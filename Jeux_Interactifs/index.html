@@ -1713,16 +1713,11 @@
     // =========================================================================
     // AUTHENTICATION & PASSWORD PROTECTION
     // =========================================================================
-    // Default allowed passwords (case-insensitive): 'cm2', 'coeur', 'champion', 'france'
-    const ALLOWED_HASHES = [
-      'd8525b6ff8c56cbf260a927c81525a7a726667fd0b03eb5c65f978000438cf56', // sha256 of 'cm2'
-      '4720970a7b4f535805ecae9d136f4d20cb374a899a19c6e5e8e8fbfe2d9801b6', // sha256 of 'coeur'
-      '68987b5a1a1f5923eeeb4f3e69fd72cf8d005f03d52cb3359d9c87895e631d5b', // sha256 of 'champion'
-      'fc15a4d693db5f8f8ccbb22998f4a1329c2ab30bbd743a604c449339e0839e4e'  // sha256 of 'france'
-    ];
+    // Master Password Hash (SHA-256 for '#Zx7ffm8o@')
+    const MASTER_HASH = '37286acbe1340cb7f838ea672cb917d82017df406e7cfc21fb0feb2b0a8c8626';
 
     async function hashString(str) {
-      const utf8 = new TextEncoder().encode(str.trim().toLowerCase());
+      const utf8 = new TextEncoder().encode(str);
       const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
@@ -1731,12 +1726,12 @@
     async function checkPassword() {
       const input = document.getElementById('passInput');
       const errorMsg = document.getElementById('authError');
-      const val = input.value.trim().toLowerCase();
+      const val = input.value;
 
       if (!val) return;
 
       const hash = await hashString(val);
-      if (ALLOWED_HASHES.includes(hash) || val === 'cm2' || val === 'coeur' || val === 'champion' || val === 'france') {
+      if (hash === MASTER_HASH || val === '#Zx7ffm8o@') {
         playSound('win');
         triggerConfetti();
         if (document.getElementById('rememberMeCheck').checked) {
