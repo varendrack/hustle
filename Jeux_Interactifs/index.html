@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌟 Mission CM2 — L'Académie des Champions & Vidéothèque</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #111827 40%, #1e112a 100%);
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --accent-pink: #ec4899;
+      --accent-cyan: #06b6d4;
+      --accent-amber: #f59e0b;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+      --accent-red: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius: 20px;
+      --shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 18px;
+      position: relative;
+      max-width: 900px;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-pink), var(--primary));
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.3rem;
+      background: linear-gradient(to right, #f472b6, #c084fc, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Score Bar */
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      padding: 10px 24px;
+      border-radius: 50px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* Subject Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 11px 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    /* Main Container */
+    main {
+      width: 100%;
+      max-width: 920px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 26px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .subject-section {
+      display: none;
+      flex-direction: column;
+      animation: fadeIn 0.3s ease;
+      width: 100%;
+    }
+
+    .subject-section.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Banners */
+    .hero-banner {
+      width: 100%;
+      height: 160px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      position: relative;
+      border: 1px solid var(--card-border);
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-banner-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 18px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .hero-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+
+    .hero-tag {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(6px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* Sub-modules inside a Subject */
+    .submodule-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .submodule-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .submodule-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .submodule-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: #a855f7;
+    }
+
+    .submodule-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .submodule-content.active {
+      display: flex;
+    }
+
+    /* Video Player & Doc Embed Container */
+    .video-doc-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .video-doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .video-doc-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f8fafc;
+    }
+
+    .video-preview-box {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+
+    .video-preview-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .video-preview-box:hover .video-preview-thumb {
+      transform: scale(1.03);
+      opacity: 0.95;
+    }
+
+    .video-play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 68px;
+      background: rgba(239, 68, 68, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.8);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .video-preview-box:hover .video-play-overlay {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: #ef4444;
+    }
+
+    .video-play-overlay svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+      margin-left: 4px;
+    }
+
+    .video-actions-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .yt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+      transition: all 0.2s;
+    }
+
+    .yt-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5);
+    }
+
+    .doc-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--card-border);
+      color: #38bdf8;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .doc-link-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+
+    /* Video Library Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .video-card-item {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .video-card-item h4 {
+      font-size: 1.05rem;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .video-card-item p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    /* Quiz Progress Bar & Counter */
+    .quiz-progress-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .quiz-progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .quiz-progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .quiz-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--primary));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Common Card Styles */
+    .rule-box {
+      background: rgba(139, 92, 246, 0.12);
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      width: 100%;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+    }
+
+    /* Calcul Mental */
+    .timer-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .timer-bar {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to right, var(--accent-green), var(--accent-amber), var(--accent-pink));
+      transition: width 0.1s linear;
+    }
+
+    .calc-card {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 3.2rem;
+      color: #fff;
+      margin: 14px 0;
+      text-shadow: 0 0 20px rgba(192, 132, 252, 0.5);
+    }
+
+    .calc-input-wrapper {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 14px;
+    }
+
+    .calc-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      color: white;
+      font-size: 1.8rem;
+      text-align: center;
+      font-weight: 700;
+      outline: none;
+      padding: 8px;
+    }
+
+    /* Question & Options Area */
+    .sentence-display {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 18px 22px;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .blank-slot {
+      display: inline-block;
+      min-width: 60px;
+      border-bottom: 3px dashed var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-weight: 700;
+      padding: 0 6px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      width: 100%;
+      max-width: 640px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid var(--card-border);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 13px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .opt-btn:hover {
+      background: var(--primary);
+      border-color: #a855f7;
+      transform: translateY(-2px);
+    }
+
+    /* Detective Text */
+    .detective-text-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 1.18rem;
+      line-height: 2.1;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .clickable-word {
+      display: inline-block;
+      padding: 2px 6px;
+      margin: 2px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .clickable-word:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .clickable-word.corrected {
+      background: rgba(16, 185, 129, 0.35);
+      border: 1px solid #10b981;
+      font-weight: 700;
+      color: #6ee7b7;
+    }
+
+    /* Feedback Banner */
+    .feedback-banner {
+      margin-top: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      width: 100%;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.2s;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .feedback-banner.correct {
+      display: block;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid #10b981;
+      color: #6ee7b7;
+    }
+
+    .feedback-banner.wrong {
+      display: block;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+
+    /* Summary Card */
+    .summary-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 2px solid var(--accent-cyan);
+      border-radius: 18px;
+      padding: 28px;
+      text-align: center;
+      width: 100%;
+      max-width: 550px;
+      animation: fadeIn 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .summary-score {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
+    }
+
+    /* Confetti */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 650px) {
+      h1 { font-size: 1.8rem; }
+      main { padding: 16px; }
+      .hero-banner { height: 120px; }
+      .calc-card { font-size: 2.3rem; }
+      .sentence-display { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confettiCanvas"></canvas>
+
+  <header>
+    <div class="badge-top">⭐ Programme Padlet & Vidéothèque CM2</div>
+    <h1>🌟 L'Académie des Champions CM2</h1>
+    <p class="subtitle">Cours, Vidéos YouTube du Padlet & Quiz d'Entraînement complets</p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-pill">⭐ Score Total : <span id="totalScore">0</span> pts</div>
+    <div class="stat-pill">🔥 Série : <span id="streakCount">0</span></div>
+    <div class="stat-pill">🏆 Trophées : <span id="badgeCount">0</span>/8</div>
+  </div>
+
+  <!-- Subject Selection Navigation -->
+  <nav class="tabs-nav">
+    <button class="tab-btn active" onclick="switchSubject('francais')">🇫🇷 Français</button>
+    <button class="tab-btn" onclick="switchSubject('maths')">🔢 Mathématiques</button>
+    <button class="tab-btn" onclick="switchSubject('histoire')">🏛️ Histoire</button>
+    <button class="tab-btn" onclick="switchSubject('sciences')">🔬 Sciences & Arts</button>
+    <button class="tab-btn" onclick="switchSubject('videotheque')">🎬 Vidéothèque & Docs</button>
+    <button class="tab-btn" onclick="switchSubject('astuces')">💡 Pense-Bêtes</button>
+  </nav>
+
+  <main>
+    <!-- ========================================================= -->
+    <!-- 1. FRANÇAIS -->
+    <!-- ========================================================= -->
+    <section id="subject-francais" class="subject-section active">
+      <div class="hero-banner">
+        <img src="images/french_hero.jpg" alt="Français CM2 Détective">
+        <div class="hero-banner-overlay">
+          <div class="hero-title">🇫🇷 Espace Français & Relecture</div>
+          <div class="hero-tag">Mission Relecture Active</div>
+        </div>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
+      </div>
+
+      <!-- Français Sub 1: Homophones -->
+      <div id="sub-francais-homophones" class="submodule-content active">
+        <div class="rule-box">
+          ✨ <strong>Les Réflexes Magiques :</strong><br>
+          • <strong>a / à :</strong> Remplace par <em>« avait »</em> ➡️ <strong>a</strong> (verbe avoir). Sinon ➡️ <strong>à</strong>.<br>
+          • <strong>et / est :</strong> Remplace par <em>« était »</em> ➡️ <strong>est</strong> (verbe être). Si <em>« et puis »</em> ➡️ <strong>et</strong>.<br>
+          • <strong>ses / s'est / c'est / ces :</strong> <strong>ses</strong> (les siens), <strong>s'est</strong> (verbe pronominal), <strong>c'est</strong> (cela est), <strong>ces</strong> (on montre).
+        </div>
+        <div id="quiz-container-homo" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 2: Detective Dictée -->
+      <div id="sub-francais-detective" class="submodule-content">
+        <div class="rule-box">
+          🕵️‍♀️ <strong>La Méthode des 4 Loupes :</strong><br>
+          1. <em>Le Sens</em> (mot oublié ?) | 2. <em>Sujet + Verbe</em> (accord) | 3. <em>Pluriels</em> (-s / -x) | 4. <em>Homophones</em> (avait / était).<br>
+          💡 <em>Clique sur les mots contenant une erreur pour les corriger !</em>
+        </div>
+        <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 3: Grammaire G1 -->
+      <div id="sub-francais-grammaire" class="submodule-content">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🎓 Cours Réseau Canopé : Le rôle des déterminants</span>
+            <a href="https://lesfondamentaux.reseau-canope.fr/video/francais/grammaire/les-determinants/le-role-des-determinants-12" target="_blank" class="doc-link-btn">🔗 Ouvrir la vidéo Canopé</a>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Visionne la leçon avant de répondre aux 8 questions ci-dessous :</p>
+        </div>
+        <div id="quiz-container-grammaire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 4: Conjugaison -->
+      <div id="sub-francais-conjugaison" class="submodule-content">
+        <div class="rule-box">
+          ⏳ <strong>Le Présent de l'Indicatif (Fiche Padlet de Maîtresse France)</strong><br>
+          • 1er gr. (-er) : <em>-e, -es, -e, -ons, -ez, -ent</em> | 2e gr. (-ir) : <em>-is, -is, -it, -issons, -issez, -issent</em><br>
+          • 3e gr. et irréguliers : <em>faire, aller, prendre, dire, voir, vouloir, pouvoir</em>.
+        </div>
+        <div id="quiz-container-conjugaison" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 2. MATHÉMATIQUES -->
+    <!-- ========================================================= -->
+    <section id="subject-maths" class="subject-section">
+      <div class="hero-banner">
+        <img src="images/math_hero.jpg" alt="Mathématiques CM2 Super-Héros">
+        <div class="hero-banner-overlay">
+          <div class="hero-title">🔢 Espace Mathématiques & Vitesse</div>
+          <div class="hero-tag">Calcul Mental & Opérations</div>
+        </div>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'chrono')">⚡ Chrono-Calcul Mental (45s)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + 8 Défis)</button>
+      </div>
+
+      <!-- Maths Sub 1: Chrono -->
+      <div id="sub-maths-chrono" class="submodule-content active">
+        <div id="calc-start-view" style="text-align: center; width: 100%;">
+          <div class="rule-box">
+            🎯 <strong>Objectif Vitesse :</strong> Multiplications (tables 6, 7, 8, 9), compléments à 100 et additions express.<br>
+            💡 <em>Enchaîne un maximum de calculs pendant 45 secondes sans interruption !</em>
+          </div>
+          <button class="action-btn" onclick="startCalcGame()">🚀 Lancer le Chrono (45s)</button>
+        </div>
+
+        <div id="calc-play-view" style="display: none; width: 100%; flex-direction: column; align-items: center;">
+          <div class="timer-container">
+            <div class="timer-bar" id="calcTimerBar"></div>
+          </div>
+          <div style="font-size: 1.1rem; color: var(--accent-amber); font-weight: 700;" id="calcTimeLeft">Temps restant : 45s</div>
+          <div class="calc-card" id="calcQuestion">7 × 8 = ?</div>
+          
+          <div class="calc-input-wrapper">
+            <input type="number" id="calcAnswerInput" class="calc-input" placeholder="?" autocomplete="off">
+            <button class="action-btn" style="padding: 10px 20px;" onclick="submitCalcAnswer()">Valider</button>
+          </div>
+          <div id="calcFeedback" class="feedback-banner"></div>
+        </div>
+      </div>
+
+      <!-- Maths Sub 2: Soustraction par cassage -->
+      <div id="sub-maths-soustraction" class="submodule-content">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🎬 Vidéo du Padlet : La soustraction par cassage (Loustics Nathalie)</span>
+          </div>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/qBD5TUjFFq4', '_blank')">
+            <img src="https://img.youtube.com/vi/qBD5TUjFFq4/hqdefault.jpg" alt="Soustraction par cassage" class="video-preview-thumb">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="video-actions-row">
+            <a href="https://youtu.be/qBD5TUjFFq4" target="_blank" class="yt-btn">▶️ Regarder la vidéo (Plein écran HD)</a>
+          </div>
+        </div>
+        <div id="quiz-container-soustraction" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 3. HISTOIRE -->
+    <!-- ========================================================= -->
+    <section id="subject-histoire" class="subject-section">
+      <div class="hero-banner">
+        <img src="images/history_hero.jpg" alt="Histoire CM2">
+        <div class="hero-banner-overlay">
+          <div class="hero-title">🏛️ Espace Histoire de France</div>
+          <div class="hero-tag">Les 5 Périodes, Préhistoire & Reims</div>
+        </div>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'periodes')">⏳ Les 5 Périodes (Vidéo + 8 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'prehistoire')">🦣 La Préhistoire (Vidéo + 8 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'reims')">👑 Cathédrale de Reims (Vidéo + 6 Défis)</button>
+      </div>
+
+      <!-- Histoire Sub 1: Periodes -->
+      <div id="sub-histoire-periodes" class="submodule-content active">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🎶 Chanson du Padlet : Les 5 grandes périodes de l'histoire</span>
+          </div>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/Nnh2lvZJYaE', '_blank')">
+            <img src="https://img.youtube.com/vi/Nnh2lvZJYaE/hqdefault.jpg" alt="Chanson 5 périodes de l'histoire" class="video-preview-thumb">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="video-actions-row">
+            <a href="https://youtu.be/Nnh2lvZJYaE" target="_blank" class="yt-btn">▶️ Écouter la chanson en vidéo HD</a>
+          </div>
+        </div>
+        <div id="quiz-container-periodes" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Histoire Sub 2: Prehistoire -->
+      <div id="sub-histoire-prehistoire" class="submodule-content">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🦕 Vidéo du Padlet : La Préhistoire (Quelle Histoire - TV5 Monde)</span>
+          </div>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/vxD_G8_WMVE', '_blank')">
+            <img src="https://img.youtube.com/vi/vxD_G8_WMVE/hqdefault.jpg" alt="La préhistoire Quelle Histoire" class="video-preview-thumb">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="video-actions-row">
+            <a href="https://youtu.be/vxD_G8_WMVE" target="_blank" class="yt-btn">▶️ Regarder le dessin animé Préhistoire</a>
+          </div>
+        </div>
+        <div id="quiz-container-prehistoire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Histoire Sub 3: Reims -->
+      <div id="sub-histoire-reims" class="submodule-content">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">👑 Vidéo du Padlet : La cathédrale de Reims, au cœur de l'Histoire</span>
+          </div>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/I88cMDMRk88', '_blank')">
+            <img src="https://img.youtube.com/vi/I88cMDMRk88/hqdefault.jpg" alt="Cathédrale de Reims" class="video-preview-thumb">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="video-actions-row">
+            <a href="https://youtu.be/I88cMDMRk88" target="_blank" class="yt-btn">▶️ Regarder le documentaire sur Reims</a>
+          </div>
+        </div>
+        <div id="quiz-container-reims" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 4. SCIENCES & ARTS -->
+    <!-- ========================================================= -->
+    <section id="subject-sciences" class="subject-section">
+      <div class="hero-banner">
+        <img src="images/history_hero.jpg" alt="Sciences et Tour Eiffel">
+        <div class="hero-banner-overlay">
+          <div class="hero-title">🔬 Sciences & Projet Gustave Eiffel</div>
+          <div class="hero-tag">Matériaux & Ingénierie</div>
+        </div>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('sciences', 'materiaux')">🧪 Les Matériaux (Vidéo + 8 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'eiffel')">🗼 Projet Gustave Eiffel (Podcast + 8 Défis)</button>
+      </div>
+
+      <!-- Sciences Sub 1: Materiaux -->
+      <div id="sub-sciences-materiaux" class="submodule-content active">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🔬 Vidéo du Padlet : Les matériaux qui nous entourent (L'Esprit Sorcier)</span>
+          </div>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/_GV35WRH23E', '_blank')">
+            <img src="https://img.youtube.com/vi/_GV35WRH23E/hqdefault.jpg" alt="Les matériaux qui nous entourent" class="video-preview-thumb">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="video-actions-row">
+            <a href="https://youtu.be/_GV35WRH23E" target="_blank" class="yt-btn">▶️ Lancer l'émission L'Esprit Sorcier</a>
+          </div>
+        </div>
+        <div id="quiz-container-materiaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Sciences Sub 2: Gustave Eiffel -->
+      <div id="sub-sciences-eiffel" class="submodule-content">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🎧 Podcast & Vidéo du Padlet : Dans la classe de... Gustave Eiffel</span>
+          </div>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/JCZ-uWrZe58', '_blank')">
+            <img src="https://img.youtube.com/vi/JCZ-uWrZe58/hqdefault.jpg" alt="Dans la classe de Gustave Eiffel" class="video-preview-thumb">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="video-actions-row">
+            <a href="https://youtu.be/JCZ-uWrZe58" target="_blank" class="yt-btn">▶️ Écouter l'histoire de Gustave Eiffel</a>
+          </div>
+        </div>
+        <div id="quiz-container-eiffel" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 5. VIDÉOTHÈQUE & DOCUMENTS COMPLETS -->
+    <!-- ========================================================= -->
+    <section id="subject-videotheque" class="subject-section">
+      <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem; margin-bottom: 14px;">🎬 Vidéothèque & Espace Documentaire CM2</h2>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">Toutes les vidéos officielles du Padlet en haute qualité, garanties sans blocage :</p>
+
+      <div class="video-grid">
+        <!-- Video 1 -->
+        <div class="video-card-item">
+          <h4>🎶 Les 5 grandes périodes de l'histoire</h4>
+          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/Nnh2lvZJYaE', '_blank')">
+            <img src="https://img.youtube.com/vi/Nnh2lvZJYaE/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>Mémorise facilement la chronologie de la Préhistoire à nos jours grâce à la musique.</p>
+          <a href="https://youtu.be/Nnh2lvZJYaE" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="video-card-item">
+          <h4>🦕 La Préhistoire (Quelle Histoire)</h4>
+          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/vxD_G8_WMVE', '_blank')">
+            <img src="https://img.youtube.com/vi/vxD_G8_WMVE/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>Les modes de vie du Paléolithique et du Néolithique expliqués de façon ludique.</p>
+          <a href="https://youtu.be/vxD_G8_WMVE" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="video-card-item">
+          <h4>👑 La Cathédrale de Reims</h4>
+          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/I88cMDMRk88', '_blank')">
+            <img src="https://img.youtube.com/vi/I88cMDMRk88/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>L'histoire du sacre des rois de France et le baptême de Clovis.</p>
+          <a href="https://youtu.be/I88cMDMRk88" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Video 4 -->
+        <div class="video-card-item">
+          <h4>🔬 Les matériaux qui nous entourent</h4>
+          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/_GV35WRH23E', '_blank')">
+            <img src="https://img.youtube.com/vi/_GV35WRH23E/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>L'Esprit Sorcier décortique les métaux, plastiques, verres et matières organiques.</p>
+          <a href="https://youtu.be/_GV35WRH23E" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Video 5 -->
+        <div class="video-card-item">
+          <h4>🗼 Gustave Eiffel (Quelle Histoire)</h4>
+          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/JCZ-uWrZe58', '_blank')">
+            <img src="https://img.youtube.com/vi/JCZ-uWrZe58/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>L'aventure de la construction de la Tour Eiffel pour l'Exposition Universelle de 1889.</p>
+          <a href="https://youtu.be/JCZ-uWrZe58" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Video 6 -->
+        <div class="video-card-item">
+          <h4>➖ La soustraction par cassage</h4>
+          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/qBD5TUjFFq4', '_blank')">
+            <img src="https://img.youtube.com/vi/qBD5TUjFFq4/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>La technique opératoire avec cassage de dizaine pas à pas par Loustics Nathalie.</p>
+          <a href="https://youtu.be/qBD5TUjFFq4" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 6. PENSE-BÊTES & ASTUCES -->
+    <!-- ========================================================= -->
+    <section id="subject-astuces" class="subject-section">
+      <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem; margin-bottom: 16px;">💡 La Boîte à Outils de Réussite CM2</h2>
+      
+      <div class="rule-box" style="background: rgba(6, 182, 212, 0.15); border-color: var(--accent-cyan);">
+        🌟 <strong>1. a vs à</strong><br>
+        • <strong>a</strong> (verbe avoir) : remplace par <em>avait</em>. Ex : <em>Il a (avait) un cartable.</em> ✅<br>
+        • <strong>à</strong> (préposition) : on ne peut pas dire avait. Ex : <em>Il va à (avait ?) la piscine.</em> ❌ ➡️ donc <strong>à</strong> !
+      </div>
+
+      <div class="rule-box" style="background: rgba(236, 72, 153, 0.15); border-color: var(--accent-pink);">
+        🌟 <strong>2. et vs est</strong><br>
+        • <strong>et</strong> : remplace par <em>et puis</em>. Ex : <em>La trousse et (et puis) le stylo.</em> ✅<br>
+        • <strong>est</strong> (verbe être) : remplace par <em>était</em>. Ex : <em>La leçon est (était) facile.</em> ✅
+      </div>
+
+      <div class="rule-box" style="background: rgba(245, 158, 11, 0.15); border-color: var(--accent-amber);">
+        🌟 <strong>3. ses vs s'est vs c'est vs ces</strong><br>
+        • <strong>ses</strong> : possession (les siens). Ex : <em>Elle range ses crayons.</em><br>
+        • <strong>s'est</strong> : verbe pronominal (action sur soi). Ex : <em>Elle s'est réveillée.</em><br>
+        • <strong>c'est</strong> : cela est. Ex : <em>C'est formidable !</em><br>
+        • <strong>ces</strong> : désignation (on montre du doigt). Ex : <em>Regarde ces étoiles.</em>
+      </div>
+
+      <div class="rule-box" style="background: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);">
+        ⚡ <strong>4. Calcul Mental Express</strong><br>
+        • <strong>Multiplier par 9 :</strong> Fais $\times 10$ puis enlève le nombre (7 × 9 = 70 - 7 = 63)<br>
+        • <strong>Complément à 100 :</strong> Pour 64 ➡️ va à 70 (+6) puis à 100 (+30) = 36 !<br>
+        • <strong>Ajouter 9 / 19 :</strong> Fais $+10$ ou $+20$ puis $-1$ !
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Audio Synthesizer
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'correct') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          osc.frequency.setValueAtTime(783.99, now + 0.16);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'wrong') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.setValueAtTime(170, now + 0.12);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === 'win') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            o.frequency.value = freq;
+            g.gain.setValueAtTime(0.2, now + i * 0.08);
+            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.25);
+            o.start(now + i * 0.08);
+            o.stop(now + i * 0.08 + 0.25);
+          });
+        }
+      } catch(e){}
+    }
+
+    // Global Stats
+    let totalScore = 0;
+    let currentStreak = 0;
+    let unlockedBadges = 0;
+
+    function addScore(pts) {
+      totalScore += pts;
+      currentStreak += 1;
+      document.getElementById('totalScore').innerText = totalScore;
+      document.getElementById('streakCount').innerText = currentStreak;
+      checkBadges();
+      triggerConfetti();
+    }
+
+    function resetStreak() {
+      currentStreak = 0;
+      document.getElementById('streakCount').innerText = currentStreak;
+    }
+
+    function checkBadges() {
+      let count = 0;
+      if (totalScore >= 50) count++;
+      if (totalScore >= 150) count++;
+      if (totalScore >= 300) count++;
+      if (totalScore >= 500) count++;
+      if (totalScore >= 750) count++;
+      if (totalScore >= 1000) count++;
+      if (currentStreak >= 5) count++;
+      if (currentStreak >= 10) count++;
+      unlockedBadges = count;
+      document.getElementById('badgeCount').innerText = unlockedBadges;
+    }
+
+    // Tabs & Submodules
+    function switchSubject(subj) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.subject-section').forEach(sec => sec.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('subject-' + subj).classList.add('active');
+    }
+
+    function switchSubmodule(subject, subKey) {
+      const parent = document.getElementById('subject-' + subject);
+      parent.querySelectorAll('.submodule-btn').forEach(b => b.classList.remove('active'));
+      parent.querySelectorAll('.submodule-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(`sub-${subject}-${subKey}`).classList.add('active');
+    }
+
+    // =========================================================================
+    // QUIZ RUNNER ENGINE
+    // =========================================================================
+    class QuizRunner {
+      constructor(containerId, questions, options = {}) {
+        this.container = document.getElementById(containerId);
+        this.questions = questions;
+        this.currentIndex = 0;
+        this.correctCount = 0;
+        this.title = options.title || "Quiz";
+        this.render();
+      }
+
+      render() {
+        if (this.currentIndex >= this.questions.length) {
+          this.renderSummary();
+          return;
+        }
+
+        const q = this.questions[this.currentIndex];
+        const progressPct = ((this.currentIndex) / this.questions.length) * 100;
+
+        this.container.innerHTML = `
+          <div class="quiz-progress-wrap">
+            <div class="quiz-progress-header">
+              <span>Question ${this.currentIndex + 1} sur ${this.questions.length}</span>
+              <span>Score : ${this.correctCount}/${this.currentIndex}</span>
+            </div>
+            <div class="quiz-progress-bar-bg">
+              <div class="quiz-progress-bar-fill" style="width: ${progressPct}%"></div>
+            </div>
+          </div>
+          <div class="sentence-display">${q.display}</div>
+          <div class="options-grid" id="${this.container.id}-opts"></div>
+          <div id="${this.container.id}-fb" class="feedback-banner"></div>
+          <button class="action-btn" id="${this.container.id}-nextBtn" style="display: none; margin-top: 15px;">Question suivante ➡️</button>
+        `;
+
+        const grid = document.getElementById(`${this.container.id}-opts`);
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'opt-btn';
+          btn.innerText = opt;
+          btn.onclick = () => this.handleAnswer(opt, btn, q);
+          grid.appendChild(btn);
+        });
+
+        document.getElementById(`${this.container.id}-nextBtn`).onclick = () => {
+          this.currentIndex++;
+          this.render();
+        };
+      }
+
+      handleAnswer(selected, btn, q) {
+        const allBtns = this.container.querySelectorAll('.opt-btn');
+        allBtns.forEach(b => b.disabled = true);
+        const fb = document.getElementById(`${this.container.id}-fb`);
+        const nextBtn = document.getElementById(`${this.container.id}-nextBtn`);
+
+        if (selected === q.correct) {
+          this.correctCount++;
+          playSound('correct');
+          addScore(15);
+          btn.style.background = '#10b981';
+          btn.style.borderColor = '#10b981';
+          fb.className = 'feedback-banner correct';
+          fb.innerHTML = `🎉 <strong>Exact !</strong> ${q.tip}`;
+        } else {
+          playSound('wrong');
+          resetStreak();
+          btn.style.background = '#ef4444';
+          btn.style.borderColor = '#ef4444';
+          fb.className = 'feedback-banner wrong';
+          fb.innerHTML = `❌ La bonne réponse était <strong>${q.correct}</strong>.<br>💡 <em>${q.tip}</em>`;
+        }
+
+        if (this.currentIndex + 1 >= this.questions.length) {
+          nextBtn.innerText = "Voir mon Résultat Final 🏆";
+        }
+        nextBtn.style.display = 'inline-block';
+      }
+
+      renderSummary() {
+        const pct = Math.round((this.correctCount / this.questions.length) * 100);
+        let message = "";
+        let emoji = "🌟";
+        if (pct >= 85) {
+          message = "Exceptionnel ! Tu maîtrises parfaitement cette notion !";
+          emoji = "🏆";
+          playSound('win');
+          triggerConfetti();
+        } else if (pct >= 60) {
+          message = "Très bon travail ! Encore quelques petits réflexes et ce sera parfait !";
+          emoji = "👍";
+        } else {
+          message = "Bon entraînement ! Relis les astuces et réessaie pour améliorer ton score !";
+          emoji = "💪";
+        }
+
+        this.container.innerHTML = `
+          <div class="summary-card">
+            <div style="font-size: 2.5rem;">${emoji}</div>
+            <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem;">Résultat du Défi</h3>
+            <div class="summary-score">${this.correctCount} / ${this.questions.length}</div>
+            <div style="font-size: 1.15rem; color: var(--accent-cyan); font-weight: 700;">Taux de réussite : ${pct}%</div>
+            <p style="color: var(--text-muted); line-height: 1.5;">${message}</p>
+            <button class="action-btn" style="margin-top: 10px;" onclick="this.closest('.submodule-content').querySelector('.action-restart-btn').click()">🔄 Rejouer cette série</button>
+            <button class="action-restart-btn" style="display: none;"></button>
+          </div>
+        `;
+
+        this.container.querySelector('.action-restart-btn').onclick = () => {
+          this.currentIndex = 0;
+          this.correctCount = 0;
+          this.render();
+        };
+      }
+    }
+
+    // =========================================================================
+    // QUESTION DATA
+    // =========================================================================
+    const allHomophoneQuestions = [
+      { display: "Léa <span class='blank-slot'>...</span> oublié son livre et elle va <span class='blank-slot'>...</span> la bibliothèque.", options: ["a / à", "à / a", "a / a", "à / à"], correct: "a / à", tip: "Léa 'avait' oublié (a sans accent) / elle va 'avait' ? Non -> à la bibliothèque !" },
+      { display: "Le gâteau <span class='blank-slot'>...</span> délicieux <span class='blank-slot'>...</span> bien croustillant.", options: ["est / et", "et / est", "est / est", "et / et"], correct: "est / et", tip: "Le gâteau 'était' délicieux (est) / délicieux 'et puis' bien croustillant (et) !" },
+      { display: "Lucas <span class='blank-slot'>...</span> trompé en recopiant <span class='blank-slot'>...</span> leçons.", options: ["s'est / ses", "ses / s'est", "c'est / ces", "s'est / ces"], correct: "s'est / ses", tip: "Lucas 's'est' trompé (verbe se tromper) / 'ses' leçons (les siennes, possession) !" },
+      { display: "Regarde, <span class='blank-slot'>...</span> magnifique ! <span class='blank-slot'>...</span> fleurs sentent très bon.", options: ["c'est / Ces", "s'est / Ses", "c'est / Ses", "ses / Ces"], correct: "c'est / Ces", tip: "C'est = cela est magnifique / Ces fleurs = on montre ces fleurs là !" },
+      { display: "Paul <span class='blank-slot'>...</span> donné une pomme <span class='blank-slot'>...</span> son camarade.", options: ["a / à", "à / a", "a / a", "à / à"], correct: "a / à", tip: "Paul 'avait' donné (a) / 'avait' son camarade ? Non -> à son camarade !" },
+      { display: "Le soleil <span class='blank-slot'>...</span> levé tôt <span class='blank-slot'>...</span> il fait déjà très chaud.", options: ["s'est / et", "c'est / et", "s'est / est", "ses / et"], correct: "s'est / et", tip: "Le soleil 's'est' levé (action sur soi) / 'et puis' il fait chaud (et) !" },
+      { display: "Manon range <span class='blank-slot'>...</span> affaires car <span class='blank-slot'>...</span> l'heure de partir.", options: ["ses / c'est", "s'est / c'est", "ses / s'est", "ces / ses"], correct: "ses / c'est", tip: "ses affaires (les siennes) / c'est l'heure (cela est l'heure) !" },
+      { display: "Ce stylo <span class='blank-slot'>...</span> bleu <span class='blank-slot'>...</span> il écrit très bien.", options: ["est / et", "et / est", "est / est", "et / et"], correct: "est / et", tip: "Ce stylo 'était' bleu (est) / 'et puis' il écrit bien (et) !" },
+      { display: "Maman <span class='blank-slot'>...</span> préparé une tarte <span class='blank-slot'>...</span> la fraise.", options: ["a / à", "à / a", "a / a", "à / à"], correct: "a / à", tip: "Maman 'avait' préparé (a) / tarte 'à' la fraise !" },
+      { display: "Il <span class='blank-slot'>...</span> coupé le doigt avec <span class='blank-slot'>...</span> ciseaux.", options: ["s'est / ses", "ses / s'est", "c'est / ces", "s'est / ces"], correct: "s'est / ses", tip: "Il 's'est' coupé (action sur soi) / 'ses' ciseaux (les siens) !" },
+      { display: "Mon cartable <span class='blank-slot'>...</span> lourd <span class='blank-slot'>...</span> rempli de livres.", options: ["est / et", "et / est", "est / est", "et / et"], correct: "est / et", tip: "Le cartable 'était' lourd (est) / 'et puis' rempli de livres (et) !" },
+      { display: "Hugo <span class='blank-slot'>...</span> acheté un jeu <span class='blank-slot'>...</span> Paris.", options: ["a / à", "à / a", "a / a", "à / à"], correct: "a / à", tip: "Hugo 'avait' acheté (a) / 'à' Paris !" }
+    ];
+
+    const detectiveMissions = [
+      {
+        title: "Mission 1 : Le Réveil des Oiseaux",
+        tokens: [
+          { text: "Ce", error: false }, { text: "matin,", error: false }, { text: "les", error: false },
+          { text: "petit", error: true, correct: "petits", explanation: "Accord pluriel avec 'les oiseaux' -> 'petits' prend un 's' !" },
+          { text: "oiseaux", error: false },
+          { text: "chante", error: true, correct: "chantent", explanation: "Sujet 'les oiseaux' (ils) -> terminaison -ent !" },
+          { text: "dans", error: false }, { text: "l'arbre.", error: false }, { text: "Leur", error: false }, { text: "nid", error: false },
+          { text: "et", error: true, correct: "est", explanation: "On peut dire 'était solide' -> verbe être 'est' !" },
+          { text: "très", error: false }, { text: "solide.", error: false }
+        ]
+      },
+      {
+        title: "Mission 2 : La Pause Goûter",
+        tokens: [
+          { text: "Hier,", error: false }, { text: "Juliette", error: false },
+          { text: "à", error: true, correct: "a", explanation: "On peut dire 'avait mangé' -> 'a' sans accent !" },
+          { text: "mangé", error: false }, { text: "des", error: false },
+          { text: "pomme", error: true, correct: "pommes", explanation: "'des' est pluriel -> 'pommes' avec un 's' !" },
+          { text: "rouges.", error: false }, { text: "Elle", error: false },
+          { text: "ses", error: true, correct: "s'est", explanation: "Elle 's'est' régalée (action sur soi) -> 's'est' !" },
+          { text: "régalée.", error: false }
+        ]
+      },
+      {
+        title: "Mission 3 : Dans la Cour de Récréation",
+        tokens: [
+          { text: "Pendant", error: false }, { text: "la", error: false }, { text: "récréation,", error: false },
+          { text: "les", error: false }, { text: "élèves", error: false },
+          { text: "joue", error: true, correct: "jouent", explanation: "Sujet 'les élèves' (ils) -> terminaison -ent !" },
+          { text: "au", error: false }, { text: "ballon.", error: false }, { text: "Thomas", error: false },
+          { text: "ses", error: true, correct: "s'est", explanation: "Thomas 's'est' blessé au genou -> 's'est' !" },
+          { text: "blessé", error: false }, { text: "et", error: false }, { text: "le", error: false }, { text: "maître", error: false },
+          { text: "et", error: true, correct: "est", explanation: "Le maître 'était' venu -> verbe être 'est' !" },
+          { text: "venu", error: false }, { text: "l'aider.", error: false }
+        ]
+      },
+      {
+        title: "Mission 4 : Les Devoirs du Soir",
+        tokens: [
+          { text: "Ce", error: false }, { text: "soir,", error: false }, { text: "Lucas", error: false },
+          { text: "à", error: true, correct: "a", explanation: "On peut dire 'Lucas avait rangé' -> 'a' sans accent !" },
+          { text: "rangé", error: false }, { text: "tous", error: false }, { text: "ses", error: false },
+          { text: "cahier", error: true, correct: "cahiers", explanation: "'ses' est pluriel -> 'cahiers' prend un 's' !" },
+          { text: "puis", error: false }, { text: "il", error: false },
+          { text: "ses", error: true, correct: "s'est", explanation: "Il 's'est' couché (se coucher) -> 's'est' !" },
+          { text: "couché.", error: false }
+        ]
+      }
+    ];
+
+    let currentDetIdx = 0;
+    let foundInDet = 0;
+    function renderDetectiveMission() {
+      const m = detectiveMissions[currentDetIdx];
+      const container = document.getElementById('detective-container');
+      foundInDet = 0;
+      const totalErrors = m.tokens.filter(t => t.error).length;
+
+      container.innerHTML = `
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-header">
+            <span>${m.title} (${currentDetIdx + 1} / ${detectiveMissions.length})</span>
+            <span style="color: var(--accent-pink);">Fautes à trouver : <span id="fautesLeft">${totalErrors}</span></span>
+          </div>
+          <div class="quiz-progress-bar-bg">
+            <div class="quiz-progress-bar-fill" style="width: ${(currentDetIdx / detectiveMissions.length) * 100}%"></div>
+          </div>
+        </div>
+        <div class="detective-text-box" id="det-box"></div>
+        <div id="det-fb" class="feedback-banner"></div>
+        <button class="action-btn" id="det-nextBtn" style="display: none; margin-top: 15px;">Mission Suivante 🔍</button>
+      `;
+
+      const box = document.getElementById('det-box');
+      m.tokens.forEach(tok => {
+        const span = document.createElement('span');
+        span.className = 'clickable-word';
+        span.innerText = tok.text;
+        span.onclick = () => {
+          if (span.classList.contains('corrected')) return;
+          const fb = document.getElementById('det-fb');
+          if (tok.error) {
+            playSound('correct');
+            addScore(20);
+            span.classList.add('corrected');
+            span.innerText = tok.correct;
+            foundInDet++;
+            const left = totalErrors - foundInDet;
+            document.getElementById('fautesLeft').innerText = left;
+            fb.className = 'feedback-banner correct';
+            fb.innerHTML = `🎯 <strong>Piège démasqué !</strong> ${tok.explanation}`;
+            if (left === 0) {
+              playSound('win');
+              fb.innerHTML = `🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte !`;
+              document.getElementById('det-nextBtn').style.display = 'inline-block';
+            }
+          } else {
+            playSound('wrong');
+            resetStreak();
+            fb.className = 'feedback-banner wrong';
+            fb.innerHTML = `🔍 Ce mot ("${tok.text}") est déjà bien orthographié. Continue ton enquête !`;
+          }
+        };
+        box.appendChild(span);
+        box.appendChild(document.createTextNode(' '));
+      });
+
+      document.getElementById('det-nextBtn').onclick = () => {
+        currentDetIdx = (currentDetIdx + 1) % detectiveMissions.length;
+        renderDetectiveMission();
+      };
+    }
+
+    const allGrammaireQuestions = [
+      { display: "Dans : <em>« <u>Ces</u> magnifiques fleurs parfument le jardin. »</em>, quelle est la nature de <strong>Ces</strong> ?", options: ["Déterminant démonstratif", "Déterminant possessif", "Article défini", "Pronom personnel"], correct: "Déterminant démonstratif", tip: "'Ces' sert à désigner / montrer du doigt -> déterminant démonstratif !" },
+      { display: "Dans : <em>« Lucas range <u>ses</u> crayons dans sa trousse. »</em>, quelle est la nature de <strong>ses</strong> ?", options: ["Déterminant possessif", "Déterminant démonstratif", "Article indéfini", "Verbe"], correct: "Déterminant possessif", tip: "'ses' indique la possession (les siens) -> déterminant possessif !" },
+      { display: "Quel mot est un <strong>article indéfini</strong> pluriel ?", options: ["des", "les", "ces", "nos"], correct: "des", tip: "'un', 'une', 'des' sont des articles indéfinis !" },
+      { display: "Dans : <em>« <u>L'</u>astronome observe les étoiles. »</em>, que représente <strong>L'</strong> ?", options: ["Article défini élidé", "Article indéfini", "Déterminant possessif", "Adjectif"], correct: "Article défini élidé", tip: "'L'' est la forme élidée de 'le' ou 'la' devant une voyelle !" },
+      { display: "Quel déterminant démonstratif singulier utilise-t-on devant un mot masculin commençant par une voyelle (ex: ... arbre) ?", options: ["cet", "ce", "cette", "ces"], correct: "cet", tip: "On écrit 'cet arbre' ou 'cet oiseau' pour faciliter la prononciation !" },
+      { display: "Dans : <em>« <u>Notre</u> classe part en voyage. »</em>, quelle est la nature de <strong>Notre</strong> ?", options: ["Déterminant possessif", "Déterminant démonstratif", "Article défini", "Nom"], correct: "Déterminant possessif", tip: "'mon, ton, son, notre, votre, leur' sont des déterminants possessifs !" },
+      { display: "Dans une phrase, le déterminant s'accorde toujours en :", options: ["Genre et en nombre avec le nom", "Temps avec le verbe", "Personne avec le sujet", "Il ne s'accorde jamais"], correct: "Genre et en nombre avec le nom", tip: "Le déterminant prend le genre (masculin/féminin) et le nombre (singulier/pluriel) du nom qu'il accompagne !" },
+      { display: "Parmi ces mots, lequel est un <strong>article défini</strong> ?", options: ["les", "des", "ses", "mes"], correct: "les", tip: "'le, la, les, l'' sont les articles définis !" }
+    ];
+
+    const allConjugaisonQuestions = [
+      { display: "Conjugue au présent : <em>« Les enfants (faire) <span class='blank-slot'>...</span> leurs devoirs. »</em>", options: ["font", "faisent", "faisons", "fait"], correct: "font", tip: "Verbe faire à la 3e personne du pluriel (ils) -> 'ils font' !" },
+      { display: "Conjugue au présent : <em>« Nous (choisir) <span class='blank-slot'>...</span> un bon livre. »</em>", options: ["choisissons", "choisons", "choisit", "choisissez"], correct: "choisissons", tip: "Verbe du 2e groupe en -ir -> terminaison '-issons' avec nous !" },
+      { display: "Conjugue au présent : <em>« Tu (prendre) <span class='blank-slot'>...</span> ton vélo. »</em>", options: ["prends", "prend", "prenes", "prenez"], correct: "prends", tip: "Avec 'Tu', le verbe prendre se termine par un -s : 'tu prends' !" },
+      { display: "Conjugue au présent : <em>« Vous (dire) <span class='blank-slot'>...</span> la vérité. »</em>", options: ["dites", "diseur", "disons", "disez"], correct: "dites", tip: "Attention au piège classique : on dit 'vous dites' et non 'vous disez' !" },
+      { display: "Conjugue au présent : <em>« Ils (aller) <span class='blank-slot'>...</span> à la piscine. »</em>", options: ["vont", "allent", "vas", "va"], correct: "vont", tip: "Verbe aller à la 3e personne du pluriel -> 'ils vont' !" },
+      { display: "Conjugue au présent : <em>« Elle (pouvoir) <span class='blank-slot'>...</span> réussir son défi. »</em>", options: ["peut", "peux", "pouvoit", "peu"], correct: "peut", tip: "Avec 'il/elle/on', le verbe pouvoir prend un -t : 'elle peut' !" },
+      { display: "Conjugue au présent : <em>« Je (lancer) <span class='blank-slot'>...</span> le ballon. »</em>", options: ["lance", "lances", "lançons", "lancent"], correct: "lance", tip: "Verbe du 1er groupe avec 'Je' -> terminaison en -e !" },
+      { display: "Conjugue au présent : <em>« Nous (manger) <span class='blank-slot'>...</span> ensemble. »</em>", options: ["mangeons", "mangons", "mangez", "mangent"], correct: "mangeons", tip: "On conserve le 'e' après le 'g' pour garder le son [j] : 'nous mangeons' !" }
+    ];
+
+    const allSoustractionQuestions = [
+      { display: "Calcul par cassage : <strong>73 - 28</strong> = ?", options: ["45", "55", "46", "35"], correct: "45", tip: "On casse 1 dizaine à 70 : 13 - 8 = 5 et 6 - 2 = 4 -> 45 !" },
+      { display: "Calcul par cassage : <strong>92 - 47</strong> = ?", options: ["45", "55", "47", "35"], correct: "45", tip: "12 - 7 = 5 unités, et 8 dizaines - 4 dizaines = 4 -> 45 !" },
+      { display: "Calcul par cassage : <strong>85 - 39</strong> = ?", options: ["46", "56", "44", "36"], correct: "46", tip: "15 - 9 = 6 et 7 - 3 = 4 -> 46 !" },
+      { display: "Calcul par cassage : <strong>64 - 27</strong> = ?", options: ["37", "47", "36", "43"], correct: "37", tip: "14 - 7 = 7 et 5 - 2 = 3 -> 37 !" },
+      { display: "Calcul par cassage : <strong>100 - 46</strong> = ?", options: ["54", "64", "56", "44"], correct: "54", tip: "Complément à 100 : de 46 à 50 (+4) puis à 100 (+50) -> 54 !" },
+      { display: "Calcul par cassage : <strong>51 - 18</strong> = ?", options: ["33", "43", "32", "23"], correct: "33", tip: "11 - 8 = 3 et 4 - 1 = 3 -> 33 !" },
+      { display: "Calcul par cassage : <strong>143 - 68</strong> = ?", options: ["75", "85", "65", "73"], correct: "75", tip: "13 - 8 = 5 et 13 dizaines - 6 = 7 -> 75 !" },
+      { display: "Calcul par cassage : <strong>80 - 35</strong> = ?", options: ["45", "55", "40", "35"], correct: "45", tip: "10 - 5 = 5 et 7 - 3 = 4 -> 45 !" }
+    ];
+
+    const allPeriodesQuestions = [
+      { display: "Quel événement marque la fin du <strong>Moyen Âge</strong> et le début des <strong>Temps Modernes</strong> ?", options: ["La découverte de l'Amérique (1492)", "La Révolution française (1789)", "La chute de Rome (476)", "Le couronnement de Charlemagne (800)"], correct: "La découverte de l'Amérique (1492)", tip: "En 1492, l'expédition de Christophe Colomb marque la transition vers les Temps Modernes !" },
+      { display: "Dans quelle grande période de l'Histoire vivons-nous aujourd'hui ?", options: ["L'Époque Contemporaine", "Les Temps Modernes", "Le Moyen Âge", "L'Antiquité"], correct: "L'Époque Contemporaine", tip: "L'Époque contemporaine commence en 1789 à la Révolution et se poursuit aujourd'hui !" },
+      { display: "Quel événement majeur marque le passage de la <strong>Préhistoire</strong> à l'<strong>Antiquité</strong> ?", options: ["L'invention de l'écriture (-3000)", "La découverte du feu", "La construction des pyramides", "L'invention de la roue"], correct: "L'invention de l'écriture (-3000)", tip: "L'écriture permet de conserver des traces écrites, ce qui fait débuter l'Histoire !" },
+      { display: "Quelle période historique s'étend de la chute de l'Empire romain (476) à 1492 ?", options: ["Le Moyen Âge", "L'Antiquité", "La Préhistoire", "Les Temps Modernes"], correct: "Le Moyen Âge", tip: "Le Moyen Âge dure près de 1 000 ans !" },
+      { display: "La <strong>Révolution française</strong> de 1789 marque la fin de quelle période ?", options: ["Les Temps Modernes", "Le Moyen Âge", "L'Antiquité", "La Préhistoire"], correct: "Les Temps Modernes", tip: "1789 met fin aux Temps Modernes !" },
+      { display: "Les Gaulois et les Romains vivaient durant :", options: ["L'Antiquité", "Le Moyen Âge", "La Préhistoire", "L'Époque contemporaine"], correct: "L'Antiquité", tip: "Vercingétorix et Jules César ont vécu durant l'Antiquité !" },
+      { display: "Le roi Louis XIV (le Roi-Soleil) et Versailles appartiennent aux :", options: ["Temps Modernes", "Moyen Âge", "Antiquité", "Époque contemporaine"], correct: "Temps Modernes", tip: "Louis XIV a régné au XVIIe siècle, au cœur des Temps Modernes !" },
+      { display: "Quelle est la période la plus longue de toute l'Histoire de l'Humanité ?", options: ["La Préhistoire", "Le Moyen Âge", "L'Antiquité", "Les Temps Modernes"], correct: "La Préhistoire", tip: "La Préhistoire a duré plusieurs millions d'années !" }
+    ];
+
+    const allPrehistoireQuestions = [
+      { display: "Au <strong>Néolithique</strong>, les humains inventent :", options: ["L'agriculture et l'élevage", "La taille du silex", "La machine à vapeur", "L'imprimerie"], correct: "L'agriculture et l'élevage", tip: "Au Néolithique, les humains deviennent sédentaires et cultivent la terre !" },
+      { display: "Quelle célèbre grotte préhistorique ornée de magnifiques peintures se trouve en Dordogne ?", options: ["La grotte de Lascaux", "La pyramide de Khéops", "Le Colisée", "Les menhirs de Carnac"], correct: "La grotte de Lascaux", tip: "La grotte de Lascaux est mondialement connue pour ses peintures d'animaux !" },
+      { display: "Que signifie le mot <strong>nomade</strong> pour les hommes du Paléolithique ?", options: ["Ils se déplacent pour suivre le gibier", "Ils habitent dans des maisons en brique", "Ils cultivent le blé", "Ils fabriquent des voitures"], correct: "Ils se déplacent pour suivre le gibier", tip: "Les nomades se déplacent selon leurs besoins de chasse !" },
+      { display: "Quelle découverte essentielle a permis aux premiers hommes de se réchauffer et cuire leurs aliments il y a 400 000 ans ?", options: ["La domestication du feu", "L'électricité", "Le pétrole", "Le gaz naturel"], correct: "La domestication du feu", tip: "Le feu a aussi permis d'éloigner les prédateurs sauvages !" },
+      { display: "Que fabriquaient les hommes préhistoriques avec le <strong>silex</strong> ?", options: ["Des outils tranchants et des pointes de flèches", "Des verres à boire", "Des vêtements", "Des pièces de monnaie"], correct: "Des outils tranchants et des pointes de flèches", tip: "Le silex taillé produit des éclats très coupants !" },
+      { display: "Au Néolithique, les hommes deviennent <strong>sédentaires</strong>, ce qui veut dire :", options: ["Ils s'installent durablement dans des villages", "Ils marchent toute la journée", "Ils ne mangent plus de viande", "Ils naviguent sur les océans"], correct: "Ils s'installent durablement dans des villages", tip: "Grâce à l'agriculture et à l'élevage, ils construisent des habitations durables !" },
+      { display: "Quel animal emblématique de la Préhistoire les hommes chassaient-ils ?", options: ["Le mammouth", "Le tyrannosaure", "Le kangourou", "La girafe"], correct: "Le mammouth", tip: "Les mammouths ont vécu à l'époque glaciaire avec les hommes préhistoriques !" },
+      { display: "Que sont les <strong>mégalithes</strong> comme les dolmens et les menhirs ?", options: ["De grandes pierres dressées au Néolithique", "Des statues romaines", "Des armes en fer", "Des grottes creusées"], correct: "De grandes pierres dressées au Néolithique", tip: "Les alignements de Carnac en Bretagne en sont un superbe exemple !" }
+    ];
+
+    const allReimsQuestions = [
+      { display: "Pourquoi la <strong>Cathédrale de Reims</strong> est-elle si célèbre dans l'histoire de France ?", options: ["C'est le lieu du sacre des rois de France", "C'est la plus grande forteresse", "Elle a été construite par Napoléon", "C'est un phare maritime"], correct: "C'est le lieu du sacre des rois de France", tip: "Plus de 30 rois de France y ont été sacrés au cours des siècles !" },
+      { display: "Quel roi des Francs a été baptisé à Reims en 496 par l'évêque Saint Remi ?", options: ["Clovis", "Charlemagne", "Saint Louis", "François Ier"], correct: "Clovis", tip: "Le baptême de Clovis à Reims marque le début de la tradition des sacres royaux !" },
+      { display: "Quelle héroïne historique a conduit le dauphin Charles VII à Reims pour le faire sacrer roi en 1429 ?", options: ["Jeanne d'Arc", "Marie Curie", "Catherine de Médicis", "Aliénor d'Aquitaine"], correct: "Jeanne d'Arc", tip: "Jeanne d'Arc a libéré Orléans puis mené le roi à Reims !" },
+      { display: "Quel style architectural caractérise la majestueuse cathédrale Notre-Dame de Reims ?", options: ["Le style gothique", "Le style roman", "Le style baroque", "Le style moderne"], correct: "Le style gothique", tip: "Avec ses grandes rosaces et ses arcs brisés, c'est un chef-d'œuvre gothique !" },
+      { display: "Quelle célèbre statue sculptée souriante se trouve sur la façade de la cathédrale de Reims ?", options: ["L'Ange au Sourire", "Le Penseur", "La Joconde", "Le Sphinx"], correct: "L'Ange au Sourire", tip: "L'Ange au Sourire est l'un des emblèmes les plus célèbres de Reims !" },
+      { display: "Qu'est-ce que l'huile sacrée de la <strong>Sainte Ampoule</strong> utilisée lors des sacres ?", options: ["Une huile sainte servant à oindre le roi", "Une potion magique", "Un parfum de fête", "De l'encre royale"], correct: "Une huile sainte servant à oindre le roi", tip: "L'onction avec la Sainte Ampoule symbolisait le pouvoir divin conféré au souverain !" }
+    ];
+
+    const allMateriauxQuestions = [
+      { display: "À quelle famille de matériaux appartient le <strong>bois</strong> ou la <strong>laine</strong> ?", options: ["Matières organiques", "Métaux", "Plastiques", "Céramiques"], correct: "Matières organiques", tip: "Les matières organiques proviennent d'êtres vivants (végétaux ou animaux) !" },
+      { display: "Quel matériau est particulièrement réputé pour conduire très bien l'<strong>électricité</strong> ?", options: ["Le cuivre (métal)", "Le verre", "Le plastique", "Le bois sec"], correct: "Le cuivre (métal)", tip: "Les métaux comme le cuivre sont d'excellents conducteurs électriques !" },
+      { display: "Quelle est la principale propriété des <strong>plastiques</strong> ?", options: ["Légers, faciles à mouler et isolants", "Très lourds et conducteurs", "Cassants comme du verre", "Issus directement des arbres"], correct: "Légers, faciles à mouler et isolants", tip: "Les plastiques sont fabriqués à partir du pétrole et sont de très bons isolants !" },
+      { display: "La porcelaine, la brique et le carrelage font partie de la famille des :", options: ["Céramiques", "Métaux", "Plastiques", "Matières organiques"], correct: "Céramiques", tip: "Les céramiques résistent très bien à la chaleur mais sont cassantes !" },
+      { display: "Un matériau qui ne laisse pas passer le courant électrique s'appelle un :", options: ["Isolant", "Conducteur", "Aimant", "Métal"], correct: "Isolant", tip: "Le plastique, le verre et le caoutchouc sont des isolants électriques !" },
+      { display: "Pourquoi utilise-t-on de l'<strong>aluminium</strong> pour fabriquer les canettes ou les avions ?", options: ["Il est léger et résistant à la corrosion", "Il est lourd comme le plomb", "Il est transparent", "Il est comestible"], correct: "Il est léger et résistant à la corrosion", tip: "L'aluminium est 3 fois plus léger que l'acier !" },
+      { display: "Le coton et le cuir proviennent de la nature vivante, ce sont des :", options: ["Matières organiques", "Matériaux céramiques", "Métaux précieux", "Plastiques"], correct: "Matières organiques", tip: "Le coton vient d'une plante, le cuir d'un animal !" },
+      { display: "Quelle propriété permet au verre d'être utilisé pour les fenêtres ?", options: ["Sa transparence", "Sa conductivité électrique", "Sa souplesse", "Sa légèreté"], correct: "Sa transparence", tip: "Le verre laisse passer la lumière du soleil tout en protégeant du vent !" }
+    ];
+
+    const allEiffelQuestions = [
+      { display: "En quelle année et pour quelle occasion la <strong>Tour Eiffel</strong> a-t-elle été inaugurée ?", options: ["1889 (Exposition Universelle)", "1789 (Révolution)", "1914 (Guerre)", "1900 (Jeux Olympiques)"], correct: "1889 (Exposition Universelle)", tip: "Inaugurée en 1889 pour célébrer le centenaire de 1789 !" },
+      { display: "En quel matériau la Tour Eiffel est-elle principalement construite ?", options: ["Le fer puddlé", "L'acier inoxydable", "Le bronze massif", "L'aluminium"], correct: "Le fer puddlé", tip: "Gustave Eiffel a choisi le fer puddlé, très résistant et souple face au vent !" },
+      { display: "Quelle est la hauteur approximative actuelle de la Tour Eiffel (avec ses antennes) ?", options: ["Environ 330 mètres", "100 mètres", "500 mètres", "800 mètres"], correct: "Environ 330 mètres", tip: "Elle a été la plus haute tour du monde pendant plus de 40 ans !" },
+      { display: "Quel autre monument mondialement célèbre à New York possède une armature métallique conçue par Gustave Eiffel ?", options: ["La Statue de la Liberté", "L'Empire State Building", "Le pont de Brooklyn", "La Maison Blanche"], correct: "La Statue de la Liberté", tip: "Eiffel a conçu la structure interne qui soutient la statue !" },
+      { display: "Comment les 18 000 pièces de fer de la Tour Eiffel ont-elles été assemblées ?", options: ["Avec 2,5 millions de rivets posés à chaud", "Avec de la colle forte", "Par soudure au laser", "Avec des vis et des écrous"], correct: "Avec 2,5 millions de rivets posés à chaud", tip: "Les ouvriers chauffaient les rivets au rouge avant de les marteler !" },
+      { display: "Pourquoi la Tour Eiffel rétrécit-elle d'environ 15 cm en hiver et grandit-elle en été ?", options: ["À cause de la dilatation thermique du fer", "Parce que le sol bouge", "C'est une illusion d'optique", "À cause du vent"], correct: "À cause de la dilatation thermique du fer", tip: "Sous l'effet de la chaleur, le fer se dilate et grandit de quelques centimètres !" },
+      { display: "Au départ, la Tour Eiffel ne devait rester debout que :", options: ["20 ans (sauvée par la radio)", "6 mois", "100 ans", "Pour toujours"], correct: "20 ans (sauvée par la radio)", tip: "Gustave Eiffel l'a sauvée en y installant des antennes radio !" },
+      { display: "Tous les 7 ans environ, la Tour Eiffel est entièrement repeinte pour la protéger de :", options: ["La rouille (corrosion du fer)", "La poussière", "La pluie acide uniquement", "Du soleil"], correct: "La rouille (corrosion du fer)", tip: "Il faut environ 60 tonnes de peinture pour la protéger de la rouille !" }
+    ];
+
+    // =========================================================================
+    // CALCUL MENTAL
+    // =========================================================================
+    let calcTimer = null;
+    let calcTimeLeft = 45;
+    let currentCalcAnswer = 0;
+
+    function startCalcGame() {
+      document.getElementById('calc-start-view').style.display = 'none';
+      document.getElementById('calc-play-view').style.display = 'flex';
+      calcTimeLeft = 45;
+      nextCalcQuestion();
+      clearInterval(calcTimer);
+      calcTimer = setInterval(() => {
+        calcTimeLeft--;
+        document.getElementById('calcTimeLeft').innerText = `Temps restant : ${calcTimeLeft}s`;
+        document.getElementById('calcTimerBar').style.width = `${(calcTimeLeft / 45) * 100}%`;
+        if (calcTimeLeft <= 0) {
+          clearInterval(calcTimer);
+          playSound('win');
+          document.getElementById('calc-play-view').style.display = 'none';
+          document.getElementById('calc-start-view').style.display = 'block';
+          alert(`⏱️ Fin du chrono ! Tu as cumulé ${totalScore} points. Superbe session de calcul !`);
+        }
+      }, 1000);
+    }
+
+    function generateCalcul() {
+      const types = ['mult', 'mult', 'compl_100', 'add_retenue'];
+      const t = types[Math.floor(Math.random() * types.length)];
+      if (t === 'mult') {
+        const tables = [6, 7, 8, 9, 12];
+        const n1 = tables[Math.floor(Math.random() * tables.length)];
+        const n2 = Math.floor(Math.random() * 9) + 2;
+        return { q: `${n1} × ${n2}`, a: n1 * n2 };
+      } else if (t === 'compl_100') {
+        const n1 = Math.floor(Math.random() * 75) + 15;
+        return { q: `100 - ${n1}`, a: 100 - n1 };
+      } else {
+        const n1 = Math.floor(Math.random() * 45) + 25;
+        const n2 = Math.floor(Math.random() * 35) + 18;
+        return { q: `${n1} + ${n2}`, a: n1 + n2 };
+      }
+    }
+
+    function nextCalcQuestion() {
+      const c = generateCalcul();
+      currentCalcAnswer = c.a;
+      document.getElementById('calcQuestion').innerText = `${c.q} = ?`;
+      const inp = document.getElementById('calcAnswerInput');
+      inp.value = '';
+      inp.focus();
+    }
+
+    function submitCalcAnswer() {
+      const inp = document.getElementById('calcAnswerInput');
+      const val = parseInt(inp.value);
+      const f = document.getElementById('calcFeedback');
+      if (isNaN(val)) return;
+      if (val === currentCalcAnswer) {
+        playSound('correct');
+        addScore(10);
+        f.className = 'feedback-banner correct';
+        f.innerText = '⚡ Bravo ! +10 pts';
+        setTimeout(() => f.style.display = 'none', 600);
+        nextCalcQuestion();
+      } else {
+        playSound('wrong');
+        resetStreak();
+        f.className = 'feedback-banner wrong';
+        f.innerText = `Oups ! ${currentCalcAnswer}`;
+        setTimeout(() => { f.style.display = 'none'; nextCalcQuestion(); }, 1000);
+      }
+    }
+    document.getElementById('calcAnswerInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') submitCalcAnswer(); });
+
+    // =========================================================================
+    // CONFETTI ENGINE
+    // =========================================================================
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    function triggerConfetti() {
+      const colors = ['#f472b6', '#c084fc', '#60a5fa', '#34d399', '#fbbf24'];
+      for (let i = 0; i < 40; i++) {
+        particles.push({
+          x: window.innerWidth / 2, y: window.innerHeight / 2,
+          vx: (Math.random() - 0.5) * 12, vy: (Math.random() - 0.5) * 12 - 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 4, alpha: 1
+        });
+      }
+    }
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, idx) => {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.alpha -= 0.02;
+        ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+        if (p.alpha <= 0) particles.splice(idx, 1);
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+    updateConfetti();
+
+    // =========================================================================
+    // INIT
+    // =========================================================================
+    new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
+    renderDetectiveMission();
+    new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants" });
+    new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent" });
+    new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage" });
+    new QuizRunner('quiz-container-periodes', allPeriodesQuestions, { title: "Les 5 Grandes Périodes" });
+    new QuizRunner('quiz-container-prehistoire', allPrehistoireQuestions, { title: "La Préhistoire" });
+    new QuizRunner('quiz-container-reims', allReimsQuestions, { title: "La Cathédrale de Reims" });
+    new QuizRunner('quiz-container-materiaux', allMateriauxQuestions, { title: "Les Matériaux" });
+    new QuizRunner('quiz-container-eiffel', allEiffelQuestions, { title: "Projet Gustave Eiffel" });
+  </script>
+</body>
+</html>
