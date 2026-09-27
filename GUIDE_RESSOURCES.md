@@ -46,7 +46,8 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
 
 ### 3. 🏛️ & 🔬 [Histoire et Sciences](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences)
 - 📖 [Fiche Découverte & Quiz : Histoire de France](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/Fiche_Decouverte_Histoire.md)
-- 🧪 [Fiche Découverte & Quiz : Sciences & Arts (Matériaux & Tour Eiffel)](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/Fiche_Decouverte_Sciences_et_Arts.md)
+- 🧪 [Fiche Découverte & Quiz : Sciences & Arts (Matériaux, Éléments & Tour Eiffel)](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/Fiche_Decouverte_Sciences_et_Arts.md)
+- ⚛️ [Tableau Périodique des Éléments Chimiques](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/tables_elements.png)
 - 🎬 Ressources vidéos & audio du Padlet :
   - 🎶 *Les 5 grandes périodes de l'histoire*
   - 🦕 *La préhistoire (Quelle Histoire)*

@@ -1006,6 +1006,7 @@
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('sciences', 'materiaux')">🧪 Les Matériaux (Vidéo + 8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'eiffel')">🗼 Projet Gustave Eiffel (Podcast + 8 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'elements')">⚛️ Tableau des Éléments (Document & Quiz)</button>
       </div>
 
       <!-- Sciences Sub 1: Materiaux -->
@@ -1044,6 +1045,30 @@
           </div>
         </div>
         <div id="quiz-container-eiffel" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Sciences Sub 3: Tableau des Éléments -->
+      <div id="sub-sciences-elements" class="submodule-content">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">⚛️ Document Officiel : Le Tableau Périodique des Éléments Chimiques</span>
+            <a href="images/tables_elements.png" target="_blank" class="doc-link-btn">🔍 Ouvrir en Plein Écran HD</a>
+          </div>
+          <div style="width: 100%; border-radius: 14px; overflow: hidden; background: #fff; padding: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); text-align: center; cursor: pointer;" onclick="window.open('images/tables_elements.png', '_blank')">
+            <img src="images/tables_elements.png" alt="Tableau Périodique des Éléments" style="width: 100%; height: auto; max-height: 480px; object-fit: contain; border-radius: 10px;">
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-muted); text-align: center; margin-top: 4px;">💡 <em>Clique sur l'image pour l'afficher en haute définition !</em></p>
+        </div>
+
+        <div class="rule-box" style="background: rgba(14, 165, 233, 0.12); border-color: #0284c7;">
+          ⚛️ <strong>Les Éléments Chimiques & les Matériaux en CM2 :</strong><br>
+          • <strong>Les briques de l'Univers :</strong> Tout ce qui existe sur Terre (l'air, l'eau, les roches, nos corps) est composé de ces éléments.<br>
+          • <strong>Les Métaux :</strong> <strong>Fe</strong> (Fer - Tour Eiffel), <strong>Cu</strong> (Cuivre - câbles électriques), <strong>Al</strong> (Aluminium - canettes), <strong>Au</strong> (Or), <strong>Ag</strong> (Argent).<br>
+          • <strong>Les Éléments de la Vie :</strong> <strong>C</strong> (Carbone), <strong>H</strong> (Hydrogène), <strong>O</strong> (Oxygène - respiration), <strong>N</strong> (Azote).<br>
+          • <strong>Les Gaz Nobles :</strong> <strong>He</strong> (Hélium pour les ballons), <strong>Ne</strong> (Néon pour les enseignes lumineuses).
+        </div>
+
+        <div id="quiz-container-elements" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
     </section>
 
@@ -1131,6 +1156,19 @@
           </div>
           <p>La technique opératoire avec cassage de dizaine pas à pas par Loustics Nathalie.</p>
           <a href="https://youtu.be/qBD5TUjFFq4" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Document 7 -->
+        <div class="video-card-item">
+          <h4>⚛️ Tableau périodique des éléments</h4>
+          <div class="video-preview-box" style="height: 170px; background: #fff;" onclick="window.open('images/tables_elements.png', '_blank')">
+            <img src="images/tables_elements.png" class="video-preview-thumb" style="object-fit: contain; padding: 6px;">
+            <div class="video-play-overlay" style="width: 52px; height: 52px; background: rgba(14, 165, 233, 0.9);">
+              <span style="font-size: 1.4rem;">🔍</span>
+            </div>
+          </div>
+          <p>La classification officielle des 118 atomes et familles de métaux pour comprendre la matière.</p>
+          <a href="images/tables_elements.png" target="_blank" class="yt-btn" style="background: linear-gradient(135deg, #0284c7, #0369a1);">🔍 Voir le document HD</a>
         </div>
       </div>
     </section>
@@ -1602,6 +1640,17 @@
       { display: "Tous les 7 ans environ, la Tour Eiffel est entièrement repeinte pour la protéger de :", options: ["La rouille (corrosion du fer)", "La poussière", "La pluie acide uniquement", "Du soleil"], correct: "La rouille (corrosion du fer)", tip: "Il faut environ 60 tonnes de peinture pour la protéger de la rouille !" }
     ];
 
+    const allElementsQuestions = [
+      { display: "Quel est le symbole chimique du <strong>Fer</strong> (utilisé pour bâtir la Tour Eiffel) ?", options: ["Fe", "F", "Fr", "Ir"], correct: "Fe", tip: "Le fer a pour symbole 'Fe' (du latin ferrum) !" },
+      { display: "Quel élément chimique indispensable à la respiration des êtres vivants a pour symbole <strong>O</strong> ?", options: ["L'Oxygène", "L'Or", "L'Osmium", "L'Ozone"], correct: "L'Oxygène", tip: "L'Oxygène (O) compose environ 21% de l'air que nous respirons !" },
+      { display: "Quel métal rougeoyant (symbole <strong>Cu</strong>) est le roi des fils électriques ?", options: ["Le Cuivre", "Le Carbone", "Le Calcium", "Le Chrome"], correct: "Le Cuivre", tip: "Le Cuivre (Cu) est un métal très ductile et un formidable conducteur électrique !" },
+      { display: "Quel élément chimique (symbole <strong>C</strong>) compose la matière vivante, le charbon et le diamant ?", options: ["Le Carbone", "Le Cuivre", "Le Chlore", "Le Cobalt"], correct: "Le Carbone", tip: "Le Carbone (C) est la base de toute la chimie organique et du vivant !" },
+      { display: "Quel gaz noble (symbole <strong>He</strong>), plus léger que l'air, fait s'envoler les ballons de fête ?", options: ["L'Hélium", "L'Hydrogène", "L'Azote", "Le Néon"], correct: "L'Hélium", tip: "L'Hélium (He) est un gaz noble très léger et ininflammable !" },
+      { display: "Quel métal très léger (symbole <strong>Al</strong>) est utilisé pour les canettes et les avions ?", options: ["L'Aluminium", "L'Argent", "L'Or", "Le Plomb"], correct: "L'Aluminium", tip: "L'Aluminium (Al) est réputé pour sa grande légèreté et sa résistance !" },
+      { display: "Quel métal précieux inoxydable a pour symbole <strong>Au</strong> (du latin <em>aurum</em>) ?", options: ["L'Or", "L'Argent", "L'Aluminium", "L'Azote"], correct: "L'Or", tip: "L'Or (Au) est un métal noble brillant très recherché depuis l'Antiquité !" },
+      { display: "Combien d'éléments chimiques composent officiellement ce tableau périodique universel ?", options: ["118 éléments", "50 éléments", "500 éléments", "12 éléments"], correct: "118 éléments", tip: "Le tableau périodique compte 118 éléments répertoriés par les scientifiques !" }
+    ];
+
     // =========================================================================
     // CALCUL MENTAL
     // =========================================================================
@@ -1768,6 +1817,7 @@
     new QuizRunner('quiz-container-reims', allReimsQuestions, { title: "La Cathédrale de Reims" });
     new QuizRunner('quiz-container-materiaux', allMateriauxQuestions, { title: "Les Matériaux" });
     new QuizRunner('quiz-container-eiffel', allEiffelQuestions, { title: "Projet Gustave Eiffel" });
+    new QuizRunner('quiz-container-elements', allElementsQuestions, { title: "Tableau des Éléments" });
   </script>
 </body>
 </html>

@@ -24,3 +24,19 @@ Tout ce qui nous entoure est fabriqué à partir de matériaux choisis pour leur
   - Composée de plus de **18 000 pièces de fer** assemblées par **2,5 millions de rivets** !
 - **Autre chef-d'œuvre d'Eiffel :**
   - Gustave Eiffel a aussi conçu la structure métallique intérieure de la **Statue de la Liberté** à New York !
+
+---
+
+## ⚛️ 3. Le Tableau Périodique des Éléments Chimiques
+
+Le tableau périodique regroupe l'ensemble des **briques élémentaires de l'Univers** (les atomes) à partir desquelles toute la matière et tous nos matériaux sont formés :
+
+![Tableau périodique des éléments](tables_elements.png)
+
+### 💡 À retenir pour le CM2 :
+- **Qu'est-ce qu'un élément ?** C'est une substance pure faite d'un seul type d'atome (ex: le fer `Fe`, le cuivre `Cu`, l'oxygène `O`, le carbone `C`, l'or `Au`).
+- **Les grandes familles :**
+  - **Les métaux** (en rouge, orange, violet et bleu clair) : très nombreux dans le tableau, conducteurs et solides.
+  - **Les non-métaux et gaz** (en vert et jaune) : indispensables à la vie (Carbone `C`, Oxygène `O`, Azote `N`, Hydrogène `H`) et les gaz nobles (Hélium `He`, Néon `Ne`).
+- **Le lien avec nos leçons :** Le fer de la Tour Eiffel (`Fe`), les fils électriques en cuivre (`Cu`), les canettes en aluminium (`Al`) ou l'oxygène que nous respirons (`O`) viennent tous de ce tableau universel !
+
