@@ -238,7 +238,7 @@
     /* Hero Banners */
     .hero-banner {
       width: 100%;
-      height: 160px;
+      height: 230px;
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 18px;
@@ -250,6 +250,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 25%;
     }
 
     .hero-banner-overlay {
@@ -355,7 +356,8 @@
     .video-preview-box {
       position: relative;
       width: 100%;
-      height: 240px;
+      aspect-ratio: 16 / 9;
+      height: auto;
       border-radius: 14px;
       overflow: hidden;
       background: #000;
@@ -738,7 +740,7 @@
     @media (max-width: 650px) {
       h1 { font-size: 1.8rem; }
       main { padding: 16px; }
-      .hero-banner { height: 120px; }
+      .hero-banner { height: 160px; }
       .calc-card { font-size: 2.3rem; }
       .sentence-display { font-size: 1.05rem; }
     }
@@ -1083,7 +1085,7 @@
         <!-- Video 1 -->
         <div class="video-card-item">
           <h4>🎶 Les 5 grandes périodes de l'histoire</h4>
-          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/Nnh2lvZJYaE', '_blank')">
+          <div class="video-preview-box"  onclick="window.open('https://youtu.be/Nnh2lvZJYaE', '_blank')">
             <img src="https://img.youtube.com/vi/Nnh2lvZJYaE/hqdefault.jpg" class="video-preview-thumb">
             <div class="video-play-overlay" style="width: 52px; height: 52px;">
               <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1096,7 +1098,7 @@
         <!-- Video 2 -->
         <div class="video-card-item">
           <h4>🦕 La Préhistoire (Quelle Histoire)</h4>
-          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/vxD_G8_WMVE', '_blank')">
+          <div class="video-preview-box"  onclick="window.open('https://youtu.be/vxD_G8_WMVE', '_blank')">
             <img src="https://img.youtube.com/vi/vxD_G8_WMVE/hqdefault.jpg" class="video-preview-thumb">
             <div class="video-play-overlay" style="width: 52px; height: 52px;">
               <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1109,7 +1111,7 @@
         <!-- Video 3 -->
         <div class="video-card-item">
           <h4>👑 La Cathédrale de Reims</h4>
-          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/I88cMDMRk88', '_blank')">
+          <div class="video-preview-box"  onclick="window.open('https://youtu.be/I88cMDMRk88', '_blank')">
             <img src="https://img.youtube.com/vi/I88cMDMRk88/hqdefault.jpg" class="video-preview-thumb">
             <div class="video-play-overlay" style="width: 52px; height: 52px;">
               <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1122,7 +1124,7 @@
         <!-- Video 4 -->
         <div class="video-card-item">
           <h4>🔬 Les matériaux qui nous entourent</h4>
-          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/_GV35WRH23E', '_blank')">
+          <div class="video-preview-box"  onclick="window.open('https://youtu.be/_GV35WRH23E', '_blank')">
             <img src="https://img.youtube.com/vi/_GV35WRH23E/hqdefault.jpg" class="video-preview-thumb">
             <div class="video-play-overlay" style="width: 52px; height: 52px;">
               <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1135,7 +1137,7 @@
         <!-- Video 5 -->
         <div class="video-card-item">
           <h4>🗼 Gustave Eiffel (Quelle Histoire)</h4>
-          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/JCZ-uWrZe58', '_blank')">
+          <div class="video-preview-box"  onclick="window.open('https://youtu.be/JCZ-uWrZe58', '_blank')">
             <img src="https://img.youtube.com/vi/JCZ-uWrZe58/hqdefault.jpg" class="video-preview-thumb">
             <div class="video-play-overlay" style="width: 52px; height: 52px;">
               <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1148,7 +1150,7 @@
         <!-- Video 6 -->
         <div class="video-card-item">
           <h4>➖ La soustraction par cassage</h4>
-          <div class="video-preview-box" style="height: 170px;" onclick="window.open('https://youtu.be/qBD5TUjFFq4', '_blank')">
+          <div class="video-preview-box"  onclick="window.open('https://youtu.be/qBD5TUjFFq4', '_blank')">
             <img src="https://img.youtube.com/vi/qBD5TUjFFq4/hqdefault.jpg" class="video-preview-thumb">
             <div class="video-play-overlay" style="width: 52px; height: 52px;">
               <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -1161,7 +1163,7 @@
         <!-- Document 7 -->
         <div class="video-card-item">
           <h4>⚛️ Tableau périodique des éléments</h4>
-          <div class="video-preview-box" style="height: 170px; background: #fff;" onclick="window.open('images/tables_elements.png', '_blank')">
+          <div class="video-preview-box" style="background: #fff;" onclick="window.open('images/tables_elements.png', '_blank')">
             <img src="images/tables_elements.png" class="video-preview-thumb" style="object-fit: contain; padding: 6px;">
             <div class="video-play-overlay" style="width: 52px; height: 52px; background: rgba(14, 165, 233, 0.9);">
               <span style="font-size: 1.4rem;">🔍</span>
