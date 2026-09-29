@@ -4373,6 +4373,38 @@
 
       <!-- Submodule 1 : Poésie -->
       <div id="sub-culture-poesie" class="submodule-content active">
+        <!-- Barre Générateur IA Poésie -->
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 18px; padding: 18px; margin-bottom: 20px; box-shadow: var(--shadow-comic-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-weight: 800; font-size: 1.15rem; color: #7c3aed; display: flex; align-items: center; gap: 8px;">
+              <span>✨ Générateur & Explorateur de Poésies (IA)</span>
+            </div>
+            <button class="doc-link-btn" onclick="restoreDefaultPoems()" style="font-size: 0.82rem; padding: 5px 12px; background: #faf5ff; border-color: #7c3aed; color: #7c3aed;" title="Rétablir toutes les poésies par défaut">
+              🔄 Réinitialiser ma liste
+            </button>
+          </div>
+          
+          <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+            <input type="text" id="poemAiThemeInput" class="conjugo-input" placeholder="Tape un thème (ex: les animaux, la nature, la nuit, le rire...) ou un poète (Carême, Desnos, Éluard...)" style="margin-bottom: 0;">
+            <button class="action-btn" id="btnGenPoemAi" onclick="generateNewPoemWithAi()" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); padding: 10px 22px;">
+              ✨ Chercher avec l'IA
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+            <span style="font-size: 0.82rem; font-weight: 800; color: var(--ink-light);">Idées de thèmes CM2 :</span>
+            <button class="t-chip" onclick="quickGenPoem('les animaux malicieux')">🐾 Animaux</button>
+            <button class="t-chip" onclick="quickGenPoem('la nature et les saisons')">🌳 Nature & Saisons</button>
+            <button class="t-chip" onclick="quickGenPoem('le rêve et la liberté')">🕊️ Rêve & Liberté</button>
+            <button class="t-chip" onclick="quickGenPoem('l école buissonnière et humour')">🏫 École & Humour</button>
+            <button class="t-chip" onclick="quickGenPoem('Maurice Carême')">✒️ Maurice Carême</button>
+            <button class="t-chip" onclick="quickGenPoem('Robert Desnos')">🦉 Robert Desnos</button>
+          </div>
+          <div id="poemAiLoading" style="display: none; margin-top: 10px; font-weight: 800; color: #7c3aed; font-size: 0.92rem;">
+            ⏳ Madame Claire et l'IA recherchent un poème adapté au CM2...
+          </div>
+        </div>
+
         <div class="poetry-container">
           <div class="poetry-sidebar" id="poetryListSidebar">
             <!-- Rempli en JS -->
@@ -4391,6 +4423,9 @@
                 <button class="t-chip" onclick="setPoemMaskLevel(50)" id="maskBtn50">-50% mots</button>
                 <button class="t-chip" onclick="setPoemMaskLevel(100)" id="maskBtn100">🏆 Par Cœur</button>
                 <button class="doc-link-btn" onclick="speakCurrentPoem()" style="padding: 4px 10px; font-size: 0.85rem;" title="Écouter la lecture vocale">🔊 Écouter</button>
+                <button class="doc-link-btn" onclick="dislikeCurrentPoem()" style="padding: 4px 10px; font-size: 0.85rem; border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;" title="Je n'aime pas cette poésie (la retirer de ma sélection)">
+                  👎 Retirer
+                </button>
               </div>
             </div>
 
@@ -4403,8 +4438,39 @@
 
       <!-- Submodule 2 : Secrets d'Art -->
       <div id="sub-culture-arts" class="submodule-content">
+        <!-- Barre Générateur IA Chefs-d'œuvre -->
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 18px; padding: 18px; margin-bottom: 20px; box-shadow: var(--shadow-comic-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-weight: 800; font-size: 1.15rem; color: #0284c7; display: flex; align-items: center; gap: 8px;">
+              <span>✨ Explorateur IA de Chefs-d'œuvre & Histoire des Arts</span>
+            </div>
+            <button class="doc-link-btn" onclick="restoreDefaultArts()" style="font-size: 0.82rem; padding: 5px 12px; background: #eff6ff; border-color: #0284c7; color: #0284c7;" title="Rétablir tous les chefs-d'œuvre">
+              🔄 Réinitialiser la galerie
+            </button>
+          </div>
+          
+          <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+            <input type="text" id="artAiThemeInput" class="conjugo-input" placeholder="Tape un artiste (Monet, Hokusai, Picasso, Rodin...), une œuvre ou un style..." style="margin-bottom: 0;">
+            <button class="action-btn" id="btnGenArtAi" onclick="generateNewArtWithAi()" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 10px 22px;">
+              ✨ Découvrir avec l'IA
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+            <span style="font-size: 0.82rem; font-weight: 800; color: var(--ink-light);">Idées de chefs-d'œuvre :</span>
+            <button class="t-chip" onclick="quickGenArt('La Grande Vague d Hokusai')">🌊 La Vague (Hokusai)</button>
+            <button class="t-chip" onclick="quickGenArt('Les Nymphéas de Claude Monet')">🪷 Les Nymphéas (Monet)</button>
+            <button class="t-chip" onclick="quickGenArt('Le Penseur d Auguste Rodin')">🗿 Le Penseur (Rodin)</button>
+            <button class="t-chip" onclick="quickGenArt('Guernica de Pablo Picasso')">🎨 Guernica (Picasso)</button>
+            <button class="t-chip" onclick="quickGenArt('Le Colisée de Rome')">🏛️ Le Colisée</button>
+          </div>
+          <div id="artAiLoading" style="display: none; margin-top: 10px; font-weight: 800; color: #0284c7; font-size: 0.92rem;">
+            ⏳ Recherche de l'œuvre et de ses anecdotes secrètes...
+          </div>
+        </div>
+
         <div class="rule-box" style="background: #fdf4ff; border: 2px solid var(--ink); margin-bottom: 16px;">
-          💡 <strong>Histoire des Arts CM2 :</strong> Clique sur les cartes de secrets pour découvrir les anecdotes insolites et détails cachés des œuvres au programme !
+          💡 <strong>Histoire des Arts CM2 :</strong> Clique sur les cartes de secrets pour découvrir les anecdotes insolites et détails cachés. Si tu n'aimes pas une œuvre, clique sur le pouce vers le bas <strong>👎 Retirer</strong> pour la faire disparaître de ta galerie !
         </div>
 
         <div id="artsGalleryContainer" style="display: flex; flex-direction: column; gap: 24px;">
@@ -8503,9 +8569,9 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
 
     // =========================================================================
-    // 4. POÉSIE & HISTOIRE DES ARTS CM2
+    // 4. POÉSIE & HISTOIRE DES ARTS CM2 (AVEC GÉNÉRATEUR IA & GESTION DES PREFERENCES)
     // =========================================================================
-    const cm2PoemsList = [
+    const initialPoemsList = [
       {
         id: "corbeau",
         title: "Le Corbeau et le Renard",
@@ -8565,7 +8631,69 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       }
     ];
 
-    const cm2ArtsList = [
+    const cm2PreloadedBackupPoems = [
+      {
+        id: "desnos_pelican",
+        title: "Le Pélican",
+        author: "Robert Desnos (1944)",
+        stanzas: [
+          ["Le capitaine Jonathan,", "Étant âgé de dix-huit ans,"],
+          ["Capture un jour un pélican", "Dans une île d'Extrême-Orient."],
+          ["Le pélican de Jonathan", "Au matin pond un œuf tout blanc,"],
+          ["Et il en sort un pélican", "Lui ressemblant exactement."],
+          ["Et ce deuxième pélican", "Pond à son tour un œuf tout blanc,"],
+          ["D'où sort un autre pélican", "Qui fera une chose pareille."],
+          ["Cela peut durer pendant très longtemps", "Si l'on ne fait pas d'omelette avant."]
+        ]
+      },
+      {
+        id: "prevert_oiseau",
+        title: "Pour faire le portrait d'un oiseau",
+        author: "Jacques Prévert (1946)",
+        stanzas: [
+          ["Peindre d'abord une cage", "avec une porte ouverte"],
+          ["peindre ensuite", "quelque chose de joli", "quelque chose de simple", "quelque chose de beau"],
+          ["quelque chose d'utile pour l'oiseau..."],
+          ["Placer ensuite la toile contre un arbre", "dans un jardin", "dans un bois", "ou dans une forêt"],
+          ["se cacher derrière l'arbre", "sans rien dire", "sans bouger..."],
+          ["Quand l'oiseau arrive", "attendre que l'oiseau entre dans la cage", "et quand il est entré"],
+          ["fermer doucement la porte avec le pinceau", "puis effacer un à un tous les barreaux", "en ayant soin de ne toucher aucune des plumes de l'oiseau."]
+        ]
+      },
+      {
+        id: "careme_ecole",
+        title: "L'Heure du Conte",
+        author: "Maurice Carême (1954)",
+        stanzas: [
+          ["C'est l'heure où les enfants assis", "Écoutent les histoires."],
+          ["Le vent dehors souffle et gémit", "Dans la grande nuit noire."],
+          ["Mais dans la classe aux murs dorés", "Un beau prince s'avance"],
+          ["Sur un cheval tout harnaché", "D'argent et d'espérance."]
+        ]
+      },
+      {
+        id: "roy_campagne",
+        title: "L'Enfant qui battait la campagne",
+        author: "Claude Roy (1969)",
+        stanzas: [
+          ["Où cours-tu si vite, bel enfant ?", "Je cours après le vent d'autan,"],
+          ["Je cours après la lune rousse", "Et le lièvre couché sous la mousse."],
+          ["Je bats la campagne et les bois,", "J'ai tout un royaume sous mon toit !"]
+        ]
+      },
+      {
+        id: "eluard_liberte",
+        title: "Liberté (Strophes choisies)",
+        author: "Paul Éluard (1942)",
+        stanzas: [
+          ["Sur mes cahiers d'écolier", "Sur mon pupitre et les arbres", "Sur le sable sur la neige", "J'écris ton nom."],
+          ["Sur toutes les pages lues", "Sur toutes les pages blanches", "Pierre sang papier ou cendre", "J'écris ton nom."],
+          ["Et par le pouvoir d'un mot", "Je recommence ma vie", "Je suis né pour te connaître", "Pour te nommer :", "Liberté."]
+        ]
+      }
+    ];
+
+    const initialArtsList = [
       {
         id: "joconde",
         title: "La Joconde (Mona Lisa)",
@@ -8592,12 +8720,133 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       }
     ];
 
+    const cm2PreloadedBackupArts = [
+      {
+        id: "hokusai",
+        title: "La Grande Vague de Kanagawa",
+        artist: "Katsushika Hokusai (vers 1831)",
+        badge: "Estampe japonaise / Musée Guimet",
+        desc: "Une vague gigantesque et menaçante aux crêtes d'écume blanche s'élève au-dessus de pêcheurs courageux.",
+        secrets: [
+          { title: "Le mont Fuji impassible", text: "Au creux de la vague monstrueuse, le mont Fuji apparaît tout petit et parfaitement calme, symbole d'éternité." },
+          { title: "Le bleu de Prusse", text: "Hokusai a utilisé un bleu très novateur pour l'époque venu d'Europe, qui donne cette profondeur fascinante à l'océan." },
+          { title: "Les griffes d'écume", text: "Observe bien la pointe des vagues : l'écume forme des dizaines de petites griffes prêtes à saisir les barques !" }
+        ]
+      },
+      {
+        id: "rodin",
+        title: "Le Penseur",
+        artist: "Auguste Rodin (1904)",
+        badge: "Musée Rodin, Paris",
+        desc: "Une colossale sculpture en bronze représentant un homme plongé dans une méditation intense et puissante.",
+        secrets: [
+          { title: "Un corps tendu par la pensée", text: "Tous les muscles de son dos et de ses jambes sont crispés : Rodin voulait montrer que penser est un véritable effort physique !" },
+          { title: "Créé pour La Porte de l'Enfer", text: "À l'origine, cette statue devait représenter le poète Dante au sommet d'une porte monumentale inspirée de la Divine Comédie." },
+          { title: "Le coude sur le genou opposé", text: "La posture est en fait anatomiquement impossible à tenir longtemps : le coude droit repose sur le genou gauche !" }
+        ]
+      },
+      {
+        id: "monet",
+        title: "Les Nymphéas",
+        artist: "Claude Monet (1914-1926)",
+        badge: "Musée de l'Orangerie, Paris",
+        desc: "D'immenses panneaux circulaires montrant des nénuphars flottant sur le bassin du jardin de Giverny.",
+        secrets: [
+          { title: "Sans ciel ni horizon", text: "Monet a supprimé la ligne d'horizon : le spectateur a l'impression d'être plongé directement au cœur de l'eau." },
+          { title: "L'effet des reflets", text: "Ce que l'on voit en arrière-plan n'est pas l'eau, mais le reflet des nuages et des saules pleureurs à la surface." },
+          { title: "Offert pour la Paix", text: "Monet a offert ces toiles géantes à la France au lendemain de la Première Guerre mondiale comme un symbole de sérénité." }
+        ]
+      },
+      {
+        id: "picasso_guernica",
+        title: "Guernica",
+        artist: "Pablo Picasso (1937)",
+        badge: "Musée Reina Sofía, Madrid",
+        desc: "Un chef-d'œuvre monumental en noir et blanc dénonçant le bombardement d'une ville et les ravages de la guerre.",
+        secrets: [
+          { title: "Le noir et blanc tragique", text: "Picasso a banni la couleur pour donner à son tableau l'aspect dramatique et solennel d'un reportage de journal." },
+          { title: "Le cheval et le taureau", text: "Le cheval terrorisé représente le peuple innocent blessé, tandis que le taureau incarne la brutalité et la tragédie." },
+          { title: "L'ampoule électrique", text: "Au plafond, une ampoule en forme de soleil éclaire la scène, symbolisant à la fois la vérité et le progrès technique destructeur." }
+        ]
+      },
+      {
+        id: "colisee",
+        title: "Le Colisée de Rome",
+        artist: "Empire Romain (70-80 ap. J.-C.)",
+        badge: "Architecture Antique / Rome",
+        desc: "Le plus grand amphithéâtre jamais construit dans l'Empire romain, chef-d'œuvre du génie civil antique.",
+        secrets: [
+          { title: "Le velarium rafraîchissant", text: "Les Romains déployaient une immense toile de navire au sommet du Colisée pour protéger les 50 000 spectateurs du soleil !" },
+          { title: "Les batailles navales", text: "Au début de son histoire, l'arène pouvait être inondée d'eau pour rejouer de véritables combats de navires (les naumachies) !" },
+          { title: "Les sous-sols secrets (hypogée)", text: "Sous le plancher de sable se cachait un réseau de trappes et d'ascenseurs mécaniques pour faire jaillir décors et animaux sauvages." }
+        ]
+      }
+    ];
+
+    // --- GESTION DES PREFERENCES D'OEUVRES ET POÉSIES ---
+    function getCustomPoems() {
+      try { return JSON.parse(localStorage.getItem('cm2_custom_poems') || '[]'); } catch (e) { return []; }
+    }
+    function saveCustomPoems(list) {
+      localStorage.setItem('cm2_custom_poems', JSON.stringify(list));
+    }
+    function getDeletedPoems() {
+      try { return JSON.parse(localStorage.getItem('cm2_deleted_poems') || '[]'); } catch (e) { return []; }
+    }
+    function saveDeletedPoems(list) {
+      localStorage.setItem('cm2_deleted_poems', JSON.stringify(list));
+    }
+
+    function getActivePoems() {
+      const deleted = getDeletedPoems();
+      const combined = [...initialPoemsList, ...getCustomPoems()];
+      // Dédoublonnage par ID
+      const seen = new Set();
+      const unique = [];
+      combined.forEach(p => {
+        if (!seen.has(p.id) && !deleted.includes(p.id)) {
+          seen.add(p.id);
+          unique.push(p);
+        }
+      });
+      return unique.length > 0 ? unique : initialPoemsList;
+    }
+
+    function getCustomArts() {
+      try { return JSON.parse(localStorage.getItem('cm2_custom_arts') || '[]'); } catch (e) { return []; }
+    }
+    function saveCustomArts(list) {
+      localStorage.setItem('cm2_custom_arts', JSON.stringify(list));
+    }
+    function getDeletedArts() {
+      try { return JSON.parse(localStorage.getItem('cm2_deleted_arts') || '[]'); } catch (e) { return []; }
+    }
+    function saveDeletedArts(list) {
+      localStorage.setItem('cm2_deleted_arts', JSON.stringify(list));
+    }
+
+    function getActiveArts() {
+      const deleted = getDeletedArts();
+      const combined = [...initialArtsList, ...getCustomArts()];
+      const seen = new Set();
+      const unique = [];
+      combined.forEach(a => {
+        if (!seen.has(a.id) && !deleted.includes(a.id)) {
+          seen.add(a.id);
+          unique.push(a);
+        }
+      });
+      return unique.length > 0 ? unique : initialArtsList;
+    }
+
     let currentPoemIdx = 0;
     let currentPoemMaskPct = 0;
 
     function initCultureSection() {
+      const activePoems = getActivePoems();
+      if (currentPoemIdx >= activePoems.length) currentPoemIdx = 0;
       renderPoetrySidebar();
-      renderPoem(0);
+      renderPoem(currentPoemIdx);
       renderArtsGallery();
     }
 
@@ -8614,7 +8863,12 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     function renderPoetrySidebar() {
       const sb = document.getElementById('poetryListSidebar');
       if (!sb) return;
-      sb.innerHTML = cm2PoemsList.map((p, idx) => `
+      const activePoems = getActivePoems();
+      if (activePoems.length === 0) {
+        sb.innerHTML = `<div style="font-size: 0.88rem; color: var(--ink-light); padding: 8px;">Toutes les poésies ont été masquées. Cliquez sur 'Réinitialiser' pour les retrouver.</div>`;
+        return;
+      }
+      sb.innerHTML = activePoems.map((p, idx) => `
         <div class="poem-nav-item ${idx === currentPoemIdx ? 'active' : ''}" onclick="selectPoem(${idx})">
           📜 ${p.title}
           <div style="font-size: 0.78rem; font-weight: 500; color: var(--ink-light); margin-top: 2px;">${p.author}</div>
@@ -8631,7 +8885,8 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
 
     function renderPoem(idx) {
-      const poem = cm2PoemsList[idx];
+      const activePoems = getActivePoems();
+      const poem = activePoems[idx] || activePoems[0];
       if (!poem) return;
 
       const titleEl = document.getElementById('currentPoemTitle');
@@ -8676,7 +8931,8 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
 
     function speakCurrentPoem() {
-      const poem = cm2PoemsList[currentPoemIdx];
+      const activePoems = getActivePoems();
+      const poem = activePoems[currentPoemIdx];
       if (!poem || !window.speechSynthesis) return;
       window.speechSynthesis.cancel();
       const text = poem.title + '. De ' + poem.author + '.\n' + poem.stanzas.map(s => s.join(' ')).join('\n');
@@ -8687,18 +8943,155 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       playSound('click');
     }
 
+    // --- SUPPRESSION / POUCE VERS LE BAS POÉSIE ---
+    function dislikeCurrentPoem() {
+      const activePoems = getActivePoems();
+      const poem = activePoems[currentPoemIdx];
+      if (!poem) return;
+
+      if (!confirm(`Souhaites-tu retirer la poésie « ${poem.title} » de ta sélection ?`)) return;
+
+      const deleted = getDeletedPoems();
+      if (!deleted.includes(poem.id)) {
+        deleted.push(poem.id);
+        saveDeletedPoems(deleted);
+      }
+
+      playSound('wrong');
+      currentPoemIdx = 0;
+      renderPoetrySidebar();
+      renderPoem(0);
+
+      // Notification
+      const container = document.getElementById('poemStanzasContainer');
+      if (container && getActivePoems().length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 24px; color: var(--ink-light);">
+          Tu as masqué toutes les poésies. Clique sur <strong>« 🔄 Réinitialiser ma liste »</strong> en haut pour tout restaurer ou utilise <strong>« ✨ Chercher avec l'IA »</strong> pour en découvrir de nouvelles !
+        </div>`;
+      }
+    }
+
+    function restoreDefaultPoems() {
+      saveDeletedPoems([]);
+      currentPoemIdx = 0;
+      initCultureSection();
+      playSound('correct');
+      alert("✅ Ta liste de poésies a été réinitialisée avec succès !");
+    }
+
+    // --- GÉNÉRATEUR IA DE POÉSIES ---
+    async function generateNewPoemWithAi() {
+      const input = document.getElementById('poemAiThemeInput');
+      const theme = input ? input.value.trim() : '';
+      const loading = document.getElementById('poemAiLoading');
+      const btn = document.getElementById('btnGenPoemAi');
+
+      if (loading) loading.style.display = 'block';
+      if (btn) btn.disabled = true;
+
+      const apiKey = localStorage.getItem('gemini_api_key') || '';
+      let newPoem = null;
+
+      if (apiKey) {
+        try {
+          const prompt = `Tu es un professeur de littérature pour le primaire CM2.
+L'élève souhaite découvrir une poésie sur le thème : "${theme || 'la nature, les animaux ou la liberté'}".
+Choisis un poème célèbre de la poésie française (Prévert, Desnos, Carême, La Fontaine, Hugo, Verlaine, Éluard, etc.) parfaitement adapté au CM2.
+Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codeblock) avec la structure exacte suivante :
+{
+  "id": "chaine_unique_${Date.now()}",
+  "title": "Titre du poème",
+  "author": "Nom de l'auteur (Année)",
+  "stanzas": [
+    ["Vers 1", "Vers 2"],
+    ["Vers 3", "Vers 4"]
+  ]
+}`;
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          });
+          const data = await response.json();
+          let rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+          newPoem = JSON.parse(rawText);
+        } catch (err) {
+          console.error("Gemini poem gen error:", err);
+        }
+      }
+
+      // Fallback depuis la réserve riche pré-enregistrée si pas d'API ou erreur
+      if (!newPoem || !newPoem.title || !newPoem.stanzas) {
+        const deleted = getDeletedPoems();
+        const activeIds = getActivePoems().map(p => p.id);
+        const candidates = cm2PreloadedBackupPoems.filter(p => !activeIds.includes(p.id) && !deleted.includes(p.id));
+        if (candidates.length > 0) {
+          newPoem = candidates[Math.floor(Math.random() * candidates.length)];
+        } else {
+          newPoem = cm2PreloadedBackupPoems[Math.floor(Math.random() * cm2PreloadedBackupPoems.length)];
+          newPoem = { ...newPoem, id: 'poem_clone_' + Date.now() };
+        }
+      }
+
+      if (loading) loading.style.display = 'none';
+      if (btn) btn.disabled = false;
+
+      if (newPoem) {
+        const custom = getCustomPoems();
+        custom.push(newPoem);
+        saveCustomPoems(custom);
+
+        const active = getActivePoems();
+        const newIdx = active.findIndex(p => p.id === newPoem.id);
+        currentPoemIdx = newIdx >= 0 ? newIdx : active.length - 1;
+
+        renderPoetrySidebar();
+        renderPoem(currentPoemIdx);
+        playSound('win');
+        triggerConfetti();
+        gainStars(1);
+
+        if (input) input.value = '';
+      }
+    }
+
+    function quickGenPoem(themeText) {
+      const input = document.getElementById('poemAiThemeInput');
+      if (input) input.value = themeText;
+      generateNewPoemWithAi();
+    }
+
+    // --- GESTION DES CHEFS-D'ŒUVRE ARTISTIQUES ---
     function renderArtsGallery() {
       const gal = document.getElementById('artsGalleryContainer');
       if (!gal) return;
 
-      gal.innerHTML = cm2ArtsList.map(art => `
-        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 18px; padding: 22px; box-shadow: var(--shadow-comic);">
+      const activeArts = getActiveArts();
+      if (activeArts.length === 0) {
+        gal.innerHTML = `
+          <div style="background: #ffffff; border: 2px dashed var(--ink); border-radius: 18px; padding: 32px; text-align: center; color: var(--ink-light);">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">🖼️</div>
+            <p>Tu as masqué tous les chefs-d'œuvre de la galerie.</p>
+            <button class="action-btn" onclick="restoreDefaultArts()" style="margin-top: 10px;">🔄 Rétablir la galerie complète</button>
+          </div>
+        `;
+        return;
+      }
+
+      gal.innerHTML = activeArts.map(art => `
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 18px; padding: 22px; box-shadow: var(--shadow-comic); position: relative;">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
             <div>
               <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--ink); margin-bottom: 4px;">${art.title}</h3>
               <div style="font-weight: 700; color: #7c3aed;">${art.artist}</div>
             </div>
-            <span style="font-size: 0.82rem; font-weight: 800; background: #f3e8ff; border: 1.5px solid var(--ink); padding: 4px 12px; border-radius: 999px;">${art.badge}</span>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <span style="font-size: 0.82rem; font-weight: 800; background: #f3e8ff; border: 1.5px solid var(--ink); padding: 4px 12px; border-radius: 999px;">${art.badge}</span>
+              <button class="doc-link-btn" onclick="dislikeArt('${art.id}')" style="padding: 4px 10px; font-size: 0.82rem; border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;" title="Je n'aime pas cette œuvre (la retirer de ma galerie)">
+                👎 Retirer
+              </button>
+            </div>
           </div>
 
           <p style="font-size: 0.98rem; color: var(--ink-light); margin-bottom: 16px; line-height: 1.5;">${art.desc}</p>
@@ -8739,6 +9132,117 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         if (card) card.classList.remove('found');
         if (badge) badge.innerText = '❓';
       }
+    }
+
+    // --- SUPPRESSION / POUCE VERS LE BAS CHEFS-D'ŒUVRE ---
+    function dislikeArt(artId) {
+      const active = getActiveArts();
+      const art = active.find(a => a.id === artId);
+      const title = art ? art.title : "cette œuvre";
+
+      if (!confirm(`Souhaites-tu retirer « ${title} » de ta galerie d'art ?`)) return;
+
+      const deleted = getDeletedArts();
+      if (!deleted.includes(artId)) {
+        deleted.push(artId);
+        saveDeletedArts(deleted);
+      }
+
+      playSound('wrong');
+      renderArtsGallery();
+    }
+
+    function restoreDefaultArts() {
+      saveDeletedArts([]);
+      renderArtsGallery();
+      playSound('correct');
+      alert("✅ Ta galerie d'art a été réinitialisée avec succès !");
+    }
+
+    // --- GÉNÉRATEUR IA DE CHEFS-D'ŒUVRE ---
+    async function generateNewArtWithAi() {
+      const input = document.getElementById('artAiThemeInput');
+      const theme = input ? input.value.trim() : '';
+      const loading = document.getElementById('artAiLoading');
+      const btn = document.getElementById('btnGenArtAi');
+
+      if (loading) loading.style.display = 'block';
+      if (btn) btn.disabled = true;
+
+      const apiKey = localStorage.getItem('gemini_api_key') || '';
+      let newArt = null;
+
+      if (apiKey) {
+        try {
+          const prompt = `Tu es un professeur d'Histoire des Arts pour le primaire CM2.
+L'élève souhaite découvrir un chef-d'œuvre artistique (peinture, sculpture, monument, estampe) sur le thème ou artiste : "${theme || "un grand chef-d'œuvre universel"}".
+Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codeblock) avec la structure exacte suivante :
+{
+  "id": "art_unique_${Date.now()}",
+  "title": "Nom du chef-d'œuvre",
+  "artist": "Nom de l'artiste (Année ou Siècle)",
+  "badge": "Lieu de conservation (ex: Musée d'Orsay, Paris)",
+  "desc": "Description passionnante en 1 à 2 phrases courtes pour un élève de CM2.",
+  "secrets": [
+    { "title": "Titre du secret 1", "text": "Explication vivante d'un détail fascinant caché dans l'œuvre." },
+    { "title": "Titre du secret 2", "text": "Explication vivante du secret 2." },
+    { "title": "Titre du secret 3", "text": "Explication vivante du secret 3." }
+  ]
+}`;
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          });
+          const data = await response.json();
+          let rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+          newArt = JSON.parse(rawText);
+        } catch (err) {
+          console.error("Gemini art gen error:", err);
+        }
+      }
+
+      // Fallback depuis la réserve riche pré-enregistrée si pas d'API ou erreur
+      if (!newArt || !newArt.title || !newArt.secrets) {
+        const deleted = getDeletedArts();
+        const activeIds = getActiveArts().map(a => a.id);
+        const candidates = cm2PreloadedBackupArts.filter(a => !activeIds.includes(a.id) && !deleted.includes(a.id));
+        if (candidates.length > 0) {
+          newArt = candidates[Math.floor(Math.random() * candidates.length)];
+        } else {
+          newArt = cm2PreloadedBackupArts[Math.floor(Math.random() * cm2PreloadedBackupArts.length)];
+          newArt = { ...newArt, id: 'art_clone_' + Date.now() };
+        }
+      }
+
+      if (loading) loading.style.display = 'none';
+      if (btn) btn.disabled = false;
+
+      if (newArt) {
+        const custom = getCustomArts();
+        custom.push(newArt);
+        saveCustomArts(custom);
+
+        renderArtsGallery();
+        playSound('win');
+        triggerConfetti();
+        gainStars(1);
+
+        if (input) input.value = '';
+
+        // Faire défiler jusqu'à la nouvelle œuvre
+        setTimeout(() => {
+          const el = document.getElementById(`artSec-${newArt.id}-0`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 120);
+      }
+    }
+
+    function quickGenArt(themeText) {
+      const input = document.getElementById('artAiThemeInput');
+      if (input) input.value = themeText;
+      generateNewArtWithAi();
     }
 
     // =========================================================================
