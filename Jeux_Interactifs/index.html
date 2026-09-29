@@ -1591,6 +1591,231 @@
       font-weight: 600;
     }
 
+    /* =========================================================================
+       REWARDS & GIFT SHOP STYLES (BD FRANCO-BELGE)
+       ========================================================================= */
+    .shop-hero {
+      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+      border: 2.5px solid var(--ink);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: var(--shadow-comic);
+    }
+    .shop-hero-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.65rem;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .shop-hero-subtitle {
+      color: var(--ink-light);
+      font-size: 0.95rem;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .shop-wallet-box {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-comic-sm);
+    }
+    .shop-wallet-coins {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #b45309;
+    }
+
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .reward-card {
+      background: #ffffff;
+      border: 2.5px solid var(--ink);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-comic);
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .reward-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-comic-lg);
+    }
+    .reward-card.can-afford {
+      border-color: var(--bd-green);
+      background: #f0fdf4;
+    }
+    .reward-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .reward-icon {
+      font-size: 2.5rem;
+      background: #fffbe8;
+      border: 2px solid var(--ink);
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 2px 2px 0px var(--ink);
+    }
+    .reward-cost-badge {
+      background: var(--bd-yellow);
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: 2px 2px 0px var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .reward-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .reward-desc {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.45;
+      font-weight: 600;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    /* Vouchers / Tickets Débloqués */
+    .vouchers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .voucher-card {
+      background: #fffdf7;
+      border: 2.5px dashed var(--ink);
+      border-radius: 18px;
+      padding: 22px;
+      position: relative;
+      box-shadow: var(--shadow-comic);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .voucher-card::before {
+      content: 'BON CADEAU CM2';
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: var(--bd-red);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--ink);
+    }
+    .voucher-card.used {
+      opacity: 0.6;
+      background: #f3f4f6;
+      filter: grayscale(0.5);
+    }
+    .voucher-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+      font-weight: 800;
+    }
+    .voucher-date {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      font-weight: 600;
+    }
+    .voucher-stamp {
+      display: inline-block;
+      border: 2px solid var(--bd-green);
+      color: var(--bd-green);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+      align-self: flex-start;
+      margin-top: 6px;
+    }
+
+    /* Parent Settings Card */
+    .parent-mgr-card {
+      background: #ffffff;
+      border: 2.5px solid var(--ink);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-comic);
+      width: 100%;
+    }
+    .parent-mgr-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      color: var(--ink);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rewards-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    .rewards-table th, .rewards-table td {
+      border: 1.5px solid var(--ink);
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    .rewards-table th {
+      background: var(--bd-yellow-light);
+      font-weight: 800;
+    }
+    .rewards-table td {
+      background: #ffffff;
+      font-weight: 600;
+    }
+
     @media (max-width: 650px) {
       h1 { font-size: 1.85rem; }
       main { padding: 18px; border-radius: 16px; }
@@ -1598,6 +1823,7 @@
       .calc-card { font-size: 2.4rem; }
       .sentence-display { font-size: 1.1rem; }
       .memos-grid { grid-template-columns: 1fr; }
+      .rewards-grid { grid-template-columns: 1fr; }
       #scratchCanvas { height: 280px; }
     }
   </style>
@@ -1689,6 +1915,7 @@
 
   <div class="stats-bar">
     <div class="stat-pill">⭐ Score Total : <span id="totalScore">0</span> pts</div>
+    <div class="stat-pill" onclick="switchSubject('recompenses')" style="cursor: pointer;" title="Ouvrir le Coffre aux Récompenses">🪙 Coffre : <span id="walletStars">0</span> ⭐</div>
     <div class="stat-pill">🔥 Série : <span id="streakCount">0</span></div>
     <div class="stat-pill">🏆 Trophées : <span id="badgeCount">0</span>/8</div>
   </div>
@@ -1702,6 +1929,7 @@
     <button class="tab-btn" onclick="switchSubject('videotheque')">🎬 Vidéothèque & Docs</button>
     <button class="tab-btn" onclick="switchSubject('astuces')">💡 Pense-Bêtes</button>
     <button class="tab-btn" onclick="switchSubject('blocnotes')">📝 Mon Bloc-Notes</button>
+    <button class="tab-btn" onclick="switchSubject('recompenses')">🎁 Boutique Cadeaux</button>
   </nav>
 
   <main>
@@ -2321,6 +2549,107 @@
         </div>
       </div>
     </section>
+
+    <!-- ========================================================= -->
+    <!-- 8. BOUTIQUE AUX TRÉSORS & RÉCOMPENSES -->
+    <!-- ========================================================= -->
+    <section id="subject-recompenses" class="subject-section">
+      <div class="shop-hero">
+        <div>
+          <div class="shop-hero-title">🎁 Le Coffre aux Trésors & Récompenses</div>
+          <div class="shop-hero-subtitle">Convertis tes étoiles gagnées en véritables cadeaux et sorties en famille !</div>
+        </div>
+        <div class="shop-wallet-box">
+          <span style="font-size: 1.8rem;">🪙</span>
+          <div>
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--ink-light); text-transform: uppercase;">Solde à dépenser</div>
+            <div class="shop-wallet-coins"><span id="shopCoinsDisplay">0</span> ⭐</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('recompenses', 'bazar')">🛍️ Le Bazar des Cadeaux</button>
+        <button class="submodule-btn" onclick="switchSubmodule('recompenses', 'mesbons')">🎟️ Mes Bons Débloqués (<span id="unlockedVouchersCount">0</span>)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('recompenses', 'parents')">⚙️ Espace Parents</button>
+      </div>
+
+      <!-- Submodule 1: Bazar des Cadeaux -->
+      <div id="sub-recompenses-bazar" class="submodule-content active">
+        <div class="rule-box" style="background: #fefce8; border: 2px solid var(--ink);">
+          💡 <strong>Comment ça marche ?</strong> Fais des quiz, réussis des défis de calcul mental et résous des problèmes pour accumuler des ⭐ étoiles. Dès que tu as assez d'étoiles, clique sur <strong>« 🎁 Débloquer ce cadeau »</strong> pour obtenir ton bon officiel à montrer à tes parents !
+        </div>
+
+        <div class="rewards-grid" id="rewardsGridContainer"></div>
+      </div>
+
+      <!-- Submodule 2: Mes Bons Débloqués -->
+      <div id="sub-recompenses-mesbons" class="submodule-content">
+        <div class="vouchers-grid" id="vouchersGridContainer"></div>
+      </div>
+
+      <!-- Submodule 3: Gestion Parentale -->
+      <div id="sub-recompenses-parents" class="submodule-content">
+        <div class="parent-mgr-card">
+          <div class="parent-mgr-title">⚙️ Configuration des Récompenses & Points</div>
+          <p style="font-size: 0.92rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 16px;">
+            Personnalisez les cadeaux, fixez le nombre d'étoiles nécessaires ou offrez des points bonus à votre enfant pour ses efforts.
+          </p>
+
+          <!-- Formulaire Ajout de Cadeau -->
+          <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+            <div style="font-weight: 800; font-size: 1.05rem; margin-bottom: 12px; color: var(--ink);">➕ Ajouter un nouveau cadeau personnalisé :</div>
+            
+            <div class="memo-input-row">
+              <input type="text" id="newRewardTitle" class="memo-input" placeholder="Nom du cadeau (ex: Sortie Bowling, Soirée burger...)" style="flex: 2;">
+              <input type="number" id="newRewardCost" class="memo-input" placeholder="Coût en ⭐ (ex: 300)" style="flex: 1; min-width: 120px;" min="10" step="10">
+              <input type="text" id="newRewardIcon" class="memo-input" placeholder="Emoji (ex: 🎳, 🍔, 🎁)" style="width: 90px; text-align: center;" maxlength="4" value="🎁">
+            </div>
+            
+            <input type="text" id="newRewardDesc" class="memo-input" placeholder="Description courte (ex: Une partie de bowling avec toute la famille le week-end !)" style="width: 100%; margin-bottom: 12px;">
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+              <button class="action-btn" onclick="addParentCustomReward()" style="padding: 9px 18px; font-size: 0.92rem;">
+                💾 Enregistrer ce cadeau
+              </button>
+            </div>
+          </div>
+
+          <!-- Bonus d'étoiles rapide -->
+          <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 14px; padding: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="font-weight: 800; color: var(--bd-green);">🌟 Donner des étoiles bonus à l'enfant :</div>
+              <div style="font-size: 0.85rem; color: var(--ink-light);">Pour une bonne note à l'école, un devoir soigné ou un coup de main !</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="action-btn" onclick="giveParentBonusStars(25)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+25 ⭐</button>
+              <button class="action-btn" onclick="giveParentBonusStars(50)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+50 ⭐</button>
+              <button class="action-btn" onclick="giveParentBonusStars(100)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+100 ⭐</button>
+            </div>
+          </div>
+
+          <!-- Tableau des Récompenses Actuelles -->
+          <div style="font-weight: 800; margin-bottom: 8px; color: var(--ink);">📋 Liste des cadeaux actifs dans la boutique :</div>
+          <table class="rewards-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">Icône</th>
+                <th>Titre & Description</th>
+                <th style="width: 100px;">Prix ⭐</th>
+                <th style="width: 90px; text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="parentRewardsTableBody"></tbody>
+          </table>
+
+          <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
+            <button class="doc-link-btn" onclick="resetDefaultRewardsCatalog()" style="border-color: var(--bd-red); color: var(--bd-red);">
+              🔄 Rétablir les cadeaux par défaut
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -2368,14 +2697,23 @@
       } catch(e){}
     }
 
-    // Global Stats
-    let totalScore = 0;
+    // Global Stats with LocalStorage Persistence
+    let totalScore = parseInt(localStorage.getItem('cm2_total_score') || '0', 10);
+    let walletStars = parseInt(localStorage.getItem('cm2_wallet_stars') || '0', 10);
     let currentStreak = 0;
     let unlockedBadges = 0;
 
     function addScore(pts) {
       totalScore += pts;
+      walletStars += pts;
       currentStreak += 1;
+
+      try {
+        localStorage.setItem('cm2_total_score', totalScore);
+        localStorage.setItem('cm2_wallet_stars', walletStars);
+      } catch (e) {}
+
+      updateRewardsDisplays();
       document.getElementById('totalScore').innerText = totalScore;
       document.getElementById('streakCount').innerText = currentStreak;
       checkBadges();
@@ -2415,6 +2753,11 @@
       if (subj === 'blocnotes') {
         renderMemos();
         setTimeout(resizeScratchpadCanvas, 80);
+      } else if (subj === 'recompenses') {
+        renderShopRewards();
+        renderClaimedVouchers();
+        renderParentRewardsTable();
+        updateRewardsDisplays();
       }
     }
 
@@ -2432,6 +2775,10 @@
 
       if (subject === 'blocnotes' && subKey === 'ardoise') {
         setTimeout(resizeScratchpadCanvas, 80);
+      } else if (subject === 'recompenses') {
+        if (subKey === 'parents') renderParentRewardsTable();
+        if (subKey === 'mesbons') renderClaimedVouchers();
+        if (subKey === 'bazar') renderShopRewards();
       }
     }
 
@@ -4037,6 +4384,286 @@ Format JSON attendu :
     }
 
     // =========================================================================
+    // REWARDS & GIFT SHOP ENGINE
+    // =========================================================================
+    const DEFAULT_REWARDS_CATALOG = [
+      { id: "rew_1", title: "🎮 30 min de jeu vidéo / écran bonus", cost: 150, icon: "🎮", desc: "Une session bonus sur ton jeu ou dessin animé préféré !" },
+      { id: "rew_2", title: "🍦 Sortie Glace ou Goûter Gourmand", cost: 250, icon: "🍦", desc: "Le goûter ou la glace de ton choix avec tes parents !" },
+      { id: "rew_3", title: "🍕 Choix du dîner de famille (Pizza / Crêpes / Burger)", cost: 350, icon: "🍕", desc: "C'est toi le chef ! Choisis le repas du soir pour toute la maison." },
+      { id: "rew_4", title: "🎬 Soirée Cinéma & Pop-corn en famille", cost: 500, icon: "🎬", desc: "Choisis le film de la soirée avec un grand bol de pop-corn !" },
+      { id: "rew_5", title: "📚 Nouvelle BD ou Livre au choix en librairie", cost: 750, icon: "📚", desc: "Un nouvel album BD (Tintin, Lou, Mortelle Adèle...) en magasin !" },
+      { id: "rew_6", title: "🎡 Grande Sortie Week-End (Parc, Zoo, Escape Game)", cost: 1200, icon: "🎡", desc: "Une demi-journée ou journée d'aventure inoubliable en famille !" }
+    ];
+
+    function getRewardsCatalog() {
+      try {
+        const data = localStorage.getItem('cm2_rewards_catalog');
+        if (!data) {
+          localStorage.setItem('cm2_rewards_catalog', JSON.stringify(DEFAULT_REWARDS_CATALOG));
+          return [...DEFAULT_REWARDS_CATALOG];
+        }
+        return JSON.parse(data);
+      } catch (e) {
+        return [...DEFAULT_REWARDS_CATALOG];
+      }
+    }
+
+    function saveRewardsCatalog(cat) {
+      try {
+        localStorage.setItem('cm2_rewards_catalog', JSON.stringify(cat));
+      } catch (e) {}
+    }
+
+    function getClaimedVouchers() {
+      try {
+        const data = localStorage.getItem('cm2_claimed_vouchers');
+        return data ? JSON.parse(data) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveClaimedVouchers(vouchers) {
+      try {
+        localStorage.setItem('cm2_claimed_vouchers', JSON.stringify(vouchers));
+      } catch (e) {}
+    }
+
+    function updateRewardsDisplays() {
+      const shopDisplay = document.getElementById('shopCoinsDisplay');
+      if (shopDisplay) shopDisplay.innerText = walletStars;
+
+      const statsWallet = document.getElementById('walletStars');
+      if (statsWallet) statsWallet.innerText = walletStars;
+
+      const totalScoreEl = document.getElementById('totalScore');
+      if (totalScoreEl) totalScoreEl.innerText = totalScore;
+
+      const vouchers = getClaimedVouchers();
+      const vouchersCount = document.getElementById('unlockedVouchersCount');
+      if (vouchersCount) vouchersCount.innerText = vouchers.length;
+    }
+
+    function renderShopRewards() {
+      const container = document.getElementById('rewardsGridContainer');
+      if (!container) return;
+
+      const catalog = getRewardsCatalog();
+      updateRewardsDisplays();
+
+      container.innerHTML = catalog.map(rew => {
+        const canAfford = walletStars >= rew.cost;
+        const missing = rew.cost - walletStars;
+
+        const btnHtml = canAfford
+          ? `<button class="action-btn" onclick="claimReward('${rew.id}')" style="width: 100%; padding: 10px; font-size: 0.95rem;">🎁 Débloquer ce cadeau !</button>`
+          : `<div style="display: flex; flex-direction: column; gap: 4px;">
+               <button class="doc-link-btn" disabled style="width: 100%; justify-content: center; opacity: 0.7; cursor: not-allowed; border-color: var(--ink); color: var(--ink-light); background: #f3f4f6;">
+                 🔒 Manque ${missing} ⭐
+               </button>
+               <div style="height: 6px; background: var(--bg-page-alt); border-radius: 4px; overflow: hidden; border: 1px solid var(--ink);">
+                 <div style="height: 100%; width: ${Math.min(100, Math.round((walletStars / rew.cost) * 100))}%; background: var(--bd-yellow);"></div>
+               </div>
+             </div>`;
+
+        return `
+          <div class="reward-card ${canAfford ? 'can-afford' : ''}">
+            <div>
+              <div class="reward-card-header">
+                <div class="reward-icon">${rew.icon || '🎁'}</div>
+                <div class="reward-cost-badge">${rew.cost} ⭐</div>
+              </div>
+              <div class="reward-title">${escapeHtml(rew.title)}</div>
+              <div class="reward-desc">${escapeHtml(rew.desc || '')}</div>
+            </div>
+            ${btnHtml}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function claimReward(rewardId) {
+      const catalog = getRewardsCatalog();
+      const rew = catalog.find(r => r.id === rewardId);
+      if (!rew) return;
+
+      if (walletStars < rew.cost) {
+        alert(`🔒 Il te manque encore ${rew.cost - walletStars} étoiles pour ce cadeau. Continue tes exercices !`);
+        return;
+      }
+
+      const confirmClaim = confirm(`🎉 Veux-tu vraiment débloquer "${rew.title}" pour ${rew.cost} ⭐ ?`);
+      if (!confirmClaim) return;
+
+      walletStars -= rew.cost;
+      localStorage.setItem('cm2_wallet_stars', walletStars);
+
+      const vouchers = getClaimedVouchers();
+      const newVoucher = {
+        id: 'vouch_' + Date.now(),
+        rewardId: rew.id,
+        title: rew.title,
+        icon: rew.icon || '🎁',
+        cost: rew.cost,
+        desc: rew.desc || '',
+        claimedAt: new Date().toISOString(),
+        used: false
+      };
+
+      vouchers.unshift(newVoucher);
+      saveClaimedVouchers(vouchers);
+
+      playSound('win');
+      triggerConfetti();
+      updateRewardsDisplays();
+
+      // Switch to vouchers tab
+      const parent = document.getElementById('subject-recompenses');
+      if (parent) {
+        parent.querySelectorAll('.submodule-btn').forEach(b => b.classList.remove('active'));
+        parent.querySelectorAll('.submodule-content').forEach(c => c.classList.remove('active'));
+        parent.querySelectorAll('.submodule-btn')?.[1]?.classList.add('active');
+        document.getElementById('sub-recompenses-mesbons')?.classList.add('active');
+      }
+
+      renderClaimedVouchers();
+      alert(`🎊 FÉLICITATIONS ! Tu as débloqué ton bon cadeau :\n\n"${rew.title}"\n\nMontre ce bon officiel à tes parents pour en profiter ! 🌟`);
+    }
+
+    function renderClaimedVouchers() {
+      const container = document.getElementById('vouchersGridContainer');
+      if (!container) return;
+
+      const vouchers = getClaimedVouchers();
+      updateRewardsDisplays();
+
+      if (vouchers.length === 0) {
+        container.innerHTML = `
+          <div class="empty-memos-state">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">🎟️</div>
+            <h4 style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; color: var(--ink); margin-bottom: 6px;">Aucun bon débloqué pour l'instant</h4>
+            <p style="font-size: 0.92rem; color: var(--ink-light); margin-bottom: 14px;">Accumule des étoiles dans les quiz pour t'offrir ton premier cadeau dans le Bazar !</p>
+            <button class="action-btn" onclick="switchSubmodule('recompenses', 'bazar')" style="padding: 8px 18px; font-size: 0.88rem;">🛍️ Voir les cadeaux</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = vouchers.map(v => {
+        const dateStr = v.claimedAt ? new Date(v.claimedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+        return `
+          <div class="voucher-card ${v.used ? 'used' : ''}" id="vouch-${v.id}">
+            <div style="font-size: 2.2rem;">${v.icon || '🎁'}</div>
+            <div class="voucher-title">${escapeHtml(v.title)}</div>
+            <div style="font-size: 0.88rem; color: var(--ink); font-weight: 600;">${escapeHtml(v.desc || '')}</div>
+            <div class="voucher-date">📅 Débloqué le : ${dateStr} (${v.cost} ⭐)</div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1.5px dashed var(--ink); padding-top: 10px;">
+              <span class="voucher-stamp" style="border-color: ${v.used ? '#9ca3af' : 'var(--bd-green)'}; color: ${v.used ? '#6b7280' : 'var(--bd-green)'};">
+                ${v.used ? '✅ CADEAU VALIDÉ' : '🌟 PRÊT À UTILISER'}
+              </span>
+              <button class="doc-link-btn" onclick="toggleVoucherUsed('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem;">
+                ${v.used ? 'Marquer non-utilisé' : 'Valider avec les parents ✅'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleVoucherUsed(id) {
+      const vouchers = getClaimedVouchers();
+      const v = vouchers.find(item => item.id === id);
+      if (v) {
+        v.used = !v.used;
+        saveClaimedVouchers(vouchers);
+        playSound('correct');
+        renderClaimedVouchers();
+      }
+    }
+
+    function renderParentRewardsTable() {
+      const tbody = document.getElementById('parentRewardsTableBody');
+      if (!tbody) return;
+
+      const catalog = getRewardsCatalog();
+      tbody.innerHTML = catalog.map(r => `
+        <tr>
+          <td style="text-align: center; font-size: 1.4rem;">${r.icon || '🎁'}</td>
+          <td>
+            <strong>${escapeHtml(r.title)}</strong><br>
+            <span style="font-size: 0.82rem; color: var(--ink-light);">${escapeHtml(r.desc || '')}</span>
+          </td>
+          <td style="font-weight: 800; color: #b45309;">${r.cost} ⭐</td>
+          <td style="text-align: center;">
+            <button class="sticky-icon-btn" onclick="deleteParentReward('${r.id}')" title="Supprimer ce cadeau" style="margin: 0 auto; background: #fee2e2; border-color: var(--bd-red);">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function addParentCustomReward() {
+      const titleInput = document.getElementById('newRewardTitle');
+      const costInput = document.getElementById('newRewardCost');
+      const iconInput = document.getElementById('newRewardIcon');
+      const descInput = document.getElementById('newRewardDesc');
+
+      const title = (titleInput?.value || '').trim();
+      const cost = parseInt(costInput?.value || '0', 10);
+      const icon = (iconInput?.value || '🎁').trim();
+      const desc = (descInput?.value || '').trim();
+
+      if (!title || isNaN(cost) || cost <= 0) {
+        alert("⚠️ Renseigne un titre valide et un coût en étoiles (supérieur à 0) !");
+        return;
+      }
+
+      const catalog = getRewardsCatalog();
+      catalog.push({
+        id: 'rew_' + Date.now(),
+        title,
+        cost,
+        icon: icon || '🎁',
+        desc: desc || "Récompense personnalisée par les parents !"
+      });
+
+      saveRewardsCatalog(catalog);
+      playSound('win');
+
+      if (titleInput) titleInput.value = '';
+      if (costInput) costInput.value = '';
+      if (descInput) descInput.value = '';
+
+      renderParentRewardsTable();
+      renderShopRewards();
+      alert("✅ Cadeau ajouté avec succès dans la boutique !");
+    }
+
+    function deleteParentReward(id) {
+      if (!confirm("Voulez-vous vraiment retirer ce cadeau de la boutique ?")) return;
+      let catalog = getRewardsCatalog();
+      catalog = catalog.filter(r => r.id !== id);
+      saveRewardsCatalog(catalog);
+      playSound('wrong');
+      renderParentRewardsTable();
+      renderShopRewards();
+    }
+
+    function giveParentBonusStars(amount) {
+      addScore(amount);
+      alert(`🎉 +${amount} ⭐ étoiles bonus accordées avec succès !`);
+    }
+
+    function resetDefaultRewardsCatalog() {
+      if (!confirm("Rétablir la liste des cadeaux d'origine ?")) return;
+      localStorage.setItem('cm2_rewards_catalog', JSON.stringify(DEFAULT_REWARDS_CATALOG));
+      renderParentRewardsTable();
+      renderShopRewards();
+      playSound('correct');
+      alert("✅ Cadeaux d'origine réinitialisés !");
+    }
+
+    // =========================================================================
     // AUTHENTICATION & PASSWORD PROTECTION
     // =========================================================================
     // Master Password Hash (SHA-256 for '#Zx7ffm8o@')
@@ -4084,9 +4711,12 @@ Format JSON attendu :
     // =========================================================================
     // INIT
     // =========================================================================
+    updateRewardsDisplays();
+    checkBadges();
     initBlocNotesEvents();
     renderMemos();
     initScratchpad();
+    renderShopRewards();
 
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
     renderDetectiveMission();
