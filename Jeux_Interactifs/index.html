@@ -760,6 +760,48 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 15px rgba(236, 72, 153, 0.6);
     }
+    .ai-gen-btn {
+      background: linear-gradient(135deg, #9333ea, #db2777);
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);
+      transition: all 0.2s ease;
+    }
+    .ai-gen-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(219, 39, 119, 0.5);
+    }
+    .ai-gen-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .ai-toast-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(30, 27, 75, 0.95);
+      border: 2px solid var(--accent-pink);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      animation: fadeIn 0.3s ease;
+    }
     .ai-modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -1085,6 +1127,7 @@
           • <strong>et / est :</strong> Remplace par <em>« était »</em> ➡️ <strong>est</strong> (verbe être). Si <em>« et puis »</em> ➡️ <strong>et</strong>.<br>
           • <strong>ses / s'est / c'est / ces :</strong> <strong>ses</strong> (les siens), <strong>s'est</strong> (verbe pronominal), <strong>c'est</strong> (cela est), <strong>ces</strong> (on montre).
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_homophones', this)">✨ Créer de nouvelles phrases avec l'IA</button>
         <div id="quiz-container-homo" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1095,6 +1138,7 @@
           1. <em>Le Sens</em> (mot oublié ?) | 2. <em>Sujet + Verbe</em> (accord) | 3. <em>Pluriels</em> (-s / -x) | 4. <em>Homophones</em> (avait / était).<br>
           💡 <em>Clique sur les mots contenant une erreur pour les corriger !</em>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('detective', this)">🕵️‍♀️ Créer un nouveau texte à corriger avec l'IA</button>
         <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1107,6 +1151,7 @@
           </div>
           <p style="font-size: 0.9rem; color: var(--text-muted);">Visionne la leçon avant de répondre aux 8 questions ci-dessous :</p>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_grammaire', this)">✨ Générer de nouvelles questions Grammaire (IA)</button>
         <div id="quiz-container-grammaire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1117,6 +1162,7 @@
           • 1er gr. (-er) : <em>-e, -es, -e, -ons, -ez, -ent</em> | 2e gr. (-ir) : <em>-is, -is, -it, -issons, -issez, -issent</em><br>
           • 3e gr. et irréguliers : <em>faire, aller, prendre, dire, voir, vouloir, pouvoir</em>.
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_conjugaison', this)">✨ Générer de nouvelles questions Conjugaison (IA)</button>
         <div id="quiz-container-conjugaison" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
     </section>
@@ -1147,6 +1193,10 @@
           <strong>2. Choisir l'Opération :</strong> Ajouter (+), Enlever/Écart (-), Répéter (×), Partager (÷) ?<br>
           <strong>3. Calculer & Répondre :</strong> Pose le calcul avec précision et formule la phrase avec l'unité (€, kg, cm...).
         </div>
+
+        <button class="ai-gen-btn" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);" onclick="generateAiExercisesFor('problemes_maths', this)">
+          🧠 Créer de nouveaux problèmes inédits avec l'IA
+        </button>
 
         <!-- Conteneur Dynamique des Problèmes -->
         <div id="problem-solver-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
@@ -1225,6 +1275,7 @@
             <a href="https://youtu.be/qBD5TUjFFq4" target="_blank" class="yt-btn">▶️ Regarder la vidéo (Plein écran HD)</a>
           </div>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('maths_soustraction', this)">✨ Générer de nouvelles soustractions par cassage (IA)</button>
         <div id="quiz-container-soustraction" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
     </section>
@@ -1263,6 +1314,7 @@
             <a href="https://youtu.be/Nnh2lvZJYaE" target="_blank" class="yt-btn">▶️ Écouter la chanson en vidéo HD</a>
           </div>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('histoire_periodes', this)">✨ Générer un nouveau quiz sur les 5 périodes (IA)</button>
         <div id="quiz-container-periodes" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1282,6 +1334,7 @@
             <a href="https://youtu.be/vxD_G8_WMVE" target="_blank" class="yt-btn">▶️ Regarder le dessin animé Préhistoire</a>
           </div>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('histoire_prehistoire', this)">✨ Générer un nouveau quiz sur la Préhistoire (IA)</button>
         <div id="quiz-container-prehistoire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1301,6 +1354,7 @@
             <a href="https://youtu.be/I88cMDMRk88" target="_blank" class="yt-btn">▶️ Regarder le documentaire sur Reims</a>
           </div>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('histoire_reims', this)">✨ Générer un nouveau quiz sur Reims (IA)</button>
         <div id="quiz-container-reims" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
     </section>
@@ -1339,6 +1393,7 @@
             <a href="https://youtu.be/_GV35WRH23E" target="_blank" class="yt-btn">▶️ Lancer l'émission L'Esprit Sorcier</a>
           </div>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('sciences_materiaux', this)">✨ Générer de nouveaux défis Matériaux (IA)</button>
         <div id="quiz-container-materiaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1358,6 +1413,7 @@
             <a href="https://youtu.be/JCZ-uWrZe58" target="_blank" class="yt-btn">▶️ Écouter l'histoire de Gustave Eiffel</a>
           </div>
         </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('sciences_eiffel', this)">✨ Générer un nouveau quiz Tour Eiffel (IA)</button>
         <div id="quiz-container-eiffel" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -1382,6 +1438,7 @@
           • <strong>Les Gaz Nobles :</strong> <strong>He</strong> (Hélium pour les ballons), <strong>Ne</strong> (Néon pour les enseignes lumineuses).
         </div>
 
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('sciences_elements', this)">✨ Générer un nouveau quiz Tableau des Éléments (IA)</button>
         <div id="quiz-container-elements" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
     </section>
@@ -2342,10 +2399,28 @@
     // =========================================================================
     // GEMINI AI INTEGRATION (CLÉ API & GÉNÉRATEUR DYNAMIQUE)
     // =========================================================================
+    // =========================================================================
+    // GEMINI AI INTEGRATION (CLÉ INTÉGRÉE & GÉNÉRATEUR DIRECT 1-CLIC)
+    // =========================================================================
+    const DEFAULT_GEMINI_KEY = "AQ.Ab8RN6IzwAoEVSrw7ppBsMlE_7ODBOzy61JNZs957BIyPK7Skw";
+
+    function showAiToast(msg, isSuccess = true) {
+      let toast = document.getElementById('aiToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'aiToast';
+        toast.className = 'ai-toast-banner';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = isSuccess ? `✨ <span>${msg}</span>` : `⚠️ <span style="color:#fca5a5;">${msg}</span>`;
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 4000);
+    }
+
     function toggleAiModal() {
       const m = document.getElementById('aiModal');
       m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
-      const savedKey = localStorage.getItem('gemini_api_key') || '';
+      const savedKey = localStorage.getItem('gemini_api_key') || DEFAULT_GEMINI_KEY;
       if (savedKey) document.getElementById('geminiApiKey').value = savedKey;
     }
 
@@ -2358,9 +2433,9 @@
     }
 
     async function callGeminiApi(promptText) {
-      const apiKey = localStorage.getItem('gemini_api_key') || document.getElementById('geminiApiKey').value.trim();
+      const apiKey = localStorage.getItem('gemini_api_key') || DEFAULT_GEMINI_KEY;
       if (!apiKey) {
-        throw new Error("Veuillez saisir votre clé API Google Gemini (gratuite) pour générer des exercices dynamiques.");
+        throw new Error("Clé API Gemini introuvable.");
       }
 
       const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
@@ -2390,18 +2465,16 @@
       return JSON.parse(rawText);
     }
 
-    async function generateAiExercises() {
-      const subject = document.getElementById('aiSubjectSelect').value;
-      const status = document.getElementById('aiLoadingStatus');
-      const feedback = document.getElementById('aiSuccessFeedback');
-      const btn = document.getElementById('aiGenerateBtn');
-
-      status.style.display = 'block';
-      feedback.style.display = 'none';
-      btn.disabled = true;
+    // Direct 1-Click AI Generation for any submodule
+    async function generateAiExercisesFor(subjectKey, btnElement) {
+      const originalText = btnElement ? btnElement.innerHTML : "";
+      if (btnElement) {
+        btnElement.disabled = true;
+        btnElement.innerHTML = `<span class="ai-spinner" style="width:16px; height:16px; margin-right:6px;"></span> Création par l'IA en cours...`;
+      }
 
       try {
-        if (subject === 'problemes_maths') {
+        if (subjectKey === 'problemes_maths') {
           const prompt = `Génère 4 problèmes mathématiques progressifs de niveau CM2 pour une élève en difficulté.
 Chaque problème doit être résolu en 3 étapes guidées (Étape 1: Comprendre les données, Étape 2: Choisir la bonne opération, Étape 3: Calculer et rédiger la réponse).
 Renvoie STRICTEMENT un JSON valide au format suivant :
@@ -2435,21 +2508,66 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
     ]
   }
 ]`;
-          const generatedProblems = await callGeminiApi(prompt);
-          if (Array.isArray(generatedProblems) && generatedProblems.length > 0) {
-            currentProblemList = generatedProblems;
+          const generated = await callGeminiApi(prompt);
+          if (Array.isArray(generated) && generated.length > 0) {
+            currentProblemList = generated;
             currentProblemIndex = 0;
             currentProblemStep = 0;
             renderProblemSolver();
-            switchSubject('maths');
-            switchSubmodule('maths', 'problemes');
-            toggleAiModal();
             playSound('win');
             triggerConfetti();
-            alert("✨ 4 nouveaux problèmes créés sur mesure par Gemini ! C'est parti !");
+            showAiToast("✨ 4 nouveaux problèmes inédits ont été créés avec l'IA !");
           }
-        } else if (subject === 'francais_homophones' || subject === 'francais_conjugaison' || subject === 'histoire_cm2' || subject === 'sciences_materiaux') {
-          const prompt = `Génère 8 questions à choix multiples de niveau CM2 sur le thème : "${subject}".
+        } else if (subjectKey === 'detective') {
+          const prompt = `Génère 3 textes courts de niveau CM2 pour un jeu de détective de dictée (repérer des fautes d'accord, d'homophones ou d'orthographe).
+Renvoie STRICTEMENT un JSON valide au format suivant :
+[
+  {
+    "title": "Titre de la mission avec émoji",
+    "tokens": [
+      { "text": "Mot", "error": false },
+      { "text": "faute", "error": true, "correct": "correction", "explanation": "Règle claire" }
+    ]
+  }
+]`;
+          const generated = await callGeminiApi(prompt);
+          if (Array.isArray(generated) && generated.length > 0) {
+            detectiveMissions.splice(0, detectiveMissions.length, ...generated);
+            currentDetIdx = 0;
+            renderDetectiveMission();
+            playSound('win');
+            triggerConfetti();
+            showAiToast("✨ 3 nouveaux textes d'enquête générés par l'IA !");
+          }
+        } else {
+          const themesMap = {
+            'francais_homophones': 'Homophones grammaticaux (a/à, et/est, on/ont, son/sont, ses/ces/c\'est/s\'est) CM2',
+            'francais_grammaire': 'Grammaire CM2 : rôle des déterminants, articles définis, indéfinis, possessifs, démonstratifs',
+            'francais_conjugaison': 'Conjugaison CM2 : Présent de l\'indicatif (1er, 2e, 3e groupe et verbes fréquents)',
+            'maths_soustraction': 'Calcul et opérations CM2 : soustraction posée, cassage de dizaine et calculs avec retenue',
+            'histoire_periodes': 'Histoire CM2 : Les 5 grandes périodes (Préhistoire, Antiquité, Moyen Âge, Temps Modernes, Époque Contemporaine)',
+            'histoire_prehistoire': 'Histoire CM2 : La Préhistoire, Paléolithique, Néolithique, feu, art pariétal, sédentarisation',
+            'histoire_reims': 'Histoire CM2 : La Cathédrale de Reims, sacre des rois de France, Clovis, Jeanne d\'Arc',
+            'sciences_materiaux': 'Sciences CM2 : Les matériaux (métaux, plastiques, céramiques, matières organiques), conductivité et recyclage',
+            'sciences_eiffel': 'Sciences & Histoire CM2 : Gustave Eiffel, la Tour Eiffel, fer puddlé, Exposition Universelle de 1889',
+            'sciences_elements': 'Sciences CM2 : Tableau périodique des éléments (Fe, Cu, Al, O, C, He, Au, Ag)'
+          };
+
+          const containerMap = {
+            'francais_homophones': 'quiz-container-homo',
+            'francais_grammaire': 'quiz-container-grammaire',
+            'francais_conjugaison': 'quiz-container-conjugaison',
+            'maths_soustraction': 'quiz-container-soustraction',
+            'histoire_periodes': 'quiz-container-periodes',
+            'histoire_prehistoire': 'quiz-container-prehistoire',
+            'histoire_reims': 'quiz-container-reims',
+            'sciences_materiaux': 'quiz-container-materiaux',
+            'sciences_eiffel': 'quiz-container-eiffel',
+            'sciences_elements': 'quiz-container-elements'
+          };
+
+          const themeDesc = themesMap[subjectKey] || subjectKey;
+          const prompt = `Génère 8 questions à choix multiples stimulantes de niveau CM2 sur le thème : "${themeDesc}".
 Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
 [
   {
@@ -2459,26 +2577,48 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
     "tip": "Astuce mémo claire et pédagogique pour retenir la règle"
   }
 ]`;
-          const generatedQuestions = await callGeminiApi(prompt);
-          if (Array.isArray(generatedQuestions) && generatedQuestions.length > 0) {
-            let containerId = 'quiz-container-homo';
-            if (subject === 'francais_conjugaison') containerId = 'quiz-container-conjugaison';
-            if (subject === 'histoire_cm2') containerId = 'quiz-container-periodes';
-            if (subject === 'sciences_materiaux') containerId = 'quiz-container-materiaux';
-
-            new QuizRunner(containerId, generatedQuestions, { title: "Défis Dynamiques Gemini IA" });
-            if (subject.startsWith('francais')) switchSubject('francais');
-            else if (subject.startsWith('histoire')) switchSubject('histoire');
-            else switchSubject('sciences');
-            toggleAiModal();
+          const generated = await callGeminiApi(prompt);
+          if (Array.isArray(generated) && generated.length > 0) {
+            const containerId = containerMap[subjectKey] || 'quiz-container-homo';
+            new QuizRunner(containerId, generated, { title: "Défis Dynamiques IA" });
             playSound('win');
             triggerConfetti();
-            alert("✨ 8 nouveaux défis générés par l'IA ! Bon entraînement !");
+            showAiToast("✨ 8 nouvelles questions créées sur mesure par l'IA !");
           }
-        } else {
-          alert("Mode Calcul Rapide mis à jour avec de nouveaux coefficients !");
-          toggleAiModal();
         }
+      } catch (err) {
+        alert("⚠️ Erreur lors de la création : " + err.message);
+      } finally {
+        if (btnElement) {
+          btnElement.disabled = false;
+          btnElement.innerHTML = originalText;
+        }
+      }
+    }
+
+    async function generateAiExercises() {
+      const subject = document.getElementById('aiSubjectSelect').value;
+      const status = document.getElementById('aiLoadingStatus');
+      const feedback = document.getElementById('aiSuccessFeedback');
+      const btn = document.getElementById('aiGenerateBtn');
+
+      status.style.display = 'block';
+      feedback.style.display = 'none';
+      btn.disabled = true;
+
+      try {
+        await generateAiExercisesFor(subject, null);
+        if (subject.startsWith('problemes')) {
+          switchSubject('maths');
+          switchSubmodule('maths', 'problemes');
+        } else if (subject.startsWith('francais')) {
+          switchSubject('francais');
+        } else if (subject.startsWith('histoire')) {
+          switchSubject('histoire');
+        } else if (subject.startsWith('sciences')) {
+          switchSubject('sciences');
+        }
+        toggleAiModal();
       } catch (err) {
         feedback.className = 'feedback-banner wrong';
         feedback.style.display = 'block';
