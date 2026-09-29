@@ -2960,7 +2960,7 @@
                 💾 Enregistrer mon Mémo
               </button>
               <button class="ai-gen-btn" onclick="aiEnhanceCurrentMemo(this)" style="margin-bottom: 0;">
-                ✨ Transformer en Rime / Astuce IA
+                ✨ Aide moi à comprendre !
               </button>
             </div>
             <button class="doc-link-btn" onclick="resetMemoEditor()" style="background: rgba(255,255,255,0.08); border-color: var(--card-border);">
@@ -4865,7 +4865,7 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
 
       const origText = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = `<span class="ai-spinner" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"></span> Rime magique IA en cours...`;
+      btn.innerHTML = `<span class="ai-spinner" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"></span> Aide en cours...`;
 
       try {
         const prompt = `Tu es un assistant pédagogique pour une élève de CM2 (10 ans).
