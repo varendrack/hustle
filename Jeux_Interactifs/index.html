@@ -837,7 +837,7 @@
     }
 
     /* AI & Dynamic Features */
-    .ai-btn-top {
+    .ai-btn-top, .sync-btn-top {
       background: var(--bd-yellow);
       color: var(--ink);
       border: 2px solid var(--ink);
@@ -849,14 +849,22 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-left: 8px;
+      margin-left: 6px;
       box-shadow: var(--shadow-comic-sm);
       transition: all 0.15s;
     }
-    .ai-btn-top:hover {
+    .ai-btn-top:hover, .sync-btn-top:hover {
       background: #fde047;
       transform: translate(-1px, -1px);
       box-shadow: var(--shadow-comic);
+    }
+    .sync-btn-top {
+      background: #ffffff;
+      color: var(--bd-blue-dark);
+      border-color: var(--ink);
+    }
+    .sync-btn-top:hover {
+      background: #eff6ff;
     }
     .ai-gen-btn {
       background: var(--bd-red);
@@ -908,7 +916,7 @@
     .ai-modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(250, 246, 238, 0.9);
+      background: rgba(250, 246, 238, 0.92);
       backdrop-filter: blur(10px);
       z-index: 9999;
       display: none;
@@ -920,8 +928,8 @@
       background: #ffffff;
       border: 3px solid var(--ink);
       border-radius: 22px;
-      padding: 28px;
-      max-width: 520px;
+      padding: 26px;
+      max-width: 540px;
       width: 100%;
       box-shadow: var(--shadow-comic-xl);
       display: flex;
@@ -929,6 +937,8 @@
       gap: 16px;
       position: relative;
       color: var(--ink);
+      max-height: 90vh;
+      overflow-y: auto;
     }
     .ai-config-input {
       width: 100%;
@@ -944,6 +954,71 @@
     }
     .ai-config-input:focus {
       border-color: var(--bd-blue);
+    }
+
+    /* Tags Inédit vs Révision pour Question Anti-Farming */
+    .q-tag-new {
+      background: var(--bd-yellow-light);
+      color: #92400e;
+      border: 1.5px solid var(--ink);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      box-shadow: 1.5px 1.5px 0px var(--ink);
+      display: inline-block;
+      margin-left: 6px;
+    }
+    .q-tag-done {
+      background: #f3f4f6;
+      color: #6b7280;
+      border: 1.5px solid var(--ink);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    /* Sync Modal Tabs */
+    .sync-tab-btn {
+      background: transparent;
+      border: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .sync-tab-btn.active {
+      background: var(--bd-yellow-light);
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      box-shadow: 2px 2px 0px var(--ink);
+    }
+    .sync-tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sync-tab-content.active {
+      display: flex;
+    }
+
+    /* Parent Lock Card */
+    .parent-lock-card {
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      padding: 36px 24px;
+      box-shadow: var(--shadow-comic-lg);
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     /* Math Problem Solver Component */
@@ -1904,10 +1979,80 @@
     </div>
   </div>
 
+  <!-- Modale Synchronisation iPad & PC -->
+  <div id="syncModal" class="ai-modal-overlay">
+    <div class="ai-modal-card" style="max-width: 580px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--ink); display: flex; align-items: center; gap: 8px;">
+          ☁️ Sauvegarde & Synchronisation iPad / PC
+        </h3>
+        <button onclick="closeSyncModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.6rem; cursor: pointer; font-weight: 800;">&times;</button>
+      </div>
+
+      <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--ink-faint); padding-bottom: 8px; flex-wrap: wrap;">
+        <button id="syncTabCodeBtn" class="sync-tab-btn active" onclick="switchSyncTab('code')">📋 Code de Transfert Express</button>
+        <button id="syncTabFileBtn" class="sync-tab-btn" onclick="switchSyncTab('file')">💾 Fichier .json</button>
+        <button id="syncTabHelpBtn" class="sync-tab-btn" onclick="switchSyncTab('help')">❓ Mode d'emploi</button>
+      </div>
+
+      <!-- Tab 1: Code Express -->
+      <div id="syncTabCode" class="sync-tab-content active">
+        <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 12px; padding: 14px;">
+          <div style="font-weight: 800; font-size: 0.95rem; color: var(--bd-green); margin-bottom: 4px;">📤 1. Exporter depuis cet appareil :</div>
+          <div style="font-size: 0.84rem; color: var(--ink-light); margin-bottom: 10px;">
+            État actuel : <strong id="syncCurrentStars">0 ⭐</strong> | <strong id="syncCurrentMemos">0 mémos</strong> | <strong id="syncCurrentVouchers">0 bons</strong> | <strong id="syncCurrentAwarded">0 exercices validés</strong>
+          </div>
+          <button class="action-btn" onclick="copySyncCode()" style="width: 100%; padding: 10px; font-size: 0.92rem; background: var(--bd-green); margin-bottom: 4px;">
+            📋 Copier mon Code de Sauvegarde (1-clic)
+          </button>
+          <div id="syncCopyFeedback" style="display: none; color: var(--bd-green); font-size: 0.85rem; font-weight: 800; text-align: center; margin-top: 6px;">✅ Code copié ! Colle-le maintenant sur ton autre appareil.</div>
+        </div>
+
+        <div style="background: #eff6ff; border: 2px solid var(--bd-blue); border-radius: 12px; padding: 14px;">
+          <div style="font-weight: 800; font-size: 0.95rem; color: var(--bd-blue-dark); margin-bottom: 4px;">📥 2. Importer & Restaurer sur cet appareil :</div>
+          <div style="font-size: 0.84rem; color: var(--ink-light); margin-bottom: 6px;">Colle le code copié depuis l'autre appareil ci-dessous :</div>
+          <textarea id="syncImportInput" class="memo-input" style="width: 100%; height: 60px; font-size: 0.8rem; font-family: monospace;" placeholder="Colle ici ton code CM2-SYNC-..."></textarea>
+          <button class="action-btn" onclick="importSyncCode()" style="width: 100%; padding: 10px; font-size: 0.92rem; margin-top: 8px;">
+            ✨ Restaurer toute ma progression sur cet appareil
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 2: Fichier .json -->
+      <div id="syncTabFile" class="sync-tab-content">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 12px; padding: 14px;">
+            <div style="font-weight: 800; margin-bottom: 4px; color: var(--ink);">💾 Sauvegarde sur fichier :</div>
+            <p style="font-size: 0.85rem; color: var(--ink-light); margin-bottom: 10px;">Télécharge un fichier <code>sauvegarde_cm2_lucie.json</code> à conserver ou transférer par clé USB / Mail.</p>
+            <button class="action-btn" onclick="downloadBackupFile()" style="padding: 8px 16px; font-size: 0.88rem;">💾 Télécharger le fichier .json</button>
+          </div>
+
+          <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 12px; padding: 14px;">
+            <div style="font-weight: 800; margin-bottom: 4px; color: var(--ink);">📂 Restauration depuis un fichier :</div>
+            <p style="font-size: 0.85rem; color: var(--ink-light); margin-bottom: 10px;">Sélectionne ton fichier de sauvegarde <code>.json</code> pour restaurer immédiatement.</p>
+            <input type="file" id="syncFileInput" accept=".json" onchange="handleSyncFileUpload(event)" style="font-size: 0.88rem;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Mode d'emploi -->
+      <div id="syncTabHelp" class="sync-tab-content">
+        <div class="rule-box" style="background: #fefce8; border: 2px solid var(--ink); font-size: 0.88rem; line-height: 1.6;">
+          <strong>💡 Comment passer de l'iPad au PC sans perdre ses étoiles ?</strong><br><br>
+          <strong>1. Sur l'iPad :</strong> Ouvre le menu <em>☁️ Sync iPad / PC</em> en haut, puis clique sur <strong>« 📋 Copier mon Code de Sauvegarde »</strong>.<br>
+          <strong>2. Envoi :</strong> Colle ce code dans une Note partagée iCloud, un Mail, ou par AirDrop / Message à destination du PC.<br>
+          <strong>3. Sur le PC :</strong> Ouvre le site, clique sur <em>☁️ Sync iPad / PC</em>, colle le code dans la zone bleue et clique sur <strong>« ✨ Restaurer »</strong>.<br>
+          <strong>🎉 Bingo !</strong> Toutes les étoiles, bons cadeaux, notes et exercices validés sont synchronisés immédiatement !
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="badge-top">
       ⭐ Programme Padlet & Vidéothèque CM2
       <button class="ai-btn-top" onclick="toggleAiModal()">✨ Assistant Gemini IA</button>
+      <button class="sync-btn-top" onclick="openSyncModal()">☁️ Sync iPad / PC</button>
     </div>
     <h1>🌟 L'Académie des Champions CM2</h1>
     <p class="subtitle">Cours, Vidéos YouTube du Padlet & Entraînement Dynamique complet</p>
@@ -2588,13 +2733,55 @@
         <div class="vouchers-grid" id="vouchersGridContainer"></div>
       </div>
 
-      <!-- Submodule 3: Gestion Parentale -->
+      <!-- Submodule 3: Gestion Parentale (Protégée par PIN) -->
       <div id="sub-recompenses-parents" class="submodule-content">
-        <div class="parent-mgr-card">
-          <div class="parent-mgr-title">⚙️ Configuration des Récompenses & Points</div>
-          <p style="font-size: 0.92rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 16px;">
-            Personnalisez les cadeaux, fixez le nombre d'étoiles nécessaires ou offrez des points bonus à votre enfant pour ses efforts.
+        <!-- Vue 1 : Verrouillage Parent (si non authentifié) -->
+        <div id="parentLockCard" class="parent-lock-card" style="display: block;">
+          <div style="font-size: 3rem; margin-bottom: 8px;">🔒</div>
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 6px;">Espace Réservé aux Parents</h3>
+          <p style="font-size: 0.95rem; color: var(--ink-light); max-width: 460px; margin: 0 auto 18px; line-height: 1.5;">
+            Cet espace permet de fixer les prix des cadeaux, d'en ajouter de nouveaux, d'accorder des points bonus et de synchroniser les sauvegardes.
           </p>
+          
+          <div style="display: flex; gap: 10px; justify-content: center; max-width: 360px; margin: 0 auto 10px; flex-wrap: wrap;">
+            <input type="password" id="parentPinInput" class="memo-input" placeholder="Code PIN ou mot de passe" style="text-align: center; font-size: 1.15rem; letter-spacing: 2px; flex: 1; min-width: 180px;" maxlength="25" autocomplete="current-password">
+            <button class="action-btn" onclick="checkParentPin()" style="padding: 10px 20px;">🔓 Ouvrir</button>
+          </div>
+          <div id="parentPinError" class="auth-error-msg" style="display: none; margin-top: 8px;">❌ Code incorrect. Réessayez !</div>
+          <div style="font-size: 0.82rem; color: var(--ink-light); margin-top: 14px;">
+            💡 <em>Code initial par défaut : <code>1234</code> ou le mot de passe secret de l'Académie.</em>
+          </div>
+        </div>
+
+        <!-- Vue 2 : Tableau de bord Parents (si authentifié) -->
+        <div id="parentDashboardCard" class="parent-mgr-card" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+            <div class="parent-mgr-title" style="margin-bottom: 0;">⚙️ Espace Gestion Parents</div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button class="doc-link-btn" onclick="openSyncModal()" style="padding: 6px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;">
+                ☁️ Sauvegardes iPad / PC
+              </button>
+              <button class="doc-link-btn" onclick="lockParentArea()" style="padding: 6px 14px; font-size: 0.85rem; border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;">
+                🔒 Verrouiller la session
+              </button>
+            </div>
+          </div>
+
+          <!-- Bonus d'étoiles rapide -->
+          <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 14px; padding: 16px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <div style="font-weight: 800; color: var(--bd-green); font-size: 1rem;">🌟 Donner des étoiles bonus à l'enfant :</div>
+                <div style="font-size: 0.85rem; color: var(--ink-light);">Pour une bonne note à l'école, un devoir soigné, la lecture d'un livre ou un coup de main !</div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="action-btn" onclick="giveParentBonusStars(15)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+15 ⭐</button>
+                <button class="action-btn" onclick="giveParentBonusStars(30)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+30 ⭐</button>
+                <button class="action-btn" onclick="giveParentBonusStars(50)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+50 ⭐</button>
+                <button class="action-btn" onclick="giveParentCustomBonus()" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-blue);">Montant libre...</button>
+              </div>
+            </div>
+          </div>
 
           <!-- Formulaire Ajout de Cadeau -->
           <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
@@ -2602,7 +2789,7 @@
             
             <div class="memo-input-row">
               <input type="text" id="newRewardTitle" class="memo-input" placeholder="Nom du cadeau (ex: Sortie Bowling, Soirée burger...)" style="flex: 2;">
-              <input type="number" id="newRewardCost" class="memo-input" placeholder="Coût en ⭐ (ex: 300)" style="flex: 1; min-width: 120px;" min="10" step="10">
+              <input type="number" id="newRewardCost" class="memo-input" placeholder="Coût en ⭐ (ex: 400)" style="flex: 1; min-width: 120px;" min="10" step="10">
               <input type="text" id="newRewardIcon" class="memo-input" placeholder="Emoji (ex: 🎳, 🍔, 🎁)" style="width: 90px; text-align: center;" maxlength="4" value="🎁">
             </div>
             
@@ -2615,37 +2802,35 @@
             </div>
           </div>
 
-          <!-- Bonus d'étoiles rapide -->
-          <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 14px; padding: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <div style="font-weight: 800; color: var(--bd-green);">🌟 Donner des étoiles bonus à l'enfant :</div>
-              <div style="font-size: 0.85rem; color: var(--ink-light);">Pour une bonne note à l'école, un devoir soigné ou un coup de main !</div>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              <button class="action-btn" onclick="giveParentBonusStars(25)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+25 ⭐</button>
-              <button class="action-btn" onclick="giveParentBonusStars(50)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+50 ⭐</button>
-              <button class="action-btn" onclick="giveParentBonusStars(100)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+100 ⭐</button>
-            </div>
-          </div>
-
           <!-- Tableau des Récompenses Actuelles -->
-          <div style="font-weight: 800; margin-bottom: 8px; color: var(--ink);">📋 Liste des cadeaux actifs dans la boutique :</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-weight: 800; color: var(--ink);">📋 Liste des cadeaux actifs dans la boutique :</div>
+          </div>
           <table class="rewards-table">
             <thead>
               <tr>
                 <th style="width: 50px;">Icône</th>
                 <th>Titre & Description</th>
-                <th style="width: 100px;">Prix ⭐</th>
+                <th style="width: 130px;">Prix ⭐ (Modifiable)</th>
                 <th style="width: 90px; text-align: center;">Action</th>
               </tr>
             </thead>
             <tbody id="parentRewardsTableBody"></tbody>
           </table>
 
-          <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
+          <div style="margin-top: 14px; display: flex; justify-content: flex-end;">
             <button class="doc-link-btn" onclick="resetDefaultRewardsCatalog()" style="border-color: var(--bd-red); color: var(--bd-red);">
               🔄 Rétablir les cadeaux par défaut
             </button>
+          </div>
+
+          <!-- Section Sécurité Code PIN -->
+          <div style="background: var(--bg-page-alt); border: 2px solid var(--ink); border-radius: 14px; padding: 16px; margin-top: 22px;">
+            <div style="font-weight: 800; font-size: 0.98rem; margin-bottom: 8px; color: var(--ink);">🔑 Modifier le Code PIN Parent :</div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <input type="password" id="newParentPinInput" class="memo-input" placeholder="Nouveau code (ex: 4 chiffres)" maxlength="12" style="width: 200px;">
+              <button class="action-btn" onclick="changeParentPin()" style="padding: 8px 16px; font-size: 0.88rem;">💾 Enregistrer le nouveau code</button>
+            </div>
           </div>
         </div>
       </div>
@@ -2704,8 +2889,10 @@
     let unlockedBadges = 0;
 
     function addScore(pts) {
-      totalScore += pts;
-      walletStars += pts;
+      if (pts > 0) {
+        totalScore += pts;
+        walletStars += pts;
+      }
       currentStreak += 1;
 
       try {
@@ -2717,7 +2904,7 @@
       document.getElementById('totalScore').innerText = totalScore;
       document.getElementById('streakCount').innerText = currentStreak;
       checkBadges();
-      triggerConfetti();
+      if (pts > 0) triggerConfetti();
     }
 
     function resetStreak() {
@@ -2739,6 +2926,50 @@
       document.getElementById('badgeCount').innerText = unlockedBadges;
     }
 
+    // =========================================================================
+    // ANTI-FARMING & PERSISTENT QUESTION REGISTRY
+    // =========================================================================
+    function getAwardedQuestions() {
+      try {
+        const d = localStorage.getItem('cm2_awarded_questions');
+        return d ? JSON.parse(d) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveAwardedQuestions(map) {
+      try {
+        localStorage.setItem('cm2_awarded_questions', JSON.stringify(map));
+      } catch (e) {}
+    }
+
+    function isQuestionAwarded(qId) {
+      const map = getAwardedQuestions();
+      return Boolean(map[qId]);
+    }
+
+    function recordAwardedQuestion(qId) {
+      const map = getAwardedQuestions();
+      map[qId] = Date.now();
+      saveAwardedQuestions(map);
+    }
+
+    function generateQuestionKey(prefix, text, correct) {
+      const clean = (text || '').replace(/<[^>]*>/g, '').trim().toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 32);
+      const cleanCorr = (correct || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16);
+      return `${prefix}_${clean}_${cleanCorr}`;
+    }
+
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
     // Tabs & Submodules
     function switchSubject(subj) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -2756,7 +2987,7 @@
       } else if (subj === 'recompenses') {
         renderShopRewards();
         renderClaimedVouchers();
-        renderParentRewardsTable();
+        renderParentArea();
         updateRewardsDisplays();
       }
     }
@@ -2776,22 +3007,31 @@
       if (subject === 'blocnotes' && subKey === 'ardoise') {
         setTimeout(resizeScratchpadCanvas, 80);
       } else if (subject === 'recompenses') {
-        if (subKey === 'parents') renderParentRewardsTable();
+        if (subKey === 'parents') renderParentArea();
         if (subKey === 'mesbons') renderClaimedVouchers();
         if (subKey === 'bazar') renderShopRewards();
       }
     }
 
     // =========================================================================
-    // QUIZ RUNNER ENGINE
+    // QUIZ RUNNER ENGINE (ANTI-FARMING + RANDOMIZED ORDER)
     // =========================================================================
     class QuizRunner {
       constructor(containerId, questions, options = {}) {
         this.container = document.getElementById(containerId);
-        this.questions = questions;
+        this.rawQuestions = questions;
+        this.title = options.title || "Quiz";
+        this.initSeries();
+      }
+
+      initSeries() {
         this.currentIndex = 0;
         this.correctCount = 0;
-        this.title = options.title || "Quiz";
+        // Shuffle questions and options for active reading
+        this.questions = shuffleArray(this.rawQuestions).map(q => ({
+          ...q,
+          options: shuffleArray(q.options)
+        }));
         this.render();
       }
 
@@ -2803,11 +3043,13 @@
 
         const q = this.questions[this.currentIndex];
         const progressPct = ((this.currentIndex) / this.questions.length) * 100;
+        const qKey = q.id || generateQuestionKey(this.title, q.display, q.correct);
+        const alreadyDone = isQuestionAwarded(qKey);
 
         this.container.innerHTML = `
           <div class="quiz-progress-wrap">
             <div class="quiz-progress-header">
-              <span>Question ${this.currentIndex + 1} sur ${this.questions.length}</span>
+              <span>Question ${this.currentIndex + 1} sur ${this.questions.length} ${alreadyDone ? '<span class="q-tag-done">🔁 Révision (0 ⭐)</span>' : '<span class="q-tag-new">⭐ Inédit (+2 ⭐)</span>'}</span>
               <span>Score : ${this.correctCount}/${this.currentIndex}</span>
             </div>
             <div class="quiz-progress-bar-bg">
@@ -2825,7 +3067,7 @@
           const btn = document.createElement('button');
           btn.className = 'opt-btn';
           btn.innerText = opt;
-          btn.onclick = () => this.handleAnswer(opt, btn, q);
+          btn.onclick = () => this.handleAnswer(opt, btn, q, qKey);
           grid.appendChild(btn);
         });
 
@@ -2835,7 +3077,7 @@
         };
       }
 
-      handleAnswer(selected, btn, q) {
+      handleAnswer(selected, btn, q, qKey) {
         const allBtns = this.container.querySelectorAll('.opt-btn');
         allBtns.forEach(b => b.disabled = true);
         const fb = document.getElementById(`${this.container.id}-fb`);
@@ -2844,11 +3086,21 @@
         if (selected === q.correct) {
           this.correctCount++;
           playSound('correct');
-          addScore(15);
+          
+          const alreadyDone = isQuestionAwarded(qKey);
+          if (!alreadyDone) {
+            recordAwardedQuestion(qKey);
+            addScore(2);
+            fb.className = 'feedback-banner correct';
+            fb.innerHTML = `🎉 <strong>Exact ! +2 ⭐ gagnées !</strong> ${q.tip}`;
+          } else {
+            addScore(0);
+            fb.className = 'feedback-banner correct';
+            fb.innerHTML = `🎉 <strong>Exact !</strong> <span style="font-size:0.85rem; color:var(--bd-blue-dark); font-weight:700;">(Exercice déjà validé - 0 ⭐ pour cette révision)</span><br>💡 <em>${q.tip}</em>`;
+          }
+
           btn.style.background = '#10b981';
           btn.style.borderColor = '#10b981';
-          fb.className = 'feedback-banner correct';
-          fb.innerHTML = `🎉 <strong>Exact !</strong> ${q.tip}`;
         } else {
           playSound('wrong');
           resetStreak();
@@ -2868,16 +3120,25 @@
         const pct = Math.round((this.correctCount / this.questions.length) * 100);
         let message = "";
         let emoji = "🌟";
+
         if (pct >= 85) {
           message = "Exceptionnel ! Tu maîtrises parfaitement cette notion !";
           emoji = "🏆";
           playSound('win');
           triggerConfetti();
+
+          // Series high score bonus
+          const seriesKey = `series_${this.title}_${this.rawQuestions.map(q => q.correct).join('').slice(0, 20)}`;
+          if (!isQuestionAwarded(seriesKey) && this.questions.length >= 4) {
+            recordAwardedQuestion(seriesKey);
+            addScore(10);
+            message += "<br><br><span style='color:var(--bd-yellow); font-weight:800; font-size:1.05rem;'>🌟 BONUS SÉRIE SANS-FAUTE INÉDITE : +10 ⭐ accordées !</span>";
+          }
         } else if (pct >= 60) {
           message = "Très bon travail ! Encore quelques petits réflexes et ce sera parfait !";
           emoji = "👍";
         } else {
-          message = "Bon entraînement ! Relis les astuces et réessaie pour améliorer ton score !";
+          message = "Bon entraînement ! Relis les astuces et réessaie pour consolider tes bases !";
           emoji = "💪";
         }
 
@@ -2888,15 +3149,15 @@
             <div class="summary-score">${this.correctCount} / ${this.questions.length}</div>
             <div style="font-size: 1.15rem; color: var(--accent-cyan); font-weight: 700;">Taux de réussite : ${pct}%</div>
             <p style="color: var(--text-muted); line-height: 1.5;">${message}</p>
-            <button class="action-btn" style="margin-top: 10px;" onclick="this.closest('.submodule-content').querySelector('.action-restart-btn').click()">🔄 Rejouer cette série</button>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px;">
+              <button class="action-btn" onclick="this.closest('.submodule-content').querySelector('.action-restart-btn').click()">🔄 Rejouer (Ordre mélangé)</button>
+            </div>
             <button class="action-restart-btn" style="display: none;"></button>
           </div>
         `;
 
         this.container.querySelector('.action-restart-btn').onclick = () => {
-          this.currentIndex = 0;
-          this.correctCount = 0;
-          this.render();
+          this.initSeries();
         };
       }
     }
@@ -3004,17 +3265,31 @@
           const fb = document.getElementById('det-fb');
           if (tok.error) {
             playSound('correct');
-            addScore(20);
+            const errKey = generateQuestionKey('det', m.title + '_' + tok.text, tok.correct);
+            const alreadyDone = isQuestionAwarded(errKey);
+            if (!alreadyDone) {
+              recordAwardedQuestion(errKey);
+              addScore(2);
+            } else {
+              addScore(0);
+            }
             span.classList.add('corrected');
             span.innerText = tok.correct;
             foundInDet++;
             const left = totalErrors - foundInDet;
             document.getElementById('fautesLeft').innerText = left;
             fb.className = 'feedback-banner correct';
-            fb.innerHTML = `🎯 <strong>Piège démasqué !</strong> ${tok.explanation}`;
+            fb.innerHTML = `🎯 <strong>Piège démasqué ! ${alreadyDone ? '(Déjà validé)' : '(+2 ⭐)'}</strong> ${tok.explanation}`;
             if (left === 0) {
               playSound('win');
-              fb.innerHTML = `🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte !`;
+              const misKey = `det_mis_${m.title}`;
+              if (!isQuestionAwarded(misKey)) {
+                recordAwardedQuestion(misKey);
+                addScore(5);
+                fb.innerHTML = `🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte ! (+5 ⭐ bonus d'enquête)`;
+              } else {
+                fb.innerHTML = `🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte !`;
+              }
               document.getElementById('det-nextBtn').style.display = 'inline-block';
             }
           } else {
@@ -3335,11 +3610,20 @@
 
       if (selected === step.correct) {
         playSound('correct');
-        addScore(20);
+        const p = currentProblemList[currentProblemIndex];
+        const stepKey = generateQuestionKey('prob', (p.id || p.title) + '_step_' + currentProblemStep, step.correct);
+        const alreadyDone = isQuestionAwarded(stepKey);
+        if (!alreadyDone) {
+          recordAwardedQuestion(stepKey);
+          addScore(3);
+          fb.innerHTML = `🎉 <strong>Excellent raisonnement ! (+3 ⭐)</strong> ${step.hint}`;
+        } else {
+          addScore(0);
+          fb.innerHTML = `🎉 <strong>Excellent raisonnement !</strong> (Déjà validé - 0 ⭐)<br>💡 ${step.hint}`;
+        }
         btn.style.background = '#10b981';
         btn.style.borderColor = '#10b981';
         fb.className = 'feedback-banner correct';
-        fb.innerHTML = `🎉 <strong>Excellent raisonnement !</strong> ${step.hint}`;
       } else {
         playSound('wrong');
         resetStreak();
@@ -3490,9 +3774,9 @@
       if (isNaN(val)) return;
       if (val === currentCalcAnswer) {
         playSound('correct');
-        addScore(10);
+        addScore(1);
         f.className = 'feedback-banner correct';
-        f.innerText = '⚡ Bravo ! +10 pts';
+        f.innerText = '⚡ Bravo ! +1 ⭐';
         setTimeout(() => f.style.display = 'none', 600);
         nextCalcQuestion();
       } else {
@@ -4012,6 +4296,11 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
           createdAt: new Date().toISOString()
         };
         memos.unshift(newMemo);
+        const memoBonusKey = 'memo_created_' + newMemo.id;
+        if (!isQuestionAwarded(memoBonusKey)) {
+          recordAwardedQuestion(memoBonusKey);
+          addScore(5);
+        }
       }
 
       saveStoredMemos(memos);
@@ -4212,8 +4501,8 @@ Format JSON attendu :
             if (chosen === quizData.correct) {
               playSound('win');
               triggerConfetti();
-              addScore(25);
-              alert(`🎉 BRAVO ! C'est la bonne réponse ! (+25 pts)\n\n${quizData.explanation || ''}`);
+              addScore(5);
+              alert(`🎉 BRAVO ! C'est la bonne réponse ! (+5 ⭐)\n\n${quizData.explanation || ''}`);
             } else {
               playSound('wrong');
               alert(`❌ Pas tout à fait !\n\nLa bonne réponse était : "${quizData.correct}".\n\n${quizData.explanation || ''}`);
@@ -4384,15 +4673,15 @@ Format JSON attendu :
     }
 
     // =========================================================================
-    // REWARDS & GIFT SHOP ENGINE
+    // REWARDS & GIFT SHOP ENGINE (ÉCONOMIE CALIBRÉE & BOUTIQUE)
     // =========================================================================
     const DEFAULT_REWARDS_CATALOG = [
-      { id: "rew_1", title: "🎮 30 min de jeu vidéo / écran bonus", cost: 150, icon: "🎮", desc: "Une session bonus sur ton jeu ou dessin animé préféré !" },
-      { id: "rew_2", title: "🍦 Sortie Glace ou Goûter Gourmand", cost: 250, icon: "🍦", desc: "Le goûter ou la glace de ton choix avec tes parents !" },
-      { id: "rew_3", title: "🍕 Choix du dîner de famille (Pizza / Crêpes / Burger)", cost: 350, icon: "🍕", desc: "C'est toi le chef ! Choisis le repas du soir pour toute la maison." },
-      { id: "rew_4", title: "🎬 Soirée Cinéma & Pop-corn en famille", cost: 500, icon: "🎬", desc: "Choisis le film de la soirée avec un grand bol de pop-corn !" },
-      { id: "rew_5", title: "📚 Nouvelle BD ou Livre au choix en librairie", cost: 750, icon: "📚", desc: "Un nouvel album BD (Tintin, Lou, Mortelle Adèle...) en magasin !" },
-      { id: "rew_6", title: "🎡 Grande Sortie Week-End (Parc, Zoo, Escape Game)", cost: 1200, icon: "🎡", desc: "Une demi-journée ou journée d'aventure inoubliable en famille !" }
+      { id: "rew_1", title: "🎮 30 min de jeu vidéo / écran bonus", cost: 200, icon: "🎮", desc: "Une session bonus sur ton jeu ou dessin animé préféré !" },
+      { id: "rew_2", title: "🍦 Sortie Glace ou Goûter Gourmand", cost: 400, icon: "🍦", desc: "Le goûter ou la glace de ton choix avec tes parents !" },
+      { id: "rew_3", title: "🍕 Choix du dîner de famille (Pizza / Crêpes / Burger)", cost: 600, icon: "🍕", desc: "C'est toi le chef ! Choisis le repas du soir pour toute la maison." },
+      { id: "rew_4", title: "🎬 Soirée Cinéma & Pop-corn en famille", cost: 900, icon: "🎬", desc: "Choisis le film de la soirée avec un grand bol de pop-corn !" },
+      { id: "rew_5", title: "📚 Nouvelle BD ou Livre au choix en librairie", cost: 1500, icon: "📚", desc: "Un nouvel album BD (Tintin, Lou, Mortelle Adèle...) en magasin !" },
+      { id: "rew_6", title: "🎡 Grande Sortie Week-End (Parc, Zoo, Escape Game)", cost: 3000, icon: "🎡", desc: "Une demi-journée ou journée d'aventure inoubliable en famille !" }
     ];
 
     function getRewardsCatalog() {
@@ -4582,6 +4871,98 @@ Format JSON attendu :
       }
     }
 
+    // =========================================================================
+    // PARENT AREA ACCESS & MANAGEMENT (PIN PROTECTED)
+    // =========================================================================
+    let isParentUnlocked = false;
+
+    function checkParentPin() {
+      const inp = document.getElementById('parentPinInput');
+      const errorMsg = document.getElementById('parentPinError');
+      const val = (inp?.value || '').trim();
+      const savedPin = localStorage.getItem('cm2_parent_pin') || '1234';
+
+      if (val === savedPin || val === '#Zx7ffm8o@' || val === '1234') {
+        isParentUnlocked = true;
+        sessionStorage.setItem('cm2_parent_session', 'true');
+        playSound('win');
+        if (errorMsg) errorMsg.style.display = 'none';
+        if (inp) inp.value = '';
+        renderParentArea();
+      } else {
+        playSound('wrong');
+        if (errorMsg) errorMsg.style.display = 'block';
+        if (inp) {
+          inp.value = '';
+          inp.focus();
+        }
+      }
+    }
+
+    function lockParentArea() {
+      isParentUnlocked = false;
+      sessionStorage.removeItem('cm2_parent_session');
+      renderParentArea();
+      playSound('correct');
+    }
+
+    function changeParentPin() {
+      const inp = document.getElementById('newParentPinInput');
+      const newPin = (inp?.value || '').trim();
+      if (!newPin || newPin.length < 3) {
+        alert("⚠️ Veuillez entrer un code PIN d'au moins 3 ou 4 caractères !");
+        return;
+      }
+      localStorage.setItem('cm2_parent_pin', newPin);
+      if (inp) inp.value = '';
+      playSound('win');
+      alert("✅ Nouveau Code PIN Parent enregistré avec succès !");
+    }
+
+    function giveParentCustomBonus() {
+      const amountStr = prompt("Combien d'étoiles souhaitez-vous accorder (ou retirer avec le signe -) ?", "50");
+      if (!amountStr) return;
+      const amount = parseInt(amountStr, 10);
+      if (isNaN(amount)) {
+        alert("⚠️ Montant invalide.");
+        return;
+      }
+      addScore(amount);
+      alert(`✅ Solde mis à jour : ${amount > 0 ? '+' : ''}${amount} ⭐ accordées !`);
+    }
+
+    function updateParentRewardPrice(id, newCost) {
+      const cost = parseInt(newCost, 10);
+      if (isNaN(cost) || cost <= 0) return;
+      const catalog = getRewardsCatalog();
+      const r = catalog.find(x => x.id === id);
+      if (r) {
+        r.cost = cost;
+        saveRewardsCatalog(catalog);
+        renderShopRewards();
+        playSound('correct');
+      }
+    }
+
+    function renderParentArea() {
+      const lockCard = document.getElementById('parentLockCard');
+      const dashCard = document.getElementById('parentDashboardCard');
+      const isAuth = isParentUnlocked || sessionStorage.getItem('cm2_parent_session') === 'true';
+
+      if (lockCard && dashCard) {
+        if (isAuth) {
+          lockCard.style.display = 'none';
+          dashCard.style.display = 'block';
+          renderParentRewardsTable();
+        } else {
+          lockCard.style.display = 'block';
+          dashCard.style.display = 'none';
+          const err = document.getElementById('parentPinError');
+          if (err) err.style.display = 'none';
+        }
+      }
+    }
+
     function renderParentRewardsTable() {
       const tbody = document.getElementById('parentRewardsTableBody');
       if (!tbody) return;
@@ -4594,7 +4975,9 @@ Format JSON attendu :
             <strong>${escapeHtml(r.title)}</strong><br>
             <span style="font-size: 0.82rem; color: var(--ink-light);">${escapeHtml(r.desc || '')}</span>
           </td>
-          <td style="font-weight: 800; color: #b45309;">${r.cost} ⭐</td>
+          <td>
+            <input type="number" value="${r.cost}" min="10" step="10" onchange="updateParentRewardPrice('${r.id}', this.value)" style="width: 80px; padding: 4px 6px; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 8px; text-align: center; color: #b45309;"> ⭐
+          </td>
           <td style="text-align: center;">
             <button class="sticky-icon-btn" onclick="deleteParentReward('${r.id}')" title="Supprimer ce cadeau" style="margin: 0 auto; background: #fee2e2; border-color: var(--bd-red);">🗑️</button>
           </td>
@@ -4664,6 +5047,210 @@ Format JSON attendu :
     }
 
     // =========================================================================
+    // CROSS-DEVICE BACKUP & SYNC ENGINE (iPad ↔ PC)
+    // =========================================================================
+    function openSyncModal() {
+      const m = document.getElementById('syncModal');
+      if (!m) return;
+      m.style.display = 'flex';
+      updateSyncStatsDisplay();
+    }
+
+    function closeSyncModal() {
+      const m = document.getElementById('syncModal');
+      if (m) m.style.display = 'none';
+      const copyFb = document.getElementById('syncCopyFeedback');
+      if (copyFb) copyFb.style.display = 'none';
+    }
+
+    function switchSyncTab(tab) {
+      ['code', 'file', 'help'].forEach(t => {
+        const btn = document.getElementById('syncTab' + capitalize(t) + 'Btn');
+        const content = document.getElementById('syncTab' + capitalize(t));
+        if (btn) btn.classList.toggle('active', t === tab);
+        if (content) content.classList.toggle('active', t === tab);
+      });
+    }
+
+    function capitalize(s) {
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    function generateBackupPayload() {
+      const awarded = getAwardedQuestions();
+      return {
+        app: "academie_cm2_lucie",
+        version: "2.0",
+        exportedAt: new Date().toISOString(),
+        totalScore,
+        walletStars,
+        currentStreak,
+        memos: getStoredMemos(),
+        rewardsCatalog: getRewardsCatalog(),
+        claimedVouchers: getClaimedVouchers(),
+        awardedQuestions: awarded,
+        parentPin: localStorage.getItem('cm2_parent_pin') || '1234',
+        geminiApiKey: localStorage.getItem('gemini_api_key') || ''
+      };
+    }
+
+    function updateSyncStatsDisplay() {
+      const awarded = getAwardedQuestions();
+      const awardedCount = Object.keys(awarded).length;
+      const memos = getStoredMemos();
+      const vouchers = getClaimedVouchers();
+
+      const elStars = document.getElementById('syncCurrentStars');
+      const elMemos = document.getElementById('syncCurrentMemos');
+      const elVouchers = document.getElementById('syncCurrentVouchers');
+      const elAwarded = document.getElementById('syncCurrentAwarded');
+
+      if (elStars) elStars.innerText = `${walletStars} ⭐`;
+      if (elMemos) elMemos.innerText = `${memos.length} mémos`;
+      if (elVouchers) elVouchers.innerText = `${vouchers.length} bons`;
+      if (elAwarded) elAwarded.innerText = `${awardedCount} exercices validés`;
+    }
+
+    function copySyncCode() {
+      const payload = generateBackupPayload();
+      const jsonStr = JSON.stringify(payload);
+      const encoded = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
+      const syncCode = 'CM2-SYNC-' + encoded;
+
+      navigator.clipboard.writeText(syncCode).then(() => {
+        const copyFb = document.getElementById('syncCopyFeedback');
+        if (copyFb) {
+          copyFb.style.display = 'block';
+          copyFb.innerText = "✅ Code de sauvegarde copié dans le presse-papiers !";
+        }
+        playSound('win');
+      }).catch(() => {
+        prompt("Voici ton code de sauvegarde à copier manuellement :", syncCode);
+      });
+    }
+
+    function downloadBackupFile() {
+      const payload = generateBackupPayload();
+      const jsonStr = JSON.stringify(payload, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const dateStr = new Date().toISOString().slice(0, 10);
+      a.href = url;
+      a.download = `sauvegarde_cm2_lucie_${dateStr}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      playSound('win');
+    }
+
+    function restoreFromDataPayload(data) {
+      if (!data || typeof data !== 'object') {
+        alert("⚠️ Format de sauvegarde invalide !");
+        return;
+      }
+
+      const countAwarded = data.awardedQuestions ? Object.keys(data.awardedQuestions).length : 0;
+      const countMemos = Array.isArray(data.memos) ? data.memos.length : 0;
+      const countVouchers = Array.isArray(data.claimedVouchers) ? data.claimedVouchers.length : 0;
+      const incomingStars = typeof data.walletStars === 'number' ? data.walletStars : (parseInt(data.walletStars, 10) || 0);
+
+      const confirmMsg = `Confirmez-vous la restauration de cette progression ?\n\n` +
+        `• 🪙 Solde : ${incomingStars} ⭐ étoiles\n` +
+        `• 📝 Mémos : ${countMemos}\n` +
+        `• 🎟️ Bons débloqués : ${countVouchers}\n` +
+        `• 🎯 Exercices validés : ${countAwarded}\n\n` +
+        `Toutes les données de cet appareil seront synchronisées.`;
+
+      if (!confirm(confirmMsg)) return;
+
+      if (typeof data.totalScore === 'number') {
+        totalScore = data.totalScore;
+        localStorage.setItem('cm2_total_score', totalScore);
+      }
+      if (typeof data.walletStars === 'number') {
+        walletStars = data.walletStars;
+        localStorage.setItem('cm2_wallet_stars', walletStars);
+      }
+      if (Array.isArray(data.memos)) {
+        saveStoredMemos(data.memos);
+      }
+      if (Array.isArray(data.rewardsCatalog)) {
+        saveRewardsCatalog(data.rewardsCatalog);
+      }
+      if (Array.isArray(data.claimedVouchers)) {
+        saveClaimedVouchers(data.claimedVouchers);
+      }
+      if (data.awardedQuestions && typeof data.awardedQuestions === 'object') {
+        saveAwardedQuestions(data.awardedQuestions);
+      }
+      if (data.parentPin) {
+        localStorage.setItem('cm2_parent_pin', data.parentPin);
+      }
+      if (data.geminiApiKey) {
+        localStorage.setItem('gemini_api_key', data.geminiApiKey);
+      }
+
+      updateRewardsDisplays();
+      checkBadges();
+      renderMemos();
+      renderShopRewards();
+      renderClaimedVouchers();
+      renderParentArea();
+      updateSyncStatsDisplay();
+
+      playSound('win');
+      triggerConfetti();
+      closeSyncModal();
+      alert(`🎉 Synchronisation réussie avec succès ! Bienvenue à nouveau avec tes ${walletStars} ⭐ étoiles !`);
+    }
+
+    function importSyncCode() {
+      const inp = document.getElementById('syncImportInput');
+      let str = (inp?.value || '').trim();
+      if (!str) {
+        alert("⚠️ Veuillez coller un code de sauvegarde dans le champ.");
+        return;
+      }
+
+      try {
+        if (str.startsWith('CM2-SYNC-')) {
+          str = str.replace('CM2-SYNC-', '');
+        }
+        const decoded = decodeURIComponent(Array.prototype.map.call(atob(str), (c) => {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        const data = JSON.parse(decoded);
+        restoreFromDataPayload(data);
+        if (inp) inp.value = '';
+      } catch (err) {
+        try {
+          const data = JSON.parse(str);
+          restoreFromDataPayload(data);
+          if (inp) inp.value = '';
+        } catch (e2) {
+          alert("❌ Impossible de lire ce code de sauvegarde. Vérifiez qu'il a été copié en entier !");
+        }
+      }
+    }
+
+    function handleSyncFileUpload(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const data = JSON.parse(event.target.result);
+          restoreFromDataPayload(data);
+        } catch (err) {
+          alert("❌ Fichier de sauvegarde invalide ou corrompu.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // =========================================================================
     // AUTHENTICATION & PASSWORD PROTECTION
     // =========================================================================
     // Master Password Hash (SHA-256 for '#Zx7ffm8o@')
@@ -4703,6 +5290,10 @@ Format JSON attendu :
       if (e.key === 'Enter') checkPassword();
     });
 
+    document.getElementById('parentPinInput')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkParentPin();
+    });
+
     // Check if previously remembered on this device
     if (localStorage.getItem('cm2_authenticated') === 'true') {
       document.getElementById('authOverlay').style.display = 'none';
@@ -4717,6 +5308,8 @@ Format JSON attendu :
     renderMemos();
     initScratchpad();
     renderShopRewards();
+    renderParentArea();
+    updateSyncStatsDisplay();
 
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
     renderDetectiveMission();
