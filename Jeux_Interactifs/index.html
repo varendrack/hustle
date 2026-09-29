@@ -1021,6 +1021,77 @@
       width: 100%;
     }
 
+    /* Icon Library Picker Component */
+    .icon-picker-box {
+      background: var(--bg-page-alt);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+    .icon-cat-chips {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      scrollbar-width: thin;
+    }
+    .icon-cat-chip {
+      background: #ffffff;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.12s ease;
+    }
+    .icon-cat-chip.active, .icon-cat-chip:hover {
+      background: var(--bd-yellow-light);
+      border-color: var(--ink);
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+    }
+    .icon-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+      gap: 6px;
+      max-height: 145px;
+      overflow-y: auto;
+      padding: 6px;
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      background: #ffffff;
+    }
+    .icon-opt-btn {
+      width: 42px;
+      height: 42px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fafafa;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.1s ease, border-color 0.1s ease, background 0.1s ease;
+      user-select: none;
+    }
+    .icon-opt-btn:hover {
+      transform: scale(1.18);
+      border-color: var(--ink);
+      background: var(--bd-yellow-light);
+      z-index: 2;
+    }
+    .icon-opt-btn.selected {
+      border-color: var(--ink);
+      background: var(--bd-yellow-light);
+      box-shadow: 0 0 0 2px var(--bd-yellow-dark);
+      transform: scale(1.12);
+    }
+
     /* Math Problem Solver Component */
     .problem-box {
       background: #fffdfa;
@@ -2048,6 +2119,61 @@
     </div>
   </div>
 
+  <!-- Modal Edition Cadeau Boutique (Parent) -->
+  <div id="editRewardModal" class="ai-modal-overlay">
+    <div class="ai-modal-card" style="max-width: 580px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 10px;">
+        <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; margin: 0; display: flex; align-items: center; gap: 8px; color: var(--ink);">
+          ✏️ Modifier le Cadeau
+        </h3>
+        <button class="modal-close-btn" onclick="closeEditRewardModal()">&times;</button>
+      </div>
+
+      <input type="hidden" id="editRewardId">
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div>
+          <label style="font-size: 0.85rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 4px;">Nom du Cadeau :</label>
+          <input type="text" id="editRewardTitle" class="memo-input" style="width: 100%;" placeholder="Titre du cadeau">
+        </div>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 140px;">
+            <label style="font-size: 0.85rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 4px;">Prix en Étoiles ⭐ :</label>
+            <input type="number" id="editRewardCost" class="memo-input" style="width: 100%; font-weight: 800; color: #b45309;" min="10" step="10">
+          </div>
+
+          <div style="flex: 1; min-width: 160px;">
+            <label style="font-size: 0.85rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 4px;">Icône actuelle :</label>
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <span id="editRewardIconPreview" style="font-size: 1.6rem; background: var(--bd-yellow-light); border: 2px solid var(--ink); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 1.5px 1.5px 0 var(--ink);">🎁</span>
+              <input type="text" id="editRewardIconInput" class="memo-input" style="width: 80px; text-align: center;" maxlength="6" oninput="updateEditIconPreview(this.value)">
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size: 0.85rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 4px;">Description / Conditions :</label>
+          <input type="text" id="editRewardDesc" class="memo-input" style="width: 100%;" placeholder="Précisions pour l'enfant...">
+        </div>
+
+        <!-- Bibliothèque d'icônes intégrée pour la modal d'édition -->
+        <div>
+          <label style="font-size: 0.85rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 4px;">🎨 Choisir dans la bibliothèque d'icônes :</label>
+          <div class="icon-picker-box">
+            <div class="icon-cat-chips" id="editIconCatChips"></div>
+            <div class="icon-picker-grid" id="editIconGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
+        <button class="doc-link-btn" onclick="closeEditRewardModal()">❌ Annuler</button>
+        <button class="action-btn" onclick="saveEditedReward()">💾 Sauvegarder les modifications</button>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="badge-top">
       ⭐ Programme Padlet & Vidéothèque CM2
@@ -2845,20 +2971,35 @@
 
           </div>
 
-          <!-- Formulaire Ajout de Cadeau -->
-          <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+          <!-- Formulaire Ajout de Cadeau avec Librairie d'Icônes -->
+          <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 14px; padding: 18px; margin-bottom: 22px;">
             <div style="font-weight: 800; font-size: 1.05rem; margin-bottom: 12px; color: var(--ink);">➕ Ajouter un nouveau cadeau personnalisé :</div>
             
             <div class="memo-input-row">
               <input type="text" id="newRewardTitle" class="memo-input" placeholder="Nom du cadeau (ex: Sortie Bowling, Soirée burger...)" style="flex: 2;">
               <input type="number" id="newRewardCost" class="memo-input" placeholder="Coût en ⭐ (ex: 400)" style="flex: 1; min-width: 120px;" min="10" step="10">
-              <input type="text" id="newRewardIcon" class="memo-input" placeholder="Emoji (ex: 🎳, 🍔, 🎁)" style="width: 90px; text-align: center;" maxlength="4" value="🎁">
+              
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <span id="newRewardIconPreview" style="font-size: 1.5rem; background: var(--bd-yellow-light); border: 2px solid var(--ink); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 1.5px 1.5px 0 var(--ink);">🎁</span>
+                <input type="text" id="newRewardIcon" class="memo-input" placeholder="Emoji" style="width: 70px; text-align: center;" maxlength="6" value="🎁" oninput="updateNewRewardIconPreview(this.value)">
+              </div>
             </div>
             
             <input type="text" id="newRewardDesc" class="memo-input" placeholder="Description courte (ex: Une partie de bowling avec toute la famille le week-end !)" style="width: 100%; margin-bottom: 12px;">
 
+            <!-- Galerie d'icônes intégrée -->
+            <div style="margin-bottom: 14px;">
+              <div style="font-size: 0.85rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🎨 Librairie d'icônes à thème : <em style="font-weight: 600; color: var(--ink-light);">(Clique pour sélectionner une icône)</em></span>
+              </div>
+              <div class="icon-picker-box">
+                <div class="icon-cat-chips" id="newIconCatChips"></div>
+                <div class="icon-picker-grid" id="newIconGrid"></div>
+              </div>
+            </div>
+
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
-              <button class="action-btn" onclick="addParentCustomReward()" style="padding: 9px 18px; font-size: 0.92rem;">
+              <button class="action-btn" onclick="addParentCustomReward()" style="padding: 9px 20px; font-size: 0.95rem;">
                 💾 Enregistrer ce cadeau
               </button>
             </div>
@@ -5127,6 +5268,9 @@ Format JSON attendu :
             awardedCountEl.innerText = `${count} question(s) mémorisée(s)`;
           }
 
+          // Initialiser le sélecteur d'icônes d'ajout de cadeau
+          renderIconPicker('newIconGrid', 'newIconCatChips', currentNewIconCategory, document.getElementById('newRewardIcon')?.value || '🎁', 'handleNew');
+
           renderParentRewardsTable();
         } else {
           lockCard.style.display = 'block';
@@ -5154,7 +5298,7 @@ Format JSON attendu :
           </td>
           <td style="text-align: center;">
             <div style="display: flex; gap: 6px; justify-content: center;">
-              <button class="sticky-icon-btn" onclick="editParentReward('${r.id}')" title="Modifier le titre, prix ou description" style="background: #eff6ff; border-color: var(--bd-blue);">✏️</button>
+              <button class="sticky-icon-btn" onclick="openEditRewardModal('${r.id}')" title="Modifier le titre, icône ou description" style="background: #eff6ff; border-color: var(--bd-blue);">✏️</button>
               <button class="sticky-icon-btn" onclick="deleteParentReward('${r.id}')" title="Supprimer ce cadeau" style="background: #fee2e2; border-color: var(--bd-red);">🗑️</button>
             </div>
           </td>
@@ -5162,34 +5306,145 @@ Format JSON attendu :
       `).join('');
     }
 
-    function editParentReward(id) {
+    // =========================================================================
+    // BOUTIQUE ICON LIBRARY (BIBLIOTHÈQUE D'ICÔNES CADEAUX)
+    // =========================================================================
+    const ICON_CATEGORIES = {
+      all: {
+        label: "🌟 Tout",
+        icons: ["🎁", "🎮", "🍦", "🍕", "🎬", "📚", "🎡", "🍔", "🍿", "🍩", "🧁", "🍫", "🍟", "🥞", "🧇", "🍪", "🍨", "🍓", "🕹️", "📱", "💻", "📺", "🎲", "🧩", "🛹", "🛼", "⚽", "🏀", "🎾", "🚲", "🏹", "🎟️", "🎪", "🏊‍♀️", "🎳", "🧗‍♀️", "🐴", "🏕️", "🎨", "🎭", "🦁", "🧸", "📖", "🛍️", "👑", "💎", "🪄", "🌟", "🏆", "✈️", "🏖️", "🚀"]
+      },
+      games: {
+        label: "🎮 Jeux & Écrans",
+        icons: ["🎮", "🕹️", "📱", "💻", "📺", "🎲", "🧩", "♟️", "🛹", "🛼", "⚽", "🏀", "🎾", "🚲", "🏹", "🏆", "🎯", "🏓"]
+      },
+      food: {
+        label: "🍕 Gourmandises & Repas",
+        icons: ["🍦", "🍨", "🍕", "🍔", "🍟", "🥞", "🧇", "🍩", "🍫", "🍿", "🧁", "🍪", "🧃", "🍓", "🥪", "🍭", "🎂", "🥤"]
+      },
+      trips: {
+        label: "🎡 Sorties & Aventures",
+        icons: ["🎡", "🎢", "🎬", "🎟️", "🎪", "🏊‍♀️", "🎳", "🧗‍♀️", "🐴", "🏕️", "🎨", "🎭", "🦁", "🐬", "🏖️", "🚀", "🎠", "⛺"]
+      },
+      gifts: {
+        label: "📚 Livres, Jouets & Privilèges",
+        icons: ["🎁", "📚", "📖", "🧸", "🛍️", "✏️", "👑", "💎", "🪄", "🌟", "🛌", "🎶", "👗", "🐕", "🐱", "🎧", "👛", "🥇"]
+      }
+    };
+
+    let currentNewIconCategory = 'all';
+    let currentEditIconCategory = 'all';
+
+    function renderIconPicker(gridId, chipsId, activeCat, currentSelectedIcon, callbackPrefix) {
+      const chipsContainer = document.getElementById(chipsId);
+      const gridContainer = document.getElementById(gridId);
+      if (!chipsContainer || !gridContainer) return;
+
+      // Render category chips
+      chipsContainer.innerHTML = Object.entries(ICON_CATEGORIES).map(([catKey, catData]) => `
+        <button type="button" class="icon-cat-chip ${catKey === activeCat ? 'active' : ''}" onclick="${callbackPrefix}Category('${catKey}')">
+          ${catData.label}
+        </button>
+      `).join('');
+
+      // Render icons grid
+      const iconsList = ICON_CATEGORIES[activeCat]?.icons || ICON_CATEGORIES.all.icons;
+      gridContainer.innerHTML = iconsList.map(icon => `
+        <button type="button" class="icon-opt-btn ${icon === currentSelectedIcon ? 'selected' : ''}" onclick="${callbackPrefix}Icon('${icon}')" title="${icon}">
+          ${icon}
+        </button>
+      `).join('');
+    }
+
+    function handleNewCategory(catKey) {
+      currentNewIconCategory = catKey;
+      const curr = document.getElementById('newRewardIcon')?.value || '🎁';
+      renderIconPicker('newIconGrid', 'newIconCatChips', currentNewIconCategory, curr, 'handleNew');
+    }
+
+    function handleNewIcon(icon) {
+      const inp = document.getElementById('newRewardIcon');
+      if (inp) inp.value = icon;
+      updateNewRewardIconPreview(icon);
+      renderIconPicker('newIconGrid', 'newIconCatChips', currentNewIconCategory, icon, 'handleNew');
+      playSound('correct');
+    }
+
+    function updateNewRewardIconPreview(icon) {
+      const prev = document.getElementById('newRewardIconPreview');
+      if (prev) prev.innerText = icon || '🎁';
+    }
+
+    function openEditRewardModal(id) {
       const catalog = getRewardsCatalog();
       const r = catalog.find(x => x.id === id);
       if (!r) return;
-      
-      const newTitle = prompt("Modifier le nom du cadeau :", r.title);
-      if (newTitle === null) return;
-      
-      const newCostStr = prompt("Modifier le coût en ⭐ :", r.cost);
-      if (newCostStr === null) return;
-      const newCost = parseInt(newCostStr, 10);
-      if (isNaN(newCost) || newCost <= 0) {
-        alert("⚠️ Le coût doit être un nombre supérieur à 0 !");
+
+      document.getElementById('editRewardId').value = r.id;
+      document.getElementById('editRewardTitle').value = r.title || '';
+      document.getElementById('editRewardCost').value = r.cost || 100;
+      document.getElementById('editRewardDesc').value = r.desc || '';
+      document.getElementById('editRewardIconInput').value = r.icon || '🎁';
+      updateEditIconPreview(r.icon || '🎁');
+
+      currentEditIconCategory = 'all';
+      renderIconPicker('editIconGrid', 'editIconCatChips', currentEditIconCategory, r.icon || '🎁', 'handleEdit');
+
+      const modal = document.getElementById('editRewardModal');
+      if (modal) modal.style.display = 'flex';
+      playSound('correct');
+    }
+
+    function closeEditRewardModal() {
+      const modal = document.getElementById('editRewardModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function handleEditCategory(catKey) {
+      currentEditIconCategory = catKey;
+      const curr = document.getElementById('editRewardIconInput')?.value || '🎁';
+      renderIconPicker('editIconGrid', 'editIconCatChips', currentEditIconCategory, curr, 'handleEdit');
+    }
+
+    function handleEditIcon(icon) {
+      const inp = document.getElementById('editRewardIconInput');
+      if (inp) inp.value = icon;
+      updateEditIconPreview(icon);
+      renderIconPicker('editIconGrid', 'editIconCatChips', currentEditIconCategory, icon, 'handleEdit');
+      playSound('correct');
+    }
+
+    function updateEditIconPreview(icon) {
+      const prev = document.getElementById('editRewardIconPreview');
+      if (prev) prev.innerText = icon || '🎁';
+    }
+
+    function saveEditedReward() {
+      const id = document.getElementById('editRewardId')?.value;
+      const title = (document.getElementById('editRewardTitle')?.value || '').trim();
+      const cost = parseInt(document.getElementById('editRewardCost')?.value || '0', 10);
+      const desc = (document.getElementById('editRewardDesc')?.value || '').trim();
+      const icon = (document.getElementById('editRewardIconInput')?.value || '🎁').trim();
+
+      if (!title || isNaN(cost) || cost <= 0) {
+        alert("⚠️ Veuillez renseigner un titre et un coût en étoiles (supérieur à 0) !");
         return;
       }
-      
-      const newDesc = prompt("Modifier la description :", r.desc || "");
-      if (newDesc === null) return;
 
-      r.title = newTitle.trim() || r.title;
-      r.cost = newCost;
-      r.desc = newDesc.trim();
-
-      saveRewardsCatalog(catalog);
-      renderParentRewardsTable();
-      renderShopRewards();
-      playSound('win');
-      alert("✅ Cadeau mis à jour avec succès !");
+      const catalog = getRewardsCatalog();
+      const r = catalog.find(x => x.id === id);
+      if (r) {
+        r.title = title;
+        r.cost = cost;
+        r.desc = desc;
+        r.icon = icon || '🎁';
+        saveRewardsCatalog(catalog);
+        renderParentRewardsTable();
+        renderShopRewards();
+        closeEditRewardModal();
+        playSound('win');
+        alert("✅ Cadeau mis à jour avec succès !");
+      }
     }
 
     function addParentCustomReward() {
@@ -5514,6 +5769,7 @@ Format JSON attendu :
     renderMemos();
     initScratchpad();
     renderShopRewards();
+    renderIconPicker('newIconGrid', 'newIconCatChips', 'all', '🎁', 'handleNew');
     renderParentArea();
     updateSyncStatsDisplay();
 
