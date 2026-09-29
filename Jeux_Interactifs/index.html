@@ -2767,20 +2767,82 @@
             </div>
           </div>
 
-          <!-- Bonus d'étoiles rapide -->
-          <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 14px; padding: 16px; margin-bottom: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-              <div>
-                <div style="font-weight: 800; color: var(--bd-green); font-size: 1rem;">🌟 Donner des étoiles bonus à l'enfant :</div>
-                <div style="font-size: 0.85rem; color: var(--ink-light);">Pour une bonne note à l'école, un devoir soigné, la lecture d'un livre ou un coup de main !</div>
+          <!-- Section 1 : Modification et Gestion des Points / Étoiles -->
+          <div style="background: #fffbeb; border: 2.5px solid var(--bd-yellow-dark); border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+              <div style="font-weight: 800; font-size: 1.15rem; color: #92400e; display: flex; align-items: center; gap: 8px;">
+                ⭐ Gestion du Solde & Valeur des Points
               </div>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <button class="action-btn" onclick="giveParentBonusStars(15)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+15 ⭐</button>
-                <button class="action-btn" onclick="giveParentBonusStars(30)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+30 ⭐</button>
-                <button class="action-btn" onclick="giveParentBonusStars(50)" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-green);">+50 ⭐</button>
-                <button class="action-btn" onclick="giveParentCustomBonus()" style="padding: 6px 12px; font-size: 0.85rem; background: var(--bd-blue);">Montant libre...</button>
-              </div>
+              <span style="font-size: 0.82rem; color: var(--ink-light); background: #ffffff; padding: 3px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 700;">
+                ⚡ Enregistrement instantané
+              </span>
             </div>
+
+            <!-- Grille des 2 compteurs : Tirelire et Score Total -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px;">
+              
+              <!-- Compteur Tirelire Boutique -->
+              <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 16px; box-shadow: 0 2px 0 var(--ink);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <strong style="color: var(--ink); font-size: 0.95rem;">🪙 Tirelire Boutique (Étoiles à dépenser)</strong>
+                  <span id="parentWalletBadge" style="font-weight: 900; color: #b45309; font-size: 1.25rem;">0 ⭐</span>
+                </div>
+                
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                  <input type="number" id="parentWalletInput" min="0" step="5" class="memo-input" style="font-weight: 800; font-size: 1.1rem; text-align: center; color: #b45309; flex: 1;" placeholder="Montant ⭐">
+                  <button class="action-btn" onclick="saveParentWalletDirect()" style="padding: 8px 14px; font-size: 0.88rem;">💾 Définir</button>
+                </div>
+                
+                <!-- Ajustements rapides -->
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;">
+                  <button class="doc-link-btn" onclick="adjustParentStars(10)" style="padding: 4px 8px; font-size: 0.8rem; background: #f0fdf4; border-color: var(--bd-green); color: var(--bd-green);" title="Ajouter 10 étoiles">+10 ⭐</button>
+                  <button class="doc-link-btn" onclick="adjustParentStars(25)" style="padding: 4px 8px; font-size: 0.8rem; background: #f0fdf4; border-color: var(--bd-green); color: var(--bd-green);" title="Ajouter 25 étoiles">+25 ⭐</button>
+                  <button class="doc-link-btn" onclick="adjustParentStars(50)" style="padding: 4px 8px; font-size: 0.8rem; background: #f0fdf4; border-color: var(--bd-green); color: var(--bd-green);" title="Ajouter 50 étoiles">+50 ⭐</button>
+                  <button class="doc-link-btn" onclick="adjustParentStars(100)" style="padding: 4px 8px; font-size: 0.8rem; background: #f0fdf4; border-color: var(--bd-green); color: var(--bd-green);" title="Ajouter 100 étoiles">+100 ⭐</button>
+                  <button class="doc-link-btn" onclick="adjustParentStars(-10)" style="padding: 4px 8px; font-size: 0.8rem; background: #fef2f2; border-color: var(--bd-red); color: var(--bd-red);" title="Retirer 10 étoiles">-10 ⭐</button>
+                  <button class="doc-link-btn" onclick="adjustParentStars(-50)" style="padding: 4px 8px; font-size: 0.8rem; background: #fef2f2; border-color: var(--bd-red); color: var(--bd-red);" title="Retirer 50 étoiles">-50 ⭐</button>
+                  <button class="doc-link-btn" onclick="giveParentCustomBonus()" style="padding: 4px 8px; font-size: 0.8rem; background: #eff6ff; border-color: var(--bd-blue); color: var(--bd-blue-dark);" title="Montant sur-mesure">✏️ Libre</button>
+                </div>
+
+                <button class="doc-link-btn" onclick="resetParentWalletToZero()" style="width: 100%; justify-content: center; font-size: 0.84rem; border-color: var(--bd-red); color: var(--bd-red); background: #fff1f2;">
+                  🗑️ Vider la tirelire (Remettre à 0 ⭐)
+                </button>
+              </div>
+
+              <!-- Compteur Score Total Cumulé -->
+              <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 16px; box-shadow: 0 2px 0 var(--ink);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <strong style="color: var(--ink); font-size: 0.95rem;">🏆 Score Total (Badges & Progression)</strong>
+                  <span id="parentTotalBadge" style="font-weight: 900; color: var(--bd-blue-dark); font-size: 1.25rem;">0 ⭐</span>
+                </div>
+                
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                  <input type="number" id="parentTotalScoreInput" min="0" step="10" class="memo-input" style="font-weight: 800; font-size: 1.1rem; text-align: center; color: var(--bd-blue-dark); flex: 1;" placeholder="Score Total">
+                  <button class="action-btn" onclick="saveParentTotalScoreDirect()" style="padding: 8px 14px; font-size: 0.88rem; background: var(--bd-blue);">💾 Définir</button>
+                </div>
+                
+                <div style="font-size: 0.82rem; color: var(--ink-light); margin-bottom: 14px; line-height: 1.4;">
+                  Ce score enregistre la progression globale de l'élève pour le déblocage des 8 badges de bravoure.
+                </div>
+
+                <button class="doc-link-btn" onclick="resetParentAllScoresToZero()" style="width: 100%; justify-content: center; font-size: 0.84rem; border-color: var(--bd-red); color: var(--bd-red); background: #fff1f2;">
+                  🔄 Remettre TOUT le score à zéro (Tirelire + Total = 0)
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Historique Anti-Triche & Remise à zéro des exercices -->
+            <div style="background: #ffffff; border: 1.5px dashed var(--ink); border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <strong style="font-size: 0.92rem; color: var(--ink);">🛡️ Historique Anti-Triche des Questions :</strong>
+                <span id="parentAwardedCount" style="font-size: 0.86rem; color: var(--ink-light); margin-left: 6px; font-weight: 700;">0 question(s) mémorisée(s)</span>
+              </div>
+              <button class="doc-link-btn" onclick="clearParentQuestionRegistry()" style="font-size: 0.82rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;">
+                🧹 Réinitialiser l'historique (Autoriser à regagner des points)
+              </button>
+            </div>
+
           </div>
 
           <!-- Formulaire Ajout de Cadeau -->
@@ -2811,14 +2873,14 @@
               <tr>
                 <th style="width: 50px;">Icône</th>
                 <th>Titre & Description</th>
-                <th style="width: 130px;">Prix ⭐ (Modifiable)</th>
-                <th style="width: 90px; text-align: center;">Action</th>
+                <th style="width: 140px;">Prix ⭐ (Modifiable)</th>
+                <th style="width: 110px; text-align: center;">Actions</th>
               </tr>
             </thead>
             <tbody id="parentRewardsTableBody"></tbody>
           </table>
 
-          <div style="margin-top: 14px; display: flex; justify-content: flex-end;">
+          <div style="margin-top: 14px; display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
             <button class="doc-link-btn" onclick="resetDefaultRewardsCatalog()" style="border-color: var(--bd-red); color: var(--bd-red);">
               🔄 Rétablir les cadeaux par défaut
             </button>
@@ -4919,16 +4981,110 @@ Format JSON attendu :
       alert("✅ Nouveau Code PIN Parent enregistré avec succès !");
     }
 
+    function saveParentWalletDirect() {
+      const inp = document.getElementById('parentWalletInput');
+      const val = parseInt(inp?.value || '0', 10);
+      if (isNaN(val) || val < 0) {
+        alert("⚠️ Veuillez entrer un montant d'étoiles valide (0 ou plus) !");
+        return;
+      }
+      walletStars = val;
+      try {
+        localStorage.setItem('cm2_wallet_stars', walletStars);
+      } catch (e) {}
+      updateRewardsDisplays();
+      renderParentArea();
+      renderShopRewards();
+      playSound('win');
+      alert(`✅ Tirelire mise à jour : l'enfant a maintenant ${walletStars} ⭐ à dépenser !`);
+    }
+
+    function saveParentTotalScoreDirect() {
+      const inp = document.getElementById('parentTotalScoreInput');
+      const val = parseInt(inp?.value || '0', 10);
+      if (isNaN(val) || val < 0) {
+        alert("⚠️ Veuillez entrer un score valide (0 ou plus) !");
+        return;
+      }
+      totalScore = val;
+      try {
+        localStorage.setItem('cm2_total_score', totalScore);
+      } catch (e) {}
+      updateRewardsDisplays();
+      checkBadges();
+      renderParentArea();
+      playSound('win');
+      alert(`✅ Score Total mis à jour : ${totalScore} ⭐ (Badges recalculés) !`);
+    }
+
+    function adjustParentStars(delta) {
+      walletStars = Math.max(0, walletStars + delta);
+      if (delta > 0) {
+        totalScore += delta;
+      }
+      try {
+        localStorage.setItem('cm2_wallet_stars', walletStars);
+        localStorage.setItem('cm2_total_score', totalScore);
+      } catch (e) {}
+      updateRewardsDisplays();
+      checkBadges();
+      renderParentArea();
+      renderShopRewards();
+      if (delta > 0) playSound('win');
+      else playSound('correct');
+      alert(`✅ Solde mis à jour : ${delta > 0 ? '+' : ''}${delta} ⭐ (Nouveau solde tirelire : ${walletStars} ⭐)`);
+    }
+
+    function resetParentWalletToZero() {
+      if (!confirm("Voulez-vous vraiment vider la tirelire de l'enfant (remettre à 0 ⭐) ?\n\n(Le score total cumulé et les badges d'honneur seront conservés).")) return;
+      walletStars = 0;
+      try {
+        localStorage.setItem('cm2_wallet_stars', 0);
+      } catch (e) {}
+      updateRewardsDisplays();
+      renderParentArea();
+      renderShopRewards();
+      playSound('wrong');
+      alert("✅ La tirelire a été remise à 0 ⭐.");
+    }
+
+    function resetParentAllScoresToZero() {
+      if (!confirm("⚠️ ATTENTION : Voulez-vous vraiment remettre TOUT le score de l'enfant à 0 ⭐ ?\n\nCela remettra à zéro la tirelire boutique, le score cumulé total et les badges débloqués.")) return;
+      walletStars = 0;
+      totalScore = 0;
+      currentStreak = 0;
+      try {
+        localStorage.setItem('cm2_wallet_stars', 0);
+        localStorage.setItem('cm2_total_score', 0);
+      } catch (e) {}
+      updateRewardsDisplays();
+      resetStreak();
+      checkBadges();
+      renderParentArea();
+      renderShopRewards();
+      playSound('wrong');
+      alert("✅ Tous les scores et étoiles ont été réinitialisés à 0 ⭐.");
+    }
+
+    function clearParentQuestionRegistry() {
+      const awarded = getAwardedQuestions();
+      const count = Object.keys(awarded).length;
+      if (!confirm(`Voulez-vous effacer l'historique des ${count} question(s) réussie(s) ?\n\nL'enfant pourra à nouveau gagner des étoiles en refaisant les exercices déjà résolus.`)) return;
+      saveAwardedQuestions({});
+      renderParentArea();
+      playSound('win');
+      alert("✅ Historique anti-triche réinitialisé ! L'enfant peut à nouveau obtenir des étoiles sur toutes les questions.");
+    }
+
     function giveParentCustomBonus() {
-      const amountStr = prompt("Combien d'étoiles souhaitez-vous accorder (ou retirer avec le signe -) ?", "50");
+      const amountStr = prompt("Combien d'étoiles souhaitez-vous ajouter (ex: 50) ou retirer (ex: -20) ?", "50");
       if (!amountStr) return;
       const amount = parseInt(amountStr, 10);
       if (isNaN(amount)) {
         alert("⚠️ Montant invalide.");
         return;
       }
-      addScore(amount);
-      alert(`✅ Solde mis à jour : ${amount > 0 ? '+' : ''}${amount} ⭐ accordées !`);
+      adjustParentStars(amount);
     }
 
     function updateParentRewardPrice(id, newCost) {
@@ -4953,6 +5109,24 @@ Format JSON attendu :
         if (isAuth) {
           lockCard.style.display = 'none';
           dashCard.style.display = 'block';
+
+          // Update Points inputs & badges
+          const walletBadge = document.getElementById('parentWalletBadge');
+          const walletInput = document.getElementById('parentWalletInput');
+          if (walletBadge) walletBadge.innerText = walletStars + ' ⭐';
+          if (walletInput) walletInput.value = walletStars;
+
+          const totalBadge = document.getElementById('parentTotalBadge');
+          const totalInput = document.getElementById('parentTotalScoreInput');
+          if (totalBadge) totalBadge.innerText = totalScore + ' ⭐';
+          if (totalInput) totalInput.value = totalScore;
+
+          const awardedCountEl = document.getElementById('parentAwardedCount');
+          if (awardedCountEl) {
+            const count = Object.keys(getAwardedQuestions()).length;
+            awardedCountEl.innerText = `${count} question(s) mémorisée(s)`;
+          }
+
           renderParentRewardsTable();
         } else {
           lockCard.style.display = 'block';
@@ -4979,10 +5153,43 @@ Format JSON attendu :
             <input type="number" value="${r.cost}" min="10" step="10" onchange="updateParentRewardPrice('${r.id}', this.value)" style="width: 80px; padding: 4px 6px; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 8px; text-align: center; color: #b45309;"> ⭐
           </td>
           <td style="text-align: center;">
-            <button class="sticky-icon-btn" onclick="deleteParentReward('${r.id}')" title="Supprimer ce cadeau" style="margin: 0 auto; background: #fee2e2; border-color: var(--bd-red);">🗑️</button>
+            <div style="display: flex; gap: 6px; justify-content: center;">
+              <button class="sticky-icon-btn" onclick="editParentReward('${r.id}')" title="Modifier le titre, prix ou description" style="background: #eff6ff; border-color: var(--bd-blue);">✏️</button>
+              <button class="sticky-icon-btn" onclick="deleteParentReward('${r.id}')" title="Supprimer ce cadeau" style="background: #fee2e2; border-color: var(--bd-red);">🗑️</button>
+            </div>
           </td>
         </tr>
       `).join('');
+    }
+
+    function editParentReward(id) {
+      const catalog = getRewardsCatalog();
+      const r = catalog.find(x => x.id === id);
+      if (!r) return;
+      
+      const newTitle = prompt("Modifier le nom du cadeau :", r.title);
+      if (newTitle === null) return;
+      
+      const newCostStr = prompt("Modifier le coût en ⭐ :", r.cost);
+      if (newCostStr === null) return;
+      const newCost = parseInt(newCostStr, 10);
+      if (isNaN(newCost) || newCost <= 0) {
+        alert("⚠️ Le coût doit être un nombre supérieur à 0 !");
+        return;
+      }
+      
+      const newDesc = prompt("Modifier la description :", r.desc || "");
+      if (newDesc === null) return;
+
+      r.title = newTitle.trim() || r.title;
+      r.cost = newCost;
+      r.desc = newDesc.trim();
+
+      saveRewardsCatalog(catalog);
+      renderParentRewardsTable();
+      renderShopRewards();
+      playSound('win');
+      alert("✅ Cadeau mis à jour avec succès !");
     }
 
     function addParentCustomReward() {
@@ -5033,8 +5240,7 @@ Format JSON attendu :
     }
 
     function giveParentBonusStars(amount) {
-      addScore(amount);
-      alert(`🎉 +${amount} ⭐ étoiles bonus accordées avec succès !`);
+      adjustParentStars(amount);
     }
 
     function resetDefaultRewardsCatalog() {
