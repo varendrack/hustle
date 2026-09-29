@@ -145,6 +145,8 @@
       font-weight: 600;
       display: none;
     }
+
+    .stats-bar {
       display: flex;
       gap: 16px;
       margin-bottom: 18px;
@@ -737,6 +739,214 @@
       z-index: 999;
     }
 
+    /* AI & Dynamic Features */
+    .ai-btn-top {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 10px rgba(168, 85, 247, 0.4);
+    }
+    .ai-btn-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.6);
+    }
+    .ai-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(15px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .ai-modal-card {
+      background: #1e1b4b;
+      border: 2px solid var(--accent-pink);
+      border-radius: 22px;
+      padding: 26px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 0 40px rgba(236, 72, 153, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+    .ai-config-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      color: white;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      outline: none;
+    }
+    .ai-config-input:focus {
+      border-color: var(--accent-pink);
+    }
+
+    /* Math Problem Solver Component */
+    .problem-box {
+      background: rgba(30, 27, 75, 0.6);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 18px;
+      padding: 22px;
+      width: 100%;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .problem-theme-badge {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.25);
+      color: #c084fc;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .problem-statement {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #f8fafc;
+      margin-bottom: 16px;
+    }
+    .problem-steps-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+    .problem-step-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      transition: all 0.2s;
+    }
+    .problem-step-card.active {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 16px rgba(6, 182, 212, 0.25);
+    }
+    .problem-step-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .step-badge {
+      background: var(--accent-cyan);
+      color: #0f172a;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    .hint-box {
+      background: rgba(245, 158, 11, 0.12);
+      border-left: 3px solid var(--accent-amber);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #fde68a;
+      margin-top: 8px;
+      display: none;
+      animation: fadeIn 0.2s;
+    }
+    .problem-op-selector {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .op-chip-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #f8fafc;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .op-chip-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    .op-chip-btn.selected {
+      background: var(--primary);
+      border-color: #a855f7;
+      color: #fff;
+    }
+
+    /* Speed Math Modes */
+    .mode-select-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+    .mode-card-btn {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mode-card-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    .mode-card-btn.active {
+      border-color: var(--accent-pink);
+      background: rgba(236, 72, 153, 0.15);
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+    }
+    .mode-card-btn .m-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+    .mode-card-btn .m-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* AI Loading Spinner */
+    .ai-spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      border-top-color: #ec4899;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     @media (max-width: 650px) {
       h1 { font-size: 1.8rem; }
       main { padding: 16px; }
@@ -769,10 +979,66 @@
     </div>
   </div>
 
+  <!-- Modale Configuration & Générateur Gemini AI -->
+  <div id="aiModal" class="ai-modal-overlay">
+    <div class="ai-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: #fff; display: flex; align-items: center; gap: 8px;">
+          ✨ Générateur Intelligent Gemini IA
+        </h3>
+        <button onclick="toggleAiModal()" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+      
+      <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">
+        Génère à l'infini de nouveaux exercices et problèmes CM2 sur mesure grâce à l'IA de Google (Gratuit).
+      </p>
+
+      <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 12px; border: 1px solid var(--card-border);">
+        <label style="display: block; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 700; margin-bottom: 6px;">
+          🔑 Ta Clé API Google Gemini (Gratuite) :
+        </label>
+        <input type="password" id="geminiApiKey" class="ai-config-input" placeholder="Colle ta clé API Google AI Studio ici (AIzaSy...)" autocomplete="off">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent-pink); font-size: 0.8rem; text-decoration: underline;">
+            👉 Obtenir une clé gratuite sur Google AI Studio
+          </a>
+          <button onclick="saveApiKey()" class="action-btn" style="padding: 6px 12px; font-size: 0.82rem;">💾 Enregistrer</button>
+        </div>
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 0.88rem; color: #fff; font-weight: 700; margin-bottom: 6px;">
+          📚 Matière & Thème à générer :
+        </label>
+        <select id="aiSubjectSelect" class="ai-config-input" style="background: #111827; cursor: pointer;">
+          <option value="problemes_maths">🔢 Problèmes Mathématiques Pas à Pas (CM2)</option>
+          <option value="calcul_mental">⚡ Calcul Mental & Stratégies Express</option>
+          <option value="francais_homophones">🎯 Français : Homophones & Accords</option>
+          <option value="francais_conjugaison">✍️ Français : Conjugaison du Présent</option>
+          <option value="histoire_cm2">🏛️ Histoire : Préhistoire & Périodes</option>
+          <option value="sciences_materiaux">🔬 Sciences : Matériaux & Tour Eiffel</option>
+        </select>
+      </div>
+
+      <button id="aiGenerateBtn" class="action-btn" style="width: 100%; padding: 12px; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="generateAiExercises()">
+        <span>🚀 Créer 5 nouveaux exercices instantanément</span>
+      </button>
+
+      <div id="aiLoadingStatus" style="display: none; text-align: center; color: var(--accent-cyan); font-size: 0.95rem; font-weight: 600;">
+        <span class="ai-spinner" style="vertical-align: middle; margin-right: 8px;"></span>
+        Gemini prépare les exercices... Un instant !
+      </div>
+      <div id="aiSuccessFeedback" class="feedback-banner"></div>
+    </div>
+  </div>
+
   <header>
-    <div class="badge-top">⭐ Programme Padlet & Vidéothèque CM2</div>
+    <div class="badge-top">
+      ⭐ Programme Padlet & Vidéothèque CM2
+      <button class="ai-btn-top" onclick="toggleAiModal()">✨ Assistant Gemini IA</button>
+    </div>
     <h1>🌟 L'Académie des Champions CM2</h1>
-    <p class="subtitle">Cours, Vidéos YouTube du Padlet & Quiz d'Entraînement complets</p>
+    <p class="subtitle">Cours, Vidéos YouTube du Padlet & Entraînement Dynamique complet</p>
   </header>
 
   <div class="stats-bar">
@@ -856,48 +1122,94 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- 2. MATHÉMATIQUES -->
+    <!-- 2. MATHÉMATIQUES (OPTIMISÉ : PROBLÈMES & CALCUL RAPIDE) -->
     <!-- ========================================================= -->
     <section id="subject-maths" class="subject-section">
       <div class="hero-banner">
         <img src="images/math_hero.jpg" alt="Mathématiques CM2 Super-Héros">
         <div class="hero-banner-overlay">
-          <div class="hero-title">🔢 Espace Mathématiques & Vitesse</div>
-          <div class="hero-tag">Calcul Mental & Opérations</div>
+          <div class="hero-title">🔢 Espace Mathématiques : Problèmes & Calcul Rapide</div>
+          <div class="hero-tag">Méthode 3 Étapes & Stratégies Express</div>
         </div>
       </div>
 
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'chrono')">⚡ Chrono-Calcul Mental (45s)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + 8 Défis)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'problemes')">🧠 Résolution de Problèmes (Pas à Pas)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'chrono')">⚡ Calcul Rapide & Stratégies</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + Quiz)</button>
       </div>
 
-      <!-- Maths Sub 1: Chrono -->
-      <div id="sub-maths-chrono" class="submodule-content active">
+      <!-- Maths Sub 1: Résolution de Problèmes Pas à Pas -->
+      <div id="sub-maths-problemes" class="submodule-content active">
+        <div class="rule-box" style="background: rgba(168, 85, 247, 0.15); border-color: var(--primary);">
+          🧭 <strong>La Méthode d'Or en 3 Étapes pour réussir TOUS les Problèmes :</strong><br>
+          <strong>1. Comprendre :</strong> Que cherche-t-on ? Quelles sont les données utiles ?<br>
+          <strong>2. Choisir l'Opération :</strong> Ajouter (+), Enlever/Écart (-), Répéter (×), Partager (÷) ?<br>
+          <strong>3. Calculer & Répondre :</strong> Pose le calcul avec précision et formule la phrase avec l'unité (€, kg, cm...).
+        </div>
+
+        <!-- Conteneur Dynamique des Problèmes -->
+        <div id="problem-solver-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Maths Sub 2: Calcul Rapide & Stratégies Paramétrables -->
+      <div id="sub-maths-chrono" class="submodule-content">
         <div id="calc-start-view" style="text-align: center; width: 100%;">
           <div class="rule-box">
-            🎯 <strong>Objectif Vitesse :</strong> Multiplications (tables 6, 7, 8, 9), compléments à 100 et additions express.<br>
-            💡 <em>Enchaîne un maximum de calculs pendant 45 secondes sans interruption !</em>
+            🎯 <strong>Choisis ton entraînement ciblé de Calcul Rapide :</strong><br>
+            💡 <em>Sélectionne une stratégie pour t'entraîner à ton rythme ou lance le Défi Chrono !</em>
           </div>
-          <button class="action-btn" onclick="startCalcGame()">🚀 Lancer le Chrono (45s)</button>
+
+          <!-- Choix du mode de calcul rapide -->
+          <div class="mode-select-grid">
+            <div class="mode-card-btn active" onclick="selectCalcMode('all', this)">
+              <div class="m-title">🔥 Défi Mix Complet</div>
+              <div class="m-desc">Multiplications, compléments à 100 et additions express</div>
+            </div>
+            <div class="mode-card-btn" onclick="selectCalcMode('tables', this)">
+              <div class="m-title">✖️ Tables Clés (6, 7, 8, 9, 12)</div>
+              <div class="m-desc">7×8, 6×9, 8×9... Les pièges classiques</div>
+            </div>
+            <div class="mode-card-btn" onclick="selectCalcMode('complements', this)">
+              <div class="m-title">💯 Compléments à 100 & 1000</div>
+              <div class="m-desc">100 - 37, 100 - 64, 1000 - 450...</div>
+            </div>
+            <div class="mode-card-btn" onclick="selectCalcMode('astuces', this)">
+              <div class="m-title">⚡ Astuces ×10, ×100, ×5, Doubles</div>
+              <div class="m-desc">Techniques ultra-rapides sans poser</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <button class="action-btn" onclick="startCalcGame(45)">⏱️ Sprint Chrono (45 secondes)</button>
+            <button class="action-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);" onclick="startCalcGame(0)">🧘 Entraînement Zen (Sans Chrono)</button>
+          </div>
         </div>
 
         <div id="calc-play-view" style="display: none; width: 100%; flex-direction: column; align-items: center;">
-          <div class="timer-container">
+          <div class="timer-container" id="calcTimerContainer">
             <div class="timer-bar" id="calcTimerBar"></div>
           </div>
-          <div style="font-size: 1.1rem; color: var(--accent-amber); font-weight: 700;" id="calcTimeLeft">Temps restant : 45s</div>
+          <div style="display: flex; justify-content: space-between; width: 100%; max-width: 450px; margin-bottom: 8px;">
+            <span style="font-size: 1.05rem; color: var(--accent-amber); font-weight: 700;" id="calcTimeLeft">Temps restant : 45s</span>
+            <span style="font-size: 0.95rem; color: var(--accent-cyan); font-weight: 700;" id="calcModeBadge">Mix Complet</span>
+          </div>
+
           <div class="calc-card" id="calcQuestion">7 × 8 = ?</div>
           
           <div class="calc-input-wrapper">
             <input type="number" id="calcAnswerInput" class="calc-input" placeholder="?" autocomplete="off">
             <button class="action-btn" style="padding: 10px 20px;" onclick="submitCalcAnswer()">Valider</button>
           </div>
+
+          <div id="calcHintText" style="color: var(--text-muted); font-size: 0.9rem; min-height: 24px; text-align: center;"></div>
           <div id="calcFeedback" class="feedback-banner"></div>
+
+          <button onclick="stopCalcGame()" style="background: transparent; border: 1px solid var(--card-border); color: var(--text-muted); padding: 6px 14px; border-radius: 10px; cursor: pointer; margin-top: 14px;">Quitter la session</button>
         </div>
       </div>
 
-      <!-- Maths Sub 2: Soustraction par cassage -->
+      <!-- Maths Sub 3: Soustraction par cassage -->
       <div id="sub-maths-soustraction" class="submodule-content">
         <div class="video-doc-card">
           <div class="video-doc-header">
@@ -1654,54 +1966,352 @@
     ];
 
     // =========================================================================
-    // CALCUL MENTAL
+    // MODULE PROBLÈMES MATHÉMATIQUES PAS À PAS (CM2)
+    // =========================================================================
+    const initialMathProblems = [
+      {
+        id: "prob_1",
+        title: "🛒 La Rentrée des Classes",
+        statement: "Pour la rentrée au CM2, la maîtresse achète <strong>6 paquets de 25 feutres</strong> pour la classe. Elle en distribue ensuite <strong>42</strong> aux élèves le premier jour. <strong>Combien de feutres lui reste-t-il dans la réserve ?</strong>",
+        steps: [
+          {
+            title: "Étape 1 : Comprendre & repérer les indices",
+            question: "Que cherchons-nous en tout premier pour résoudre ce problème ?",
+            options: ["Le nombre total de feutres achetés au départ", "Le nombre d'élèves dans la classe", "Le prix d'un feutre"],
+            correct: "Le nombre total de feutres achetés au départ",
+            hint: "Pour savoir ce qu'il reste après la distribution, il faut d'abord savoir combien de feutres elle avait au tout début !"
+          },
+          {
+            title: "Étape 2 : Le bon choix d'opération",
+            question: "Pour trouver le total des 6 paquets de 25 feutres, quelle opération fais-tu ?",
+            options: ["6 × 25 (Multiplication)", "25 - 6 (Soustraction)", "25 + 6 (Addition)", "25 ÷ 6 (Division)"],
+            correct: "6 × 25 (Multiplication)",
+            hint: "Il y a 6 paquets identiques de 25 feutres. C'est une quantité répétée ➡️ la multiplication !"
+          },
+          {
+            title: "Étape 3 : Le calcul final & la réponse",
+            question: "6 × 25 = 150 feutres au total. On en distribue 42. Quel est le résultat final (150 - 42) ?",
+            options: ["108 feutres", "112 feutres", "98 feutres", "118 feutres"],
+            correct: "108 feutres",
+            hint: "150 - 40 = 110, puis 110 - 2 = 108 feutres !"
+          }
+        ]
+      },
+      {
+        id: "prob_2",
+        title: "🏃‍♂️ La Course d'Endurance",
+        statement: "Le parcours de cross de l'école fait <strong>400 mètres</strong> par tour. Lucas a déjà effectué <strong>4 tours</strong> complets et souhaite parcourir <strong>2 500 mètres</strong> au total. <strong>Combien de mètres lui reste-t-il à courir ?</strong>",
+        steps: [
+          {
+            title: "Étape 1 : Comprendre la distance déjà parcourue",
+            question: "Lucas fait 4 tours de 400 m. Quelle distance a-t-il déjà courue ?",
+            options: ["1 600 mètres (4 × 400)", "800 mètres (400 + 4)", "2 000 mètres (400 × 5)"],
+            correct: "1 600 mètres (4 × 400)",
+            hint: "4 tours de 400 m ➡️ 4 × 4 = 16, donc 1 600 m !"
+          },
+          {
+            title: "Étape 2 : Choisir l'opération pour ce qu'il reste",
+            question: "Pour trouver la distance restante jusqu'à 2 500 m, que fais-tu ?",
+            options: ["2 500 - 1 600 (Soustraction)", "2 500 + 1 600 (Addition)", "2 500 ÷ 4 (Division)"],
+            correct: "2 500 - 1 600 (Soustraction)",
+            hint: "On cherche un écart / ce qui manque pour atteindre l'objectif ➡️ la soustraction !"
+          },
+          {
+            title: "Étape 3 : Calcul & Phrase réponse",
+            question: "Combien font 2 500 - 1 600 ?",
+            options: ["900 mètres", "800 mètres", "1 100 mètres", "950 mètres"],
+            correct: "900 mètres",
+            hint: "De 1 600 à 2 000 il y a 400 m, + 500 m jusqu'à 2 500 m = 900 m !"
+          }
+        ]
+      },
+      {
+        id: "prob_3",
+        title: "🍰 Les Gâteaux de la Kermesse",
+        statement: "Trois amis vendent des parts de gâteau à la kermesse à <strong>2 € la part</strong>. Ils ont préparé <strong>4 gâteaux de 8 parts chacun</strong>. À la fin de la journée, il ne reste que <strong>3 parts</strong>. <strong>Quelle somme totale ont-ils récoltée ?</strong>",
+        steps: [
+          {
+            title: "Étape 1 : Nombre de parts vendues",
+            question: "4 gâteaux de 8 parts = 32 parts. Il en reste 3. Combien de parts ont été vendues ?",
+            options: ["29 parts (32 - 3)", "35 parts (32 + 3)", "24 parts (3 × 8)"],
+            correct: "29 parts (32 - 3)",
+            hint: "Total préparé (32) - ce qui reste invendu (3) = 29 parts vendues !"
+          },
+          {
+            title: "Étape 2 : Calcul de la recette totale",
+            question: "Chaque part est vendue 2 €. Pour 29 parts, quelle somme ont-ils gagnée ?",
+            options: ["58 € (29 × 2)", "31 € (29 + 2)", "62 € (31 × 2)", "48 €"],
+            correct: "58 € (29 × 2)",
+            hint: "Le double de 29 : (20 × 2) + (9 × 2) = 40 + 18 = 58 € !"
+          },
+          {
+            title: "Étape 3 : Rédaction & Vérification",
+            question: "Quelle phrase réponse est la plus rigoureuse et complète ?",
+            options: ["Ils ont récolté la somme totale de 58 €.", "Ça fait 58.", "58 parts de gâteau."],
+            correct: "Ils ont récolté la somme totale de 58 €.",
+            hint: "Une réponse en CM2 comprend toujours une phrase complète et l'unité (€) !"
+          }
+        ]
+      },
+      {
+        id: "prob_4",
+        title: "📚 Le Roman d'Aventure",
+        statement: "Chloé lit un livre passionnant de <strong>180 pages</strong>. Elle lit <strong>15 pages chaque soir</strong> pendant <strong>8 jours consécutifs</strong>. <strong>Combien de pages lui reste-t-il à lire pour finir le livre ?</strong>",
+        steps: [
+          {
+            title: "Étape 1 : Pages lues en 8 soirs",
+            question: "Combien de pages Chloé a-t-elle déjà lues (15 pages × 8 soirs) ?",
+            options: ["120 pages", "100 pages", "140 pages", "115 pages"],
+            correct: "120 pages",
+            hint: "Astuce calcul rapide : 15 × 8 = (15 × 2) × 4 = 30 × 4 = 120 pages !"
+          },
+          {
+            title: "Étape 2 : Pages restantes",
+            question: "Le livre compte 180 pages. Quel calcul donne les pages restantes ?",
+            options: ["180 - 120 = 60 pages", "180 + 120 = 300 pages", "180 ÷ 8 = 22 pages"],
+            correct: "180 - 120 = 60 pages",
+            hint: "180 pages au total - 120 pages déjà lues = 60 pages !"
+          },
+          {
+            title: "Étape 3 : Conclusion",
+            question: "À ce rythme (15 pages/soir), en combien de soirs finira-t-elle les 60 pages restantes ?",
+            options: ["4 soirs (60 ÷ 15)", "3 soirs", "5 soirs", "6 soirs"],
+            correct: "4 soirs (60 ÷ 15)",
+            hint: "15 + 15 = 30 (2 soirs) donc 60 pages en 4 soirs !"
+          }
+        ]
+      }
+    ];
+
+    let currentProblemList = [...initialMathProblems];
+    let currentProblemIndex = 0;
+    let currentProblemStep = 0;
+
+    function renderProblemSolver() {
+      const container = document.getElementById('problem-solver-container');
+      if (!container) return;
+
+      if (currentProblemIndex >= currentProblemList.length) {
+        container.innerHTML = `
+          <div class="summary-card">
+            <div style="font-size: 2.8rem;">🧠🏆</div>
+            <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem;">Félicitations Championne !</h3>
+            <p style="color: #cbd5e1; font-size: 1.05rem;">Tu as résolu tous les problèmes avec succès et avec la méthode d'or !</p>
+            <div style="display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; justify-content: center;">
+              <button class="action-btn" onclick="currentProblemIndex = 0; currentProblemStep = 0; renderProblemSolver();">🔄 Rejouer ces problèmes</button>
+              <button class="action-btn" style="background: linear-gradient(135deg, #a855f7, #ec4899);" onclick="toggleAiModal(); document.getElementById('aiSubjectSelect').value='problemes_maths';">✨ Générer de nouveaux problèmes avec Gemini</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const p = currentProblemList[currentProblemIndex];
+      const step = p.steps[currentProblemStep];
+      const stepPct = Math.round(((currentProblemStep) / p.steps.length) * 100);
+
+      container.innerHTML = `
+        <div class="problem-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <span class="problem-theme-badge">${p.title} — Problème ${currentProblemIndex + 1} sur ${currentProblemList.length}</span>
+            <span style="font-size: 0.85rem; color: var(--accent-cyan); font-weight: 700;">Étape ${currentProblemStep + 1} / ${p.steps.length}</span>
+          </div>
+
+          <div class="problem-statement">${p.statement}</div>
+
+          <div class="problem-step-card active">
+            <div class="problem-step-title">
+              <span>${step.title}</span>
+              <span class="step-badge">Question guidée</span>
+            </div>
+
+            <div style="font-size: 1.1rem; color: #fff; margin: 10px 0; font-weight: 600;">${step.question}</div>
+
+            <div class="options-grid" id="prob-opts-grid" style="max-width: 100%;"></div>
+
+            <div id="probFeedback" class="feedback-banner"></div>
+
+            <div id="probHintBox" class="hint-box">💡 <strong>Indice de méthode :</strong> ${step.hint}</div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 8px;">
+              <button onclick="document.getElementById('probHintBox').style.display = 'block';" style="background: rgba(245, 158, 11, 0.15); border: 1px solid var(--accent-amber); color: #fde68a; padding: 6px 14px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">💡 Voir un Indice</button>
+              <button id="probNextBtn" class="action-btn" style="display: none;">Étape suivante ➡️</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const optsGrid = document.getElementById('prob-opts-grid');
+      step.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => handleProblemStepAnswer(opt, btn, step);
+        optsGrid.appendChild(btn);
+      });
+
+      document.getElementById('probNextBtn').onclick = () => {
+        if (currentProblemStep + 1 < p.steps.length) {
+          currentProblemStep++;
+        } else {
+          currentProblemIndex++;
+          currentProblemStep = 0;
+        }
+        renderProblemSolver();
+      };
+    }
+
+    function handleProblemStepAnswer(selected, btn, step) {
+      const allBtns = document.querySelectorAll('#prob-opts-grid .opt-btn');
+      allBtns.forEach(b => b.disabled = true);
+      const fb = document.getElementById('probFeedback');
+      const nextBtn = document.getElementById('probNextBtn');
+
+      if (selected === step.correct) {
+        playSound('correct');
+        addScore(20);
+        btn.style.background = '#10b981';
+        btn.style.borderColor = '#10b981';
+        fb.className = 'feedback-banner correct';
+        fb.innerHTML = `🎉 <strong>Excellent raisonnement !</strong> ${step.hint}`;
+      } else {
+        playSound('wrong');
+        resetStreak();
+        btn.style.background = '#ef4444';
+        btn.style.borderColor = '#ef4444';
+        fb.className = 'feedback-banner wrong';
+        fb.innerHTML = `❌ Pas tout à fait. La bonne réponse était : <strong>${step.correct}</strong>.<br>💡 <em>${step.hint}</em>`;
+      }
+
+      nextBtn.style.display = 'inline-block';
+    }
+
+    // =========================================================================
+    // CALCUL RAPIDE & STRATÉGIES MULTI-MODES
     // =========================================================================
     let calcTimer = null;
     let calcTimeLeft = 45;
+    let calcTimeInitial = 45;
     let currentCalcAnswer = 0;
+    let currentCalcHint = "";
+    let selectedCalcMode = 'all';
 
-    function startCalcGame() {
+    function selectCalcMode(mode, element) {
+      selectedCalcMode = mode;
+      document.querySelectorAll('.mode-card-btn').forEach(b => b.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    function startCalcGame(seconds = 45) {
       document.getElementById('calc-start-view').style.display = 'none';
       document.getElementById('calc-play-view').style.display = 'flex';
-      calcTimeLeft = 45;
+      calcTimeInitial = seconds;
+      calcTimeLeft = seconds;
+
+      const modeNames = {
+        all: "🔥 Défi Mix Complet",
+        tables: "✖️ Tables Clés (6, 7, 8, 9, 12)",
+        complements: "💯 Compléments à 100 & 1000",
+        astuces: "⚡ Astuces Rapides"
+      };
+      document.getElementById('calcModeBadge').innerText = modeNames[selectedCalcMode] || "Entraînement";
+
+      const timerContainer = document.getElementById('calcTimerContainer');
+      const timeLeftSpan = document.getElementById('calcTimeLeft');
+
+      if (seconds > 0) {
+        timerContainer.style.display = 'block';
+        timeLeftSpan.innerText = `Temps restant : ${calcTimeLeft}s`;
+        clearInterval(calcTimer);
+        calcTimer = setInterval(() => {
+          calcTimeLeft--;
+          timeLeftSpan.innerText = `Temps restant : ${calcTimeLeft}s`;
+          document.getElementById('calcTimerBar').style.width = `${(calcTimeLeft / calcTimeInitial) * 100}%`;
+          if (calcTimeLeft <= 0) {
+            clearInterval(calcTimer);
+            playSound('win');
+            document.getElementById('calc-play-view').style.display = 'none';
+            document.getElementById('calc-start-view').style.display = 'block';
+            alert(`⏱️ Fin du chrono ! Tu as cumulé ${totalScore} points. Superbe session de calcul rapide !`);
+          }
+        }, 1000);
+      } else {
+        timerContainer.style.display = 'none';
+        timeLeftSpan.innerText = `Mode Zen (sans stress)`;
+      }
+
       nextCalcQuestion();
-      clearInterval(calcTimer);
-      calcTimer = setInterval(() => {
-        calcTimeLeft--;
-        document.getElementById('calcTimeLeft').innerText = `Temps restant : ${calcTimeLeft}s`;
-        document.getElementById('calcTimerBar').style.width = `${(calcTimeLeft / 45) * 100}%`;
-        if (calcTimeLeft <= 0) {
-          clearInterval(calcTimer);
-          playSound('win');
-          document.getElementById('calc-play-view').style.display = 'none';
-          document.getElementById('calc-start-view').style.display = 'block';
-          alert(`⏱️ Fin du chrono ! Tu as cumulé ${totalScore} points. Superbe session de calcul !`);
-        }
-      }, 1000);
+    }
+
+    function stopCalcGame() {
+      if (calcTimer) clearInterval(calcTimer);
+      document.getElementById('calc-play-view').style.display = 'none';
+      document.getElementById('calc-start-view').style.display = 'block';
     }
 
     function generateCalcul() {
-      const types = ['mult', 'mult', 'compl_100', 'add_retenue'];
-      const t = types[Math.floor(Math.random() * types.length)];
-      if (t === 'mult') {
-        const tables = [6, 7, 8, 9, 12];
+      let t = selectedCalcMode;
+      if (t === 'all') {
+        const types = ['tables', 'tables', 'complements', 'astuces', 'soustraction_rapide'];
+        t = types[Math.floor(Math.random() * types.length)];
+      }
+
+      if (t === 'tables') {
+        const tables = [6, 7, 8, 9, 12, 15];
         const n1 = tables[Math.floor(Math.random() * tables.length)];
-        const n2 = Math.floor(Math.random() * 9) + 2;
-        return { q: `${n1} × ${n2}`, a: n1 * n2 };
-      } else if (t === 'compl_100') {
-        const n1 = Math.floor(Math.random() * 75) + 15;
-        return { q: `100 - ${n1}`, a: 100 - n1 };
+        const n2 = Math.floor(Math.random() * 8) + 3;
+        let hint = "";
+        if (n1 === 9 || n2 === 9) hint = "💡 Astuce ×9 : Multiplie par 10 puis enlève une fois le nombre !";
+        else if (n1 === 7 && n2 === 8) hint = "💡 Le grand classique : 5, 6, 7, 8 ➡️ 56 = 7 × 8 !";
+        else if (n1 === 6 && n2 === 7) hint = "💡 6 × 7 = 42 !";
+        return { q: `${n1} × ${n2}`, a: n1 * n2, hint };
+      } else if (t === 'complements') {
+        if (Math.random() > 0.4) {
+          const n1 = Math.floor(Math.random() * 75) + 15;
+          return {
+            q: `100 - ${n1}`,
+            a: 100 - n1,
+            hint: `💡 Complément à 100 : va à la dizaine supérieure puis ajoute les dizaines jusqu'à 100 !`
+          };
+        } else {
+          const base = [150, 250, 350, 450, 650, 750, 850];
+          const n1 = base[Math.floor(Math.random() * base.length)];
+          return {
+            q: `1 000 - ${n1}`,
+            a: 1000 - n1,
+            hint: `💡 Complément à 1 000 : de ${n1} à 1 000 !`
+          };
+        }
+      } else if (t === 'astuces') {
+        const astuceType = Math.floor(Math.random() * 3);
+        if (astuceType === 0) {
+          // Multiplier par 10 ou 100
+          const n1 = Math.floor(Math.random() * 85) + 12;
+          const factor = Math.random() > 0.5 ? 10 : 100;
+          return { q: `${n1} × ${factor}`, a: n1 * factor, hint: `💡 Règle d'or : On ajoute ${factor === 10 ? 'un zéro (0)' : 'deux zéros (00)'} à la fin !` };
+        } else if (astuceType === 1) {
+          // Multiplier par 5 (×10 / 2)
+          const evenNumbers = [12, 14, 16, 18, 24, 28, 32, 44, 52];
+          const n1 = evenNumbers[Math.floor(Math.random() * evenNumbers.length)];
+          return { q: `${n1} × 5`, a: n1 * 5, hint: `💡 Astuce ×5 : Fais la moitié de ${n1} (${n1 / 2}) puis ajoute un 0 (${(n1 / 2) * 10}) !` };
+        } else {
+          // Doubles
+          const n1 = Math.floor(Math.random() * 45) + 15;
+          return { q: `Double de ${n1}`, a: n1 * 2, hint: `💡 Double : Double les dizaines puis les unités !` };
+        }
       } else {
-        const n1 = Math.floor(Math.random() * 45) + 25;
-        const n2 = Math.floor(Math.random() * 35) + 18;
-        return { q: `${n1} + ${n2}`, a: n1 + n2 };
+        const n1 = Math.floor(Math.random() * 55) + 35;
+        const n2 = Math.floor(Math.random() * 28) + 14;
+        return { q: `${n1} - ${n2}`, a: n1 - n2, hint: `💡 Soustraction : Enlève d'abord les dizaines, puis les unités !` };
       }
     }
 
     function nextCalcQuestion() {
       const c = generateCalcul();
       currentCalcAnswer = c.a;
+      currentCalcHint = c.hint || "";
       document.getElementById('calcQuestion').innerText = `${c.q} = ?`;
+      document.getElementById('calcHintText').innerText = currentCalcHint;
       const inp = document.getElementById('calcAnswerInput');
       inp.value = '';
       inp.focus();
@@ -1723,11 +2333,161 @@
         playSound('wrong');
         resetStreak();
         f.className = 'feedback-banner wrong';
-        f.innerText = `Oups ! ${currentCalcAnswer}`;
-        setTimeout(() => { f.style.display = 'none'; nextCalcQuestion(); }, 1000);
+        f.innerText = `Oups ! La réponse était ${currentCalcAnswer}`;
+        setTimeout(() => { f.style.display = 'none'; nextCalcQuestion(); }, 1200);
       }
     }
     document.getElementById('calcAnswerInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') submitCalcAnswer(); });
+
+    // =========================================================================
+    // GEMINI AI INTEGRATION (CLÉ API & GÉNÉRATEUR DYNAMIQUE)
+    // =========================================================================
+    function toggleAiModal() {
+      const m = document.getElementById('aiModal');
+      m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+      const savedKey = localStorage.getItem('gemini_api_key') || '';
+      if (savedKey) document.getElementById('geminiApiKey').value = savedKey;
+    }
+
+    function saveApiKey() {
+      const key = document.getElementById('geminiApiKey').value.trim();
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        alert("✅ Clé API Gemini enregistrée avec succès sur cet appareil !");
+      }
+    }
+
+    async function callGeminiApi(promptText) {
+      const apiKey = localStorage.getItem('gemini_api_key') || document.getElementById('geminiApiKey').value.trim();
+      if (!apiKey) {
+        throw new Error("Veuillez saisir votre clé API Google Gemini (gratuite) pour générer des exercices dynamiques.");
+      }
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      const payload = {
+        contents: [{
+          parts: [{ text: promptText }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          responseMimeType: "application/json"
+        }
+      };
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error?.message || `Erreur API Gemini (${response.status})`);
+      }
+
+      const data = await response.json();
+      const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      return JSON.parse(rawText);
+    }
+
+    async function generateAiExercises() {
+      const subject = document.getElementById('aiSubjectSelect').value;
+      const status = document.getElementById('aiLoadingStatus');
+      const feedback = document.getElementById('aiSuccessFeedback');
+      const btn = document.getElementById('aiGenerateBtn');
+
+      status.style.display = 'block';
+      feedback.style.display = 'none';
+      btn.disabled = true;
+
+      try {
+        if (subject === 'problemes_maths') {
+          const prompt = `Génère 4 problèmes mathématiques progressifs de niveau CM2 pour une élève en difficulté.
+Chaque problème doit être résolu en 3 étapes guidées (Étape 1: Comprendre les données, Étape 2: Choisir la bonne opération, Étape 3: Calculer et rédiger la réponse).
+Renvoie STRICTEMENT un JSON valide au format suivant :
+[
+  {
+    "id": "prob_gen_1",
+    "title": "Titre ludique avec émoji",
+    "statement": "Énoncé clair et stimulant avec balises <strong> pour les nombres",
+    "steps": [
+      {
+        "title": "Étape 1 : Comprendre",
+        "question": "Question guidée sur les données utiles",
+        "options": ["Option A", "Option B", "Option C"],
+        "correct": "Option exacte",
+        "hint": "Explication bienveillante et astuce de réflexion"
+      },
+      {
+        "title": "Étape 2 : L'Opération",
+        "question": "Quelle opération choisir ?",
+        "options": ["Option A", "Option B", "Option C"],
+        "correct": "Option exacte",
+        "hint": "Pourquoi cette opération"
+      },
+      {
+        "title": "Étape 3 : Résultat",
+        "question": "Quel est le résultat final ?",
+        "options": ["Option A", "Option B", "Option C"],
+        "correct": "Option exacte avec unité",
+        "hint": "Astuce de calcul"
+      }
+    ]
+  }
+]`;
+          const generatedProblems = await callGeminiApi(prompt);
+          if (Array.isArray(generatedProblems) && generatedProblems.length > 0) {
+            currentProblemList = generatedProblems;
+            currentProblemIndex = 0;
+            currentProblemStep = 0;
+            renderProblemSolver();
+            switchSubject('maths');
+            switchSubmodule('maths', 'problemes');
+            toggleAiModal();
+            playSound('win');
+            triggerConfetti();
+            alert("✨ 4 nouveaux problèmes créés sur mesure par Gemini ! C'est parti !");
+          }
+        } else if (subject === 'francais_homophones' || subject === 'francais_conjugaison' || subject === 'histoire_cm2' || subject === 'sciences_materiaux') {
+          const prompt = `Génère 8 questions à choix multiples de niveau CM2 sur le thème : "${subject}".
+Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
+[
+  {
+    "display": "Phrase ou question avec <span class='blank-slot'>...</span> ou <strong>terme clé</strong>",
+    "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+    "correct": "Option correcte exacte",
+    "tip": "Astuce mémo claire et pédagogique pour retenir la règle"
+  }
+]`;
+          const generatedQuestions = await callGeminiApi(prompt);
+          if (Array.isArray(generatedQuestions) && generatedQuestions.length > 0) {
+            let containerId = 'quiz-container-homo';
+            if (subject === 'francais_conjugaison') containerId = 'quiz-container-conjugaison';
+            if (subject === 'histoire_cm2') containerId = 'quiz-container-periodes';
+            if (subject === 'sciences_materiaux') containerId = 'quiz-container-materiaux';
+
+            new QuizRunner(containerId, generatedQuestions, { title: "Défis Dynamiques Gemini IA" });
+            if (subject.startsWith('francais')) switchSubject('francais');
+            else if (subject.startsWith('histoire')) switchSubject('histoire');
+            else switchSubject('sciences');
+            toggleAiModal();
+            playSound('win');
+            triggerConfetti();
+            alert("✨ 8 nouveaux défis générés par l'IA ! Bon entraînement !");
+          }
+        } else {
+          alert("Mode Calcul Rapide mis à jour avec de nouveaux coefficients !");
+          toggleAiModal();
+        }
+      } catch (err) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.style.display = 'block';
+        feedback.innerHTML = `⚠️ <strong>Erreur IA :</strong> ${err.message}`;
+      } finally {
+        status.style.display = 'none';
+        btn.disabled = false;
+      }
+    }
 
     // =========================================================================
     // CONFETTI ENGINE
@@ -1811,6 +2571,7 @@
     // =========================================================================
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
     renderDetectiveMission();
+    renderProblemSolver();
     new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants" });
     new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent" });
     new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage" });

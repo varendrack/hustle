@@ -8,9 +8,12 @@ Ce dossier regroupe l'ensemble des cours, fiches de travail, exercices, dictées
 👉 **Lancer l'application : [Jeux_Interactifs/index.html](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Jeux_Interactifs/index.html)** *(à ouvrir dans Safari, Chrome ou votre navigateur habituel)*
 
 L'application intègre toutes les matières avec des **lecteurs vidéos YouTube intégrés**, des visuels illustrés, des effets sonores et un système de badges de réussite :
+- ✨ **Générateur Intelligent Gemini IA (API Gratuite) :** Création dynamique et illimitée de nouveaux exercices et problèmes CM2 sur mesure en un clic (Français, Maths, Histoire, Sciences).
+- 🧠 **Résolution de Problèmes Pas à Pas (Méthode 3 Étapes) :** Découpage méthodique (Comprendre les données utiles ➡️ Choisir la bonne opération ➡️ Calculer & formuler la réponse) avec indices progressifs.
+- ⚡ **Calcul Rapide & Stratégies Paramétrables :** Modes d'entraînement ciblés (Tables clés 6,7,8,9,12 / Compléments à 100 & 1000 / Astuces ×10, ×5, Doubles) en mode Sprint Chrono ou Zen sans stress.
 - 🎬 **Vidéothèque Complète :** Retrouvez directement toutes les vidéos officielles du Padlet dans un onglet dédié (Chanson des 5 périodes, Préhistoire, Reims, Matériaux, Eiffel, Soustraction par cassage).
 - 🇫🇷 **Français :** Duel des homophones (*a/à*, *et/est*, *s'est/ses/c'est*), Mission Détective de relecture, Grammaire G1 (déterminants & vidéo Canopé), Conjugaison du Présent.
-- 🔢 **Mathématiques :** Chrono-Calcul Mental (45s), Soustraction par cassage avec vidéo pas à pas.
+- 🔢 **Mathématiques :** Problèmes guidés, Calcul Rapide, Soustraction par cassage avec vidéo pas à pas.
 - 🏛️ **Histoire :** Les 5 grandes périodes (en chanson), la Préhistoire (Quelle Histoire), la Cathédrale de Reims.
 - 🔬 **Sciences & Arts :** Les familles de matériaux (L'Esprit Sorcier), le projet & défi Gustave Eiffel.
 - 💡 **Boîte à Pense-Bêtes :** Toutes les astuces mnémotechniques indispensables.
