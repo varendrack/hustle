@@ -989,12 +989,477 @@
       to { transform: rotate(360deg); }
     }
 
+    /* =========================================================================
+       BLOC-NOTES & MÉMOS PERSONNELS STYLES
+       ========================================================================= */
+    .blocnotes-hero {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(168, 85, 247, 0.25), rgba(6, 182, 212, 0.2));
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .blocnotes-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .blocnotes-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* Memo Editor Card */
+    .memo-editor-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .memo-editor-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .memo-input-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .memo-input {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .memo-input:focus {
+      border-color: var(--accent-cyan);
+    }
+    .memo-textarea {
+      width: 100%;
+      min-height: 100px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      resize: vertical;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .memo-textarea:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Color dots & stickers */
+    .memo-custom-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .memo-custom-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .memo-custom-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .color-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .color-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .color-dot:hover {
+      transform: scale(1.15);
+    }
+    .color-dot.active {
+      border-color: #fff;
+      transform: scale(1.2);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    .color-dot.yellow { background: #fef08a; }
+    .color-dot.pink { background: #fbcfe8; }
+    .color-dot.blue { background: #bae6fd; }
+    .color-dot.green { background: #bbf7d0; }
+    .color-dot.purple { background: #e9d5ff; }
+    .color-dot.orange { background: #fed7aa; }
+
+    .sticker-list {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .sticker-opt {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .sticker-opt:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+    .sticker-opt.active {
+      background: rgba(236, 72, 153, 0.3);
+      border-color: var(--accent-pink);
+      transform: scale(1.15);
+    }
+
+    /* Category pills in editor */
+    .memo-cat-select {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .memo-cat-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .memo-cat-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .memo-cat-btn.active {
+      background: var(--primary);
+      border-color: #a855f7;
+      color: #fff;
+    }
+
+    /* Memo Editor Actions */
+    .memo-editor-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .memo-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Filter & Search Bar */
+    .memos-filter-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-pill {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-pill:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .filter-pill.active {
+      background: var(--primary);
+      border-color: #a855f7;
+      color: #fff;
+    }
+    .memo-search-input {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      width: 180px;
+    }
+    .memo-search-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Sticky Notes Grid */
+    .memos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+      width: 100%;
+    }
+    .sticky-card {
+      border-radius: 14px;
+      padding: 18px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0,0,0,0.15);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+      color: #0f172a; /* Ultra readable dark text on pastel notes */
+    }
+    .sticky-card:hover {
+      transform: translateY(-5px) rotate(0.5deg);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+    }
+    .sticky-card::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      backdrop-filter: blur(2px);
+    }
+    .sticky-card.pinned::before {
+      content: '📌';
+      background: transparent;
+      box-shadow: none;
+      font-size: 1.3rem;
+      top: -12px;
+      left: 20px;
+      transform: none;
+    }
+
+    .sticky-card.color-yellow { background: linear-gradient(135deg, #fef08a 0%, #fde047 100%); }
+    .sticky-card.color-pink   { background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%); }
+    .sticky-card.color-blue   { background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%); }
+    .sticky-card.color-green  { background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%); }
+    .sticky-card.color-purple { background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%); }
+    .sticky-card.color-orange { background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%); }
+
+    .sticky-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .sticky-sticker {
+      font-size: 1.4rem;
+      margin-right: 6px;
+    }
+    .sticky-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.25;
+      flex: 1;
+    }
+    .sticky-top-btns {
+      display: flex;
+      gap: 4px;
+    }
+    .sticky-icon-btn {
+      background: rgba(0, 0, 0, 0.08);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      color: #0f172a;
+    }
+    .sticky-icon-btn:hover {
+      background: rgba(0, 0, 0, 0.18);
+      transform: scale(1.1);
+    }
+    .sticky-icon-btn.active-pin {
+      background: #f59e0b;
+      color: #fff;
+    }
+    .sticky-content {
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: #1e293b;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-bottom: 14px;
+      flex: 1;
+      font-weight: 500;
+    }
+    .sticky-image-preview {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: #fff;
+    }
+    .sticky-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed rgba(0, 0, 0, 0.15);
+      padding-top: 8px;
+      font-size: 0.75rem;
+    }
+    .sticky-category-tag {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .sticky-bottom-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    /* Scratchpad / Brouillon Drawing Board */
+    .scratchpad-wrap {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .scratchpad-toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+    .scratch-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .scratch-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    .scratch-btn.active {
+      background: var(--primary);
+      border-color: #a855f7;
+    }
+    .scratch-color-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s;
+    }
+    .scratch-color-dot.active {
+      border-color: #fff;
+      transform: scale(1.2);
+    }
+    .scratchpad-canvas-container {
+      width: 100%;
+      background: #0f172a;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      position: relative;
+      touch-action: none;
+      cursor: crosshair;
+      overflow: hidden;
+    }
+    #scratchCanvas {
+      display: block;
+      width: 100%;
+      height: 380px;
+      touch-action: none;
+    }
+
+    .empty-memos-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 14px;
+      border: 1px dashed var(--card-border);
+    }
+
     @media (max-width: 650px) {
       h1 { font-size: 1.8rem; }
       main { padding: 16px; }
       .hero-banner { height: 160px; }
       .calc-card { font-size: 2.3rem; }
       .sentence-display { font-size: 1.05rem; }
+      .memos-grid { grid-template-columns: 1fr; }
+      #scratchCanvas { height: 280px; }
     }
   </style>
 </head>
@@ -1097,6 +1562,7 @@
     <button class="tab-btn" onclick="switchSubject('sciences')">🔬 Sciences & Arts</button>
     <button class="tab-btn" onclick="switchSubject('videotheque')">🎬 Vidéothèque & Docs</button>
     <button class="tab-btn" onclick="switchSubject('astuces')">💡 Pense-Bêtes</button>
+    <button class="tab-btn" onclick="switchSubject('blocnotes')">📝 Mon Bloc-Notes</button>
   </nav>
 
   <main>
@@ -1577,6 +2043,145 @@
         • <strong>Ajouter 9 / 19 :</strong> Fais $+10$ ou $+20$ puis $-1$ !
       </div>
     </section>
+
+    <!-- ========================================================= -->
+    <!-- 7. MON BLOC-NOTES & MÉMOS PERSONNELS -->
+    <!-- ========================================================= -->
+    <section id="subject-blocnotes" class="subject-section">
+      <div class="blocnotes-hero">
+        <div>
+          <div class="blocnotes-title">📝 Mon Bloc-Notes & Carnet Secret</div>
+          <div class="blocnotes-subtitle">Écris tes propres mémos, tes astuces de révision ou gribouille sur l'ardoise magique !</div>
+        </div>
+        <button class="action-btn" onclick="scrollToMemoEditor()" style="padding: 10px 18px; font-size: 0.95rem;">
+          ✏️ Nouveau Mémo
+        </button>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('blocnotes', 'mesmemos')">📌 Mes Mémos & Post-its</button>
+        <button class="submodule-btn" onclick="switchSubmodule('blocnotes', 'ardoise')">🎨 L'Ardoise Magique (Brouillon & Dessin)</button>
+      </div>
+
+      <!-- Submodule 1: Mes Mémos -->
+      <div id="sub-blocnotes-mesmemos" class="submodule-content active">
+        <!-- Formulaire d'édition / création de mémo -->
+        <div class="memo-editor-card" id="memoEditorCard">
+          <div class="memo-editor-title">
+            <span id="memoEditorModeTitle">✏️ Écrire un nouveau mémo</span>
+          </div>
+
+          <div class="memo-input-row">
+            <input type="text" id="memoTitleInput" class="memo-input" placeholder="Titre du mémo (ex: Astuce table de 8, Règle du pluriel...)" maxlength="60">
+            
+            <div class="memo-cat-select" id="memoCatSelect">
+              <button type="button" class="memo-cat-btn active" data-cat="maths">🔢 Maths</button>
+              <button type="button" class="memo-cat-btn" data-cat="francais">🇫🇷 Français</button>
+              <button type="button" class="memo-cat-btn" data-cat="histoire">🏛️ Histoire</button>
+              <button type="button" class="memo-cat-btn" data-cat="sciences">🔬 Sciences</button>
+              <button type="button" class="memo-cat-btn" data-cat="astuce">💡 Astuce</button>
+              <button type="button" class="memo-cat-btn" data-cat="perso">⭐ Perso</button>
+            </div>
+          </div>
+
+          <div class="memo-custom-row">
+            <div class="memo-custom-group">
+              <span class="memo-custom-label">Couleur :</span>
+              <div class="color-dots" id="memoColorDots">
+                <div class="color-dot yellow active" data-color="yellow" title="Jaune soleil"></div>
+                <div class="color-dot pink" data-color="pink" title="Rose fraise"></div>
+                <div class="color-dot blue" data-color="blue" title="Bleu ciel"></div>
+                <div class="color-dot green" data-color="green" title="Vert menthe"></div>
+                <div class="color-dot purple" data-color="purple" title="Violet lavande"></div>
+                <div class="color-dot orange" data-color="orange" title="Orange pêche"></div>
+              </div>
+            </div>
+
+            <div class="memo-custom-group">
+              <span class="memo-custom-label">Sticker :</span>
+              <div class="sticker-list" id="memoStickerList">
+                <div class="sticker-opt active" data-icon="⭐">⭐</div>
+                <div class="sticker-opt" data-icon="💡">💡</div>
+                <div class="sticker-opt" data-icon="🎯">🎯</div>
+                <div class="sticker-opt" data-icon="🚀">🚀</div>
+                <div class="sticker-opt" data-icon="📚">📚</div>
+                <div class="sticker-opt" data-icon="✍️">✍️</div>
+                <div class="sticker-opt" data-icon="🐱">🐱</div>
+                <div class="sticker-opt" data-icon="🧠">🧠</div>
+                <div class="sticker-opt" data-icon="🔢">🔢</div>
+                <div class="sticker-opt" data-icon="🏆">🏆</div>
+              </div>
+            </div>
+          </div>
+
+          <textarea id="memoContentInput" class="memo-textarea" placeholder="Écris ton mémo ou ton astuce ici..."></textarea>
+
+          <input type="hidden" id="editingMemoId" value="">
+
+          <div class="memo-editor-actions">
+            <div class="memo-btn-group">
+              <button class="action-btn" onclick="saveMemoFromForm()" style="padding: 10px 20px;">
+                💾 Enregistrer mon Mémo
+              </button>
+              <button class="ai-gen-btn" onclick="aiEnhanceCurrentMemo(this)" style="margin-bottom: 0;">
+                ✨ Transformer en Rime / Astuce IA
+              </button>
+            </div>
+            <button class="doc-link-btn" onclick="resetMemoEditor()" style="background: rgba(255,255,255,0.08); border-color: var(--card-border);">
+              🔄 Effacer
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtres et Recherche -->
+        <div class="memos-filter-wrap">
+          <div class="filter-pills" id="memosFilterPills">
+            <button class="filter-pill active" onclick="filterMemosBy('all', this)">Tous (<span id="memoCountAll">0</span>)</button>
+            <button class="filter-pill" onclick="filterMemosBy('pinned', this)">⭐ Favoris</button>
+            <button class="filter-pill" onclick="filterMemosBy('maths', this)">🔢 Maths</button>
+            <button class="filter-pill" onclick="filterMemosBy('francais', this)">🇫🇷 Français</button>
+            <button class="filter-pill" onclick="filterMemosBy('histoire', this)">🏛️ Histoire</button>
+            <button class="filter-pill" onclick="filterMemosBy('sciences', this)">🔬 Sciences</button>
+          </div>
+
+          <input type="text" id="memoSearchInput" class="memo-search-input" placeholder="🔍 Rechercher..." oninput="handleMemoSearch()">
+        </div>
+
+        <!-- Grille des Post-its -->
+        <div class="memos-grid" id="memosGridContainer"></div>
+      </div>
+
+      <!-- Submodule 2: Ardoise / Brouillon Tactile -->
+      <div id="sub-blocnotes-ardoise" class="submodule-content">
+        <div class="scratchpad-wrap">
+          <div class="scratchpad-toolbar">
+            <button class="scratch-btn active" id="toolPen" onclick="setScratchTool('pen')">✏️ Crayon</button>
+            <button class="scratch-btn" id="toolMarker" onclick="setScratchTool('marker')">🖍️ Feutre</button>
+            <button class="scratch-btn" id="toolEraser" onclick="setScratchTool('eraser')">🧽 Gomme</button>
+
+            <div style="display: flex; gap: 6px; align-items: center; margin-left: 8px;">
+              <div class="scratch-color-dot active" style="background: #ffffff;" data-color="#ffffff" onclick="setScratchColor('#ffffff', this)"></div>
+              <div class="scratch-color-dot" style="background: #facc15;" data-color="#facc15" onclick="setScratchColor('#facc15', this)"></div>
+              <div class="scratch-color-dot" style="background: #38bdf8;" data-color="#38bdf8" onclick="setScratchColor('#38bdf8', this)"></div>
+              <div class="scratch-color-dot" style="background: #f472b6;" data-color="#f472b6" onclick="setScratchColor('#f472b6', this)"></div>
+              <div class="scratch-color-dot" style="background: #4ade80;" data-color="#4ade80" onclick="setScratchColor('#4ade80', this)"></div>
+            </div>
+
+            <div style="margin-left: auto; display: flex; gap: 8px;">
+              <button class="scratch-btn" onclick="clearScratchCanvas()">🧹 Tout effacer</button>
+              <button class="action-btn" onclick="saveScratchAsMemo()" style="padding: 6px 14px; font-size: 0.85rem;">💾 Sauvegarder en Mémo</button>
+            </div>
+          </div>
+
+          <div class="scratchpad-canvas-container" id="scratchCanvasContainer">
+            <canvas id="scratchCanvas"></canvas>
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-muted); text-align: center;">
+            💡 Astuce : Utilise ton doigt ou ton stylet sur l'iPad pour poser une opération, dessiner un schéma ou faire tes calculs de tête !
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -1661,16 +2266,34 @@
     function switchSubject(subj) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.subject-section').forEach(sec => sec.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('subject-' + subj).classList.add('active');
+      if (window.event && window.event.target) {
+        const b = window.event.target.closest('.tab-btn');
+        if (b) b.classList.add('active');
+      }
+      const target = document.getElementById('subject-' + subj);
+      if (target) target.classList.add('active');
+
+      if (subj === 'blocnotes') {
+        renderMemos();
+        setTimeout(resizeScratchpadCanvas, 80);
+      }
     }
 
     function switchSubmodule(subject, subKey) {
       const parent = document.getElementById('subject-' + subject);
+      if (!parent) return;
       parent.querySelectorAll('.submodule-btn').forEach(b => b.classList.remove('active'));
       parent.querySelectorAll('.submodule-content').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById(`sub-${subject}-${subKey}`).classList.add('active');
+      if (window.event && window.event.target) {
+        const b = window.event.target.closest('.submodule-btn');
+        if (b) b.classList.add('active');
+      }
+      const sub = document.getElementById(`sub-${subject}-${subKey}`);
+      if (sub) sub.classList.add('active');
+
+      if (subject === 'blocnotes' && subKey === 'ardoise') {
+        setTimeout(resizeScratchpadCanvas, 80);
+      }
     }
 
     // =========================================================================
@@ -2675,6 +3298,606 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
     updateConfetti();
 
     // =========================================================================
+    // BLOC-NOTES & MÉMOS PERSONNELS ENGINE
+    // =========================================================================
+    const DEFAULT_MEMOS = [
+      {
+        id: "memo_def_1",
+        title: "👐 Table de 9 avec les 10 doigts",
+        category: "maths",
+        color: "yellow",
+        icon: "🔢",
+        content: "Pour calculer 9 × 4 :\n1. Pose tes 10 doigts à plat devant toi.\n2. Baisse le 4ème doigt (en partant de la gauche).\n3. Doigts à gauche = 3 (dizaines).\n4. Doigts à droite = 6 (unités).\n➡️ Résultat = 36 !",
+        pinned: true,
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "memo_def_2",
+        title: "🕵️‍♀️ Astuce Magique : a vs à",
+        category: "francais",
+        color: "pink",
+        icon: "💡",
+        content: "Remplace le mot par « avait » :\n• Si la phrase a du sens ➡️ écris « a » (verbe avoir).\n  Ex : Il a (avait) un cartable ✅\n• Si ça ne marche pas ➡️ mets un accent « à » !\n  Ex : Elle va à la piscine ✅",
+        pinned: false,
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "memo_def_3",
+        title: "🏛️ Sédentaires vs Nomades",
+        category: "histoire",
+        color: "green",
+        icon: "🏛️",
+        content: "• Paléolithique ➡️ Les hommes sont NOMADES (ils bougent tout le temps pour chasser).\n• Néolithique ➡️ Les hommes deviennent SÉDENTAIRES (ils construisent des villages, cultivent et font de l'élevage).",
+        pinned: false,
+        createdAt: new Date().toISOString()
+      }
+    ];
+
+    let currentMemosFilter = 'all';
+    let currentMemosSearch = '';
+    let selectedMemoCat = 'maths';
+    let selectedMemoColor = 'yellow';
+    let selectedMemoIcon = '⭐';
+
+    function getStoredMemos() {
+      try {
+        const data = localStorage.getItem('cm2_student_memos');
+        if (!data) {
+          localStorage.setItem('cm2_student_memos', JSON.stringify(DEFAULT_MEMOS));
+          return [...DEFAULT_MEMOS];
+        }
+        return JSON.parse(data);
+      } catch (e) {
+        return [...DEFAULT_MEMOS];
+      }
+    }
+
+    function saveStoredMemos(memos) {
+      try {
+        localStorage.setItem('cm2_student_memos', JSON.stringify(memos));
+      } catch (e) {}
+    }
+
+    function initBlocNotesEvents() {
+      // Category selection in editor
+      document.querySelectorAll('#memoCatSelect .memo-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#memoCatSelect .memo-cat-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedMemoCat = btn.getAttribute('data-cat') || 'maths';
+        });
+      });
+
+      // Color selection in editor
+      document.querySelectorAll('#memoColorDots .color-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          document.querySelectorAll('#memoColorDots .color-dot').forEach(d => d.classList.remove('active'));
+          dot.classList.add('active');
+          selectedMemoColor = dot.getAttribute('data-color') || 'yellow';
+        });
+      });
+
+      // Sticker selection in editor
+      document.querySelectorAll('#memoStickerList .sticker-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          document.querySelectorAll('#memoStickerList .sticker-opt').forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          selectedMemoIcon = opt.getAttribute('data-icon') || '⭐';
+        });
+      });
+    }
+
+    function getCategoryLabel(cat) {
+      const map = {
+        maths: "🔢 Maths",
+        francais: "🇫🇷 Français",
+        histoire: "🏛️ Histoire",
+        sciences: "🔬 Sciences",
+        astuce: "💡 Astuce",
+        perso: "⭐ Perso"
+      };
+      return map[cat] || "📝 Mémo";
+    }
+
+    function renderMemos() {
+      const container = document.getElementById('memosGridContainer');
+      if (!container) return;
+
+      const memos = getStoredMemos();
+      const countAllEl = document.getElementById('memoCountAll');
+      if (countAllEl) countAllEl.innerText = memos.length;
+
+      // Filter
+      let filtered = memos.filter(m => {
+        if (currentMemosFilter === 'pinned' && !m.pinned) return false;
+        if (currentMemosFilter !== 'all' && currentMemosFilter !== 'pinned' && m.category !== currentMemosFilter) return false;
+        if (currentMemosSearch.trim()) {
+          const query = currentMemosSearch.toLowerCase().trim();
+          const matchTitle = (m.title || '').toLowerCase().includes(query);
+          const matchContent = (m.content || '').toLowerCase().includes(query);
+          if (!matchTitle && !matchContent) return false;
+        }
+        return true;
+      });
+
+      // Sort: pinned first, then newest
+      filtered.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-memos-state">
+            <div style="font-size: 2.4rem; margin-bottom: 8px;">📝</div>
+            <h4 style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; color: #fff; margin-bottom: 6px;">Aucun mémo trouvé</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">Écris ton premier mémo ci-dessus pour le retrouver ici !</p>
+            <button class="action-btn" onclick="scrollToMemoEditor()" style="padding: 8px 16px; font-size: 0.85rem;">✏️ Créer un mémo</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(m => {
+        const colorClass = `color-${m.color || 'yellow'}`;
+        const pinClass = m.pinned ? 'pinned' : '';
+        const pinIcon = m.pinned ? '⭐' : '☆';
+        const dateStr = m.createdAt ? new Date(m.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : '';
+        const imgHtml = m.imageUrl ? `<img src="${m.imageUrl}" alt="Schéma mémo" class="sticky-image-preview">` : '';
+
+        return `
+          <div class="sticky-card ${colorClass} ${pinClass}" id="card-${m.id}">
+            <div>
+              <div class="sticky-header">
+                <span class="sticky-sticker">${m.icon || '⭐'}</span>
+                <span class="sticky-title">${escapeHtml(m.title || 'Mémo')}</span>
+                <div class="sticky-top-btns">
+                  <button class="sticky-icon-btn ${m.pinned ? 'active-pin' : ''}" onclick="togglePinMemo('${m.id}')" title="${m.pinned ? 'Détacher' : 'Épingler en favori'}">${pinIcon}</button>
+                  <button class="sticky-icon-btn" onclick="speakMemo('${m.id}')" title="Écouter la lecture">🔊</button>
+                </div>
+              </div>
+
+              ${imgHtml}
+              <div class="sticky-content">${escapeHtml(m.content || '')}</div>
+            </div>
+
+            <div class="sticky-footer">
+              <span class="sticky-category-tag">${getCategoryLabel(m.category)}</span>
+              <div class="sticky-bottom-actions">
+                <button class="sticky-icon-btn" onclick="aiQuizOnMemo('${m.id}', this)" title="✨ Défi Quiz IA sur cette note" style="font-size: 0.75rem;">✨ Quiz</button>
+                <button class="sticky-icon-btn" onclick="editMemo('${m.id}')" title="Modifier">✏️</button>
+                <button class="sticky-icon-btn" onclick="deleteMemo('${m.id}')" title="Supprimer">🗑️</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function scrollToMemoEditor() {
+      const editor = document.getElementById('memoEditorCard');
+      if (editor) {
+        editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('memoTitleInput')?.focus();
+      }
+    }
+
+    function saveMemoFromForm() {
+      const titleInput = document.getElementById('memoTitleInput');
+      const contentInput = document.getElementById('memoContentInput');
+      const editingIdInput = document.getElementById('editingMemoId');
+
+      const title = (titleInput?.value || '').trim();
+      const content = (contentInput?.value || '').trim();
+      const editId = (editingIdInput?.value || '').trim();
+
+      if (!title && !content) {
+        alert("⚠️ Remplis au moins un titre ou un contenu pour ton mémo !");
+        return;
+      }
+
+      const memos = getStoredMemos();
+
+      if (editId) {
+        const idx = memos.findIndex(m => m.id === editId);
+        if (idx !== -1) {
+          memos[idx].title = title || "Sans titre";
+          memos[idx].content = content;
+          memos[idx].category = selectedMemoCat;
+          memos[idx].color = selectedMemoColor;
+          memos[idx].icon = selectedMemoIcon;
+        }
+      } else {
+        const newMemo = {
+          id: 'memo_' + Date.now(),
+          title: title || "Sans titre",
+          content: content,
+          category: selectedMemoCat,
+          color: selectedMemoColor,
+          icon: selectedMemoIcon,
+          pinned: false,
+          createdAt: new Date().toISOString()
+        };
+        memos.unshift(newMemo);
+      }
+
+      saveStoredMemos(memos);
+      playSound('win');
+      triggerConfetti();
+      resetMemoEditor();
+      renderMemos();
+    }
+
+    function resetMemoEditor() {
+      const titleInput = document.getElementById('memoTitleInput');
+      const contentInput = document.getElementById('memoContentInput');
+      const editingIdInput = document.getElementById('editingMemoId');
+      const modeTitle = document.getElementById('memoEditorModeTitle');
+
+      if (titleInput) titleInput.value = '';
+      if (contentInput) contentInput.value = '';
+      if (editingIdInput) editingIdInput.value = '';
+      if (modeTitle) modeTitle.innerText = "✏️ Écrire un nouveau mémo";
+    }
+
+    function editMemo(id) {
+      const memos = getStoredMemos();
+      const memo = memos.find(m => m.id === id);
+      if (!memo) return;
+
+      const titleInput = document.getElementById('memoTitleInput');
+      const contentInput = document.getElementById('memoContentInput');
+      const editingIdInput = document.getElementById('editingMemoId');
+      const modeTitle = document.getElementById('memoEditorModeTitle');
+
+      if (titleInput) titleInput.value = memo.title || '';
+      if (contentInput) contentInput.value = memo.content || '';
+      if (editingIdInput) editingIdInput.value = memo.id;
+      if (modeTitle) modeTitle.innerText = `✏️ Modifier : "${memo.title || 'Mémo'}"`;
+
+      // Select category
+      selectedMemoCat = memo.category || 'maths';
+      document.querySelectorAll('#memoCatSelect .memo-cat-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-cat') === selectedMemoCat);
+      });
+
+      // Select color
+      selectedMemoColor = memo.color || 'yellow';
+      document.querySelectorAll('#memoColorDots .color-dot').forEach(dot => {
+        dot.classList.toggle('active', dot.getAttribute('data-color') === selectedMemoColor);
+      });
+
+      // Select icon
+      selectedMemoIcon = memo.icon || '⭐';
+      document.querySelectorAll('#memoStickerList .sticker-opt').forEach(opt => {
+        opt.classList.toggle('active', opt.getAttribute('data-icon') === selectedMemoIcon);
+      });
+
+      scrollToMemoEditor();
+    }
+
+    function deleteMemo(id) {
+      if (!confirm("Veux-tu vraiment supprimer ce mémo ?")) return;
+      let memos = getStoredMemos();
+      memos = memos.filter(m => m.id !== id);
+      saveStoredMemos(memos);
+      playSound('wrong');
+      renderMemos();
+    }
+
+    function togglePinMemo(id) {
+      const memos = getStoredMemos();
+      const memo = memos.find(m => m.id === id);
+      if (memo) {
+        memo.pinned = !memo.pinned;
+        saveStoredMemos(memos);
+        playSound('correct');
+        renderMemos();
+      }
+    }
+
+    function speakMemo(id) {
+      const memos = getStoredMemos();
+      const memo = memos.find(m => m.id === id);
+      if (!memo) return;
+
+      if (!('speechSynthesis' in window)) {
+        alert("La synthèse vocale n'est pas supportée sur ce navigateur.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const textToSpeak = `${memo.title}. ${memo.content}`;
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.lang = 'fr-FR';
+      utterance.rate = 0.95;
+      utterance.pitch = 1.05;
+
+      const card = document.getElementById(`card-${id}`);
+      if (card) card.style.transform = 'scale(1.03)';
+
+      utterance.onend = () => {
+        if (card) card.style.transform = '';
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function filterMemosBy(cat, btn) {
+      currentMemosFilter = cat;
+      document.querySelectorAll('#memosFilterPills .filter-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderMemos();
+    }
+
+    function handleMemoSearch() {
+      const input = document.getElementById('memoSearchInput');
+      currentMemosSearch = input ? input.value : '';
+      renderMemos();
+    }
+
+    // AI Helper to Enhance & Rhyme Memo
+    async function aiEnhanceCurrentMemo(btn) {
+      const titleInput = document.getElementById('memoTitleInput');
+      const contentInput = document.getElementById('memoContentInput');
+      const rawTitle = (titleInput?.value || '').trim();
+      const rawContent = (contentInput?.value || '').trim();
+
+      if (!rawTitle && !rawContent) {
+        alert("⚠️ Écris d'abord une idée ou une règle dans ton mémo !");
+        return;
+      }
+
+      const origText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span class="ai-spinner" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"></span> Rime magique IA en cours...`;
+
+      try {
+        const prompt = `Tu es un assistant pédagogique pour une élève de CM2 (10 ans).
+L'élève a commencé à écrire ce mémo pour ses révisions :
+Titre : "${rawTitle}"
+Contenu : "${rawContent}"
+Catégorie souhaitée : ${selectedMemoCat}
+
+Tâche :
+1. Propose un titre accrocheur et motivant avec un emoji.
+2. Reformule et structure le contenu pour qu'il soit limpide, concis et ultra facile à retenir pour un enfant de CM2.
+3. Ajoute une petite rime mémorable ou un moyen mnémotechnique sympa.
+
+Réponds STRICTEMENT en JSON :
+{
+  "title": "Titre avec emoji",
+  "content": "Contenu clair et bien aéré avec puces et rime",
+  "sticker": "💡"
+}`;
+
+        const result = await callGeminiApi(prompt);
+        if (result && result.content) {
+          if (titleInput && result.title) titleInput.value = result.title;
+          if (contentInput) contentInput.value = result.content;
+          playSound('win');
+          triggerConfetti();
+        }
+      } catch (err) {
+        alert("Oups : " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origText;
+      }
+    }
+
+    // AI Quiz Challenge on a Specific Memo
+    async function aiQuizOnMemo(id, btn) {
+      const memos = getStoredMemos();
+      const memo = memos.find(m => m.id === id);
+      if (!memo) return;
+
+      const origText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span class="ai-spinner" style="width:14px;height:14px;margin-right:4px;vertical-align:middle;"></span>`;
+
+      try {
+        const prompt = `Crée un mini-défi / question de quiz CM2 à 4 choix basé UNIQUEMENT sur le mémo suivant rédigé par l'élève :
+Titre: "${memo.title}"
+Contenu: "${memo.content}"
+
+Format JSON attendu :
+{
+  "question": "Texte de la question...",
+  "options": ["Choix A", "Choix B", "Choix C", "Choix D"],
+  "correct": "Choix exact",
+  "explanation": "Explication courte encourageante pour l'enfant"
+}`;
+
+        const quizData = await callGeminiApi(prompt);
+        if (quizData && quizData.options) {
+          const userChoice = prompt(`🌟 DÉFI IA SUR TON MÉMO :\n\n${quizData.question}\n\n` + quizData.options.map((opt, i) => `${i+1}. ${opt}`).join('\n') + `\n\nEntre le numéro (1, 2, 3 ou 4) de ta réponse :`);
+          
+          if (userChoice !== null) {
+            const idx = parseInt(userChoice, 10) - 1;
+            const chosen = quizData.options[idx];
+            if (chosen === quizData.correct) {
+              playSound('win');
+              triggerConfetti();
+              addScore(25);
+              alert(`🎉 BRAVO ! C'est la bonne réponse ! (+25 pts)\n\n${quizData.explanation || ''}`);
+            } else {
+              playSound('wrong');
+              alert(`❌ Pas tout à fait !\n\nLa bonne réponse était : "${quizData.correct}".\n\n${quizData.explanation || ''}`);
+            }
+          }
+        }
+      } catch (err) {
+        alert("Oups : " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origText;
+      }
+    }
+
+    // =========================================================================
+    // ARDOISE / BROUILLON TACTILE (CANVAS)
+    // =========================================================================
+    let scratchCanvas = null;
+    let scratchCtx = null;
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let scratchTool = 'pen';
+    let scratchColor = '#ffffff';
+
+    function initScratchpad() {
+      scratchCanvas = document.getElementById('scratchCanvas');
+      if (!scratchCanvas) return;
+      scratchCtx = scratchCanvas.getContext('2d');
+      resizeScratchpadCanvas();
+
+      scratchCanvas.addEventListener('pointerdown', handlePointerDown);
+      scratchCanvas.addEventListener('pointermove', handlePointerMove);
+      scratchCanvas.addEventListener('pointerup', handlePointerUp);
+      scratchCanvas.addEventListener('pointercancel', handlePointerUp);
+    }
+
+    function resizeScratchpadCanvas() {
+      if (!scratchCanvas) return;
+      const rect = scratchCanvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      // Preserve existing drawing if any
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = scratchCanvas.width;
+      tempCanvas.height = scratchCanvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      if (scratchCanvas.width > 0 && scratchCanvas.height > 0) {
+        tempCtx.drawImage(scratchCanvas, 0, 0);
+      }
+
+      scratchCanvas.width = rect.width;
+      scratchCanvas.height = rect.height;
+
+      if (tempCanvas.width > 0) {
+        scratchCtx.drawImage(tempCanvas, 0, 0);
+      }
+    }
+
+    function getCanvasCoords(e) {
+      const rect = scratchCanvas.getBoundingClientRect();
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+
+    function handlePointerDown(e) {
+      isDrawing = true;
+      const coords = getCanvasCoords(e);
+      lastX = coords.x;
+      lastY = coords.y;
+      scratchCtx.beginPath();
+      scratchCtx.arc(lastX, lastY, (scratchTool === 'eraser' ? 14 : 2), 0, Math.PI * 2);
+      if (scratchTool === 'eraser') {
+        scratchCtx.fillStyle = '#0f172a';
+      } else {
+        scratchCtx.fillStyle = scratchColor;
+      }
+      scratchCtx.fill();
+    }
+
+    function handlePointerMove(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getCanvasCoords(e);
+
+      scratchCtx.beginPath();
+      scratchCtx.moveTo(lastX, lastY);
+      scratchCtx.lineTo(coords.x, coords.y);
+
+      if (scratchTool === 'eraser') {
+        scratchCtx.strokeStyle = '#0f172a';
+        scratchCtx.lineWidth = 28;
+      } else if (scratchTool === 'marker') {
+        scratchCtx.strokeStyle = scratchColor;
+        scratchCtx.lineWidth = 7;
+      } else {
+        scratchCtx.strokeStyle = scratchColor;
+        scratchCtx.lineWidth = 3;
+      }
+      scratchCtx.lineCap = 'round';
+      scratchCtx.lineJoin = 'round';
+      scratchCtx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function handlePointerUp() {
+      isDrawing = false;
+    }
+
+    function setScratchTool(tool) {
+      scratchTool = tool;
+      ['toolPen', 'toolMarker', 'toolEraser'].forEach(id => {
+        document.getElementById(id)?.classList.remove('active');
+      });
+      if (tool === 'pen') document.getElementById('toolPen')?.classList.add('active');
+      if (tool === 'marker') document.getElementById('toolMarker')?.classList.add('active');
+      if (tool === 'eraser') document.getElementById('toolEraser')?.classList.add('active');
+    }
+
+    function setScratchColor(color, el) {
+      scratchColor = color;
+      document.querySelectorAll('.scratch-color-dot').forEach(d => d.classList.remove('active'));
+      if (el) el.classList.add('active');
+      if (scratchTool === 'eraser') setScratchTool('pen');
+    }
+
+    function clearScratchCanvas() {
+      if (!scratchCanvas || !scratchCtx) return;
+      scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+      playSound('wrong');
+    }
+
+    function saveScratchAsMemo() {
+      if (!scratchCanvas) return;
+      const dataUrl = scratchCanvas.toDataURL('image/png');
+      const memos = getStoredMemos();
+
+      const newMemo = {
+        id: 'memo_' + Date.now(),
+        title: "🎨 Mon Schéma / Brouillon",
+        content: "Schéma ou calcul réalisé sur l'ardoise magique.",
+        category: "maths",
+        color: "blue",
+        icon: "🎨",
+        imageUrl: dataUrl,
+        pinned: true,
+        createdAt: new Date().toISOString()
+      };
+
+      memos.unshift(newMemo);
+      saveStoredMemos(memos);
+      playSound('win');
+      triggerConfetti();
+
+      // Switch to memos submodule
+      const parent = document.getElementById('subject-blocnotes');
+      parent.querySelectorAll('.submodule-btn').forEach(b => b.classList.remove('active'));
+      parent.querySelectorAll('.submodule-content').forEach(c => c.classList.remove('active'));
+      parent.querySelector('.submodule-btn:first-child')?.classList.add('active');
+      document.getElementById('sub-blocnotes-mesmemos')?.classList.add('active');
+
+      renderMemos();
+      alert("✨ Ton schéma a été enregistré sous forme de Post-it dans tes Mémos !");
+    }
+
+    // =========================================================================
     // AUTHENTICATION & PASSWORD PROTECTION
     // =========================================================================
     // Master Password Hash (SHA-256 for '#Zx7ffm8o@')
@@ -2722,6 +3945,10 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
     // =========================================================================
     // INIT
     // =========================================================================
+    initBlocNotesEvents();
+    renderMemos();
+    initScratchpad();
+
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
     renderDetectiveMission();
     renderProblemSolver();
