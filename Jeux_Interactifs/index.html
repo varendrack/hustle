@@ -2309,6 +2309,7 @@
   <!-- Modal Célébration Bon Cadeau Débloqué (Pour l'Enfant) -->
   <div id="voucherWonModal" class="ai-modal-overlay">
     <div class="ai-modal-card voucher-won-modal-card">
+      <button onclick="closeWonVoucherModal()" style="position: absolute; top: 14px; right: 18px; background: transparent; border: none; color: var(--ink-light); font-size: 1.6rem; cursor: pointer; font-weight: 800;" title="Fermer">&times;</button>
       <div style="font-size: 3.5rem; line-height: 1; animation: floatAnim 3s ease-in-out infinite;">🎉</div>
       <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.85rem; color: #b45309; margin: 4px 0 6px;">
         Tu as gagné !
@@ -2363,6 +2364,9 @@
         </button>
         <button class="action-btn" onclick="closeWonVoucherModal()" style="padding: 10px 24px; font-size: 1rem;">
           🌟 Voir dans Mes Bons Débloqués
+        </button>
+        <button class="doc-link-btn" onclick="deleteCurrentWonVoucher()" style="border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;" title="Supprimer ce bon">
+          🗑️ Supprimer ce Bon
         </button>
       </div>
     </div>
@@ -3176,9 +3180,13 @@
               </span>
             </div>
 
-            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 12px; line-height: 1.5;">
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 8px; line-height: 1.5;">
               Indiquez votre adresse Gmail : dès que votre fille débloque un cadeau dans sa boutique avec ses étoiles, <strong>un email vous est immédiatement envoyé avec le bon officiel</strong> et les détails du cadeau !
             </p>
+
+            <div style="background: #fffbeb; border: 1.5px dashed var(--bd-yellow-dark); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.83rem; color: #92400e; line-height: 1.4;">
+              ⚠️ <strong>Première utilisation :</strong> Après avoir enregistré votre adresse et cliqué sur <em>« 📨 Tester l'envoi »</em>, FormSubmit vous envoie un <strong>email de confirmation / activation</strong> (sujet : <em>« Action Required: Confirm your email »</em>).<br>👉 <strong>Vérifiez impérativement vos SPAMS / Courriers indésirables</strong> dans Gmail et <strong>cliquez sur le lien</strong> pour autoriser les envois !
+            </div>
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
               <input type="email" id="parentEmailInput" class="memo-input" placeholder="votre-adresse@gmail.com" style="flex: 2; min-width: 220px;" autocomplete="email">
@@ -5234,13 +5242,42 @@ Format JSON attendu :
       triggerConfetti();
       updateRewardsDisplays();
 
-      // Envoi de la notification par email au papa (si configuré)
-      sendVoucherEmailNotification(newVoucher);
-
       // Afficher le grand bon officiel festif à l'enfant
       showWonVoucherModal(newVoucher);
 
+      // Envoi de la notification par email au papa (si configuré)
+      sendVoucherEmailNotification(newVoucher).then(res => {
+        updateWonVoucherBadgeEmailStatus(res);
+      });
+
       renderClaimedVouchers();
+    }
+
+    function updateWonVoucherBadgeEmailStatus(res) {
+      const badgeEl = document.getElementById('voucherPapaNotificationBadge');
+      const email = getParentEmail();
+      if (!badgeEl) return;
+
+      if (!email) {
+        badgeEl.innerHTML = `✉️ <strong>Tu as gagné !</strong> Montre ce bon à ton papa ! <em>(Email parent non configuré)</em>`;
+        badgeEl.style.background = '#fef3c7';
+        badgeEl.style.color = '#92400e';
+        return;
+      }
+
+      if (res && res.success) {
+        badgeEl.innerHTML = `✉️ <strong>Ton bon officiel a été envoyé par email à ton papa (${escapeHtml(email)}) !</strong>`;
+        badgeEl.style.background = '#dcfce7';
+        badgeEl.style.color = '#15803d';
+      } else if (res && res.needsActivation) {
+        badgeEl.innerHTML = `⚠️ <strong>Papa : activation requise !</strong> FormSubmit vous a envoyé un email d'activation sur <em>${escapeHtml(email)}</em>. Cliquez sur le lien (vérifiez les Spams !) pour recevoir les futurs bons.`;
+        badgeEl.style.background = '#fee2e2';
+        badgeEl.style.color = '#991b1b';
+      } else {
+        badgeEl.innerHTML = `✉️ <strong>Ton bon est validé !</strong> <em>(Notification email en attente ou vérifiez l'Espace Parents)</em>`;
+        badgeEl.style.background = '#fef3c7';
+        badgeEl.style.color = '#92400e';
+      }
     }
 
     function showWonVoucherModal(voucher) {
@@ -5269,9 +5306,13 @@ Format JSON attendu :
       const email = getParentEmail();
       if (badgeEl) {
         if (email) {
-          badgeEl.innerHTML = `✉️ <strong>Ton bon officiel a été envoyé à ton papa (${escapeHtml(email)}) !</strong>`;
+          badgeEl.innerHTML = `⏳ <strong>Envoi de la notification par email à ton papa (${escapeHtml(email)})...</strong>`;
+          badgeEl.style.background = '#eff6ff';
+          badgeEl.style.color = '#1e3a8a';
         } else {
           badgeEl.innerHTML = `✉️ <strong>Tu as gagné ! Le bon est prêt à être montré à ton papa !</strong>`;
+          badgeEl.style.background = '#fef3c7';
+          badgeEl.style.color = '#92400e';
         }
       }
 
@@ -5381,12 +5422,15 @@ Format JSON attendu :
               <span class="voucher-stamp" style="border-color: ${v.used ? '#9ca3af' : 'var(--bd-green)'}; color: ${v.used ? '#6b7280' : 'var(--bd-green)'};">
                 ${v.used ? '✅ CADEAU VALIDÉ' : '🌟 PRÊT À UTILISER'}
               </span>
-              <div style="display: flex; gap: 6px;">
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                 <button class="doc-link-btn" onclick="showWonVoucherModalById('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;" title="Voir et imprimer le bon officiel">
                   🎫 Voir le Bon
                 </button>
                 <button class="doc-link-btn" onclick="toggleVoucherUsed('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem;">
                   ${v.used ? 'Marquer non-utilisé' : 'Valider avec Papa ✅'}
+                </button>
+                <button class="doc-link-btn" onclick="deleteClaimedVoucher('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem; border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;" title="Supprimer définitivement ce bon">
+                  🗑️ Supprimer
                 </button>
               </div>
             </div>
@@ -5404,6 +5448,33 @@ Format JSON attendu :
         playSound('correct');
         renderClaimedVouchers();
       }
+    }
+
+    function deleteClaimedVoucher(id) {
+      const vouchers = getClaimedVouchers();
+      const v = vouchers.find(item => item.id === id);
+      if (!v) return;
+
+      const confirmDelete = confirm(`Es-tu sûr(e) de vouloir supprimer ce bon « ${v.title} » ?\n\nCe bon sera définitivement retiré de ta collection de bons.`);
+      if (!confirmDelete) return;
+
+      const updated = vouchers.filter(item => item.id !== id);
+      saveClaimedVouchers(updated);
+
+      if (currentWonVoucher && currentWonVoucher.id === id) {
+        const modal = document.getElementById('voucherWonModal');
+        if (modal) modal.style.display = 'none';
+        currentWonVoucher = null;
+      }
+
+      playSound('wrong');
+      renderClaimedVouchers();
+      updateRewardsDisplays();
+    }
+
+    function deleteCurrentWonVoucher() {
+      if (!currentWonVoucher || !currentWonVoucher.id) return;
+      deleteClaimedVoucher(currentWonVoucher.id);
     }
 
     // =========================================================================
@@ -5623,12 +5694,13 @@ Format JSON attendu :
       const email = getParentEmail();
       if (!email) {
         console.log("Aucune adresse email parent configurée.");
-        return false;
+        return { success: false, reason: 'no_email' };
       }
 
       const payload = {
         _subject: `🎁 Académie CM2 : Nouveau Bon Cadeau Débloqué : "${voucher.title}" !`,
         _template: "table",
+        _captcha: "false",
         "Élève": "Votre fille (CM2)",
         "Cadeau Débloqué": `${voucher.icon || '🎁'} ${voucher.title}`,
         "Coût en Étoiles": `${voucher.cost} ⭐`,
@@ -5649,10 +5721,17 @@ Format JSON attendu :
           body: JSON.stringify(payload)
         });
         const data = await res.json();
-        return data.success === "true" || res.ok;
+        const isSuccess = data.success === "true" || data.success === true;
+        const msg = String(data.message || '');
+        const needsActivation = !isSuccess && (msg.toLowerCase().includes('activat') || msg.toLowerCase().includes('confirm'));
+        return {
+          success: isSuccess,
+          needsActivation: needsActivation,
+          message: msg
+        };
       } catch (e) {
         console.warn("Erreur lors de l'envoi de la notification email:", e);
-        return false;
+        return { success: false, reason: 'network_error', message: e.message || 'Erreur réseau' };
       }
     }
 
@@ -5681,18 +5760,27 @@ Format JSON attendu :
         desc: "Ceci est un email de test pour valider la bonne réception des bons cadeaux sur votre Gmail."
       };
 
-      const success = await sendVoucherEmailNotification(testVoucher);
+      const res = await sendVoucherEmailNotification(testVoucher);
       if (feedback) {
-        if (success) {
+        if (res && res.success) {
           feedback.style.background = '#dcfce7';
           feedback.style.color = '#15803d';
           feedback.style.border = '1.5px solid var(--bd-green)';
           feedback.innerHTML = `✅ <strong>Email de test envoyé avec succès à ${escapeHtml(email)} !</strong><br>Vérifiez votre boîte de réception Gmail (ou les spams si première réception).`;
-        } else {
+        } else if (res && res.needsActivation) {
           feedback.style.background = '#fefce8';
           feedback.style.color = '#92400e';
           feedback.style.border = '1.5px solid var(--bd-yellow-dark)';
-          feedback.innerHTML = `ℹ️ <strong>L'envoi a été transmis à ${escapeHtml(email)}.</strong><br>Si c'est la toute première fois avec cette adresse, FormSubmit vous a envoyé un email d'activation : cliquez sur le lien dans cet email pour autoriser les futurs messages !`;
+          feedback.innerHTML = `⚠️ <strong>Action requise sur votre boîte Gmail (${escapeHtml(email)}) !</strong><br>` +
+            `FormSubmit vous a envoyé un email d'activation obligatoire intitulé <strong>« Action Required: Confirm your email »</strong>.<br>` +
+            `👉 <strong>1. Vérifiez vos SPAMS / Courriers indésirables</strong> dans Gmail.<br>` +
+            `👉 <strong>2. Cliquez sur le bouton « Activate Form »</strong> dans cet email.<br>` +
+            `👉 <strong>3. Revenez ici et re-cliquez sur « Tester l'envoi »</strong> : vos notifications fonctionneront alors instantanément à chaque cadeau débloqué !`;
+        } else {
+          feedback.style.background = '#fee2e2';
+          feedback.style.color = '#b91c1c';
+          feedback.style.border = '1.5px solid var(--bd-red)';
+          feedback.innerHTML = `❌ <strong>Erreur lors de l'envoi :</strong> ${escapeHtml(res?.message || 'Veuillez vérifier votre connexion internet.')}`;
         }
       }
     }
