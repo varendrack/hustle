@@ -1092,6 +1092,138 @@
       transform: scale(1.12);
     }
 
+    /* Grand Billet Bon Cadeau Débloqué (Célébration Enfant) */
+    .voucher-won-modal-card {
+      background: #ffffff;
+      border: 3.5px solid var(--ink);
+      border-radius: 24px;
+      padding: 26px 20px;
+      max-width: 620px;
+      box-shadow: var(--shadow-comic-xl);
+    }
+    .voucher-papa-badge {
+      background: #f0fdf4;
+      border: 2px solid var(--bd-green);
+      color: #15803d;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 8px 18px;
+      border-radius: 20px;
+      display: inline-block;
+      margin: 0 auto 16px;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .grand-voucher-ticket {
+      background: #fffdf2;
+      border: 3px dashed var(--ink);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-comic);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .ticket-header-ribbon {
+      background: var(--bd-yellow);
+      border-bottom: 2.5px solid var(--ink);
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      padding: 8px 12px;
+    }
+    .ticket-body {
+      padding: 22px 20px;
+      position: relative;
+    }
+    .ticket-icon {
+      font-size: 3.6rem;
+      margin-bottom: 4px;
+      filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.15));
+    }
+    .ticket-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.65rem;
+      color: var(--ink);
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .ticket-desc {
+      font-size: 0.96rem;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+      font-weight: 600;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ticket-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.88rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .detail-label {
+      color: var(--ink-light);
+      font-weight: 700;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .detail-val {
+      color: var(--ink);
+      font-weight: 900;
+    }
+    .ticket-official-stamp {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      transform: rotate(12deg);
+      pointer-events: none;
+    }
+    .stamp-circle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 3px double var(--bd-red);
+      color: var(--bd-red);
+      border-radius: 50%;
+      width: 86px;
+      height: 86px;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+      text-transform: uppercase;
+      background: rgba(254, 242, 242, 0.4);
+      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+    }
+    .ticket-footer-msg {
+      background: var(--bg-page-alt);
+      border-top: 2px dashed var(--ink);
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+
+    @media (max-width: 550px) {
+      .ticket-details-grid {
+        grid-template-columns: 1fr;
+      }
+      .ticket-official-stamp {
+        position: static;
+        margin: 12px auto 0;
+        transform: none;
+      }
+    }
+
     /* Math Problem Solver Component */
     .problem-box {
       background: #fffdfa;
@@ -2174,6 +2306,68 @@
     </div>
   </div>
 
+  <!-- Modal Célébration Bon Cadeau Débloqué (Pour l'Enfant) -->
+  <div id="voucherWonModal" class="ai-modal-overlay">
+    <div class="ai-modal-card voucher-won-modal-card">
+      <div style="font-size: 3.5rem; line-height: 1; animation: floatAnim 3s ease-in-out infinite;">🎉</div>
+      <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.85rem; color: #b45309; margin: 4px 0 6px;">
+        Tu as gagné !
+      </h2>
+      <div class="voucher-papa-badge" id="voucherPapaNotificationBadge">
+        ✉️ Ton bon cadeau est envoyé à ton papa !
+      </div>
+
+      <!-- Le Grand Billet Officiel Style BD -->
+      <div class="grand-voucher-ticket" id="wonVoucherTicket">
+        <div class="ticket-header-ribbon">⭐ BON CADEAU OFFICIEL DE L'ACADÉMIE CM2 ⭐</div>
+        
+        <div class="ticket-body">
+          <div class="ticket-icon" id="wonVoucherIcon">🎁</div>
+          <div class="ticket-title" id="wonVoucherTitle">Nom du Cadeau</div>
+          <div class="ticket-desc" id="wonVoucherDesc">Description du cadeau débloqué</div>
+          
+          <div class="ticket-details-grid">
+            <div>
+              <span class="detail-label">🎟️ N° du Bon :</span>
+              <span class="detail-val" id="wonVoucherCode">CM2-BON-0000</span>
+            </div>
+            <div>
+              <span class="detail-label">📅 Date :</span>
+              <span class="detail-val" id="wonVoucherDate">29/09/2026</span>
+            </div>
+            <div>
+              <span class="detail-label">⭐ Valeur méritée :</span>
+              <span class="detail-val" id="wonVoucherCost">400 ⭐</span>
+            </div>
+            <div>
+              <span class="detail-label">👑 Décerné à :</span>
+              <span class="detail-val">La Championne du CM2</span>
+            </div>
+          </div>
+
+          <div class="ticket-official-stamp">
+            <span class="stamp-circle">
+              TRANSMIS<br>À PAPA<br>⭐ VALIDÉ ⭐
+            </span>
+          </div>
+        </div>
+
+        <div class="ticket-footer-msg">
+          💡 Montre ce bon officiel à ton papa ou imprime-le pour profiter de ta récompense !
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+        <button class="doc-link-btn" onclick="printWonVoucher()" style="border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;">
+          🖨️ Imprimer ce Bon
+        </button>
+        <button class="action-btn" onclick="closeWonVoucherModal()" style="padding: 10px 24px; font-size: 1rem;">
+          🌟 Voir dans Mes Bons Débloqués
+        </button>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="badge-top">
       ⭐ Programme Padlet & Vidéothèque CM2
@@ -2969,6 +3163,34 @@
               </button>
             </div>
 
+          </div>
+
+          <!-- Section 2 : Configuration Notification Email Gmail Parents -->
+          <div style="background: #f0fdf4; border: 2.5px solid var(--bd-green); border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <div style="font-weight: 800; font-size: 1.1rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+                📬 Notification Email Gmail lors d'un Déblocage de Cadeau
+              </div>
+              <span id="parentEmailStatusBadge" style="font-size: 0.8rem; font-weight: 800; padding: 3px 8px; border-radius: 8px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink);">
+                ⚪ Non configuré
+              </span>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 12px; line-height: 1.5;">
+              Indiquez votre adresse Gmail : dès que votre fille débloque un cadeau dans sa boutique avec ses étoiles, <strong>un email vous est immédiatement envoyé avec le bon officiel</strong> et les détails du cadeau !
+            </p>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+              <input type="email" id="parentEmailInput" class="memo-input" placeholder="votre-adresse@gmail.com" style="flex: 2; min-width: 220px;" autocomplete="email">
+              <button class="action-btn" onclick="saveParentEmailConfig()" style="padding: 8px 18px; font-size: 0.9rem; background: var(--bd-green);">
+                💾 Enregistrer mon Email
+              </button>
+              <button class="doc-link-btn" onclick="sendTestParentEmail()" style="padding: 8px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;">
+                📨 Tester l'envoi
+              </button>
+            </div>
+            
+            <div id="parentEmailFeedback" style="font-size: 0.84rem; margin-top: 10px; padding: 8px 12px; border-radius: 8px; display: none;"></div>
           </div>
 
           <!-- Formulaire Ajout de Cadeau avec Librairie d'Icônes -->
@@ -4974,7 +5196,9 @@ Format JSON attendu :
       }).join('');
     }
 
-    function claimReward(rewardId) {
+    let currentWonVoucher = null;
+
+    async function claimReward(rewardId) {
       const catalog = getRewardsCatalog();
       const rew = catalog.find(r => r.id === rewardId);
       if (!rew) return;
@@ -4993,6 +5217,7 @@ Format JSON attendu :
       const vouchers = getClaimedVouchers();
       const newVoucher = {
         id: 'vouch_' + Date.now(),
+        code: 'CM2-BON-' + Math.floor(1000 + Math.random() * 9000),
         rewardId: rew.id,
         title: rew.title,
         icon: rew.icon || '🎁',
@@ -5009,7 +5234,63 @@ Format JSON attendu :
       triggerConfetti();
       updateRewardsDisplays();
 
-      // Switch to vouchers tab
+      // Envoi de la notification par email au papa (si configuré)
+      sendVoucherEmailNotification(newVoucher);
+
+      // Afficher le grand bon officiel festif à l'enfant
+      showWonVoucherModal(newVoucher);
+
+      renderClaimedVouchers();
+    }
+
+    function showWonVoucherModal(voucher) {
+      currentWonVoucher = voucher;
+      const modal = document.getElementById('voucherWonModal');
+      if (!modal) return;
+
+      const iconEl = document.getElementById('wonVoucherIcon');
+      const titleEl = document.getElementById('wonVoucherTitle');
+      const descEl = document.getElementById('wonVoucherDesc');
+      const codeEl = document.getElementById('wonVoucherCode');
+      const dateEl = document.getElementById('wonVoucherDate');
+      const costEl = document.getElementById('wonVoucherCost');
+      const badgeEl = document.getElementById('voucherPapaNotificationBadge');
+
+      if (iconEl) iconEl.innerText = voucher.icon || '🎁';
+      if (titleEl) titleEl.innerText = voucher.title || 'Cadeau';
+      if (descEl) descEl.innerText = voucher.desc || 'Bon cadeau débloqué sur l\'Académie CM2 !';
+      if (codeEl) codeEl.innerText = voucher.code || voucher.id;
+      if (dateEl) {
+        const d = voucher.claimedAt ? new Date(voucher.claimedAt) : new Date();
+        dateEl.innerText = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+      if (costEl) costEl.innerText = voucher.cost + ' ⭐';
+
+      const email = getParentEmail();
+      if (badgeEl) {
+        if (email) {
+          badgeEl.innerHTML = `✉️ <strong>Ton bon officiel a été envoyé à ton papa (${escapeHtml(email)}) !</strong>`;
+        } else {
+          badgeEl.innerHTML = `✉️ <strong>Tu as gagné ! Le bon est prêt à être montré à ton papa !</strong>`;
+        }
+      }
+
+      modal.style.display = 'flex';
+      playSound('win');
+      triggerConfetti();
+    }
+
+    function showWonVoucherModalById(id) {
+      const vouchers = getClaimedVouchers();
+      const v = vouchers.find(x => x.id === id);
+      if (v) showWonVoucherModal(v);
+    }
+
+    function closeWonVoucherModal() {
+      const modal = document.getElementById('voucherWonModal');
+      if (modal) modal.style.display = 'none';
+
+      // Basculer vers l'onglet Mes Bons Débloqués
       const parent = document.getElementById('subject-recompenses');
       if (parent) {
         parent.querySelectorAll('.submodule-btn').forEach(b => b.classList.remove('active'));
@@ -5017,9 +5298,55 @@ Format JSON attendu :
         parent.querySelectorAll('.submodule-btn')?.[1]?.classList.add('active');
         document.getElementById('sub-recompenses-mesbons')?.classList.add('active');
       }
-
       renderClaimedVouchers();
-      alert(`🎊 FÉLICITATIONS ! Tu as débloqué ton bon cadeau :\n\n"${rew.title}"\n\nMontre ce bon officiel à tes parents pour en profiter ! 🌟`);
+    }
+
+    function printWonVoucher() {
+      if (!currentWonVoucher) return;
+      const v = currentWonVoucher;
+      const d = v.claimedAt ? new Date(v.claimedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : new Date().toLocaleDateString('fr-FR');
+      
+      const printWindow = window.open('', '_blank', 'width=700,height=550');
+      if (!printWindow) {
+        window.print();
+        return;
+      }
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Bon Cadeau CM2 - ${escapeHtml(v.title)}</title>
+          <style>
+            body { font-family: 'Comic Sans MS', Arial, sans-serif; background: #fff; padding: 20px; text-align: center; }
+            .ticket { border: 4px dashed #1e293b; border-radius: 20px; padding: 24px; max-width: 580px; margin: 0 auto; background: #fffdf2; }
+            .header { background: #fef08a; border: 2px solid #1e293b; border-radius: 10px; padding: 8px; font-weight: 900; font-size: 1.1rem; margin-bottom: 16px; }
+            .icon { font-size: 4rem; margin: 10px 0; }
+            .title { font-size: 1.8rem; font-weight: 900; color: #1e293b; margin-bottom: 8px; }
+            .desc { font-size: 1.05rem; color: #4b5563; margin-bottom: 20px; }
+            .details { display: flex; justify-content: space-around; border: 2px solid #1e293b; border-radius: 12px; padding: 12px; font-size: 0.95rem; font-weight: 700; background: #fff; margin-bottom: 16px; }
+            .stamp { display: inline-block; border: 3px double #dc2626; color: #dc2626; border-radius: 50%; padding: 14px 10px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin-top: 10px; }
+          </style>
+        </head>
+        <body>
+          <div class="ticket">
+            <div class="header">⭐ BON CADEAU OFFICIEL DE L'ACADÉMIE CM2 ⭐</div>
+            <div class="icon">${v.icon || '🎁'}</div>
+            <div class="title">${escapeHtml(v.title)}</div>
+            <div class="desc">${escapeHtml(v.desc || '')}</div>
+            <div class="details">
+              <div>🎟️ N° : <strong>${v.code || v.id}</strong></div>
+              <div>📅 Date : <strong>${d}</strong></div>
+              <div>⭐ Valeur : <strong>${v.cost} ⭐</strong></div>
+            </div>
+            <div class="stamp">TRANSMIS À PAPA<br>⭐ VALIDÉ ⭐</div>
+          </div>
+          <script>
+            window.onload = function() { window.print(); }
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
     }
 
     function renderClaimedVouchers() {
@@ -5048,15 +5375,20 @@ Format JSON attendu :
             <div style="font-size: 2.2rem;">${v.icon || '🎁'}</div>
             <div class="voucher-title">${escapeHtml(v.title)}</div>
             <div style="font-size: 0.88rem; color: var(--ink); font-weight: 600;">${escapeHtml(v.desc || '')}</div>
-            <div class="voucher-date">📅 Débloqué le : ${dateStr} (${v.cost} ⭐)</div>
+            <div class="voucher-date">📅 Débloqué le : ${dateStr} (${v.cost} ⭐) ${v.code ? '• ' + v.code : ''}</div>
             
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1.5px dashed var(--ink); padding-top: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1.5px dashed var(--ink); padding-top: 10px; gap: 6px; flex-wrap: wrap;">
               <span class="voucher-stamp" style="border-color: ${v.used ? '#9ca3af' : 'var(--bd-green)'}; color: ${v.used ? '#6b7280' : 'var(--bd-green)'};">
                 ${v.used ? '✅ CADEAU VALIDÉ' : '🌟 PRÊT À UTILISER'}
               </span>
-              <button class="doc-link-btn" onclick="toggleVoucherUsed('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem;">
-                ${v.used ? 'Marquer non-utilisé' : 'Valider avec les parents ✅'}
-              </button>
+              <div style="display: flex; gap: 6px;">
+                <button class="doc-link-btn" onclick="showWonVoucherModalById('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;" title="Voir et imprimer le bon officiel">
+                  🎫 Voir le Bon
+                </button>
+                <button class="doc-link-btn" onclick="toggleVoucherUsed('${v.id}')" style="padding: 5px 10px; font-size: 0.78rem;">
+                  ${v.used ? 'Marquer non-utilisé' : 'Valider avec Papa ✅'}
+                </button>
+              </div>
             </div>
           </div>
         `;
@@ -5241,6 +5573,130 @@ Format JSON attendu :
       }
     }
 
+    // =========================================================================
+    // PARENT GMAIL NOTIFICATION SYSTEM
+    // =========================================================================
+    function getParentEmail() {
+      try {
+        return (localStorage.getItem('cm2_parent_email') || '').trim();
+      } catch (e) {
+        return '';
+      }
+    }
+
+    function saveParentEmailConfig() {
+      const inp = document.getElementById('parentEmailInput');
+      const email = (inp?.value || '').trim();
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        alert("⚠️ Veuillez renseigner une adresse email valide (ex: exemple@gmail.com) !");
+        return;
+      }
+      try {
+        localStorage.setItem('cm2_parent_email', email);
+      } catch (e) {}
+      updateParentEmailUI();
+      playSound('win');
+      alert(`✅ Adresse email enregistrée avec succès !\n\n${email}\n\nUn message récapitulatif vous sera automatiquement envoyé à chaque fois que votre fille débloque un bon cadeau !`);
+    }
+
+    function updateParentEmailUI() {
+      const email = getParentEmail();
+      const inp = document.getElementById('parentEmailInput');
+      const badge = document.getElementById('parentEmailStatusBadge');
+      if (inp && email && !inp.value) inp.value = email;
+      if (badge) {
+        if (email) {
+          badge.innerText = `✅ Actif (${email})`;
+          badge.style.background = '#dcfce7';
+          badge.style.color = '#15803d';
+          badge.style.borderColor = 'var(--bd-green)';
+        } else {
+          badge.innerText = `⚪ Non configuré`;
+          badge.style.background = '#f3f4f6';
+          badge.style.color = '#6b7280';
+          badge.style.borderColor = 'var(--ink)';
+        }
+      }
+    }
+
+    async function sendVoucherEmailNotification(voucher) {
+      const email = getParentEmail();
+      if (!email) {
+        console.log("Aucune adresse email parent configurée.");
+        return false;
+      }
+
+      const payload = {
+        _subject: `🎁 Académie CM2 : Nouveau Bon Cadeau Débloqué : "${voucher.title}" !`,
+        _template: "table",
+        "Élève": "Votre fille (CM2)",
+        "Cadeau Débloqué": `${voucher.icon || '🎁'} ${voucher.title}`,
+        "Coût en Étoiles": `${voucher.cost} ⭐`,
+        "N° de Bon Officiel": voucher.code || voucher.id,
+        "Date d'obtention": new Date().toLocaleString('fr-FR'),
+        "Description du Cadeau": voucher.desc || "Débloqué sur l'Académie des Champions CM2",
+        "Solde restant en Tirelire": `${walletStars} ⭐`,
+        "Message": "Bravo ! Ce bon cadeau a été mérité et validé grâce au travail sur l'Académie CM2. Il est désormais prêt à être honoré par Papa !"
+      };
+
+      try {
+        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        return data.success === "true" || res.ok;
+      } catch (e) {
+        console.warn("Erreur lors de l'envoi de la notification email:", e);
+        return false;
+      }
+    }
+
+    async function sendTestParentEmail() {
+      const email = getParentEmail() || (document.getElementById('parentEmailInput')?.value || '').trim();
+      if (!email || !email.includes('@')) {
+        alert("⚠️ Veuillez d'abord renseigner et enregistrer votre adresse Gmail !");
+        return;
+      }
+      
+      const feedback = document.getElementById('parentEmailFeedback');
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#eff6ff';
+        feedback.style.color = '#1e3a8a';
+        feedback.style.border = '1.5px solid var(--bd-blue)';
+        feedback.innerHTML = "⏳ Envoi de l'email de test en cours...";
+      }
+
+      const testVoucher = {
+        id: 'test_' + Date.now(),
+        code: 'CM2-TEST-0001',
+        title: "🍕 Choix du dîner de famille (Test)",
+        icon: "🍕",
+        cost: 100,
+        desc: "Ceci est un email de test pour valider la bonne réception des bons cadeaux sur votre Gmail."
+      };
+
+      const success = await sendVoucherEmailNotification(testVoucher);
+      if (feedback) {
+        if (success) {
+          feedback.style.background = '#dcfce7';
+          feedback.style.color = '#15803d';
+          feedback.style.border = '1.5px solid var(--bd-green)';
+          feedback.innerHTML = `✅ <strong>Email de test envoyé avec succès à ${escapeHtml(email)} !</strong><br>Vérifiez votre boîte de réception Gmail (ou les spams si première réception).`;
+        } else {
+          feedback.style.background = '#fefce8';
+          feedback.style.color = '#92400e';
+          feedback.style.border = '1.5px solid var(--bd-yellow-dark)';
+          feedback.innerHTML = `ℹ️ <strong>L'envoi a été transmis à ${escapeHtml(email)}.</strong><br>Si c'est la toute première fois avec cette adresse, FormSubmit vous a envoyé un email d'activation : cliquez sur le lien dans cet email pour autoriser les futurs messages !`;
+        }
+      }
+    }
+
     function renderParentArea() {
       const lockCard = document.getElementById('parentLockCard');
       const dashCard = document.getElementById('parentDashboardCard');
@@ -5270,6 +5726,9 @@ Format JSON attendu :
 
           // Initialiser le sélecteur d'icônes d'ajout de cadeau
           renderIconPicker('newIconGrid', 'newIconCatChips', currentNewIconCategory, document.getElementById('newRewardIcon')?.value || '🎁', 'handleNew');
+
+          // Mettre à jour l'affichage de l'email configuré
+          updateParentEmailUI();
 
           renderParentRewardsTable();
         } else {
@@ -5551,6 +6010,7 @@ Format JSON attendu :
         claimedVouchers: getClaimedVouchers(),
         awardedQuestions: awarded,
         parentPin: localStorage.getItem('cm2_parent_pin') || '1234',
+        parentEmail: localStorage.getItem('cm2_parent_email') || '',
         geminiApiKey: localStorage.getItem('gemini_api_key') || ''
       };
     }
@@ -5648,6 +6108,9 @@ Format JSON attendu :
       }
       if (data.parentPin) {
         localStorage.setItem('cm2_parent_pin', data.parentPin);
+      }
+      if (data.parentEmail) {
+        localStorage.setItem('cm2_parent_email', data.parentEmail);
       }
       if (data.geminiApiKey) {
         localStorage.setItem('gemini_api_key', data.geminiApiKey);
