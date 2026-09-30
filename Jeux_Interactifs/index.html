@@ -5713,6 +5713,7 @@
       try {
         localStorage.setItem('cm2_total_score', totalScore);
         localStorage.setItem('cm2_wallet_stars', walletStars);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
 
       if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
@@ -7646,6 +7647,7 @@ Format JSON attendu :
 
       walletStars -= rew.cost;
       localStorage.setItem('cm2_wallet_stars', walletStars);
+      localStorage.setItem('cm2_last_updated_timestamp', Date.now());
 
       const vouchers = getClaimedVouchers();
       const newVoucher = {
