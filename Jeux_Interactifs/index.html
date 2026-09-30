@@ -211,6 +211,81 @@
       font-size: 1.05rem;
     }
 
+    /* Daily Balance Widget & Subject Boost Badges */
+    .daily-balance-widget {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border: 2px solid var(--bd-green);
+      border-radius: 16px;
+      padding: 10px 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-comic);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.15s ease;
+    }
+    .daily-balance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .daily-balance-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .daily-balance-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .domain-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1.5px solid var(--ink);
+      background: #ffffff;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .domain-chip.active {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #15803d;
+    }
+    .tab-boost-badge {
+      display: inline-block;
+      background: #fef08a;
+      color: #854d0e;
+      border: 1.5px solid #ca8a04;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 999px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .parent-slider-card {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 2px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     /* Subject Tabs Navigation */
     .tabs-nav {
       display: flex;
@@ -3731,28 +3806,31 @@
     <div class="stat-pill">🏆 Trophées : <span id="badgeCount">0</span>/8</div>
   </div>
 
+  <!-- Widget Défi Polyvalence & Équilibre des 5 Domaines -->
+  <div id="dailyBalanceWidget" class="daily-balance-widget"></div>
+
   <!-- Subject Selection Navigation (Organisée par Pôles) -->
   <nav class="tabs-nav-structured">
     <!-- Pôle 1 : Les 4 Matières Fondamentales -->
     <div class="tabs-group-container">
       <span class="tabs-group-tag">📚 Matières</span>
-      <button class="tab-btn active" onclick="switchSubject('francais')">🇫🇷 Français</button>
-      <button class="tab-btn" onclick="switchSubject('maths')">🔢 Mathématiques</button>
-      <button class="tab-btn" onclick="switchSubject('histoire')">🏛️ Histoire & Géo</button>
-      <button class="tab-btn" onclick="switchSubject('sciences')">🔬 Sciences</button>
+      <button class="tab-btn active" id="tabBtnFrancais" onclick="switchSubject('francais')">🇫🇷 Français</button>
+      <button class="tab-btn" id="tabBtnMaths" onclick="switchSubject('maths')">🔢 Mathématiques</button>
+      <button class="tab-btn" id="tabBtnHistoire" onclick="switchSubject('histoire')">🏛️ Histoire & Géo</button>
+      <button class="tab-btn" id="tabBtnSciences" onclick="switchSubject('sciences')">🔬 Sciences</button>
     </div>
 
     <!-- Pôle 2 : Outils de Progression & Éveil Culturel -->
     <div class="tabs-group-container">
       <span class="tabs-group-tag">🛠️ Boîte à Outils & Éveil</span>
-      <button class="tab-btn tab-btn-highlight" onclick="switchSubject('outils')">🧰 Boîte à Outils (Conjugeur, Tables, Conversions...)</button>
-      <button class="tab-btn tab-btn-culture" onclick="switchSubject('culture')">🎭 Poésie & Arts (Chefs-d'œuvre)</button>
+      <button class="tab-btn tab-btn-highlight" id="tabBtnOutils" onclick="switchSubject('outils')">🧰 Boîte à Outils (Conjugeur, Tables...)</button>
+      <button class="tab-btn tab-btn-culture" id="tabBtnCulture" onclick="switchSubject('culture')">🎭 Poésie & Arts</button>
     </div>
 
     <!-- Pôle 3 : Espaces de l'Enfant -->
     <div class="tabs-group-container">
       <span class="tabs-group-tag">🌟 Mon Espace</span>
-      <button class="tab-btn" onclick="switchSubject('blocnotes')">📝 Mon Bloc-Notes & Ardoise</button>
+      <button class="tab-btn" onclick="switchSubject('blocnotes')">📝 Mon Bloc-Notes</button>
       <button class="tab-btn" onclick="switchSubject('videotheque')">🎬 Vidéothèque</button>
       <button class="tab-btn tab-btn-shop" onclick="switchSubject('recompenses')">🎁 Boutique Cadeaux</button>
     </div>
@@ -4732,7 +4810,119 @@
 
           </div>
 
-          <!-- Section 2 : Configuration Notification Email Gmail Parents -->
+          <!-- Section 2 : Curseurs d'Orientation & Coefficients des Matières -->
+          <div style="background: #f5f3ff; border: 2.5px solid #7c3aed; border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+              <div style="font-weight: 800; font-size: 1.15rem; color: #5b21b6; display: flex; align-items: center; gap: 8px;">
+                🎛️ Curseurs d'Orientation & Valeur des Points par Matière
+              </div>
+              <span style="font-size: 0.82rem; color: #5b21b6; background: #ffffff; padding: 3px 10px; border: 1.5px solid #7c3aed; border-radius: 8px; font-weight: 700;">
+                ⚡ Multiplicateur en direct
+              </span>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--ink); margin-bottom: 14px; line-height: 1.5;">
+              Ajustez les curseurs pour <strong>multiplier les étoiles gagnées</strong> dans les matières où vous souhaitez encourager votre fille à s'entraîner en priorité (ex: <em>Mathématiques x2.5</em> pour la motiver à faire des maths !).
+            </p>
+
+            <!-- Préréglages Rapides 1-Clic -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+              <button class="doc-link-btn" onclick="applyPresetMultipliers('balanced')" style="padding: 5px 10px; font-size: 0.82rem; background: #ffffff; border-color: #7c3aed; color: #5b21b6;">🎯 Tout Équilibré (1x partout)</button>
+              <button class="doc-link-btn" onclick="applyPresetMultipliers('maths')" style="padding: 5px 10px; font-size: 0.82rem; background: #fef08a; border-color: #ca8a04; color: #854d0e;">🔢 Priorité Maths (x2.5)</button>
+              <button class="doc-link-btn" onclick="applyPresetMultipliers('francais')" style="padding: 5px 10px; font-size: 0.82rem; background: #eff6ff; border-color: var(--bd-blue); color: var(--bd-blue-dark);">🇫🇷 Priorité Français (x2.5)</button>
+              <button class="doc-link-btn" onclick="applyPresetMultipliers('sciences')" style="padding: 5px 10px; font-size: 0.82rem; background: #ecfdf5; border-color: var(--bd-green); color: var(--bd-green);">🔬 Priorité Sciences & Histoire (x2.0)</button>
+            </div>
+
+            <!-- Grille des 5 curseurs -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 14px;">
+              
+              <!-- 1. Français -->
+              <div class="parent-slider-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--ink); font-size: 0.92rem;">🇫🇷 Français</strong>
+                  <span id="multValBadge-francais" style="font-weight: 800; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; background: #eff6ff; border: 1px solid var(--bd-blue); color: var(--bd-blue-dark);">x1.0 ⭐</span>
+                </div>
+                <input type="range" id="multSlider-francais" min="0.5" max="3.0" step="0.25" value="1.0" oninput="onMultiplierSliderChange('francais', this.value)" style="width: 100%; cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-light);">
+                  <span>0.5x</span>
+                  <span>1.0x (Normal)</span>
+                  <span>2.0x (Double)</span>
+                  <span>3.0x</span>
+                </div>
+              </div>
+
+              <!-- 2. Mathématiques -->
+              <div class="parent-slider-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--ink); font-size: 0.92rem;">🔢 Mathématiques</strong>
+                  <span id="multValBadge-maths" style="font-weight: 800; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; background: #fef08a; border: 1px solid #ca8a04; color: #854d0e;">x1.5 ⭐</span>
+                </div>
+                <input type="range" id="multSlider-maths" min="0.5" max="3.0" step="0.25" value="1.5" oninput="onMultiplierSliderChange('maths', this.value)" style="width: 100%; cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-light);">
+                  <span>0.5x</span>
+                  <span>1.0x (Normal)</span>
+                  <span>2.0x (Double)</span>
+                  <span>3.0x</span>
+                </div>
+              </div>
+
+              <!-- 3. Histoire & Géo -->
+              <div class="parent-slider-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--ink); font-size: 0.92rem;">🏛️ Histoire & Géo</strong>
+                  <span id="multValBadge-histoire" style="font-weight: 800; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; background: #eff6ff; border: 1px solid var(--bd-blue); color: var(--bd-blue-dark);">x1.0 ⭐</span>
+                </div>
+                <input type="range" id="multSlider-histoire" min="0.5" max="3.0" step="0.25" value="1.0" oninput="onMultiplierSliderChange('histoire', this.value)" style="width: 100%; cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-light);">
+                  <span>0.5x</span>
+                  <span>1.0x (Normal)</span>
+                  <span>2.0x (Double)</span>
+                  <span>3.0x</span>
+                </div>
+              </div>
+
+              <!-- 4. Sciences -->
+              <div class="parent-slider-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--ink); font-size: 0.92rem;">🔬 Sciences</strong>
+                  <span id="multValBadge-sciences" style="font-weight: 800; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; background: #ecfdf5; border: 1px solid var(--bd-green); color: var(--bd-green);">x1.0 ⭐</span>
+                </div>
+                <input type="range" id="multSlider-sciences" min="0.5" max="3.0" step="0.25" value="1.0" oninput="onMultiplierSliderChange('sciences', this.value)" style="width: 100%; cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-light);">
+                  <span>0.5x</span>
+                  <span>1.0x (Normal)</span>
+                  <span>2.0x (Double)</span>
+                  <span>3.0x</span>
+                </div>
+              </div>
+
+              <!-- 5. Culture & Arts -->
+              <div class="parent-slider-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--ink); font-size: 0.92rem;">🎭 Poésie & Arts</strong>
+                  <span id="multValBadge-culture" style="font-weight: 800; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; background: #fdf4ff; border: 1px solid #c026d3; color: #a21caf;">x1.0 ⭐</span>
+                </div>
+                <input type="range" id="multSlider-culture" min="0.5" max="3.0" step="0.25" value="1.0" oninput="onMultiplierSliderChange('culture', this.value)" style="width: 100%; cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-light);">
+                  <span>0.5x</span>
+                  <span>1.0x (Normal)</span>
+                  <span>2.0x (Double)</span>
+                  <span>3.0x</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Répartition de la pratique aujourd'hui -->
+            <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 10px 14px;">
+              <div style="font-weight: 700; font-size: 0.84rem; color: var(--ink); margin-bottom: 6px;">📊 Répartition des exercices pratiqués aujourd'hui :</div>
+              <div id="parentActivityDistBar" style="display: flex; height: 16px; border-radius: 8px; overflow: hidden; border: 1px solid var(--ink); background: #f1f5f9; margin-bottom: 6px;"></div>
+              <div id="parentActivityDistLabels" style="display: flex; gap: 10px; font-size: 0.75rem; color: var(--ink-light); flex-wrap: wrap;"></div>
+            </div>
+
+          </div>
+
+          <!-- Section 3 : Configuration Notification Email Gmail Parents -->
           <div style="background: #f0fdf4; border: 2.5px solid var(--bd-green); border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
               <div style="font-weight: 800; font-size: 1.1rem; color: #166534; display: flex; align-items: center; gap: 8px;">
@@ -5213,10 +5403,263 @@
     let currentStreak = 0;
     let unlockedBadges = 0;
 
-    function addScore(pts) {
-      if (pts > 0) {
-        totalScore += pts;
-        walletStars += pts;
+    // =========================================================================
+    // SUBJECT MULTIPLIERS & DOMAIN BALANCING ENGINE
+    // =========================================================================
+    const DEFAULT_SUBJECT_MULTIPLIERS = {
+      francais: 1.0,
+      maths: 1.5,
+      histoire: 1.0,
+      sciences: 1.0,
+      culture: 1.0
+    };
+
+    const SUBJECT_METAS = {
+      francais: { label: "Français", icon: "🇫🇷", color: "#2563eb", bg: "#eff6ff" },
+      maths: { label: "Mathématiques", icon: "🔢", color: "#d97706", bg: "#fef3c7" },
+      histoire: { label: "Histoire-Géo", icon: "🏛️", color: "#0284c7", bg: "#e0f2fe" },
+      sciences: { label: "Sciences", icon: "🔬", color: "#059669", bg: "#d1fae5" },
+      culture: { label: "Arts & Poésie", icon: "🎨", color: "#9333ea", bg: "#f3e8ff" }
+    };
+
+    function getSubjectMultipliers() {
+      try {
+        const raw = localStorage.getItem('cm2_subject_multipliers');
+        if (raw) return { ...DEFAULT_SUBJECT_MULTIPLIERS, ...JSON.parse(raw) };
+      } catch (e) {}
+      return { ...DEFAULT_SUBJECT_MULTIPLIERS };
+    }
+
+    function saveSubjectMultipliers(mults) {
+      localStorage.setItem('cm2_subject_multipliers', JSON.stringify(mults));
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
+      updateSubjectBonusBadges();
+      renderParentMultipliersUI();
+    }
+
+    function getSubjectMultiplier(subjectKey) {
+      if (!subjectKey) return 1.0;
+      const mults = getSubjectMultipliers();
+      const val = parseFloat(mults[subjectKey]);
+      return (!isNaN(val) && val > 0) ? val : 1.0;
+    }
+
+    function onMultiplierSliderChange(subjectKey, val) {
+      const mults = getSubjectMultipliers();
+      const num = parseFloat(val);
+      mults[subjectKey] = num;
+      saveSubjectMultipliers(mults);
+    }
+
+    function applyPresetMultipliers(presetKey) {
+      let mults = { francais: 1.0, maths: 1.0, histoire: 1.0, sciences: 1.0, culture: 1.0 };
+      if (presetKey === 'maths') {
+        mults = { francais: 1.0, maths: 2.5, histoire: 1.0, sciences: 1.0, culture: 1.0 };
+      } else if (presetKey === 'francais') {
+        mults = { francais: 2.5, maths: 1.0, histoire: 1.0, sciences: 1.0, culture: 1.0 };
+      } else if (presetKey === 'sciences') {
+        mults = { francais: 1.0, maths: 1.0, histoire: 2.0, sciences: 2.0, culture: 1.0 };
+      }
+      saveSubjectMultipliers(mults);
+      playSound('win');
+    }
+
+    function renderParentMultipliersUI() {
+      const mults = getSubjectMultipliers();
+      Object.keys(SUBJECT_METAS).forEach(key => {
+        const val = mults[key] !== undefined ? mults[key] : 1.0;
+        const slider = document.getElementById('multSlider-' + key);
+        const badge = document.getElementById('multValBadge-' + key);
+        if (slider) slider.value = val;
+        if (badge) {
+          badge.innerText = `x${val.toFixed(1)} ⭐`;
+          if (val > 1.0) {
+            badge.style.background = '#fef08a';
+            badge.style.color = '#854d0e';
+            badge.style.borderColor = '#ca8a04';
+          } else {
+            badge.style.background = '#f1f5f9';
+            badge.style.color = '#475569';
+            badge.style.borderColor = '#cbd5e1';
+          }
+        }
+      });
+      renderParentActivityStats();
+    }
+
+    function updateSubjectBonusBadges() {
+      const mults = getSubjectMultipliers();
+      const mapping = {
+        francais: 'tabBtnFrancais',
+        maths: 'tabBtnMaths',
+        histoire: 'tabBtnHistoire',
+        sciences: 'tabBtnSciences',
+        culture: 'tabBtnCulture'
+      };
+
+      Object.entries(mapping).forEach(([key, btnId]) => {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        const mult = mults[key] || 1.0;
+        const meta = SUBJECT_METAS[key];
+        
+        let boostHtml = '';
+        if (mult > 1.0) {
+          boostHtml = `<span class="tab-boost-badge">🔥 x${mult.toFixed(1)} ⭐</span>`;
+        }
+
+        if (key === 'francais') btn.innerHTML = `🇫🇷 Français ${boostHtml}`;
+        if (key === 'maths') btn.innerHTML = `🔢 Mathématiques ${boostHtml}`;
+        if (key === 'histoire') btn.innerHTML = `🏛️ Histoire & Géo ${boostHtml}`;
+        if (key === 'sciences') btn.innerHTML = `🔬 Sciences ${boostHtml}`;
+        if (key === 'culture') btn.innerHTML = `🎭 Poésie & Arts ${boostHtml}`;
+      });
+    }
+
+    // --- DAILY MULTI-DOMAIN BALANCE QUEST ---
+    function getDailyActivity() {
+      const todayKey = 'cm2_act_' + new Date().toISOString().slice(0, 10);
+      try {
+        const raw = localStorage.getItem(todayKey);
+        return raw ? JSON.parse(raw) : { francais: 0, maths: 0, histoire: 0, sciences: 0, culture: 0, bonusesAwarded: [] };
+      } catch (e) {
+        return { francais: 0, maths: 0, histoire: 0, sciences: 0, culture: 0, bonusesAwarded: [] };
+      }
+    }
+
+    function recordDomainActivity(subjectKey) {
+      if (!subjectKey || !SUBJECT_METAS[subjectKey]) return;
+      const todayKey = 'cm2_act_' + new Date().toISOString().slice(0, 10);
+      const act = getDailyActivity();
+      act[subjectKey] = (act[subjectKey] || 0) + 1;
+
+      // Check polyvalence milestones
+      const activeDomains = Object.keys(SUBJECT_METAS).filter(k => (act[k] || 0) > 0);
+      const count = activeDomains.length;
+      const awarded = act.bonusesAwarded || [];
+
+      let bonusPts = 0;
+      let bonusLabel = "";
+
+      if (count >= 2 && !awarded.includes(2)) {
+        awarded.push(2);
+        bonusPts = 2;
+        bonusLabel = "🥈 Défi Polyvalence (2 domaines explorés) : +2 ⭐ Bonus !";
+      } else if (count >= 3 && !awarded.includes(3)) {
+        awarded.push(3);
+        bonusPts = 4;
+        bonusLabel = "🥇 Défi Polyvalence (3 domaines explorés) : +4 ⭐ Bonus !";
+      } else if (count >= 4 && !awarded.includes(4)) {
+        awarded.push(4);
+        bonusPts = 8;
+        bonusLabel = "🏆 Défi Polyvalence (4 domaines explorés) : +8 ⭐ Bonus !";
+      } else if (count >= 5 && !awarded.includes(5)) {
+        awarded.push(5);
+        bonusPts = 15;
+        bonusLabel = "👑 GRAND CHELEM POLYVALENCE (Les 5 domaines maîtrisés aujourd'hui) : +15 ⭐ !";
+      }
+
+      act.bonusesAwarded = awarded;
+      try {
+        localStorage.setItem(todayKey, JSON.stringify(act));
+      } catch (e) {}
+
+      if (bonusPts > 0) {
+        addScore(bonusPts, null, true);
+        alert(`🎉 ${bonusLabel}`);
+        playSound('win');
+        triggerConfetti();
+      }
+
+      renderDailyBalanceWidget();
+      renderParentActivityStats();
+    }
+
+    function renderDailyBalanceWidget() {
+      const widget = document.getElementById('dailyBalanceWidget');
+      if (!widget) return;
+
+      const act = getDailyActivity();
+      const mults = getSubjectMultipliers();
+      const activeDomains = Object.keys(SUBJECT_METAS).filter(k => (act[k] || 0) > 0);
+      const count = activeDomains.length;
+
+      let nextGoalMsg = "";
+      if (count === 0) nextGoalMsg = "🎯 Fais un premier exercice pour lancer la quête du jour !";
+      else if (count === 1) nextGoalMsg = "🥈 Explore une 2e matière pour débloquer +2 ⭐ bonus !";
+      else if (count === 2) nextGoalMsg = "🥇 Explore une 3e matière pour débloquer +4 ⭐ bonus !";
+      else if (count === 3) nextGoalMsg = "🏆 Explore une 4e matière pour débloquer +8 ⭐ bonus !";
+      else if (count === 4) nextGoalMsg = "👑 Explore la 5e matière pour le GRAND CHELEM (+15 ⭐) !";
+      else nextGoalMsg = "🌟 Grand Chelem accompli aujourd'hui ! Félicitations pour ta polyvalence !";
+
+      const chipsHtml = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
+        const isDone = (act[key] || 0) > 0;
+        const mult = mults[key] || 1.0;
+        const multTag = mult > 1.0 ? ` 🔥x${mult.toFixed(1)}` : '';
+        return `
+          <div class="domain-chip ${isDone ? 'active' : ''}" onclick="switchSubject('${key}')" style="cursor: pointer;" title="${isDone ? 'Validé aujourd\'hui (' + act[key] + ' ex.)' : 'À explorer aujourd\'hui'}">
+            <span>${meta.icon} ${meta.label}</span>
+            <span>${isDone ? '✅' : '⏳'}</span>
+            ${multTag ? `<span style="color:#d97706; font-size:0.75rem;">${multTag}</span>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      widget.innerHTML = `
+        <div class="daily-balance-header">
+          <span class="daily-balance-title">
+            🌈 Défi Polyvalence du Jour : <strong>${count}/5 matières</strong>
+          </span>
+          <span style="font-size: 0.84rem; font-weight: 800; color: #15803d;">${nextGoalMsg}</span>
+        </div>
+        <div class="daily-balance-chips">
+          ${chipsHtml}
+        </div>
+      `;
+    }
+
+    function renderParentActivityStats() {
+      const bar = document.getElementById('parentActivityDistBar');
+      const labels = document.getElementById('parentActivityDistLabels');
+      if (!bar || !labels) return;
+
+      const act = getDailyActivity();
+      const total = Object.keys(SUBJECT_METAS).reduce((sum, k) => sum + (act[k] || 0), 0);
+
+      if (total === 0) {
+        bar.innerHTML = `<div style="width: 100%; text-align: center; font-size: 0.75rem; color: #94a3b8; line-height: 16px;">Aucun exercice effectué aujourd'hui</div>`;
+        labels.innerHTML = `<span>En attente de session de travail.</span>`;
+        return;
+      }
+
+      bar.innerHTML = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
+        const c = act[key] || 0;
+        if (c === 0) return '';
+        const pct = ((c / total) * 100).toFixed(1);
+        return `<div style="width: ${pct}%; background: ${meta.color};" title="${meta.label} : ${c} ex. (${pct}%)"></div>`;
+      }).join('');
+
+      labels.innerHTML = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
+        const c = act[key] || 0;
+        const pct = ((c / total) * 100).toFixed(0);
+        return `<span style="color: ${meta.color}; font-weight: 700;">${meta.icon} ${meta.label}: ${c} (${pct}%)</span>`;
+      }).join('');
+    }
+
+    // --- SCORING & BADGES ---
+    function addScore(pts, subjectKey = null, isBonus = false) {
+      let earnedPts = pts;
+      let mult = 1.0;
+
+      if (pts > 0 && subjectKey && !isBonus) {
+        mult = getSubjectMultiplier(subjectKey);
+        earnedPts = Math.max(1, Math.round(pts * mult));
+        recordDomainActivity(subjectKey);
+      }
+
+      if (earnedPts > 0) {
+        totalScore += earnedPts;
+        walletStars += earnedPts;
       }
       currentStreak += 1;
 
@@ -5225,16 +5668,23 @@
         localStorage.setItem('cm2_wallet_stars', walletStars);
       } catch (e) {}
 
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
+
       updateRewardsDisplays();
-      document.getElementById('totalScore').innerText = totalScore;
-      document.getElementById('streakCount').innerText = currentStreak;
+      const elTotal = document.getElementById('totalScore');
+      const elStreak = document.getElementById('streakCount');
+      if (elTotal) elTotal.innerText = totalScore;
+      if (elStreak) elStreak.innerText = currentStreak;
       checkBadges();
-      if (pts > 0) triggerConfetti();
+      if (earnedPts > 0) triggerConfetti();
+
+      return { earnedPts, mult };
     }
 
     function resetStreak() {
       currentStreak = 0;
-      document.getElementById('streakCount').innerText = currentStreak;
+      const el = document.getElementById('streakCount');
+      if (el) el.innerText = currentStreak;
     }
 
     function checkBadges() {
@@ -5248,7 +5698,8 @@
       if (currentStreak >= 5) count++;
       if (currentStreak >= 10) count++;
       unlockedBadges = count;
-      document.getElementById('badgeCount').innerText = unlockedBadges;
+      const el = document.getElementById('badgeCount');
+      if (el) el.innerText = unlockedBadges;
     }
 
     // =========================================================================
@@ -5321,6 +5772,7 @@
       } else if (subj === 'culture') {
         initCultureSection();
       }
+      renderDailyBalanceWidget();
     }
 
     function switchSubmodule(subject, subKey) {
@@ -5345,20 +5797,20 @@
     }
 
     // =========================================================================
-    // QUIZ RUNNER ENGINE (ANTI-FARMING + RANDOMIZED ORDER)
+    // QUIZ RUNNER ENGINE (ANTI-FARMING + MULTIPLIER SUPPORT)
     // =========================================================================
     class QuizRunner {
       constructor(containerId, questions, options = {}) {
         this.container = document.getElementById(containerId);
         this.rawQuestions = questions;
         this.title = options.title || "Quiz";
+        this.subjectKey = options.subjectKey || "francais";
         this.initSeries();
       }
 
       initSeries() {
         this.currentIndex = 0;
         this.correctCount = 0;
-        // Shuffle questions and options for active reading
         this.questions = shuffleArray(this.rawQuestions).map(q => ({
           ...q,
           options: shuffleArray(q.options)
@@ -5367,6 +5819,7 @@
       }
 
       render() {
+        if (!this.container) return;
         if (this.currentIndex >= this.questions.length) {
           this.renderSummary();
           return;
@@ -5376,11 +5829,14 @@
         const progressPct = ((this.currentIndex) / this.questions.length) * 100;
         const qKey = q.id || generateQuestionKey(this.title, q.display, q.correct);
         const alreadyDone = isQuestionAwarded(qKey);
+        const mult = getSubjectMultiplier(this.subjectKey);
+        const ptsPreview = Math.max(1, Math.round(2 * mult));
+        const multTag = mult > 1.0 ? `<span style="color:#d97706; font-weight:800; font-size:0.78rem; background:#fef3c7; padding:2px 6px; border-radius:4px; margin-left:4px;">🔥 x${mult.toFixed(1)} Parent</span>` : '';
 
         this.container.innerHTML = `
           <div class="quiz-progress-wrap">
             <div class="quiz-progress-header">
-              <span>Question ${this.currentIndex + 1} sur ${this.questions.length} ${alreadyDone ? '<span class="q-tag-done">🔁 Révision (0 ⭐)</span>' : '<span class="q-tag-new">⭐ Inédit (+2 ⭐)</span>'}</span>
+              <span>Question ${this.currentIndex + 1} sur ${this.questions.length} ${alreadyDone ? '<span class="q-tag-done">🔁 Révision (0 ⭐)</span>' : `<span class="q-tag-new">⭐ Inédit (+${ptsPreview} ⭐)${multTag}</span>`}</span>
               <span>Score : ${this.correctCount}/${this.currentIndex}</span>
             </div>
             <div class="quiz-progress-bar-bg">
@@ -5421,11 +5877,12 @@
           const alreadyDone = isQuestionAwarded(qKey);
           if (!alreadyDone) {
             recordAwardedQuestion(qKey);
-            addScore(2);
+            const res = addScore(2, this.subjectKey);
+            const boostMsg = res.mult > 1.0 ? ` (🔥 Bonus Parent x${res.mult.toFixed(1)} appliqué)` : '';
             fb.className = 'feedback-banner correct';
-            fb.innerHTML = `🎉 <strong>Exact ! +2 ⭐ gagnées !</strong> ${q.tip}`;
+            fb.innerHTML = `🎉 <strong>Exact ! +${res.earnedPts} ⭐ gagnées !${boostMsg}</strong> ${q.tip}`;
           } else {
-            addScore(0);
+            addScore(0, this.subjectKey);
             fb.className = 'feedback-banner correct';
             fb.innerHTML = `🎉 <strong>Exact !</strong> <span style="font-size:0.85rem; color:var(--bd-blue-dark); font-weight:700;">(Exercice déjà validé - 0 ⭐ pour cette révision)</span><br>💡 <em>${q.tip}</em>`;
           }
@@ -5462,8 +5919,8 @@
           const seriesKey = `series_${this.title}_${this.rawQuestions.map(q => q.correct).join('').slice(0, 20)}`;
           if (!isQuestionAwarded(seriesKey) && this.questions.length >= 4) {
             recordAwardedQuestion(seriesKey);
-            addScore(10);
-            message += "<br><br><span style='color:var(--bd-yellow); font-weight:800; font-size:1.05rem;'>🌟 BONUS SÉRIE SANS-FAUTE INÉDITE : +10 ⭐ accordées !</span>";
+            const res = addScore(10, this.subjectKey);
+            message += `<br><br><span style='color:var(--bd-yellow); font-weight:800; font-size:1.05rem;'>🌟 BONUS SÉRIE SANS-FAUTE INÉDITE : +${res.earnedPts} ⭐ accordées !</span>`;
           }
         } else if (pct >= 60) {
           message = "Très bon travail ! Encore quelques petits réflexes et ce sera parfait !";
@@ -5487,9 +5944,12 @@
           </div>
         `;
 
-        this.container.querySelector('.action-restart-btn').onclick = () => {
-          this.initSeries();
-        };
+        const rBtn = this.container.querySelector('.action-restart-btn');
+        if (rBtn) {
+          rBtn.onclick = () => {
+            this.initSeries();
+          };
+        }
       }
     }
 
@@ -5600,26 +6060,29 @@
             const alreadyDone = isQuestionAwarded(errKey);
             if (!alreadyDone) {
               recordAwardedQuestion(errKey);
-              addScore(2);
+              const res = addScore(2, 'francais');
+              const boostMsg = res.mult > 1.0 ? ` (🔥 Boost Français x${res.mult.toFixed(1)})` : '';
+              fb.className = 'feedback-banner correct';
+              fb.innerHTML = `🎯 <strong>Piège démasqué ! +${res.earnedPts} ⭐ gagnées !${boostMsg}</strong> ${tok.explanation}`;
             } else {
-              addScore(0);
+              addScore(0, 'francais');
+              fb.className = 'feedback-banner correct';
+              fb.innerHTML = `🎯 <strong>Piège démasqué ! (Déjà validé)</strong> ${tok.explanation}`;
             }
             span.classList.add('corrected');
             span.innerText = tok.correct;
             foundInDet++;
             const left = totalErrors - foundInDet;
             document.getElementById('fautesLeft').innerText = left;
-            fb.className = 'feedback-banner correct';
-            fb.innerHTML = `🎯 <strong>Piège démasqué ! ${alreadyDone ? '(Déjà validé)' : '(+2 ⭐)'}</strong> ${tok.explanation}`;
             if (left === 0) {
               playSound('win');
               const misKey = `det_mis_${m.title}`;
               if (!isQuestionAwarded(misKey)) {
                 recordAwardedQuestion(misKey);
-                addScore(5);
-                fb.innerHTML = `🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte ! (+5 ⭐ bonus d'enquête)`;
+                const res = addScore(5, 'francais');
+                fb.innerHTML += `<br><br>🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte ! (+${res.earnedPts} ⭐ bonus d'enquête)`;
               } else {
-                fb.innerHTML = `🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte !`;
+                fb.innerHTML += `<br><br>🏆 <strong>Félicitations Détective !</strong> Tu as trouvé toutes les erreurs de ce texte !`;
               }
               document.getElementById('det-nextBtn').style.display = 'inline-block';
             }
@@ -5950,10 +6413,11 @@
         const alreadyDone = isQuestionAwarded(stepKey);
         if (!alreadyDone) {
           recordAwardedQuestion(stepKey);
-          addScore(3);
-          fb.innerHTML = `🎉 <strong>Excellent raisonnement ! (+3 ⭐)</strong> ${step.hint}`;
+          const res = addScore(3, 'maths');
+          const boostMsg = res.mult > 1.0 ? ` (🔥 Boost Maths x${res.mult.toFixed(1)})` : '';
+          fb.innerHTML = `🎉 <strong>Excellent raisonnement ! (+${res.earnedPts} ⭐)${boostMsg}</strong> ${step.hint}`;
         } else {
-          addScore(0);
+          addScore(0, 'maths');
           fb.innerHTML = `🎉 <strong>Excellent raisonnement !</strong> (Déjà validé - 0 ⭐)<br>💡 ${step.hint}`;
         }
         btn.style.background = '#10b981';
@@ -6321,7 +6785,7 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
           const generated = await callGeminiApi(prompt);
           if (Array.isArray(generated) && generated.length > 0) {
             const containerId = containerMap[subjectKey] || 'quiz-container-homo';
-            new QuizRunner(containerId, generated, { title: "Défis Dynamiques IA" });
+            new QuizRunner(containerId, generated, { title: "Défis Dynamiques IA", subjectKey: subjectKey });
             playSound('win');
             triggerConfetti();
             showAiToast("✨ 8 nouvelles questions créées sur mesure par l'IA !");
@@ -8033,7 +8497,7 @@ Format JSON attendu :
       const awarded = getAwardedQuestions();
       return {
         app: "academie_cm2_lucie",
-        version: "2.5",
+        version: "2.6",
         exportedAt: new Date().toISOString(),
         updatedTimestamp: Date.now(),
         totalScore,
@@ -8047,6 +8511,7 @@ Format JSON attendu :
         deletedArts: getDeletedArts(),
         customPoems: getCustomPoems(),
         deletedPoems: getDeletedPoems(),
+        subjectMultipliers: getSubjectMultipliers(),
         parentPin: localStorage.getItem('cm2_parent_pin') || '1234',
         parentEmail: localStorage.getItem('cm2_parent_email') || '',
         geminiApiKey: localStorage.getItem('gemini_api_key') || ''
@@ -8210,6 +8675,9 @@ Format JSON attendu :
         const mergedDel = Array.from(new Set([...currentDel, ...data.deletedPoems]));
         saveDeletedPoems(mergedDel);
       }
+      if (data.subjectMultipliers && typeof data.subjectMultipliers === 'object') {
+        saveSubjectMultipliers(data.subjectMultipliers);
+      }
       if (data.parentPin) {
         localStorage.setItem('cm2_parent_pin', data.parentPin);
       }
@@ -8228,6 +8696,8 @@ Format JSON attendu :
       renderParentArea();
       initCultureSection();
       updateSyncStatsDisplay();
+      updateSubjectBonusBadges();
+      renderDailyBalanceWidget();
       updateCloudUiStatus("Synchronisé avec succès", true);
 
       if (!isSilent) {
@@ -10935,20 +11405,22 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     renderIconPicker('newIconGrid', 'newIconCatChips', 'all', '🎁', 'handleNew');
     renderParentArea();
     updateSyncStatsDisplay();
+    updateSubjectBonusBadges();
+    renderDailyBalanceWidget();
     initCloudAutoSync();
 
-    new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
+    new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
     renderDetectiveMission();
     renderProblemSolver();
-    new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants" });
-    new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent" });
-    new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage" });
-    new QuizRunner('quiz-container-periodes', allPeriodesQuestions, { title: "Les 5 Grandes Périodes" });
-    new QuizRunner('quiz-container-prehistoire', allPrehistoireQuestions, { title: "La Préhistoire" });
-    new QuizRunner('quiz-container-reims', allReimsQuestions, { title: "La Cathédrale de Reims" });
-    new QuizRunner('quiz-container-materiaux', allMateriauxQuestions, { title: "Les Matériaux" });
-    new QuizRunner('quiz-container-eiffel', allEiffelQuestions, { title: "Projet Gustave Eiffel" });
-    new QuizRunner('quiz-container-elements', allElementsQuestions, { title: "Tableau des Éléments" });
+    new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants", subjectKey: "francais" });
+    new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent", subjectKey: "francais" });
+    new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage", subjectKey: "maths" });
+    new QuizRunner('quiz-container-periodes', allPeriodesQuestions, { title: "Les 5 Grandes Périodes", subjectKey: "histoire" });
+    new QuizRunner('quiz-container-prehistoire', allPrehistoireQuestions, { title: "La Préhistoire", subjectKey: "histoire" });
+    new QuizRunner('quiz-container-reims', allReimsQuestions, { title: "La Cathédrale de Reims", subjectKey: "histoire" });
+    new QuizRunner('quiz-container-materiaux', allMateriauxQuestions, { title: "Les Matériaux", subjectKey: "sciences" });
+    new QuizRunner('quiz-container-eiffel', allEiffelQuestions, { title: "Projet Gustave Eiffel", subjectKey: "sciences" });
+    new QuizRunner('quiz-container-elements', allElementsQuestions, { title: "Tableau des Éléments", subjectKey: "sciences" });
   </script>
 </body>
 </html>
