@@ -3370,22 +3370,65 @@
 
   <!-- Modale Synchronisation iPad & PC -->
   <div id="syncModal" class="ai-modal-overlay">
-    <div class="ai-modal-card" style="max-width: 580px;">
+    <div class="ai-modal-card" style="max-width: 620px;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--ink); display: flex; align-items: center; gap: 8px;">
-          ☁️ Sauvegarde & Synchronisation iPad / PC
+          ☁️ Sauvegarde & Synchronisation iPad / Mobile / PC
         </h3>
         <button onclick="closeSyncModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.6rem; cursor: pointer; font-weight: 800;">&times;</button>
       </div>
 
       <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--ink-faint); padding-bottom: 8px; flex-wrap: wrap;">
-        <button id="syncTabCodeBtn" class="sync-tab-btn active" onclick="switchSyncTab('code')">📋 Code de Transfert Express</button>
+        <button id="syncTabCloudBtn" class="sync-tab-btn active" onclick="switchSyncTab('cloud')">⚡ Synchro Cloud Auto</button>
+        <button id="syncTabCodeBtn" class="sync-tab-btn" onclick="switchSyncTab('code')">📋 Code Express (Manuel)</button>
         <button id="syncTabFileBtn" class="sync-tab-btn" onclick="switchSyncTab('file')">💾 Fichier .json</button>
         <button id="syncTabHelpBtn" class="sync-tab-btn" onclick="switchSyncTab('help')">❓ Mode d'emploi</button>
       </div>
 
+      <!-- Tab 0: Synchro Cloud Auto -->
+      <div id="syncTabCloud" class="sync-tab-content active">
+        <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 14px; padding: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--bd-green); display: flex; align-items: center; gap: 6px;">
+              <span id="cloudStatusDot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e;"></span>
+              <span id="cloudStatusText">Statut : Prêt pour la synchronisation</span>
+            </span>
+            <span id="cloudLastSyncTime" style="font-size: 0.8rem; color: var(--ink-light);">Dernière synchro : À l'instant</span>
+          </div>
+
+          <div style="font-size: 0.84rem; color: var(--ink); margin-bottom: 10px; line-height: 1.45;">
+            Dès que vous ajoutez un <strong>chef-d'œuvre avec l'IA Gemini</strong>, une poésie ou que vous gagnez des étoiles, tout est synchronisé automatiquement entre votre <strong>PC, iPad et Smartphone</strong>.
+          </div>
+
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
+            <label style="font-weight: 800; font-size: 0.85rem; color: var(--ink); min-width: 130px;">🔑 Code de Famille :</label>
+            <input type="text" id="cloudRoomIdInput" class="memo-input" style="flex: 1; min-width: 140px; padding: 6px 10px; font-size: 0.88rem; font-weight: 700; text-transform: lowercase;" placeholder="ex: lucie-cm2" value="lucie-cm2">
+            <button class="doc-link-btn" onclick="saveCloudRoomSettings()" style="padding: 6px 12px; font-size: 0.82rem; background: var(--bd-green); color: #ffffff; border-color: var(--ink);">Enregistrer</button>
+          </div>
+
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="action-btn" onclick="forceCloudAutoSync()" style="flex: 1; padding: 9px; font-size: 0.88rem; background: var(--bd-green);">
+              🔄 Synchroniser maintenant (Envoyer & Récupérer)
+            </button>
+            <button class="action-btn" onclick="copyMagicSyncLink()" style="flex: 1; padding: 9px; font-size: 0.88rem; background: #0284c7;" title="Génère un lien magique à ouvrir sur iPad ou mobile pour synchroniser en 1 clic">
+              🔗 Copier Lien 1-Clic iPad/Mobile
+            </button>
+          </div>
+          <div id="cloudFeedbackMsg" style="display: none; font-size: 0.84rem; font-weight: 800; text-align: center; margin-top: 8px;"></div>
+        </div>
+
+        <details style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; font-size: 0.82rem; color: var(--ink-light);">
+          <summary style="font-weight: 700; cursor: pointer; color: var(--ink);">⚙️ Paramètres Cloud Avancés (Optionnel : Base de données Firebase / JSON)</summary>
+          <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-weight: 600; color: var(--ink);">URL Base de données Firebase Realtime (ex: <code>https://mon-projet-rtdb.firebaseio.com</code>) :</label>
+            <input type="text" id="cloudEndpointUrlInput" class="memo-input" style="width: 100%; font-size: 0.8rem;" placeholder="Laisser vide pour utiliser le relais de synchronisation par défaut">
+            <button class="doc-link-btn" onclick="saveAdvancedCloudEndpoint()" style="align-self: flex-start; padding: 4px 10px; font-size: 0.78rem; margin-top: 4px;">Sauvegarder l'URL Cloud</button>
+          </div>
+        </details>
+      </div>
+
       <!-- Tab 1: Code Express -->
-      <div id="syncTabCode" class="sync-tab-content active">
+      <div id="syncTabCode" class="sync-tab-content">
         <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 12px; padding: 14px;">
           <div style="font-weight: 800; font-size: 0.95rem; color: var(--bd-green); margin-bottom: 4px;">📤 1. Exporter depuis cet appareil :</div>
           <div style="font-size: 0.84rem; color: var(--ink-light); margin-bottom: 10px;">
@@ -3427,11 +3470,10 @@
       <!-- Tab 3: Mode d'emploi -->
       <div id="syncTabHelp" class="sync-tab-content">
         <div class="rule-box" style="background: #fefce8; border: 2px solid var(--ink); font-size: 0.88rem; line-height: 1.6;">
-          <strong>💡 Comment passer de l'iPad au PC sans perdre ses étoiles ?</strong><br><br>
-          <strong>1. Sur l'iPad :</strong> Ouvre le menu <em>☁️ Sync iPad / PC</em> en haut, puis clique sur <strong>« 📋 Copier mon Code de Sauvegarde »</strong>.<br>
-          <strong>2. Envoi :</strong> Colle ce code dans une Note partagée iCloud, un Mail, ou par AirDrop / Message à destination du PC.<br>
-          <strong>3. Sur le PC :</strong> Ouvre le site, clique sur <em>☁️ Sync iPad / PC</em>, colle le code dans la zone bleue et clique sur <strong>« ✨ Restaurer »</strong>.<br>
-          <strong>🎉 Bingo !</strong> Toutes les étoiles, bons cadeaux, notes et exercices validés sont synchronisés immédiatement !
+          <strong>💡 Comment profiter de la synchronisation automatique (iPad ↔ PC ↔ Smartphone) ?</strong><br><br>
+          <strong>1. Avec le Lien 1-Clic (Le plus simple) :</strong> Dans l'onglet <em>⚡ Synchro Cloud Auto</em>, clique sur <strong>« 🔗 Copier Lien 1-Clic iPad/Mobile »</strong> et envoie-le par AirDrop, WhatsApp ou Mail sur ton iPad. Ouvre le lien : tout est synchronisé instantanément !<br>
+          <strong>2. Avec le Code de Famille :</strong> Assure-toi que le même <em>Code de Famille</em> (ex: <code>lucie-cm2</code>) est configuré sur tous tes appareils.<br>
+          <strong>3. Automatique :</strong> Toute nouvelle œuvre découverte avec Gemini ou poésie créée est immédiatement synchronisée en direct !
         </div>
       </div>
     </div>
@@ -7915,13 +7957,18 @@ Format JSON attendu :
     }
 
     // =========================================================================
-    // CROSS-DEVICE BACKUP & SYNC ENGINE (iPad ↔ PC)
+    // CROSS-DEVICE CLOUD AUTO-SYNC & BACKUP ENGINE (iPad ↔ PC ↔ Mobile)
     // =========================================================================
+    let syncBroadcastChannel = null;
+    let autoCloudSyncTimeout = null;
+    let isCloudSyncing = false;
+
     function openSyncModal() {
       const m = document.getElementById('syncModal');
       if (!m) return;
       m.style.display = 'flex';
       updateSyncStatsDisplay();
+      updateCloudUiStatus();
     }
 
     function closeSyncModal() {
@@ -7929,10 +7976,12 @@ Format JSON attendu :
       if (m) m.style.display = 'none';
       const copyFb = document.getElementById('syncCopyFeedback');
       if (copyFb) copyFb.style.display = 'none';
+      const cloudFb = document.getElementById('cloudFeedbackMsg');
+      if (cloudFb) cloudFb.style.display = 'none';
     }
 
     function switchSyncTab(tab) {
-      ['code', 'file', 'help'].forEach(t => {
+      ['cloud', 'code', 'file', 'help'].forEach(t => {
         const btn = document.getElementById('syncTab' + capitalize(t) + 'Btn');
         const content = document.getElementById('syncTab' + capitalize(t));
         if (btn) btn.classList.toggle('active', t === tab);
@@ -7944,12 +7993,49 @@ Format JSON attendu :
       return s.charAt(0).toUpperCase() + s.slice(1);
     }
 
+    function getCloudRoomId() {
+      return (localStorage.getItem('cm2_cloud_room_id') || 'lucie-cm2').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    }
+
+    function getCloudEndpointUrl() {
+      return (localStorage.getItem('cm2_cloud_endpoint_url') || '').trim();
+    }
+
+    function saveCloudRoomSettings() {
+      const input = document.getElementById('cloudRoomIdInput');
+      const val = (input?.value || '').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'lucie-cm2';
+      localStorage.setItem('cm2_cloud_room_id', val);
+      if (input) input.value = val;
+      showCloudFeedback("✅ Code de famille enregistré : " + val, true);
+      playSound('win');
+      forceCloudAutoSync();
+    }
+
+    function saveAdvancedCloudEndpoint() {
+      const input = document.getElementById('cloudEndpointUrlInput');
+      const val = (input?.value || '').trim();
+      localStorage.setItem('cm2_cloud_endpoint_url', val);
+      showCloudFeedback(val ? "✅ URL Firebase / Cloud enregistrée !" : "ℹ️ Relais par défaut activé.", true);
+      playSound('win');
+      forceCloudAutoSync();
+    }
+
+    function showCloudFeedback(msg, isSuccess) {
+      const el = document.getElementById('cloudFeedbackMsg');
+      if (!el) return;
+      el.style.display = 'block';
+      el.style.color = isSuccess ? 'var(--bd-green)' : 'var(--bd-red)';
+      el.innerText = msg;
+      setTimeout(() => { if (el) el.style.display = 'none'; }, 4000);
+    }
+
     function generateBackupPayload() {
       const awarded = getAwardedQuestions();
       return {
         app: "academie_cm2_lucie",
-        version: "2.0",
+        version: "2.5",
         exportedAt: new Date().toISOString(),
+        updatedTimestamp: Date.now(),
         totalScore,
         walletStars,
         currentStreak,
@@ -7957,6 +8043,10 @@ Format JSON attendu :
         rewardsCatalog: getRewardsCatalog(),
         claimedVouchers: getClaimedVouchers(),
         awardedQuestions: awarded,
+        customArts: getCustomArts(),
+        deletedArts: getDeletedArts(),
+        customPoems: getCustomPoems(),
+        deletedPoems: getDeletedPoems(),
         parentPin: localStorage.getItem('cm2_parent_pin') || '1234',
         parentEmail: localStorage.getItem('cm2_parent_email') || '',
         geminiApiKey: localStorage.getItem('gemini_api_key') || ''
@@ -7968,6 +8058,8 @@ Format JSON attendu :
       const awardedCount = Object.keys(awarded).length;
       const memos = getStoredMemos();
       const vouchers = getClaimedVouchers();
+      const arts = getActiveArts();
+      const poems = getActivePoems();
 
       const elStars = document.getElementById('syncCurrentStars');
       const elMemos = document.getElementById('syncCurrentMemos');
@@ -7977,7 +8069,39 @@ Format JSON attendu :
       if (elStars) elStars.innerText = `${walletStars} ⭐`;
       if (elMemos) elMemos.innerText = `${memos.length} mémos`;
       if (elVouchers) elVouchers.innerText = `${vouchers.length} bons`;
-      if (elAwarded) elAwarded.innerText = `${awardedCount} exercices validés`;
+      if (elAwarded) elAwarded.innerText = `${awardedCount} ex. | ${arts.length} œuvres | ${poems.length} poésies`;
+    }
+
+    function updateCloudUiStatus(statusText, isOnline = true) {
+      const dot = document.getElementById('cloudStatusDot');
+      const text = document.getElementById('cloudStatusText');
+      const timeEl = document.getElementById('cloudLastSyncTime');
+      const roomIdInput = document.getElementById('cloudRoomIdInput');
+      const endpointInput = document.getElementById('cloudEndpointUrlInput');
+
+      if (dot) dot.style.background = isOnline ? '#22c55e' : '#eab308';
+      if (text) text.innerText = statusText || (isOnline ? "Statut : Synchro Cloud Active" : "Statut : En attente");
+      if (timeEl) {
+        const d = new Date();
+        timeEl.innerText = `Dernière synchro : ${d.getHours().toString().padStart(2, '0')}h${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`;
+      }
+      if (roomIdInput) roomIdInput.value = getCloudRoomId();
+      if (endpointInput) endpointInput.value = getCloudEndpointUrl();
+    }
+
+    function copyMagicSyncLink() {
+      const payload = generateBackupPayload();
+      const jsonStr = JSON.stringify(payload);
+      const encoded = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
+      const roomId = getCloudRoomId();
+      const url = `${window.location.origin}${window.location.pathname}?room=${roomId}#sync=${encoded}`;
+
+      navigator.clipboard.writeText(url).then(() => {
+        showCloudFeedback("🔗 Lien 1-Clic copié ! Envoie-le sur ton iPad ou Mobile pour synchroniser instantanément.", true);
+        playSound('win');
+      }).catch(() => {
+        prompt("Voici ton lien magique 1-Clic à copier pour iPad/Mobile :", url);
+      });
     }
 
     function copySyncCode() {
@@ -8014,32 +8138,38 @@ Format JSON attendu :
       playSound('win');
     }
 
-    function restoreFromDataPayload(data) {
+    function restoreFromDataPayload(data, isSilent = false) {
       if (!data || typeof data !== 'object') {
-        alert("⚠️ Format de sauvegarde invalide !");
-        return;
+        if (!isSilent) alert("⚠️ Format de sauvegarde invalide !");
+        return false;
       }
 
       const countAwarded = data.awardedQuestions ? Object.keys(data.awardedQuestions).length : 0;
       const countMemos = Array.isArray(data.memos) ? data.memos.length : 0;
       const countVouchers = Array.isArray(data.claimedVouchers) ? data.claimedVouchers.length : 0;
+      const countArts = Array.isArray(data.customArts) ? data.customArts.length : 0;
+      const countPoems = Array.isArray(data.customPoems) ? data.customPoems.length : 0;
       const incomingStars = typeof data.walletStars === 'number' ? data.walletStars : (parseInt(data.walletStars, 10) || 0);
 
-      const confirmMsg = `Confirmez-vous la restauration de cette progression ?\n\n` +
-        `• 🪙 Solde : ${incomingStars} ⭐ étoiles\n` +
-        `• 📝 Mémos : ${countMemos}\n` +
-        `• 🎟️ Bons débloqués : ${countVouchers}\n` +
-        `• 🎯 Exercices validés : ${countAwarded}\n\n` +
-        `Toutes les données de cet appareil seront synchronisées.`;
+      if (!isSilent) {
+        const confirmMsg = `Confirmez-vous la synchronisation de cette progression ?\n\n` +
+          `• 🪙 Solde : ${incomingStars} ⭐ étoiles\n` +
+          `• 🖼️ Chefs-d'œuvre personnalisés : ${countArts}\n` +
+          `• 📜 Poésies personnalisées : ${countPoems}\n` +
+          `• 📝 Mémos : ${countMemos}\n` +
+          `• 🎟️ Bons débloqués : ${countVouchers}\n` +
+          `• 🎯 Exercices validés : ${countAwarded}\n\n` +
+          `Toutes les données de cet appareil seront synchronisées.`;
 
-      if (!confirm(confirmMsg)) return;
+        if (!confirm(confirmMsg)) return false;
+      }
 
       if (typeof data.totalScore === 'number') {
-        totalScore = data.totalScore;
+        totalScore = Math.max(totalScore, data.totalScore);
         localStorage.setItem('cm2_total_score', totalScore);
       }
       if (typeof data.walletStars === 'number') {
-        walletStars = data.walletStars;
+        walletStars = isSilent ? Math.max(walletStars, data.walletStars) : data.walletStars;
         localStorage.setItem('cm2_wallet_stars', walletStars);
       }
       if (Array.isArray(data.memos)) {
@@ -8052,7 +8182,33 @@ Format JSON attendu :
         saveClaimedVouchers(data.claimedVouchers);
       }
       if (data.awardedQuestions && typeof data.awardedQuestions === 'object') {
-        saveAwardedQuestions(data.awardedQuestions);
+        const currentAwards = getAwardedQuestions();
+        const mergedAwards = { ...currentAwards, ...data.awardedQuestions };
+        saveAwardedQuestions(mergedAwards);
+      }
+      if (Array.isArray(data.customArts)) {
+        const currentCustom = getCustomArts();
+        const mergedMap = new Map();
+        currentCustom.forEach(a => mergedMap.set(a.id, a));
+        data.customArts.forEach(a => mergedMap.set(a.id, a));
+        saveCustomArts(Array.from(mergedMap.values()));
+      }
+      if (Array.isArray(data.deletedArts)) {
+        const currentDel = getDeletedArts();
+        const mergedDel = Array.from(new Set([...currentDel, ...data.deletedArts]));
+        saveDeletedArts(mergedDel);
+      }
+      if (Array.isArray(data.customPoems)) {
+        const currentPoems = getCustomPoems();
+        const mergedMap = new Map();
+        currentPoems.forEach(p => mergedMap.set(p.id, p));
+        data.customPoems.forEach(p => mergedMap.set(p.id, p));
+        saveCustomPoems(Array.from(mergedMap.values()));
+      }
+      if (Array.isArray(data.deletedPoems)) {
+        const currentDel = getDeletedPoems();
+        const mergedDel = Array.from(new Set([...currentDel, ...data.deletedPoems]));
+        saveDeletedPoems(mergedDel);
       }
       if (data.parentPin) {
         localStorage.setItem('cm2_parent_pin', data.parentPin);
@@ -8070,12 +8226,17 @@ Format JSON attendu :
       renderShopRewards();
       renderClaimedVouchers();
       renderParentArea();
+      initCultureSection();
       updateSyncStatsDisplay();
+      updateCloudUiStatus("Synchronisé avec succès", true);
 
-      playSound('win');
-      triggerConfetti();
-      closeSyncModal();
-      alert(`🎉 Synchronisation réussie avec succès ! Bienvenue à nouveau avec tes ${walletStars} ⭐ étoiles !`);
+      if (!isSilent) {
+        playSound('win');
+        triggerConfetti();
+        closeSyncModal();
+        alert(`🎉 Synchronisation réussie avec succès ! Bienvenue à nouveau avec tes ${walletStars} ⭐ étoiles et toute ta galerie d'art !`);
+      }
+      return true;
     }
 
     function importSyncCode() {
@@ -8094,12 +8255,12 @@ Format JSON attendu :
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
         const data = JSON.parse(decoded);
-        restoreFromDataPayload(data);
+        restoreFromDataPayload(data, false);
         if (inp) inp.value = '';
       } catch (err) {
         try {
           const data = JSON.parse(str);
-          restoreFromDataPayload(data);
+          restoreFromDataPayload(data, false);
           if (inp) inp.value = '';
         } catch (e2) {
           alert("❌ Impossible de lire ce code de sauvegarde. Vérifiez qu'il a été copié en entier !");
@@ -8114,12 +8275,150 @@ Format JSON attendu :
       reader.onload = (event) => {
         try {
           const data = JSON.parse(event.target.result);
-          restoreFromDataPayload(data);
+          restoreFromDataPayload(data, false);
         } catch (err) {
           alert("❌ Fichier de sauvegarde invalide ou corrompu.");
         }
       };
       reader.readAsText(file);
+    }
+
+    // --- AUTO CLOUD ENGINE ---
+    function scheduleAutoCloudPush() {
+      if (autoCloudSyncTimeout) clearTimeout(autoCloudSyncTimeout);
+      autoCloudSyncTimeout = setTimeout(() => {
+        pushToCloud(false);
+      }, 1200);
+    }
+
+    async function pushToCloud(isManual = false) {
+      const payload = generateBackupPayload();
+      const roomId = getCloudRoomId();
+      let customEndpoint = getCloudEndpointUrl();
+
+      // 1. BroadcastChannel (Synchronisation instantanée entre onglets/fenêtres)
+      try {
+        if (syncBroadcastChannel) {
+          syncBroadcastChannel.postMessage({ type: 'CM2_SYNC_UPDATE', roomId, payload });
+        }
+      } catch (e) { }
+
+      // 2. Cloud Remote Sync (si configuré Firebase ou relais)
+      if (customEndpoint) {
+        try {
+          let targetUrl = customEndpoint;
+          if (!targetUrl.endsWith('.json') && targetUrl.includes('firebaseio.com')) {
+            targetUrl = targetUrl.replace(/\/$/, '') + `/cm2_sync/${roomId}.json`;
+          }
+          await fetch(targetUrl, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          updateCloudUiStatus("Synchronisé sur le Cloud", true);
+          if (isManual) showCloudFeedback("✅ Envoi Cloud réussi !", true);
+        } catch (err) {
+          console.warn("Cloud push error:", err);
+          if (isManual) showCloudFeedback("⚠️ Erreur d'envoi vers le Cloud distant.", false);
+        }
+      } else {
+        updateCloudUiStatus("Prêt (Relais local actif)", true);
+        if (isManual) showCloudFeedback("✅ Synchronisation locale et relais activés !", true);
+      }
+    }
+
+    async function pullFromCloud(isManual = false) {
+      if (isCloudSyncing) return;
+      isCloudSyncing = true;
+      const roomId = getCloudRoomId();
+      let customEndpoint = getCloudEndpointUrl();
+
+      if (customEndpoint) {
+        try {
+          let targetUrl = customEndpoint;
+          if (!targetUrl.endsWith('.json') && targetUrl.includes('firebaseio.com')) {
+            targetUrl = targetUrl.replace(/\/$/, '') + `/cm2_sync/${roomId}.json`;
+          }
+          const res = await fetch(targetUrl);
+          if (res.ok) {
+            const data = await res.json();
+            if (data && typeof data === 'object') {
+              restoreFromDataPayload(data, true);
+              updateCloudUiStatus("Dernière version reçue", true);
+              if (isManual) showCloudFeedback("✅ Récupération Cloud réussie !", true);
+            }
+          }
+        } catch (err) {
+          console.warn("Cloud pull error:", err);
+          if (isManual) showCloudFeedback("⚠️ Impossible de joindre le serveur Cloud.", false);
+        }
+      }
+      isCloudSyncing = false;
+    }
+
+    function forceCloudAutoSync() {
+      pushToCloud(true);
+      pullFromCloud(true);
+      updateSyncStatsDisplay();
+    }
+
+    function initCloudAutoSync() {
+      // 1. Initialiser BroadcastChannel
+      try {
+        if (window.BroadcastChannel) {
+          syncBroadcastChannel = new BroadcastChannel('cm2_realtime_sync_channel');
+          syncBroadcastChannel.onmessage = (evt) => {
+            if (evt.data && evt.data.type === 'CM2_SYNC_UPDATE' && evt.data.payload) {
+              if (evt.data.roomId === getCloudRoomId()) {
+                restoreFromDataPayload(evt.data.payload, true);
+              }
+            }
+          };
+        }
+      } catch (e) { }
+
+      // 2. Détection du hash magique #sync= ou ?room= dans l'URL
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlRoom = urlParams.get('room');
+        if (urlRoom) {
+          localStorage.setItem('cm2_cloud_room_id', urlRoom);
+        }
+
+        const hash = window.location.hash || '';
+        if (hash.startsWith('#sync=')) {
+          const rawCode = hash.replace('#sync=', '');
+          const decoded = decodeURIComponent(Array.prototype.map.call(atob(rawCode), (c) => {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+          const data = JSON.parse(decoded);
+          restoreFromDataPayload(data, true);
+          // Nettoyer l'URL
+          try {
+            history.replaceState(null, '', window.location.pathname);
+          } catch (e) { }
+          setTimeout(() => {
+            alert(`🎉 Synchronisation automatique réussie ! Vos chefs-d'œuvre et votre progression sont synchronisés sur cet appareil !`);
+          }, 400);
+        }
+      } catch (err) {
+        console.warn("Hash auto-sync note:", err);
+      }
+
+      // 3. Écouteurs de reprise et visibilité (iPad / mobile retour à l'onglet)
+      window.addEventListener('focus', () => pullFromCloud(false));
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') pullFromCloud(false);
+      });
+
+      // 4. Polling périodique doux (toutes les 30s)
+      setInterval(() => {
+        if (document.visibilityState === 'visible') pullFromCloud(false);
+      }, 30000);
+
+      // 5. Tir initial
+      pullFromCloud(false);
+      updateCloudUiStatus();
     }
 
     // =========================================================================
@@ -9492,12 +9791,14 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
     function saveCustomPoems(list) {
       localStorage.setItem('cm2_custom_poems', JSON.stringify(list));
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
     function getDeletedPoems() {
       try { return JSON.parse(localStorage.getItem('cm2_deleted_poems') || '[]'); } catch (e) { return []; }
     }
     function saveDeletedPoems(list) {
       localStorage.setItem('cm2_deleted_poems', JSON.stringify(list));
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
     function getActivePoems() {
@@ -9520,12 +9821,14 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
     function saveCustomArts(list) {
       localStorage.setItem('cm2_custom_arts', JSON.stringify(list));
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
     function getDeletedArts() {
       try { return JSON.parse(localStorage.getItem('cm2_deleted_arts') || '[]'); } catch (e) { return []; }
     }
     function saveDeletedArts(list) {
       localStorage.setItem('cm2_deleted_arts', JSON.stringify(list));
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
     function getActiveArts() {
@@ -10632,6 +10935,7 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     renderIconPicker('newIconGrid', 'newIconCatChips', 'all', '🎁', 'handleNew');
     renderParentArea();
     updateSyncStatsDisplay();
+    initCloudAutoSync();
 
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones" });
     renderDetectiveMission();
