@@ -217,11 +217,13 @@
       border: 2px solid var(--bd-green);
       border-radius: 16px;
       padding: 10px 18px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow-comic);
       display: flex;
       flex-direction: column;
       gap: 8px;
+      width: 100%;
+      max-width: 920px;
       transition: transform 0.15s ease;
     }
     .daily-balance-header {
@@ -242,26 +244,49 @@
     }
     .daily-balance-chips {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .domain-chip {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 0.8rem;
+      gap: 6px;
+      font-size: 0.88rem;
       font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 10px;
       border: 1.5px solid var(--ink);
       background: #ffffff;
       color: var(--ink);
-      transition: all 0.2s;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .domain-chip:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      background: #f8fafc;
     }
     .domain-chip.active {
       background: #dcfce7;
       border-color: #16a34a;
       color: #15803d;
+    }
+    .domain-chip.current-subject {
+      border: 2px solid var(--ink);
+      box-shadow: var(--shadow-comic-sm);
+      transform: translate(-1.5px, -1.5px);
+      font-weight: 900;
+    }
+    .domain-chip.current-subject:not(.active) {
+      background: var(--bd-yellow);
+      color: var(--ink);
+    }
+    .domain-chip.current-subject.active {
+      background: #86efac;
+      border-color: var(--ink);
+      color: #065f46;
     }
     .tab-boost-badge {
       display: inline-block;
@@ -2249,14 +2274,20 @@
       box-shadow: 2px 2px 0 var(--ink);
     }
 
-    /* Structured Tabs Navigation */
+    /* Structured Tabs Navigation Encadré (Boîte à Outils, Éveil & Mon Espace) */
     .tabs-nav-structured {
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+      border: 2px solid var(--bd-blue);
+      border-radius: 16px;
+      padding: 10px 18px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-comic);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
+      gap: 8px;
       width: 100%;
-      max-width: 980px;
+      max-width: 920px;
+      transition: transform 0.15s ease;
     }
     .tabs-group-container {
       display: flex;
@@ -2272,10 +2303,15 @@
       letter-spacing: 0.05em;
       color: var(--ink-light);
       background: rgba(0,0,0,0.06);
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 4px 9px;
+      border-radius: 8px;
       margin-right: 2px;
-      border: 1px dashed rgba(0,0,0,0.15);
+      border: 1px dashed rgba(0,0,0,0.18);
+    }
+    .tabs-nav-structured .tab-btn {
+      padding: 8px 16px;
+      font-size: 0.92rem;
+      border-radius: 12px;
     }
     .tab-btn-highlight {
       background: #fef08a !important;
@@ -2293,6 +2329,15 @@
     }
     .tab-btn-shop {
       background: #fed7aa !important;
+    }
+    .tab-btn.active,
+    .tab-btn-highlight.active,
+    .tab-btn-culture.active,
+    .tab-btn-shop.active {
+      background: var(--bd-yellow) !important;
+      color: var(--ink) !important;
+      border-color: var(--ink) !important;
+      box-shadow: var(--shadow-comic) !important;
     }
 
     /* ------------------------------------------------------------- */
@@ -3809,25 +3854,16 @@
   <!-- Widget Défi Polyvalence & Équilibre des 5 Domaines -->
   <div id="dailyBalanceWidget" class="daily-balance-widget"></div>
 
-  <!-- Subject Selection Navigation (Organisée par Pôles) -->
+  <!-- Navigation Complémentaire : Boîte à Outils, Éveil & Mon Espace -->
   <nav class="tabs-nav-structured">
-    <!-- Pôle 1 : Les 4 Matières Fondamentales -->
-    <div class="tabs-group-container">
-      <span class="tabs-group-tag">📚 Matières</span>
-      <button class="tab-btn active" id="tabBtnFrancais" onclick="switchSubject('francais')">🇫🇷 Français</button>
-      <button class="tab-btn" id="tabBtnMaths" onclick="switchSubject('maths')">🔢 Mathématiques</button>
-      <button class="tab-btn" id="tabBtnHistoire" onclick="switchSubject('histoire')">🏛️ Histoire & Géo</button>
-      <button class="tab-btn" id="tabBtnSciences" onclick="switchSubject('sciences')">🔬 Sciences</button>
-    </div>
-
-    <!-- Pôle 2 : Outils de Progression & Éveil Culturel -->
+    <!-- Pôle 1 : Outils de Progression & Éveil Culturel -->
     <div class="tabs-group-container">
       <span class="tabs-group-tag">🛠️ Boîte à Outils & Éveil</span>
       <button class="tab-btn tab-btn-highlight" id="tabBtnOutils" onclick="switchSubject('outils')">🧰 Boîte à Outils (Conjugeur, Tables...)</button>
       <button class="tab-btn tab-btn-culture" id="tabBtnCulture" onclick="switchSubject('culture')">🎭 Poésie & Arts</button>
     </div>
 
-    <!-- Pôle 3 : Espaces de l'Enfant -->
+    <!-- Pôle 2 : Espaces de l'Enfant -->
     <div class="tabs-group-container">
       <span class="tabs-group-tag">🌟 Mon Espace</span>
       <button class="tab-btn" onclick="switchSubject('blocnotes')">📝 Mon Bloc-Notes</button>
@@ -5402,6 +5438,7 @@
     let walletStars = parseInt(localStorage.getItem('cm2_wallet_stars') || '0', 10);
     let currentStreak = 0;
     let unlockedBadges = 0;
+    let currentSubject = 'francais';
 
     // =========================================================================
     // SUBJECT MULTIPLIERS & DOMAIN BALANCING ENGINE
@@ -5594,13 +5631,14 @@
 
       const chipsHtml = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
         const isDone = (act[key] || 0) > 0;
+        const isCurrent = (currentSubject === key);
         const mult = mults[key] || 1.0;
         const multTag = mult > 1.0 ? ` 🔥x${mult.toFixed(1)}` : '';
         return `
-          <div class="domain-chip ${isDone ? 'active' : ''}" onclick="switchSubject('${key}')" style="cursor: pointer;" title="${isDone ? 'Validé aujourd\'hui (' + act[key] + ' ex.)' : 'À explorer aujourd\'hui'}">
+          <div class="domain-chip ${isDone ? 'active' : ''} ${isCurrent ? 'current-subject' : ''}" onclick="switchSubject('${key}')" style="cursor: pointer;" title="${isDone ? 'Validé aujourd\'hui (' + act[key] + ' ex.)' : 'À explorer aujourd\'hui'}">
             <span>${meta.icon} ${meta.label}</span>
             <span>${isDone ? '✅' : '⏳'}</span>
-            ${multTag ? `<span style="color:#d97706; font-size:0.75rem;">${multTag}</span>` : ''}
+            ${multTag ? `<span style="color:#d97706; font-size:0.75rem; font-weight:800;">${multTag}</span>` : ''}
           </div>
         `;
       }).join('');
@@ -5748,12 +5786,16 @@
 
     // Tabs & Submodules
     function switchSubject(subj) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      currentSubject = subj;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`'${subj}'`) || onclickAttr.includes(`"${subj}"`)) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
       document.querySelectorAll('.subject-section').forEach(sec => sec.classList.remove('active'));
-      if (window.event && window.event.target) {
-        const b = window.event.target.closest('.tab-btn');
-        if (b) b.classList.add('active');
-      }
       const target = document.getElementById('subject-' + subj);
       if (target) target.classList.add('active');
 
