@@ -7586,25 +7586,45 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
     let selectedMemoColor = 'yellow';
     let selectedMemoIcon = '⭐';
 
+    function getDeletedMemos() {
+      try {
+        const data = localStorage.getItem('cm2_deleted_memos');
+        return data ? JSON.parse(data) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveDeletedMemos(list) {
+      try {
+        localStorage.setItem('cm2_deleted_memos', JSON.stringify(list));
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
+      } catch (e) {}
+    }
+
     function getStoredMemos() {
       try {
         const data = localStorage.getItem('cm2_student_memos');
+        const deleted = getDeletedMemos();
         if (!data) {
           localStorage.setItem('cm2_student_memos', JSON.stringify(DEFAULT_MEMOS));
-          return [...DEFAULT_MEMOS];
+          return DEFAULT_MEMOS.filter(m => !deleted.includes(m.id));
         }
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+        return Array.isArray(parsed) ? parsed.filter(m => !deleted.includes(m.id)) : [...DEFAULT_MEMOS];
       } catch (e) {
         return [...DEFAULT_MEMOS];
       }
     }
 
-    function saveStoredMemos(memos) {
+    function saveStoredMemos(memos, skipPush = false) {
       try {
         localStorage.setItem('cm2_student_memos', JSON.stringify(memos));
         localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
-      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
+      if (!skipPush && typeof scheduleAutoCloudPush === 'function') {
+        scheduleAutoCloudPush();
+      }
     }
 
     function initBlocNotesEvents() {
@@ -7841,6 +7861,11 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
       if (!confirm("Veux-tu vraiment supprimer ce mémo ?")) return;
       let memos = getStoredMemos();
       memos = memos.filter(m => m.id !== id);
+      const delList = getDeletedMemos();
+      if (!delList.includes(id)) {
+        delList.push(id);
+        saveDeletedMemos(delList);
+      }
       saveStoredMemos(memos);
       playSound('wrong');
       renderMemos();
@@ -9447,6 +9472,7 @@ Format JSON attendu :
         walletStars,
         currentStreak,
         memos: getStoredMemos(),
+        deletedMemos: getDeletedMemos(),
         rewardsCatalog: getRewardsCatalog(),
         claimedVouchers: getClaimedVouchers(),
         awardedQuestions: awarded,
@@ -9538,8 +9564,22 @@ Format JSON attendu :
         walletStars = data.walletStars;
         localStorage.setItem('cm2_wallet_stars', walletStars);
       }
+      if (Array.isArray(data.deletedMemos)) {
+        const currentDel = getDeletedMemos();
+        const mergedDel = Array.from(new Set([...currentDel, ...data.deletedMemos]));
+        saveDeletedMemos(mergedDel);
+      }
       if (Array.isArray(data.memos)) {
-        saveStoredMemos(data.memos);
+        const delList = getDeletedMemos();
+        const currentMemos = getStoredMemos().filter(m => !delList.includes(m.id));
+        const mergedMap = new Map();
+        currentMemos.forEach(m => mergedMap.set(m.id, m));
+        data.memos.forEach(m => {
+          if (!delList.includes(m.id)) {
+            mergedMap.set(m.id, m);
+          }
+        });
+        saveStoredMemos(Array.from(mergedMap.values()), true);
       }
       if (Array.isArray(data.rewardsCatalog)) {
         saveRewardsCatalog(data.rewardsCatalog, true);
@@ -11532,6 +11572,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
     function saveCustomPoems(list) {
       localStorage.setItem('cm2_custom_poems', JSON.stringify(list));
+      localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
     function getDeletedPoems() {
@@ -11539,6 +11580,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
     function saveDeletedPoems(list) {
       localStorage.setItem('cm2_deleted_poems', JSON.stringify(list));
+      localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
@@ -11562,6 +11604,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
     function saveCustomArts(list) {
       localStorage.setItem('cm2_custom_arts', JSON.stringify(list));
+      localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
     function getDeletedArts() {
@@ -11569,6 +11612,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
     function saveDeletedArts(list) {
       localStorage.setItem('cm2_deleted_arts', JSON.stringify(list));
+      localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
