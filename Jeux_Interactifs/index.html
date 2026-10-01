@@ -2444,7 +2444,18 @@
         width: 95vw !important;
         max-width: 95vw !important;
       }
-
+      .teacher-modal-card {
+        grid-template-columns: 1fr !important;
+        max-height: 94vh !important;
+        padding: 12px 10px !important;
+        gap: 0 !important;
+      }
+      .teacher-standing-col {
+        display: none !important;
+      }
+      .teacher-main-col {
+        max-height: calc(94vh - 20px) !important;
+      }
 
       /* Calculatrice Flottante Mobile */
       .floating-calc-fab {
@@ -2766,18 +2777,18 @@
     /* MODALE DE LA MAÎTRESSE : AIDE-MOI À COMPRENDRE ! (INTERACTIF) */
     /* ------------------------------------------------------------- */
     .teacher-modal-card {
-      max-width: 960px;
-      width: 95vw;
-      background: #fffdfa;
-      border: 3px solid var(--ink);
-      box-shadow: var(--shadow-comic-xl);
-      border-radius: 22px;
-      padding: 16px;
-      display: grid;
-      grid-template-columns: 270px 1fr;
-      gap: 16px;
-      max-height: 92vh;
-      align-items: stretch;
+      max-width: 960px !important;
+      width: 95vw !important;
+      background: #fffdfa !important;
+      border: 3px solid var(--ink) !important;
+      box-shadow: var(--shadow-comic-xl) !important;
+      border-radius: 22px !important;
+      padding: 16px !important;
+      display: grid !important;
+      grid-template-columns: 270px 1fr !important;
+      gap: 16px !important;
+      max-height: 92vh !important;
+      align-items: stretch !important;
       overflow: hidden;
     }
 
@@ -3171,222 +3182,6 @@
       align-items: center;
       justify-content: center;
       border-radius: 12px;
-    }
-
-    /* ------------------------------------------------------------- */
-    /* RESPONSIVE SMARTPHONE & TABLETTE — MADAME CLAIRE (IA)         */
-    /* ------------------------------------------------------------- */
-    @media (max-width: 820px) {
-      #teacherHelpModal {
-        padding: 8px 6px !important;
-      }
-      .teacher-modal-card {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 96vw !important;
-        max-width: 96vw !important;
-        height: 92vh !important;
-        max-height: 92vh !important;
-        padding: 12px 10px 10px 10px !important;
-        gap: 0 !important;
-        border-radius: 18px !important;
-        box-shadow: var(--shadow-comic-sm) !important;
-        overflow: hidden !important;
-      }
-      .teacher-standing-col {
-        display: none !important;
-      }
-      .teacher-main-col {
-        width: 100% !important;
-        height: 100% !important;
-        max-height: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        min-width: 0 !important;
-        overflow: hidden !important;
-      }
-      .teacher-header {
-        padding-bottom: 8px !important;
-        margin-bottom: 8px !important;
-        gap: 8px !important;
-        align-items: center !important;
-        flex-shrink: 0 !important;
-      }
-      .teacher-avatar-circle {
-        width: 38px !important;
-        height: 38px !important;
-        flex-shrink: 0 !important;
-      }
-      .teacher-title-wrap {
-        flex: 1 !important;
-        min-width: 0 !important;
-      }
-      .teacher-title-wrap h3 {
-        font-size: 1.12rem !important;
-        line-height: 1.2 !important;
-        margin: 0 !important;
-      }
-      .teacher-title-wrap p {
-        font-size: 0.72rem !important;
-        line-height: 1.2 !important;
-        margin: 2px 0 0 0 !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        max-width: 200px !important;
-      }
-      .teacher-status-badge {
-        font-size: 0.65rem !important;
-        padding: 1px 6px !important;
-      }
-      .teacher-reset-btn {
-        padding: 4px 8px !important;
-        font-size: 0.75rem !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-      }
-      .teacher-topics-bar {
-        padding: 6px 8px !important;
-        margin-bottom: 6px !important;
-        flex-shrink: 0 !important;
-        border-radius: 10px !important;
-      }
-      .teacher-topics-header {
-        flex-wrap: wrap !important;
-        gap: 4px !important;
-        margin-bottom: 4px !important;
-      }
-      .teacher-topics-header > span {
-        display: none !important;
-      }
-      .teacher-subject-tabs {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        gap: 4px !important;
-      }
-      .t-subj-tab {
-        flex: 1 !important;
-        text-align: center !important;
-        padding: 4px 2px !important;
-        font-size: 0.74rem !important;
-        white-space: nowrap !important;
-      }
-      .teacher-chips-tray {
-        display: none !important;
-        gap: 6px !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        padding: 2px 1px 4px 1px !important;
-        scrollbar-width: none !important;
-      }
-      .teacher-chips-tray::-webkit-scrollbar {
-        display: none !important;
-      }
-      .teacher-chips-tray.active {
-        display: flex !important;
-      }
-      .t-chip {
-        flex-shrink: 0 !important;
-        font-size: 0.74rem !important;
-        padding: 4px 10px !important;
-        white-space: nowrap !important;
-        border-radius: 20px !important;
-      }
-      .teacher-chat-thread {
-        flex: 1 1 auto !important;
-        height: auto !important;
-        max-height: none !important;
-        min-height: 0 !important;
-        padding: 6px 2px !important;
-        gap: 10px !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-      }
-      .teacher-msg-row {
-        gap: 6px !important;
-      }
-      .teacher-msg-avatar {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 1.05rem !important;
-        flex-shrink: 0 !important;
-      }
-      .teacher-msg-bubble-wrap {
-        max-width: 90% !important;
-      }
-      .teacher-msg-bubble {
-        font-size: 0.88rem !important;
-        padding: 9px 12px !important;
-        line-height: 1.45 !important;
-        border-radius: 14px !important;
-        box-shadow: 1.5px 1.5px 0 var(--ink) !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-      }
-      .teacher-msg-bubble ul, .teacher-msg-bubble ol {
-        margin: 4px 0 4px 14px !important;
-        padding: 0 !important;
-      }
-      .teacher-msg-footer {
-        margin-top: 6px !important;
-        padding-top: 4px !important;
-        font-size: 0.72rem !important;
-      }
-      .t-followup-btn {
-        font-size: 0.74rem !important;
-        padding: 3px 8px !important;
-        border-radius: 8px !important;
-      }
-      .teacher-typing-box {
-        padding: 4px 8px !important;
-        margin: 4px 0 !important;
-        font-size: 0.76rem !important;
-      }
-      .teacher-input-container {
-        padding-top: 6px !important;
-        margin-top: 4px !important;
-        gap: 6px !important;
-        border-top: 2px solid var(--ink) !important;
-        flex-shrink: 0 !important;
-      }
-      .teacher-chat-textarea {
-        min-height: 42px !important;
-        max-height: 64px !important;
-        padding: 8px 10px !important;
-        font-size: 16px !important; /* Empêche le zoom auto sur iPhone/Safari */
-        border-radius: 12px !important;
-        box-sizing: border-box !important;
-      }
-      .teacher-send-btn {
-        height: 42px !important;
-        padding: 0 12px !important;
-        font-size: 0.85rem !important;
-        border-radius: 10px !important;
-        flex-shrink: 0 !important;
-        white-space: nowrap !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .teacher-modal-card {
-        width: 98vw !important;
-        max-width: 98vw !important;
-        height: 95vh !important;
-        max-height: 95vh !important;
-        padding: 8px 8px 6px 8px !important;
-      }
-      .teacher-header {
-        gap: 6px !important;
-      }
-      .teacher-title-wrap p {
-        display: none !important;
-      }
-      .teacher-reset-btn {
-        padding: 4px 6px !important;
-        font-size: 0.72rem !important;
-      }
     }
 
     /* ------------------------------------------------------------- */
@@ -4569,7 +4364,7 @@
           <div class="teacher-avatar-circle" id="teacherAvatarEl">
             <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%;">
           </div>
-          <div class="teacher-title-wrap" style="flex: 1; min-width: 0;">
+          <div style="flex: 1; min-width: 140px;">
             <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
               <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0;">
                 Madame Claire
@@ -4581,7 +4376,7 @@
             </p>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <button class="doc-link-btn teacher-reset-btn" onclick="resetTeacherConversation()" title="Commencer une nouvelle discussion" style="background: #ffffff;">
+            <button class="doc-link-btn" onclick="resetTeacherConversation()" title="Commencer une nouvelle discussion" style="padding: 4px 10px; font-size: 0.78rem; background: #ffffff;">
               🔄 Nouveau sujet
             </button>
             <button onclick="closeTeacherHelpModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
@@ -4718,7 +4513,6 @@
         <button class="submodule-btn active" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire-g2')">🏷️ Grammaire G2 & Adjectifs (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
       </div>
 
@@ -4756,26 +4550,6 @@
         </div>
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_grammaire', this)">✨ Générer de nouvelles questions Grammaire (IA)</button>
         <div id="quiz-container-grammaire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Français Sub 3b: Grammaire G2 (Les Adjectifs Qualificatifs) -->
-      <div id="sub-francais-grammaire-g2" class="submodule-content">
-        <div class="video-doc-card">
-          <div class="video-doc-header">
-            <span class="video-doc-title">🏷️ Fiche Officielle du Padlet : G2 — Les adjectifs qualificatifs</span>
-            <a href="images/fiche_G2_adjectifs.png" target="_blank" class="doc-link-btn" style="background: #fef3c7; border-color: #d97706; color: #b45309;">📄 Voir la fiche de cours HD</a>
-          </div>
-          <div class="rule-box" style="margin-top: 10px; background: #fffbeb; border-color: #f59e0b;">
-            💡 <strong>Règles d'or de Maîtresse France (Leçon G2) :</strong><br>
-            • <strong>Qu'est-ce que c'est ?</strong> Un mot qui donne des précisions sur un nom ou un pronom pour décrire une personne, un animal, un objet ou un lieu (<em>un petit chat noir</em>, <em>cette histoire amusante</em>).<br>
-            • <strong>Règle d'accord :</strong> L'adjectif s'accorde toujours en <strong>genre</strong> (masculin/féminin) et en <strong>nombre</strong> (singulier/pluriel) avec le nom auquel il se rapporte (<em>un garçon intelligent</em> ➡️ <em>des garçons intelligents</em>, <em>une fille intelligente</em> ➡️ <em>des filles intelligentes</em>).<br>
-            • ⚠️ <strong>Cas particuliers indispensables :</strong><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;1. Pluriel en <strong>-x</strong> : adjectifs en <em>-eau</em> prennent un <em>-x</em> (<em>un beau livre</em> ➡️ <em>des beaux livres</em>). Ceux en <em>-al</em> font généralement <em>-aux</em> (<em>un journal local</em> ➡️ <em>des journaux locaux</em>).<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;2. <strong>Invariables :</strong> les adjectifs de couleur composés (<em>des yeux bleu clair</em>) ou issus de noms de fruits/fleurs (<em>des vestes marron</em>, <em>des rubans orange</em>) ne prennent jamais de « s » !
-          </div>
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_grammaire_g2', this)">✨ Générer de nouvelles questions Adjectifs G2 (IA)</button>
-        <div id="quiz-container-grammaire-g2" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
       <!-- Français Sub 4: Conjugaison -->
@@ -4996,7 +4770,6 @@
 
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('sciences', 'materiaux')">🧪 Les Matériaux (Vidéo + 8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'recyclage')">♻️ Le Recyclage des Déchets (Vidéo + 8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'eiffel')">🗼 Projet Gustave Eiffel (Podcast + 8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'elements')">⚛️ Tableau des Éléments (Lettres & Quiz)</button>
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'labo')">⚗️ Le Labo des Molécules (Jeu de Fusion Réel)</button>
@@ -5020,34 +4793,6 @@
         </div>
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('sciences_materiaux', this)">✨ Générer de nouveaux défis Matériaux (IA)</button>
         <div id="quiz-container-materiaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Sciences Sub 1b: Recyclage & Écologie -->
-      <div id="sub-sciences-recyclage" class="submodule-content">
-        <div class="video-doc-card">
-          <div class="video-doc-header">
-            <span class="video-doc-title">♻️ Vidéo Officielle du Padlet : C'est quoi le recyclage des déchets ? (1jour1question feat. Info ou Mytho)</span>
-            <span class="subject-chip" style="background: #dcfce7; color: #15803d; border-color: #86efac;">🌱 Éco-Citoyenneté</span>
-          </div>
-          <div class="video-preview-box" onclick="window.open('https://youtu.be/_2X4JvI6RwQ', '_blank')">
-            <img src="https://img.youtube.com/vi/_2X4JvI6RwQ/hqdefault.jpg" alt="C'est quoi le recyclage des déchets" class="video-preview-thumb">
-            <div class="video-play-overlay">
-              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </div>
-          </div>
-          <div class="video-actions-row">
-            <a href="https://youtu.be/_2X4JvI6RwQ" target="_blank" class="yt-btn" style="background: linear-gradient(135deg, #16a34a, #15803d);">▶️ Regarder l'épisode 1jour1question</a>
-          </div>
-          <div class="rule-box" style="margin-top: 12px; background: #f0fdf4; border-color: #22c55e;">
-            🌍 <strong>Mémo Rapide : Le Guide du Tri & la règle des 3R :</strong><br>
-            • 🟡 <strong>Bac Jaune (Emballages) :</strong> Bouteilles et flacons en plastique, cartons, briques alimentaires, canettes et boîtes de conserve en métal.<br>
-            • 🟢 <strong>Bac Vert (Verre) :</strong> Bouteilles, pots et bocaux en verre (sans bouchon ni couvercle). Le verre est recyclable à l'infini !<br>
-            • 🟤 <strong>Compost / Déchets Bio :</strong> Épluchures de fruits et légumes, marc de café, coquilles d'œufs pour fertiliser la terre.<br>
-            • 🏆 <strong>La Règle d'or des « 3R » :</strong> <strong>1. Réduire</strong> (le meilleur déchet est celui qu'on ne crée pas !), <strong>2. Réutiliser</strong> (donner ou réparer), <strong>3. Recycler</strong> (trier pour transformer).
-          </div>
-        </div>
-        <button class="ai-gen-btn" style="background: linear-gradient(135deg, #16a34a, #15803d);" onclick="generateAiExercisesFor('sciences_recyclage', this)">✨ Générer un nouveau quiz Recyclage (IA)</button>
-        <div id="quiz-container-recyclage" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
       <!-- Sciences Sub 2: Gustave Eiffel -->
@@ -5384,20 +5129,7 @@
           <a href="https://youtu.be/qBD5TUjFFq4" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
         </div>
 
-        <!-- Video 7: Recyclage -->
-        <div class="video-card-item">
-          <h4>♻️ C'est quoi le recyclage des déchets ?</h4>
-          <div class="video-preview-box" onclick="window.open('https://youtu.be/_2X4JvI6RwQ', '_blank')">
-            <img src="https://img.youtube.com/vi/_2X4JvI6RwQ/hqdefault.jpg" class="video-preview-thumb">
-            <div class="video-play-overlay" style="width: 52px; height: 52px; background: rgba(22, 163, 74, 0.9);">
-              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </div>
-          </div>
-          <p>1jour1question & Info ou Mytho expliquent le tri, la transformation des matières et la règle des 3R.</p>
-          <a href="https://youtu.be/_2X4JvI6RwQ" target="_blank" class="yt-btn" style="background: linear-gradient(135deg, #16a34a, #15803d);">▶️ Lancer la vidéo</a>
-        </div>
-
-        <!-- Document 8 -->
+        <!-- Document 7 -->
         <div class="video-card-item">
           <h4>⚛️ Tableau périodique des éléments</h4>
           <div class="video-preview-box" style="background: #fff;" onclick="window.open('images/tables_elements.png', '_blank')">
@@ -6223,9 +5955,6 @@
                 <div id="currentPoemAuthor" style="font-weight: 700; color: var(--ink-light); font-size: 1rem;"></div>
               </div>
               <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-                <button class="doc-link-btn" id="btnPoemOriginalPadlet" onclick="window.open('images/poesie_henriette_major.png', '_blank')" style="display: none; padding: 4px 10px; font-size: 0.85rem; background: #fdf2f8; border-color: #ec4899; color: #be185d;" title="Ouvrir la fiche manuscrite officielle du Padlet">
-                  📄 Fiche originale du Padlet
-                </button>
                 <span style="font-size: 0.8rem; font-weight: 800; color: var(--ink-light);">Réciter :</span>
                 <button class="t-chip" onclick="setPoemMaskLevel(0)" id="maskBtn0" style="background: #fef08a;">Texte 100%</button>
                 <button class="t-chip" onclick="setPoemMaskLevel(25)" id="maskBtn25">-25% mots</button>
@@ -7060,17 +6789,6 @@
       { display: "Parmi ces mots, lequel est un <strong>article défini</strong> ?", options: ["les", "des", "ses", "mes"], correct: "les", tip: "'le, la, les, l'' sont les articles définis !" }
     ];
 
-    const allGrammaireG2Questions = [
-      { display: "Dans : <em>« Un <u>petit</u> chat <u>noir</u> saute sur le muret. »</em>, quelle est la nature des mots soulignés ?", options: ["Adjectifs qualificatifs", "Noms communs", "Déterminants", "Verbes d'action"], correct: "Adjectifs qualificatifs", tip: "Ils apportent des précisions sur la taille et la couleur du chat -> adjectifs qualificatifs !" },
-      { display: "Quel est le rôle principal de l'<strong>adjectif qualificatif</strong> dans une phrase ?", options: ["Donner des précisions sur un nom ou un pronom", "Indiquer l'action effectuée", "Relier deux propositions", "Remplacer le sujet"], correct: "Donner des précisions sur un nom ou un pronom", tip: "L'adjectif décrit une personne, un animal, un objet ou un lieu (taille, couleur, forme, qualité) !" },
-      { display: "Dans : <em>« Ces fillettes semblent <span class='blank-slot'>...</span>. »</em>, comment accorder l'adjectif <strong>amusant</strong> ?", options: ["amusantes", "amusant", "amusante", "amusants"], correct: "amusantes", tip: "'fillettes' est féminin pluriel -> l'adjectif prend la marque du féminin 'e' et du pluriel 's' : amusantes !" },
-      { display: "Quel est le pluriel correct de : <em>« un <u>beau</u> livre »</em> ?", options: ["des beaux livres", "des beaus livres", "des baux livres", "des beau livres"], correct: "des beaux livres", tip: "Règle du cours : les adjectifs se terminant par -eau prennent un -x au pluriel !" },
-      { display: "Comment s'accorde l'adjectif dans : <em>« des journaux <span class='blank-slot'>...</span> »</em> (local) ?", options: ["locaux", "locals", "locales", "locauxes"], correct: "locaux", tip: "Règle du cours : les adjectifs en -al se transforment généralement en -aux (local -> locaux) !" },
-      { display: "Comment s'écrit la couleur dans : <em>« Elle porte des chaussettes <span class='blank-slot'>...</span>. »</em> ?", options: ["bleu clair", "bleues claires", "bleu claires", "bleues clair"], correct: "bleu clair", tip: "Règle du cours : les adjectifs de couleur composés (bleu clair, vert foncé...) sont invariables !" },
-      { display: "Complète la phrase : <em>« Maxime a acheté deux vestes <span class='blank-slot'>...</span>. »</em>", options: ["marron", "marrons", "marrones", "marronnes"], correct: "marron", tip: "Règle du cours : les adjectifs de couleur issus de noms de fruits ou fleurs (marron, orange...) restent invariables !" },
-      { display: "Repère les adjectifs qualificatifs dans : <em>« Ce <u>grand</u> chêne <u>centenaire</u> abrite des oiseaux. »</em>", options: ["grand et centenaire", "chêne et oiseaux", "abrite", "Ce et des"], correct: "grand et centenaire", tip: "'grand' et 'centenaire' qualifient et précisent le nom 'chêne' !" }
-    ];
-
     const allConjugaisonQuestions = [
       { display: "Conjugue au présent : <em>« Les enfants (faire) <span class='blank-slot'>...</span> leurs devoirs. »</em>", options: ["font", "faisent", "faisons", "fait"], correct: "font", tip: "Verbe faire à la 3e personne du pluriel (ils) -> 'ils font' !" },
       { display: "Conjugue au présent : <em>« Nous (choisir) <span class='blank-slot'>...</span> un bon livre. »</em>", options: ["choisissons", "choisons", "choisit", "choisissez"], correct: "choisissons", tip: "Verbe du 2e groupe en -ir -> terminaison '-issons' avec nous !" },
@@ -7133,17 +6851,6 @@
       { display: "Pourquoi utilise-t-on de l'<strong>aluminium</strong> pour fabriquer les canettes ou les avions ?", options: ["Il est léger et résistant à la corrosion", "Il est lourd comme le plomb", "Il est transparent", "Il est comestible"], correct: "Il est léger et résistant à la corrosion", tip: "L'aluminium est 3 fois plus léger que l'acier !" },
       { display: "Le coton et le cuir proviennent de la nature vivante, ce sont des :", options: ["Matières organiques", "Matériaux céramiques", "Métaux précieux", "Plastiques"], correct: "Matières organiques", tip: "Le coton vient d'une plante, le cuir d'un animal !" },
       { display: "Quelle propriété permet au verre d'être utilisé pour les fenêtres ?", options: ["Sa transparence", "Sa conductivité électrique", "Sa souplesse", "Sa légèreté"], correct: "Sa transparence", tip: "Le verre laisse passer la lumière du soleil tout en protégeant du vent !" }
-    ];
-
-    const allRecyclageQuestions = [
-      { display: "Qu'est-ce que le <strong>recyclage</strong> d'après la vidéo 1jour1question ?", options: ["Réutiliser des déchets pour fabriquer de nouveaux objets", "Brûler toutes les poubelles dans la nature", "Enterrer les déchets sous terre pour toujours", "Jeter les emballages dans la mer"], correct: "Réutiliser des déchets pour fabriquer de nouveaux objets", tip: "Le recyclage permet de récupérer et transformer la matière usagée pour lui donner une seconde vie !" },
-      { display: "Dans quelle poubelle de tri sélectif doit-on jeter les <strong>bouteilles, pots et bocaux en verre</strong> ?", options: ["Dans le bac vert (ou conteneur à verre)", "Dans le bac jaune", "Dans le composteur", "Dans la poubelle des ordures ménagères"], correct: "Dans le bac vert (ou conteneur à verre)", tip: "Le verre se recycle à 100% et à l'infini dans le bac vert ou conteneur spécial verre !" },
-      { display: "Que dépose-t-on dans le <strong>bac jaune</strong> de tri sélectif ?", options: ["Les emballages en plastique, cartons, boîtes de conserve et canettes", "Les restes de nourriture et épluchures", "Les miroirs cassés et vaisselles", "Les vieux vêtements abîmés"], correct: "Les emballages en plastique, cartons, boîtes de conserve et canettes", tip: "Le bac jaune accueille tous les emballages ménagers (bouteilles plastique, cartons, conserves, canettes) !" },
-      { display: "Où doit-on jeter les <strong>épluchures de légumes</strong> et le <strong>marc de café</strong> pour nourrir la terre ?", options: ["Dans le composteur (ou bac bio-déchets)", "Dans le conteneur à verre", "Dans le bac jaune", "Dans la poubelle des emballages"], correct: "Dans le composteur (ou bac bio-déchets)", tip: "Ces déchets organiques se décomposent naturellement en compost fertile pour enrichir les jardins !" },
-      { display: "Pourquoi le recyclage de l'<strong>aluminium</strong> et de l'<strong>acier</strong> (canettes, boîtes) est-il très avantageux ?", options: ["Ces métaux se recyclent à 100% et à l'infini sans perdre leurs qualités", "Ils se dissolvent tout seuls dans la terre", "Ils coûtent plus cher à jeter", "On en fabrique directement de l'eau"], correct: "Ces métaux se recyclent à 100% et à l'infini sans perdre leurs qualités", tip: "Recycler le métal permet d'économiser jusqu'à 95% d'énergie par rapport à l'extraction de minerai neuf !" },
-      { display: "En quoi sont transformés le <strong>papier</strong> et le <strong>carton</strong> recyclés après le centre de tri ?", options: ["En nouveaux cartons, journaux ou rouleaux essuie-tout", "En bouteilles en plastique", "En carrosseries de voiture", "En vitres de fenêtre"], correct: "En nouveaux cartons, journaux ou rouleaux essuie-tout", tip: "Les fibres de cellulose du papier sont nettoyées, broyées en pâte puis réutilisées plusieurs fois !" },
-      { display: "Que signifie la règle écologique majeure des <strong>« 3R »</strong> ?", options: ["Réduire, Réutiliser, Recycler", "Remplir, Ranger, Remplacer", "Rire, Rêver, Réussir", "Rouler, Réparer, Ranger"], correct: "Réduire, Réutiliser, Recycler", tip: "1. Réduire (éviter le gaspillage), 2. Réutiliser (donner ou réparer), 3. Recycler (trier) !" },
-      { display: "D'après 1jour1question, quelle est la <strong>MEILLEURE</strong> solution pour protéger la Terre ?", options: ["Ne pas produire de déchet inutile et éviter le gaspillage", "Acheter un maximum de produits suremballés", "Jeter tous ses objets après une seule utilisation", "Attendre que les océans nettoient tout"], correct: "Ne pas produire de déchet inutile et éviter le gaspillage", tip: "Le meilleur déchet pour la planète est celui qu'on ne produit pas !" }
     ];
 
     const allEiffelQuestions = [
@@ -7716,14 +7423,12 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
           const themesMap = {
             'francais_homophones': 'Homophones grammaticaux (a/à, et/est, on/ont, son/sont, ses/ces/c\'est/s\'est) CM2',
             'francais_grammaire': 'Grammaire CM2 : rôle des déterminants, articles définis, indéfinis, possessifs, démonstratifs',
-            'francais_grammaire_g2': 'Grammaire CM2 : les adjectifs qualificatifs (rôle de description, accord en genre et nombre, pluriels en -x et -aux, adjectifs de couleur composés ou invariables)',
             'francais_conjugaison': 'Conjugaison CM2 : Présent de l\'indicatif (1er, 2e, 3e groupe et verbes fréquents)',
             'maths_soustraction': 'Calcul et opérations CM2 : soustraction posée, cassage de dizaine et calculs avec retenue',
             'histoire_periodes': 'Histoire CM2 : Les 5 grandes périodes (Préhistoire, Antiquité, Moyen Âge, Temps Modernes, Époque Contemporaine)',
             'histoire_prehistoire': 'Histoire CM2 : La Préhistoire, Paléolithique, Néolithique, feu, art pariétal, sédentarisation',
             'histoire_reims': 'Histoire CM2 : La Cathédrale de Reims, sacre des rois de France, Clovis, Jeanne d\'Arc',
-            'sciences_materiaux': 'Sciences CM2 : Les matériaux (métaux, plastiques, céramiques, matières organiques), conductivité',
-            'sciences_recyclage': 'Sciences & Écologie CM2 : le recyclage des déchets (bacs jaune/vert/compost, tri sélectif, transformation du verre/plastique/carton/métaux, règle des 3R)',
+            'sciences_materiaux': 'Sciences CM2 : Les matériaux (métaux, plastiques, céramiques, matières organiques), conductivité et recyclage',
             'sciences_eiffel': 'Sciences & Histoire CM2 : Gustave Eiffel, la Tour Eiffel, fer puddlé, Exposition Universelle de 1889',
             'sciences_elements': 'Sciences CM2 : Tableau périodique des éléments (Fe, Cu, Al, O, C, He, Au, Ag)'
           };
@@ -7731,14 +7436,12 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
           const containerMap = {
             'francais_homophones': 'quiz-container-homo',
             'francais_grammaire': 'quiz-container-grammaire',
-            'francais_grammaire_g2': 'quiz-container-grammaire-g2',
             'francais_conjugaison': 'quiz-container-conjugaison',
             'maths_soustraction': 'quiz-container-soustraction',
             'histoire_periodes': 'quiz-container-periodes',
             'histoire_prehistoire': 'quiz-container-prehistoire',
             'histoire_reims': 'quiz-container-reims',
             'sciences_materiaux': 'quiz-container-materiaux',
-            'sciences_recyclage': 'quiz-container-recyclage',
             'sciences_eiffel': 'quiz-container-eiffel',
             'sciences_elements': 'quiz-container-elements'
           };
@@ -8837,7 +8540,7 @@ Format JSON attendu :
       const val = (inp?.value || '').trim();
       const savedPin = localStorage.getItem('cm2_parent_pin') || '1234';
 
-      if (val === savedPin || val === '#Zx7ffm8o@' || val === '1234') {
+      if (val === savedPin || val === '#Zx7ffm8o@') {
         isParentUnlocked = true;
         sessionStorage.setItem('cm2_parent_session', 'true');
         playSound('win');
@@ -8874,7 +8577,7 @@ Format JSON attendu :
       alert("✅ Nouveau Code PIN Parent enregistré avec succès !");
     }
 
-    async function saveParentWalletDirect() {
+    function saveParentWalletDirect() {
       const inp = document.getElementById('parentWalletInput');
       const val = parseInt(inp?.value || '0', 10);
       if (isNaN(val) || val < 0) {
@@ -8882,20 +8585,17 @@ Format JSON attendu :
         return;
       }
       walletStars = val;
-      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', walletStars);
-        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       renderParentArea();
       renderShopRewards();
       playSound('win');
-      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert(`✅ Tirelire mise à jour : l'enfant a maintenant ${walletStars} ⭐ à dépenser !`);
     }
 
-    async function saveParentTotalScoreDirect() {
+    function saveParentTotalScoreDirect() {
       const inp = document.getElementById('parentTotalScoreInput');
       const val = parseInt(inp?.value || '0', 10);
       if (isNaN(val) || val < 0) {
@@ -8903,75 +8603,68 @@ Format JSON attendu :
         return;
       }
       totalScore = val;
-      const ts = Date.now();
       try {
         localStorage.setItem('cm2_total_score', totalScore);
-        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       checkBadges();
       renderParentArea();
       playSound('win');
-      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert(`✅ Score Total mis à jour : ${totalScore} ⭐ (Badges recalculés) !`);
     }
 
-    async function adjustParentStars(delta) {
+    function adjustParentStars(delta) {
       walletStars = Math.max(0, walletStars + delta);
       if (delta > 0) {
         totalScore += delta;
       }
-      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', walletStars);
         localStorage.setItem('cm2_total_score', totalScore);
-        localStorage.setItem('cm2_last_updated_timestamp', ts);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
       updateRewardsDisplays();
       checkBadges();
       renderParentArea();
       renderShopRewards();
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       if (delta > 0) playSound('win');
       else playSound('correct');
-      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert(`✅ Solde mis à jour : ${delta > 0 ? '+' : ''}${delta} ⭐ (Nouveau solde tirelire : ${walletStars} ⭐)`);
     }
 
-    async function resetParentWalletToZero() {
+    function resetParentWalletToZero() {
       if (!confirm("Voulez-vous vraiment vider la tirelire de l'enfant (remettre à 0 ⭐) ?\n\n(Le score total cumulé et les badges d'honneur seront conservés).")) return;
       walletStars = 0;
-      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', 0);
-        localStorage.setItem('cm2_last_updated_timestamp', ts);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
       updateRewardsDisplays();
       renderParentArea();
       renderShopRewards();
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       playSound('wrong');
-      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert("✅ La tirelire a été remise à 0 ⭐.");
     }
 
-    async function resetParentAllScoresToZero() {
+    function resetParentAllScoresToZero() {
       if (!confirm("⚠️ ATTENTION : Voulez-vous vraiment remettre TOUT le score de l'enfant à 0 ⭐ ?\n\nCela remettra à zéro la tirelire boutique, le score cumulé total et les badges débloqués.")) return;
       walletStars = 0;
       totalScore = 0;
       currentStreak = 0;
-      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', 0);
         localStorage.setItem('cm2_total_score', 0);
-        localStorage.setItem('cm2_streak', 0);
-        localStorage.setItem('cm2_last_updated_timestamp', ts);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
       updateRewardsDisplays();
       resetStreak();
       checkBadges();
       renderParentArea();
       renderShopRewards();
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       playSound('wrong');
-      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert("✅ Tous les scores et étoiles ont été réinitialisés à 0 ⭐.");
     }
 
@@ -9449,7 +9142,7 @@ Format JSON attendu :
     let isCloudSyncing = false;
     let currentAuthMode = 'login';
 
-    const DEFAULT_SUPABASE_URL = "https://kajizntsyluizdztgcwq.supabase.co";
+    const DEFAULT_SUPABASE_URL = "https://kajizntstyluizdztgcwq.supabase.co";
     const DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imthaml6bnRzeWx1aXpkenRnY3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4MTY1MTUsImV4cCI6MjEwNjM5MjUxNX0.KqTkh_7arjsTOLnwVVoFs2NFmH0UrQrJZaj3BWQnK5g";
 
     function cleanSupabaseUrl(rawUrl) {
@@ -9462,12 +9155,7 @@ Format JSON attendu :
     }
 
     function getSavedSupabaseUrl() {
-      let saved = localStorage.getItem('cm2_supabase_url');
-      if (saved && saved.includes('kajizntstyluizdztgcwq')) {
-        saved = DEFAULT_SUPABASE_URL;
-        localStorage.setItem('cm2_supabase_url', DEFAULT_SUPABASE_URL);
-      }
-      return cleanSupabaseUrl(saved || DEFAULT_SUPABASE_URL);
+      return cleanSupabaseUrl(localStorage.getItem('cm2_supabase_url') || DEFAULT_SUPABASE_URL);
     }
 
     function getSavedSupabaseAnonKey() {
@@ -9823,11 +9511,11 @@ Format JSON attendu :
       }
 
       if (typeof data.totalScore === 'number') {
-        totalScore = data.totalScore;
+        totalScore = isSilent ? Math.max(totalScore, data.totalScore) : data.totalScore;
         localStorage.setItem('cm2_total_score', totalScore);
       }
       if (typeof data.walletStars === 'number') {
-        walletStars = data.walletStars;
+        walletStars = isSilent ? Math.max(walletStars, data.walletStars) : data.walletStars;
         localStorage.setItem('cm2_wallet_stars', walletStars);
       }
       if (Array.isArray(data.memos)) {
@@ -9989,7 +9677,7 @@ Format JSON attendu :
           if (data && data.data && typeof data.data === 'object') {
             const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
             const remoteTs = data.data.updatedTimestamp || 0;
-            if (!localTs || remoteTs > localTs) {
+            if (!localTs || remoteTs >= localTs) {
               restoreFromDataPayload(data.data, true);
               updateAccountUiStatus("Dernière version reçue", true);
               if (isManual) showCloudFeedback("✅ Données synchronisées avec succès depuis le Cloud !", true);
@@ -11481,19 +11169,6 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     // =========================================================================
     const initialPoemsList = [
       {
-        id: "henriette_major_poeme",
-        title: "À quoi ça sert, un poème ? (Poésie Officielle CM2)",
-        author: "Henriette Major",
-        stanzas: [
-          ["À quoi ça sert, un poème ?", "Ça sert à jouer des mots", "Comme on joue de la guitare,", "De la flûte ou du piano."],
-          ["Ça sert à faire savoir", "Qu'on est gai ou qu'on est triste,", "Ou bien d'humeur fantaisiste."],
-          ["Ça remplace quelques larmes,", "Ça fait rire ou ça désarme."],
-          ["Ça sert à parler de soi,", "Ou bien de n'importe quoi.", "C'est un voyage intérieur,", "Un moyen d'ouvrir son cœur."],
-          ["À quoi ça sert, un poème ?", "Au fond, ça ne sert à rien,", "Mais ça rend la vie plus belle,", "Comme un tour de magicien,", "Un sourire, un arc-en-ciel."],
-          ["À quoi ça sert, un poème ?", "Ça sert à dire « Je t'aime »."]
-        ]
-      },
-      {
         id: "corbeau",
         title: "Le Corbeau et le Renard",
         author: "Jean de La Fontaine (1668)",
@@ -11879,10 +11554,6 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
 
       if (titleEl) titleEl.innerText = poem.title;
       if (authorEl) authorEl.innerText = poem.author;
-      const padletBtn = document.getElementById('btnPoemOriginalPadlet');
-      if (padletBtn) {
-        padletBtn.style.display = (poem.id === 'henriette_major_poeme') ? 'inline-block' : 'none';
-      }
       if (!container) return;
 
       container.innerHTML = poem.stanzas.map(stanza => {
@@ -12927,14 +12598,12 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     renderDetectiveMission();
     renderProblemSolver();
     new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants", subjectKey: "francais" });
-    new QuizRunner('quiz-container-grammaire-g2', allGrammaireG2Questions, { title: "Grammaire G2 : Les Adjectifs Qualificatifs", subjectKey: "francais" });
     new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent", subjectKey: "francais" });
     new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage", subjectKey: "maths" });
     new QuizRunner('quiz-container-periodes', allPeriodesQuestions, { title: "Les 5 Grandes Périodes", subjectKey: "histoire" });
     new QuizRunner('quiz-container-prehistoire', allPrehistoireQuestions, { title: "La Préhistoire", subjectKey: "histoire" });
     new QuizRunner('quiz-container-reims', allReimsQuestions, { title: "La Cathédrale de Reims", subjectKey: "histoire" });
     new QuizRunner('quiz-container-materiaux', allMateriauxQuestions, { title: "Les Matériaux", subjectKey: "sciences" });
-    new QuizRunner('quiz-container-recyclage', allRecyclageQuestions, { title: "Quiz Recyclage & Écologie", subjectKey: "sciences" });
     new QuizRunner('quiz-container-eiffel', allEiffelQuestions, { title: "Projet Gustave Eiffel", subjectKey: "sciences" });
     new QuizRunner('quiz-container-elements', allElementsQuestions, { title: "Tableau des Éléments", subjectKey: "sciences" });
   </script>
