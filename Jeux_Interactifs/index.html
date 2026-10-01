@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Supabase Cloud SDK (Multi-device Realtime Sync & Authentication) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       /* Palette BD Franco-Belge Ligne Claire (Hergé / Vandersteen) */
@@ -3488,112 +3490,176 @@
     </div>
   </div>
 
-  <!-- Modale Synchronisation iPad & PC -->
+  <!-- Modale Synchronisation Universelle Multi-Appareils (Supabase Cloud) -->
   <div id="syncModal" class="ai-modal-overlay">
-    <div class="ai-modal-card" style="max-width: 620px;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--ink); display: flex; align-items: center; gap: 8px;">
-          ☁️ Sauvegarde & Synchronisation iPad / Mobile / PC
+    <div class="ai-modal-card" style="max-width: 650px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 10px;">
+        <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.45rem; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 8px;">
+          ☁️ Compte & Synchronisation Multi-Appareils
         </h3>
         <button onclick="closeSyncModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.6rem; cursor: pointer; font-weight: 800;">&times;</button>
       </div>
 
       <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--ink-faint); padding-bottom: 8px; flex-wrap: wrap;">
-        <button id="syncTabCloudBtn" class="sync-tab-btn active" onclick="switchSyncTab('cloud')">⚡ Synchro Cloud Auto</button>
-        <button id="syncTabCodeBtn" class="sync-tab-btn" onclick="switchSyncTab('code')">📋 Code Express (Manuel)</button>
-        <button id="syncTabFileBtn" class="sync-tab-btn" onclick="switchSyncTab('file')">💾 Fichier .json</button>
-        <button id="syncTabHelpBtn" class="sync-tab-btn" onclick="switchSyncTab('help')">❓ Mode d'emploi</button>
+        <button id="syncTabAccountBtn" class="sync-tab-btn active" onclick="switchSyncTab('account')">👤 Mon Compte Cloud</button>
+        <button id="syncTabConfigBtn" class="sync-tab-btn" onclick="switchSyncTab('config')">⚙️ Configuration Supabase</button>
+        <button id="syncTabFileBtn" class="sync-tab-btn" onclick="switchSyncTab('file')">💾 Sauvegarde Fichier</button>
       </div>
 
-      <!-- Tab 0: Synchro Cloud Auto -->
-      <div id="syncTabCloud" class="sync-tab-content active">
-        <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 14px; padding: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-            <span style="font-weight: 800; font-size: 0.95rem; color: var(--bd-green); display: flex; align-items: center; gap: 6px;">
-              <span id="cloudStatusDot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e;"></span>
-              <span id="cloudStatusText">Statut : Prêt pour la synchronisation</span>
-            </span>
-            <span id="cloudLastSyncTime" style="font-size: 0.8rem; color: var(--ink-light);">Dernière synchro : À l'instant</span>
+      <!-- Tab 1: Mon Compte Cloud -->
+      <div id="syncTabAccount" class="sync-tab-content active">
+        <!-- État CONNECTÉ -->
+        <div id="supabaseUserCard" style="display: none; background: #f0fdf4; border: 2.5px solid var(--bd-green); border-radius: 14px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.8rem;">👩‍🎓</span>
+              <div>
+                <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--bd-green);">Compte Connecté</div>
+                <div id="supabaseUserEmailDisplay" style="font-size: 1.05rem; font-weight: 800; color: var(--ink);">email@exemple.com</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span style="display: inline-flex; align-items: center; gap: 5px; background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 800; border: 1.5px solid #16a34a;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; animation: pulse 1.5s infinite;"></span>
+                Synchro En Temps Réel Active
+              </span>
+              <div id="cloudLastSyncTime" style="font-size: 0.75rem; color: var(--ink-light); margin-top: 3px;">Dernière synchro : À l'instant</div>
+            </div>
           </div>
 
-          <div style="font-size: 0.84rem; color: var(--ink); margin-bottom: 10px; line-height: 1.45;">
-            Les <strong>cadeaux personnalisés de la boutique</strong>, les <strong>⭐ étoiles</strong>, les <strong>bons débloqués</strong>, les <strong>œuvres d'art</strong> et poésies sont synchronisés automatiquement entre votre <strong>PC, iPad et Smartphone</strong> avec le même Code de Famille.
-          </div>
-
-          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
-            <label style="font-weight: 800; font-size: 0.85rem; color: var(--ink); min-width: 130px;">🔑 Code de Famille :</label>
-            <input type="text" id="cloudRoomIdInput" class="memo-input" style="flex: 1; min-width: 140px; padding: 6px 10px; font-size: 0.88rem; font-weight: 700; text-transform: lowercase;" placeholder="ex: lucie-cm2" value="lucie-cm2">
-            <button class="doc-link-btn" onclick="saveCloudRoomSettings()" style="padding: 6px 12px; font-size: 0.82rem; background: var(--bd-green); color: #ffffff; border-color: var(--ink);">Enregistrer</button>
+          <div style="background: rgba(255,255,255,0.8); border: 1.5px solid #bbf7d0; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;">
+            <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; color: #15803d; margin-bottom: 6px;">📊 Données synchronisées automatiquement :</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; font-size: 0.82rem;">
+              <div>🪙 <strong id="syncCurrentStars">0 ⭐</strong> tirelire</div>
+              <div>🎁 <strong id="syncCurrentGifts">0</strong> cadeaux boutique</div>
+              <div>🎟️ <strong id="syncCurrentVouchers">0</strong> bons débloqués</div>
+              <div>📝 <strong id="syncCurrentMemos">0</strong> mémos post-its</div>
+              <div>🖼️ <strong id="syncCurrentArts">0</strong> œuvres d'art</div>
+              <div>🧪 <strong id="syncCurrentMolecules">0</strong> molécules labo</div>
+            </div>
           </div>
 
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="action-btn" onclick="forceCloudAutoSync()" style="flex: 1; padding: 9px; font-size: 0.88rem; background: var(--bd-green);">
+            <button class="action-btn" onclick="forceCloudAutoSync()" style="flex: 2; min-width: 180px; padding: 10px; font-size: 0.9rem; background: var(--bd-green);">
               🔄 Synchroniser maintenant (Envoyer & Récupérer)
             </button>
-            <button class="action-btn" onclick="copyMagicSyncLink()" style="flex: 1; padding: 9px; font-size: 0.88rem; background: #0284c7;" title="Génère un lien magique à ouvrir sur iPad ou mobile pour synchroniser en 1 clic">
-              🔗 Copier Lien 1-Clic iPad/Mobile
+            <button class="action-btn" onclick="logoutSupabase()" style="flex: 1; min-width: 120px; padding: 10px; font-size: 0.88rem; background: #ef4444; border-color: #b91c1c;">
+              🚪 Déconnexion
             </button>
           </div>
           <div id="cloudFeedbackMsg" style="display: none; font-size: 0.84rem; font-weight: 800; text-align: center; margin-top: 8px;"></div>
         </div>
 
-        <details style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; font-size: 0.82rem; color: var(--ink-light);">
-          <summary style="font-weight: 700; cursor: pointer; color: var(--ink);">⚙️ Paramètres Cloud Avancés (Optionnel : Base de données Firebase / JSON)</summary>
-          <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
-            <label style="font-weight: 600; color: var(--ink);">URL Base de données Firebase Realtime (ex: <code>https://mon-projet-rtdb.firebaseio.com</code>) :</label>
-            <input type="text" id="cloudEndpointUrlInput" class="memo-input" style="width: 100%; font-size: 0.8rem;" placeholder="Laisser vide pour utiliser le relais de synchronisation par défaut">
-            <button class="doc-link-btn" onclick="saveAdvancedCloudEndpoint()" style="align-self: flex-start; padding: 4px 10px; font-size: 0.78rem; margin-top: 4px;">Sauvegarder l'URL Cloud</button>
+        <!-- État DÉCONNECTÉ (Formulaire Connexion / Inscription) -->
+        <div id="supabaseAuthCard" style="background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 16px;">
+          <div style="text-align: center; margin-bottom: 14px;">
+            <div style="font-size: 2.2rem; margin-bottom: 4px;">🔐</div>
+            <h4 style="margin: 0; font-family: 'Fredoka', sans-serif; font-size: 1.25rem; color: var(--ink);">
+              Synchronisation Automatique Sans Effort
+            </h4>
+            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: var(--ink-light); line-height: 1.4;">
+              Connectez-vous sur votre <strong>PC, iPad ou Smartphone</strong> : tous vos points, cadeaux, œuvres et mémos se synchronisent en direct sans aucun copier-coller !
+            </p>
           </div>
-        </details>
+
+          <div style="display: flex; gap: 6px; background: var(--bg-page-alt); padding: 4px; border-radius: 10px; margin-bottom: 14px;">
+            <button id="btnAuthModeLogin" class="submodule-btn active" onclick="setAuthMode('login')" style="flex: 1; padding: 6px; font-size: 0.85rem;">🔑 Se connecter</button>
+            <button id="btnAuthModeSignup" class="submodule-btn" onclick="setAuthMode('signup')" style="flex: 1; padding: 6px; font-size: 0.85rem;">✨ Créer un compte</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div>
+              <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">📧 Adresse Email :</label>
+              <input type="email" id="supabaseAuthEmail" class="memo-input" style="width: 100%; font-size: 0.9rem;" placeholder="ex: famille@gmail.com">
+            </div>
+
+            <div>
+              <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🔒 Mot de Passe :</label>
+              <input type="password" id="supabaseAuthPassword" class="memo-input" style="width: 100%; font-size: 0.9rem;" placeholder="Votre mot de passe sécurisé">
+            </div>
+
+            <button id="supabaseSubmitAuthBtn" class="action-btn" onclick="submitSupabaseAuth()" style="width: 100%; padding: 11px; font-size: 0.95rem; margin-top: 4px; background: var(--bd-blue);">
+              🚀 Se connecter
+            </button>
+            <div id="supabaseAuthErrorMsg" style="display: none; color: #dc2626; background: #fee2e2; border: 1.5px solid #ef4444; border-radius: 8px; padding: 8px; font-size: 0.82rem; font-weight: 700; text-align: center;"></div>
+          </div>
+        </div>
       </div>
 
-      <!-- Tab 1: Code Express -->
-      <div id="syncTabCode" class="sync-tab-content">
-        <div style="background: #f0fdf4; border: 2px solid var(--bd-green); border-radius: 12px; padding: 14px;">
-          <div style="font-weight: 800; font-size: 0.95rem; color: var(--bd-green); margin-bottom: 4px;">📤 1. Exporter depuis cet appareil :</div>
-          <div style="font-size: 0.84rem; color: var(--ink-light); margin-bottom: 10px;">
-            État actuel : <strong id="syncCurrentStars">0 ⭐</strong> | <strong id="syncCurrentGifts">0 cadeaux</strong> | <strong id="syncCurrentMemos">0 mémos</strong> | <strong id="syncCurrentVouchers">0 bons</strong> | <strong id="syncCurrentAwarded">0 exercices validés</strong>
+      <!-- Tab 2: Configuration Supabase -->
+      <div id="syncTabConfig" class="sync-tab-content">
+        <div style="background: #f8fafc; border: 2px solid var(--ink); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-weight: 800; font-size: 0.95rem; color: var(--ink); display: flex; align-items: center; gap: 6px;">
+            ⚡ Paramètres de Connexion Supabase Cloud
           </div>
-          <button class="action-btn" onclick="copySyncCode()" style="width: 100%; padding: 10px; font-size: 0.92rem; background: var(--bd-green); margin-bottom: 4px;">
-            📋 Copier mon Code de Sauvegarde (1-clic)
-          </button>
-          <div id="syncCopyFeedback" style="display: none; color: var(--bd-green); font-size: 0.85rem; font-weight: 800; text-align: center; margin-top: 6px;">✅ Code copié ! Colle-le maintenant sur ton autre appareil.</div>
-        </div>
+          <p style="font-size: 0.82rem; color: var(--ink-light); margin: 0; line-height: 1.4;">
+            Renseignez ici l'URL de votre projet et la clé publique Anon fournies gratuitement sur votre tableau de bord <a href="https://supabase.com" target="_blank" style="color: var(--bd-blue); font-weight: 800;">supabase.com</a>.
+          </p>
 
-        <div style="background: #eff6ff; border: 2px solid var(--bd-blue); border-radius: 12px; padding: 14px;">
-          <div style="font-weight: 800; font-size: 0.95rem; color: var(--bd-blue-dark); margin-bottom: 4px;">📥 2. Importer & Restaurer sur cet appareil :</div>
-          <div style="font-size: 0.84rem; color: var(--ink-light); margin-bottom: 6px;">Colle le code copié depuis l'autre appareil ci-dessous :</div>
-          <textarea id="syncImportInput" class="memo-input" style="width: 100%; height: 60px; font-size: 0.8rem; font-family: monospace;" placeholder="Colle ici ton code CM2-SYNC-..."></textarea>
-          <button class="action-btn" onclick="importSyncCode()" style="width: 100%; padding: 10px; font-size: 0.92rem; margin-top: 8px;">
-            ✨ Restaurer toute ma progression sur cet appareil
-          </button>
+          <div>
+            <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🌐 URL du Projet Supabase :</label>
+            <input type="text" id="supabaseUrlInput" class="memo-input" style="width: 100%; font-size: 0.85rem;" placeholder="https://xxxxxxxxxxxx.supabase.co">
+          </div>
+
+          <div>
+            <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🔑 Clé Publique Anon (API Key) :</label>
+            <input type="text" id="supabaseAnonKeyInput" class="memo-input" style="width: 100%; font-size: 0.85rem; font-family: monospace;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 4px;">
+            <button class="action-btn" onclick="saveSupabaseConfig()" style="flex: 1; padding: 9px; font-size: 0.88rem; background: var(--bd-green);">
+              💾 Sauvegarder la configuration
+            </button>
+            <button class="doc-link-btn" onclick="testSupabaseConnection()" style="padding: 9px 14px; font-size: 0.85rem;">
+              🔍 Tester la connexion
+            </button>
+          </div>
+          <div id="supabaseConfigFeedback" style="display: none; font-size: 0.82rem; font-weight: 800; text-align: center;"></div>
+
+          <details style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; font-size: 0.82rem; color: var(--ink-light); margin-top: 4px;">
+            <summary style="font-weight: 800; cursor: pointer; color: var(--ink);">📋 Script SQL Supabase (1-Clic pour initialiser la base)</summary>
+            <div style="margin-top: 8px;">
+              <p style="margin: 0 0 6px 0; font-size: 0.78rem;">Copiez et collez ce script dans le <strong>SQL Editor</strong> de votre projet Supabase :</p>
+              <textarea readonly style="width: 100%; height: 130px; font-family: monospace; font-size: 0.72rem; padding: 6px; background: #f1f5f9; border: 1px solid #94a3b8; border-radius: 6px;">-- 1. Table de stockage des élèves et parents
+create table if not exists public.user_cm2_data (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  email text,
+  data jsonb not null default '{}'::jsonb,
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- 2. Permissions d'accès pour l'API
+grant all on table public.user_cm2_data to anon, authenticated, service_role;
+
+-- 3. Activation de la sécurité (Row Level Security)
+alter table public.user_cm2_data enable row level security;
+
+create policy "Accès complet utilisateur"
+  on public.user_cm2_data for all
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+-- 4. Activation de la synchronisation Realtime
+alter publication supabase_realtime add table public.user_cm2_data;</textarea>
+            </div>
+          </details>
         </div>
       </div>
 
-      <!-- Tab 2: Fichier .json -->
+      <!-- Tab 3: Sauvegarde Fichier (Secours) -->
       <div id="syncTabFile" class="sync-tab-content">
-        <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
           <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 12px; padding: 14px;">
-            <div style="font-weight: 800; margin-bottom: 4px; color: var(--ink);">💾 Sauvegarde sur fichier :</div>
-            <p style="font-size: 0.85rem; color: var(--ink-light); margin-bottom: 10px;">Télécharge un fichier <code>sauvegarde_cm2_lucie.json</code> à conserver ou transférer par clé USB / Mail.</p>
-            <button class="action-btn" onclick="downloadBackupFile()" style="padding: 8px 16px; font-size: 0.88rem;">💾 Télécharger le fichier .json</button>
+            <div style="font-weight: 800; margin-bottom: 4px; color: var(--ink);">💾 Exporter sur fichier .json :</div>
+            <p style="font-size: 0.82rem; color: var(--ink-light); margin-bottom: 8px;">Téléchargez une copie de secours complète de toutes vos données.</p>
+            <button class="action-btn" onclick="downloadBackupFile()" style="padding: 8px 16px; font-size: 0.85rem;">💾 Télécharger le fichier .json</button>
           </div>
 
           <div style="background: var(--bg-page); border: 2px solid var(--ink); border-radius: 12px; padding: 14px;">
-            <div style="font-weight: 800; margin-bottom: 4px; color: var(--ink);">📂 Restauration depuis un fichier :</div>
-            <p style="font-size: 0.85rem; color: var(--ink-light); margin-bottom: 10px;">Sélectionne ton fichier de sauvegarde <code>.json</code> pour restaurer immédiatement.</p>
-            <input type="file" id="syncFileInput" accept=".json" onchange="handleSyncFileUpload(event)" style="font-size: 0.88rem;">
+            <div style="font-weight: 800; margin-bottom: 4px; color: var(--ink);">📂 Restaurer depuis un fichier :</div>
+            <p style="font-size: 0.82rem; color: var(--ink-light); margin-bottom: 8px;">Sélectionnez votre fichier de sauvegarde <code>.json</code> pour restaurer immédiatement.</p>
+            <input type="file" id="syncFileInput" accept=".json" onchange="handleSyncFileUpload(event)" style="font-size: 0.85rem;">
           </div>
-        </div>
-      </div>
-
-      <!-- Tab 3: Mode d'emploi -->
-      <div id="syncTabHelp" class="sync-tab-content">
-        <div class="rule-box" style="background: #fefce8; border: 2px solid var(--ink); font-size: 0.88rem; line-height: 1.6;">
-          <strong>💡 Comment profiter de la synchronisation automatique (iPad ↔ PC ↔ Smartphone) ?</strong><br><br>
-          <strong>1. Avec le Lien 1-Clic (Le plus simple) :</strong> Dans l'onglet <em>⚡ Synchro Cloud Auto</em>, clique sur <strong>« 🔗 Copier Lien 1-Clic iPad/Mobile »</strong> et envoie-le par AirDrop, WhatsApp ou Mail sur ton iPad. Ouvre le lien : tout est synchronisé instantanément !<br>
-          <strong>2. Avec le Code de Famille :</strong> Assure-toi que le même <em>Code de Famille</em> (ex: <code>lucie-cm2</code>) est configuré sur tous tes appareils.<br>
-          <strong>3. Automatique :</strong> Toute nouvelle œuvre découverte avec Gemini ou poésie créée est immédiatement synchronisée en direct !
         </div>
       </div>
     </div>
@@ -3832,8 +3898,9 @@
         <button class="calc-btn-top" onclick="toggleFloatingCalculator()" title="Ouvrir la calculatrice flottante">
           🧮 Calculatrice
         </button>
-        <button class="sync-btn-top" onclick="openSyncModal()" title="Synchroniser avec iPad ou PC">
-          ☁️ Sync iPad / PC
+        <button id="accountNavBtn" class="sync-btn-top" onclick="openSyncModal()" title="Compte & Synchronisation Cloud Automatique (PC, iPad, Mobile)">
+          <span id="accountNavDot" style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #94a3b8;"></span>
+          <span id="accountNavStatus">👤 Compte & Synchro</span>
         </button>
         <button class="ai-btn-top-cfg" onclick="toggleAiModal()" title="Paramètres de l'IA">
           ⚙️ Clé IA
@@ -5043,11 +5110,11 @@
 
           <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button class="action-btn" onclick="syncParentRewardsNow()" style="padding: 8px 16px; font-size: 0.88rem; background: var(--bd-blue); border-color: var(--ink);" title="Envoie immédiatement ces cadeaux sur le Cloud pour l'iPad">
-                ☁️ Synchroniser les Cadeaux sur l'iPad
+              <button class="action-btn" onclick="syncParentRewardsNow()" style="padding: 8px 16px; font-size: 0.88rem; background: var(--bd-blue); border-color: var(--ink);" title="Sauvegarde immédiatement sur le Cloud Supabase pour l'iPad">
+                ☁️ Sauvegarder & Synchroniser sur l'iPad
               </button>
-              <button class="doc-link-btn" onclick="copyParentRewardsCodeExpress()" style="padding: 8px 14px; font-size: 0.85rem; border-color: var(--bd-green); color: var(--bd-green); background: #f0fdf4;" title="Copier le code de sauvegarde manuel pour l'iPad">
-                📋 Copier Code Express (iPad)
+              <button class="doc-link-btn" onclick="openSyncModal()" style="padding: 8px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;" title="Gérer le compte et la synchronisation">
+                👤 Gérer le Compte Cloud
               </button>
             </div>
             <button class="doc-link-btn" onclick="resetDefaultRewardsCatalog()" style="border-color: var(--bd-red); color: var(--bd-red);">
@@ -5765,7 +5832,9 @@
     function saveAwardedQuestions(map) {
       try {
         localStorage.setItem('cm2_awarded_questions', JSON.stringify(map));
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
     function isQuestionAwarded(qId) {
@@ -6976,7 +7045,9 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
     function saveStoredMemos(memos) {
       try {
         localStorage.setItem('cm2_student_memos', JSON.stringify(memos));
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
     function initBlocNotesEvents() {
@@ -8495,46 +8566,88 @@ Format JSON attendu :
       }
       await pushToCloud(true);
       if (fb) {
-        fb.innerText = "✅ Cadeaux envoyés sur le Cloud !";
+        fb.innerText = "✅ Cadeaux synchronisés sur le Cloud !";
         fb.style.color = "var(--bd-green)";
         setTimeout(() => {
           if (fb) fb.innerText = "🟢 Synchro iPad Active";
         }, 4000);
       }
-      openSyncModal();
-    }
-
-    function copyParentRewardsCodeExpress() {
-      copySyncCode();
-      alert("📋 Code Express copié dans le presse-papiers !\n\nPour synchroniser sans connexion Cloud :\n1. Sur votre iPad, ouvrez le jeu.\n2. Cliquez sur '☁️ Sync iPad / PC' en haut à droite.\n3. Allez dans l'onglet '📋 Code Express (Manuel)'.\n4. Collez le code et cliquez sur 'Restaurer' : tous vos cadeaux personnalisés apparaîtront instantanément !");
+      if (!currentSupabaseUser) {
+        openSyncModal();
+      }
     }
 
     // =========================================================================
-    // CROSS-DEVICE CLOUD AUTO-SYNC & BACKUP ENGINE (iPad ↔ PC ↔ Mobile)
+    // UNIVERSAL SUPABASE CLOUD SYNC & ACCOUNT ENGINE (PC ↔ iPad ↔ Mobile)
     // =========================================================================
+    let supabaseClient = null;
+    let currentSupabaseUser = null;
+    let supabaseRealtimeChannel = null;
     let syncBroadcastChannel = null;
     let autoCloudSyncTimeout = null;
     let isCloudSyncing = false;
+    let currentAuthMode = 'login';
+
+    function cleanSupabaseUrl(rawUrl) {
+      let url = (rawUrl || '').trim();
+      if (!url) return '';
+      url = url.replace(/\/rest\/v1\/?.*$/i, '');
+      url = url.replace(/\/auth\/v1\/?.*$/i, '');
+      url = url.replace(/\/+$/, '');
+      return url;
+    }
+
+    function getSavedSupabaseUrl() {
+      return cleanSupabaseUrl(localStorage.getItem('cm2_supabase_url') || '');
+    }
+
+    function getSavedSupabaseAnonKey() {
+      return (localStorage.getItem('cm2_supabase_anon_key') || '').trim();
+    }
+
+    function getSupabaseClient() {
+      if (supabaseClient) return supabaseClient;
+      const url = getSavedSupabaseUrl();
+      const key = getSavedSupabaseAnonKey();
+      if (url && key && window.supabase && typeof window.supabase.createClient === 'function') {
+        try {
+          supabaseClient = window.supabase.createClient(url, key, {
+            auth: {
+              persistSession: true,
+              autoRefreshToken: true
+            }
+          });
+        } catch (err) {
+          console.error("Supabase client init error:", err);
+        }
+      }
+      return supabaseClient;
+    }
 
     function openSyncModal() {
       const m = document.getElementById('syncModal');
       if (!m) return;
       m.style.display = 'flex';
       updateSyncStatsDisplay();
-      updateCloudUiStatus();
+      updateAccountUiDisplay();
+      
+      const urlInp = document.getElementById('supabaseUrlInput');
+      const keyInp = document.getElementById('supabaseAnonKeyInput');
+      if (urlInp) urlInp.value = getSavedSupabaseUrl();
+      if (keyInp) keyInp.value = getSavedSupabaseAnonKey();
     }
 
     function closeSyncModal() {
       const m = document.getElementById('syncModal');
       if (m) m.style.display = 'none';
-      const copyFb = document.getElementById('syncCopyFeedback');
-      if (copyFb) copyFb.style.display = 'none';
       const cloudFb = document.getElementById('cloudFeedbackMsg');
       if (cloudFb) cloudFb.style.display = 'none';
+      const authErr = document.getElementById('supabaseAuthErrorMsg');
+      if (authErr) authErr.style.display = 'none';
     }
 
     function switchSyncTab(tab) {
-      ['cloud', 'code', 'file', 'help'].forEach(t => {
+      ['account', 'config', 'file'].forEach(t => {
         const btn = document.getElementById('syncTab' + capitalize(t) + 'Btn');
         const content = document.getElementById('syncTab' + capitalize(t));
         if (btn) btn.classList.toggle('active', t === tab);
@@ -8543,34 +8656,250 @@ Format JSON attendu :
     }
 
     function capitalize(s) {
-      return s.charAt(0).toUpperCase() + s.slice(1);
+      return s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
     }
 
-    function getCloudRoomId() {
-      return (localStorage.getItem('cm2_cloud_room_id') || 'lucie-cm2').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    function setAuthMode(mode) {
+      currentAuthMode = mode;
+      const btnLogin = document.getElementById('btnAuthModeLogin');
+      const btnSignup = document.getElementById('btnAuthModeSignup');
+      const submitBtn = document.getElementById('supabaseSubmitAuthBtn');
+      const authErr = document.getElementById('supabaseAuthErrorMsg');
+      if (authErr) authErr.style.display = 'none';
+
+      if (mode === 'login') {
+        if (btnLogin) btnLogin.classList.add('active');
+        if (btnSignup) btnSignup.classList.remove('active');
+        if (submitBtn) submitBtn.innerText = "🚀 Se connecter";
+      } else {
+        if (btnLogin) btnLogin.classList.remove('active');
+        if (btnSignup) btnSignup.classList.add('active');
+        if (submitBtn) submitBtn.innerText = "✨ Créer mon compte";
+      }
     }
 
-    function getCloudEndpointUrl() {
-      return (localStorage.getItem('cm2_cloud_endpoint_url') || '').trim();
+    async function submitSupabaseAuth() {
+      const client = getSupabaseClient();
+      const authErr = document.getElementById('supabaseAuthErrorMsg');
+      const email = (document.getElementById('supabaseAuthEmail')?.value || '').trim();
+      const password = (document.getElementById('supabaseAuthPassword')?.value || '').trim();
+      const submitBtn = document.getElementById('supabaseSubmitAuthBtn');
+
+      if (!client) {
+        if (authErr) {
+          authErr.style.display = 'block';
+          authErr.innerHTML = `⚠️ Veuillez d'abord renseigner vos identifiants Supabase (URL & Clé) dans l'onglet <strong>⚙️ Configuration Supabase</strong> !`;
+        }
+        switchSyncTab('config');
+        return;
+      }
+
+      if (!email || !password) {
+        if (authErr) {
+          authErr.style.display = 'block';
+          authErr.innerText = "⚠️ Veuillez renseigner un email et un mot de passe.";
+        }
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "⏳ En cours...";
+      }
+      if (authErr) authErr.style.display = 'none';
+
+      try {
+        if (currentAuthMode === 'login') {
+          const { data, error } = await client.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          currentSupabaseUser = data.user;
+          playSound('win');
+          triggerConfetti();
+          updateAccountUiDisplay();
+          await pullFromCloud(true);
+          setupSupabaseRealtime(data.user.id);
+        } else {
+          const { data, error } = await client.auth.signUp({ email, password });
+          if (error) throw error;
+          if (data.session) {
+            currentSupabaseUser = data.user;
+            playSound('win');
+            triggerConfetti();
+            updateAccountUiDisplay();
+            await pushToCloud(true);
+            setupSupabaseRealtime(data.user.id);
+            alert("🎉 Compte créé avec succès ! Vos données ont été initialisées sur le Cloud.");
+          } else {
+            alert("✨ Compte créé ! Si la confirmation par email est activée sur votre projet Supabase, veuillez vérifier votre boîte de réception.");
+          }
+        }
+      } catch (err) {
+        console.error("Auth error:", err);
+        if (authErr) {
+          authErr.style.display = 'block';
+          authErr.innerText = "❌ " + (err.message || "Erreur de connexion. Vérifiez vos identifiants.");
+        }
+        playSound('wrong');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = currentAuthMode === 'login' ? "🚀 Se connecter" : "✨ Créer mon compte";
+        }
+      }
     }
 
-    function saveCloudRoomSettings() {
-      const input = document.getElementById('cloudRoomIdInput');
-      const val = (input?.value || '').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'lucie-cm2';
-      localStorage.setItem('cm2_cloud_room_id', val);
-      if (input) input.value = val;
-      showCloudFeedback("✅ Code de famille enregistré : " + val, true);
+    async function logoutSupabase() {
+      if (!confirm("Voulez-vous vraiment vous déconnecter de ce compte ?")) return;
+      const client = getSupabaseClient();
+      if (client) {
+        try {
+          await client.auth.signOut();
+        } catch (e) {}
+      }
+      if (supabaseRealtimeChannel && client) {
+        try { client.removeChannel(supabaseRealtimeChannel); } catch (e) {}
+        supabaseRealtimeChannel = null;
+      }
+      currentSupabaseUser = null;
+      playSound('click');
+      updateAccountUiDisplay();
+    }
+
+    function saveSupabaseConfig() {
+      const url = cleanSupabaseUrl(document.getElementById('supabaseUrlInput')?.value || '');
+      const key = (document.getElementById('supabaseAnonKeyInput')?.value || '').trim();
+      const fb = document.getElementById('supabaseConfigFeedback');
+
+      const urlInp = document.getElementById('supabaseUrlInput');
+      if (urlInp) urlInp.value = url;
+
+      localStorage.setItem('cm2_supabase_url', url);
+      localStorage.setItem('cm2_supabase_anon_key', key);
+      supabaseClient = null; // force reload client
+
+      if (fb) {
+        fb.style.display = 'block';
+        fb.style.color = 'var(--bd-green)';
+        fb.innerText = "✅ Configuration Supabase enregistrée avec succès !";
+        setTimeout(() => { if (fb) fb.style.display = 'none'; }, 4000);
+      }
       playSound('win');
-      forceCloudAutoSync();
+      initSupabaseEngine();
     }
 
-    function saveAdvancedCloudEndpoint() {
-      const input = document.getElementById('cloudEndpointUrlInput');
-      const val = (input?.value || '').trim();
-      localStorage.setItem('cm2_cloud_endpoint_url', val);
-      showCloudFeedback(val ? "✅ URL Firebase / Cloud enregistrée !" : "ℹ️ Relais par défaut activé.", true);
-      playSound('win');
-      forceCloudAutoSync();
+    async function testSupabaseConnection() {
+      const fb = document.getElementById('supabaseConfigFeedback');
+      const client = getSupabaseClient();
+      if (!client) {
+        if (fb) {
+          fb.style.display = 'block';
+          fb.style.color = 'var(--bd-red)';
+          fb.innerText = "⚠️ Veuillez remplir l'URL et la Clé Anon avant de tester.";
+        }
+        return;
+      }
+      if (fb) {
+        fb.style.display = 'block';
+        fb.style.color = 'var(--bd-blue)';
+        fb.innerText = "⏳ Test de connexion vers Supabase...";
+      }
+
+      try {
+        const { error: authErr } = await client.auth.getSession();
+        if (authErr && !authErr.message?.includes('session')) {
+          throw authErr;
+        }
+
+        const { error } = await client.from('user_cm2_data').select('user_id').limit(1);
+        if (error) {
+          if (error.code === '42P01') {
+            throw new Error("La table 'user_cm2_data' n'existe pas encore. Exécutez le script SQL ci-dessous dans Supabase.");
+          }
+          // Note: code 42501 (permission denied / RLS) or PGRST301 is expected when not logged in
+        }
+
+        if (fb) {
+          fb.style.color = 'var(--bd-green)';
+          fb.innerText = "✅ Connexion à Supabase établie avec succès ! Vous pouvez créer votre compte ou vous connecter.";
+        }
+        playSound('win');
+      } catch (err) {
+        if (fb) {
+          fb.style.color = 'var(--bd-red)';
+          fb.innerText = "❌ Erreur de connexion : " + (err.message || "Vérifiez l'URL et la clé");
+        }
+        playSound('wrong');
+      }
+    }
+
+    function setupSupabaseRealtime(userId) {
+      const client = getSupabaseClient();
+      if (!client || !userId) return;
+
+      try {
+        if (supabaseRealtimeChannel) {
+          client.removeChannel(supabaseRealtimeChannel);
+        }
+
+        supabaseRealtimeChannel = client
+          .channel(`cm2-realtime-user-${userId}`)
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'user_cm2_data',
+              filter: `user_id=eq.${userId}`
+            },
+            (payload) => {
+              if (payload.new && payload.new.data) {
+                const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
+                const remoteTs = payload.new.data.updatedTimestamp || 0;
+                if (!localTs || remoteTs > localTs) {
+                  restoreFromDataPayload(payload.new.data, true);
+                  updateAccountUiStatus("Données synchronisées en direct d'un autre appareil !", true);
+                }
+              }
+            }
+          )
+          .subscribe();
+      } catch (err) {
+        console.warn("Realtime sub warning:", err);
+      }
+    }
+
+    function updateAccountUiDisplay() {
+      const isLogged = Boolean(currentSupabaseUser);
+      const userCard = document.getElementById('supabaseUserCard');
+      const authCard = document.getElementById('supabaseAuthCard');
+      const emailDisplay = document.getElementById('supabaseUserEmailDisplay');
+      const navStatus = document.getElementById('accountNavStatus');
+      const navDot = document.getElementById('accountNavDot');
+
+      if (userCard) userCard.style.display = isLogged ? 'block' : 'none';
+      if (authCard) authCard.style.display = isLogged ? 'none' : 'block';
+
+      if (isLogged) {
+        const email = currentSupabaseUser.email || 'Élève';
+        if (emailDisplay) emailDisplay.innerText = email;
+        if (navStatus) navStatus.innerText = `👤 ${email.split('@')[0]}`;
+        if (navDot) navDot.style.background = '#22c55e';
+      } else {
+        if (navStatus) navStatus.innerText = "👤 Compte & Synchro";
+        if (navDot) navDot.style.background = '#94a3b8';
+      }
+
+      updateSyncStatsDisplay();
+    }
+
+    function updateAccountUiStatus(statusText, isOnline = true) {
+      const timeEl = document.getElementById('cloudLastSyncTime');
+      if (timeEl) {
+        const d = new Date();
+        timeEl.innerText = `Dernière synchro : ${d.getHours().toString().padStart(2, '0')}h${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`;
+      }
+      const navDot = document.getElementById('accountNavDot');
+      if (navDot) navDot.style.background = isOnline ? '#22c55e' : '#eab308';
     }
 
     function showCloudFeedback(msg, isSuccess) {
@@ -8586,7 +8915,7 @@ Format JSON attendu :
       const awarded = getAwardedQuestions();
       return {
         app: "academie_cm2_lucie",
-        version: "2.6",
+        version: "3.0",
         exportedAt: new Date().toISOString(),
         updatedTimestamp: Date.now(),
         totalScore,
@@ -8600,6 +8929,7 @@ Format JSON attendu :
         deletedArts: getDeletedArts(),
         customPoems: getCustomPoems(),
         deletedPoems: getDeletedPoems(),
+        discoveredMolecules: getDiscoveredMolecules(),
         subjectMultipliers: getSubjectMultipliers(),
         parentPin: localStorage.getItem('cm2_parent_pin') || '1234',
         parentEmail: localStorage.getItem('cm2_parent_email') || '',
@@ -8614,69 +8944,21 @@ Format JSON attendu :
       const vouchers = getClaimedVouchers();
       const catalog = getRewardsCatalog();
       const arts = getActiveArts();
-      const poems = getActivePoems();
+      const molecules = getDiscoveredMolecules();
 
       const elStars = document.getElementById('syncCurrentStars');
       const elGifts = document.getElementById('syncCurrentGifts');
       const elMemos = document.getElementById('syncCurrentMemos');
       const elVouchers = document.getElementById('syncCurrentVouchers');
-      const elAwarded = document.getElementById('syncCurrentAwarded');
+      const elArts = document.getElementById('syncCurrentArts');
+      const elMolecules = document.getElementById('syncCurrentMolecules');
 
       if (elStars) elStars.innerText = `${walletStars} ⭐`;
-      if (elGifts) elGifts.innerText = `${catalog.length} cadeaux`;
-      if (elMemos) elMemos.innerText = `${memos.length} mémos`;
-      if (elVouchers) elVouchers.innerText = `${vouchers.length} bons`;
-      if (elAwarded) elAwarded.innerText = `${catalog.length} cadeaux | ${awardedCount} ex. | ${arts.length} œuvres | ${poems.length} poésies`;
-    }
-
-    function updateCloudUiStatus(statusText, isOnline = true) {
-      const dot = document.getElementById('cloudStatusDot');
-      const text = document.getElementById('cloudStatusText');
-      const timeEl = document.getElementById('cloudLastSyncTime');
-      const roomIdInput = document.getElementById('cloudRoomIdInput');
-      const endpointInput = document.getElementById('cloudEndpointUrlInput');
-
-      if (dot) dot.style.background = isOnline ? '#22c55e' : '#eab308';
-      if (text) text.innerText = statusText || (isOnline ? "Statut : Synchro Cloud Active" : "Statut : En attente");
-      if (timeEl) {
-        const d = new Date();
-        timeEl.innerText = `Dernière synchro : ${d.getHours().toString().padStart(2, '0')}h${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`;
-      }
-      if (roomIdInput) roomIdInput.value = getCloudRoomId();
-      if (endpointInput) endpointInput.value = getCloudEndpointUrl();
-    }
-
-    function copyMagicSyncLink() {
-      const payload = generateBackupPayload();
-      const jsonStr = JSON.stringify(payload);
-      const encoded = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
-      const roomId = getCloudRoomId();
-      const url = `${window.location.origin}${window.location.pathname}?room=${roomId}#sync=${encoded}`;
-
-      navigator.clipboard.writeText(url).then(() => {
-        showCloudFeedback("🔗 Lien 1-Clic copié ! Envoie-le sur ton iPad ou Mobile pour synchroniser instantanément.", true);
-        playSound('win');
-      }).catch(() => {
-        prompt("Voici ton lien magique 1-Clic à copier pour iPad/Mobile :", url);
-      });
-    }
-
-    function copySyncCode() {
-      const payload = generateBackupPayload();
-      const jsonStr = JSON.stringify(payload);
-      const encoded = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
-      const syncCode = 'CM2-SYNC-' + encoded;
-
-      navigator.clipboard.writeText(syncCode).then(() => {
-        const copyFb = document.getElementById('syncCopyFeedback');
-        if (copyFb) {
-          copyFb.style.display = 'block';
-          copyFb.innerText = "✅ Code de sauvegarde copié dans le presse-papiers !";
-        }
-        playSound('win');
-      }).catch(() => {
-        prompt("Voici ton code de sauvegarde à copier manuellement :", syncCode);
-      });
+      if (elGifts) elGifts.innerText = `${catalog.length}`;
+      if (elMemos) elMemos.innerText = `${memos.length}`;
+      if (elVouchers) elVouchers.innerText = `${vouchers.length}`;
+      if (elArts) elArts.innerText = `${arts.length}`;
+      if (elMolecules) elMolecules.innerText = `${molecules.length}`;
     }
 
     function downloadBackupFile() {
@@ -8724,7 +9006,7 @@ Format JSON attendu :
       }
 
       if (typeof data.totalScore === 'number') {
-        totalScore = Math.max(totalScore, data.totalScore);
+        totalScore = isSilent ? Math.max(totalScore, data.totalScore) : data.totalScore;
         localStorage.setItem('cm2_total_score', totalScore);
       }
       if (typeof data.walletStars === 'number') {
@@ -8769,6 +9051,11 @@ Format JSON attendu :
         const mergedDel = Array.from(new Set([...currentDel, ...data.deletedPoems]));
         saveDeletedPoems(mergedDel);
       }
+      if (Array.isArray(data.discoveredMolecules)) {
+        const currentMol = getDiscoveredMolecules();
+        const mergedMol = Array.from(new Set([...currentMol, ...data.discoveredMolecules]));
+        saveDiscoveredMolecules(mergedMol);
+      }
       if (data.subjectMultipliers && typeof data.subjectMultipliers === 'object') {
         saveSubjectMultipliers(data.subjectMultipliers);
       }
@@ -8792,10 +9079,11 @@ Format JSON attendu :
       renderClaimedVouchers();
       renderParentArea();
       initCultureSection();
+      renderCodex();
       updateSyncStatsDisplay();
       updateSubjectBonusBadges();
       renderDailyBalanceWidget();
-      updateCloudUiStatus("Synchronisé avec succès", true);
+      updateAccountUiStatus("Synchronisé avec succès", true);
 
       if (!isSilent) {
         playSound('win');
@@ -8804,35 +9092,6 @@ Format JSON attendu :
         alert(`🎉 Synchronisation réussie avec succès !\n\n• ${countRewards} cadeau(x) configurés dans la boutique\n• ${walletStars} ⭐ étoiles dans la tirelire\n• ${countArts} œuvre(s) d'art et ${countPoems} poésie(s)`);
       }
       return true;
-    }
-
-    function importSyncCode() {
-      const inp = document.getElementById('syncImportInput');
-      let str = (inp?.value || '').trim();
-      if (!str) {
-        alert("⚠️ Veuillez coller un code de sauvegarde dans le champ.");
-        return;
-      }
-
-      try {
-        if (str.startsWith('CM2-SYNC-')) {
-          str = str.replace('CM2-SYNC-', '');
-        }
-        const decoded = decodeURIComponent(Array.prototype.map.call(atob(str), (c) => {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        const data = JSON.parse(decoded);
-        restoreFromDataPayload(data, false);
-        if (inp) inp.value = '';
-      } catch (err) {
-        try {
-          const data = JSON.parse(str);
-          restoreFromDataPayload(data, false);
-          if (inp) inp.value = '';
-        } catch (e2) {
-          alert("❌ Impossible de lire ce code de sauvegarde. Vérifiez qu'il a été copié en entier !");
-        }
-      }
     }
 
     function handleSyncFileUpload(e) {
@@ -8850,147 +9109,87 @@ Format JSON attendu :
       reader.readAsText(file);
     }
 
-    // --- AUTO CLOUD ENGINE ---
+    // --- AUTO CLOUD ENGINE (SUPABASE REALTIME & BACKGROUND PUSH) ---
     function scheduleAutoCloudPush() {
       if (autoCloudSyncTimeout) clearTimeout(autoCloudSyncTimeout);
       autoCloudSyncTimeout = setTimeout(() => {
         pushToCloud(false);
-      }, 1200);
-    }
-
-    function getCloudRelayTopic() {
-      const roomId = getCloudRoomId() || 'lucie-cm2';
-      return 'cm2-lucie-sync-' + roomId;
+      }, 1000);
     }
 
     async function pushToCloud(isManual = false) {
       const payload = generateBackupPayload();
-      const roomId = getCloudRoomId();
-      let customEndpoint = getCloudEndpointUrl();
 
-      // 1. BroadcastChannel (Synchronisation instantanée entre onglets/fenêtres du même appareil)
+      // 1. BroadcastChannel (Synchronisation instantanée entre onglets du même appareil)
       try {
         if (syncBroadcastChannel) {
-          syncBroadcastChannel.postMessage({ type: 'CM2_SYNC_UPDATE', roomId, payload });
+          syncBroadcastChannel.postMessage({ type: 'CM2_SYNC_UPDATE', payload });
         }
       } catch (e) { }
 
-      // 2. Cloud Remote Sync (Serveur distant)
-      if (customEndpoint) {
+      // 2. Supabase Cloud Sync
+      const client = getSupabaseClient();
+      if (client && currentSupabaseUser) {
         try {
-          let targetUrl = customEndpoint;
-          if (!targetUrl.endsWith('.json') && targetUrl.includes('firebaseio.com')) {
-            targetUrl = targetUrl.replace(/\/$/, '') + `/cm2_sync/${roomId}.json`;
-          }
-          await fetch(targetUrl, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          updateCloudUiStatus("Synchronisé sur Firebase Cloud", true);
-          if (isManual) showCloudFeedback("✅ Envoi Cloud réussi vers Firebase !", true);
+          const { error } = await client
+            .from('user_cm2_data')
+            .upsert({
+              user_id: currentSupabaseUser.id,
+              email: currentSupabaseUser.email,
+              data: payload,
+              updated_at: new Date().toISOString()
+            });
+
+          if (error) throw error;
+          updateAccountUiStatus("Synchronisé sur Supabase Cloud", true);
+          if (isManual) showCloudFeedback("✅ Progression et boutique sauvegardées sur Supabase !", true);
         } catch (err) {
-          console.warn("Cloud push error:", err);
-          if (isManual) showCloudFeedback("⚠️ Erreur d'envoi vers le Cloud Firebase.", false);
+          console.warn("Supabase push error:", err);
+          if (isManual) showCloudFeedback("⚠️ Erreur lors de l'envoi vers Supabase : " + (err.message || "Erreur"), false);
         }
       } else {
-        // Relais Cloud universel par défaut (CORS activé, zéro configuration)
-        try {
-          const topic = getCloudRelayTopic();
-          const res = await fetch(`https://ntfy.sh/${topic}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (res.ok) {
-            updateCloudUiStatus("Synchronisé via Relais Cloud Auto", true);
-            if (isManual) showCloudFeedback("✅ Envoi Cloud réussi ! Vos cadeaux et progressions sont prêts pour l'iPad.", true);
-          } else {
-            throw new Error("Relais status " + res.status);
-          }
-        } catch (err) {
-          console.warn("Relay push error:", err);
-          updateCloudUiStatus("Relais Cloud indisponible", false);
-          if (isManual) showCloudFeedback("⚠️ Impossible de joindre le relais Cloud. Utilisez le Code Express.", false);
-        }
+        if (isManual) showCloudFeedback("ℹ️ Connectez-vous à votre compte Supabase pour synchroniser vos autres appareils.", false);
       }
     }
 
     async function pullFromCloud(isManual = false) {
       if (isCloudSyncing) return;
       isCloudSyncing = true;
-      const roomId = getCloudRoomId();
-      let customEndpoint = getCloudEndpointUrl();
+      const client = getSupabaseClient();
 
-      if (customEndpoint) {
+      if (client && currentSupabaseUser) {
         try {
-          let targetUrl = customEndpoint;
-          if (!targetUrl.endsWith('.json') && targetUrl.includes('firebaseio.com')) {
-            targetUrl = targetUrl.replace(/\/$/, '') + `/cm2_sync/${roomId}.json`;
+          const { data, error } = await client
+            .from('user_cm2_data')
+            .select('data, updated_at')
+            .eq('user_id', currentSupabaseUser.id)
+            .single();
+
+          if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+            throw error;
           }
-          const res = await fetch(targetUrl);
-          if (res.ok) {
-            const data = await res.json();
-            if (data && typeof data === 'object') {
-              const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
-              const remoteTs = data.updatedTimestamp || 0;
-              if (!localTs || remoteTs >= localTs) {
-                restoreFromDataPayload(data, true);
-                updateCloudUiStatus("Dernière version reçue", true);
-                if (isManual) showCloudFeedback("✅ Récupération Cloud réussie ! Cadeaux et points mis à jour.", true);
-              } else {
-                updateCloudUiStatus("Cet appareil est déjà à jour", true);
-                if (isManual) showCloudFeedback("ℹ️ Cet appareil possède déjà la version la plus récente.", true);
-              }
+
+          if (data && data.data && typeof data.data === 'object') {
+            const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
+            const remoteTs = data.data.updatedTimestamp || 0;
+            if (!localTs || remoteTs >= localTs) {
+              restoreFromDataPayload(data.data, true);
+              updateAccountUiStatus("Dernière version reçue", true);
+              if (isManual) showCloudFeedback("✅ Données synchronisées avec succès depuis le Cloud !", true);
+            } else {
+              // Local is newer, push to cloud to keep everything synchronized
+              pushToCloud(false);
+              updateAccountUiStatus("Cet appareil est à jour", true);
+              if (isManual) showCloudFeedback("ℹ️ Cet appareil possède déjà la version la plus récente.", true);
             }
+          } else {
+            // First time login with no data on server yet: push local data
+            await pushToCloud(false);
+            if (isManual) showCloudFeedback("✅ Première sauvegarde enregistrée sur votre compte !", true);
           }
         } catch (err) {
-          console.warn("Cloud pull error:", err);
-          if (isManual) showCloudFeedback("⚠️ Impossible de joindre le serveur Firebase.", false);
-        }
-      } else {
-        // Relais Cloud universel par défaut
-        try {
-          const topic = getCloudRelayTopic();
-          const res = await fetch(`https://ntfy.sh/${topic}/json?poll=1`);
-          if (res.ok) {
-            const text = await res.text();
-            if (text && text.trim()) {
-              const lines = text.trim().split('\n');
-              let restored = false;
-              for (const line of lines) {
-                try {
-                  const ev = JSON.parse(line);
-                  if (ev.event === 'message' && ev.message) {
-                    const payload = JSON.parse(ev.message);
-                    if (payload && typeof payload === 'object' && payload.app === 'academie_cm2_lucie') {
-                      const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
-                      const remoteTs = payload.updatedTimestamp || 0;
-                      if (!localTs || remoteTs >= localTs) {
-                        restoreFromDataPayload(payload, true);
-                        updateCloudUiStatus("Dernière version reçue", true);
-                        if (isManual) showCloudFeedback("✅ Récupération Cloud réussie ! Cadeaux et points synchronisés.", true);
-                        restored = true;
-                      } else {
-                        updateCloudUiStatus("Cet appareil est déjà à jour", true);
-                        if (isManual) showCloudFeedback("ℹ️ Cet appareil possède déjà la version la plus récente.", true);
-                        restored = true;
-                      }
-                      break;
-                    }
-                  }
-                } catch (parseLineErr) {}
-              }
-              if (!restored && isManual) {
-                showCloudFeedback("ℹ️ Aucune nouvelle sauvegarde trouvée sur le relais.", false);
-              }
-            } else if (isManual) {
-              showCloudFeedback("ℹ️ Aucune sauvegarde disponible sur le relais.", false);
-            }
-          }
-        } catch (err) {
-          console.warn("Relay pull error:", err);
-          if (isManual) showCloudFeedback("⚠️ Impossible de joindre le relais Cloud.", false);
+          console.warn("Supabase pull error:", err);
+          if (isManual) showCloudFeedback("⚠️ Impossible de récupérer les données : " + (err.message || "Erreur"), false);
         }
       }
       isCloudSyncing = false;
@@ -9002,47 +9201,48 @@ Format JSON attendu :
       updateSyncStatsDisplay();
     }
 
-    function initCloudAutoSync() {
+    async function initSupabaseEngine() {
       // 1. Initialiser BroadcastChannel
       try {
         if (window.BroadcastChannel) {
           syncBroadcastChannel = new BroadcastChannel('cm2_realtime_sync_channel');
           syncBroadcastChannel.onmessage = (evt) => {
             if (evt.data && evt.data.type === 'CM2_SYNC_UPDATE' && evt.data.payload) {
-              if (evt.data.roomId === getCloudRoomId()) {
-                restoreFromDataPayload(evt.data.payload, true);
-              }
+              restoreFromDataPayload(evt.data.payload, true);
             }
           };
         }
       } catch (e) { }
 
-      // 2. Détection du hash magique #sync= ou ?room= dans l'URL
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlRoom = urlParams.get('room');
-        if (urlRoom) {
-          localStorage.setItem('cm2_cloud_room_id', urlRoom);
-        }
+      // 2. Initialiser Supabase Auth & Session
+      const client = getSupabaseClient();
+      if (client) {
+        try {
+          const { data: { session } } = await client.auth.getSession();
+          if (session && session.user) {
+            currentSupabaseUser = session.user;
+            setupSupabaseRealtime(session.user.id);
+            await pullFromCloud(false);
+          }
 
-        const hash = window.location.hash || '';
-        if (hash.startsWith('#sync=')) {
-          const rawCode = hash.replace('#sync=', '');
-          const decoded = decodeURIComponent(Array.prototype.map.call(atob(rawCode), (c) => {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-          }).join(''));
-          const data = JSON.parse(decoded);
-          restoreFromDataPayload(data, true);
-          // Nettoyer l'URL
-          try {
-            history.replaceState(null, '', window.location.pathname);
-          } catch (e) { }
-          setTimeout(() => {
-            alert(`🎉 Synchronisation automatique réussie ! Vos chefs-d'œuvre et votre progression sont synchronisés sur cet appareil !`);
-          }, 400);
+          client.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'SIGNED_IN' && session?.user) {
+              currentSupabaseUser = session.user;
+              setupSupabaseRealtime(session.user.id);
+              updateAccountUiDisplay();
+              await pullFromCloud(false);
+            } else if (event === 'SIGNED_OUT') {
+              currentSupabaseUser = null;
+              if (supabaseRealtimeChannel) {
+                try { client.removeChannel(supabaseRealtimeChannel); } catch (e) {}
+                supabaseRealtimeChannel = null;
+              }
+              updateAccountUiDisplay();
+            }
+          });
+        } catch (err) {
+          console.warn("Supabase getSession warning:", err);
         }
-      } catch (err) {
-        console.warn("Hash auto-sync note:", err);
       }
 
       // 3. Écouteurs de reprise et visibilité (iPad / mobile retour à l'onglet)
@@ -9051,14 +9251,16 @@ Format JSON attendu :
         if (document.visibilityState === 'visible') pullFromCloud(false);
       });
 
-      // 4. Polling périodique doux (toutes les 30s)
+      // 4. Polling périodique doux (toutes les 45s)
       setInterval(() => {
         if (document.visibilityState === 'visible') pullFromCloud(false);
-      }, 30000);
+      }, 45000);
 
-      // 5. Tir initial
-      pullFromCloud(false);
-      updateCloudUiStatus();
+      updateAccountUiDisplay();
+    }
+
+    function initCloudAutoSync() {
+      initSupabaseEngine();
     }
 
     // =========================================================================
@@ -11295,7 +11497,9 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     function saveDiscoveredMolecules(list) {
       try {
         localStorage.setItem('cm2_discovered_molecules', JSON.stringify(list));
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
     function resetDiscoveredMolecules() {
