@@ -2785,81 +2785,98 @@
       border-radius: 22px !important;
       padding: 16px !important;
       display: grid !important;
-      grid-template-columns: 240px 1fr !important;
+      grid-template-columns: 270px 1fr !important;
       gap: 16px !important;
       max-height: 92vh !important;
       align-items: stretch !important;
       overflow: hidden;
     }
 
-    /* Colonne Illustration Madame Claire en pied (Style Hergé) */
+    /* Colonne Illustration Madame Claire en pied (Style Hergé Ligne Claire) */
     .teacher-standing-col {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(180deg, #fefce8 0%, #fef08a 60%, #fed7aa 100%);
       border: 2.5px solid var(--ink);
       border-radius: 16px;
-      padding: 12px 10px;
+      overflow: hidden;
       box-shadow: var(--shadow-comic-sm);
       text-align: center;
-      position: relative;
-    }
-    .teacher-figure-frame {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .teacher-figure-img {
-      max-width: 100%;
-      height: 290px;
-      object-fit: contain;
-      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.18));
-      transition: transform 0.2s ease;
+      background: #1e293b;
+      min-height: 480px;
       cursor: pointer;
     }
-    .teacher-figure-img:hover {
-      transform: scale(1.03);
+    .teacher-scene-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+    .teacher-standing-col:hover .teacher-scene-bg {
+      transform: scale(1.025);
     }
     .teacher-figure-badge {
-      background: var(--bd-blue);
-      color: #ffffff;
-      border: 1.5px solid var(--ink);
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--ink);
+      border: 2px solid var(--ink);
       border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
+      padding: 5px 12px;
+      font-size: 0.8rem;
       font-weight: 800;
-      margin-top: 6px;
-      box-shadow: 1.5px 1.5px 0 var(--ink);
+      margin-top: 10px;
+      box-shadow: 2px 2px 0 var(--ink);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
+      backdrop-filter: blur(4px);
     }
     .teacher-speech-bubble-side {
-      background: #ffffff;
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.96);
       border: 2px solid var(--ink);
-      border-radius: 12px;
-      padding: 8px 10px;
-      font-size: 0.78rem;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--ink);
       line-height: 1.35;
-      margin-top: 8px;
-      box-shadow: 1.5px 1.5px 0 var(--ink);
-      position: relative;
+      margin: 0 10px 12px 10px;
+      box-shadow: 2px 2px 0 var(--ink);
+      backdrop-filter: blur(4px);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .teacher-standing-col:hover .teacher-speech-bubble-side {
+      background: #fef08a;
+      transform: translateY(-2px);
+    }
+    .teacher-speech-bubble-side::before {
+      content: '';
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 9px 9px 9px;
+      border-style: solid;
+      border-color: transparent transparent var(--ink) transparent;
     }
     .teacher-speech-bubble-side::after {
       content: '';
       position: absolute;
-      top: -8px;
+      top: -6px;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 0 8px 8px 8px;
+      border-width: 0 7px 7px 7px;
       border-style: solid;
-      border-color: transparent transparent var(--ink) transparent;
+      border-color: transparent transparent #ffffff transparent;
     }
 
     /* Colonne Principale Chat */
@@ -4330,12 +4347,10 @@
     <div class="ai-modal-card teacher-modal-card">
       
       <!-- Colonne GAUCHE : Madame Claire en pied (Style Ligne Claire / Hergé) -->
-      <div class="teacher-standing-col">
-        <div class="teacher-figure-frame">
-          <img src="images/madame_claire.jpg" alt="Madame Claire - Maîtresse Bienveillante de CM2" class="teacher-figure-img" onclick="askTeacherFollowUp('Bonjour Madame Claire ! Comment vas-tu aujourd\'hui ?')">
-          <div class="teacher-figure-badge">
-            <span>⭐ Madame Claire • CM2</span>
-          </div>
+      <div class="teacher-standing-col" onclick="askTeacherFollowUp('Bonjour Madame Claire ! Comment vas-tu aujourd\'hui ?')" title="Clique sur Madame Claire pour lui dire bonjour !">
+        <img src="images/madame_claire.jpg" alt="Madame Claire - Maîtresse Bienveillante de CM2" class="teacher-scene-bg">
+        <div class="teacher-figure-badge">
+          <span>⭐ Madame Claire • CM2</span>
         </div>
         <div class="teacher-speech-bubble-side">
           « N'aie jamais peur de te tromper, pose-moi toutes tes questions ! »
@@ -4347,7 +4362,7 @@
         <!-- En-tête avec titre, statut et action de réinitialisation -->
         <div class="teacher-header">
           <div class="teacher-avatar-circle" id="teacherAvatarEl">
-            <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 100%; height: 100%; object-fit: cover; object-position: top center;">
+            <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%;">
           </div>
           <div style="flex: 1; min-width: 140px;">
             <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
@@ -4412,7 +4427,7 @@
 
         <!-- Indicateur de réflexion Madame Claire -->
         <div id="teacherTypingIndicator" class="teacher-typing-box" style="display: none;">
-          <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: top center; border: 1.5px solid #16a34a; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+          <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: center 20%; border: 1.5px solid #16a34a; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
           <div class="teacher-typing-dots">
             <span></span><span></span><span></span>
           </div>
@@ -10078,7 +10093,7 @@ Format JSON attendu :
       thread.innerHTML = teacherChatMessages.map((msg, idx) => {
         const isUser = msg.role === 'user';
         const senderName = isUser ? "Toi" : "Madame Claire";
-        const avatar = isUser ? "👧" : '<img src="images/madame_claire.jpg" alt="Madame Claire" style="width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:top center; display:block;">';
+        const avatar = isUser ? "👧" : '<img src="images/madame_claire.jpg" alt="Madame Claire" style="width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:center 20%; display:block;">';
         const isLastModel = (!isUser && idx === teacherChatMessages.length - 1);
 
         let followUpsHtml = '';
