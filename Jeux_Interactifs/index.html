@@ -3570,18 +3570,21 @@
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div>
               <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">📧 Adresse Email :</label>
-              <input type="email" id="supabaseAuthEmail" class="memo-input" style="width: 100%; font-size: 0.9rem;" placeholder="ex: famille@gmail.com">
+              <input type="email" id="supabaseAuthEmail" class="memo-input" style="width: 100%; font-size: 0.9rem;" placeholder="ex: famille@gmail.com" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false">
             </div>
 
             <div>
               <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🔒 Mot de Passe :</label>
-              <input type="password" id="supabaseAuthPassword" class="memo-input" style="width: 100%; font-size: 0.9rem;" placeholder="Votre mot de passe sécurisé">
+              <div style="position: relative; display: flex; align-items: center;">
+                <input type="password" id="supabaseAuthPassword" class="memo-input" style="width: 100%; font-size: 0.9rem; padding-right: 42px;" placeholder="Votre mot de passe sécurisé" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false">
+                <button type="button" onclick="togglePasswordVisibility('supabaseAuthPassword', this)" style="position: absolute; right: 8px; background: none; border: none; font-size: 1.1rem; cursor: pointer; padding: 4px; line-height: 1;" title="Afficher/Masquer le mot de passe">👁️</button>
+              </div>
             </div>
 
             <button id="supabaseSubmitAuthBtn" class="action-btn" onclick="submitSupabaseAuth()" style="width: 100%; padding: 11px; font-size: 0.95rem; margin-top: 4px; background: var(--bd-blue);">
               🚀 Se connecter
             </button>
-            <div id="supabaseAuthErrorMsg" style="display: none; color: #dc2626; background: #fee2e2; border: 1.5px solid #ef4444; border-radius: 8px; padding: 8px; font-size: 0.82rem; font-weight: 700; text-align: center;"></div>
+            <div id="supabaseAuthErrorMsg" style="display: none; color: #dc2626; background: #fee2e2; border: 1.5px solid #ef4444; border-radius: 8px; padding: 8px; font-size: 0.82rem; font-weight: 700; text-align: center; line-height: 1.4;"></div>
           </div>
         </div>
       </div>
@@ -3598,12 +3601,12 @@
 
           <div>
             <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🌐 URL du Projet Supabase :</label>
-            <input type="text" id="supabaseUrlInput" class="memo-input" style="width: 100%; font-size: 0.85rem;" placeholder="https://xxxxxxxxxxxx.supabase.co">
+            <input type="text" id="supabaseUrlInput" class="memo-input" style="width: 100%; font-size: 0.85rem;" placeholder="https://xxxxxxxxxxxx.supabase.co" autocapitalize="none" autocorrect="off" spellcheck="false">
           </div>
 
           <div>
             <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🔑 Clé Publique Anon (API Key) :</label>
-            <input type="text" id="supabaseAnonKeyInput" class="memo-input" style="width: 100%; font-size: 0.85rem; font-family: monospace;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+            <input type="text" id="supabaseAnonKeyInput" class="memo-input" style="width: 100%; font-size: 0.85rem; font-family: monospace;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." autocapitalize="none" autocorrect="off" spellcheck="false">
           </div>
 
           <div style="display: flex; gap: 8px; margin-top: 4px;">
@@ -3614,6 +3617,10 @@
               🔍 Tester la connexion
             </button>
           </div>
+          
+          <button class="doc-link-btn" onclick="copySupabaseConfigLink()" style="padding: 8px 12px; font-size: 0.82rem; background: #e0e7ff; color: #3730a3; border-color: #a5b4fc; text-align: center; margin-top: 2px;">
+            📱 Transférer la config sur Mobile / iPad (Copier le lien direct)
+          </button>
           <div id="supabaseConfigFeedback" style="display: none; font-size: 0.82rem; font-weight: 800; text-align: center;"></div>
 
           <details style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; font-size: 0.82rem; color: var(--ink-light); margin-top: 4px;">
@@ -8588,6 +8595,9 @@ Format JSON attendu :
     let isCloudSyncing = false;
     let currentAuthMode = 'login';
 
+    const DEFAULT_SUPABASE_URL = "https://kajizntstyluizdztgcwq.supabase.co";
+    const DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imthaml6bnRzeWx1aXpkenRnY3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4MTY1MTUsImV4cCI6MjEwNjM5MjUxNX0.KqTkh_7arjsTOLnwVVoFs2NFmH0UrQrJZaj3BWQnK5g";
+
     function cleanSupabaseUrl(rawUrl) {
       let url = (rawUrl || '').trim();
       if (!url) return '';
@@ -8598,11 +8608,11 @@ Format JSON attendu :
     }
 
     function getSavedSupabaseUrl() {
-      return cleanSupabaseUrl(localStorage.getItem('cm2_supabase_url') || '');
+      return cleanSupabaseUrl(localStorage.getItem('cm2_supabase_url') || DEFAULT_SUPABASE_URL);
     }
 
     function getSavedSupabaseAnonKey() {
-      return (localStorage.getItem('cm2_supabase_anon_key') || '').trim();
+      return (localStorage.getItem('cm2_supabase_anon_key') || DEFAULT_SUPABASE_ANON_KEY).trim();
     }
 
     function getSupabaseClient() {
@@ -8681,7 +8691,7 @@ Format JSON attendu :
     async function submitSupabaseAuth() {
       const client = getSupabaseClient();
       const authErr = document.getElementById('supabaseAuthErrorMsg');
-      const email = (document.getElementById('supabaseAuthEmail')?.value || '').trim();
+      const email = (document.getElementById('supabaseAuthEmail')?.value || '').trim().toLowerCase();
       const password = (document.getElementById('supabaseAuthPassword')?.value || '').trim();
       const submitBtn = document.getElementById('supabaseSubmitAuthBtn');
 
@@ -8737,7 +8747,13 @@ Format JSON attendu :
         console.error("Auth error:", err);
         if (authErr) {
           authErr.style.display = 'block';
-          authErr.innerText = "❌ " + (err.message || "Erreur de connexion. Vérifiez vos identifiants.");
+          let msg = err.message || "Erreur de connexion. Vérifiez vos identifiants.";
+          if (/invalid login credentials/i.test(msg)) {
+            msg = "Email ou mot de passe incorrect. Vérifiez qu'il n'y a pas de majuscule automatique sur mobile, ou si le compte n'a pas encore été créé, cliquez sur l'onglet '✨ Créer un compte'.";
+          } else if (/email not confirmed/i.test(msg)) {
+            msg = "Veuillez confirmer votre email avant de vous connecter (ou désactivez la confirmation d'email dans votre dashboard Supabase).";
+          }
+          authErr.innerText = "❌ " + msg;
         }
         playSound('wrong');
       } finally {
@@ -8763,6 +8779,52 @@ Format JSON attendu :
       currentSupabaseUser = null;
       playSound('click');
       updateAccountUiDisplay();
+    }
+
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (btn) btn.innerText = '🙈';
+      } else {
+        input.type = 'password';
+        if (btn) btn.innerText = '👁️';
+      }
+    }
+
+    function copySupabaseConfigLink() {
+      const url = getSavedSupabaseUrl() || cleanSupabaseUrl(document.getElementById('supabaseUrlInput')?.value || '');
+      const key = getSavedSupabaseAnonKey() || (document.getElementById('supabaseAnonKeyInput')?.value || '').trim();
+      const fb = document.getElementById('supabaseConfigFeedback');
+
+      if (!url || !key) {
+        if (fb) {
+          fb.style.display = 'block';
+          fb.style.color = 'var(--bd-red)';
+          fb.innerText = "⚠️ Remplissez et sauvegardez d'abord l'URL et la Clé pour générer le lien de partage.";
+        }
+        return;
+      }
+
+      const cleanBase = window.location.href.split('#')[0].split('?')[0];
+      const configParams = `sb_url=${encodeURIComponent(url)}&sb_key=${encodeURIComponent(key)}`;
+      const fullLink = `${cleanBase}#${configParams}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullLink).then(() => {
+          if (fb) {
+            fb.style.display = 'block';
+            fb.style.color = 'var(--bd-green)';
+            fb.innerText = "📋 Lien copié ! Ouvrez ce lien sur votre mobile pour configurer Supabase en 1 clic sans rien retaper.";
+          }
+          playSound('win');
+        }).catch(() => {
+          prompt("Copiez ce lien et ouvrez-le sur votre mobile :", fullLink);
+        });
+      } else {
+        prompt("Copiez ce lien et ouvrez-le sur votre mobile :", fullLink);
+      }
     }
 
     function saveSupabaseConfig() {
@@ -9202,6 +9264,27 @@ Format JSON attendu :
     }
 
     async function initSupabaseEngine() {
+      // 0. Auto-import configuration from URL hash or query params if present (Facilite le transfert PC -> Mobile)
+      try {
+        const rawHash = window.location.hash.startsWith('#') ? window.location.hash.substring(1) : '';
+        const params = new URLSearchParams(rawHash || window.location.search);
+        const urlParam = params.get('sb_url');
+        const keyParam = params.get('sb_key');
+        if (urlParam && keyParam) {
+          localStorage.setItem('cm2_supabase_url', cleanSupabaseUrl(decodeURIComponent(urlParam)));
+          localStorage.setItem('cm2_supabase_anon_key', decodeURIComponent(keyParam).trim());
+          supabaseClient = null; // force reload client
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search.replace(/[\?&]sb_url=[^&]*/g, '').replace(/[\?&]sb_key=[^&]*/g, ''));
+          }
+          setTimeout(() => {
+            alert("✨ Configuration Supabase reçue et enregistrée avec succès depuis le lien de partage ! Vous pouvez maintenant vous connecter.");
+          }, 300);
+        }
+      } catch (e) {
+        console.warn("Auto-config import warning:", e);
+      }
+
       // 1. Initialiser BroadcastChannel
       try {
         if (window.BroadcastChannel) {
