@@ -248,5 +248,35 @@
     "local_file": "/Users/yvasseur/Desktop/Privé/Dropbox/CM2/Padlet_CM2/Images/IMG_3517.jpg",
     "file_type": "image",
     "created_at": "2026-09-24T17:15:02.934Z"
+  },
+  {
+    "index": 26,
+    "id": "wish_lkROZPwRLlD3QjMg",
+    "subject": "G2",
+    "body": "Les adjectifs qualificatifs",
+    "attachment_url": "Fiche_G2_cm2.png",
+    "local_file": "/Users/yvasseur/Desktop/Privé/Dropbox/CM2/Padlet_CM2/Images/Fiche_G2_cm2.png",
+    "file_type": "fiche_cours",
+    "created_at": "2026-09-29T10:00:00.000Z"
+  },
+  {
+    "index": 27,
+    "id": "wish_lDK1ZRzpGMrjZJ9z",
+    "subject": "C'est quoi le recyclage des déchets ?",
+    "body": "1jour1question feat. Info ou Mytho",
+    "attachment_url": "https://youtu.be/_2X4JvI6RwQ",
+    "local_file": null,
+    "file_type": "video_youtube",
+    "created_at": "2026-09-29T10:30:00.000Z"
+  },
+  {
+    "index": 28,
+    "id": "wish_LNV1Q7ryKRgjamq3",
+    "subject": "Poésies et chants",
+    "body": "À quoi ça sert, un poème ? — Henriette Major",
+    "attachment_url": "poesie_henriette_major.png",
+    "local_file": "/Users/yvasseur/Desktop/Privé/Dropbox/CM2/Padlet_CM2/Images/poesie_henriette_major.png",
+    "file_type": "image",
+    "created_at": "2026-09-29T11:00:00.000Z"
   }
 ]

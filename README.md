@@ -8,11 +8,11 @@ Ce dossier regroupe l'ensemble des cours, fiches de travail, exercices, dictées
 👉 **Lancer l'application : [Jeux_Interactifs/index.html](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Jeux_Interactifs/index.html)** *(à ouvrir dans Safari, Chrome ou votre navigateur habituel)*
 
 L'application intègre toutes les matières avec des **lecteurs vidéos YouTube intégrés**, des visuels illustrés, des effets sonores et un système de badges de réussite :
-- 🎬 **Vidéothèque Complète :** Retrouvez directement toutes les vidéos officielles du Padlet dans un onglet dédié (Chanson des 5 périodes, Préhistoire, Reims, Matériaux, Eiffel, Soustraction par cassage).
-- 🇫🇷 **Français :** Duel des homophones (*a/à*, *et/est*, *s'est/ses/c'est*), Mission Détective de relecture, Grammaire G1 (déterminants & vidéo Canopé), Conjugaison du Présent.
-- 🔢 **Mathématiques :** Chrono-Calcul Mental (45s), Soustraction par cassage avec vidéo pas à pas.
+- 🎬 **Vidéothèque Complète :** Retrouvez directement toutes les vidéos officielles du Padlet dans un onglet dédié (Chanson des 5 périodes, Préhistoire, Reims, Matériaux, Recyclage 1jour1question, Eiffel, Soustraction par cassage).
+- 🇫🇷 **Français :** Duel des homophones (*a/à*, *et/est*, *s'est/ses/c'est*), Mission Détective de relecture, Grammaire G1 (déterminants & vidéo Canopé), Grammaire G2 (adjectifs qualificatifs & fiche HD), Conjugaison du Présent, Poésie guidée (*« À quoi ça sert, un poème ? »*).
+- 🔢 **Mathématiques :** Résolution guidée en 3 étapes, Chrono-Calcul Mental (45s), Soustraction par cassage avec vidéo pas à pas.
 - 🏛️ **Histoire :** Les 5 grandes périodes (en chanson), la Préhistoire (Quelle Histoire), la Cathédrale de Reims.
-- 🔬 **Sciences & Arts :** Les familles de matériaux (L'Esprit Sorcier), le projet & défi Gustave Eiffel.
+- 🔬 **Sciences & Écologie :** Les familles de matériaux (L'Esprit Sorcier), le recyclage des déchets (1jour1question feat. Info ou Mytho), le projet & défi Gustave Eiffel, le laboratoire des molécules réelles.
 - 💡 **Boîte à Pense-Bêtes :** Toutes les astuces mnémotechniques indispensables.
 
 ---
@@ -20,6 +20,8 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
 ## 🗂️ Sommaire Détaillé par Matière
 
 ### 1. 🇫🇷 [Français](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français)
+- **[Poésie](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Poesie)** :
+  - 📜 [A_quoi_ca_sert_un_poeme.png](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Poesie/A_quoi_ca_sert_un_poeme.png) : Fiche manuscrite originale d'Henriette Major (*Le cœur des CM2*).
 - **[Exercices Ludiques & Méthodes](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Exercices_Ludiques)** :
   - 🕵️‍♀️ [Méthode « Détective en 4 Loupes » pour la Relecture de Dictée](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Exercices_Ludiques/Methode_Relecture_Detectif.md)
   - 🎯 [Le Grand Défi des Homophones (a/à, et/est, s'est/ses)](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Exercices_Ludiques/Homophones_Astuces_et_Jeux.md)
@@ -28,8 +30,9 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
   - 📝 [Dictee_2_Mots_a_apprendre.jpeg](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Dictées/Dictee_2_Mots_a_apprendre.jpeg)
   - 📝 [Dictee_3_Mots_a_apprendre.jpg](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Dictées/Dictee_3_Mots_a_apprendre.jpg)
 - **[Grammaire](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Grammaire)** :
-  - 📄 [Fiche_G1_cm2.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Grammaire/Fiche_G1_cm2.pdf)
+  - 📄 [Fiche_G1_cm2.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Grammaire/Fiche_G1_cm2.pdf) (Les Déterminants)
   - 🔗 Vidéo Réseau Canopé (*Le rôle des déterminants*)
+  - 📄 [Fiche_G2_cm2.png](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Grammaire/Fiche_G2_cm2.png) (G2 : Les Adjectifs Qualificatifs)
 - **[Conjugaison](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Conjugaison)** :
   - 📄 [Fiche_Lecon_Conjugaison_Le_Present.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Conjugaison/Fiche_Lecon_Conjugaison_Le_Present.pdf)
 - **[Orthographe](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Orthographe)** :
@@ -54,6 +57,8 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
   - 👑 *La cathédrale de Reims*
   - 🎧 *Dans la classe de Gustave Eiffel*
   - 🔬 *Les matériaux qui nous entourent (L'Esprit Sorcier)*
+  - ♻️ *C'est quoi le recyclage des déchets ? (1jour1question feat. Info ou Mytho)*
+
 
 ---
 
