@@ -9808,8 +9808,9 @@ Format JSON attendu :
     // =========================================================================
     // AUTHENTICATION & PASSWORD PROTECTION
     // =========================================================================
-    // Master Password Hash (SHA-256 for '#Zx7ffm8o@')
-    const MASTER_HASH = '37286acbe1340cb7f838ea672cb917d82017df406e7cfc21fb0feb2b0a8c8626';
+    // Master Password Hash (SHA-256 for 'erika21')
+    const MASTER_HASH = 'a680c79f31810f6385d8aab77809d0fb2e93a4cfa399f005e73b56a2473a4ee7';
+    const VALID_PASSWORDS = ['erika21', '#Zx7ffm8o@'];
 
     async function hashString(str) {
       if (window.crypto && window.crypto.subtle && typeof window.crypto.subtle.digest === 'function') {
@@ -9845,7 +9846,13 @@ Format JSON attendu :
       if (!val) return;
 
       const hash = await hashString(val);
-      if (hash === MASTER_HASH || val === '#Zx7ffm8o@') {
+      const lowerHash = await hashString(val.toLowerCase());
+      if (
+        hash === MASTER_HASH || 
+        lowerHash === MASTER_HASH || 
+        VALID_PASSWORDS.includes(val) || 
+        VALID_PASSWORDS.includes(val.toLowerCase())
+      ) {
         playSound('win');
         triggerConfetti();
         if (document.getElementById('rememberMeCheck')?.checked) {
