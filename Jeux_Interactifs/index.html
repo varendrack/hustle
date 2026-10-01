@@ -2444,6 +2444,18 @@
         width: 95vw !important;
         max-width: 95vw !important;
       }
+      .teacher-modal-card {
+        grid-template-columns: 1fr !important;
+        max-height: 94vh !important;
+        padding: 12px 10px !important;
+        gap: 0 !important;
+      }
+      .teacher-standing-col {
+        display: none !important;
+      }
+      .teacher-main-col {
+        max-height: calc(94vh - 20px) !important;
+      }
 
       /* Calculatrice Flottante Mobile */
       .floating-calc-fab {
@@ -2765,16 +2777,98 @@
     /* MODALE DE LA MAÎTRESSE : AIDE-MOI À COMPRENDRE ! (INTERACTIF) */
     /* ------------------------------------------------------------- */
     .teacher-modal-card {
-      max-width: 680px !important;
+      max-width: 960px !important;
       width: 95vw !important;
       background: #fffdfa !important;
       border: 3px solid var(--ink) !important;
       box-shadow: var(--shadow-comic-xl) !important;
       border-radius: 22px !important;
-      padding: 18px 20px !important;
-      display: flex !important;
-      flex-direction: column !important;
+      padding: 16px !important;
+      display: grid !important;
+      grid-template-columns: 240px 1fr !important;
+      gap: 16px !important;
       max-height: 92vh !important;
+      align-items: stretch !important;
+      overflow: hidden;
+    }
+
+    /* Colonne Illustration Madame Claire en pied (Style Hergé) */
+    .teacher-standing-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #fefce8 0%, #fef08a 60%, #fed7aa 100%);
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 12px 10px;
+      box-shadow: var(--shadow-comic-sm);
+      text-align: center;
+      position: relative;
+    }
+    .teacher-figure-frame {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .teacher-figure-img {
+      max-width: 100%;
+      height: 290px;
+      object-fit: contain;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.18));
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .teacher-figure-img:hover {
+      transform: scale(1.03);
+    }
+    .teacher-figure-badge {
+      background: var(--bd-blue);
+      color: #ffffff;
+      border: 1.5px solid var(--ink);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-top: 6px;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .teacher-speech-bubble-side {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-top: 8px;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      position: relative;
+    }
+    .teacher-speech-bubble-side::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent var(--ink) transparent;
+    }
+
+    /* Colonne Principale Chat */
+    .teacher-main-col {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      height: 100%;
+      max-height: calc(92vh - 32px);
     }
     .teacher-header {
       display: flex;
@@ -2785,16 +2879,16 @@
       margin-bottom: 10px;
     }
     .teacher-avatar-circle {
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: #fef08a;
       border: 2px solid var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 2px 2px 0 var(--ink);
+      overflow: hidden;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
       flex-shrink: 0;
       transition: transform 0.2s ease;
     }
@@ -4234,85 +4328,104 @@
   <!-- MODALE AIDE-MOI À COMPRENDRE ! (MADAME CLAIRE — MAÎTRESSE VIRTUELLE BIENVEILLANTE) -->
   <div id="teacherHelpModal" class="ai-modal-overlay" style="display: none;">
     <div class="ai-modal-card teacher-modal-card">
-      <!-- En-tête avec avatar, statut et action de réinitialisation -->
-      <div class="teacher-header">
-        <div class="teacher-avatar-circle" id="teacherAvatarEl">👩‍🏫</div>
-        <div style="flex: 1; min-width: 140px;">
-          <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-            <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0;">
-              Madame Claire
-            </h3>
-            <span class="teacher-status-badge">🟢 En ligne & à ton écoute</span>
+      
+      <!-- Colonne GAUCHE : Madame Claire en pied (Style Ligne Claire / Hergé) -->
+      <div class="teacher-standing-col">
+        <div class="teacher-figure-frame">
+          <img src="images/madame_claire.jpg" alt="Madame Claire - Maîtresse Bienveillante de CM2" class="teacher-figure-img" onclick="askTeacherFollowUp('Bonjour Madame Claire ! Comment vas-tu aujourd\'hui ?')">
+          <div class="teacher-figure-badge">
+            <span>⭐ Madame Claire • CM2</span>
           </div>
-          <p style="font-size: 0.84rem; color: var(--ink-light); margin: 2px 0 0 0;">
-            Ta maîtresse bienveillante • Pose toutes tes questions sans jamais avoir peur !
-          </p>
         </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <button class="doc-link-btn" onclick="resetTeacherConversation()" title="Commencer une nouvelle discussion" style="padding: 4px 10px; font-size: 0.78rem; background: #ffffff;">
-            🔄 Nouveau sujet
+        <div class="teacher-speech-bubble-side">
+          « N'aie jamais peur de te tromper, pose-moi toutes tes questions ! »
+        </div>
+      </div>
+
+      <!-- Colonne DROITE : Fil de discussion et zone d'échange -->
+      <div class="teacher-main-col">
+        <!-- En-tête avec titre, statut et action de réinitialisation -->
+        <div class="teacher-header">
+          <div class="teacher-avatar-circle" id="teacherAvatarEl">
+            <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 100%; height: 100%; object-fit: cover; object-position: top center;">
+          </div>
+          <div style="flex: 1; min-width: 140px;">
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0;">
+                Madame Claire
+              </h3>
+              <span class="teacher-status-badge">🟢 En ligne & à ton écoute</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--ink-light); margin: 2px 0 0 0;">
+              Ta maîtresse bienveillante • Pose toutes tes questions sans stress !
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button class="doc-link-btn" onclick="resetTeacherConversation()" title="Commencer une nouvelle discussion" style="padding: 4px 10px; font-size: 0.78rem; background: #ffffff;">
+              🔄 Nouveau sujet
+            </button>
+            <button onclick="closeTeacherHelpModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
+          </div>
+        </div>
+
+        <!-- Sélecteur de Matières Rapides / Sujets fréquents -->
+        <div class="teacher-topics-bar">
+          <div class="teacher-topics-header">
+            <span>💡 Suggestions de questions rapides :</span>
+            <div class="teacher-subject-tabs">
+              <button class="t-subj-tab active" onclick="switchTeacherTopicTab('francais', this)">🇫🇷 Français</button>
+              <button class="t-subj-tab" onclick="switchTeacherTopicTab('maths', this)">🔢 Maths</button>
+              <button class="t-subj-tab" onclick="switchTeacherTopicTab('methode', this)">🧠 Méthode</button>
+            </div>
+          </div>
+          
+          <div id="teacherChipsFrancais" class="teacher-chips-tray active">
+            <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus jamais confondre a et à ?')">a ou à ?</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment faire la différence entre et et est ?')">et ou est ?</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quand utilise-t-on l\'imparfait et le passé composé ?')">Imparfait vs Passé composé</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Pourquoi met-on toujours un S avec TU ?')">Règle du TU</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment savoir si un verbe se termine par -er ou -é ?')">-er ou -é ?</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment accorder le participe passé simplement ?')">Accord participe passé</button>
+          </div>
+
+          <div id="teacherChipsMaths" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Comment poser une division à deux chiffres simplement ?')">Division posée</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment additionner des fractions simples ?')">Fractions faciles</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment convertir des millimètres en mètres sans me tromper ?')">Tableau de conversion</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quelle est la différence entre le périmètre et l\'aire d\'une figure ?')">Périmètre vs Aire</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment multiplier un nombre décimal par 10 ou 100 ?')">Multiplier décimaux</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment bien poser une soustraction avec retenue ?')">Soustraction retenue</button>
+          </div>
+
+          <div id="teacherChipsMethode" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Comment faire pour bien apprendre et retenir ma leçon par cœur ?')">Mémoriser une leçon</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quelle est la meilleure méthode pour relire ma dictée et trouver mes fautes ?')">Chasse aux fautes dictée</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus stresser avant une évaluation en classe ?')">Gérer le stress</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment bien comprendre un problème de maths sans me perdre ?')">Méthode problèmes</button>
+          </div>
+        </div>
+
+        <!-- Fil de conversation interactif scrollable -->
+        <div class="teacher-chat-thread" id="teacherChatThread">
+          <!-- Messages injectés ici dynamiquement -->
+        </div>
+
+        <!-- Indicateur de réflexion Madame Claire -->
+        <div id="teacherTypingIndicator" class="teacher-typing-box" style="display: none;">
+          <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: top center; border: 1.5px solid #16a34a; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+          <div class="teacher-typing-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span style="font-size: 0.82rem; font-weight: 700; color: #166534;">Madame Claire prépare son explication avec douceur...</span>
+        </div>
+
+        <!-- Barre de saisie du message pour l'enfant -->
+        <div class="teacher-input-container">
+          <textarea id="teacherQuestionInput" class="teacher-chat-textarea" placeholder="Tape ta question ici (ex: Je ne comprends pas cet exercice, réexplique-moi...)" rows="1" onkeydown="handleTeacherInputKeydown(event)"></textarea>
+          <button class="action-btn teacher-send-btn" id="teacherSubmitBtn" onclick="askTeacherHelp()" title="Envoyer mon message">
+            <span>✨ Envoyer</span>
           </button>
-          <button onclick="closeTeacherHelpModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
         </div>
-      </div>
-
-      <!-- Sélecteur de Matières Rapides / Sujets fréquents -->
-      <div class="teacher-topics-bar">
-        <div class="teacher-topics-header">
-          <span>💡 Suggestions de questions rapides :</span>
-          <div class="teacher-subject-tabs">
-            <button class="t-subj-tab active" onclick="switchTeacherTopicTab('francais', this)">🇫🇷 Français</button>
-            <button class="t-subj-tab" onclick="switchTeacherTopicTab('maths', this)">🔢 Maths</button>
-            <button class="t-subj-tab" onclick="switchTeacherTopicTab('methode', this)">🧠 Méthode</button>
-          </div>
-        </div>
-        
-        <div id="teacherChipsFrancais" class="teacher-chips-tray active">
-          <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus jamais confondre a et à ?')">a ou à ?</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment faire la différence entre et et est ?')">et ou est ?</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Quand utilise-t-on l\'imparfait et le passé composé ?')">Imparfait vs Passé composé</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Pourquoi met-on toujours un S avec TU ?')">Règle du TU</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment savoir si un verbe se termine par -er ou -é ?')">-er ou -é ?</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment accorder le participe passé simplement ?')">Accord participe passé</button>
-        </div>
-
-        <div id="teacherChipsMaths" class="teacher-chips-tray">
-          <button class="t-chip" onclick="quickTeacherAsk('Comment poser une division à deux chiffres simplement ?')">Division posée</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment additionner des fractions simples ?')">Fractions faciles</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment convertir des millimètres en mètres sans me tromper ?')">Tableau de conversion</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Quelle est la différence entre le périmètre et l\'aire d\'une figure ?')">Périmètre vs Aire</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment multiplier un nombre décimal par 10 ou 100 ?')">Multiplier décimaux</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment bien poser une soustraction avec retenue ?')">Soustraction retenue</button>
-        </div>
-
-        <div id="teacherChipsMethode" class="teacher-chips-tray">
-          <button class="t-chip" onclick="quickTeacherAsk('Comment faire pour bien apprendre et retenir ma leçon par cœur ?')">Mémoriser une leçon</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Quelle est la meilleure méthode pour relire ma dictée et trouver mes fautes ?')">Chasse aux fautes dictée</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus stresser avant une évaluation en classe ?')">Gérer le stress</button>
-          <button class="t-chip" onclick="quickTeacherAsk('Comment bien comprendre un problème de maths sans me perdre ?')">Méthode problèmes</button>
-        </div>
-      </div>
-
-      <!-- Fil de conversation interactif scrollable -->
-      <div class="teacher-chat-thread" id="teacherChatThread">
-        <!-- Messages injectés ici dynamiquement -->
-      </div>
-
-      <!-- Indicateur de réflexion Madame Claire -->
-      <div id="teacherTypingIndicator" class="teacher-typing-box" style="display: none;">
-        <span style="font-size: 1.3rem;">👩‍🏫</span>
-        <div class="teacher-typing-dots">
-          <span></span><span></span><span></span>
-        </div>
-        <span style="font-size: 0.82rem; font-weight: 700; color: #166534;">Madame Claire prépare son explication avec douceur...</span>
-      </div>
-
-      <!-- Barre de saisie du message pour l'enfant -->
-      <div class="teacher-input-container">
-        <textarea id="teacherQuestionInput" class="teacher-chat-textarea" placeholder="Tape ta question ici (ex: Je ne comprends pas cet exercice, réexplique-moi...)" rows="1" onkeydown="handleTeacherInputKeydown(event)"></textarea>
-        <button class="action-btn teacher-send-btn" id="teacherSubmitBtn" onclick="askTeacherHelp()" title="Envoyer mon message">
-          <span>✨ Envoyer</span>
-        </button>
       </div>
     </div>
   </div>
@@ -9965,7 +10078,7 @@ Format JSON attendu :
       thread.innerHTML = teacherChatMessages.map((msg, idx) => {
         const isUser = msg.role === 'user';
         const senderName = isUser ? "Toi" : "Madame Claire";
-        const avatar = isUser ? "👧" : "👩‍🏫";
+        const avatar = isUser ? "👧" : '<img src="images/madame_claire.jpg" alt="Madame Claire" style="width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:top center; display:block;">';
         const isLastModel = (!isUser && idx === teacherChatMessages.length - 1);
 
         let followUpsHtml = '';
