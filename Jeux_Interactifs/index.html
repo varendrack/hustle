@@ -8590,10 +8590,12 @@ Format JSON attendu :
       walletStars = val;
       try {
         localStorage.setItem('cm2_wallet_stars', walletStars);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
       updateRewardsDisplays();
       renderParentArea();
       renderShopRewards();
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       playSound('win');
       alert(`✅ Tirelire mise à jour : l'enfant a maintenant ${walletStars} ⭐ à dépenser !`);
     }
@@ -8608,10 +8610,12 @@ Format JSON attendu :
       totalScore = val;
       try {
         localStorage.setItem('cm2_total_score', totalScore);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
       } catch (e) {}
       updateRewardsDisplays();
       checkBadges();
       renderParentArea();
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       playSound('win');
       alert(`✅ Score Total mis à jour : ${totalScore} ⭐ (Badges recalculés) !`);
     }
@@ -9527,11 +9531,11 @@ Format JSON attendu :
       }
 
       if (typeof data.totalScore === 'number') {
-        totalScore = isSilent ? Math.max(totalScore, data.totalScore) : data.totalScore;
+        totalScore = data.totalScore;
         localStorage.setItem('cm2_total_score', totalScore);
       }
       if (typeof data.walletStars === 'number') {
-        walletStars = isSilent ? Math.max(walletStars, data.walletStars) : data.walletStars;
+        walletStars = data.walletStars;
         localStorage.setItem('cm2_wallet_stars', walletStars);
       }
       if (Array.isArray(data.memos)) {
@@ -9635,7 +9639,7 @@ Format JSON attendu :
       if (autoCloudSyncTimeout) clearTimeout(autoCloudSyncTimeout);
       autoCloudSyncTimeout = setTimeout(() => {
         pushToCloud(false);
-      }, 1000);
+      }, 800);
     }
 
     async function pushToCloud(isManual = false) {
@@ -9659,7 +9663,7 @@ Format JSON attendu :
               email: currentSupabaseUser.email,
               data: payload,
               updated_at: new Date().toISOString()
-            });
+            }, { onConflict: 'user_id' });
 
           if (error) throw error;
           updateAccountUiStatus("Synchronisé sur Supabase Cloud", true);
@@ -9693,15 +9697,18 @@ Format JSON attendu :
           if (data && data.data && typeof data.data === 'object') {
             const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
             const remoteTs = data.data.updatedTimestamp || 0;
-            if (!localTs || remoteTs >= localTs) {
+            if (!localTs || remoteTs > localTs) {
               restoreFromDataPayload(data.data, true);
               updateAccountUiStatus("Dernière version reçue", true);
               if (isManual) showCloudFeedback("✅ Données synchronisées avec succès depuis le Cloud !", true);
-            } else {
+            } else if (localTs > remoteTs) {
               // Local is newer, push to cloud to keep everything synchronized
               pushToCloud(false);
               updateAccountUiStatus("Cet appareil est à jour", true);
               if (isManual) showCloudFeedback("ℹ️ Cet appareil possède déjà la version la plus récente.", true);
+            } else {
+              updateAccountUiStatus("Cet appareil est à jour", true);
+              if (isManual) showCloudFeedback("ℹ️ Cet appareil est déjà parfaitement synchronisé.", true);
             }
           } else {
             // First time login with no data on server yet: push local data
@@ -9714,6 +9721,45 @@ Format JSON attendu :
         }
       }
       isCloudSyncing = false;
+    }
+
+    function setupSupabaseRealtime(userId) {
+      if (!userId) return;
+      const client = getSupabaseClient();
+      if (!client || typeof client.channel !== 'function') return;
+
+      if (supabaseRealtimeChannel) {
+        try { client.removeChannel(supabaseRealtimeChannel); } catch (e) {}
+        supabaseRealtimeChannel = null;
+      }
+
+      try {
+        supabaseRealtimeChannel = client
+          .channel('cm2_realtime_sync_' + userId)
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'user_cm2_data',
+              filter: `user_id=eq.${userId}`
+            },
+            (payload) => {
+              if (payload && payload.new && payload.new.data) {
+                const incoming = payload.new.data;
+                const remoteTs = incoming.updatedTimestamp || 0;
+                const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
+                if (remoteTs > localTs) {
+                  restoreFromDataPayload(incoming, true);
+                  updateAccountUiStatus("Synchro temps réel ⚡", true);
+                }
+              }
+            }
+          )
+          .subscribe();
+      } catch (err) {
+        console.warn("Supabase Realtime setup error:", err);
+      }
     }
 
     async function forceCloudAutoSync() {
