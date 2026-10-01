@@ -9142,7 +9142,7 @@ Format JSON attendu :
     let isCloudSyncing = false;
     let currentAuthMode = 'login';
 
-    const DEFAULT_SUPABASE_URL = "https://kajizntstyluizdztgcwq.supabase.co";
+    const DEFAULT_SUPABASE_URL = "https://kajizntsyluizdztgcwq.supabase.co";
     const DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imthaml6bnRzeWx1aXpkenRnY3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4MTY1MTUsImV4cCI6MjEwNjM5MjUxNX0.KqTkh_7arjsTOLnwVVoFs2NFmH0UrQrJZaj3BWQnK5g";
 
     function cleanSupabaseUrl(rawUrl) {
@@ -9155,11 +9155,21 @@ Format JSON attendu :
     }
 
     function getSavedSupabaseUrl() {
-      return cleanSupabaseUrl(localStorage.getItem('cm2_supabase_url') || DEFAULT_SUPABASE_URL);
+      let saved = localStorage.getItem('cm2_supabase_url');
+      if (!saved || saved.includes('kajizntstyluizdztgcwq') || !saved.startsWith('https://')) {
+        saved = DEFAULT_SUPABASE_URL;
+        localStorage.setItem('cm2_supabase_url', DEFAULT_SUPABASE_URL);
+      }
+      return cleanSupabaseUrl(saved || DEFAULT_SUPABASE_URL);
     }
 
     function getSavedSupabaseAnonKey() {
-      return (localStorage.getItem('cm2_supabase_anon_key') || DEFAULT_SUPABASE_ANON_KEY).trim();
+      let saved = localStorage.getItem('cm2_supabase_anon_key');
+      if (!saved || saved.length < 20) {
+        saved = DEFAULT_SUPABASE_ANON_KEY;
+        localStorage.setItem('cm2_supabase_anon_key', DEFAULT_SUPABASE_ANON_KEY);
+      }
+      return saved.trim();
     }
 
     function getSupabaseClient() {
@@ -9171,7 +9181,8 @@ Format JSON attendu :
           supabaseClient = window.supabase.createClient(url, key, {
             auth: {
               persistSession: true,
-              autoRefreshToken: true
+              autoRefreshToken: true,
+              detectSessionInUrl: false
             }
           });
         } catch (err) {
@@ -9241,7 +9252,7 @@ Format JSON attendu :
       if (!client) {
         if (authErr) {
           authErr.style.display = 'block';
-          authErr.innerHTML = `⚠️ Impossible d'initialiser la connexion Supabase.`;
+          authErr.innerHTML = `⚠️ Impossible d'initialiser Supabase. Vérifiez que la connexion internet est active.`;
         }
         return;
       }
@@ -9294,6 +9305,8 @@ Format JSON attendu :
             msg = "Email ou mot de passe incorrect. Vérifiez qu'il n'y a pas de majuscule automatique sur mobile, ou si le compte n'a pas encore été créé, cliquez sur l'onglet '✨ Créer un compte'.";
           } else if (/email not confirmed/i.test(msg)) {
             msg = "Veuillez confirmer votre email avant de vous connecter (ou désactivez la confirmation d'email dans votre dashboard Supabase).";
+          } else if (/load failed|failed to fetch|networkerror/i.test(msg)) {
+            msg = "Impossible de contacter le serveur d'authentification (Erreur réseau/Load failed). Vérifiez votre connexion internet ou désactivez un éventuel bloqueur de pub / relais privé.";
           }
           authErr.innerText = "❌ " + msg;
         }
@@ -9796,10 +9809,17 @@ Format JSON attendu :
     const MASTER_HASH = '37286acbe1340cb7f838ea672cb917d82017df406e7cfc21fb0feb2b0a8c8626';
 
     async function hashString(str) {
-      const utf8 = new TextEncoder().encode(str);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      if (window.crypto && window.crypto.subtle && typeof window.crypto.subtle.digest === 'function') {
+        try {
+          const utf8 = new TextEncoder().encode(str);
+          const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+          const hashArray = Array.from(new Uint8Array(hashBuffer));
+          return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch (e) {
+          console.warn("crypto.subtle error:", e);
+        }
+      }
+      return '';
     }
 
     async function checkPassword() {
