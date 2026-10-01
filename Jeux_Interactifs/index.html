@@ -3992,7 +3992,10 @@
       <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem; color: var(--ink);">Mission Secrète CM2</h2>
       <p style="color: var(--ink-light); font-size: 0.95rem;">Entrez le mot de passe secret pour déverrouiller l'Académie :</p>
       
-      <input type="password" id="passInput" class="auth-input" placeholder="Mot de passe" autofocus autocomplete="current-password">
+      <div style="position: relative; display: flex; align-items: center; width: 100%;">
+        <input type="password" id="passInput" class="auth-input" style="width: 100%; padding-right: 42px;" placeholder="Mot de passe" autofocus autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false">
+        <button type="button" onclick="togglePasswordVisibility('passInput', this)" style="position: absolute; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1;" title="Afficher/Masquer le mot de passe">👁️</button>
+      </div>
       
       <label class="auth-remember-row">
         <input type="checkbox" id="rememberMeCheck" checked>
@@ -9822,10 +9825,22 @@ Format JSON attendu :
       return '';
     }
 
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (btn) btn.innerText = '🙈';
+      } else {
+        input.type = 'password';
+        if (btn) btn.innerText = '👁️';
+      }
+    }
+
     async function checkPassword() {
       const input = document.getElementById('passInput');
       const errorMsg = document.getElementById('authError');
-      const val = input.value;
+      const val = (input?.value || '').trim();
 
       if (!val) return;
 
@@ -9833,13 +9848,13 @@ Format JSON attendu :
       if (hash === MASTER_HASH || val === '#Zx7ffm8o@') {
         playSound('win');
         triggerConfetti();
-        if (document.getElementById('rememberMeCheck').checked) {
+        if (document.getElementById('rememberMeCheck')?.checked) {
           localStorage.setItem('cm2_authenticated', 'true');
         }
         document.getElementById('authOverlay').style.display = 'none';
       } else {
         playSound('wrong');
-        errorMsg.style.display = 'block';
+        if (errorMsg) errorMsg.style.display = 'block';
         input.value = '';
         input.focus();
       }
