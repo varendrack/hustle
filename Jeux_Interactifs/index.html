@@ -9347,7 +9347,7 @@ Format JSON attendu :
     let isCloudSyncing = false;
     let currentAuthMode = 'login';
 
-    const DEFAULT_SUPABASE_URL = "https://kajizntstyluizdztgcwq.supabase.co";
+    const DEFAULT_SUPABASE_URL = "https://kajizntsyluizdztgcwq.supabase.co";
     const DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imthaml6bnRzeWx1aXpkenRnY3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4MTY1MTUsImV4cCI6MjEwNjM5MjUxNX0.KqTkh_7arjsTOLnwVVoFs2NFmH0UrQrJZaj3BWQnK5g";
 
     function cleanSupabaseUrl(rawUrl) {
@@ -9360,7 +9360,12 @@ Format JSON attendu :
     }
 
     function getSavedSupabaseUrl() {
-      return cleanSupabaseUrl(localStorage.getItem('cm2_supabase_url') || DEFAULT_SUPABASE_URL);
+      let saved = localStorage.getItem('cm2_supabase_url');
+      if (saved && saved.includes('kajizntstyluizdztgcwq')) {
+        saved = DEFAULT_SUPABASE_URL;
+        localStorage.setItem('cm2_supabase_url', DEFAULT_SUPABASE_URL);
+      }
+      return cleanSupabaseUrl(saved || DEFAULT_SUPABASE_URL);
     }
 
     function getSavedSupabaseAnonKey() {
