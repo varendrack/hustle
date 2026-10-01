@@ -2200,6 +2200,83 @@
       font-weight: 600;
     }
 
+    /* ------------------------------------------------------------- */
+    /* RESPONSIVE TABLETTES & IPAD (iPad Mini, iPad Air, iPad Pro)   */
+    /* ------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+      .ai-modal-overlay {
+        padding: 12px !important;
+      }
+      .ai-modal-card {
+        width: 94vw !important;
+        max-width: 760px !important;
+        max-height: 93vh !important;
+        padding: 20px 16px !important;
+      }
+      .teacher-modal-card {
+        grid-template-columns: 1fr !important;
+        width: 94vw !important;
+        max-width: 780px !important;
+        max-height: 92vh !important;
+        height: 92vh !important;
+        padding: 16px 14px !important;
+        gap: 0 !important;
+      }
+      .teacher-standing-col {
+        display: none !important;
+      }
+      .teacher-main-col {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      .teacher-header {
+        padding-bottom: 8px !important;
+        margin-bottom: 8px !important;
+      }
+      .teacher-topics-bar {
+        padding: 8px 10px !important;
+        margin-bottom: 8px !important;
+      }
+      .teacher-chips-tray {
+        gap: 6px !important;
+      }
+      .t-chip {
+        font-size: 0.84rem !important;
+        padding: 6px 12px !important;
+      }
+      .teacher-chat-thread {
+        flex: 1 1 auto !important;
+        min-height: 280px !important;
+        max-height: none !important;
+        padding: 8px 4px !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .teacher-msg-bubble-wrap {
+        max-width: 88% !important;
+      }
+      .teacher-msg-bubble {
+        font-size: 0.95rem !important;
+        padding: 12px 14px !important;
+        line-height: 1.45 !important;
+      }
+      .teacher-input-container {
+        padding-top: 8px !important;
+        margin-top: 6px !important;
+      }
+      .teacher-chat-textarea {
+        font-size: 0.95rem !important;
+        min-height: 50px !important;
+      }
+      .teacher-send-btn {
+        height: 50px !important;
+        padding: 10px 20px !important;
+        font-size: 0.95rem !important;
+      }
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 10px 8px;
