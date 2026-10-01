@@ -3501,12 +3501,11 @@
       </div>
 
       <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--ink-faint); padding-bottom: 8px; flex-wrap: wrap;">
-        <button id="syncTabAccountBtn" class="sync-tab-btn active" onclick="switchSyncTab('account')">👤 Mon Compte Cloud</button>
-        <button id="syncTabConfigBtn" class="sync-tab-btn" onclick="switchSyncTab('config')">⚙️ Configuration Supabase</button>
-        <button id="syncTabFileBtn" class="sync-tab-btn" onclick="switchSyncTab('file')">💾 Sauvegarde Fichier</button>
+        <button id="syncTabAccountBtn" class="sync-tab-btn active" onclick="switchSyncTab('account')">👤 Mon Compte & Synchro Directe</button>
+        <button id="syncTabFileBtn" class="sync-tab-btn" onclick="switchSyncTab('file')">💾 Sauvegarde Fichier (Secours)</button>
       </div>
 
-      <!-- Tab 1: Mon Compte Cloud -->
+      <!-- Tab 1: Mon Compte Cloud & Synchro Directe -->
       <div id="syncTabAccount" class="sync-tab-content active">
         <!-- État CONNECTÉ -->
         <div id="supabaseUserCard" style="display: none; background: #f0fdf4; border: 2.5px solid var(--bd-green); border-radius: 14px; padding: 16px;">
@@ -3586,70 +3585,6 @@
             </button>
             <div id="supabaseAuthErrorMsg" style="display: none; color: #dc2626; background: #fee2e2; border: 1.5px solid #ef4444; border-radius: 8px; padding: 8px; font-size: 0.82rem; font-weight: 700; text-align: center; line-height: 1.4;"></div>
           </div>
-        </div>
-      </div>
-
-      <!-- Tab 2: Configuration Supabase -->
-      <div id="syncTabConfig" class="sync-tab-content">
-        <div style="background: #f8fafc; border: 2px solid var(--ink); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
-          <div style="font-weight: 800; font-size: 0.95rem; color: var(--ink); display: flex; align-items: center; gap: 6px;">
-            ⚡ Paramètres de Connexion Supabase Cloud
-          </div>
-          <p style="font-size: 0.82rem; color: var(--ink-light); margin: 0; line-height: 1.4;">
-            Renseignez ici l'URL de votre projet et la clé publique Anon fournies gratuitement sur votre tableau de bord <a href="https://supabase.com" target="_blank" style="color: var(--bd-blue); font-weight: 800;">supabase.com</a>.
-          </p>
-
-          <div>
-            <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🌐 URL du Projet Supabase :</label>
-            <input type="text" id="supabaseUrlInput" class="memo-input" style="width: 100%; font-size: 0.85rem;" placeholder="https://xxxxxxxxxxxx.supabase.co" autocapitalize="none" autocorrect="off" spellcheck="false">
-          </div>
-
-          <div>
-            <label style="font-size: 0.82rem; font-weight: 800; color: var(--ink); display: block; margin-bottom: 3px;">🔑 Clé Publique Anon (API Key) :</label>
-            <input type="text" id="supabaseAnonKeyInput" class="memo-input" style="width: 100%; font-size: 0.85rem; font-family: monospace;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." autocapitalize="none" autocorrect="off" spellcheck="false">
-          </div>
-
-          <div style="display: flex; gap: 8px; margin-top: 4px;">
-            <button class="action-btn" onclick="saveSupabaseConfig()" style="flex: 1; padding: 9px; font-size: 0.88rem; background: var(--bd-green);">
-              💾 Sauvegarder la configuration
-            </button>
-            <button class="doc-link-btn" onclick="testSupabaseConnection()" style="padding: 9px 14px; font-size: 0.85rem;">
-              🔍 Tester la connexion
-            </button>
-          </div>
-          
-          <button class="doc-link-btn" onclick="copySupabaseConfigLink()" style="padding: 8px 12px; font-size: 0.82rem; background: #e0e7ff; color: #3730a3; border-color: #a5b4fc; text-align: center; margin-top: 2px;">
-            📱 Transférer la config sur Mobile / iPad (Copier le lien direct)
-          </button>
-          <div id="supabaseConfigFeedback" style="display: none; font-size: 0.82rem; font-weight: 800; text-align: center;"></div>
-
-          <details style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; font-size: 0.82rem; color: var(--ink-light); margin-top: 4px;">
-            <summary style="font-weight: 800; cursor: pointer; color: var(--ink);">📋 Script SQL Supabase (1-Clic pour initialiser la base)</summary>
-            <div style="margin-top: 8px;">
-              <p style="margin: 0 0 6px 0; font-size: 0.78rem;">Copiez et collez ce script dans le <strong>SQL Editor</strong> de votre projet Supabase :</p>
-              <textarea readonly style="width: 100%; height: 130px; font-family: monospace; font-size: 0.72rem; padding: 6px; background: #f1f5f9; border: 1px solid #94a3b8; border-radius: 6px;">-- 1. Table de stockage des élèves et parents
-create table if not exists public.user_cm2_data (
-  user_id uuid primary key references auth.users(id) on delete cascade,
-  email text,
-  data jsonb not null default '{}'::jsonb,
-  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
-
--- 2. Permissions d'accès pour l'API
-grant all on table public.user_cm2_data to anon, authenticated, service_role;
-
--- 3. Activation de la sécurité (Row Level Security)
-alter table public.user_cm2_data enable row level security;
-
-create policy "Accès complet utilisateur"
-  on public.user_cm2_data for all
-  using (auth.uid() = user_id)
-  with check (auth.uid() = user_id);
-
--- 4. Activation de la synchronisation Realtime
-alter publication supabase_realtime add table public.user_cm2_data;</textarea>
-            </div>
-          </details>
         </div>
       </div>
 
@@ -8638,13 +8573,9 @@ Format JSON attendu :
       const m = document.getElementById('syncModal');
       if (!m) return;
       m.style.display = 'flex';
+      switchSyncTab('account');
       updateSyncStatsDisplay();
       updateAccountUiDisplay();
-      
-      const urlInp = document.getElementById('supabaseUrlInput');
-      const keyInp = document.getElementById('supabaseAnonKeyInput');
-      if (urlInp) urlInp.value = getSavedSupabaseUrl();
-      if (keyInp) keyInp.value = getSavedSupabaseAnonKey();
     }
 
     function closeSyncModal() {
@@ -8657,7 +8588,7 @@ Format JSON attendu :
     }
 
     function switchSyncTab(tab) {
-      ['account', 'config', 'file'].forEach(t => {
+      ['account', 'file'].forEach(t => {
         const btn = document.getElementById('syncTab' + capitalize(t) + 'Btn');
         const content = document.getElementById('syncTab' + capitalize(t));
         if (btn) btn.classList.toggle('active', t === tab);
@@ -8698,9 +8629,8 @@ Format JSON attendu :
       if (!client) {
         if (authErr) {
           authErr.style.display = 'block';
-          authErr.innerHTML = `⚠️ Veuillez d'abord renseigner vos identifiants Supabase (URL & Clé) dans l'onglet <strong>⚙️ Configuration Supabase</strong> !`;
+          authErr.innerHTML = `⚠️ Impossible d'initialiser la connexion Supabase.`;
         }
-        switchSyncTab('config');
         return;
       }
 
@@ -8793,106 +8723,7 @@ Format JSON attendu :
       }
     }
 
-    function copySupabaseConfigLink() {
-      const url = getSavedSupabaseUrl() || cleanSupabaseUrl(document.getElementById('supabaseUrlInput')?.value || '');
-      const key = getSavedSupabaseAnonKey() || (document.getElementById('supabaseAnonKeyInput')?.value || '').trim();
-      const fb = document.getElementById('supabaseConfigFeedback');
 
-      if (!url || !key) {
-        if (fb) {
-          fb.style.display = 'block';
-          fb.style.color = 'var(--bd-red)';
-          fb.innerText = "⚠️ Remplissez et sauvegardez d'abord l'URL et la Clé pour générer le lien de partage.";
-        }
-        return;
-      }
-
-      const cleanBase = window.location.href.split('#')[0].split('?')[0];
-      const configParams = `sb_url=${encodeURIComponent(url)}&sb_key=${encodeURIComponent(key)}`;
-      const fullLink = `${cleanBase}#${configParams}`;
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fullLink).then(() => {
-          if (fb) {
-            fb.style.display = 'block';
-            fb.style.color = 'var(--bd-green)';
-            fb.innerText = "📋 Lien copié ! Ouvrez ce lien sur votre mobile pour configurer Supabase en 1 clic sans rien retaper.";
-          }
-          playSound('win');
-        }).catch(() => {
-          prompt("Copiez ce lien et ouvrez-le sur votre mobile :", fullLink);
-        });
-      } else {
-        prompt("Copiez ce lien et ouvrez-le sur votre mobile :", fullLink);
-      }
-    }
-
-    function saveSupabaseConfig() {
-      const url = cleanSupabaseUrl(document.getElementById('supabaseUrlInput')?.value || '');
-      const key = (document.getElementById('supabaseAnonKeyInput')?.value || '').trim();
-      const fb = document.getElementById('supabaseConfigFeedback');
-
-      const urlInp = document.getElementById('supabaseUrlInput');
-      if (urlInp) urlInp.value = url;
-
-      localStorage.setItem('cm2_supabase_url', url);
-      localStorage.setItem('cm2_supabase_anon_key', key);
-      supabaseClient = null; // force reload client
-
-      if (fb) {
-        fb.style.display = 'block';
-        fb.style.color = 'var(--bd-green)';
-        fb.innerText = "✅ Configuration Supabase enregistrée avec succès !";
-        setTimeout(() => { if (fb) fb.style.display = 'none'; }, 4000);
-      }
-      playSound('win');
-      initSupabaseEngine();
-    }
-
-    async function testSupabaseConnection() {
-      const fb = document.getElementById('supabaseConfigFeedback');
-      const client = getSupabaseClient();
-      if (!client) {
-        if (fb) {
-          fb.style.display = 'block';
-          fb.style.color = 'var(--bd-red)';
-          fb.innerText = "⚠️ Veuillez remplir l'URL et la Clé Anon avant de tester.";
-        }
-        return;
-      }
-      if (fb) {
-        fb.style.display = 'block';
-        fb.style.color = 'var(--bd-blue)';
-        fb.innerText = "⏳ Test de connexion vers Supabase...";
-      }
-
-      try {
-        const { error: authErr } = await client.auth.getSession();
-        if (authErr && !authErr.message?.includes('session')) {
-          throw authErr;
-        }
-
-        const { error } = await client.from('user_cm2_data').select('user_id').limit(1);
-        if (error) {
-          if (error.code === '42P01') {
-            throw new Error("La table 'user_cm2_data' n'existe pas encore. Exécutez le script SQL ci-dessous dans Supabase.");
-          }
-          // Note: code 42501 (permission denied / RLS) or PGRST301 is expected when not logged in
-        }
-
-        if (fb) {
-          fb.style.color = 'var(--bd-green)';
-          fb.innerText = "✅ Connexion à Supabase établie avec succès ! Vous pouvez créer votre compte ou vous connecter.";
-        }
-        playSound('win');
-      } catch (err) {
-        if (fb) {
-          fb.style.color = 'var(--bd-red)';
-          fb.innerText = "❌ Erreur de connexion : " + (err.message || "Vérifiez l'URL et la clé");
-        }
-        playSound('wrong');
-      }
-    }
 
     function setupSupabaseRealtime(userId) {
       const client = getSupabaseClient();
