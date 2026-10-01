@@ -8782,7 +8782,7 @@ Format JSON attendu :
       alert("✅ Nouveau Code PIN Parent enregistré avec succès !");
     }
 
-    function saveParentWalletDirect() {
+    async function saveParentWalletDirect() {
       const inp = document.getElementById('parentWalletInput');
       const val = parseInt(inp?.value || '0', 10);
       if (isNaN(val) || val < 0) {
@@ -8790,17 +8790,20 @@ Format JSON attendu :
         return;
       }
       walletStars = val;
+      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', walletStars);
+        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       renderParentArea();
       renderShopRewards();
       playSound('win');
+      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert(`✅ Tirelire mise à jour : l'enfant a maintenant ${walletStars} ⭐ à dépenser !`);
     }
 
-    function saveParentTotalScoreDirect() {
+    async function saveParentTotalScoreDirect() {
       const inp = document.getElementById('parentTotalScoreInput');
       const val = parseInt(inp?.value || '0', 10);
       if (isNaN(val) || val < 0) {
@@ -8808,68 +8811,75 @@ Format JSON attendu :
         return;
       }
       totalScore = val;
+      const ts = Date.now();
       try {
         localStorage.setItem('cm2_total_score', totalScore);
+        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       checkBadges();
       renderParentArea();
       playSound('win');
+      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert(`✅ Score Total mis à jour : ${totalScore} ⭐ (Badges recalculés) !`);
     }
 
-    function adjustParentStars(delta) {
+    async function adjustParentStars(delta) {
       walletStars = Math.max(0, walletStars + delta);
       if (delta > 0) {
         totalScore += delta;
       }
+      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', walletStars);
         localStorage.setItem('cm2_total_score', totalScore);
-        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
+        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       checkBadges();
       renderParentArea();
       renderShopRewards();
-      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       if (delta > 0) playSound('win');
       else playSound('correct');
+      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert(`✅ Solde mis à jour : ${delta > 0 ? '+' : ''}${delta} ⭐ (Nouveau solde tirelire : ${walletStars} ⭐)`);
     }
 
-    function resetParentWalletToZero() {
+    async function resetParentWalletToZero() {
       if (!confirm("Voulez-vous vraiment vider la tirelire de l'enfant (remettre à 0 ⭐) ?\n\n(Le score total cumulé et les badges d'honneur seront conservés).")) return;
       walletStars = 0;
+      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', 0);
-        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
+        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       renderParentArea();
       renderShopRewards();
-      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       playSound('wrong');
+      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert("✅ La tirelire a été remise à 0 ⭐.");
     }
 
-    function resetParentAllScoresToZero() {
+    async function resetParentAllScoresToZero() {
       if (!confirm("⚠️ ATTENTION : Voulez-vous vraiment remettre TOUT le score de l'enfant à 0 ⭐ ?\n\nCela remettra à zéro la tirelire boutique, le score cumulé total et les badges débloqués.")) return;
       walletStars = 0;
       totalScore = 0;
       currentStreak = 0;
+      const ts = Date.now();
       try {
         localStorage.setItem('cm2_wallet_stars', 0);
         localStorage.setItem('cm2_total_score', 0);
-        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
+        localStorage.setItem('cm2_streak', 0);
+        localStorage.setItem('cm2_last_updated_timestamp', ts);
       } catch (e) {}
       updateRewardsDisplays();
       resetStreak();
       checkBadges();
       renderParentArea();
       renderShopRewards();
-      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
       playSound('wrong');
+      if (typeof pushToCloud === 'function') await pushToCloud(false);
       alert("✅ Tous les scores et étoiles ont été réinitialisés à 0 ⭐.");
     }
 
@@ -9721,11 +9731,11 @@ Format JSON attendu :
       }
 
       if (typeof data.totalScore === 'number') {
-        totalScore = isSilent ? Math.max(totalScore, data.totalScore) : data.totalScore;
+        totalScore = data.totalScore;
         localStorage.setItem('cm2_total_score', totalScore);
       }
       if (typeof data.walletStars === 'number') {
-        walletStars = isSilent ? Math.max(walletStars, data.walletStars) : data.walletStars;
+        walletStars = data.walletStars;
         localStorage.setItem('cm2_wallet_stars', walletStars);
       }
       if (Array.isArray(data.memos)) {
@@ -9887,7 +9897,7 @@ Format JSON attendu :
           if (data && data.data && typeof data.data === 'object') {
             const localTs = parseInt(localStorage.getItem('cm2_last_updated_timestamp') || '0', 10);
             const remoteTs = data.data.updatedTimestamp || 0;
-            if (!localTs || remoteTs >= localTs) {
+            if (!localTs || remoteTs > localTs) {
               restoreFromDataPayload(data.data, true);
               updateAccountUiStatus("Dernière version reçue", true);
               if (isManual) showCloudFeedback("✅ Données synchronisées avec succès depuis le Cloud !", true);
