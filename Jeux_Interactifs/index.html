@@ -2762,60 +2762,105 @@
     }
 
     /* ------------------------------------------------------------- */
-    /* MODALE DE LA MAÎTRESSE : AIDE-MOI À COMPRENDRE !              */
+    /* MODALE DE LA MAÎTRESSE : AIDE-MOI À COMPRENDRE ! (INTERACTIF) */
     /* ------------------------------------------------------------- */
     .teacher-modal-card {
-      max-width: 620px !important;
+      max-width: 680px !important;
+      width: 95vw !important;
       background: #fffdfa !important;
       border: 3px solid var(--ink) !important;
-      box-shadow: var(--shadow-comic-lg) !important;
-      border-radius: 20px !important;
-      padding: 24px !important;
+      box-shadow: var(--shadow-comic-xl) !important;
+      border-radius: 22px !important;
+      padding: 18px 20px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      max-height: 92vh !important;
     }
     .teacher-header {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: center;
-      margin-bottom: 16px;
       border-bottom: 2px solid var(--ink);
-      padding-bottom: 14px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
     }
     .teacher-avatar-circle {
-      width: 64px;
-      height: 64px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       background: #fef08a;
       border: 2px solid var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       box-shadow: 2px 2px 0 var(--ink);
       flex-shrink: 0;
+      transition: transform 0.2s ease;
     }
-    .teacher-speech-intro {
-      background: #eff6ff;
-      border: 2px solid var(--ink);
-      border-radius: 14px;
-      padding: 10px 14px;
-      font-size: 0.95rem;
-      color: var(--ink);
-      position: relative;
-      line-height: 1.4;
-      margin-bottom: 14px;
+    .teacher-avatar-circle:hover {
+      transform: scale(1.08) rotate(4deg);
     }
-    .teacher-quick-chips {
+    .teacher-status-badge {
+      display: inline-flex;
+      align-items: center;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--bd-green);
+    }
+    .teacher-topics-bar {
+      background: #f8fafc;
+      border: 1.5px solid var(--ink);
+      border-radius: 12px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+    }
+    .teacher-topics-header {
       display: flex;
-      gap: 6px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--ink-light);
+    }
+    .teacher-subject-tabs {
+      display: flex;
+      gap: 4px;
+    }
+    .t-subj-tab {
+      background: #ffffff;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.1s ease;
+    }
+    .t-subj-tab.active {
+      background: var(--bd-yellow);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+    .teacher-chips-tray {
+      display: none;
+      gap: 5px;
       flex-wrap: wrap;
-      margin-bottom: 12px;
+    }
+    .teacher-chips-tray.active {
+      display: flex;
     }
     .t-chip {
       background: #ffffff;
       border: 1.5px solid var(--ink);
       border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 0.84rem;
+      padding: 4px 10px;
+      font-size: 0.78rem;
       font-weight: 800;
       color: var(--ink);
       cursor: pointer;
@@ -2826,59 +2871,206 @@
       background: #fef08a;
       transform: translateY(-1px);
     }
-    .teacher-textarea {
-      width: 100%;
-      min-height: 90px;
-      padding: 12px;
-      border: 2px solid var(--ink);
-      border-radius: 14px;
-      font-size: 0.98rem;
-      font-family: inherit;
-      background: #ffffff;
-      color: var(--ink);
-      margin-bottom: 12px;
-      box-shadow: inset 1px 1px 3px rgba(0,0,0,0.08);
-      resize: vertical;
+
+    /* Fil de discussion interactif */
+    .teacher-chat-thread {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 44vh;
+      min-height: 240px;
+      padding: 8px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
     }
-    .teacher-response-card {
-      background: #ffffff;
+    .teacher-msg-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .teacher-msg-row.user {
+      flex-direction: row-reverse;
+    }
+    .teacher-msg-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #fef08a;
+      border: 1.5px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+    .teacher-msg-row.user .teacher-msg-avatar {
+      background: #bae6fd;
+    }
+    .teacher-msg-bubble-wrap {
+      max-width: 84%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .teacher-msg-row.user .teacher-msg-bubble-wrap {
+      align-items: flex-end;
+    }
+    .teacher-msg-sender {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--ink-light);
+      margin-left: 4px;
+    }
+    .teacher-msg-bubble {
+      background: #fffdf0;
       border: 2px solid var(--ink);
       border-radius: 16px;
-      padding: 16px;
-      margin-top: 14px;
-      box-shadow: 3px 3px 0 var(--ink);
-      display: none;
+      border-top-left-radius: 4px;
+      padding: 12px 14px;
+      color: var(--ink);
+      font-size: 0.93rem;
+      line-height: 1.5;
+      box-shadow: 2px 2px 0 var(--ink);
+      position: relative;
     }
-    .teacher-response-title {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 800;
+    .teacher-msg-row.user .teacher-msg-bubble {
+      background: #eff6ff;
+      border-color: var(--bd-blue-dark);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 4px;
+      color: #0c4a6e;
+    }
+    .teacher-msg-bubble ul, .teacher-msg-bubble ol {
+      margin: 6px 0 6px 18px;
+    }
+    .teacher-msg-bubble li {
+      margin-bottom: 4px;
+    }
+    .teacher-msg-bubble strong {
+      color: #92400e;
+    }
+    .teacher-msg-row.user .teacher-msg-bubble strong {
       color: #0369a1;
+    }
+    .teacher-msg-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed rgba(0,0,0,0.12);
+      font-size: 0.76rem;
+      color: var(--ink-light);
+    }
+    .teacher-voice-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.1s ease;
+    }
+    .teacher-voice-btn:hover {
+      background: #fef08a;
+    }
+    
+    /* Boutons de relance magique sous la réponse */
+    .teacher-followups-tray {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .t-followup-btn {
+      background: #ffffff;
+      border: 1.5px solid #0284c7;
+      color: #0369a1;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 1px 1px 0 var(--ink);
+      transition: all 0.12s;
+    }
+    .t-followup-btn:hover {
+      background: #e0f2fe;
+      transform: translateY(-1px);
+    }
+
+    /* Indicateur de réflexion avec bulles qui sautent */
+    .teacher-typing-box {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      background: #f0fdf4;
+      border: 1.5px solid var(--bd-green);
+      border-radius: 12px;
+      padding: 6px 12px;
+      margin: 6px 0;
+      animation: fadeIn 0.2s ease;
     }
-    .teacher-response-body {
-      font-size: 0.98rem;
-      line-height: 1.6;
-      color: var(--ink);
-      margin-bottom: 14px;
+    .teacher-typing-dots {
+      display: flex;
+      gap: 4px;
     }
-    .teacher-response-body ul {
-      margin: 8px 0 8px 20px;
-      padding: 0;
+    .teacher-typing-dots span {
+      width: 7px;
+      height: 7px;
+      background: #16a34a;
+      border-radius: 50%;
+      animation: bounceDot 1.2s infinite ease-in-out;
     }
-    .teacher-response-body li {
-      margin-bottom: 6px;
+    .teacher-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .teacher-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounceDot {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
     }
-    .teacher-example-box {
-      background: #fef9c3;
-      border-left: 4px solid #f59e0b;
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin: 10px 0;
+
+    /* Barre de saisie chat */
+    .teacher-input-container {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      border-top: 2px solid var(--ink);
+      padding-top: 10px;
+      margin-top: 6px;
+    }
+    .teacher-chat-textarea {
+      flex: 1;
+      min-height: 48px;
+      max-height: 90px;
+      padding: 10px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
       font-size: 0.92rem;
+      font-family: inherit;
+      background: #ffffff;
+      color: var(--ink);
+      box-shadow: inset 1px 1px 3px rgba(0,0,0,0.06);
+      resize: none;
+      outline: none;
+    }
+    .teacher-chat-textarea:focus {
+      border-color: var(--bd-blue);
+    }
+    .teacher-send-btn {
+      padding: 10px 18px !important;
+      font-size: 0.92rem !important;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
     }
 
     /* ------------------------------------------------------------- */
@@ -4039,55 +4231,88 @@
     </div>
   </div>
 
-  <!-- MODALE AIDE-MOI À COMPRENDRE ! (MADAME CLAIRE) -->
+  <!-- MODALE AIDE-MOI À COMPRENDRE ! (MADAME CLAIRE — MAÎTRESSE VIRTUELLE BIENVEILLANTE) -->
   <div id="teacherHelpModal" class="ai-modal-overlay" style="display: none;">
     <div class="ai-modal-card teacher-modal-card">
+      <!-- En-tête avec avatar, statut et action de réinitialisation -->
       <div class="teacher-header">
-        <div class="teacher-avatar-circle">👩‍🏫</div>
-        <div style="flex: 1;">
-          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.4rem; color: var(--ink); margin-bottom: 2px;">
-            Madame Claire — Maîtresse Bienveillante
-          </h3>
-          <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0;">
-            Je suis là pour t'expliquer pas à pas, avec douceur et des exemples clairs !
+        <div class="teacher-avatar-circle" id="teacherAvatarEl">👩‍🏫</div>
+        <div style="flex: 1; min-width: 140px;">
+          <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+            <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0;">
+              Madame Claire
+            </h3>
+            <span class="teacher-status-badge">🟢 En ligne & à ton écoute</span>
+          </div>
+          <p style="font-size: 0.84rem; color: var(--ink-light); margin: 2px 0 0 0;">
+            Ta maîtresse bienveillante • Pose toutes tes questions sans jamais avoir peur !
           </p>
         </div>
-        <button onclick="closeTeacherHelpModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1;">&times;</button>
-      </div>
-
-      <div class="teacher-speech-intro">
-        💬 <em>« N'aie jamais peur de te tromper ou de ne pas comprendre. Une question, c'est déjà le début de la réussite ! Que veux-tu qu'on regarde ensemble ? »</em>
-      </div>
-
-      <div class="teacher-quick-chips">
-        <span style="font-size: 0.8rem; font-weight: 800; color: var(--ink-light); align-self: center;">Questions fréquentes :</span>
-        <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus confondre a et à ?')">a / à ?</button>
-        <button class="t-chip" onclick="quickTeacherAsk('Comment poser une division à deux chiffres simplement ?')">Division posée</button>
-        <button class="t-chip" onclick="quickTeacherAsk('Quand utilise-t-on l\'imparfait et le passé composé ?')">Imparfait vs Passé composé</button>
-        <button class="t-chip" onclick="quickTeacherAsk('Comment convertir des millimètres en mètres sans me tromper ?')">Conversions faciles</button>
-        <button class="t-chip" onclick="quickTeacherAsk('Quelle est la règle pour les fractions de même dénominateur ?')">Fractions simples</button>
-        <button class="t-chip" onclick="quickTeacherAsk('Pourquoi met-on toujours un S avec TU ?')">Règle du TU</button>
-      </div>
-
-      <textarea id="teacherQuestionInput" class="teacher-textarea" placeholder="Tape ici ta question, un exercice qui te bloque ou un mot que tu ne comprends pas..."></textarea>
-
-      <div style="display: flex; gap: 10px; justify-content: flex-end; align-items: center; flex-wrap: wrap;">
-        <button class="doc-link-btn" onclick="clearTeacherChat()">Effacer</button>
-        <button class="action-btn" id="teacherSubmitBtn" onclick="askTeacherHelp()" style="padding: 10px 22px;">
-          ✨ M'expliquer simplement
-        </button>
-      </div>
-
-      <div id="teacherLoadingBox" style="display: none; text-align: center; padding: 18px;">
-        <div style="font-size: 2rem; animation: pulse 1s infinite;">👩‍🏫✨</div>
-        <p style="font-weight: 700; color: var(--ink); margin-top: 8px;">Madame Claire prépare une explication rien que pour toi...</p>
-      </div>
-
-      <div id="teacherResponseCard" class="teacher-response-card">
-        <div class="teacher-response-title">
-          <span>💡 L'explication de Madame Claire :</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button class="doc-link-btn" onclick="resetTeacherConversation()" title="Commencer une nouvelle discussion" style="padding: 4px 10px; font-size: 0.78rem; background: #ffffff;">
+            🔄 Nouveau sujet
+          </button>
+          <button onclick="closeTeacherHelpModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
         </div>
-        <div class="teacher-response-body" id="teacherResponseBody"></div>
+      </div>
+
+      <!-- Sélecteur de Matières Rapides / Sujets fréquents -->
+      <div class="teacher-topics-bar">
+        <div class="teacher-topics-header">
+          <span>💡 Suggestions de questions rapides :</span>
+          <div class="teacher-subject-tabs">
+            <button class="t-subj-tab active" onclick="switchTeacherTopicTab('francais', this)">🇫🇷 Français</button>
+            <button class="t-subj-tab" onclick="switchTeacherTopicTab('maths', this)">🔢 Maths</button>
+            <button class="t-subj-tab" onclick="switchTeacherTopicTab('methode', this)">🧠 Méthode</button>
+          </div>
+        </div>
+        
+        <div id="teacherChipsFrancais" class="teacher-chips-tray active">
+          <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus jamais confondre a et à ?')">a ou à ?</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment faire la différence entre et et est ?')">et ou est ?</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Quand utilise-t-on l\'imparfait et le passé composé ?')">Imparfait vs Passé composé</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Pourquoi met-on toujours un S avec TU ?')">Règle du TU</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment savoir si un verbe se termine par -er ou -é ?')">-er ou -é ?</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment accorder le participe passé simplement ?')">Accord participe passé</button>
+        </div>
+
+        <div id="teacherChipsMaths" class="teacher-chips-tray">
+          <button class="t-chip" onclick="quickTeacherAsk('Comment poser une division à deux chiffres simplement ?')">Division posée</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment additionner des fractions simples ?')">Fractions faciles</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment convertir des millimètres en mètres sans me tromper ?')">Tableau de conversion</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Quelle est la différence entre le périmètre et l\'aire d\'une figure ?')">Périmètre vs Aire</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment multiplier un nombre décimal par 10 ou 100 ?')">Multiplier décimaux</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment bien poser une soustraction avec retenue ?')">Soustraction retenue</button>
+        </div>
+
+        <div id="teacherChipsMethode" class="teacher-chips-tray">
+          <button class="t-chip" onclick="quickTeacherAsk('Comment faire pour bien apprendre et retenir ma leçon par cœur ?')">Mémoriser une leçon</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Quelle est la meilleure méthode pour relire ma dictée et trouver mes fautes ?')">Chasse aux fautes dictée</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus stresser avant une évaluation en classe ?')">Gérer le stress</button>
+          <button class="t-chip" onclick="quickTeacherAsk('Comment bien comprendre un problème de maths sans me perdre ?')">Méthode problèmes</button>
+        </div>
+      </div>
+
+      <!-- Fil de conversation interactif scrollable -->
+      <div class="teacher-chat-thread" id="teacherChatThread">
+        <!-- Messages injectés ici dynamiquement -->
+      </div>
+
+      <!-- Indicateur de réflexion Madame Claire -->
+      <div id="teacherTypingIndicator" class="teacher-typing-box" style="display: none;">
+        <span style="font-size: 1.3rem;">👩‍🏫</span>
+        <div class="teacher-typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span style="font-size: 0.82rem; font-weight: 700; color: #166534;">Madame Claire prépare son explication avec douceur...</span>
+      </div>
+
+      <!-- Barre de saisie du message pour l'enfant -->
+      <div class="teacher-input-container">
+        <textarea id="teacherQuestionInput" class="teacher-chat-textarea" placeholder="Tape ta question ici (ex: Je ne comprends pas cet exercice, réexplique-moi...)" rows="1" onkeydown="handleTeacherInputKeydown(event)"></textarea>
+        <button class="action-btn teacher-send-btn" id="teacherSubmitBtn" onclick="askTeacherHelp()" title="Envoyer mon message">
+          <span>✨ Envoyer</span>
+        </button>
       </div>
     </div>
   </div>
@@ -9641,49 +9866,201 @@ Format JSON attendu :
     });
 
     // =========================================================================
-    // 2. MODALE D'AIDE BIENVEILLANTE : MADAME CLAIRE
+    // 2. MODALE D'AIDE BIENVEILLANTE : MADAME CLAIRE (CHAT INTERACTIF & MULTI-TOURS)
     // =========================================================================
     const madameClaireKnowledge = {
-      "a": "<strong>L'astuce magique de 'a' vs 'à' :</strong><br>Remplace par <em>« avait »</em> ! Si la phrase a toujours du sens, c'est le verbe avoir, donc <strong>a sans accent</strong> (ex: <em>Il a faim</em> ➔ <em>Il avait faim</em>). Si la phrase devient bizarre, c'est la préposition : <strong>à avec accent</strong> (ex: <em>Je vais à la piscine</em>) !",
-      "et": "<strong>L'astuce magique de 'et' vs 'est' :</strong><br>Remplace par <em>« était »</em> ! Si ça marche, c'est le verbe être ➔ <strong>est</strong> (ex: <em>Le ciel est bleu</em> ➔ <em>Le ciel était bleu</em>). Sinon, remplace par <em>« et puis »</em> ➔ <strong>et</strong> (ex: <em>Un chat et un chien</em>) !",
-      "division": "<strong>Poser une division simplement :</strong><br>Pense aux 4 étapes qui se répètent :<br>1. <strong>Je partage</strong> (combien de fois rentre le diviseur ?)<br>2. <strong>Je multiplie</strong><br>3. <strong>Je soustrais</strong> pour trouver le reste<br>4. <strong>J'abaisse</strong> le chiffre suivant.<br><em>Rappelle-toi toujours : le reste à chaque étape doit être plus petit que le diviseur !</em>",
-      "imparfait": "<strong>Imparfait vs Passé Composé :</strong><br>• L'<strong>imparfait</strong> s'utilise pour une habitude, un décor ou une action qui dure dans le passé (ex: <em>Tous les matins, il marchait dans la forêt...</em>). Terminaisons : <em>-ais, -ais, -ait, -ions, -iez, -aient</em>.<br>• Le <strong>passé composé</strong> s'utilise pour une action précise, soudaine et terminée (ex: <em>Soudain, un loup a surgi !</em>).",
-      "conversion": "<strong>Conversions sans se tromper :</strong><br>1. Repère le <strong>chiffre des unités</strong> de ton nombre (ex: dans 34,5 m, le chiffre des unités est le 4).<br>2. Place ce chiffre dans la colonne de l'unité de départ (mètre).<br>3. Déplace la virgule ou ajoute des zéros jusqu'à la colonne cible !",
-      "fractions": "<strong>Additionner des fractions :</strong><br>Si elles ont le <strong>même dénominateur</strong> (le nombre du bas), on additionne UNIQUEMENT les numérateurs (le haut) et on garde le bas intact !<br>Exemple : <strong>3/8 + 2/8 = 5/8</strong> !",
-      "tu": "<strong>La règle d'or du 'TU' :</strong><br>En français, le pronom <strong>TU</strong> est le meilleur ami de la lettre <strong>S</strong> ! À presque tous les temps (présent, imparfait, futur, conditionnel), la forme se termine par un <strong>S</strong> (ou un <strong>X</strong> pour peux/veux/vaux). Dès que tu vois <em>Tu</em>, vérifie ton S !"
+      "a": {
+        title: "L'astuce magique de « a » vs « à »",
+        html: "<strong>L'astuce magique de « a » vs « à » :</strong><br>Remplace par <em>« avait »</em> !<br>• Si la phrase a toujours du sens, c'est le verbe <strong>avoir</strong> ➔ écris <strong>a sans accent</strong> (ex: <em>Il a faim</em> ➔ <em>Il avait faim</em>).<br>• Si la phrase devient bizarre, c'est la préposition ➔ écris <strong>à avec accent</strong> (ex: <em>Je vais à la piscine</em>) !",
+        example: "Exemple : « Léa <strong>a</strong> donné un livre <strong>à</strong> son frère » ➔ On peut dire « Léa <em>avait</em> donné... » mais pas « ...<em>avait</em> son frère » !"
+      },
+      "et": {
+        title: "L'astuce magique de « et » vs « est »",
+        html: "<strong>L'astuce magique de « et » vs « est » :</strong><br>Remplace par <em>« était »</em> !<br>• Si ça fonctionne, c'est le verbe <strong>être</strong> ➔ écris <strong>est</strong> (ex: <em>Le ciel est bleu</em> ➔ <em>Le ciel était bleu</em>).<br>• Sinon, remplace par <em>« et puis »</em> ➔ écris <strong>et</strong> (ex: <em>Un chat et un chien</em> ➔ <em>Un chat et puis un chien</em>) !",
+        example: "Exemple : « Tom <strong>est</strong> courageux <strong>et</strong> gentil » ➔ « Tom <em>était</em> courageux <em>et puis</em> gentil » !"
+      },
+      "division": {
+        title: "Poser une division à deux chiffres simplement",
+        html: "<strong>La méthode magique des 4 étapes qui tournent en boucle :</strong><br>1. <strong>Je partage / J'estime :</strong> Combien de fois rentre le diviseur dans les premiers chiffres ? (Pense aux tables !)<br>2. <strong>Je multiplie :</strong> Je pose le résultat sous le dividende.<br>3. <strong>Je soustrais :</strong> Je calcule la différence pour trouver le reste.<br>4. <strong>J'abaisse :</strong> Je descends le chiffre suivant et je recommence !<br><em>💡 Règle d'or : à chaque étape, ton reste doit être plus petit que le diviseur !</em>",
+        example: "Pour diviser par 24 : écris vite la petite table de 24 au brouillon (24, 48, 72, 96...) pour trouver le bon chiffre en un coup d'œil !"
+      },
+      "imparfait": {
+        title: "Imparfait vs Passé Composé",
+        html: "<strong>Imparfait ou Passé Composé ? Voici le secret :</strong><br>• L'<strong>Imparfait</strong> sert pour le décor, une habitude ou une action longue qui n'a pas de fin précise (ex: <em>Il pleuvait doucement et nous marchions...</em>). Terminaisons : <em>-ais, -ais, -ait, -ions, -iez, -aient</em>.<br>• Le <strong>Passé Composé</strong> sert pour un événement soudain, précis et court qui fait avancer l'histoire (ex: <em>Soudain, le téléphone a sonné !</em>).",
+        example: "Exemple : « Je <strong>lisais</strong> tranquillement (action longue) quand mon chat <strong>a sauté</strong> sur la table (action soudaine) ! »"
+      },
+      "conversion": {
+        title: "Tableau de conversion sans jamais se tromper",
+        html: "<strong>Le secret des conversions en 3 étapes :</strong><br>1. <strong>Trouve le chiffre des unités</strong> de ton nombre (ex: dans 45,8 m, le chiffre des unités est le 5).<br>2. <strong>Pose ce chiffre dans la colonne de l'unité de départ</strong> (ici dans les mètres).<br>3. <strong>Déplace la virgule</strong> ou ajoute des zéros jusqu'à la colonne demandée !",
+        example: "Pour convertir 45,8 m en cm : le 5 est dans les m, le 8 dans les dm, on ajoute un 0 dans les cm ➔ <strong>4 580 cm</strong> !"
+      },
+      "fractions": {
+        title: "Fractions simples et faciles",
+        html: "<strong>Additionner des fractions de même dénominateur :</strong><br>Rappelle-toi l'image d'un gâteau coupé en parts !<br>• Si les fractions ont le <strong>même nombre en bas</strong> (le dénominateur), tu additionnes <strong>UNIQUEMENT les nombres du haut</strong> (les numérateurs).<br>• Le bas ne change jamais car les parts ont la même taille !",
+        example: "Exemple : <strong>3/8 + 2/8 = 5/8</strong> (3 parts de pizza + 2 parts de pizza = 5 parts sur 8) !"
+      },
+      "tu": {
+        title: "La règle d'or du pronom TU",
+        html: "<strong>La règle inséparable du « TU » :</strong><br>En français, le pronom <strong>TU</strong> a un meilleur ami dont il ne se sépare jamais : la lettre <strong>S</strong> !<br>À presque tous les temps (présent, imparfait, futur, conditionnel), le verbe avec <em>TU</em> se termine par un <strong>S</strong> (ou un <strong>X</strong> pour <em>tu peux, tu veux, tu vaux</em>).",
+        example: "Exemples : <em>Tu manges</em>, <em>tu finissais</em>, <em>tu prendras</em>, <em>tu as</em>, <em>tu es</em> !"
+      },
+      "er": {
+        title: "-er ou -é à la fin d'un verbe ?",
+        html: "<strong>L'astuce magique de « -er » vs « -é » :</strong><br>Remplace le verbe par <strong>« mordre / vendre »</strong> (infinitif) ou par <strong>« mordu / vendu »</strong> (participe passé) !<br>• Si on peut dire <em>mordre</em> ➔ écris <strong>-er</strong> (infinitif).<br>• Si on peut dire <em>mordu</em> ➔ écris <strong>-é</strong> (participe passé) !",
+        example: "Exemple : « Il va <em>manger</em> » (il va <em>mordre</em> ➔ -er) vs « Il a <em>mangé</em> » (il a <em>mordu</em> ➔ -é) !"
+      },
+      "participe": {
+        title: "Accords du participe passé avec Être et Avoir",
+        html: "<strong>Le grand secret du participe passé :</strong><br>• Avec l'auxiliaire <strong>ÊTRE</strong> : il s'accorde TOUJOURS en genre et en nombre avec le sujet (ex: <em>Elles sont arrivé<strong>es</strong></em>).<br>• Avec l'auxiliaire <strong>AVOIR</strong> : il ne s'accorde JAMAIS avec le sujet ! (ex: <em>Elles ont mangé</em>). <em>(Sauf si le COD est placé avant, mais garde déjà cette règle en tête !)</em>",
+        example: "Pense à la formule : <em>Être = Copain avec le sujet (accord)</em> | <em>Avoir = Solitaire (pas d'accord avec le sujet)</em> !"
+      },
+      "perimetre": {
+        title: "Différence entre Périmètre et Aire",
+        html: "<strong>Périmètre vs Aire :</strong><br>• Le <strong>Périmètre</strong>, c'est la <strong>clôture</strong> autour du jardin (on additionne toutes les longueurs des côtés, résultat en cm ou m).<br>• L'<strong>Aire</strong>, c'est la <strong>surface de pelouse</strong> à l'intérieur du jardin (pour un rectangle : Longueur × largeur, résultat en cm² ou m²) !",
+        example: "Un rectangle de 4 cm par 3 cm :<br>• Périmètre = (4 + 3) × 2 = <strong>14 cm</strong><br>• Aire = 4 × 3 = <strong>12 cm²</strong> !"
+      },
+      "methode": {
+        title: "Comment bien mémoriser et retenir une leçon ?",
+        html: "<strong>Les 3 étapes de la super-mémoire :</strong><br>1. <strong>Lis la leçon à voix haute</strong> pour que ton cerveau l'entende.<br>2. <strong>Ferme les yeux et réexplique-la avec tes propres mots</strong> comme si tu l'expliquais à une amie.<br>3. <strong>Écris 3 questions clés</strong> sur ton ardoise et réponds-y le lendemain matin !",
+        example: "Le sommeil consolide les apprentissages : réviser 10 minutes le soir + 5 minutes le matin est 10 fois plus efficace que de stresser 1 heure d'un coup !"
+      }
     };
+
+    let teacherChatMessages = [];
+    let isTeacherSpeaking = false;
+
+    function switchTeacherTopicTab(tabKey, btn) {
+      document.querySelectorAll('.t-subj-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.teacher-chips-tray').forEach(t => t.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const tray = document.getElementById('teacherChips' + tabKey.charAt(0).toUpperCase() + tabKey.slice(1));
+      if (tray) tray.classList.add('active');
+    }
+
+    function initTeacherChatThread() {
+      const thread = document.getElementById('teacherChatThread');
+      if (!thread) return;
+      if (teacherChatMessages.length === 0) {
+        const welcomeHtml = `Bonjour mon champion ! 🌟<br>
+        Je suis <strong>Madame Claire</strong>, ta maîtresse virtuelle bienveillante.<br><br>
+        Si un exercice te bloque, si une leçon te semble floue ou si tu hésites sur une règle, <strong>pose-moi ta question</strong> ci-dessous.<br>
+        N'aie jamais peur de te tromper : ici, chaque question est un pas de géant vers la réussite ! Que regardons-nous ensemble ?`;
+        
+        teacherChatMessages.push({
+          role: 'model',
+          html: welcomeHtml,
+          text: "Bonjour mon champion ! Je suis Madame Claire, ta maîtresse virtuelle bienveillante. Si un exercice te bloque ou si tu hésites, pose-moi ta question. N'aie jamais peur de te tromper !",
+          showFollowUps: false,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
+      }
+      renderTeacherChatThread();
+    }
+
+    function renderTeacherChatThread() {
+      const thread = document.getElementById('teacherChatThread');
+      if (!thread) return;
+
+      thread.innerHTML = teacherChatMessages.map((msg, idx) => {
+        const isUser = msg.role === 'user';
+        const senderName = isUser ? "Toi" : "Madame Claire";
+        const avatar = isUser ? "👧" : "👩‍🏫";
+        const isLastModel = (!isUser && idx === teacherChatMessages.length - 1);
+
+        let followUpsHtml = '';
+        if (!isUser && msg.showFollowUps) {
+          followUpsHtml = `
+            <div class="teacher-followups-tray">
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Peux-tu me donner un autre exemple très concret avec des choses du quotidien ?')">💡 Un autre exemple</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Je n\\'ai pas bien compris, peux-tu me réexpliquer encore plus simplement ?')">🤔 Pas bien compris</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Pose-moi une petite question facile pour vérifier si j\\'ai bien compris !')">🎯 Teste-moi</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Merci beaucoup Madame Claire, c\\'est très clair !')">💖 Merci !</button>
+            </div>
+          `;
+        }
+
+        const speechEscaped = escapeHtml(msg.text || '').replace(/'/g, "\\'");
+        const voiceBtn = !isUser ? `
+          <button class="teacher-voice-btn" onclick="speakTeacherMessage('${speechEscaped}', this)" title="Écouter l'explication à voix haute">
+            🔊 Écouter
+          </button>
+        ` : '';
+
+        return `
+          <div class="teacher-msg-row ${isUser ? 'user' : ''}">
+            <div class="teacher-msg-avatar">${avatar}</div>
+            <div class="teacher-msg-bubble-wrap">
+              <span class="teacher-msg-sender">${senderName} • ${msg.time || ''}</span>
+              <div class="teacher-msg-bubble">
+                <div>${msg.html}</div>
+                ${!isUser ? `
+                  <div class="teacher-msg-footer">
+                    <span>💡 Astuce CM2</span>
+                    ${voiceBtn}
+                  </div>
+                ` : ''}
+              </div>
+              ${followUpsHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      setTimeout(() => {
+        thread.scrollTop = thread.scrollHeight;
+      }, 50);
+    }
 
     function openTeacherHelpModal(initialPrompt) {
       const modal = document.getElementById('teacherHelpModal');
       const input = document.getElementById('teacherQuestionInput');
-      const respCard = document.getElementById('teacherResponseCard');
       if (!modal) return;
       modal.style.display = 'flex';
-      if (respCard) respCard.style.display = 'none';
+      initTeacherChatThread();
       if (input) {
         if (initialPrompt) input.value = initialPrompt;
-        setTimeout(() => input.focus(), 100);
+        setTimeout(() => input.focus(), 120);
       }
     }
 
     function closeTeacherHelpModal() {
       const modal = document.getElementById('teacherHelpModal');
       if (modal) modal.style.display = 'none';
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      isTeacherSpeaking = false;
+    }
+
+    function resetTeacherConversation() {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      isTeacherSpeaking = false;
+      teacherChatMessages = [];
+      initTeacherChatThread();
+      const input = document.getElementById('teacherQuestionInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      playSound('correct');
     }
 
     function quickTeacherAsk(text) {
       const input = document.getElementById('teacherQuestionInput');
-      if (input) {
-        input.value = text;
-        askTeacherHelp();
-      }
+      if (input) input.value = text;
+      askTeacherHelp();
     }
 
-    function clearTeacherChat() {
+    function askTeacherFollowUp(text) {
       const input = document.getElementById('teacherQuestionInput');
-      const resp = document.getElementById('teacherResponseCard');
-      if (input) input.value = '';
-      if (resp) resp.style.display = 'none';
+      if (input) input.value = text;
+      askTeacherHelp();
+    }
+
+    function handleTeacherInputKeydown(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        askTeacherHelp();
+      }
     }
 
     async function askTeacherHelp() {
@@ -9691,66 +10068,199 @@ Format JSON attendu :
       const question = input ? input.value.trim() : '';
       if (!question) return;
 
-      const loading = document.getElementById('teacherLoadingBox');
-      const respCard = document.getElementById('teacherResponseCard');
-      const respBody = document.getElementById('teacherResponseBody');
-      const submitBtn = document.getElementById('teacherSubmitBtn');
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-      if (loading) loading.style.display = 'block';
-      if (respCard) respCard.style.display = 'none';
+      // Ajouter le message de l'élève au fil
+      teacherChatMessages.push({
+        role: 'user',
+        html: escapeHtml(question).replace(/\n/g, '<br>'),
+        text: question,
+        time: timeStr
+      });
+
+      if (input) input.value = '';
+      renderTeacherChatThread();
+
+      const typingIndicator = document.getElementById('teacherTypingIndicator');
+      const submitBtn = document.getElementById('teacherSubmitBtn');
+      if (typingIndicator) typingIndicator.style.display = 'flex';
       if (submitBtn) submitBtn.disabled = true;
+
+      // Faire défiler vers le bas
+      const thread = document.getElementById('teacherChatThread');
+      if (thread) thread.scrollTop = thread.scrollHeight;
 
       const apiKey = localStorage.getItem('gemini_api_key') || '';
       let answerHtml = '';
+      let rawAnswerText = '';
 
       if (apiKey) {
         try {
-          const prompt = `Tu es Madame Claire, une institutrice de CM2 extrêmement douce, bienveillante, encourageante et pédagogue. 
-Un élève de CM2 te pose cette question : "${question}".
-Réponds-lui directement avec chaleur, en lui expliquant la notion pas-à-pas avec des phrases courtes et limpides.
-Inclus :
-1. Une explication très simple avec les mots d'un enfant de 10 ans.
-2. Un exemple concret ou une astuce mnémotechnique facile à retenir.
-3. Une phrase d'encouragement chaleureuse qui lui donne confiance en elle.
-Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si besoin, sans balises html/body).`;
+          // Préparer l'historique multi-tours pour Gemini
+          const contents = [
+            {
+              role: 'user',
+              parts: [{
+                text: `Consignes de rôle pour tout le dialogue : Tu es Madame Claire, une institutrice de CM2 extrêmement douce, chaleureuse, souriante, encourageante et ultra-pédagogue. 
+Tu t'adresses à une élève de CM2 (10 ans). 
+Ton style :
+1. Très clair, fluide et compréhensible par un enfant de 10 ans.
+2. Utilise des étapes numérotées, des exemples amusants de la vie quotidienne (gâteaux, billes, animaux, super-héros...).
+3. Met en gras <strong> les mots et règles clés.
+4. Termine toujours par une phrase motivante et bienveillante qui donne confiance.
+5. Si l'élève te demande un autre exemple ou te dit qu'elle n'a pas compris, adapte ton explication avec encore plus de douceur et une autre métaphore imagée.
+6. Si l'élève te dit « Teste-moi », pose-lui UNE petite question simple et encourage-la à répondre.
+Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si besoin, sans balises <html> ni <body>).`
+              }]
+            },
+            {
+              role: 'model',
+              parts: [{
+                text: `Bonjour mon champion ! C'est compris, je suis Madame Claire et je vais t'accompagner avec douceur et pédagogie.`
+              }]
+            }
+          ];
+
+          // Ajouter les derniers messages du fil pour la continuité du dialogue
+          const recentHistory = teacherChatMessages.slice(-8);
+          recentHistory.forEach(m => {
+            contents.push({
+              role: m.role === 'user' ? 'user' : 'model',
+              parts: [{ text: m.text || m.html }]
+            });
+          });
 
           const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            body: JSON.stringify({ contents: contents })
           });
           const data = await response.json();
           if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-            answerHtml = data.candidates[0].content.parts[0].text.replace(/```html/g, '').replace(/```/g, '');
+            answerHtml = data.candidates[0].content.parts[0].text.replace(/```html/g, '').replace(/```/g, '').trim();
+            // Créer une version texte propre pour la synthèse vocale
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = answerHtml;
+            rawAnswerText = tempDiv.textContent || tempDiv.innerText || '';
           }
         } catch (err) {
-          console.error("Gemini teacher error:", err);
+          console.error("Gemini teacher conversation error:", err);
         }
       }
 
-      // Fallback si pas d'API ou erreur réseau
+      // Fallback local intelligent si pas d'API ou erreur réseau
       if (!answerHtml) {
         const lower = question.toLowerCase();
-        let matchedKey = Object.keys(madameClaireKnowledge).find(k => lower.includes(k));
-        if (matchedKey) {
-          answerHtml = madameClaireKnowledge[matchedKey] + `<br><br>🌟 <em>« Tu es formidable, continue d'avancer pas à pas ! »</em>`;
+        let matched = null;
+
+        if (lower.includes('merci')) {
+          answerHtml = `Avec tout mon cœur ! 💖<br>Tu as fait du super travail aujourd'hui. N'oublie jamais que poser des questions est la meilleure preuve de ton intelligence et de ta curiosité !<br><br>🌟 <em>« Reste toujours aussi curieuse et fière de toi ! »</em>`;
+          rawAnswerText = "Avec tout mon cœur ! Tu as fait du super travail aujourd'hui. Reste toujours aussi curieuse et fière de toi !";
+        } else if (lower.includes('pas compris') || lower.includes('plus simple')) {
+          answerHtml = `C'est tout à fait normal, prenons notre temps ! 🤗<br><br>
+          💡 <strong>Regardons les choses autrement :</strong><br>
+          Quand une notion semble compliquée, on la coupe en petits morceaux faciles :<br>
+          • 1. <strong>Prends ton brouillon</strong> et écris seulement le premier mot ou chiffre.<br>
+          • 2. <strong>Pose-toi la question :</strong> <em>« Qu'est-ce qu'on me demande de trouver ? »</em><br>
+          • 3. <strong>Fais un petit schéma ou dessin rapide</strong> (des ronds pour des fractions, une flèche pour la chronologie...).<br><br>
+          Dis-moi précisément quel mot ou quelle phrase te bloque et nous allons la décortiquer ensemble ! ✨`;
+          rawAnswerText = "C'est tout à fait normal, prenons notre temps ! Regardons les choses autrement. Dis-moi précisément quel mot te bloque et nous allons le décortiquer ensemble.";
+        } else if (lower.includes('teste-moi') || lower.includes('question')) {
+          answerHtml = `C'est parti pour le mini-défi de Madame Claire ! 🎯<br><br>
+          Voici ta petite question :<br>
+          👉 <strong>Dans la phrase : « Tu march... dans le parc », quelle lettre dois-tu impérativement mettre à la fin ?</strong><br><br>
+          <em>(Tape ta réponse dans la case en bas et envoie-la moi !)</em> 💪✨`;
+          rawAnswerText = "C'est parti pour le mini-défi de Madame Claire ! Dans la phrase : Tu marches dans le parc, quelle lettre dois-tu impérativement mettre à la fin ? Tape ta réponse en bas !";
         } else {
-          answerHtml = `Bonjour mon champion ! C'est une excellente question.<br><br>
-          💡 <strong>Le conseil de Madame Claire :</strong><br>
-          Pour bien réussir cette étape :<br>
-          1. <strong>Prends ton temps</strong> et lis bien l'énoncé jusqu'au bout.<br>
-          2. <strong>Repère les indices</strong> (les mots clés, les sujets, les unités).<br>
-          3. <strong>Utilise ton ardoise ou ton brouillon</strong> pour tester tes hypothèses sans peur de te tromper.<br><br>
-          <em>(Pour poser des questions sur-mesure à l'infini avec l'IA, n'hésite pas à configurer ta clé gratuite dans ⚙️ Clé IA en haut de la page !)</em><br><br>
-          💖 <em>« J'ai confiance en toi, tu vas y arriver ! »</em>`;
+          for (let key of Object.keys(madameClaireKnowledge)) {
+            if (lower.includes(key)) {
+              matched = madameClaireKnowledge[key];
+              break;
+            }
+          }
+
+          if (matched) {
+            answerHtml = `Bravo pour cette excellente question ! 💡<br><br>
+            ${matched.html}<br><br>
+            ${matched.example ? `<div class="teacher-example-box">🌟 <strong>Exemple concret :</strong><br>${matched.example}</div>` : ''}
+            <br>💖 <em>« Tu vois comme tout devient plus clair quand on a la bonne méthode ? »</em>`;
+            
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = answerHtml;
+            rawAnswerText = tempDiv.textContent || tempDiv.innerText || '';
+          } else {
+            answerHtml = `C'est une très bonne question mon champion ! 🌟<br><br>
+            💡 <strong>Le conseil pas-à-pas de Madame Claire :</strong><br>
+            1. <strong>Prends ton temps</strong> et relis l'énoncé deux fois calmement.<br>
+            2. <strong>Surligne les indices</strong> (les verbes, les sujets, les unités de mesure).<br>
+            3. <strong>Fais un schéma ou une ardoise</strong> pour tester tes calculs sans stress.<br><br>
+            <em>(Pour que je puisse répondre sur-mesure à n'importe quel exercice spécifique, tu peux renseigner ta clé gratuite dans ⚙️ Clé IA en haut de la page !)</em><br><br>
+            💖 <em>« J'ai confiance en toi, tu as toutes les compétences pour réussir ! »</em>`;
+            rawAnswerText = "C'est une très bonne question ! Prends ton temps, relis calmement et fais confiance à tes capacités. Tu vas y arriver !";
+          }
         }
       }
 
-      if (loading) loading.style.display = 'none';
+      if (typingIndicator) typingIndicator.style.display = 'none';
       if (submitBtn) submitBtn.disabled = false;
-      if (respBody) respBody.innerHTML = answerHtml;
-      if (respCard) respCard.style.display = 'block';
+
+      // Ajouter la réponse de Madame Claire
+      teacherChatMessages.push({
+        role: 'model',
+        html: answerHtml,
+        text: rawAnswerText,
+        showFollowUps: true,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+
+      renderTeacherChatThread();
       playSound('correct');
+
+      if (input) setTimeout(() => input.focus(), 80);
+    }
+
+    // Synthèse vocale bienveillante pour lire les réponses à voix haute
+    function speakTeacherMessage(text, btn) {
+      if (!window.speechSynthesis) {
+        alert("La synthèse vocale n'est pas supportée par votre navigateur.");
+        return;
+      }
+
+      if (isTeacherSpeaking) {
+        window.speechSynthesis.cancel();
+        isTeacherSpeaking = false;
+        if (btn) btn.innerHTML = "🔊 Écouter";
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const cleanText = text.replace(/<[^>]*>/g, '').replace(/[•—➔👉💡✨💖🌟]/g, ' ').trim();
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'fr-FR';
+      utterance.rate = 0.95; // Rythme posé et doux
+      utterance.pitch = 1.1; // Voix chaleureuse
+
+      // Tenter de sélectionner une voix française féminine naturelle si disponible
+      const voices = window.speechSynthesis.getVoices();
+      const frVoice = voices.find(v => v.lang.startsWith('fr') && (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('audrey') || v.name.toLowerCase().includes('amelie') || v.name.toLowerCase().includes('marie') || v.name.toLowerCase().includes('virginie') || v.name.toLowerCase().includes('google français')));
+      if (frVoice) utterance.voice = frVoice;
+
+      utterance.onstart = () => {
+        isTeacherSpeaking = true;
+        if (btn) btn.innerHTML = "⏹️ Arrêter";
+      };
+
+      utterance.onend = () => {
+        isTeacherSpeaking = false;
+        if (btn) btn.innerHTML = "🔊 Écouter";
+      };
+
+      utterance.onerror = () => {
+        isTeacherSpeaking = false;
+        if (btn) btn.innerHTML = "🔊 Écouter";
+      };
+
+      window.speechSynthesis.speak(utterance);
     }
 
     // =========================================================================
