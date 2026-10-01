@@ -99,6 +99,10 @@
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 10px;
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-sizing: border-box;
     }
 
     h1 {
@@ -2196,15 +2200,271 @@
       font-weight: 600;
     }
 
-    @media (max-width: 650px) {
-      h1 { font-size: 1.85rem; }
-      main { padding: 18px; border-radius: 16px; }
-      .hero-banner { height: 160px; }
-      .calc-card { font-size: 2.4rem; }
-      .sentence-display { font-size: 1.1rem; }
-      .memos-grid { grid-template-columns: 1fr; }
-      .rewards-grid { grid-template-columns: 1fr; }
-      #scratchCanvas { height: 280px; }
+    @media (max-width: 768px) {
+      body {
+        padding: 10px 8px;
+        overflow-x: hidden;
+      }
+      header {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 12px;
+      }
+      h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        font-size: 0.85rem;
+        padding: 0 4px;
+      }
+      
+      /* Menu Rouge Supérieur (Badge Top) & Boutons Navigation */
+      .badge-top {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px 8px !important;
+        border-radius: 16px !important;
+        gap: 8px !important;
+        box-sizing: border-box !important;
+      }
+      .badge-title {
+        font-size: 0.76rem !important;
+        line-height: 1.3 !important;
+        text-align: center !important;
+      }
+      .top-nav-actions {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .teacher-help-btn-top,
+      .parents-btn-top,
+      .sync-btn-top,
+      .ai-btn-top-cfg {
+        font-size: 0.78rem !important;
+        padding: 7px 4px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        justify-content: center !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+      }
+
+      /* Barre des Stats */
+      .stats-bar {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 8px 10px !important;
+        border-radius: 16px !important;
+        gap: 6px !important;
+        justify-content: space-around !important;
+        box-sizing: border-box !important;
+      }
+      .stat-pill {
+        font-size: 0.78rem !important;
+        gap: 4px !important;
+      }
+
+      /* Défi Polyvalence (Matières du jour) */
+      .daily-balance-widget {
+        padding: 10px 8px !important;
+        border-radius: 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .daily-balance-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 4px !important;
+      }
+      .daily-balance-chips {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        width: 100% !important;
+      }
+      .domain-chip {
+        width: 100% !important;
+        padding: 6px 8px !important;
+        font-size: 0.78rem !important;
+        justify-content: space-between !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Navigation Complémentaire (Boîte à outils, Éveil, Mon espace) */
+      .tabs-nav-structured {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 8px 6px !important;
+        border-radius: 14px !important;
+        margin-bottom: 16px !important;
+        box-sizing: border-box !important;
+      }
+      .tabs-group-container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        width: 100% !important;
+      }
+      .tabs-group-tag {
+        grid-column: span 2 !important;
+        text-align: center !important;
+        margin: 2px 0 !important;
+      }
+      .tabs-nav-structured .tab-btn {
+        width: 100% !important;
+        padding: 8px 4px !important;
+        font-size: 0.78rem !important;
+        justify-content: center !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        line-height: 1.25 !important;
+      }
+
+      /* Conteneur Principal */
+      main {
+        padding: 14px 10px !important;
+        border-radius: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Barres des Sous-Modules dans chaque matière */
+      .submodule-bar {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        width: 100% !important;
+        margin-bottom: 14px !important;
+      }
+      .submodule-btn {
+        width: 100% !important;
+        padding: 8px 6px !important;
+        font-size: 0.78rem !important;
+        text-align: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        line-height: 1.25 !important;
+      }
+
+      /* Bannières Hero */
+      .hero-banner {
+        height: 140px !important;
+        border-radius: 14px !important;
+        margin-bottom: 14px !important;
+      }
+      .hero-title { font-size: 1.25rem !important; }
+      .hero-tag { font-size: 0.75rem !important; }
+      
+      .calc-card { font-size: 2.2rem !important; }
+      .sentence-display { font-size: 1.05rem !important; }
+
+      /* Filtres & Recherche Mémos */
+      .memos-filter-wrap {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+        width: 100% !important;
+      }
+      .filter-pills {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 4px !important;
+        width: 100% !important;
+      }
+      .filter-pill {
+        padding: 5px 4px !important;
+        font-size: 0.75rem !important;
+        text-align: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      .memo-search-input {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .memos-grid { grid-template-columns: 1fr !important; }
+      .rewards-grid { grid-template-columns: 1fr !important; }
+
+      /* Ardoise / Scratchpad */
+      .scratchpad-toolbar {
+        padding: 8px !important;
+        gap: 6px !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+      }
+      .scratch-btn {
+        padding: 5px 8px !important;
+        font-size: 0.76rem !important;
+      }
+      #scratchCanvas { height: 260px !important; }
+
+      /* Cartes & Tableaux Espace Parents */
+      .parent-lock-card, .parent-mgr-card {
+        padding: 16px 10px !important;
+        border-radius: 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .rewards-table {
+        display: block !important;
+        overflow-x: auto !important;
+        width: 100% !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .memo-input {
+        min-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .memo-input-row {
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+
+      /* Modales */
+      .ai-modal-card {
+        padding: 18px 12px !important;
+        max-height: 94vh !important;
+        border-radius: 18px !important;
+        width: 95vw !important;
+        max-width: 95vw !important;
+      }
+
+      /* Calculatrice Flottante Mobile */
+      .floating-calc-fab {
+        bottom: 14px !important;
+        right: 14px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.4rem !important;
+      }
+      .floating-calc-window {
+        width: 92vw !important;
+        max-width: 340px !important;
+        right: 4vw !important;
+        bottom: 70px !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .filter-pills {
+        grid-template-columns: 1fr 1fr !important;
+      }
     }
   
     /* ------------------------------------------------------------- */
@@ -2245,8 +2505,8 @@
       transform: translate(2px, 2px);
       box-shadow: none;
     }
-    .calc-btn-top {
-      background: #e0f2fe;
+    .parents-btn-top {
+      background: #ffffff;
       color: var(--ink);
       border: 2px solid var(--ink);
       font-weight: 800;
@@ -2260,9 +2520,14 @@
       gap: 6px;
       transition: all 0.15s ease;
     }
-    .calc-btn-top:hover {
-      background: #bae6fd;
+    .parents-btn-top:hover {
+      background: #fef08a;
       transform: translateY(-1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .parents-btn-top:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
     }
     .ai-btn-top-cfg {
       background: #fff;
@@ -3834,8 +4099,8 @@
         <button class="teacher-help-btn-top" onclick="openTeacherHelpModal()" title="Pose ta question à Madame Claire, la maîtresse bienveillante !">
           👩‍🏫 Aide-moi à comprendre !
         </button>
-        <button class="calc-btn-top" onclick="toggleFloatingCalculator()" title="Ouvrir la calculatrice flottante">
-          🧮 Calculatrice
+        <button class="parents-btn-top" onclick="switchSubject('parents')" title="Espace de gestion et suivi réservé aux parents">
+          ⚙️ Espace Parents
         </button>
         <button id="accountNavBtn" class="sync-btn-top" onclick="openSyncModal()" title="Compte & Synchronisation Cloud Automatique (PC, iPad, Mobile)">
           <span id="accountNavDot" style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #94a3b8;"></span>
@@ -4723,7 +4988,6 @@
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('recompenses', 'bazar')">🛍️ Le Bazar des Cadeaux</button>
         <button class="submodule-btn" onclick="switchSubmodule('recompenses', 'mesbons')">🎟️ Mes Bons Débloqués (<span id="unlockedVouchersCount">0</span>)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('recompenses', 'parents')">⚙️ Espace Parents</button>
       </div>
 
       <!-- Submodule 1: Bazar des Cadeaux -->
@@ -4739,10 +5003,20 @@
       <div id="sub-recompenses-mesbons" class="submodule-content">
         <div class="vouchers-grid" id="vouchersGridContainer"></div>
       </div>
+    </section>
 
-      <!-- Submodule 3: Gestion Parentale (Protégée par PIN) -->
-      <div id="sub-recompenses-parents" class="submodule-content">
-        <!-- Vue 1 : Verrouillage Parent (si non authentifié) -->
+    <!-- ========================================================= -->
+    <!-- ESPACE GESTION & SUIVI PARENTAL (ACCÈS RÉSERVÉ)          -->
+    <!-- ========================================================= -->
+    <section id="subject-parents" class="subject-section">
+      <div class="shop-hero" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+        <div>
+          <div class="shop-hero-title" style="color: #ffffff;">⚙️ Espace Réservé aux Parents</div>
+          <div class="shop-hero-subtitle" style="color: #94a3b8;">Gestion des étoiles, barème des cadeaux, notifications Gmail et suivi des progrès.</div>
+        </div>
+      </div>
+
+      <!-- Vue 1 : Verrouillage Parent (si non authentifié) -->
         <div id="parentLockCard" class="parent-lock-card" style="display: block;">
           <div style="font-size: 3rem; margin-bottom: 8px;">🔒</div>
           <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 6px;">Espace Réservé aux Parents</h3>
@@ -4765,9 +5039,6 @@
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
             <div class="parent-mgr-title" style="margin-bottom: 0;">⚙️ Espace Gestion Parents</div>
             <div style="display: flex; gap: 8px; align-items: center;">
-              <button class="doc-link-btn" onclick="openSyncModal()" style="padding: 6px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;">
-                ☁️ Sauvegardes iPad / PC
-              </button>
               <button class="doc-link-btn" onclick="lockParentArea()" style="padding: 6px 14px; font-size: 0.85rem; border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;">
                 🔒 Verrouiller la session
               </button>
@@ -5047,15 +5318,7 @@
             <tbody id="parentRewardsTableBody"></tbody>
           </table>
 
-          <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button class="action-btn" onclick="syncParentRewardsNow()" style="padding: 8px 16px; font-size: 0.88rem; background: var(--bd-blue); border-color: var(--ink);" title="Sauvegarde immédiatement sur le Cloud Supabase pour l'iPad">
-                ☁️ Sauvegarder & Synchroniser sur l'iPad
-              </button>
-              <button class="doc-link-btn" onclick="openSyncModal()" style="padding: 8px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;" title="Gérer le compte et la synchronisation">
-                👤 Gérer le Compte Cloud
-              </button>
-            </div>
+          <div style="margin-top: 14px; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap;">
             <button class="doc-link-btn" onclick="resetDefaultRewardsCatalog()" style="border-color: var(--bd-red); color: var(--bd-red);">
               🔄 Rétablir les cadeaux par défaut
             </button>
@@ -5070,7 +5333,6 @@
             </div>
           </div>
         </div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -5823,8 +6085,9 @@
       } else if (subj === 'recompenses') {
         renderShopRewards();
         renderClaimedVouchers();
-        renderParentArea();
         updateRewardsDisplays();
+      } else if (subj === 'parents') {
+        renderParentArea();
       } else if (subj === 'outils') {
         initConjugator();
         initPythagorasTable();
@@ -5850,7 +6113,6 @@
       if (subject === 'blocnotes' && subKey === 'ardoise') {
         setTimeout(resizeScratchpadCanvas, 80);
       } else if (subject === 'recompenses') {
-        if (subKey === 'parents') renderParentArea();
         if (subKey === 'mesbons') renderClaimedVouchers();
         if (subKey === 'bazar') renderShopRewards();
       }
