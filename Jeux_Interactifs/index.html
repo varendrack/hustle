@@ -5822,8 +5822,22 @@
             </div>
 
             <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px; line-height: 1.5;">
-              Indiquez votre adresse Gmail : vous recevrez <strong>automatiquement un rapport complet par email à chaque fois que votre fille termine une session d'entraînement</strong> (questions réussies, erreurs, temps passé, progression par matière) ainsi que lorsqu'elle débloque un bon cadeau !
+              Indiquez votre adresse Gmail : vous recevrez <strong>automatiquement un rapport complet par email dès que votre fille termine ou interrompt sa séance d'entraînement</strong> (questions réussies, erreurs, temps passé, progression par matière) ainsi que lorsqu'elle débloque un bon cadeau !
             </p>
+
+            <!-- Badge Automatisation Active -->
+            <div style="background: #f0fdf4; border: 1.5px solid #16a34a; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; font-size: 0.83rem; color: #166534; line-height: 1.45;">
+              <div style="font-weight: 800; font-size: 0.88rem; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                <span>⚡ Système 100% Automatique & Transparent :</span>
+              </div>
+              Votre enfant n'a pas besoin d'y penser ! Le bilan vous est envoyé automatiquement :
+              <ul style="margin: 4px 0 0 16px; padding: 0;">
+                <li>🚪 <strong>À la fermeture de l'onglet ou du navigateur</strong></li>
+                <li>⏳ <strong>Après 10 minutes d'inactivité</strong> (si l'ordinateur est laissé allumé)</li>
+                <li>🔄 <strong>Au prochain démarrage</strong> (rattrapage automatique si coupure)</li>
+                <li>🏁 <strong>Ou via le bouton manuel</strong> <em>« Terminer ma session »</em></li>
+              </ul>
+            </div>
 
             <div style="background: #fffbeb; border: 1.5px dashed var(--bd-yellow-dark); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.83rem; color: #92400e; line-height: 1.4;">
               ⚠️ <strong>Première utilisation :</strong> Après avoir enregistré votre adresse et cliqué sur <em>« 📨 Tester l'envoi »</em>, FormSubmit vous envoie un <strong>email d'activation obligatoire</strong> (sujet : <em>« Action Required: Confirm your email »</em>).<br>👉 <strong>Vérifiez impérativement vos SPAMS / Courriers indésirables</strong> dans Gmail et <strong>cliquez sur le lien</strong> pour autoriser les envois !
@@ -6465,6 +6479,10 @@
         }
       }
 
+      sessionHasBeenSent = false;
+      lastUserActivityTime = Date.now();
+      saveActiveSessionState();
+
       saveStudentStats(stats);
       renderParentStats();
     }
@@ -6764,6 +6782,9 @@
         totalScore += earnedPts;
         walletStars += earnedPts;
         sessionStats.starsEarned = (sessionStats.starsEarned || 0) + earnedPts;
+        sessionHasBeenSent = false;
+        lastUserActivityTime = Date.now();
+        saveActiveSessionState();
       }
       currentStreak += 1;
 
@@ -6799,6 +6820,8 @@
         totalScore = Math.max(0, totalScore - penaltyPts);
         walletStars = Math.max(0, walletStars - penaltyPts);
         sessionStats.starsEarned = Math.max(0, (sessionStats.starsEarned || 0) - penaltyPts);
+        lastUserActivityTime = Date.now();
+        saveActiveSessionState();
       }
 
       try {
@@ -9215,9 +9238,11 @@ Format JSON attendu :
     }
 
     // =========================================================================
-    // PARENT GMAIL NOTIFICATION & SESSION REPORT SYSTEM
+    // PARENT GMAIL NOTIFICATION & AUTOMATED SESSION REPORT SYSTEM
     // =========================================================================
     let sessionStartTime = Date.now();
+    let lastUserActivityTime = Date.now();
+    let sessionHasBeenSent = false;
     let sessionStats = {
       totalCorrect: 0,
       totalErrors: 0,
@@ -9231,8 +9256,58 @@ Format JSON attendu :
       starsEarned: 0
     };
 
-    function getSessionDurationString() {
-      const elapsedMs = Date.now() - sessionStartTime;
+    function saveActiveSessionState() {
+      try {
+        const data = {
+          startTime: sessionStartTime,
+          lastActivityTime: Date.now(),
+          stats: sessionStats,
+          hasBeenSent: sessionHasBeenSent
+        };
+        localStorage.setItem('cm2_active_session_state', JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    function restoreOrCreateSessionState() {
+      try {
+        const raw = localStorage.getItem('cm2_active_session_state');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          const totalAnswers = ((parsed.stats?.totalCorrect || 0) + (parsed.stats?.totalErrors || 0));
+          const timeSinceLastActivity = Date.now() - (parsed.lastActivityTime || 0);
+
+          // Si la session précédente contenait du travail non envoyé et date de plus de 25 min (séance passée interrompue)
+          if (totalAnswers >= 2 && !parsed.hasBeenSent && timeSinceLastActivity > 25 * 60 * 1000) {
+            // Rattrapage automatique en arrière-plan
+            sendSessionReportEmail('rattrapage_demarrage', parsed.stats, parsed.startTime, true);
+            // On initialise une session propre pour maintenant
+            sessionStartTime = Date.now();
+            lastUserActivityTime = Date.now();
+            sessionHasBeenSent = false;
+            saveActiveSessionState();
+            return;
+          }
+
+          // Si c'est une reprise d'activité récente (< 25 min)
+          if (timeSinceLastActivity <= 25 * 60 * 1000 && !parsed.hasBeenSent) {
+            sessionStartTime = parsed.startTime || Date.now();
+            sessionStats = parsed.stats || sessionStats;
+            sessionHasBeenSent = !!parsed.hasBeenSent;
+            lastUserActivityTime = Date.now();
+            return;
+          }
+        }
+      } catch (e) {}
+
+      sessionStartTime = Date.now();
+      lastUserActivityTime = Date.now();
+      sessionHasBeenSent = false;
+      saveActiveSessionState();
+    }
+
+    function getSessionDurationString(customStart = null) {
+      const start = customStart || sessionStartTime;
+      const elapsedMs = Date.now() - start;
       const minutes = Math.max(1, Math.round(elapsedMs / 60000));
       if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''}`;
       const h = Math.floor(minutes / 60);
@@ -9260,7 +9335,7 @@ Format JSON attendu :
       } catch (e) {}
       updateParentEmailUI();
       playSound('win');
-      alert(`✅ Adresse email enregistrée avec succès !\n\n${email}\n\nUn rapport récapitulatif vous sera automatiquement envoyé à chaque fin de session de travail et à chaque cadeau débloqué !`);
+      alert(`✅ Adresse email enregistrée avec succès !\n\n${email}\n\nUn rapport récapitulatif vous sera automatiquement envoyé à chaque fin de séance (fermeture de page, inactivité 10 min, ou clic manuel) et à chaque cadeau débloqué !`);
     }
 
     function updateParentEmailUI() {
@@ -9283,15 +9358,31 @@ Format JSON attendu :
       }
     }
 
-    async function sendSessionReportEmail(isManual = false) {
+    function showAutoSessionToast(msg) {
+      let toast = document.getElementById('cm2AutoSessionToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'cm2AutoSessionToast';
+        toast.style.cssText = "position: fixed; bottom: 20px; right: 20px; z-index: 10000; background: #065f46; color: #ffffff; padding: 12px 18px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.25); border: 2px solid #34d399; display: flex; align-items: center; gap: 8px; animation: popIn 0.3s ease-out;";
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<span>📬</span><span>${escapeHtml(msg)}</span>`;
+      toast.style.display = 'flex';
+      setTimeout(() => {
+        if (toast) toast.style.display = 'none';
+      }, 6000);
+    }
+
+    async function sendSessionReportEmail(triggerReason = 'manual', customStats = null, customStartTime = null, isBackground = false) {
       const email = getParentEmail();
       if (!email) {
         return { success: false, reason: 'no_email', message: "Aucune adresse email parent configurée." };
       }
 
-      const durationStr = getSessionDurationString();
-      const sCorrect = sessionStats.totalCorrect || 0;
-      const sErrors = sessionStats.totalErrors || 0;
+      const activeStats = customStats || sessionStats;
+      const durationStr = getSessionDurationString(customStartTime);
+      const sCorrect = activeStats.totalCorrect || 0;
+      const sErrors = activeStats.totalErrors || 0;
       const sTotal = sCorrect + sErrors;
       const sRate = sTotal > 0 ? `${Math.round((sCorrect / sTotal) * 100)}%` : '—';
       const gStats = getStudentStats();
@@ -9300,7 +9391,7 @@ Format JSON attendu :
 
       // Détail par matière
       const subjBreakdown = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
-        const sub = sessionStats.bySubject[key] || { correct: 0, errors: 0 };
+        const sub = activeStats.bySubject?.[key] || { correct: 0, errors: 0 };
         const tot = (sub.correct || 0) + (sub.errors || 0);
         if (tot === 0) return null;
         const rate = Math.round(((sub.correct || 0) / tot) * 100);
@@ -9315,17 +9406,31 @@ Format JSON attendu :
         else appreciation = "💪 Séance d'entraînement studieuse. Pensez à revoir ensemble les quelques erreurs avec bienveillance.";
       }
 
+      let reasonLabel = "🏁 Clôture manuelle par l'élève";
+      let subjectTag = "Bilan de Session";
+      if (triggerReason === 'inactivite') {
+        reasonLabel = "⏳ Clôture automatique (après 10 min d'inactivité)";
+        subjectTag = "Bilan de Session [Auto - Inactivité]";
+      } else if (triggerReason === 'fermeture') {
+        reasonLabel = "🚪 Clôture automatique (fermeture de la page)";
+        subjectTag = "Bilan de Session [Auto - Fin de séance]";
+      } else if (triggerReason === 'rattrapage_demarrage') {
+        reasonLabel = "🔄 Rattrapage automatique (séance précédente non transmise)";
+        subjectTag = "Bilan de Session [Rattrapage]";
+      }
+
       const payload = {
-        _subject: `📊 Académie CM2 : Bilan de Session de Travail (${new Date().toLocaleDateString('fr-FR')} - ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })})`,
+        _subject: `📊 Académie CM2 : ${subjectTag} (${new Date().toLocaleDateString('fr-FR')} - ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })})`,
         _template: "table",
         _captcha: "false",
         "Élève": "Votre fille (CM2)",
+        "Déclencheur du rapport": reasonLabel,
         "Date & Heure": new Date().toLocaleString('fr-FR'),
         "Durée estimée de la séance": durationStr,
         "Questions Réussies (Session)": `${sCorrect} ✅`,
         "Erreurs Commises (Session)": `${sErrors} ❌`,
         "Taux de Réussite de la Séance": sRate,
-        "Étoiles Gagnées lors de la Séance": `+${sessionStats.starsEarned || 0} ⭐`,
+        "Étoiles Gagnées lors de la Séance": `+${activeStats.starsEarned || 0} ⭐`,
         "Détail par Matière (Séance)": subjBreakdown,
         "Bilan Global Cumulé (Année)": `${gStats.totalCorrect || 0} réussies / ${gStats.totalErrors || 0} erreurs (${gRate} de réussite)`,
         "Solde Tirelire Actuel": `${walletStars} ⭐ à dépenser`,
@@ -9340,7 +9445,8 @@ Format JSON attendu :
             "Content-Type": "application/json",
             "Accept": "application/json"
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          keepalive: true
         });
         const data = await res.json();
         const isSuccess = data.success === "true" || data.success === true;
@@ -9357,12 +9463,82 @@ Format JSON attendu :
       }
     }
 
+    function initSessionAutoTracker() {
+      const updateActivity = () => {
+        lastUserActivityTime = Date.now();
+        if (sessionHasBeenSent) {
+          sessionHasBeenSent = false;
+          saveActiveSessionState();
+        }
+      };
+
+      ['mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
+        window.addEventListener(evt, updateActivity, { passive: true });
+      });
+
+      // Vérification périodique de l'inactivité (toutes les 30 secondes)
+      setInterval(() => {
+        const totalQ = (sessionStats.totalCorrect || 0) + (sessionStats.totalErrors || 0);
+        const inactiveMs = Date.now() - lastUserActivityTime;
+
+        // Si plus de 10 min d'inactivité, au moins 2 questions traitées et rapport pas encore envoyé
+        if (inactiveMs >= 10 * 60 * 1000 && totalQ >= 2 && !sessionHasBeenSent) {
+          sessionHasBeenSent = true;
+          saveActiveSessionState();
+          sendSessionReportEmail('inactivite', null, null, true).then((res) => {
+            if (res && res.success) {
+              showAutoSessionToast("📊 Bilan de session envoyé automatiquement par email aux parents !");
+            }
+          });
+          // Réinitialisation de la session active
+          setTimeout(() => {
+            sessionStartTime = Date.now();
+            lastUserActivityTime = Date.now();
+            sessionHasBeenSent = false;
+            sessionStats = {
+              totalCorrect: 0,
+              totalErrors: 0,
+              bySubject: {
+                francais: { correct: 0, errors: 0 },
+                maths: { correct: 0, errors: 0 },
+                histoire: { correct: 0, errors: 0 },
+                sciences: { correct: 0, errors: 0 },
+                culture: { correct: 0, errors: 0 }
+              },
+              starsEarned: 0
+            };
+            saveActiveSessionState();
+          }, 3000);
+        }
+      }, 30000);
+
+      // Clôture automatique à la fermeture ou au départ de la page
+      const handlePageExit = () => {
+        const totalQ = (sessionStats.totalCorrect || 0) + (sessionStats.totalErrors || 0);
+        if (totalQ >= 2 && !sessionHasBeenSent) {
+          sessionHasBeenSent = true;
+          saveActiveSessionState();
+          sendSessionReportEmail('fermeture', null, null, true);
+        }
+      };
+
+      window.addEventListener('pagehide', handlePageExit);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          handlePageExit();
+        }
+      });
+    }
+
     async function finishStudySession() {
       const sCorrect = sessionStats.totalCorrect || 0;
       const sErrors = sessionStats.totalErrors || 0;
       const sStars = sessionStats.starsEarned || 0;
       const durationStr = getSessionDurationString();
       const email = getParentEmail();
+
+      sessionHasBeenSent = true;
+      saveActiveSessionState();
 
       playSound('win');
       triggerConfetti();
@@ -9424,7 +9600,7 @@ Format JSON attendu :
       modal.style.display = 'flex';
 
       if (email) {
-        const res = await sendSessionReportEmail();
+        const res = await sendSessionReportEmail('manual');
         const statusEl = document.getElementById('sessionModalEmailStatus');
         if (statusEl) {
           if (res && res.success) {
@@ -9444,6 +9620,8 @@ Format JSON attendu :
 
       // Réinitialiser les compteurs de session pour la session suivante
       sessionStartTime = Date.now();
+      lastUserActivityTime = Date.now();
+      sessionHasBeenSent = false;
       sessionStats = {
         totalCorrect: 0,
         totalErrors: 0,
@@ -9456,6 +9634,7 @@ Format JSON attendu :
         },
         starsEarned: 0
       };
+      saveActiveSessionState();
     }
 
     async function sendManualParentSessionReport() {
@@ -13474,6 +13653,8 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     updateSyncStatsDisplay();
     updateSubjectBonusBadges();
     renderDailyBalanceWidget();
+    restoreOrCreateSessionState();
+    initSessionAutoTracker();
     initCloudAutoSync();
 
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
