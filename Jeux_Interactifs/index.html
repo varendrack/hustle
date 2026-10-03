@@ -5621,6 +5621,80 @@
 
           </div>
 
+          <!-- Section 2 : Statistiques & Bilan d'Entraînement de l'Enfant -->
+          <div style="background: #ffffff; border: 2.5px solid var(--bd-blue); border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+              <div style="font-weight: 800; font-size: 1.15rem; color: var(--bd-blue-dark); display: flex; align-items: center; gap: 8px;">
+                📊 Bilan & Statistiques d'Entraînement de l'Élève
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span id="parentStatsTotalBadge" style="font-size: 0.82rem; color: var(--bd-blue-dark); background: #eff6ff; padding: 3px 10px; border: 1.5px solid var(--bd-blue); border-radius: 8px; font-weight: 800;">
+                  0 question(s) tentée(s)
+                </span>
+                <button class="doc-link-btn" onclick="resetParentStats()" style="padding: 3px 8px; font-size: 0.78rem; border-color: var(--bd-red); color: var(--bd-red); background: #fff1f2;" title="Remettre à zéro les compteurs d'erreurs et de réussites">
+                  🗑️ Réinitialiser
+                </button>
+              </div>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 14px; line-height: 1.5;">
+              Suivi détaillé des <strong>questions réussies</strong> et des <strong>erreurs commises</strong> (au total et par matière). <span style="font-size: 0.82rem; color: #b91c1c; background: #fef2f2; padding: 2px 8px; border: 1.2px solid var(--bd-red); border-radius: 6px; font-weight: 800;">⚠️ Règle de malus active : les erreurs déduisent les points prévus</span>
+            </p>
+
+            <!-- 4 Cartes Récapitulatives Globales (KPIs) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px;">
+              
+              <!-- Réussies Total -->
+              <div style="background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 2px 2px 0 var(--ink);">
+                <div style="font-size: 0.75rem; font-weight: 800; color: #166534; text-transform: uppercase; margin-bottom: 2px;">✅ Réussies</div>
+                <div id="statGlobalCorrect" style="font-size: 1.7rem; font-weight: 900; color: #15803d; font-family: 'Fredoka', sans-serif;">0</div>
+                <div style="font-size: 0.72rem; color: #166534; font-weight: 700;">Total général</div>
+              </div>
+
+              <!-- Erreurs Total -->
+              <div style="background: #fef2f2; border: 2px solid #dc2626; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 2px 2px 0 var(--ink);">
+                <div style="font-size: 0.75rem; font-weight: 800; color: #991b1b; text-transform: uppercase; margin-bottom: 2px;">❌ Erreurs</div>
+                <div id="statGlobalErrors" style="font-size: 1.7rem; font-weight: 900; color: #b91c1c; font-family: 'Fredoka', sans-serif;">0</div>
+                <div style="font-size: 0.72rem; color: #991b1b; font-weight: 700;">Total général</div>
+              </div>
+
+              <!-- Taux de Réussite -->
+              <div style="background: #eff6ff; border: 2px solid var(--bd-blue); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 2px 2px 0 var(--ink);">
+                <div style="font-size: 0.75rem; font-weight: 800; color: #1e40af; text-transform: uppercase; margin-bottom: 2px;">🎯 Taux de Réussite</div>
+                <div id="statGlobalRate" style="font-size: 1.7rem; font-weight: 900; color: var(--bd-blue-dark); font-family: 'Fredoka', sans-serif;">—%</div>
+                <div style="font-size: 0.72rem; color: #1e40af; font-weight: 700;">Précision globale</div>
+              </div>
+
+              <!-- Total Questions -->
+              <div style="background: #fffbeb; border: 2px solid var(--bd-yellow-dark); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 2px 2px 0 var(--ink);">
+                <div style="font-size: 0.75rem; font-weight: 800; color: #92400e; text-transform: uppercase; margin-bottom: 2px;">📝 Total Questions</div>
+                <div id="statGlobalTotal" style="font-size: 1.7rem; font-weight: 900; color: #b45309; font-family: 'Fredoka', sans-serif;">0</div>
+                <div style="font-size: 0.72rem; color: #92400e; font-weight: 700;">Tentatives</div>
+              </div>
+
+            </div>
+
+            <!-- Jauge Globale Bicolore (Réussites / Erreurs) -->
+            <div style="margin-bottom: 16px; background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 10px; padding: 10px 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 6px;">
+                <span style="color: #15803d;">✅ Réussies : <strong id="statGlobalRatioCorrect">0</strong></span>
+                <span style="color: #b91c1c;">❌ Erreurs : <strong id="statGlobalRatioErrors">0</strong></span>
+              </div>
+              <div style="display: flex; height: 12px; border-radius: 6px; overflow: hidden; border: 1px solid var(--ink); background: #e2e8f0;">
+                <div id="statGlobalBarCorrect" style="width: 50%; background: #22c55e; transition: width 0.3s ease;"></div>
+                <div id="statGlobalBarErrors" style="width: 50%; background: #ef4444; transition: width 0.3s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Grille Détaillée par Matière -->
+            <div style="font-weight: 800; font-size: 0.95rem; color: var(--ink); margin-bottom: 10px;">
+              📚 Détail des Réussites & Erreurs par Matière :
+            </div>
+            <div id="parentStatsSubjectGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+              <!-- Injecté dynamiquement par renderParentStats() -->
+            </div>
+          </div>
+
           <!-- Section 2 : Curseurs d'Orientation & Coefficients des Matières -->
           <div style="background: #f5f3ff; border: 2.5px solid #7c3aed; border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
@@ -6299,6 +6373,202 @@
       renderParentActivityStats();
     }
 
+    // =========================================================================
+    // STUDENT QUESTION & ERROR STATISTICS (GLOBAL & BY SUBJECT)
+    // =========================================================================
+    const DEFAULT_STUDENT_STATS = {
+      totalCorrect: 0,
+      totalErrors: 0,
+      bySubject: {
+        francais: { correct: 0, errors: 0 },
+        maths: { correct: 0, errors: 0 },
+        histoire: { correct: 0, errors: 0 },
+        sciences: { correct: 0, errors: 0 },
+        culture: { correct: 0, errors: 0 }
+      }
+    };
+
+    function getStudentStats() {
+      try {
+        const raw = localStorage.getItem('cm2_student_stats');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return {
+            totalCorrect: typeof parsed.totalCorrect === 'number' ? parsed.totalCorrect : 0,
+            totalErrors: typeof parsed.totalErrors === 'number' ? parsed.totalErrors : 0,
+            bySubject: {
+              francais: { correct: parsed.bySubject?.francais?.correct || 0, errors: parsed.bySubject?.francais?.errors || 0 },
+              maths: { correct: parsed.bySubject?.maths?.correct || 0, errors: parsed.bySubject?.maths?.errors || 0 },
+              histoire: { correct: parsed.bySubject?.histoire?.correct || 0, errors: parsed.bySubject?.histoire?.errors || 0 },
+              sciences: { correct: parsed.bySubject?.sciences?.correct || 0, errors: parsed.bySubject?.sciences?.errors || 0 },
+              culture: { correct: parsed.bySubject?.culture?.correct || 0, errors: parsed.bySubject?.culture?.errors || 0 }
+            }
+          };
+        }
+      } catch (e) {}
+
+      // Initialisation par défaut
+      return {
+        totalCorrect: 0,
+        totalErrors: 0,
+        bySubject: {
+          francais: { correct: 0, errors: 0 },
+          maths: { correct: 0, errors: 0 },
+          histoire: { correct: 0, errors: 0 },
+          sciences: { correct: 0, errors: 0 },
+          culture: { correct: 0, errors: 0 }
+        }
+      };
+    }
+
+    function saveStudentStats(stats) {
+      try {
+        localStorage.setItem('cm2_student_stats', JSON.stringify(stats));
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
+      } catch (e) {}
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
+    }
+
+    function recordQuestionAttempt(subjectKey, isCorrect) {
+      const stats = getStudentStats();
+      const validKey = (subjectKey && stats.bySubject[subjectKey]) ? subjectKey : null;
+
+      if (isCorrect) {
+        stats.totalCorrect = (stats.totalCorrect || 0) + 1;
+        if (validKey) {
+          stats.bySubject[validKey].correct = (stats.bySubject[validKey].correct || 0) + 1;
+        }
+      } else {
+        stats.totalErrors = (stats.totalErrors || 0) + 1;
+        if (validKey) {
+          stats.bySubject[validKey].errors = (stats.bySubject[validKey].errors || 0) + 1;
+        }
+      }
+
+      saveStudentStats(stats);
+      renderParentStats();
+    }
+
+    function resetParentStats() {
+      const stats = getStudentStats();
+      const total = (stats.totalCorrect || 0) + (stats.totalErrors || 0);
+      if (!confirm(`Voulez-vous réinitialiser les statistiques d'apprentissage (${total} question(s) enregistrée(s)) ?\n\n(Le score total, la tirelire et les badges d'honneur ne seront pas modifiés).`)) return;
+      saveStudentStats(DEFAULT_STUDENT_STATS);
+      renderParentStats();
+      playSound('wrong');
+      alert("✅ Les statistiques de réussites et d'erreurs ont été réinitialisées à 0.");
+    }
+
+    function renderParentStats() {
+      const stats = getStudentStats();
+      const totalCorrect = stats.totalCorrect || 0;
+      const totalErrors = stats.totalErrors || 0;
+      const totalAttempts = totalCorrect + totalErrors;
+      const globalRate = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : null;
+
+      const elTotalBadge = document.getElementById('parentStatsTotalBadge');
+      const elGlobalCorrect = document.getElementById('statGlobalCorrect');
+      const elGlobalErrors = document.getElementById('statGlobalErrors');
+      const elGlobalRate = document.getElementById('statGlobalRate');
+      const elGlobalTotal = document.getElementById('statGlobalTotal');
+      const elRatioCorrect = document.getElementById('statGlobalRatioCorrect');
+      const elRatioErrors = document.getElementById('statGlobalRatioErrors');
+      const elBarCorrect = document.getElementById('statGlobalBarCorrect');
+      const elBarErrors = document.getElementById('statGlobalBarErrors');
+      const grid = document.getElementById('parentStatsSubjectGrid');
+
+      if (elTotalBadge) elTotalBadge.innerText = `${totalAttempts} question${totalAttempts > 1 ? 's' : ''} tentée${totalAttempts > 1 ? 's' : ''}`;
+      if (elGlobalCorrect) elGlobalCorrect.innerText = totalCorrect;
+      if (elGlobalErrors) elGlobalErrors.innerText = totalErrors;
+      if (elGlobalRate) elGlobalRate.innerText = globalRate !== null ? `${globalRate}%` : '—%';
+      if (elGlobalTotal) elGlobalTotal.innerText = totalAttempts;
+
+      if (elRatioCorrect) elRatioCorrect.innerText = `${totalCorrect} (${totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0}%)`;
+      if (elRatioErrors) elRatioErrors.innerText = `${totalErrors} (${totalAttempts > 0 ? Math.round((totalErrors / totalAttempts) * 100) : 0}%)`;
+
+      if (elBarCorrect && elBarErrors) {
+        if (totalAttempts === 0) {
+          elBarCorrect.style.width = '0%';
+          elBarErrors.style.width = '0%';
+        } else {
+          const correctPct = (totalCorrect / totalAttempts) * 100;
+          const errorsPct = (totalErrors / totalAttempts) * 100;
+          elBarCorrect.style.width = `${correctPct}%`;
+          elBarErrors.style.width = `${errorsPct}%`;
+        }
+      }
+
+      if (grid) {
+        grid.innerHTML = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
+          const subjStats = stats.bySubject[key] || { correct: 0, errors: 0 };
+          const sCorrect = subjStats.correct || 0;
+          const sErrors = subjStats.errors || 0;
+          const sTotal = sCorrect + sErrors;
+          const sRate = sTotal > 0 ? Math.round((sCorrect / sTotal) * 100) : null;
+          const correctPct = sTotal > 0 ? ((sCorrect / sTotal) * 100) : 0;
+          const errorsPct = sTotal > 0 ? ((sErrors / sTotal) * 100) : 0;
+
+          let statusBadge = '<span style="font-size:0.75rem; font-weight:700; background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px;">En attente</span>';
+          let advice = "Pas encore d'exercice répondu dans cette matière.";
+          if (sTotal > 0) {
+            if (sRate >= 80) {
+              statusBadge = '<span style="font-size:0.75rem; font-weight:800; background:#dcfce7; color:#15803d; border:1px solid #16a34a; padding:2px 8px; border-radius:6px;">🌟 Excellente maîtrise</span>';
+              advice = "Très grande aisance sur les notions abordées !";
+            } else if (sRate >= 60) {
+              statusBadge = '<span style="font-size:0.75rem; font-weight:800; background:#eff6ff; color:#1e40af; border:1px solid #2563eb; padding:2px 8px; border-radius:6px;">👍 Bon niveau</span>';
+              advice = "Base solide, continuer les entraînements réguliers.";
+            } else {
+              statusBadge = '<span style="font-size:0.75rem; font-weight:800; background:#fef2f2; color:#b91c1c; border:1px solid #dc2626; padding:2px 8px; border-radius:6px;">⚠️ À consolider</span>';
+              advice = "Quelques notions à revoir avec les fiches ou les indices.";
+            }
+          }
+
+          return `
+            <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 14px; box-shadow: 2px 2px 0 var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <strong style="color: var(--ink); font-size: 0.98rem; display: flex; align-items: center; gap: 6px;">
+                    ${meta.icon} ${meta.label}
+                  </strong>
+                  ${statusBadge}
+                </div>
+
+                <!-- 2 Blocs Réussite / Erreur par Matière -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+                  <div style="background: #f0fdf4; border: 1.5px solid #16a34a; border-radius: 8px; padding: 8px 10px; text-align: center;">
+                    <div style="font-size: 0.72rem; font-weight: 800; color: #166534; text-transform: uppercase;">✅ Réussies</div>
+                    <div style="font-size: 1.35rem; font-weight: 900; color: #15803d; font-family: 'Fredoka', sans-serif;">${sCorrect}</div>
+                  </div>
+                  <div style="background: #fef2f2; border: 1.5px solid #dc2626; border-radius: 8px; padding: 8px 10px; text-align: center;">
+                    <div style="font-size: 0.72rem; font-weight: 800; color: #991b1b; text-transform: uppercase;">❌ Erreurs</div>
+                    <div style="font-size: 1.35rem; font-weight: 900; color: #b91c1c; font-family: 'Fredoka', sans-serif;">${sErrors}</div>
+                  </div>
+                </div>
+
+                <!-- Jauge bicolore par matière -->
+                <div style="margin-bottom: 8px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-light); margin-bottom: 4px; font-weight: 700;">
+                    <span>Taux de réussite</span>
+                    <span style="color: ${sRate >= 60 || sRate === null ? 'var(--ink)' : '#b91c1c'}; font-weight: 800;">${sRate !== null ? sRate + '%' : '—'} (${sTotal} question${sTotal > 1 ? 's' : ''})</span>
+                  </div>
+                  <div style="display: flex; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--ink); background: #e2e8f0;">
+                    ${sTotal > 0 ? `
+                      <div style="width: ${correctPct}%; background: #22c55e;" title="${sCorrect} réussies (${Math.round(correctPct)}%)"></div>
+                      <div style="width: ${errorsPct}%; background: #ef4444;" title="${sErrors} erreurs (${Math.round(errorsPct)}%)"></div>
+                    ` : `<div style="width: 100%; background: #cbd5e1;"></div>`}
+                  </div>
+                </div>
+              </div>
+
+              <div style="font-size: 0.75rem; color: var(--ink-light); font-style: italic; border-top: 1px dashed #cbd5e1; padding-top: 6px; margin-top: 4px;">
+                💡 ${advice}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
     function updateSubjectBonusBadges() {
       const mults = getSubjectMultipliers();
       const mapping = {
@@ -6493,6 +6763,36 @@
       if (earnedPts > 0) triggerConfetti();
 
       return { earnedPts, mult };
+    }
+
+    function deductScore(pts, subjectKey = null) {
+      let penaltyPts = pts;
+      let mult = 1.0;
+
+      if (pts > 0 && subjectKey) {
+        mult = getSubjectMultiplier(subjectKey);
+        penaltyPts = Math.max(1, Math.round(pts * mult));
+      }
+
+      if (penaltyPts > 0) {
+        totalScore = Math.max(0, totalScore - penaltyPts);
+        walletStars = Math.max(0, walletStars - penaltyPts);
+      }
+
+      try {
+        localStorage.setItem('cm2_total_score', totalScore);
+        localStorage.setItem('cm2_wallet_stars', walletStars);
+        localStorage.setItem('cm2_last_updated_timestamp', Date.now());
+      } catch (e) {}
+
+      if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
+
+      updateRewardsDisplays();
+      const elTotal = document.getElementById('totalScore');
+      if (elTotal) elTotal.innerText = totalScore;
+      checkBadges();
+
+      return { penaltyPts, mult };
     }
 
     function resetStreak() {
@@ -6693,6 +6993,7 @@
         if (selected === q.correct) {
           this.correctCount++;
           playSound('correct');
+          recordQuestionAttempt(this.subjectKey, true);
           
           const alreadyDone = isQuestionAwarded(qKey);
           if (!alreadyDone) {
@@ -6712,10 +7013,13 @@
         } else {
           playSound('wrong');
           resetStreak();
+          recordQuestionAttempt(this.subjectKey, false);
+          const penalty = deductScore(2, this.subjectKey);
+          const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Parent x${penalty.mult.toFixed(1)} appliqué)` : '';
           btn.style.background = '#ef4444';
           btn.style.borderColor = '#ef4444';
           fb.className = 'feedback-banner wrong';
-          fb.innerHTML = `❌ La bonne réponse était <strong>${q.correct}</strong>.<br>💡 <em>${q.tip}</em>`;
+          fb.innerHTML = `❌ La bonne réponse était <strong>${q.correct}</strong>.<br><strong style="color:var(--bd-red); font-size:0.95rem;">⚠️ Malus : -${penalty.penaltyPts} ⭐</strong>${boostMsg}<br>💡 <em>${q.tip}</em>`;
         }
 
         if (this.currentIndex + 1 >= this.questions.length) {
@@ -6876,6 +7180,7 @@
           const fb = document.getElementById('det-fb');
           if (tok.error) {
             playSound('correct');
+            recordQuestionAttempt('francais', true);
             const errKey = generateQuestionKey('det', m.title + '_' + tok.text, tok.correct);
             const alreadyDone = isQuestionAwarded(errKey);
             if (!alreadyDone) {
@@ -6909,8 +7214,11 @@
           } else {
             playSound('wrong');
             resetStreak();
+            recordQuestionAttempt('francais', false);
+            const penalty = deductScore(2, 'francais');
+            const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Français x${penalty.mult.toFixed(1)})` : '';
             fb.className = 'feedback-banner wrong';
-            fb.innerHTML = `🔍 Ce mot ("${tok.text}") est déjà bien orthographié. Continue ton enquête !`;
+            fb.innerHTML = `🔍 Ce mot ("${tok.text}") est déjà bien orthographié.<br><strong style="color:var(--bd-red); font-size:0.95rem;">⚠️ Malus : -${penalty.penaltyPts} ⭐</strong>${boostMsg} Continue ton enquête !`;
           }
         };
         box.appendChild(span);
@@ -7228,6 +7536,7 @@
 
       if (selected === step.correct) {
         playSound('correct');
+        recordQuestionAttempt('maths', true);
         const p = currentProblemList[currentProblemIndex];
         const stepKey = generateQuestionKey('prob', (p.id || p.title) + '_step_' + currentProblemStep, step.correct);
         const alreadyDone = isQuestionAwarded(stepKey);
@@ -7246,10 +7555,13 @@
       } else {
         playSound('wrong');
         resetStreak();
+        recordQuestionAttempt('maths', false);
+        const penalty = deductScore(3, 'maths');
+        const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Maths x${penalty.mult.toFixed(1)})` : '';
         btn.style.background = '#ef4444';
         btn.style.borderColor = '#ef4444';
         fb.className = 'feedback-banner wrong';
-        fb.innerHTML = `❌ Pas tout à fait. La bonne réponse était : <strong>${step.correct}</strong>.<br>💡 <em>${step.hint}</em>`;
+        fb.innerHTML = `❌ Pas tout à fait. La bonne réponse était : <strong>${step.correct}</strong>.<br><strong style="color:var(--bd-red); font-size:0.95rem;">⚠️ Malus : -${penalty.penaltyPts} ⭐</strong>${boostMsg}<br>💡 <em>${step.hint}</em>`;
       }
 
       nextBtn.style.display = 'inline-block';
@@ -7394,6 +7706,7 @@
       if (val === currentCalcAnswer) {
         playSound('correct');
         addScore(1);
+        recordQuestionAttempt('maths', true);
         f.className = 'feedback-banner correct';
         f.innerText = '⚡ Bravo ! +1 ⭐';
         setTimeout(() => f.style.display = 'none', 600);
@@ -7401,8 +7714,10 @@
       } else {
         playSound('wrong');
         resetStreak();
+        recordQuestionAttempt('maths', false);
+        const penalty = deductScore(1, 'maths');
         f.className = 'feedback-banner wrong';
-        f.innerText = `Oups ! La réponse était ${currentCalcAnswer}`;
+        f.innerText = `Oups ! La réponse était ${currentCalcAnswer} (-${penalty.penaltyPts} ⭐)`;
         setTimeout(() => { f.style.display = 'none'; nextCalcQuestion(); }, 1200);
       }
     }
@@ -9050,6 +9365,12 @@ Format JSON attendu :
           // Mettre à jour l'affichage de l'email configuré
           updateParentEmailUI();
 
+          // Mettre à jour les statistiques globales et par matière
+          renderParentStats();
+
+          // Mettre à jour les curseurs de matières
+          renderParentMultipliersUI();
+
           renderParentRewardsTable();
         } else {
           lockCard.style.display = 'block';
@@ -9624,6 +9945,7 @@ Format JSON attendu :
         deletedPoems: getDeletedPoems(),
         discoveredMolecules: getDiscoveredMolecules(),
         subjectMultipliers: getSubjectMultipliers(),
+        studentStats: getStudentStats(),
         parentPin: localStorage.getItem('cm2_parent_pin') || '1234',
         parentEmail: localStorage.getItem('cm2_parent_email') || '',
         geminiApiKey: localStorage.getItem('gemini_api_key') || ''
@@ -9765,6 +10087,24 @@ Format JSON attendu :
       }
       if (data.subjectMultipliers && typeof data.subjectMultipliers === 'object') {
         saveSubjectMultipliers(data.subjectMultipliers);
+      }
+      if (data.studentStats && typeof data.studentStats === 'object') {
+        const curStats = getStudentStats();
+        const incoming = data.studentStats;
+        const merged = {
+          totalCorrect: Math.max(curStats.totalCorrect || 0, incoming.totalCorrect || 0),
+          totalErrors: Math.max(curStats.totalErrors || 0, incoming.totalErrors || 0),
+          bySubject: {}
+        };
+        Object.keys(SUBJECT_METAS).forEach(k => {
+          const cSub = curStats.bySubject?.[k] || { correct: 0, errors: 0 };
+          const inSub = incoming.bySubject?.[k] || { correct: 0, errors: 0 };
+          merged.bySubject[k] = {
+            correct: Math.max(cSub.correct || 0, inSub.correct || 0),
+            errors: Math.max(cSub.errors || 0, inSub.errors || 0)
+          };
+        });
+        saveStudentStats(merged);
       }
       if (data.parentPin) {
         localStorage.setItem('cm2_parent_pin', data.parentPin);
@@ -11101,6 +11441,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         playSound('correct');
         triggerConfetti();
         gainStars(1);
+        recordQuestionAttempt('francais', true);
         feed.style.display = 'block';
         feed.style.background = '#dcfce7';
         feed.style.color = '#14532d';
@@ -11108,13 +11449,15 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         feed.innerHTML = `🎉 <strong>Bravo !</strong> ${currentConjugoQuizData.pronoun} ${currentConjugoQuizData.correct}. Tu gagnes <strong>+1 ⭐</strong> pour la Boutique !`;
       } else {
         playSound('wrong');
+        recordQuestionAttempt('francais', false);
+        const penalty = deductScore(1, 'francais');
         btnEl.style.background = '#fee2e2';
         btnEl.style.borderColor = '#b91c1c';
         feed.style.display = 'block';
         feed.style.background = '#fef2f2';
         feed.style.color = '#7f1d1d';
         feed.style.border = '2px solid #b91c1c';
-        feed.innerHTML = `❌ <strong>Presque !</strong> La bonne réponse était : <em>${currentConjugoQuizData.pronoun} ${currentConjugoQuizData.correct}</em>. Retente ta chance !`;
+        feed.innerHTML = `❌ <strong>Presque !</strong> La bonne réponse était : <em>${currentConjugoQuizData.pronoun} ${currentConjugoQuizData.correct}</em>.<br><strong style="color:var(--bd-red);">⚠️ Malus : -${penalty.penaltyPts} ⭐</strong> Retente ta chance !`;
       }
     }
 
@@ -11212,6 +11555,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         playSound('correct');
         triggerConfetti();
         gainStars(1);
+        recordQuestionAttempt('maths', true);
         if (alertBox && alertText) {
           alertBox.style.background = '#dcfce7';
           alertText.innerHTML = `🎉 <strong>Bravo !</strong> ${r} × ${c} = ${r * c} ! Tu gagnes <strong>+1 ⭐</strong> !`;
@@ -11222,9 +11566,11 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         }, 3200);
       } else {
         playSound('wrong');
+        recordQuestionAttempt('maths', false);
+        const penalty = deductScore(1, 'maths');
         if (alertBox && alertText) {
           alertBox.style.background = '#fee2e2';
-          alertText.innerHTML = `❌ Oups ! ${r} × ${c} = ${r * c}. Cherche encore la case de <strong>${pythagorasQuizActive.r} × ${pythagorasQuizActive.c}</strong> !`;
+          alertText.innerHTML = `❌ Oups ! ${r} × ${c} = ${r * c}. Cherche encore la case de <strong>${pythagorasQuizActive.r} × ${pythagorasQuizActive.c}</strong> ! <strong style="color:var(--bd-red);">(Malus : -${penalty.penaltyPts} ⭐)</strong>`;
         }
       }
     }
@@ -12698,6 +13044,7 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
         } else {
           if (typeof playSound === 'function') playSound('correct');
         }
+        recordQuestionAttempt('sciences', true);
 
         panel.className = 'fusion-result-panel fusion-result-success';
         panel.style.display = 'block';
@@ -12741,13 +13088,15 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
         }
       } else {
         if (typeof playSound === 'function') playSound('wrong');
+        recordQuestionAttempt('sciences', false);
+        const penalty = deductScore(2, 'sciences');
         panel.className = 'fusion-result-panel fusion-result-fail';
         panel.style.display = 'block';
         panel.innerHTML = `
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 1.6rem;">💨</span>
             <div>
-              <strong>Aucune réaction stable observée !</strong><br>
+              <strong>Aucune réaction stable observée !</strong> <span style="color:#b91c1c; font-weight:800;">(Malus : -${penalty.penaltyPts} ⭐)</span><br>
               <span style="font-size: 0.88rem; color: #7f1d1d;">
                 Ce mélange d'atomes (${beakerAtoms.join(' + ')}) ne forme pas de composé chimique courant dans la nature.
                 Consulte les indices des Quêtes ou les silhouettes du Grand Codex ci-dessous !
