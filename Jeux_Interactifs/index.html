@@ -4618,9 +4618,6 @@
     <div class="stat-pill" onclick="switchSubject('recompenses')" style="cursor: pointer;" title="Ouvrir le Coffre aux Récompenses">🪙 Coffre : <span id="walletStars">0</span> ⭐</div>
     <div class="stat-pill">🔥 Série : <span id="streakCount">0</span></div>
     <div class="stat-pill">🏆 Trophées : <span id="badgeCount">0</span>/8</div>
-    <button class="stat-pill" onclick="finishStudySession()" style="cursor: pointer; background: #ecfdf5; border-color: #059669; color: #065f46; font-weight: 800;" title="Envoyer le bilan de travail par email aux parents et clôturer la séance">
-      🏁 Terminer ma session 📨
-    </button>
   </div>
 
   <!-- Widget Défi Polyvalence & Équilibre des 5 Domaines -->
@@ -5834,8 +5831,7 @@
               <ul style="margin: 4px 0 0 16px; padding: 0;">
                 <li>🚪 <strong>À la fermeture de l'onglet ou du navigateur</strong></li>
                 <li>⏳ <strong>Après 10 minutes d'inactivité</strong> (si l'ordinateur est laissé allumé)</li>
-                <li>🔄 <strong>Au prochain démarrage</strong> (rattrapage automatique si coupure)</li>
-                <li>🏁 <strong>Ou via le bouton manuel</strong> <em>« Terminer ma session »</em></li>
+                <li>🔄 <strong>Au prochain démarrage</strong> (rattrapage automatique en cas d'interruption)</li>
               </ul>
             </div>
 
@@ -7108,7 +7104,6 @@
             <p style="color: var(--text-muted); line-height: 1.5;">${message}</p>
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px;">
               <button class="action-btn" onclick="this.closest('.submodule-content').querySelector('.action-restart-btn').click()">🔄 Rejouer (Ordre mélangé)</button>
-              <button class="action-btn" onclick="finishStudySession()" style="background: linear-gradient(135deg, #10b981, #059669);">🏁 Terminer ma session & Envoyer le bilan 📨</button>
             </div>
             <button class="action-restart-btn" style="display: none;"></button>
           </div>
