@@ -4618,6 +4618,9 @@
     <div class="stat-pill" onclick="switchSubject('recompenses')" style="cursor: pointer;" title="Ouvrir le Coffre aux Récompenses">🪙 Coffre : <span id="walletStars">0</span> ⭐</div>
     <div class="stat-pill">🔥 Série : <span id="streakCount">0</span></div>
     <div class="stat-pill">🏆 Trophées : <span id="badgeCount">0</span>/8</div>
+    <button class="stat-pill" onclick="finishStudySession()" style="cursor: pointer; background: #ecfdf5; border-color: #059669; color: #065f46; font-weight: 800;" title="Envoyer le bilan de travail par email aux parents et clôturer la séance">
+      🏁 Terminer ma session 📨
+    </button>
   </div>
 
   <!-- Widget Défi Polyvalence & Équilibre des 5 Domaines -->
@@ -5807,32 +5810,39 @@
 
           </div>
 
-          <!-- Section 3 : Configuration Notification Email Gmail Parents -->
+          <!-- Section 3 : Configuration Notifications Email Gmail Parents & Rapports de Session -->
           <div style="background: #f0fdf4; border: 2.5px solid var(--bd-green); border-radius: 14px; padding: 18px; margin-bottom: 22px; box-shadow: 0 3px 0 var(--ink);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
               <div style="font-weight: 800; font-size: 1.1rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-                📬 Notification Email Gmail lors d'un Déblocage de Cadeau
+                📬 Notifications Gmail Parents : Déblocage de Cadeaux & Rapports de Session
               </div>
               <span id="parentEmailStatusBadge" style="font-size: 0.8rem; font-weight: 800; padding: 3px 8px; border-radius: 8px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink);">
                 ⚪ Non configuré
               </span>
             </div>
 
-            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 8px; line-height: 1.5;">
-              Indiquez votre adresse Gmail : dès que votre fille débloque un cadeau dans sa boutique avec ses étoiles, <strong>un email vous est immédiatement envoyé avec le bon officiel</strong> et les détails du cadeau !
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px; line-height: 1.5;">
+              Indiquez votre adresse Gmail : vous recevrez <strong>automatiquement un rapport complet par email à chaque fois que votre fille termine une session d'entraînement</strong> (questions réussies, erreurs, temps passé, progression par matière) ainsi que lorsqu'elle débloque un bon cadeau !
             </p>
 
             <div style="background: #fffbeb; border: 1.5px dashed var(--bd-yellow-dark); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.83rem; color: #92400e; line-height: 1.4;">
-              ⚠️ <strong>Première utilisation :</strong> Après avoir enregistré votre adresse et cliqué sur <em>« 📨 Tester l'envoi »</em>, FormSubmit vous envoie un <strong>email de confirmation / activation</strong> (sujet : <em>« Action Required: Confirm your email »</em>).<br>👉 <strong>Vérifiez impérativement vos SPAMS / Courriers indésirables</strong> dans Gmail et <strong>cliquez sur le lien</strong> pour autoriser les envois !
+              ⚠️ <strong>Première utilisation :</strong> Après avoir enregistré votre adresse et cliqué sur <em>« 📨 Tester l'envoi »</em>, FormSubmit vous envoie un <strong>email d'activation obligatoire</strong> (sujet : <em>« Action Required: Confirm your email »</em>).<br>👉 <strong>Vérifiez impérativement vos SPAMS / Courriers indésirables</strong> dans Gmail et <strong>cliquez sur le lien</strong> pour autoriser les envois !
             </div>
 
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px;">
               <input type="email" id="parentEmailInput" class="memo-input" placeholder="votre-adresse@gmail.com" style="flex: 2; min-width: 220px;" autocomplete="email">
               <button class="action-btn" onclick="saveParentEmailConfig()" style="padding: 8px 18px; font-size: 0.9rem; background: var(--bd-green);">
                 💾 Enregistrer mon Email
               </button>
-              <button class="doc-link-btn" onclick="sendTestParentEmail()" style="padding: 8px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;">
-                📨 Tester l'envoi
+            </div>
+
+            <!-- Actions Rapides Rapports Email -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="doc-link-btn" onclick="sendManualParentSessionReport()" style="padding: 7px 14px; font-size: 0.85rem; border-color: var(--bd-green); color: #166534; background: #dcfce7;" title="Envoyer immédiatement le rapport de la session en cours">
+                📊 Envoyer le rapport de session actuel
+              </button>
+              <button class="doc-link-btn" onclick="sendTestParentEmail()" style="padding: 7px 14px; font-size: 0.85rem; border-color: var(--bd-blue); color: var(--bd-blue-dark); background: #eff6ff;" title="Tester l'envoi d'un bon cadeau">
+                📨 Tester l'envoi d'un Bon Cadeau
               </button>
             </div>
             
@@ -6438,10 +6448,20 @@
         if (validKey) {
           stats.bySubject[validKey].correct = (stats.bySubject[validKey].correct || 0) + 1;
         }
+        // Mise à jour de la session en cours
+        sessionStats.totalCorrect = (sessionStats.totalCorrect || 0) + 1;
+        if (validKey && sessionStats.bySubject[validKey]) {
+          sessionStats.bySubject[validKey].correct = (sessionStats.bySubject[validKey].correct || 0) + 1;
+        }
       } else {
         stats.totalErrors = (stats.totalErrors || 0) + 1;
         if (validKey) {
           stats.bySubject[validKey].errors = (stats.bySubject[validKey].errors || 0) + 1;
+        }
+        // Mise à jour de la session en cours
+        sessionStats.totalErrors = (sessionStats.totalErrors || 0) + 1;
+        if (validKey && sessionStats.bySubject[validKey]) {
+          sessionStats.bySubject[validKey].errors = (sessionStats.bySubject[validKey].errors || 0) + 1;
         }
       }
 
@@ -6743,6 +6763,7 @@
       if (earnedPts > 0) {
         totalScore += earnedPts;
         walletStars += earnedPts;
+        sessionStats.starsEarned = (sessionStats.starsEarned || 0) + earnedPts;
       }
       currentStreak += 1;
 
@@ -6777,6 +6798,7 @@
       if (penaltyPts > 0) {
         totalScore = Math.max(0, totalScore - penaltyPts);
         walletStars = Math.max(0, walletStars - penaltyPts);
+        sessionStats.starsEarned = Math.max(0, (sessionStats.starsEarned || 0) - penaltyPts);
       }
 
       try {
@@ -7063,6 +7085,7 @@
             <p style="color: var(--text-muted); line-height: 1.5;">${message}</p>
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px;">
               <button class="action-btn" onclick="this.closest('.submodule-content').querySelector('.action-restart-btn').click()">🔄 Rejouer (Ordre mélangé)</button>
+              <button class="action-btn" onclick="finishStudySession()" style="background: linear-gradient(135deg, #10b981, #059669);">🏁 Terminer ma session & Envoyer le bilan 📨</button>
             </div>
             <button class="action-restart-btn" style="display: none;"></button>
           </div>
@@ -9192,8 +9215,31 @@ Format JSON attendu :
     }
 
     // =========================================================================
-    // PARENT GMAIL NOTIFICATION SYSTEM
+    // PARENT GMAIL NOTIFICATION & SESSION REPORT SYSTEM
     // =========================================================================
+    let sessionStartTime = Date.now();
+    let sessionStats = {
+      totalCorrect: 0,
+      totalErrors: 0,
+      bySubject: {
+        francais: { correct: 0, errors: 0 },
+        maths: { correct: 0, errors: 0 },
+        histoire: { correct: 0, errors: 0 },
+        sciences: { correct: 0, errors: 0 },
+        culture: { correct: 0, errors: 0 }
+      },
+      starsEarned: 0
+    };
+
+    function getSessionDurationString() {
+      const elapsedMs = Date.now() - sessionStartTime;
+      const minutes = Math.max(1, Math.round(elapsedMs / 60000));
+      if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''}`;
+      const h = Math.floor(minutes / 60);
+      const m = minutes % 60;
+      return `${h}h ${m}min`;
+    }
+
     function getParentEmail() {
       try {
         return (localStorage.getItem('cm2_parent_email') || '').trim();
@@ -9214,7 +9260,7 @@ Format JSON attendu :
       } catch (e) {}
       updateParentEmailUI();
       playSound('win');
-      alert(`✅ Adresse email enregistrée avec succès !\n\n${email}\n\nUn message récapitulatif vous sera automatiquement envoyé à chaque fois que votre fille débloque un bon cadeau !`);
+      alert(`✅ Adresse email enregistrée avec succès !\n\n${email}\n\nUn rapport récapitulatif vous sera automatiquement envoyé à chaque fin de session de travail et à chaque cadeau débloqué !`);
     }
 
     function updateParentEmailUI() {
@@ -9233,6 +9279,219 @@ Format JSON attendu :
           badge.style.background = '#f3f4f6';
           badge.style.color = '#6b7280';
           badge.style.borderColor = 'var(--ink)';
+        }
+      }
+    }
+
+    async function sendSessionReportEmail(isManual = false) {
+      const email = getParentEmail();
+      if (!email) {
+        return { success: false, reason: 'no_email', message: "Aucune adresse email parent configurée." };
+      }
+
+      const durationStr = getSessionDurationString();
+      const sCorrect = sessionStats.totalCorrect || 0;
+      const sErrors = sessionStats.totalErrors || 0;
+      const sTotal = sCorrect + sErrors;
+      const sRate = sTotal > 0 ? `${Math.round((sCorrect / sTotal) * 100)}%` : '—';
+      const gStats = getStudentStats();
+      const gTotal = (gStats.totalCorrect || 0) + (gStats.totalErrors || 0);
+      const gRate = gTotal > 0 ? `${Math.round(((gStats.totalCorrect || 0) / gTotal) * 100)}%` : '—';
+
+      // Détail par matière
+      const subjBreakdown = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
+        const sub = sessionStats.bySubject[key] || { correct: 0, errors: 0 };
+        const tot = (sub.correct || 0) + (sub.errors || 0);
+        if (tot === 0) return null;
+        const rate = Math.round(((sub.correct || 0) / tot) * 100);
+        return `${meta.icon} ${meta.label} : ${sub.correct} réussie(s), ${sub.errors} erreur(s) (${rate}%)`;
+      }).filter(Boolean).join(' | ') || "Entraînement général / Boîte à outils";
+
+      let appreciation = "🌟 Séance de travail accomplie avec sérieux !";
+      if (sTotal > 0) {
+        const rateNum = Math.round((sCorrect / sTotal) * 100);
+        if (rateNum >= 85) appreciation = "🏆 Excellente séance ! Très grande précision et maîtrise des notions abordées.";
+        else if (rateNum >= 65) appreciation = "👍 Bon travail ! Les bases sont solides, encouragez-la à poursuivre régulièrement.";
+        else appreciation = "💪 Séance d'entraînement studieuse. Pensez à revoir ensemble les quelques erreurs avec bienveillance.";
+      }
+
+      const payload = {
+        _subject: `📊 Académie CM2 : Bilan de Session de Travail (${new Date().toLocaleDateString('fr-FR')} - ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })})`,
+        _template: "table",
+        _captcha: "false",
+        "Élève": "Votre fille (CM2)",
+        "Date & Heure": new Date().toLocaleString('fr-FR'),
+        "Durée estimée de la séance": durationStr,
+        "Questions Réussies (Session)": `${sCorrect} ✅`,
+        "Erreurs Commises (Session)": `${sErrors} ❌`,
+        "Taux de Réussite de la Séance": sRate,
+        "Étoiles Gagnées lors de la Séance": `+${sessionStats.starsEarned || 0} ⭐`,
+        "Détail par Matière (Séance)": subjBreakdown,
+        "Bilan Global Cumulé (Année)": `${gStats.totalCorrect || 0} réussies / ${gStats.totalErrors || 0} erreurs (${gRate} de réussite)`,
+        "Solde Tirelire Actuel": `${walletStars} ⭐ à dépenser`,
+        "Score Total de Progression": `${totalScore} ⭐ (${unlockedBadges}/8 Trophées débloqués)`,
+        "Appréciation Pédagogique": appreciation
+      };
+
+      try {
+        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        const isSuccess = data.success === "true" || data.success === true;
+        const msg = String(data.message || '');
+        const needsActivation = !isSuccess && (msg.toLowerCase().includes('activat') || msg.toLowerCase().includes('confirm'));
+        return {
+          success: isSuccess,
+          needsActivation: needsActivation,
+          message: msg
+        };
+      } catch (e) {
+        console.warn("Erreur envoi rapport session email:", e);
+        return { success: false, reason: 'network_error', message: e.message || 'Erreur réseau' };
+      }
+    }
+
+    async function finishStudySession() {
+      const sCorrect = sessionStats.totalCorrect || 0;
+      const sErrors = sessionStats.totalErrors || 0;
+      const sStars = sessionStats.starsEarned || 0;
+      const durationStr = getSessionDurationString();
+      const email = getParentEmail();
+
+      playSound('win');
+      triggerConfetti();
+
+      let modal = document.getElementById('sessionFinishModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'sessionFinishModal';
+        modal.className = 'ai-modal-overlay';
+        document.body.appendChild(modal);
+      }
+
+      const emailStatusMsg = email 
+        ? `📬 <em>Envoi du rapport par email à <strong>${escapeHtml(email)}</strong> en cours...</em>`
+        : `💡 <em>(Pour recevoir ce rapport par email, configurez votre adresse Gmail dans l'Espace Parents).</em>`;
+
+      modal.innerHTML = `
+        <div class="ai-modal-card" style="max-width: 500px; text-align: center; border: 3px solid var(--bd-blue); box-shadow: 6px 6px 0 var(--ink); animation: popIn 0.3s ease-out;">
+          <div style="font-size: 3.2rem; margin-bottom: 6px;">🎉🏁</div>
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem; color: var(--ink); margin-bottom: 6px;">
+            Bravo pour ta Session de Travail !
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--ink-light); margin-bottom: 16px;">
+            Tu as bien progressé aujourd'hui sur l'Académie des Champions CM2 !
+          </p>
+
+          <!-- 4 Badges de Session -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+            <div style="background: #f0fdf4; border: 1.5px solid #16a34a; border-radius: 10px; padding: 10px;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: #166534; text-transform: uppercase;">✅ Réussites</div>
+              <div style="font-size: 1.6rem; font-weight: 900; color: #15803d; font-family: 'Fredoka', sans-serif;">${sCorrect}</div>
+            </div>
+            <div style="background: #fef2f2; border: 1.5px solid #dc2626; border-radius: 10px; padding: 10px;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: #991b1b; text-transform: uppercase;">❌ Erreurs</div>
+              <div style="font-size: 1.6rem; font-weight: 900; color: #b91c1c; font-family: 'Fredoka', sans-serif;">${sErrors}</div>
+            </div>
+            <div style="background: #fefce8; border: 1.5px solid #ca8a04; border-radius: 10px; padding: 10px;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: #854d0e; text-transform: uppercase;">⭐ Étoiles Gagnées</div>
+              <div style="font-size: 1.6rem; font-weight: 900; color: #b45309; font-family: 'Fredoka', sans-serif;">+${sStars}</div>
+            </div>
+            <div style="background: #eff6ff; border: 1.5px solid var(--bd-blue); border-radius: 10px; padding: 10px;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: #1e40af; text-transform: uppercase;">⏱️ Durée</div>
+              <div style="font-size: 1.35rem; font-weight: 900; color: var(--bd-blue-dark); font-family: 'Fredoka', sans-serif;">${durationStr}</div>
+            </div>
+          </div>
+
+          <div id="sessionModalEmailStatus" style="font-size: 0.85rem; background: #f8fafc; border: 1.5px dashed var(--ink); border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; color: var(--ink);">
+            ${emailStatusMsg}
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <button class="action-btn" onclick="document.getElementById('sessionFinishModal').style.display='none';" style="padding: 10px 24px; font-size: 1rem;">
+              🌟 Super, Continuer !
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.style.display = 'flex';
+
+      if (email) {
+        const res = await sendSessionReportEmail();
+        const statusEl = document.getElementById('sessionModalEmailStatus');
+        if (statusEl) {
+          if (res && res.success) {
+            statusEl.innerHTML = `✅ <strong>Rapport envoyé avec succès par email à ${escapeHtml(email)} !</strong>`;
+            statusEl.style.background = '#dcfce7';
+            statusEl.style.color = '#15803d';
+            statusEl.style.borderColor = 'var(--bd-green)';
+          } else if (res && res.needsActivation) {
+            statusEl.innerHTML = `⚠️ <strong>Confirmation requise sur Gmail (${escapeHtml(email)}) :</strong> Cliquez sur le lien FormSubmit reçu pour valider la réception.`;
+            statusEl.style.background = '#fefce8';
+            statusEl.style.color = '#92400e';
+          } else {
+            statusEl.innerHTML = `⚠️ <em>Note : Impossible d'envoyer l'email (${escapeHtml(res?.message || 'connexion')}). Les stats restent enregistrées.</em>`;
+          }
+        }
+      }
+
+      // Réinitialiser les compteurs de session pour la session suivante
+      sessionStartTime = Date.now();
+      sessionStats = {
+        totalCorrect: 0,
+        totalErrors: 0,
+        bySubject: {
+          francais: { correct: 0, errors: 0 },
+          maths: { correct: 0, errors: 0 },
+          histoire: { correct: 0, errors: 0 },
+          sciences: { correct: 0, errors: 0 },
+          culture: { correct: 0, errors: 0 }
+        },
+        starsEarned: 0
+      };
+    }
+
+    async function sendManualParentSessionReport() {
+      const email = getParentEmail();
+      if (!email || !email.includes('@')) {
+        alert("⚠️ Veuillez d'abord renseigner et enregistrer votre adresse email dans le champ ci-dessus !");
+        return;
+      }
+      const feedback = document.getElementById('parentEmailFeedback');
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#eff6ff';
+        feedback.style.color = '#1e3a8a';
+        feedback.style.border = '1.5px solid var(--bd-blue)';
+        feedback.innerHTML = "⏳ Envoi du rapport de session de travail en cours...";
+      }
+
+      const res = await sendSessionReportEmail(true);
+      if (feedback) {
+        if (res && res.success) {
+          feedback.style.background = '#dcfce7';
+          feedback.style.color = '#15803d';
+          feedback.style.border = '1.5px solid var(--bd-green)';
+          feedback.innerHTML = `✅ <strong>Rapport de session envoyé avec succès à ${escapeHtml(email)} !</strong><br>Vérifiez votre boîte de réception Gmail.`;
+        } else if (res && res.needsActivation) {
+          feedback.style.background = '#fefce8';
+          feedback.style.color = '#92400e';
+          feedback.style.border = '1.5px solid var(--bd-yellow-dark)';
+          feedback.innerHTML = `⚠️ <strong>Action requise sur votre boîte Gmail (${escapeHtml(email)}) !</strong><br>` +
+            `FormSubmit vous a envoyé un email d'activation obligatoire intitulé <strong>« Action Required: Confirm your email »</strong>.<br>` +
+            `👉 Cliquez sur « Activate Form » dans cet email, puis réessayez l'envoi !`;
+        } else {
+          feedback.style.background = '#fee2e2';
+          feedback.style.color = '#b91c1c';
+          feedback.style.border = '1.5px solid var(--bd-red)';
+          feedback.innerHTML = `❌ <strong>Erreur lors de l'envoi :</strong> ${escapeHtml(res?.message || 'Veuillez vérifier votre connexion internet.')}`;
         }
       }
     }
