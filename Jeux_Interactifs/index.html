@@ -6636,6 +6636,11 @@
             <div id="parentStatsSubjectGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
               <!-- Injecté dynamiquement par renderParentStats() -->
             </div>
+
+            <!-- Diagnostic Détaillé des Fautes & Conseils de Révision de la Session -->
+            <div id="parentSessionErrorDiagnostic" style="margin-top: 18px; border-top: 2px dashed #cbd5e1; padding-top: 14px;">
+              <!-- Injecté dynamiquement par renderParentStats() -->
+            </div>
           </div>
 
           <!-- Section 2 : Curseurs d'Orientation & Coefficients des Matières -->
@@ -7452,7 +7457,46 @@
       if (typeof scheduleAutoCloudPush === 'function') scheduleAutoCloudPush();
     }
 
-    function recordQuestionAttempt(subjectKey, isCorrect) {
+    function categorizeError(subjectKey, title = '', question = '', tip = '') {
+      const lower = (title + ' ' + question + ' ' + tip).toLowerCase();
+      if (lower.includes('homophone') || lower.includes(' a / à') || lower.includes('et / est') || lower.includes('ses / s\'est') || lower.includes('on / ont') || lower.includes('son / sont')) {
+        return "Homophones Grammaticaux (a/à, et/est, ses/s'est...)";
+      }
+      if (lower.includes('conjugaison') || lower.includes('présent') || lower.includes('terminaison') || lower.includes('verbe')) {
+        return "Conjugaison & Terminaisons des Verbes";
+      }
+      if (lower.includes('accord') || lower.includes('sujet') || lower.includes('pluriel')) {
+        return "Accords Sujet-Verbe & Pluriels";
+      }
+      if (lower.includes('grammaire') || lower.includes('déterminant') || lower.includes('g1') || lower.includes('nature')) {
+        return "Grammaire & Nature des Mots (Déterminants, Noms...)";
+      }
+      if (lower.includes('orthographe') || lower.includes('« s »') || lower.includes('ss') || lower.includes('dictée')) {
+        return "Orthographe & Valeur des Lettres (s/ss, dictée)";
+      }
+      if (lower.includes('soustraction') || lower.includes('cassage')) {
+        return "Technique de la Soustraction par Cassage";
+      }
+      if (lower.includes('problème') || lower.includes('étape') || lower.includes('opération')) {
+        return "Résolution de Problèmes & Choix d'Opération";
+      }
+      if (lower.includes('calcul') || lower.includes('table') || lower.includes('pythagore') || lower.includes('multiplication')) {
+        return "Calcul Mental & Tables de Multiplication";
+      }
+      if (lower.includes('période') || lower.includes('préhistoire') || lower.includes('reims') || lower.includes('histoire')) {
+        return "Histoire (Repères Chronologiques & Événements)";
+      }
+      if (lower.includes('matériau') || lower.includes('eiffel') || lower.includes('élément') || lower.includes('molécule') || lower.includes('science')) {
+        return "Sciences & Matériaux (Propriétés & Démarche)";
+      }
+      if (subjectKey === 'francais') return "Français Général";
+      if (subjectKey === 'maths') return "Mathématiques Général";
+      if (subjectKey === 'histoire') return "Histoire de France";
+      if (subjectKey === 'sciences') return "Sciences & Technologies";
+      return "Compétences Générales CM2";
+    }
+
+    function recordQuestionAttempt(subjectKey, isCorrect, details = {}) {
       const stats = getStudentStats();
       const validKey = (subjectKey && stats.bySubject[subjectKey]) ? subjectKey : null;
 
@@ -7461,7 +7505,6 @@
         if (validKey) {
           stats.bySubject[validKey].correct = (stats.bySubject[validKey].correct || 0) + 1;
         }
-        // Mise à jour de la session en cours
         sessionStats.totalCorrect = (sessionStats.totalCorrect || 0) + 1;
         if (validKey && sessionStats.bySubject[validKey]) {
           sessionStats.bySubject[validKey].correct = (sessionStats.bySubject[validKey].correct || 0) + 1;
@@ -7471,11 +7514,30 @@
         if (validKey) {
           stats.bySubject[validKey].errors = (stats.bySubject[validKey].errors || 0) + 1;
         }
-        // Mise à jour de la session en cours
         sessionStats.totalErrors = (sessionStats.totalErrors || 0) + 1;
         if (validKey && sessionStats.bySubject[validKey]) {
           sessionStats.bySubject[validKey].errors = (sessionStats.bySubject[validKey].errors || 0) + 1;
         }
+
+        // Enregistrement détaillé de la faute pour l'analyse complète
+        const title = details.title || (validKey ? SUBJECT_METAS[validKey]?.label : subjectKey) || 'Exercice';
+        const qText = details.question ? String(details.question).replace(/<[^>]*>?/gm, '').trim() : 'Question';
+        const sAns = details.selected !== undefined ? String(details.selected).replace(/<[^>]*>?/gm, '').trim() : 'Réponse erronée';
+        const cAns = details.correct !== undefined ? String(details.correct).replace(/<[^>]*>?/gm, '').trim() : '';
+        const tipText = details.tip ? String(details.tip).replace(/<[^>]*>?/gm, '').trim() : '';
+        const category = details.category || categorizeError(subjectKey, title, qText, tipText);
+
+        sessionStats.errorLogs = sessionStats.errorLogs || [];
+        sessionStats.errorLogs.push({
+          subject: subjectKey,
+          title: title,
+          category: category,
+          question: qText.slice(0, 160),
+          selected: sAns.slice(0, 80),
+          correct: cAns.slice(0, 80),
+          tip: tipText.slice(0, 200),
+          time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+        });
       }
 
       sessionHasBeenSent = false;
@@ -7484,6 +7546,83 @@
 
       saveStudentStats(stats);
       renderParentStats();
+    }
+
+    function analyzeSessionErrors(customStats = null) {
+      const activeStats = customStats || sessionStats;
+      const logs = activeStats.errorLogs || [];
+      const totalErrors = logs.length;
+
+      if (totalErrors === 0) {
+        return {
+          totalErrors: 0,
+          breakdownPercent: "🎉 Aucune faute commise lors de cette session (100% de précision) !",
+          errorDetailsList: "✨ Séance parfaite ! Zéro erreur enregistrée.",
+          revisionAdvice: "🌟 Remarquable ! Toutes les compétences abordées ont été validées sans faute. Encouragez votre enfant à poursuivre ce rythme.",
+          priorityFocus: "Maintien de l'excellence et curiosité"
+        };
+      }
+
+      // 1. Décompte et pourcentage par catégorie
+      const catCounts = {};
+      logs.forEach(err => {
+        catCounts[err.category] = (catCounts[err.category] || 0) + 1;
+      });
+
+      const sortedCategories = Object.entries(catCounts).sort((a, b) => b[1] - a[1]);
+      const breakdownPercent = sortedCategories.map(([cat, count]) => {
+        const pct = ((count / totalErrors) * 100).toFixed(1);
+        return `• ${cat} : ${count} faute${count > 1 ? 's' : ''} (${pct}%)`;
+      }).join('\n');
+
+      // 2. Liste détaillée des erreurs avec réponses élève vs attendues
+      const errorDetailsList = logs.map((err, idx) => {
+        let line = `[Erreur ${idx + 1}] [${err.category}] ${err.title}\n`;
+        line += `  👉 Énoncé : "${err.question}"\n`;
+        line += `  ❌ Réponse élève : "${err.selected}" | ✅ Réponse attendue : "${err.correct}"\n`;
+        if (err.tip) line += `  💡 Règle / Astuce : ${err.tip}`;
+        return line;
+      }).join('\n----------------------------------------\n');
+
+      // 3. Conseils de révision personnalisés et pédagogiques
+      const adviceList = [];
+      sortedCategories.forEach(([cat, count]) => {
+        if (cat.includes("Homophones")) {
+          adviceList.push(`🎯 Homophones (${count} faute${count > 1 ? 's' : ''}) : Pratiquer l'astuce de l'imparfait : remplacer par "avait" (pour a/à) ou "était" (pour est/et). Faire 3 phrases d'entraînement par jour.`);
+        } else if (cat.includes("Conjugaison")) {
+          adviceList.push(`✍️ Conjugaison (${count} faute${count > 1 ? 's' : ''}) : Revoir le radical et les terminaisons régulières du présent (-e, -es, -e, -ons, -ez, -ent) et des verbes fréquents (faire, aller, dire).`);
+        } else if (cat.includes("Accords")) {
+          adviceList.push(`🔍 Accords Sujet-Verbe (${count} faute${count > 1 ? 's' : ''}) : Adopter le réflexe de toujours souligner le sujet avant d'écrire la terminaison du verbe (attention aux pronoms inversés ou éloignés).`);
+        } else if (cat.includes("Grammaire")) {
+          adviceList.push(`📖 Grammaire (${count} faute${count > 1 ? 's' : ''}) : Réviser la fiche G1 sur les déterminants (articles définis/indéfinis, possessifs, démonstratifs).`);
+        } else if (cat.includes("Orthographe")) {
+          adviceList.push(`🐍 Orthographe (${count} faute${count > 1 ? 's' : ''}) : Règle du 's' entre deux voyelles qui fait [z], nécessitant 'ss' pour faire le son [s].`);
+        } else if (cat.includes("Calcul Mental")) {
+          adviceList.push(`⚡ Calcul Mental (${count} faute${count > 1 ? 's' : ''}) : Pratiquer 5 minutes sur le Dojo des Tables de Pythagore et utiliser les décompositions (ex: x11 = x10 + nombre).`);
+        } else if (cat.includes("Soustraction")) {
+          adviceList.push(`➖ Soustraction par Cassage (${count} faute${count > 1 ? 's' : ''}) : Revoir la vidéo explicative du Padlet : barrer la dizaine supérieure et ajouter 10 unités.`);
+        } else if (cat.includes("Problèmes")) {
+          adviceList.push(`🧠 Problèmes (${count} faute${count > 1 ? 's' : ''}) : Bien faire reformuler la question avec ses propres mots et dessiner un petit schéma avant de poser le calcul.`);
+        } else if (cat.includes("Histoire")) {
+          adviceList.push(`🏛️ Histoire (${count} faute${count > 1 ? 's' : ''}) : Réécouter la chanson des 5 grandes périodes et revoir les repères clés (-3000, 476, 1492, 1789).`);
+        } else if (cat.includes("Sciences")) {
+          adviceList.push(`🔬 Sciences (${count} faute${count > 1 ? 's' : ''}) : Revoir les 4 familles de matériaux (métaux, céramiques/verres, organiques, plastiques) et leurs propriétés.`);
+        } else {
+          adviceList.push(`💡 ${cat} (${count} faute${count > 1 ? 's' : ''}) : Revoir calmement la leçon associée avec un exemple concret.`);
+        }
+      });
+
+      const topCat = sortedCategories[0][0];
+      const priorityFocus = `Priorité N°1 : Travailler "${topCat}" lors de la prochaine session (${sortedCategories[0][1]} erreur${sortedCategories[0][1] > 1 ? 's' : ''} constatée${sortedCategories[0][1] > 1 ? 's' : ''})`;
+
+      return {
+        totalErrors,
+        sortedCategories,
+        breakdownPercent,
+        errorDetailsList,
+        revisionAdvice: adviceList.join('\n\n'),
+        priorityFocus
+      };
     }
 
     function resetParentStats() {
@@ -7603,6 +7742,89 @@
             </div>
           `;
         }).join('');
+      }
+
+      // Diagnostic approfondi des erreurs de la session en cours
+      const errorDiagEl = document.getElementById('parentSessionErrorDiagnostic');
+      if (errorDiagEl) {
+        const analysis = analyzeSessionErrors();
+        if (analysis.totalErrors === 0) {
+          errorDiagEl.innerHTML = `
+            <div style="background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 2rem;">🏆</span>
+              <div>
+                <strong style="color: #166534; font-size: 0.95rem; display: block; margin-bottom: 2px;">Session en cours irréprochable (100% de réussite) !</strong>
+                <span style="font-size: 0.85rem; color: #15803d;">Aucune erreur enregistrée pour le moment. Toutes les notions travaillées aujourd'hui sont parfaitement maîtrisées.</span>
+              </div>
+            </div>
+          `;
+        } else {
+          const breakdownChips = (analysis.sortedCategories || []).map(([cat, count]) => {
+            const pct = ((count / analysis.totalErrors) * 100).toFixed(0);
+            return `<span style="background: #fee2e2; border: 1.5px solid #dc2626; color: #991b1b; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">${escapeHtml(cat)} : <strong>${count} (${pct}%)</strong></span>`;
+          }).join(' ');
+
+          const rawAdvice = analysis.revisionAdvice || '';
+          const adviceBlocks = rawAdvice.split('\n\n').filter(Boolean).map(adv => {
+            return `<div style="background: #ffffff; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 8px 12px; font-size: 0.85rem; color: #78350f; margin-bottom: 6px;">${escapeHtml(adv)}</div>`;
+          }).join('');
+
+          const errorItems = (sessionStats.errorLogs || []).map((err, idx) => {
+            return `
+              <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 0.83rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--ink); font-size: 0.85rem;">[#${idx + 1}] ${escapeHtml(err.title || '')}</strong>
+                  <span style="background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${escapeHtml(err.category || '')} (${escapeHtml(err.time || '')})</span>
+                </div>
+                <div style="color: var(--ink); margin-bottom: 4px;"><strong>Énoncé :</strong> ${escapeHtml(err.question || '')}</div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px;">
+                  <span style="color: #dc2626; font-weight: 700;">❌ Réponse élève : "${escapeHtml(err.selected || '')}"</span>
+                  <span style="color: #16a34a; font-weight: 700;">✅ Attendu : "${escapeHtml(err.correct || '')}"</span>
+                </div>
+                ${err.tip ? `<div style="color: #b45309; font-size: 0.78rem; font-style: italic; background: #fefce8; padding: 4px 8px; border-radius: 6px;">💡 Astuce : ${escapeHtml(err.tip)}</div>` : ''}
+              </div>
+            `;
+          }).join('');
+
+          errorDiagEl.innerHTML = `
+            <div style="font-weight: 800; font-size: 1rem; color: #991b1b; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              🔍 Diagnostic Détaillé des Fautes (${analysis.totalErrors} erreur${analysis.totalErrors > 1 ? 's' : ''})
+            </div>
+            
+            <!-- Priorité N°1 -->
+            <div style="background: #fef2f2; border: 2px solid #dc2626; border-radius: 10px; padding: 10px 14px; font-weight: 800; font-size: 0.9rem; color: #991b1b; margin-bottom: 12px;">
+              🎯 ${escapeHtml(analysis.priorityFocus)}
+            </div>
+
+            <!-- Répartition % par Type de Faute -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-weight: 700; font-size: 0.85rem; color: var(--ink); margin-bottom: 6px;">
+                📊 Répartition des types de fautes (%) :
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                ${breakdownChips}
+              </div>
+            </div>
+
+            <!-- Conseils de Révision Ciblés -->
+            <div style="background: #fffbeb; border: 2px solid #f59e0b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+              <div style="font-weight: 800; font-size: 0.9rem; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                💡 Conseils Personnalisés de Révision :
+              </div>
+              ${adviceBlocks}
+            </div>
+
+            <!-- Détail Question par Question -->
+            <details style="background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 10px; padding: 10px;">
+              <summary style="font-weight: 800; font-size: 0.88rem; color: var(--ink); cursor: pointer;">
+                📋 Voir l'analyse question par question (${analysis.totalErrors} faute${analysis.totalErrors > 1 ? 's' : ''})
+              </summary>
+              <div style="margin-top: 10px;">
+                ${errorItems}
+              </div>
+            </details>
+          `;
+        }
       }
     }
 
@@ -8037,7 +8259,7 @@
         if (selected === q.correct) {
           this.correctCount++;
           playSound('correct');
-          recordQuestionAttempt(this.subjectKey, true);
+          recordQuestionAttempt(this.subjectKey, true, { title: this.title, question: q.display });
           
           const alreadyDone = isQuestionAwarded(qKey);
           if (!alreadyDone) {
@@ -8057,7 +8279,7 @@
         } else {
           playSound('wrong');
           resetStreak();
-          recordQuestionAttempt(this.subjectKey, false);
+          recordQuestionAttempt(this.subjectKey, false, { title: this.title, question: q.display, selected: selected, correct: q.correct, tip: q.tip });
           const penalty = deductScore(2, this.subjectKey);
           const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Parent x${penalty.mult.toFixed(1)} appliqué)` : '';
           btn.style.background = '#ef4444';
@@ -8224,7 +8446,7 @@
           const fb = document.getElementById('det-fb');
           if (tok.error) {
             playSound('correct');
-            recordQuestionAttempt('francais', true);
+            recordQuestionAttempt('francais', true, { title: "Détective : " + m.title, question: `Erreur dans "${tok.text}"`, correct: tok.correct });
             const errKey = generateQuestionKey('det', m.title + '_' + tok.text, tok.correct);
             const alreadyDone = isQuestionAwarded(errKey);
             if (!alreadyDone) {
@@ -8258,7 +8480,7 @@
           } else {
             playSound('wrong');
             resetStreak();
-            recordQuestionAttempt('francais', false);
+            recordQuestionAttempt('francais', false, { title: "Détective : " + m.title, question: `Texte : "${m.title}"`, selected: `Clic erroné sur "${tok.text}"`, correct: "Mot sans faute", tip: "Vérifier la phrase avec la méthode des 4 loupes de relecture !" });
             const penalty = deductScore(2, 'francais');
             const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Français x${penalty.mult.toFixed(1)})` : '';
             fb.className = 'feedback-banner wrong';
@@ -9359,7 +9581,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
 
       if (selected === step.correct) {
         playSound('correct');
-        recordQuestionAttempt('maths', true);
+        recordQuestionAttempt('maths', true, { title: "Problème : " + (currentProblemList[currentProblemIndex]?.title || "Problème"), question: step.q });
         const p = currentProblemList[currentProblemIndex];
         const stepKey = generateQuestionKey('prob', (p.id || p.title) + '_step_' + currentProblemStep, step.correct);
         const alreadyDone = isQuestionAwarded(stepKey);
@@ -9378,7 +9600,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       } else {
         playSound('wrong');
         resetStreak();
-        recordQuestionAttempt('maths', false);
+        recordQuestionAttempt('maths', false, { title: "Problème : " + (currentProblemList[currentProblemIndex]?.title || "Problème"), question: step.q, selected: selected, correct: step.correct, tip: step.hint });
         const penalty = deductScore(3, 'maths');
         const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Maths x${penalty.mult.toFixed(1)})` : '';
         btn.style.background = '#ef4444';
@@ -9529,7 +9751,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       if (val === currentCalcAnswer) {
         playSound('correct');
         addScore(1);
-        recordQuestionAttempt('maths', true);
+        recordQuestionAttempt('maths', true, { title: "Calcul Mental & Stratégies", question: document.getElementById('calcQuestion')?.innerText || "Calcul" });
         f.className = 'feedback-banner correct';
         f.innerText = '⚡ Bravo ! +1 ⭐';
         setTimeout(() => f.style.display = 'none', 600);
@@ -9537,7 +9759,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       } else {
         playSound('wrong');
         resetStreak();
-        recordQuestionAttempt('maths', false);
+        recordQuestionAttempt('maths', false, { title: "Calcul Mental & Stratégies", question: document.getElementById('calcQuestion')?.innerText || "Calcul", selected: val, correct: currentCalcAnswer, tip: currentCalcHint || "Décomposer par tranche de 10 ou utiliser les compléments" });
         const penalty = deductScore(1, 'maths');
         f.className = 'feedback-banner wrong';
         f.innerText = `Oups ! La réponse était ${currentCalcAnswer} (-${penalty.penaltyPts} ⭐)`;
@@ -11539,6 +11761,9 @@ Format JSON attendu :
       const gTotal = (gStats.totalCorrect || 0) + (gStats.totalErrors || 0);
       const gRate = gTotal > 0 ? `${Math.round(((gStats.totalCorrect || 0) / gTotal) * 100)}%` : '—';
 
+      // Analyse approfondie des erreurs de la session
+      const analysis = analyzeSessionErrors(activeStats);
+
       // Détail par matière
       const subjBreakdown = Object.entries(SUBJECT_METAS).map(([key, meta]) => {
         const sub = activeStats.bySubject?.[key] || { correct: 0, errors: 0 };
@@ -11567,6 +11792,9 @@ Format JSON attendu :
       } else if (triggerReason === 'rattrapage_demarrage') {
         reasonLabel = "🔄 Rattrapage automatique (séance précédente non transmise)";
         subjectTag = "Bilan de Session [Rattrapage]";
+      } else if (triggerReason === 'limite_45min') {
+        reasonLabel = "⏱️ Clôture automatique (45 min max atteinte)";
+        subjectTag = "Bilan de Session [45 min]";
       }
 
       const payload = {
@@ -11582,6 +11810,10 @@ Format JSON attendu :
         "Taux de Réussite de la Séance": sRate,
         "Étoiles Gagnées lors de la Séance": `+${activeStats.starsEarned || 0} ⭐`,
         "Détail par Matière (Séance)": subjBreakdown,
+        "📊 Répartition des Fautes par Type (%)": analysis.breakdownPercent,
+        "🎯 Priorité N°1 de Révision": analysis.priorityFocus,
+        "💡 Conseils Personnalisés de Révision": analysis.revisionAdvice,
+        "🔍 Analyse Complète des Erreurs (Séance)": analysis.errorDetailsList,
         "Bilan Global Cumulé (Année)": `${gStats.totalCorrect || 0} réussies / ${gStats.totalErrors || 0} erreurs (${gRate} de réussite)`,
         "Solde Tirelire Actuel": `${walletStars} ⭐ à dépenser`,
         "Score Total de Progression": `${totalScore} ⭐ (${unlockedBadges}/8 Trophées débloqués)`,
@@ -14087,7 +14319,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         playSound('correct');
         triggerConfetti();
         gainStars(1);
-        recordQuestionAttempt('francais', true);
+        recordQuestionAttempt('francais', true, { title: "Dojo de Conjugaison", question: `${currentConjugoQuizData.pronoun} (${currentConjugoQuizData.verb})` });
         feed.style.display = 'block';
         feed.style.background = '#dcfce7';
         feed.style.color = '#14532d';
@@ -14095,7 +14327,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         feed.innerHTML = `🎉 <strong>Bravo !</strong> ${currentConjugoQuizData.pronoun} ${currentConjugoQuizData.correct}. Tu gagnes <strong>+1 ⭐</strong> pour la Boutique !`;
       } else {
         playSound('wrong');
-        recordQuestionAttempt('francais', false);
+        recordQuestionAttempt('francais', false, { title: "Dojo de Conjugaison", question: `${currentConjugoQuizData.pronoun} (${currentConjugoQuizData.verb})`, selected: btnEl.innerText, correct: currentConjugoQuizData.correct, tip: "Revoir les terminaisons du présent pour ce verbe" });
         const penalty = deductScore(1, 'francais');
         btnEl.style.background = '#fee2e2';
         btnEl.style.borderColor = '#b91c1c';
@@ -14201,7 +14433,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         playSound('correct');
         triggerConfetti();
         gainStars(1);
-        recordQuestionAttempt('maths', true);
+        recordQuestionAttempt('maths', true, { title: "Dojo des Tables de Pythagore", question: `${pythagorasQuizActive.r} × ${pythagorasQuizActive.c}` });
         if (alertBox && alertText) {
           alertBox.style.background = '#dcfce7';
           alertText.innerHTML = `🎉 <strong>Bravo !</strong> ${r} × ${c} = ${r * c} ! Tu gagnes <strong>+1 ⭐</strong> !`;
@@ -14212,7 +14444,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         }, 3200);
       } else {
         playSound('wrong');
-        recordQuestionAttempt('maths', false);
+        recordQuestionAttempt('maths', false, { title: "Dojo des Tables de Pythagore", question: `${pythagorasQuizActive.r} × ${pythagorasQuizActive.c}`, selected: `${r} × ${c} = ${r * c}`, correct: `${pythagorasQuizActive.r * pythagorasQuizActive.c}`, tip: "Revoir la table de multiplication correspondante" });
         const penalty = deductScore(1, 'maths');
         if (alertBox && alertText) {
           alertBox.style.background = '#fee2e2';
@@ -15734,7 +15966,7 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
         }
       } else {
         if (typeof playSound === 'function') playSound('wrong');
-        recordQuestionAttempt('sciences', false);
+        recordQuestionAttempt('sciences', false, { title: "Laboratoire des Molécules", question: `Mélange : ${beakerAtoms.join(' + ')}`, selected: "Réaction instable", correct: "Voir formule dans le Codex", tip: "Consulter les recettes du grand Codex des molécules" });
         const penalty = deductScore(2, 'sciences');
         panel.className = 'fusion-result-panel fusion-result-fail';
         panel.style.display = 'block';
