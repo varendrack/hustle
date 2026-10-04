@@ -7430,7 +7430,8 @@
               histoire: { correct: parsed.bySubject?.histoire?.correct || 0, errors: parsed.bySubject?.histoire?.errors || 0 },
               sciences: { correct: parsed.bySubject?.sciences?.correct || 0, errors: parsed.bySubject?.sciences?.errors || 0 },
               culture: { correct: parsed.bySubject?.culture?.correct || 0, errors: parsed.bySubject?.culture?.errors || 0 }
-            }
+            },
+            errorLogs: Array.isArray(parsed.errorLogs) ? parsed.errorLogs : []
           };
         }
       } catch (e) {}
@@ -7445,7 +7446,8 @@
           histoire: { correct: 0, errors: 0 },
           sciences: { correct: 0, errors: 0 },
           culture: { correct: 0, errors: 0 }
-        }
+        },
+        errorLogs: []
       };
     }
 
@@ -7489,9 +7491,9 @@
       if (lower.includes('matériau') || lower.includes('eiffel') || lower.includes('élément') || lower.includes('molécule') || lower.includes('science')) {
         return "Sciences & Matériaux (Propriétés & Démarche)";
       }
-      if (subjectKey === 'francais') return "Français Général";
-      if (subjectKey === 'maths') return "Mathématiques Général";
-      if (subjectKey === 'histoire') return "Histoire de France";
+      if (subjectKey === 'francais') return "Français (Homophones, Accords & Conjugaison)";
+      if (subjectKey === 'maths') return "Mathématiques (Calcul Rapide & Problèmes)";
+      if (subjectKey === 'histoire') return "Histoire de France & Repères";
       if (subjectKey === 'sciences') return "Sciences & Technologies";
       return "Compétences Générales CM2";
     }
@@ -7527,8 +7529,7 @@
         const tipText = details.tip ? String(details.tip).replace(/<[^>]*>?/gm, '').trim() : '';
         const category = details.category || categorizeError(subjectKey, title, qText, tipText);
 
-        sessionStats.errorLogs = sessionStats.errorLogs || [];
-        sessionStats.errorLogs.push({
+        const errorRecord = {
           subject: subjectKey,
           title: title,
           category: category,
@@ -7536,8 +7537,16 @@
           selected: sAns.slice(0, 80),
           correct: cAns.slice(0, 80),
           tip: tipText.slice(0, 200),
-          time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-        });
+          time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+          date: new Date().toLocaleDateString('fr-FR')
+        };
+
+        sessionStats.errorLogs = sessionStats.errorLogs || [];
+        sessionStats.errorLogs.push(errorRecord);
+
+        stats.errorLogs = stats.errorLogs || [];
+        stats.errorLogs.unshift(errorRecord);
+        if (stats.errorLogs.length > 200) stats.errorLogs = stats.errorLogs.slice(0, 200);
       }
 
       sessionHasBeenSent = false;
@@ -7549,9 +7558,16 @@
     }
 
     function analyzeSessionErrors(customStats = null) {
-      const activeStats = customStats || sessionStats;
-      const logs = activeStats.errorLogs || [];
-      const totalErrors = logs.length;
+      const globalStats = getStudentStats();
+      const activeStats = customStats || (sessionStats.totalErrors > 0 || (sessionStats.errorLogs && sessionStats.errorLogs.length > 0) ? sessionStats : globalStats);
+      
+      // Récupération des logs disponibles (session ou global)
+      let logs = activeStats.errorLogs || [];
+      if (logs.length === 0 && globalStats.errorLogs && globalStats.errorLogs.length > 0) {
+        logs = globalStats.errorLogs;
+      }
+
+      const totalErrors = activeStats.totalErrors || (activeStats.bySubject ? Object.values(activeStats.bySubject).reduce((acc, s) => acc + (s.errors || 0), 0) : 0);
 
       if (totalErrors === 0) {
         return {
@@ -7559,61 +7575,109 @@
           breakdownPercent: "🎉 Aucune faute commise lors de cette session (100% de précision) !",
           errorDetailsList: "✨ Séance parfaite ! Zéro erreur enregistrée.",
           revisionAdvice: "🌟 Remarquable ! Toutes les compétences abordées ont été validées sans faute. Encouragez votre enfant à poursuivre ce rythme.",
-          priorityFocus: "Maintien de l'excellence et curiosité"
+          priorityFocus: "Maintien de l'excellence et curiosité",
+          sortedCategories: [],
+          isPerfect: true
         };
       }
 
-      // 1. Décompte et pourcentage par catégorie
+      // 1. Décompte par catégorie
       const catCounts = {};
-      logs.forEach(err => {
-        catCounts[err.category] = (catCounts[err.category] || 0) + 1;
-      });
 
+      if (logs.length > 0) {
+        logs.forEach(err => {
+          const cat = err.category || "Compétences Générales CM2";
+          catCounts[cat] = (catCounts[cat] || 0) + 1;
+        });
+      }
+
+      // Si les logs sont incomplets par rapport aux totaux enregistrés par matière (ex: historique antérieur)
+      if (activeStats.bySubject) {
+        const loggedCount = Object.values(catCounts).reduce((a, b) => a + b, 0);
+        if (loggedCount === 0 || loggedCount < totalErrors) {
+          const subjMap = {
+            francais: "Français (Homophones, Accords & Conjugaison)",
+            sciences: "Sciences (Matériaux, Propriétés & Sciences)",
+            histoire: "Histoire (Repères Chronologiques & Préhistoire)",
+            maths: "Mathématiques (Calcul Mental, Tables & Problèmes)",
+            culture: "Arts, Poésie & Culture"
+          };
+
+          // On complète avec les totaux réels des matières
+          Object.entries(activeStats.bySubject).forEach(([sKey, sData]) => {
+            const errCount = sData.errors || 0;
+            if (errCount > 0) {
+              const catName = subjMap[sKey] || "Compétences Générales CM2";
+              // Si déjà partiellement compté dans les logs, on ajuste pour refléter le volume réel
+              if (loggedCount === 0) {
+                catCounts[catName] = errCount;
+              } else if (!catCounts[catName]) {
+                catCounts[catName] = errCount;
+              }
+            }
+          });
+        }
+      }
+
+      const effectiveTotal = Object.values(catCounts).reduce((a, b) => a + b, 0) || totalErrors || 1;
       const sortedCategories = Object.entries(catCounts).sort((a, b) => b[1] - a[1]);
+
+      // 2. Pourcentages formatés
       const breakdownPercent = sortedCategories.map(([cat, count]) => {
-        const pct = ((count / totalErrors) * 100).toFixed(1);
+        const pct = ((count / effectiveTotal) * 100).toFixed(1);
         return `• ${cat} : ${count} faute${count > 1 ? 's' : ''} (${pct}%)`;
       }).join('\n');
 
-      // 2. Liste détaillée des erreurs avec réponses élève vs attendues
-      const errorDetailsList = logs.map((err, idx) => {
-        let line = `[Erreur ${idx + 1}] [${err.category}] ${err.title}\n`;
-        line += `  👉 Énoncé : "${err.question}"\n`;
-        line += `  ❌ Réponse élève : "${err.selected}" | ✅ Réponse attendue : "${err.correct}"\n`;
-        if (err.tip) line += `  💡 Règle / Astuce : ${err.tip}`;
-        return line;
-      }).join('\n----------------------------------------\n');
+      // 3. Liste détaillée des questions erronées
+      let errorDetailsList = "";
+      if (logs.length > 0) {
+        errorDetailsList = logs.map((err, idx) => {
+          let line = `[Erreur ${idx + 1}] [${err.category || 'Général'}] ${err.title || 'Exercice'}\n`;
+          line += `  👉 Énoncé : "${err.question}"\n`;
+          line += `  ❌ Réponse élève : "${err.selected}" | ✅ Réponse attendue : "${err.correct}"\n`;
+          if (err.tip) line += `  💡 Règle / Astuce : ${err.tip}`;
+          return line;
+        }).join('\n----------------------------------------\n');
+      } else {
+        errorDetailsList = `Historique consolidé des ${totalErrors} erreurs enregistrées par matière :\n` +
+          sortedCategories.map(([cat, count]) => `• ${cat} : ${count} faute(s)`).join('\n');
+      }
 
-      // 3. Conseils de révision personnalisés et pédagogiques
+      // 4. Conseils de révision personnalisés et pédagogiques
       const adviceList = [];
       sortedCategories.forEach(([cat, count]) => {
+        const pct = Math.round((count / effectiveTotal) * 100);
         if (cat.includes("Homophones")) {
-          adviceList.push(`🎯 Homophones (${count} faute${count > 1 ? 's' : ''}) : Pratiquer l'astuce de l'imparfait : remplacer par "avait" (pour a/à) ou "était" (pour est/et). Faire 3 phrases d'entraînement par jour.`);
+          adviceList.push(`🎯 Homophones (${count} fautes, ${pct}%) : Pratiquer l'astuce de l'imparfait : remplacer par "avait" (pour a/à) ou "était" (pour est/et). Faire 3 phrases d'entraînement par jour.`);
+        } else if (cat.includes("Français")) {
+          adviceList.push(`🇫🇷 Français (${count} fautes, ${pct}%) : 1. Distinguer homophones (a/à, et/est) avec l'imparfait. 2. Repérer le sujet avant d'accorder le verbe au présent. 3. Revoir la fiche G1 sur les déterminants.`);
         } else if (cat.includes("Conjugaison")) {
-          adviceList.push(`✍️ Conjugaison (${count} faute${count > 1 ? 's' : ''}) : Revoir le radical et les terminaisons régulières du présent (-e, -es, -e, -ons, -ez, -ent) et des verbes fréquents (faire, aller, dire).`);
+          adviceList.push(`✍️ Conjugaison (${count} fautes, ${pct}%) : Revoir le radical et les terminaisons régulières du présent (-e, -es, -e, -ons, -ez, -ent) et des verbes fréquents (faire, aller, dire).`);
         } else if (cat.includes("Accords")) {
-          adviceList.push(`🔍 Accords Sujet-Verbe (${count} faute${count > 1 ? 's' : ''}) : Adopter le réflexe de toujours souligner le sujet avant d'écrire la terminaison du verbe (attention aux pronoms inversés ou éloignés).`);
+          adviceList.push(`🔍 Accords Sujet-Verbe (${count} fautes, ${pct}%) : Adopter le réflexe de toujours souligner le sujet avant d'écrire la terminaison du verbe (attention aux pronoms inversés ou éloignés).`);
         } else if (cat.includes("Grammaire")) {
-          adviceList.push(`📖 Grammaire (${count} faute${count > 1 ? 's' : ''}) : Réviser la fiche G1 sur les déterminants (articles définis/indéfinis, possessifs, démonstratifs).`);
+          adviceList.push(`📖 Grammaire (${count} fautes, ${pct}%) : Réviser la fiche G1 sur les déterminants (articles définis/indéfinis, possessifs, démonstratifs).`);
         } else if (cat.includes("Orthographe")) {
-          adviceList.push(`🐍 Orthographe (${count} faute${count > 1 ? 's' : ''}) : Règle du 's' entre deux voyelles qui fait [z], nécessitant 'ss' pour faire le son [s].`);
-        } else if (cat.includes("Calcul Mental")) {
-          adviceList.push(`⚡ Calcul Mental (${count} faute${count > 1 ? 's' : ''}) : Pratiquer 5 minutes sur le Dojo des Tables de Pythagore et utiliser les décompositions (ex: x11 = x10 + nombre).`);
+          adviceList.push(`🐍 Orthographe (${count} fautes, ${pct}%) : Règle du 's' entre deux voyelles qui fait [z], nécessitant 'ss' pour faire le son [s].`);
+        } else if (cat.includes("Calcul Mental") || cat.includes("Mathématiques")) {
+          adviceList.push(`⚡ Mathématiques & Calcul (${count} fautes, ${pct}%) : Pratiquer 5 minutes sur le Dojo des Tables de Pythagore et utiliser les décompositions (ex: x11 = x10 + nombre). Soustraction par cassage : barrer la dizaine voisine.`);
         } else if (cat.includes("Soustraction")) {
-          adviceList.push(`➖ Soustraction par Cassage (${count} faute${count > 1 ? 's' : ''}) : Revoir la vidéo explicative du Padlet : barrer la dizaine supérieure et ajouter 10 unités.`);
+          adviceList.push(`➖ Soustraction par Cassage (${count} fautes, ${pct}%) : Revoir la vidéo explicative du Padlet : barrer la dizaine supérieure et ajouter 10 unités.`);
         } else if (cat.includes("Problèmes")) {
-          adviceList.push(`🧠 Problèmes (${count} faute${count > 1 ? 's' : ''}) : Bien faire reformuler la question avec ses propres mots et dessiner un petit schéma avant de poser le calcul.`);
+          adviceList.push(`🧠 Problèmes (${count} fautes, ${pct}%) : Bien faire reformuler la question avec ses propres mots et dessiner un petit schéma avant de poser le calcul.`);
         } else if (cat.includes("Histoire")) {
-          adviceList.push(`🏛️ Histoire (${count} faute${count > 1 ? 's' : ''}) : Réécouter la chanson des 5 grandes périodes et revoir les repères clés (-3000, 476, 1492, 1789).`);
+          adviceList.push(`🏛️ Histoire (${count} faute, ${pct}%) : Réécouter la chanson des 5 grandes périodes et revoir les repères clés (-3000 écriture, 476 Moyen Âge, 1492 Temps Modernes, 1789 Révolution).`);
         } else if (cat.includes("Sciences")) {
-          adviceList.push(`🔬 Sciences (${count} faute${count > 1 ? 's' : ''}) : Revoir les 4 familles de matériaux (métaux, céramiques/verres, organiques, plastiques) et leurs propriétés.`);
+          adviceList.push(`🔬 Sciences & Matériaux (${count} fautes, ${pct}%) : Revoir les 4 familles de matériaux (métaux conducteurs, céramiques/verres, organiques, plastiques) et la Tour Eiffel en fer puddlé.`);
         } else {
-          adviceList.push(`💡 ${cat} (${count} faute${count > 1 ? 's' : ''}) : Revoir calmement la leçon associée avec un exemple concret.`);
+          adviceList.push(`💡 ${cat} (${count} fautes, ${pct}%) : Revoir calmement la leçon associée avec un exemple concret.`);
         }
       });
 
-      const topCat = sortedCategories[0][0];
-      const priorityFocus = `Priorité N°1 : Travailler "${topCat}" lors de la prochaine session (${sortedCategories[0][1]} erreur${sortedCategories[0][1] > 1 ? 's' : ''} constatée${sortedCategories[0][1] > 1 ? 's' : ''})`;
+      const topCat = sortedCategories.length > 0 ? sortedCategories[0][0] : "Français";
+      const topCount = sortedCategories.length > 0 ? sortedCategories[0][1] : totalErrors;
+      const topPct = Math.round((topCount / effectiveTotal) * 100);
+      const priorityFocus = `Priorité N°1 : Travailler "${topCat}" lors des prochaines séances (${topCount} faute${topCount > 1 ? 's' : ''} constatée${topCount > 1 ? 's' : ''}, soit ${topPct}% des erreurs totales)`;
 
       return {
         totalErrors,
@@ -7621,7 +7685,8 @@
         breakdownPercent,
         errorDetailsList,
         revisionAdvice: adviceList.join('\n\n'),
-        priorityFocus
+        priorityFocus,
+        isPerfect: false
       };
     }
 
@@ -7744,83 +7809,106 @@
         }).join('');
       }
 
-      // Diagnostic approfondi des erreurs de la session en cours
+      // Diagnostic approfondi des erreurs de l'élève (Bilan global & séance)
       const errorDiagEl = document.getElementById('parentSessionErrorDiagnostic');
       if (errorDiagEl) {
+        const globalStats = getStudentStats();
         const analysis = analyzeSessionErrors();
-        if (analysis.totalErrors === 0) {
+        if (analysis.totalErrors === 0 && (globalStats.totalErrors || 0) === 0) {
           errorDiagEl.innerHTML = `
-            <div style="background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 2rem;">🏆</span>
+            <div style="background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 14px; box-shadow: 2px 2px 0 var(--ink);">
+              <span style="font-size: 2.2rem;">🏆</span>
               <div>
-                <strong style="color: #166534; font-size: 0.95rem; display: block; margin-bottom: 2px;">Session en cours irréprochable (100% de réussite) !</strong>
-                <span style="font-size: 0.85rem; color: #15803d;">Aucune erreur enregistrée pour le moment. Toutes les notions travaillées aujourd'hui sont parfaitement maîtrisées.</span>
+                <strong style="color: #166534; font-size: 1rem; display: block; margin-bottom: 2px;">Parcours d'entraînement exemplaire (100% de réussite) !</strong>
+                <span style="font-size: 0.88rem; color: #15803d;">Aucune erreur enregistrée. Toutes les compétences abordées sont parfaitement maîtrisées.</span>
               </div>
             </div>
           `;
         } else {
+          const effectiveTotal = (analysis.sortedCategories || []).reduce((sum, [, c]) => sum + c, 0) || analysis.totalErrors || 1;
           const breakdownChips = (analysis.sortedCategories || []).map(([cat, count]) => {
-            const pct = ((count / analysis.totalErrors) * 100).toFixed(0);
-            return `<span style="background: #fee2e2; border: 1.5px solid #dc2626; color: #991b1b; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">${escapeHtml(cat)} : <strong>${count} (${pct}%)</strong></span>`;
+            const pct = Math.round((count / effectiveTotal) * 100);
+            return `<span style="background: #fee2e2; border: 1.5px solid #dc2626; color: #991b1b; padding: 6px 12px; border-radius: 8px; font-size: 0.83rem; font-weight: 700; box-shadow: 1px 1px 0 #dc2626; display: inline-flex; align-items: center; gap: 4px;"><span>⚠️</span><span>${escapeHtml(cat)} : <strong>${count} (${pct}%)</strong></span></span>`;
           }).join(' ');
 
           const rawAdvice = analysis.revisionAdvice || '';
           const adviceBlocks = rawAdvice.split('\n\n').filter(Boolean).map(adv => {
-            return `<div style="background: #ffffff; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 8px 12px; font-size: 0.85rem; color: #78350f; margin-bottom: 6px;">${escapeHtml(adv)}</div>`;
+            return `<div style="background: #ffffff; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 10px 14px; font-size: 0.86rem; color: #78350f; margin-bottom: 8px; box-shadow: 1px 1px 0 #f59e0b; line-height: 1.45;">${escapeHtml(adv)}</div>`;
           }).join('');
 
-          const errorItems = (sessionStats.errorLogs || []).map((err, idx) => {
-            return `
-              <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; padding: 10px; margin-bottom: 8px; font-size: 0.83rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                  <strong style="color: var(--ink); font-size: 0.85rem;">[#${idx + 1}] ${escapeHtml(err.title || '')}</strong>
-                  <span style="background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${escapeHtml(err.category || '')} (${escapeHtml(err.time || '')})</span>
+          const allLogs = (sessionStats.errorLogs && sessionStats.errorLogs.length > 0) ? sessionStats.errorLogs : (globalStats.errorLogs || []);
+          let errorItemsHtml = '';
+          if (allLogs.length > 0) {
+            errorItemsHtml = allLogs.map((err, idx) => {
+              return `
+                <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 0.83rem; box-shadow: 1px 1px 0 var(--ink);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 6px;">
+                    <strong style="color: var(--ink); font-size: 0.85rem;">[#${idx + 1}] ${escapeHtml(err.title || '')}</strong>
+                    <span style="background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${escapeHtml(err.category || '')} ${err.time ? `(${escapeHtml(err.time)})` : ''}</span>
+                  </div>
+                  <div style="color: var(--ink); margin-bottom: 4px;"><strong>Énoncé :</strong> ${escapeHtml(err.question || '')}</div>
+                  <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px;">
+                    <span style="color: #dc2626; font-weight: 700;">❌ Réponse élève : "${escapeHtml(err.selected || '')}"</span>
+                    <span style="color: #16a34a; font-weight: 700;">✅ Attendu : "${escapeHtml(err.correct || '')}"</span>
+                  </div>
+                  ${err.tip ? `<div style="color: #b45309; font-size: 0.78rem; font-style: italic; background: #fefce8; padding: 4px 8px; border-radius: 6px; margin-top: 4px;">💡 Astuce : ${escapeHtml(err.tip)}</div>` : ''}
                 </div>
-                <div style="color: var(--ink); margin-bottom: 4px;"><strong>Énoncé :</strong> ${escapeHtml(err.question || '')}</div>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px;">
-                  <span style="color: #dc2626; font-weight: 700;">❌ Réponse élève : "${escapeHtml(err.selected || '')}"</span>
-                  <span style="color: #16a34a; font-weight: 700;">✅ Attendu : "${escapeHtml(err.correct || '')}"</span>
-                </div>
-                ${err.tip ? `<div style="color: #b45309; font-size: 0.78rem; font-style: italic; background: #fefce8; padding: 4px 8px; border-radius: 6px;">💡 Astuce : ${escapeHtml(err.tip)}</div>` : ''}
+              `;
+            }).join('');
+          } else {
+            errorItemsHtml = `
+              <div style="background: #f8fafc; border: 1px dashed #94a3b8; border-radius: 8px; padding: 12px; font-size: 0.82rem; color: #475569;">
+                📌 <em>Les ${analysis.totalErrors} erreurs cumulées proviennent de vos séries d'exercices précédentes. Les prochaines questions manquées seront automatiquement enregistrées ici avec leur énoncé complet, la réponse de votre enfant et la correction attendue !</em>
               </div>
             `;
-          }).join('');
+          }
 
           errorDiagEl.innerHTML = `
-            <div style="font-weight: 800; font-size: 1rem; color: #991b1b; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-              🔍 Diagnostic Détaillé des Fautes (${analysis.totalErrors} erreur${analysis.totalErrors > 1 ? 's' : ''})
+            <div style="font-weight: 800; font-size: 1.05rem; color: #991b1b; display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+              <span style="display: flex; align-items: center; gap: 8px;">
+                🔍 Diagnostic Détaillé des Fautes & Conseils de Révision (${analysis.totalErrors} faute${analysis.totalErrors > 1 ? 's' : ''} constatée${analysis.totalErrors > 1 ? 's' : ''})
+              </span>
+              <span style="font-size: 0.78rem; background: #fee2e2; color: #991b1b; border: 1.5px solid #dc2626; padding: 3px 10px; border-radius: 8px; font-weight: 800;">
+                📊 Analyse en Direct
+              </span>
             </div>
             
-            <!-- Priorité N°1 -->
-            <div style="background: #fef2f2; border: 2px solid #dc2626; border-radius: 10px; padding: 10px 14px; font-weight: 800; font-size: 0.9rem; color: #991b1b; margin-bottom: 12px;">
-              🎯 ${escapeHtml(analysis.priorityFocus)}
+            <!-- Priorité N°1 de Révision -->
+            <div style="background: #fef2f2; border: 2.5px solid #dc2626; border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 3px 3px 0 var(--ink);">
+              <div style="font-size: 0.78rem; font-weight: 800; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                🎯 PRIORITÉ N°1 DE RÉVISION
+              </div>
+              <div style="font-size: 1rem; font-weight: 900; color: #7f1d1d; line-height: 1.4;">
+                ${escapeHtml(analysis.priorityFocus)}
+              </div>
             </div>
 
             <!-- Répartition % par Type de Faute -->
-            <div style="margin-bottom: 12px;">
-              <div style="font-weight: 700; font-size: 0.85rem; color: var(--ink); margin-bottom: 6px;">
-                📊 Répartition des types de fautes (%) :
+            <div style="margin-bottom: 14px; background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 14px; box-shadow: 2px 2px 0 var(--ink);">
+              <div style="font-weight: 800; font-size: 0.9rem; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                📊 Répartition des Fautes par Type (%) :
               </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                 ${breakdownChips}
               </div>
             </div>
 
             <!-- Conseils de Révision Ciblés -->
-            <div style="background: #fffbeb; border: 2px solid #f59e0b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-              <div style="font-weight: 800; font-size: 0.9rem; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                💡 Conseils Personnalisés de Révision :
+            <div style="background: #fffbeb; border: 2.5px solid #f59e0b; border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 3px 3px 0 var(--ink);">
+              <div style="font-weight: 900; font-size: 0.95rem; color: #92400e; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                💡 Conseils Personnalisés de Révision du Tuteur :
               </div>
               ${adviceBlocks}
             </div>
 
             <!-- Détail Question par Question -->
-            <details style="background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 10px; padding: 10px;">
-              <summary style="font-weight: 800; font-size: 0.88rem; color: var(--ink); cursor: pointer;">
-                📋 Voir l'analyse question par question (${analysis.totalErrors} faute${analysis.totalErrors > 1 ? 's' : ''})
+            <details style="background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 2px 2px 0 var(--ink);">
+              <summary style="font-weight: 800; font-size: 0.9rem; color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <span>📋 Voir le journal d'erreurs question par question</span>
+                <span style="font-size: 0.75rem; color: #64748b; font-weight: 700;">(Cliquer pour déplier)</span>
               </summary>
-              <div style="margin-top: 10px;">
-                ${errorItems}
+              <div style="margin-top: 12px; border-top: 1px dashed #cbd5e1; padding-top: 10px;">
+                ${errorItemsHtml}
               </div>
             </details>
           `;
