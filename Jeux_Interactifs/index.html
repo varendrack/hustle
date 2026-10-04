@@ -5405,72 +5405,76 @@
           </div>
         </div>
 
-        <div style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 25px; border: 2px solid var(--bd-blue-light); width: 100%; max-width: 960px;">
-          <h3 style="color: var(--bd-blue-dark); font-size: 1.6rem; font-family: 'Fredoka', sans-serif; text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <span>📚</span> L'Essentiel de la Préhistoire en Images
+        <div style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.07); margin-bottom: 30px; border: 2px solid var(--bd-blue-light); width: 100%; max-width: 1000px;">
+          <h3 style="color: var(--bd-blue-dark); font-size: 1.7rem; font-family: 'Fredoka', sans-serif; text-align: center; margin-bottom: 22px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <span>📚</span> L'Essentiel de la Préhistoire en Grandes Images
           </h3>
           
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
             <!-- 1. Paléolithique -->
-            <div style="background: #f0fdfa; border-radius: 14px; border: 2px solid #99f6e4; box-shadow: 0 4px 12px rgba(20,184,166,0.12); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-              <div style="position: relative; overflow: hidden; height: 130px; background: #ccfbf1;">
-                <img src="images/paleolithique.jpg" alt="Le Paléolithique" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;">
-                <span style="position: absolute; bottom: 6px; left: 8px; background: rgba(15,118,110,0.85); color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 8px; border-radius: 20px; backdrop-filter: blur(4px);">🦴 Pierre taillée</span>
+            <div style="background: #f0fdfa; border-radius: 16px; border: 2px solid #99f6e4; box-shadow: 0 6px 16px rgba(20,184,166,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+              <div style="position: relative; overflow: hidden; height: 230px; background: #ccfbf1; cursor: pointer;" onclick="window.open('images/paleolithique.jpg', '_blank')" title="Clique pour voir en grand">
+                <img src="images/paleolithique.jpg" alt="Le Paléolithique" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(15,118,110,0.9); color: white; font-size: 0.85rem; font-weight: bold; padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.2);">🦴 Pierre taillée</span>
+                <span style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; backdrop-filter: blur(4px);">🔍 Agrandir</span>
               </div>
-              <div style="padding: 14px 14px 16px 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                <h4 style="color: #0f766e; margin-bottom: 8px; font-size: 1.08rem; font-family: 'Fredoka', sans-serif;">1. Le Paléolithique</h4>
-                <ul style="padding-left: 16px; font-size: 0.9rem; line-height: 1.45; color: #115e59; margin: 0;">
-                  <li style="margin-bottom: 5px;"><strong>Nomades</strong> (se déplacent pour chasser et cueillir).</li>
-                  <li style="margin-bottom: 5px;">Maîtrise du <strong>feu</strong> pour se chauffer et cuire.</li>
-                  <li><strong>Art pariétal</strong> : peintures rupestres (ex. Lascaux).</li>
+              <div style="padding: 18px 20px 20px 20px; flex-grow: 1; display: flex; flex-direction: column;">
+                <h4 style="color: #0f766e; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Fredoka', sans-serif;">1. Le Paléolithique</h4>
+                <ul style="padding-left: 20px; font-size: 0.98rem; line-height: 1.55; color: #115e59; margin: 0;">
+                  <li style="margin-bottom: 6px;"><strong>Nomades</strong> : se déplacent constamment pour chasser le gibier et cueillir.</li>
+                  <li style="margin-bottom: 6px;">Maîtrise du <strong>feu</strong> (se chauffer, cuire, éloigner les prédateurs).</li>
+                  <li><strong>Art pariétal</strong> : fabuleuses peintures d'animaux dans les grottes (ex. Lascaux, Chauvet).</li>
                 </ul>
               </div>
             </div>
             
             <!-- 2. Néolithique -->
-            <div style="background: #fefce8; border-radius: 14px; border: 2px solid #fef08a; box-shadow: 0 4px 12px rgba(234,179,8,0.12); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-              <div style="position: relative; overflow: hidden; height: 130px; background: #fef9c3;">
-                <img src="images/neolithique.jpg" alt="Le Néolithique" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;">
-                <span style="position: absolute; bottom: 6px; left: 8px; background: rgba(161,98,7,0.85); color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 8px; border-radius: 20px; backdrop-filter: blur(4px);">🌾 Pierre polie</span>
+            <div style="background: #fefce8; border-radius: 16px; border: 2px solid #fef08a; box-shadow: 0 6px 16px rgba(234,179,8,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+              <div style="position: relative; overflow: hidden; height: 230px; background: #fef9c3; cursor: pointer;" onclick="window.open('images/neolithique.jpg', '_blank')" title="Clique pour voir en grand">
+                <img src="images/neolithique.jpg" alt="Le Néolithique" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(161,98,7,0.9); color: white; font-size: 0.85rem; font-weight: bold; padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.2);">🌾 Pierre polie</span>
+                <span style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; backdrop-filter: blur(4px);">🔍 Agrandir</span>
               </div>
-              <div style="padding: 14px 14px 16px 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                <h4 style="color: #a16207; margin-bottom: 8px; font-size: 1.08rem; font-family: 'Fredoka', sans-serif;">2. Le Néolithique</h4>
-                <ul style="padding-left: 16px; font-size: 0.9rem; line-height: 1.45; color: #854d0e; margin: 0;">
-                  <li style="margin-bottom: 5px;"><strong>Sédentaires</strong> (premiers villages et maisons).</li>
-                  <li style="margin-bottom: 5px;">Naissance de l'<strong>agriculture</strong> et de l'<strong>élevage</strong>.</li>
-                  <li>Artisanat : <strong>poterie</strong>, céramique et tissage.</li>
+              <div style="padding: 18px 20px 20px 20px; flex-grow: 1; display: flex; flex-direction: column;">
+                <h4 style="color: #a16207; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Fredoka', sans-serif;">2. Le Néolithique</h4>
+                <ul style="padding-left: 20px; font-size: 0.98rem; line-height: 1.55; color: #854d0e; margin: 0;">
+                  <li style="margin-bottom: 6px;"><strong>Sédentaires</strong> : construction des premiers villages en dur et maisons.</li>
+                  <li style="margin-bottom: 6px;">Invention majeure : <strong>agriculture</strong> (blé, orge) et <strong>élevage</strong> (moutons, chèvres).</li>
+                  <li>Nouveaux métiers & artisanat : <strong>poterie</strong>, céramique, tissage des vêtements.</li>
                 </ul>
               </div>
             </div>
             
             <!-- 3. Âge des Métaux -->
-            <div style="background: #fff7ed; border-radius: 14px; border: 2px solid #fed7aa; box-shadow: 0 4px 12px rgba(249,115,22,0.12); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-              <div style="position: relative; overflow: hidden; height: 130px; background: #ffedd5;">
-                <img src="images/age_des_metaux.jpg" alt="L'Âge des Métaux" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;">
-                <span style="position: absolute; bottom: 6px; left: 8px; background: rgba(194,65,12,0.85); color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 8px; border-radius: 20px; backdrop-filter: blur(4px);">⛏️ Métallurgie</span>
+            <div style="background: #fff7ed; border-radius: 16px; border: 2px solid #fed7aa; box-shadow: 0 6px 16px rgba(249,115,22,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+              <div style="position: relative; overflow: hidden; height: 230px; background: #ffedd5; cursor: pointer;" onclick="window.open('images/age_des_metaux.jpg', '_blank')" title="Clique pour voir en grand">
+                <img src="images/age_des_metaux.jpg" alt="L'Âge des Métaux" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(194,65,12,0.9); color: white; font-size: 0.85rem; font-weight: bold; padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.2);">⛏️ Métallurgie</span>
+                <span style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; backdrop-filter: blur(4px);">🔍 Agrandir</span>
               </div>
-              <div style="padding: 14px 14px 16px 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                <h4 style="color: #c2410c; margin-bottom: 8px; font-size: 1.08rem; font-family: 'Fredoka', sans-serif;">3. Âge des Métaux</h4>
-                <ul style="padding-left: 16px; font-size: 0.9rem; line-height: 1.45; color: #9a3412; margin: 0;">
-                  <li style="margin-bottom: 5px;">Dès <strong>-2 500 ans</strong> av. J.-C.</li>
-                  <li style="margin-bottom: 5px;">Travail du <strong>cuivre</strong>, du <strong>bronze</strong> puis du <strong>fer</strong>.</li>
-                  <li>Outils plus solides, armes perfectionnées et parures.</li>
+              <div style="padding: 18px 20px 20px 20px; flex-grow: 1; display: flex; flex-direction: column;">
+                <h4 style="color: #c2410c; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Fredoka', sans-serif;">3. L'Âge des Métaux</h4>
+                <ul style="padding-left: 20px; font-size: 0.98rem; line-height: 1.55; color: #9a3412; margin: 0;">
+                  <li style="margin-bottom: 6px;">À partir de <strong>-2 500 ans</strong> av. J.-C.</li>
+                  <li style="margin-bottom: 6px;">Travail des métaux fondus : <strong>cuivre</strong>, puis <strong>bronze</strong> et <strong>fer</strong>.</li>
+                  <li>Outils agricoles très robustes (charrues), armes défensives et bijoux précieux (torques).</li>
                 </ul>
               </div>
             </div>
 
             <!-- 4. Fin de la Préhistoire -->
-            <div style="background: #fff1f2; border-radius: 14px; border: 2px solid #fecdd3; box-shadow: 0 4px 12px rgba(244,63,94,0.12); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-              <div style="position: relative; overflow: hidden; height: 130px; background: #ffe4e6;">
-                <img src="images/invention_ecriture.jpg" alt="Invention de l'écriture" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;">
-                <span style="position: absolute; bottom: 6px; left: 8px; background: rgba(190,18,60,0.85); color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 8px; border-radius: 20px; backdrop-filter: blur(4px);">✍️ Naissance de l'Histoire</span>
+            <div style="background: #fff1f2; border-radius: 16px; border: 2px solid #fecdd3; box-shadow: 0 6px 16px rgba(244,63,94,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+              <div style="position: relative; overflow: hidden; height: 230px; background: #ffe4e6; cursor: pointer;" onclick="window.open('images/invention_ecriture.jpg', '_blank')" title="Clique pour voir en grand">
+                <img src="images/invention_ecriture.jpg" alt="Invention de l'écriture" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(190,18,60,0.9); color: white; font-size: 0.85rem; font-weight: bold; padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.2);">✍️ Naissance de l'Histoire</span>
+                <span style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; backdrop-filter: blur(4px);">🔍 Agrandir</span>
               </div>
-              <div style="padding: 14px 14px 16px 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                <h4 style="color: #be123c; margin-bottom: 8px; font-size: 1.08rem; font-family: 'Fredoka', sans-serif;">4. Fin de la Préhistoire</h4>
-                <ul style="padding-left: 16px; font-size: 0.9rem; line-height: 1.45; color: #9f1239; margin: 0;">
-                  <li style="margin-bottom: 5px;">Invention de l'<strong>écriture</strong> (vers -3 300 / -3 000).</li>
-                  <li style="margin-bottom: 5px;">Clôture définitive de la <strong>Préhistoire</strong>.</li>
-                  <li>Début de la 1ère période historique : <strong>L'Antiquité</strong> !</li>
+              <div style="padding: 18px 20px 20px 20px; flex-grow: 1; display: flex; flex-direction: column;">
+                <h4 style="color: #be123c; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Fredoka', sans-serif;">4. Fin de la Préhistoire</h4>
+                <ul style="padding-left: 20px; font-size: 0.98rem; line-height: 1.55; color: #9f1239; margin: 0;">
+                  <li style="margin-bottom: 6px;">Invention de l'<strong>écriture</strong> (vers -3 300 / -3 000 en Mésopotamie).</li>
+                  <li style="margin-bottom: 6px;">L'écriture permet de conserver des traces écrites et marque la <strong>fin de la Préhistoire</strong>.</li>
+                  <li>Début officiel de la première grande période historique : <strong>L'Antiquité</strong> !</li>
                 </ul>
               </div>
             </div>
