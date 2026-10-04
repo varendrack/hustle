@@ -4164,6 +4164,126 @@
       white-space: nowrap;
       line-height: 1.6;
     }
+    /* ========================================================= */
+    /* 📜 DIPLÔME OFFICIEL DE DICTÉE CM2 & IMPRESSION / EXPORT   */
+    /* ========================================================= */
+    .diploma-certificate {
+      background: #fffdfa;
+      border: 8px double #b45309;
+      border-radius: 20px;
+      padding: 26px 20px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12), inset 0 0 35px rgba(254, 243, 199, 0.4);
+      text-align: center;
+      color: #1f1b18;
+      overflow: hidden;
+    }
+    .diploma-inner-frame {
+      border: 2px solid #ca8a04;
+      border-radius: 14px;
+      padding: 20px 16px;
+      position: relative;
+      background: radial-gradient(circle at center, #ffffff 65%, #fefce8 100%);
+    }
+    .diploma-header-icon {
+      font-size: 2.2rem;
+      margin-bottom: 2px;
+    }
+    .diploma-academy-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #92400e;
+      margin-bottom: 4px;
+    }
+    .diploma-main-title {
+      font-family: 'Fredoka', 'Georgia', serif;
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .diploma-student-input {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #b45309;
+      text-align: center;
+      border: none;
+      border-bottom: 2.5px dashed #ca8a04;
+      background: transparent;
+      width: 85%;
+      max-width: 380px;
+      margin: 6px auto;
+      display: block;
+      outline: none;
+      padding: 4px 8px;
+      transition: border-color 0.2s;
+    }
+    .diploma-student-input:focus {
+      border-bottom-color: #2563eb;
+      color: #1e3a8a;
+    }
+    .diploma-badge-stamp {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #ffffff;
+      border: 3px double #ffffff;
+      outline: 2.5px solid #b45309;
+      border-radius: 50%;
+      width: 88px;
+      height: 88px;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+      flex-shrink: 0;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #dicteeDiplomaModal,
+      #dicteeDiplomaModal * {
+        visibility: visible !important;
+      }
+      #dicteeDiplomaModal {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .diploma-modal-card {
+        border: none !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      .diploma-modal-actions,
+      .diploma-close-btn {
+        display: none !important;
+      }
+      .diploma-certificate {
+        box-shadow: none !important;
+        border: 6px double #b45309 !important;
+        width: 100% !important;
+        max-width: 800px !important;
+        margin: 0 auto !important;
+        page-break-inside: avoid !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -4630,9 +4750,101 @@
               <div style="font-size: 0.82rem; color: #854d0e; border-top: 1px dashed #ca8a04; padding-top: 6px;" id="dicteeOraleAdvice">
                 💡 <em>Vérifie bien : les accords des verbes (-ent), les pluriels (-s / -aux) et l'orthographe de « chasseur », « bison » et « au fond » !</em>
               </div>
+            <!-- Bloc Récompense Dictée Terminée & Diplôme -->
+            <div id="dicteeRewardPromptBox" style="margin-top: 14px; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 2px solid #f59e0b; border-radius: 14px; padding: 12px 14px; text-align: center; box-shadow: 0 3px 10px rgba(245, 158, 11, 0.2);">
+              <div style="font-size: 1rem; font-weight: 800; color: #92400e; margin-bottom: 3px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <span>🎉 Dictée terminée et relue sur ton cahier ?</span>
+              </div>
+              <p style="font-size: 0.84rem; color: #78350f; margin: 0 0 8px 0;">
+                Valide ton travail pour gagner <strong>+5 Étoiles ⭐</strong> et recevoir ton <strong>Diplôme Officiel de Dictée CM2</strong> avec Madame Claire !
+              </p>
+              <button id="btnClaimDicteeReward" onclick="claimDicteeReward()" class="action-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #ffffff; border: 2px solid #78350f; font-size: 0.98rem; padding: 10px 20px; border-radius: 12px; font-weight: 800; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3); cursor: pointer; transition: transform 0.15s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                🏅 J'ai terminé ma dictée sur cahier ! (+5 ⭐ & Diplôme)
+              </button>
             </div>
           </div>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODALE DU DIPLÔME OFFICIEL DE DICTÉE CM2 -->
+  <div id="dicteeDiplomaModal" class="ai-modal-overlay" style="display: none;">
+    <div class="ai-modal-card diploma-modal-card" style="max-width: 760px; background: #ffffff; border: 3px solid var(--ink); border-radius: 22px; padding: 22px; box-shadow: var(--shadow-comic-xl);">
+      
+      <!-- En-tête Modale -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.5rem;">🎉</span>
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0;">
+            Félicitations pour ta dictée !
+          </h3>
+          <span style="background: #fef08a; color: #854d0e; border: 1.5px solid #ca8a04; border-radius: 12px; font-size: 0.78rem; font-weight: 800; padding: 2px 8px;">+5 ⭐ Gagnées</span>
+        </div>
+        <button onclick="closeDicteeDiplomaModal()" class="diploma-close-btn" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
+      </div>
+
+      <!-- Certificat Imprimable / Téléchargeable -->
+      <div id="dicteeDiplomaCard" class="diploma-certificate">
+        <div class="diploma-inner-frame">
+          <div class="diploma-header-icon">🏛️ 📜 🌟</div>
+          <div class="diploma-academy-title">RÉPUBLIQUE DU SAVOIR • ACADÉMIE DE CM2</div>
+          <div class="diploma-main-title">DIPLÔME D'EXCELLENCE EN DICTÉE</div>
+          
+          <p style="font-size: 0.92rem; color: #475569; margin: 6px 0 2px 0;">
+            Ce diplôme d'honneur est officiellement décerné avec les félicitations à :
+          </p>
+          
+          <input type="text" id="diplomaStudentName" class="diploma-student-input" value="Champion(ne) de CM2" placeholder="Tape ton prénom..." title="Clique ici pour écrire ton prénom sur le diplôme">
+          
+          <p style="font-size: 0.95rem; line-height: 1.6; color: #1e293b; max-width: 580px; margin: 6px auto 10px;">
+            Pour avoir écouté attentivement, rédigé sur son cahier et relu avec rigueur et succès la dictée vocale :
+          </p>
+          
+          <div style="margin-bottom: 14px;">
+            <span id="diplomaDicteeTheme" style="display: inline-block; font-family: 'Fredoka', sans-serif; font-weight: 800; font-size: 1.12rem; color: #4338ca; background: #e0e7ff; border: 2px solid #6366f1; border-radius: 10px; padding: 6px 16px; box-shadow: 2px 2px 0 var(--ink);">
+              🎙️ L'art des cavernes mystérieuses
+            </span>
+          </div>
+
+          <!-- Section Bas : Tampon d'Or, Date et Signature de Madame Claire -->
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; border-top: 1.5px dashed #cbd5e1; padding-top: 14px; flex-wrap: wrap;">
+            
+            <!-- Date du jour -->
+            <div style="text-align: left; font-size: 0.84rem; color: #475569;">
+              <span style="font-weight: 700; color: #1e293b;">📅 Délivré le :</span><br>
+              <span id="diplomaDateText" style="font-weight: 800; color: #0284c7;">4 octobre 2026</span>
+            </div>
+
+            <!-- Sceau d'or 5 Étoiles -->
+            <div class="diploma-badge-stamp">
+              <span style="font-size: 0.72rem; font-weight: 900; letter-spacing: 0.5px;">⭐ 5 ÉTOILES ⭐</span>
+              <span style="font-size: 0.62rem; font-weight: 800; text-transform: uppercase;">MAÎTRISE CM2</span>
+            </div>
+
+            <!-- Signature Madame Claire -->
+            <div style="text-align: right; font-size: 0.84rem; color: #475569;">
+              <span style="font-weight: 700; color: #1e293b;">Professeure référente :</span><br>
+              <span style="font-family: 'Fredoka', cursive, sans-serif; font-weight: 800; font-size: 1.05rem; color: #b45309;">Madame Claire ✍️</span><br>
+              <span style="font-size: 0.72rem; font-style: italic; color: #64748b;">(Maîtresse bienveillante)</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions Modale (Imprimer, Télécharger, Fermer) -->
+      <div class="diploma-modal-actions" style="display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 16px; flex-wrap: wrap;">
+        <button onclick="printDicteeDiploma()" class="action-btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 11px 20px; font-size: 0.98rem; display: inline-flex; align-items: center; gap: 8px;">
+          🖨️ Imprimer mon Diplôme
+        </button>
+        <button onclick="downloadDicteeDiploma()" class="action-btn" style="background: linear-gradient(135deg, #059669, #047857); padding: 11px 20px; font-size: 0.98rem; display: inline-flex; align-items: center; gap: 8px;">
+          📥 Télécharger en Image (PNG)
+        </button>
+        <button onclick="closeDicteeDiplomaModal()" class="doc-link-btn" style="padding: 10px 18px; font-size: 0.92rem; background: #ffffff;">
+          ✨ Continuer les entraînements
+        </button>
       </div>
 
     </div>
@@ -8038,6 +8250,236 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
           btn.innerHTML = originalText;
         }
       }
+    }
+
+    // =========================================================================
+    // SYSTÈME DE RÉCOMPENSE & DIPLÔME OFFICIEL DE DICTÉE CM2
+    // =========================================================================
+    function claimDicteeReward() {
+      // Audio & Célébration
+      playSound('win');
+      triggerConfetti();
+      setTimeout(triggerConfetti, 400);
+
+      // Attribution des points & statistiques
+      addScore(5, 'francais', true);
+      recordDomainActivity('francais');
+      recordQuestionAttempt('francais', true);
+
+      // Félicitations vocales par Madame Claire
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const praisePhrases = [
+          "Félicitations pour ton travail ! Tu as obtenu cinq étoiles et ton diplôme officiel de dictée !",
+          "Bravo ! Tu as fait preuve d'une excellente concentration sur ta dictée. Voici ton diplôme d'excellence !",
+          "Magnifique travail ! Tu as mérité tes cinq étoiles d'or et ton diplôme officiel !"
+        ];
+        const randomPraise = praisePhrases[Math.floor(Math.random() * praisePhrases.length)];
+        const utter = new SpeechSynthesisUtterance(randomPraise);
+        utter.lang = 'fr-FR';
+        utter.rate = 0.88;
+        utter.pitch = 1.02;
+        const voice = DicteePlayer.getSelectedVoice();
+        if (voice) utter.voice = voice;
+        window.speechSynthesis.speak(utter);
+      }
+
+      // Mise à jour des informations du diplôme
+      const currentTitleEl = document.getElementById('dicteeOraleTitle');
+      const diplomaThemeEl = document.getElementById('diplomaDicteeTheme');
+      if (diplomaThemeEl) {
+        const titleText = currentTitleEl ? currentTitleEl.innerText.replace('🎙️', '').trim() : CURRENT_WEEK_DICTEE_WORDS.weekTitle;
+        diplomaThemeEl.innerText = `🎙️ ${titleText}`;
+      }
+
+      const diplomaDateEl = document.getElementById('diplomaDateText');
+      if (diplomaDateEl) {
+        const todayStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        diplomaDateEl.innerText = todayStr;
+      }
+
+      // Récupérer le prénom enregistré dans la mémoire locale si existant
+      const savedName = localStorage.getItem('cm2_student_name');
+      const nameInput = document.getElementById('diplomaStudentName');
+      if (nameInput && savedName) {
+        nameInput.value = savedName;
+      }
+
+      // Ouverture de la modale du diplôme
+      const diplomaModal = document.getElementById('dicteeDiplomaModal');
+      if (diplomaModal) {
+        diplomaModal.style.display = 'flex';
+      }
+
+      showAiToast("🎉 Félicitations ! +5 ⭐ ajoutées et Diplôme officiel débloqué !");
+    }
+
+    function closeDicteeDiplomaModal() {
+      const modal = document.getElementById('dicteeDiplomaModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function printDicteeDiploma() {
+      window.print();
+    }
+
+    function downloadDicteeDiploma() {
+      const studentName = (document.getElementById('diplomaStudentName')?.value || "Élève de CM2").trim();
+      const themeText = (document.getElementById('diplomaDicteeTheme')?.innerText || "L'art pariétal et la Préhistoire").replace('🎙️', '').trim();
+      const dateText = (document.getElementById('diplomaDateText')?.innerText || new Date().toLocaleDateString('fr-FR')).trim();
+
+      // Sauvegarder le prénom pour les prochaines fois
+      if (studentName && studentName !== "Champion(ne) de CM2") {
+        localStorage.setItem('cm2_student_name', studentName);
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 840;
+      const ctx = canvas.getContext('2d');
+
+      // Fond parchemin élégant
+      const gradBg = ctx.createLinearGradient(0, 0, 1200, 840);
+      gradBg.addColorStop(0, '#fefce8');
+      gradBg.addColorStop(0.5, '#ffffff');
+      gradBg.addColorStop(1, '#fef9c3');
+      ctx.fillStyle = gradBg;
+      ctx.fillRect(0, 0, 1200, 840);
+
+      // Bordure extérieure dorée double
+      ctx.lineWidth = 14;
+      ctx.strokeStyle = '#b45309';
+      ctx.strokeRect(24, 24, 1152, 792);
+
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#ca8a04';
+      ctx.strokeRect(40, 40, 1120, 760);
+
+      // Coins décoratifs
+      ctx.fillStyle = '#b45309';
+      ctx.font = '32px serif';
+      ctx.fillText('✦', 48, 72);
+      ctx.fillText('✦', 1128, 72);
+      ctx.fillText('✦', 48, 784);
+      ctx.fillText('✦', 1128, 784);
+
+      // En-tête académique
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#78350f';
+      ctx.font = 'bold 20px "Segoe UI", sans-serif';
+      ctx.fillText('🏛️ RÉPUBLIQUE DU SAVOIR • ACADÉMIE DE CM2 🌟', 600, 110);
+
+      // Grand Titre du Diplôme
+      ctx.fillStyle = '#1e3a8a';
+      ctx.font = '900 42px "Fredoka", "Segoe UI", sans-serif';
+      ctx.fillText('DIPLÔME D\'EXCELLENCE EN DICTÉE', 600, 175);
+
+      // Ruban sous le titre
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(350, 195);
+      ctx.lineTo(850, 195);
+      ctx.stroke();
+
+      // Texte de présentation
+      ctx.fillStyle = '#475569';
+      ctx.font = '500 24px "Segoe UI", sans-serif';
+      ctx.fillText('Ce diplôme d\'honneur est officiellement décerné avec les félicitations à :', 600, 260);
+
+      // Prénom de l'élève
+      ctx.fillStyle = '#b45309';
+      ctx.font = '900 48px "Fredoka", "Segoe UI", cursive, sans-serif';
+      ctx.fillText(studentName, 600, 335);
+
+      // Ligne dorée sous le prénom
+      ctx.strokeStyle = '#ca8a04';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 6]);
+      ctx.beginPath();
+      ctx.moveTo(320, 355);
+      ctx.lineTo(880, 355);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Texte d'éloge
+      ctx.fillStyle = '#1e293b';
+      ctx.font = '500 24px "Segoe UI", sans-serif';
+      ctx.fillText('Pour avoir écouté attentivement, rédigé sur son cahier et relu avec succès la dictée :', 600, 420);
+
+      // Cartouche Thème de la dictée
+      ctx.fillStyle = '#e0e7ff';
+      ctx.strokeStyle = '#6366f1';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(240, 455, 720, 60, 14);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#3730a3';
+      ctx.font = 'bold 26px "Fredoka", "Segoe UI", sans-serif';
+      ctx.fillText(`🎙️ ${themeText}`, 600, 495);
+
+      // Ligne de séparation basse
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(100, 570);
+      ctx.lineTo(1100, 570);
+      ctx.stroke();
+
+      // Bas Gauche : Date
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#64748b';
+      ctx.font = 'bold 20px "Segoe UI", sans-serif';
+      ctx.fillText('📅 Délivré le :', 120, 640);
+      ctx.fillStyle = '#0284c7';
+      ctx.font = 'bold 24px "Segoe UI", sans-serif';
+      ctx.fillText(dateText, 120, 675);
+
+      // Bas Centre : Tampon d'Or
+      ctx.save();
+      ctx.translate(600, 660);
+      const sealGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, 65);
+      sealGrad.addColorStop(0, '#fef08a');
+      sealGrad.addColorStop(0.7, '#f59e0b');
+      sealGrad.addColorStop(1, '#b45309');
+      ctx.fillStyle = sealGrad;
+      ctx.beginPath();
+      ctx.arc(0, 0, 65, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 16px "Segoe UI", sans-serif';
+      ctx.fillText('⭐ 5 ÉTOILES ⭐', 0, -12);
+      ctx.font = 'bold 13px "Segoe UI", sans-serif';
+      ctx.fillText('MAÎTRISE CM2', 0, 10);
+      ctx.fillText('MENTION BIEN', 0, 28);
+      ctx.restore();
+
+      // Bas Droite : Signature Madame Claire
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#64748b';
+      ctx.font = 'bold 20px "Segoe UI", sans-serif';
+      ctx.fillText('Professeure référente :', 1080, 630);
+      ctx.fillStyle = '#b45309';
+      ctx.font = 'bold 32px "Fredoka", cursive, sans-serif';
+      ctx.fillText('Madame Claire ✍️', 1080, 675);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = 'italic 16px "Segoe UI", sans-serif';
+      ctx.fillText('(Maîtresse bienveillante de CM2)', 1080, 705);
+
+      // Déclenchement du téléchargement de l'image
+      const link = document.createElement('a');
+      link.download = `Diplome_Dictee_CM2_${studentName.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      showAiToast("📥 Ton diplôme a été téléchargé en haute résolution !");
     }
 
     const allDicteeMotsQuestions = [
