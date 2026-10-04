@@ -7982,6 +7982,19 @@
           return;
         }
         if (this.isPlaying) return; // Prevent double playback
+        
+        if (this.isPaused) {
+          this.isPaused = false;
+          this.isPlaying = true;
+          this.updateUI();
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          } else {
+            this.speakCurrentSentence();
+          }
+          return;
+        }
+
         if (this.currentIndex >= this.sentences.length) {
           this.currentIndex = 0;
         }
@@ -7999,16 +8012,15 @@
         if (this.timer) {
           clearTimeout(this.timer);
           this.timer = null;
+        } else if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+          try {
+            window.speechSynthesis.pause();
+          } catch (e) {
+            console.warn("speechSynthesis pause error:", e);
+          }
         }
         this.isPlaying = false;
         this.isPaused = true;
-        if ('speechSynthesis' in window) {
-          try {
-            window.speechSynthesis.cancel();
-          } catch (e) {
-            console.warn("speechSynthesis cancel error:", e);
-          }
-        }
         this.updateUI();
         const statusEl = document.getElementById('dicteeOraleStatus');
         if (statusEl) {
@@ -8027,6 +8039,7 @@
         if ('speechSynthesis' in window) {
           try {
             window.speechSynthesis.cancel();
+            window.speechSynthesis.resume(); // Bug workaround
           } catch (e) {}
         }
         this.currentIndex = 0;
@@ -8048,6 +8061,7 @@
         if ('speechSynthesis' in window) {
           try {
             window.speechSynthesis.cancel();
+            window.speechSynthesis.resume(); // Bug workaround
           } catch (e) {}
         }
         this.currentIndex = Math.max(0, this.currentIndex - 1);
