@@ -7987,9 +7987,8 @@
           this.isPaused = false;
           this.isPlaying = true;
           this.updateUI();
-          if (window.speechSynthesis.paused) {
-            window.speechSynthesis.resume();
-          } else {
+          window.speechSynthesis.resume();
+          if (!window.speechSynthesis.speaking) {
             this.speakCurrentSentence();
           }
           return;
