@@ -7959,11 +7959,29 @@
         return 3500;
       },
 
+      getSpokenPunctuation(text) {
+        return text.replace(/(\.\.\.|[.!?,:;«»])/g, match => {
+          switch(match) {
+            case '...': return " points de suspension. ";
+            case '.': return " point. ";
+            case '!': return " point d'exclamation. ";
+            case '?': return " point d'interrogation. ";
+            case ':': return " deux points. ";
+            case ';': return " point virgule. ";
+            case ',': return " virgule, ";
+            case '«': return " ouvrez les guillemets, ";
+            case '»': return " fermez les guillemets, ";
+            default: return match;
+          }
+        });
+      },
+
       play() {
         if (!('speechSynthesis' in window)) {
           alert("La synthèse vocale n'est pas supportée par ce navigateur.");
           return;
         }
+        if (this.isPlaying) return; // Prevent double playback
         if (this.currentIndex >= this.sentences.length) {
           this.currentIndex = 0;
         }
@@ -8064,7 +8082,8 @@
         }
 
         const sentence = this.sentences[this.currentIndex];
-        const utter = new SpeechSynthesisUtterance(sentence);
+        const spokenText = this.getSpokenPunctuation(sentence);
+        const utter = new SpeechSynthesisUtterance(spokenText);
         utter.lang = 'fr-FR';
         utter.rate = this.rate;
         utter.pitch = this.pitch;
