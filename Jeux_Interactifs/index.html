@@ -4117,93 +4117,53 @@
         flex-shrink: 0 !important;
         height: 48px !important;
         padding: 10px 18px !important;
-    /* Style Spécifique pour la Grille des Mots de la Dictée Hebdo */
-    .dictee-row-card {
-      background: #ffffff;
+    /* Style Tableau Mots de la Dictée (Identique à la fiche CM2) */
+    .dictee-table-wrap {
+      overflow-x: auto;
+      margin: 12px 0;
+      border-radius: 12px;
       border: 2px solid var(--ink);
-      border-radius: 14px;
-      padding: 14px;
       box-shadow: var(--shadow-comic-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .dictee-row-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1.5px solid var(--ink-faint);
-      padding-bottom: 6px;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .dictee-cols-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 10px;
-    }
-    .dictee-col-box {
-      background: var(--bg-page-alt);
-      border: 1.5px solid var(--ink-faint);
-      border-radius: 10px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .dictee-col-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--ink-light);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      border-bottom: 1px dashed var(--ink-faint);
-      padding-bottom: 4px;
-    }
-    .dictee-chips-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .dictee-word-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
       background: #ffffff;
-      border: 1.5px solid var(--ink);
-      padding: 5px 9px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 700;
+    }
+    .dictee-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
       color: var(--ink);
-      cursor: pointer;
-      transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: 1.5px 1.5px 0px var(--ink);
+      background: #ffffff;
     }
-    .dictee-word-chip:hover {
-      transform: translateY(-2px);
-      background: #fef08a;
-      box-shadow: 2.5px 2.5px 0px var(--ink);
-    }
-    .dictee-word-highlight {
-      font-size: 0.72rem;
-      background: #fee2e2;
-      color: var(--bd-red-dark);
-      padding: 1px 4px;
-      border-radius: 4px;
+    .dictee-table th {
+      background: #f1f5f9;
+      color: var(--ink);
       font-weight: 800;
-      border: 1px solid #fca5a5;
+      font-size: 0.92rem;
+      text-align: center;
+      padding: 10px 8px;
+      border: 1.5px solid var(--ink);
     }
-    .dictee-word-audio {
-      font-size: 0.78rem;
-      opacity: 0.75;
+    .dictee-table td {
+      border: 1.5px solid var(--ink);
+      padding: 10px 14px;
+      vertical-align: top;
+      line-height: 1.65;
     }
-    .dictee-word-chip:hover .dictee-word-audio {
-      opacity: 1;
-      transform: scale(1.1);
+    .dictee-table td.level-col {
+      text-align: center;
+      vertical-align: middle;
+      font-weight: 800;
+      font-size: 0.88rem;
+      background: #fafaf9;
+      color: var(--ink);
+      white-space: nowrap;
+      line-height: 1.6;
+    }
+    .dictee-table mark.hl {
+      background-color: #fef08a;
+      color: var(--ink);
+      padding: 1px 2px;
+      border-radius: 2px;
+      font-weight: 800;
     }
   </style>
 </head>
@@ -4777,28 +4737,109 @@
         <div class="rule-box" style="border-left: 5px solid #d97706; background: #fffbeb;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
-              📜 Mots de la Dictée Hebdomadaire — CM2
+              📜 Les mots de la dictée (CM2)
             </span>
             <span id="dictee-week-badge" style="background: #fef08a; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #854d0e;">
               🦣 Thème : L'art pariétal & la Préhistoire
             </span>
           </div>
 
-          <div style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 12px; line-height: 1.45;">
-            💡 <em>Clique sur un mot pour entendre sa prononciation 🔊 et observer les difficultés orthographiques surlignées. Filtre par groupe ou entraîne-toi avec le quiz ci-dessous !</em>
-          </div>
+          <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px;">
+            💡 <em>Voici la grille officielle des mots de la dictée avec les difficultés orthographiques surlignées en jaune :</em>
+          </p>
 
-          <!-- Filtres par niveau -->
-          <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;" id="dictee-level-filters">
-            <button class="filter-chip active" onclick="filterDicteeWords('all', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #ffffff; cursor: pointer; font-weight: 800; font-size: 0.82rem; box-shadow: var(--shadow-comic-sm);">🌟 Tous les mots</button>
-            <button class="filter-chip" onclick="filterDicteeWords('jaune', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #fef9c3; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🟡 Groupe Jaune</button>
-            <button class="filter-chip" onclick="filterDicteeWords('vert', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #dcfce7; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🟢 Groupe Vert</button>
-            <button class="filter-chip" onclick="filterDicteeWords('violet', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #f3e8ff; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🟣 Groupe Violet</button>
-            <button class="filter-chip" onclick="filterDicteeWords('or', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #fef08a; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🥇 Groupe Or</button>
+          <!-- Tableau identique à la capture -->
+          <div class="dictee-table-wrap">
+            <table class="dictee-table">
+              <thead>
+                <tr>
+                  <th style="width: 14%;">Groupes</th>
+                  <th style="width: 26%;">Noms</th>
+                  <th style="width: 16%;">Verbes</th>
+                  <th style="width: 22%;">Adjectifs et<br>participes passés</th>
+                  <th style="width: 22%;">Mots invariables</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="level-col">
+                    jaune<br>
+                    vert<br>
+                    violet<br>
+                    or
+                  </td>
+                  <td>
+                    un <mark class="hl">an</mark><br>
+                    la p<mark class="hl">ein</mark>ture<br>
+                    l'arti<mark class="hl">s</mark>te<br>
+                    la gro<mark class="hl">tt</mark>e<br>
+                    un animal / des anim<mark class="hl">aux</mark><br>
+                    le si<mark class="hl">gn</mark>e
+                  </td>
+                  <td>
+                    r<mark class="hl">éali</mark>ser<br>
+                    v<mark class="hl">oi</mark>r
+                  </td>
+                  <td>
+                    par<mark class="hl">iéta</mark>l<br>
+                    <mark class="hl">impressio</mark>nn<mark class="hl">ant</mark><br>
+                    nombr<mark class="hl">eux</mark><br>
+                    m<mark class="hl">ystérie</mark>ux
+                  </td>
+                  <td>
+                    <mark class="hl">jadis</mark> / il <mark class="hl">y a</mark><br>
+                    <mark class="hl">aussi</mark> / m<mark class="hl">ais</mark><br>
+                    pl<mark class="hl">us</mark> / souv<mark class="hl">ent</mark><br>
+                    p<mark class="hl">end</mark>ant / tr<mark class="hl">ès</mark><br>
+                    p<mark class="hl">eu</mark> / <mark class="hl">entre</mark><br>
+                    b<mark class="hl">eaucoup</mark>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="level-col">
+                    vert<br>
+                    violet<br>
+                    or
+                  </td>
+                  <td>
+                    un <mark class="hl">être</mark> / la Pr<mark class="hl">éh</mark>istoire<br>
+                    la m<mark class="hl">ain</mark> / le p<mark class="hl">ersonna</mark>ge<br>
+                    la <mark class="hl">scène</mark> / le cha<mark class="hl">sseu</mark>r<br>
+                    un bi<mark class="hl">son</mark> / le com<mark class="hl">bat</mark>
+                  </td>
+                  <td>
+                    r<mark class="hl">a</mark>conter
+                  </td>
+                  <td>
+                    <mark class="hl">humain</mark><br>
+                    <mark class="hl">entier</mark><br>
+                    bl<mark class="hl">essé</mark>
+                  </td>
+                  <td>
+                    au <mark class="hl">fond</mark>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="level-col">
+                    violet<br>
+                    or
+                  </td>
+                  <td>
+                    le <mark class="hl">spéciali</mark>ste / l'<mark class="hl">homme</mark>
+                  </td>
+                  <td>
+                    <mark class="hl">étonner</mark>
+                  </td>
+                  <td>
+                    de<mark class="hl">ssiné</mark>
+                  </td>
+                  <td>
+                    pr<mark class="hl">écisém</mark>ent
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <!-- Grille générée dynamiquement -->
-          <div id="dictee-grid-container" style="display: flex; flex-direction: column; gap: 14px;"></div>
         </div>
 
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (Mots de la semaine)</button>
@@ -7434,206 +7475,13 @@
     // =========================================================================
     // MOTS DE LA DICTÉE HEBDOMADAIRE (ÉVOLUTIF CHAQUE SEMAINE)
     // =========================================================================
-    const CURRENT_WEEK_DICTEE = {
-      weekId: "semaine_prehistoire_art_parietal",
+    const CURRENT_WEEK_DICTEE_WORDS = {
       weekTitle: "L'art pariétal et la Préhistoire",
-      badgeText: "🦣 Thème : L'art pariétal & la Préhistoire",
-      groups: [
-        {
-          id: "groupe_jaune_vert_violet_or",
-          levels: ["jaune", "vert", "violet", "or"],
-          levelLabel: "Jaune / Vert / Violet / Or",
-          levelBadge: "🟡 Jaune / 🟢 Vert / 🟣 Violet / 🥇 Or",
-          cardBg: "#ffffff",
-          badgeBg: "#fef9c3",
-          badgeColor: "#854d0e",
-          noms: [
-            { text: "un an", highlight: "an" },
-            { text: "la peinture", highlight: "ein" },
-            { text: "l'artiste", highlight: "s" },
-            { text: "la grotte", highlight: "tt" },
-            { text: "un animal / des animaux", highlight: "aux" },
-            { text: "le signe", highlight: "gn" }
-          ],
-          verbes: [
-            { text: "réaliser", highlight: "s = [z]" },
-            { text: "voir", highlight: "oi" }
-          ],
-          adjectifs: [
-            { text: "pariétal", highlight: "ét" },
-            { text: "impressionnant", highlight: "ss / nn / ant" },
-            { text: "nombreux", highlight: "x" },
-            { text: "mystérieux", highlight: "y / x" }
-          ],
-          invariables: [
-            { text: "jadis", highlight: "s" },
-            { text: "il y a", highlight: "y a" },
-            { text: "aussi", highlight: "ss" },
-            { text: "mais", highlight: "s" },
-            { text: "plus", highlight: "s" },
-            { text: "souvent", highlight: "ent" },
-            { text: "pendant", highlight: "an / ant" },
-            { text: "très", highlight: "è / s" },
-            { text: "peu", highlight: "eu" },
-            { text: "entre", highlight: "en / re" },
-            { text: "beaucoup", highlight: "eau / p" }
-          ]
-        },
-        {
-          id: "groupe_vert_violet_or",
-          levels: ["vert", "violet", "or"],
-          levelLabel: "Vert / Violet / Or",
-          levelBadge: "🟢 Vert / 🟣 Violet / 🥇 Or",
-          cardBg: "#fdfdfd",
-          badgeBg: "#dcfce7",
-          badgeColor: "#166534",
-          noms: [
-            { text: "un être", highlight: "ê" },
-            { text: "la Préhistoire", highlight: "é / h" },
-            { text: "la main", highlight: "ain" },
-            { text: "le personnage", highlight: "nn / g" },
-            { text: "la scène", highlight: "sc / è" },
-            { text: "le chasseur", highlight: "ss" },
-            { text: "un bison", highlight: "s = [z]" },
-            { text: "le combat", highlight: "om / t" }
-          ],
-          verbes: [
-            { text: "raconter", highlight: "on / er" }
-          ],
-          adjectifs: [
-            { text: "humain", highlight: "h / ain" },
-            { text: "entier", highlight: "en / er" },
-            { text: "blessé", highlight: "ss / é" }
-          ],
-          invariables: [
-            { text: "au fond", highlight: "au / d" }
-          ]
-        },
-        {
-          id: "groupe_violet_or",
-          levels: ["violet", "or"],
-          levelLabel: "Violet / Or",
-          levelBadge: "🟣 Violet / 🥇 Or",
-          cardBg: "#fafafa",
-          badgeBg: "#f3e8ff",
-          badgeColor: "#6b21a8",
-          noms: [
-            { text: "le spécialiste", highlight: "é / s / t" },
-            { text: "l'homme", highlight: "h / mm" }
-          ],
-          verbes: [
-            { text: "étonner", highlight: "é / nn / er" }
-          ],
-          adjectifs: [
-            { text: "dessiné", highlight: "ss / é" }
-          ],
-          invariables: [
-            { text: "précisément", highlight: "é / s = [z] / ment" }
-          ]
-        }
-      ]
+      noms: ["un an", "la peinture", "l'artiste", "la grotte", "un animal / des animaux", "le signe", "un être", "la Préhistoire", "la main", "le personnage", "la scène", "le chasseur", "un bison", "le combat", "le spécialiste", "l'homme"],
+      verbes: ["réaliser", "voir", "raconter", "étonner"],
+      adjectifs: ["pariétal", "impressionnant", "nombreux", "mystérieux", "humain", "entier", "blessé", "dessiné"],
+      invariables: ["jadis", "il y a", "aussi", "mais", "plus", "souvent", "pendant", "très", "peu", "entre", "beaucoup", "au fond", "précisément"]
     };
-
-    function speakWord(text) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const clean = text.replace(/\(.*?\)/g, '').split('/')[0].trim();
-        const utter = new SpeechSynthesisUtterance(clean);
-        utter.lang = 'fr-FR';
-        utter.rate = 0.9;
-        window.speechSynthesis.speak(utter);
-      }
-    }
-
-    let currentDicteeFilter = 'all';
-
-    function filterDicteeWords(level, btnElement) {
-      currentDicteeFilter = level;
-      const filtersWrap = document.getElementById('dictee-level-filters');
-      if (filtersWrap) {
-        filtersWrap.querySelectorAll('.filter-chip').forEach(b => {
-          b.classList.remove('active');
-          b.style.boxShadow = 'none';
-        });
-      }
-      if (btnElement) {
-        btnElement.classList.add('active');
-        btnElement.style.boxShadow = 'var(--shadow-comic-sm)';
-      }
-      renderDicteeWordGrid(level);
-    }
-
-    function renderDicteeWordGrid(filterLevel = 'all') {
-      const container = document.getElementById('dictee-grid-container');
-      if (!container) return;
-
-      const badgeEl = document.getElementById('dictee-week-badge');
-      if (badgeEl && CURRENT_WEEK_DICTEE.badgeText) {
-        badgeEl.innerText = CURRENT_WEEK_DICTEE.badgeText;
-      }
-
-      const filteredGroups = CURRENT_WEEK_DICTEE.groups.filter(g => {
-        if (filterLevel === 'all') return true;
-        return g.levels.includes(filterLevel);
-      });
-
-      if (filteredGroups.length === 0) {
-        container.innerHTML = `<div style="text-align: center; color: var(--ink-light); padding: 20px;">Aucun mot trouvé pour ce filtre.</div>`;
-        return;
-      }
-
-      container.innerHTML = filteredGroups.map(group => {
-        const renderChips = (list) => {
-          if (!list || list.length === 0) return '<em style="font-size:0.8rem; color:#94a3b8;">Aucun</em>';
-          return list.map(item => `
-            <div class="dictee-word-chip" onclick="speakWord('${item.text.replace(/'/g, "\\'")}')" title="Cliquer pour écouter la prononciation">
-              <span>${item.text}</span>
-              ${item.highlight ? `<span class="dictee-word-highlight">${item.highlight}</span>` : ''}
-              <span class="dictee-word-audio">🔊</span>
-            </div>
-          `).join('');
-        };
-
-        return `
-          <div class="dictee-row-card" style="background: ${group.cardBg};">
-            <div class="dictee-row-header">
-              <span style="font-weight: 800; font-size: 0.95rem; color: var(--ink);">
-                🏷️ Palier d'apprentissage :
-              </span>
-              <span style="background: ${group.badgeBg}; color: ${group.badgeColor}; border: 1.5px solid var(--ink); padding: 3px 12px; border-radius: 12px; font-weight: 800; font-size: 0.84rem;">
-                ${group.levelBadge}
-              </span>
-            </div>
-
-            <div class="dictee-cols-grid">
-              <!-- NOMS -->
-              <div class="dictee-col-box">
-                <div class="dictee-col-title">🏷️ Noms (${group.noms.length})</div>
-                <div class="dictee-chips-wrap">${renderChips(group.noms)}</div>
-              </div>
-
-              <!-- VERBES -->
-              <div class="dictee-col-box">
-                <div class="dictee-col-title">⚡ Verbes (${group.verbes.length})</div>
-                <div class="dictee-chips-wrap">${renderChips(group.verbes)}</div>
-              </div>
-
-              <!-- ADJECTIFS & PARTICIPES -->
-              <div class="dictee-col-box">
-                <div class="dictee-col-title">✨ Adjectifs & Participes (${group.adjectifs.length})</div>
-                <div class="dictee-chips-wrap">${renderChips(group.adjectifs)}</div>
-              </div>
-
-              <!-- MOTS INVARIABLES -->
-              <div class="dictee-col-box">
-                <div class="dictee-col-title">🔒 Mots Invariables (${group.invariables.length})</div>
-                <div class="dictee-chips-wrap">${renderChips(group.invariables)}</div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
 
     const allDicteeMotsQuestions = [
       { display: "Complète l'accord sujet-verbe au présent : <em>« Jadis, les artistes préhistoriques (réaliser) <span class='blank-slot'>...</span> de fascinantes peintures sur la roche. »</em>", options: ["réalisent", "réalise", "réalisons", "réalisez"], correct: "réalisent", tip: "Le sujet est 'les artistes préhistoriques' (3e personne du pluriel, ils) -> terminaison en '-ent' !" },
@@ -8310,16 +8158,10 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
             showAiToast("✨ 3 nouveaux textes d'enquête générés par l'IA !");
           }
         } else if (subjectKey === 'francais_dictee_mots') {
-          const wordsListStr = CURRENT_WEEK_DICTEE.groups.map(g => {
-            const noms = g.noms.map(n => n.text).join(', ');
-            const verbes = g.verbes.map(v => v.text).join(', ');
-            const adjs = g.adjectifs.map(a => a.text).join(', ');
-            const invs = g.invariables.map(i => i.text).join(', ');
-            return `Niveau ${g.levelBadge} : Noms (${noms}) | Verbes (${verbes}) | Adjectifs (${adjs}) | Invariables (${invs})`;
-          }).join('\n');
+          const wordsListStr = `Noms: ${CURRENT_WEEK_DICTEE_WORDS.noms.join(', ')} | Verbes: ${CURRENT_WEEK_DICTEE_WORDS.verbes.join(', ')} | Adjectifs: ${CURRENT_WEEK_DICTEE_WORDS.adjectifs.join(', ')} | Invariables: ${CURRENT_WEEK_DICTEE_WORDS.invariables.join(', ')}`;
 
           const prompt = `Tu es un professeur de français CM2 bienveillant et rigoureux.
-Voici la liste officielle des MOTS DE LA DICTÉE DE LA SEMAINE sur le thème "${CURRENT_WEEK_DICTEE.weekTitle}" :
+Voici la liste officielle des MOTS DE LA DICTÉE DE LA SEMAINE sur le thème "${CURRENT_WEEK_DICTEE_WORDS.weekTitle}" :
 ${wordsListStr}
 
 Génère 8 questions à choix multiples (QCM) stimulantes de niveau CM2 utilisant les mots de cette liste pour faire travailler activement :
@@ -14089,7 +13931,6 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     initSessionAutoTracker();
     initCloudAutoSync();
 
-    renderDicteeWordGrid('all');
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
     renderDetectiveMission();
     renderProblemSolver();
