@@ -7612,7 +7612,7 @@
           const seriesKey = `series_${this.title}_${this.rawQuestions.map(q => q.correct).join('').slice(0, 20)}`;
           if (!isQuestionAwarded(seriesKey) && this.questions.length >= 4) {
             recordAwardedQuestion(seriesKey);
-            const res = addScore(10, this.subjectKey);
+            const res = addScore(5, this.subjectKey); // Reduced to 5 from 10
             message += `<br><br><span style='color:var(--bd-yellow); font-weight:800; font-size:1.05rem;'>🌟 BONUS SÉRIE SANS-FAUTE INÉDITE : +${res.earnedPts} ⭐ accordées !</span>`;
           }
         } else if (pct >= 60) {
