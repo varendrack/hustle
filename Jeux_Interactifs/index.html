@@ -4117,12 +4117,95 @@
         flex-shrink: 0 !important;
         height: 48px !important;
         padding: 10px 18px !important;
-        font-size: 0.95rem !important;
-        box-sizing: border-box !important;
-      }
+    /* Style Spécifique pour la Grille des Mots de la Dictée Hebdo */
+    .dictee-row-card {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-
-</style>
+    .dictee-row-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--ink-faint);
+      padding-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .dictee-cols-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .dictee-col-box {
+      background: var(--bg-page-alt);
+      border: 1.5px solid var(--ink-faint);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dictee-col-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px dashed var(--ink-faint);
+      padding-bottom: 4px;
+    }
+    .dictee-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .dictee-word-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1.5px solid var(--ink);
+      padding: 5px 9px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 1.5px 1.5px 0px var(--ink);
+    }
+    .dictee-word-chip:hover {
+      transform: translateY(-2px);
+      background: #fef08a;
+      box-shadow: 2.5px 2.5px 0px var(--ink);
+    }
+    .dictee-word-highlight {
+      font-size: 0.72rem;
+      background: #fee2e2;
+      color: var(--bd-red-dark);
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-weight: 800;
+      border: 1px solid #fca5a5;
+    }
+    .dictee-word-audio {
+      font-size: 0.78rem;
+      opacity: 0.75;
+    }
+    .dictee-word-chip:hover .dictee-word-audio {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
   <canvas id="confettiCanvas"></canvas>
@@ -4185,6 +4268,7 @@
           <option value="problemes_maths">🔢 Problèmes Mathématiques Pas à Pas (CM2)</option>
           <option value="calcul_mental">⚡ Calcul Mental & Stratégies Express</option>
           <option value="francais_homophones">🎯 Français : Homophones & Accords</option>
+          <option value="francais_dictee_mots">📜 Français : Mots de la Dictée Hebdo</option>
           <option value="francais_orthographe_s">🐍 Français : Orthographe « s » ou « ss »</option>
           <option value="francais_conjugaison">✍️ Français : Conjugaison du Présent</option>
           <option value="francais_grammaire">📖 Français : Grammaire & Déterminants</option>
@@ -4659,6 +4743,7 @@
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Semaine)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe : « s » ou « ss » (10 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
@@ -4685,6 +4770,39 @@
         </div>
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('detective', this)">🕵️‍♀️ Créer un nouveau texte à corriger avec l'IA</button>
         <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 3: Mots de la Dictée Hebdomadaire -->
+      <div id="sub-francais-dictee_mots" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #d97706; background: #fffbeb;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
+              📜 Mots de la Dictée Hebdomadaire — CM2
+            </span>
+            <span id="dictee-week-badge" style="background: #fef08a; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #854d0e;">
+              🦣 Thème : L'art pariétal & la Préhistoire
+            </span>
+          </div>
+
+          <div style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 12px; line-height: 1.45;">
+            💡 <em>Clique sur un mot pour entendre sa prononciation 🔊 et observer les difficultés orthographiques surlignées. Filtre par groupe ou entraîne-toi avec le quiz ci-dessous !</em>
+          </div>
+
+          <!-- Filtres par niveau -->
+          <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;" id="dictee-level-filters">
+            <button class="filter-chip active" onclick="filterDicteeWords('all', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #ffffff; cursor: pointer; font-weight: 800; font-size: 0.82rem; box-shadow: var(--shadow-comic-sm);">🌟 Tous les mots</button>
+            <button class="filter-chip" onclick="filterDicteeWords('jaune', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #fef9c3; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🟡 Groupe Jaune</button>
+            <button class="filter-chip" onclick="filterDicteeWords('vert', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #dcfce7; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🟢 Groupe Vert</button>
+            <button class="filter-chip" onclick="filterDicteeWords('violet', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #f3e8ff; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🟣 Groupe Violet</button>
+            <button class="filter-chip" onclick="filterDicteeWords('or', this)" style="padding: 5px 14px; border-radius: 14px; border: 1.5px solid var(--ink); background: #fef08a; cursor: pointer; font-weight: 800; font-size: 0.82rem;">🥇 Groupe Or</button>
+          </div>
+
+          <!-- Grille générée dynamiquement -->
+          <div id="dictee-grid-container" style="display: flex; flex-direction: column; gap: 14px;"></div>
+        </div>
+
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (Mots de la semaine)</button>
+        <div id="quiz-container-dictee-mots" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
       <!-- Français Sub 3: Orthographe « s » ou « ss » -->
@@ -7313,6 +7431,223 @@
       };
     }
 
+    // =========================================================================
+    // MOTS DE LA DICTÉE HEBDOMADAIRE (ÉVOLUTIF CHAQUE SEMAINE)
+    // =========================================================================
+    const CURRENT_WEEK_DICTEE = {
+      weekId: "semaine_prehistoire_art_parietal",
+      weekTitle: "L'art pariétal et la Préhistoire",
+      badgeText: "🦣 Thème : L'art pariétal & la Préhistoire",
+      groups: [
+        {
+          id: "groupe_jaune_vert_violet_or",
+          levels: ["jaune", "vert", "violet", "or"],
+          levelLabel: "Jaune / Vert / Violet / Or",
+          levelBadge: "🟡 Jaune / 🟢 Vert / 🟣 Violet / 🥇 Or",
+          cardBg: "#ffffff",
+          badgeBg: "#fef9c3",
+          badgeColor: "#854d0e",
+          noms: [
+            { text: "un an", highlight: "an" },
+            { text: "la peinture", highlight: "ein" },
+            { text: "l'artiste", highlight: "s" },
+            { text: "la grotte", highlight: "tt" },
+            { text: "un animal / des animaux", highlight: "aux" },
+            { text: "le signe", highlight: "gn" }
+          ],
+          verbes: [
+            { text: "réaliser", highlight: "s = [z]" },
+            { text: "voir", highlight: "oi" }
+          ],
+          adjectifs: [
+            { text: "pariétal", highlight: "ét" },
+            { text: "impressionnant", highlight: "ss / nn / ant" },
+            { text: "nombreux", highlight: "x" },
+            { text: "mystérieux", highlight: "y / x" }
+          ],
+          invariables: [
+            { text: "jadis", highlight: "s" },
+            { text: "il y a", highlight: "y a" },
+            { text: "aussi", highlight: "ss" },
+            { text: "mais", highlight: "s" },
+            { text: "plus", highlight: "s" },
+            { text: "souvent", highlight: "ent" },
+            { text: "pendant", highlight: "an / ant" },
+            { text: "très", highlight: "è / s" },
+            { text: "peu", highlight: "eu" },
+            { text: "entre", highlight: "en / re" },
+            { text: "beaucoup", highlight: "eau / p" }
+          ]
+        },
+        {
+          id: "groupe_vert_violet_or",
+          levels: ["vert", "violet", "or"],
+          levelLabel: "Vert / Violet / Or",
+          levelBadge: "🟢 Vert / 🟣 Violet / 🥇 Or",
+          cardBg: "#fdfdfd",
+          badgeBg: "#dcfce7",
+          badgeColor: "#166534",
+          noms: [
+            { text: "un être", highlight: "ê" },
+            { text: "la Préhistoire", highlight: "é / h" },
+            { text: "la main", highlight: "ain" },
+            { text: "le personnage", highlight: "nn / g" },
+            { text: "la scène", highlight: "sc / è" },
+            { text: "le chasseur", highlight: "ss" },
+            { text: "un bison", highlight: "s = [z]" },
+            { text: "le combat", highlight: "om / t" }
+          ],
+          verbes: [
+            { text: "raconter", highlight: "on / er" }
+          ],
+          adjectifs: [
+            { text: "humain", highlight: "h / ain" },
+            { text: "entier", highlight: "en / er" },
+            { text: "blessé", highlight: "ss / é" }
+          ],
+          invariables: [
+            { text: "au fond", highlight: "au / d" }
+          ]
+        },
+        {
+          id: "groupe_violet_or",
+          levels: ["violet", "or"],
+          levelLabel: "Violet / Or",
+          levelBadge: "🟣 Violet / 🥇 Or",
+          cardBg: "#fafafa",
+          badgeBg: "#f3e8ff",
+          badgeColor: "#6b21a8",
+          noms: [
+            { text: "le spécialiste", highlight: "é / s / t" },
+            { text: "l'homme", highlight: "h / mm" }
+          ],
+          verbes: [
+            { text: "étonner", highlight: "é / nn / er" }
+          ],
+          adjectifs: [
+            { text: "dessiné", highlight: "ss / é" }
+          ],
+          invariables: [
+            { text: "précisément", highlight: "é / s = [z] / ment" }
+          ]
+        }
+      ]
+    };
+
+    function speakWord(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const clean = text.replace(/\(.*?\)/g, '').split('/')[0].trim();
+        const utter = new SpeechSynthesisUtterance(clean);
+        utter.lang = 'fr-FR';
+        utter.rate = 0.9;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    let currentDicteeFilter = 'all';
+
+    function filterDicteeWords(level, btnElement) {
+      currentDicteeFilter = level;
+      const filtersWrap = document.getElementById('dictee-level-filters');
+      if (filtersWrap) {
+        filtersWrap.querySelectorAll('.filter-chip').forEach(b => {
+          b.classList.remove('active');
+          b.style.boxShadow = 'none';
+        });
+      }
+      if (btnElement) {
+        btnElement.classList.add('active');
+        btnElement.style.boxShadow = 'var(--shadow-comic-sm)';
+      }
+      renderDicteeWordGrid(level);
+    }
+
+    function renderDicteeWordGrid(filterLevel = 'all') {
+      const container = document.getElementById('dictee-grid-container');
+      if (!container) return;
+
+      const badgeEl = document.getElementById('dictee-week-badge');
+      if (badgeEl && CURRENT_WEEK_DICTEE.badgeText) {
+        badgeEl.innerText = CURRENT_WEEK_DICTEE.badgeText;
+      }
+
+      const filteredGroups = CURRENT_WEEK_DICTEE.groups.filter(g => {
+        if (filterLevel === 'all') return true;
+        return g.levels.includes(filterLevel);
+      });
+
+      if (filteredGroups.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--ink-light); padding: 20px;">Aucun mot trouvé pour ce filtre.</div>`;
+        return;
+      }
+
+      container.innerHTML = filteredGroups.map(group => {
+        const renderChips = (list) => {
+          if (!list || list.length === 0) return '<em style="font-size:0.8rem; color:#94a3b8;">Aucun</em>';
+          return list.map(item => `
+            <div class="dictee-word-chip" onclick="speakWord('${item.text.replace(/'/g, "\\'")}')" title="Cliquer pour écouter la prononciation">
+              <span>${item.text}</span>
+              ${item.highlight ? `<span class="dictee-word-highlight">${item.highlight}</span>` : ''}
+              <span class="dictee-word-audio">🔊</span>
+            </div>
+          `).join('');
+        };
+
+        return `
+          <div class="dictee-row-card" style="background: ${group.cardBg};">
+            <div class="dictee-row-header">
+              <span style="font-weight: 800; font-size: 0.95rem; color: var(--ink);">
+                🏷️ Palier d'apprentissage :
+              </span>
+              <span style="background: ${group.badgeBg}; color: ${group.badgeColor}; border: 1.5px solid var(--ink); padding: 3px 12px; border-radius: 12px; font-weight: 800; font-size: 0.84rem;">
+                ${group.levelBadge}
+              </span>
+            </div>
+
+            <div class="dictee-cols-grid">
+              <!-- NOMS -->
+              <div class="dictee-col-box">
+                <div class="dictee-col-title">🏷️ Noms (${group.noms.length})</div>
+                <div class="dictee-chips-wrap">${renderChips(group.noms)}</div>
+              </div>
+
+              <!-- VERBES -->
+              <div class="dictee-col-box">
+                <div class="dictee-col-title">⚡ Verbes (${group.verbes.length})</div>
+                <div class="dictee-chips-wrap">${renderChips(group.verbes)}</div>
+              </div>
+
+              <!-- ADJECTIFS & PARTICIPES -->
+              <div class="dictee-col-box">
+                <div class="dictee-col-title">✨ Adjectifs & Participes (${group.adjectifs.length})</div>
+                <div class="dictee-chips-wrap">${renderChips(group.adjectifs)}</div>
+              </div>
+
+              <!-- MOTS INVARIABLES -->
+              <div class="dictee-col-box">
+                <div class="dictee-col-title">🔒 Mots Invariables (${group.invariables.length})</div>
+                <div class="dictee-chips-wrap">${renderChips(group.invariables)}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const allDicteeMotsQuestions = [
+      { display: "Complète l'accord sujet-verbe au présent : <em>« Jadis, les artistes préhistoriques (réaliser) <span class='blank-slot'>...</span> de fascinantes peintures sur la roche. »</em>", options: ["réalisent", "réalise", "réalisons", "réalisez"], correct: "réalisent", tip: "Le sujet est 'les artistes préhistoriques' (3e personne du pluriel, ils) -> terminaison en '-ent' !" },
+      { display: "Complète avec le bon adjectif au pluriel : <em>« Au fond de la grotte, nous découvrons de (nombreux) <span class='blank-slot'>...</span> signes gravés. »</em>", options: ["nombreux", "nombreuse", "nombreuses", "nombreuxs"], correct: "nombreux", tip: "L'adjectif 'nombreux' se termine déjà par un 'x' au singulier, il ne change pas au masculin pluriel !" },
+      { display: "Orthographe (« s » ou « ss ») : <em>« Le cha<span class='blank-slot'>...</span>eur poursuit un bi<span class='blank-slot'>...</span>on au galop. »</em>", options: ["ss / s (chasseur / bison)", "s / ss (chaseur / bisson)", "ss / ss (chasseur / bisson)", "s / s (chaseur / bison)"], correct: "ss / s (chasseur / bison)", tip: "« chasseur » prend 'ss' pour faire le son [s] entre deux voyelles, alors que « bison » a un seul 's' qui fait le son [z] !" },
+      { display: "Choisis le bon mot invariable de temps : <em>« <span class='blank-slot'>...</span>, les hommes préhistoriques peignaient dans les grottes sombres. »</em>", options: ["Jadis", "Aussi", "Entre", "Beaucoup"], correct: "Jadis", tip: "« Jadis » est un mot invariable signifiant 'autrefois, dans les temps anciens' (avec un 's' muet final) !" },
+      { display: "Pluriel particulier : <em>« Dans cette scène, l'artiste a dessiné un <span class='blank-slot'>...</span> blessé et plusieurs <span class='blank-slot'>...</span> sauvages. »</em>", options: ["animal / animaux", "animaux / animal", "animal / animals", "animale / animaux"], correct: "animal / animaux", tip: "Un 'animal' au singulier devient des 'animaux' au pluriel (les noms en -al font leur pluriel en -aux) !" },
+      { display: "Accord de l'adjectif féminin pluriel : <em>« Les peintures de la grotte sont (impressionnant) <span class='blank-slot'>...</span> et (mystérieux) <span class='blank-slot'>...</span>. »</em>", options: ["impressionnantes / mystérieuses", "impressionnant / mystérieux", "impressionnants / mystérieux", "impressionnantes / mystérieuxs"], correct: "impressionnantes / mystérieuses", tip: "'peintures' est un nom féminin pluriel -> adjectifs en '-es' : 'impressionnantes' et 'mystérieuses' !" },
+      { display: "Conjugaison au présent : <em>« Le spécialiste nous (raconter) <span class='blank-slot'>...</span> précisément le combat de l'homme contre la bête. »</em>", options: ["raconte", "racontes", "racontent", "racontons"], correct: "raconte", tip: "Le sujet est 'Le spécialiste' (il, 3e personne du singulier) -> terminaison en '-e' pour un verbe du 1er groupe !" },
+      { display: "Complète l'orthographe : <em>« L'homme a de<span class='blank-slot'>...</span>iné une main entière avec préci<span class='blank-slot'>...</span>ion. »</em>", options: ["ss / s (dessiné / précision)", "s / ss (désiné / précission)", "ss / ss (dessiné / précission)", "s / s (désiné / précision)"], correct: "ss / s (dessiné / précision)", tip: "« dessiné » prend 'ss' (son [s] entre 2 voyelles) et « précision » prend un seul 's' (son [z] entre 2 voyelles) !" },
+      { display: "Orthographe des mots invariables : <em>« Les chasseurs avancent <span class='blank-slot'>...</span> de la caverne avec <span class='blank-slot'>...</span> de courage. »</em>", options: ["au fond / beaucoup", "au font / beaucou", "au fond / beaucoups", "aux fond / beaucoup"], correct: "au fond / beaucoup", tip: "« au fond » prend un 'd' muet (comme 'profondeur') et « beaucoup » se termine par un 'p' muet !" },
+      { display: "Accord avec sujet inversé : <em>« Entre les parois de la grotte (se trouver) <span class='blank-slot'>...</span> la main d'un être humain. »</em>", options: ["se trouve", "se trouvent", "se trouves", "se trouvons"], correct: "se trouve", tip: "Attention au sujet inversé : qu'est-ce qui se trouve ? 'La main d'un être humain' (singulier) -> 'se trouve' !" }
+    ];
+
     const allGrammaireQuestions = [
       { display: "Dans : <em>« <u>Ces</u> magnifiques fleurs parfument le jardin. »</em>, quelle est la nature de <strong>Ces</strong> ?", options: ["Déterminant démonstratif", "Déterminant possessif", "Article défini", "Pronom personnel"], correct: "Déterminant démonstratif", tip: "'Ces' sert à désigner / montrer du doigt -> déterminant démonstratif !" },
       { display: "Dans : <em>« Lucas range <u>ses</u> crayons dans sa trousse. »</em>, quelle est la nature de <strong>ses</strong> ?", options: ["Déterminant possessif", "Déterminant démonstratif", "Article indéfini", "Verbe"], correct: "Déterminant possessif", tip: "'ses' indique la possession (les siens) -> déterminant possessif !" },
@@ -7974,9 +8309,45 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
             triggerConfetti();
             showAiToast("✨ 3 nouveaux textes d'enquête générés par l'IA !");
           }
+        } else if (subjectKey === 'francais_dictee_mots') {
+          const wordsListStr = CURRENT_WEEK_DICTEE.groups.map(g => {
+            const noms = g.noms.map(n => n.text).join(', ');
+            const verbes = g.verbes.map(v => v.text).join(', ');
+            const adjs = g.adjectifs.map(a => a.text).join(', ');
+            const invs = g.invariables.map(i => i.text).join(', ');
+            return `Niveau ${g.levelBadge} : Noms (${noms}) | Verbes (${verbes}) | Adjectifs (${adjs}) | Invariables (${invs})`;
+          }).join('\n');
+
+          const prompt = `Tu es un professeur de français CM2 bienveillant et rigoureux.
+Voici la liste officielle des MOTS DE LA DICTÉE DE LA SEMAINE sur le thème "${CURRENT_WEEK_DICTEE.weekTitle}" :
+${wordsListStr}
+
+Génère 8 questions à choix multiples (QCM) stimulantes de niveau CM2 utilisant les mots de cette liste pour faire travailler activement :
+1. Les accords sujet-verbe au présent avec les verbes de la liste (réaliser, voir, raconter, étonner).
+2. L'accord des adjectifs qualificatifs en genre et nombre (pariétal/pariétaux/pariétales, impressionnant(s)/impressionnante(s), nombreux, mystérieux, humain, entier, blessé, dessiné).
+3. L'orthographe des sons : « s » ou « ss » (chasseur, dessin, bison, artiste, spécialiste), pluriels en -aux (animal/animaux), lettres muettes (au fond, combat, jadis, beaucoup, précisément).
+4. Les mots invariables et homophones.
+
+Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
+[
+  {
+    "display": "Phrase d'entraînement avec <span class='blank-slot'>...</span> ou mot souligné",
+    "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+    "correct": "Option correcte exacte",
+    "tip": "Astuce ou règle claire pour mémoriser l'accord ou l'orthographe"
+  }
+]`;
+          const generated = await callGeminiApi(prompt);
+          if (Array.isArray(generated) && generated.length > 0) {
+            new QuizRunner('quiz-container-dictee-mots', generated, { title: "Défis IA : Mots de la Dictée", subjectKey: 'francais' });
+            playSound('win');
+            triggerConfetti();
+            showAiToast("✨ 8 nouvelles phrases d'entraînement générées sur les mots de la semaine !");
+          }
         } else {
           const themesMap = {
             'francais_homophones': 'Homophones grammaticaux (a/à, et/est, on/ont, son/sont, ses/ces/c\'est/s\'est) CM2',
+            'francais_dictee_mots': 'Orthographe et accords CM2 sur les mots de la dictée hebdomadaire (art pariétal, préhistoire, accords sujet-verbe et adjectifs)',
             'francais_orthographe_s': 'Orthographe CM2 : Écrire « s » ou « ss » (règle du son [s] : s en début/fin de mot, s entre consonne et voyelle comme artiste/veste/escalier, et ss entre 2 voyelles comme chasseur/dessin/poisson/trousse pour éviter le son [z] comme maison/poison)',
             'francais_grammaire': 'Grammaire CM2 : rôle des déterminants, articles définis, indéfinis, possessifs, démonstratifs',
             'francais_conjugaison': 'Conjugaison CM2 : Présent de l\'indicatif (1er, 2e, 3e groupe et verbes fréquents)',
@@ -7991,6 +8362,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
 
           const containerMap = {
             'francais_homophones': 'quiz-container-homo',
+            'francais_dictee_mots': 'quiz-container-dictee-mots',
             'francais_orthographe_s': 'quiz-container-orthographe-s',
             'francais_grammaire': 'quiz-container-grammaire',
             'francais_conjugaison': 'quiz-container-conjugaison',
@@ -8048,6 +8420,9 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
         if (subject.startsWith('problemes')) {
           switchSubject('maths');
           switchSubmodule('maths', 'problemes');
+        } else if (subject === 'francais_dictee_mots') {
+          switchSubject('francais');
+          switchSubmodule('francais', 'dictee_mots');
         } else if (subject === 'francais_orthographe_s') {
           switchSubject('francais');
           switchSubmodule('francais', 'orthographe_s');
@@ -13714,9 +14089,11 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     initSessionAutoTracker();
     initCloudAutoSync();
 
+    renderDicteeWordGrid('all');
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
     renderDetectiveMission();
     renderProblemSolver();
+    new QuizRunner('quiz-container-dictee-mots', allDicteeMotsQuestions, { title: "Mots de la Dictée Hebdo", subjectKey: "francais" });
     new QuizRunner('quiz-container-orthographe-s', allOrthographeSQuestions, { title: "Orthographe : « s » ou « ss »", subjectKey: "francais" });
     new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants", subjectKey: "francais" });
     new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent", subjectKey: "francais" });
