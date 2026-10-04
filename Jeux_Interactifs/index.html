@@ -7953,17 +7953,23 @@
         return availableFrenchVoices[0] || null;
       },
 
+      getPauseDuration() {
+        if (this.rate <= 0.78) return 4500;
+        if (this.rate >= 0.92) return 2500;
+        return 3500;
+      },
+
       play() {
         if (!('speechSynthesis' in window)) {
           alert("La synthèse vocale n'est pas supportée par ce navigateur.");
           return;
         }
-        if (this.isPaused) {
-          this.isPaused = false;
-          this.isPlaying = true;
-          this.updateUI();
-          this.speakCurrentSentence();
-          return;
+        if (this.currentIndex >= this.sentences.length) {
+          this.currentIndex = 0;
+        }
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
         }
         this.isPlaying = true;
         this.isPaused = false;
@@ -7972,26 +7978,39 @@
       },
 
       pause() {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
         }
-        if (this.timer) clearTimeout(this.timer);
         this.isPlaying = false;
         this.isPaused = true;
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+          } catch (e) {
+            console.warn("speechSynthesis cancel error:", e);
+          }
+        }
         this.updateUI();
         const statusEl = document.getElementById('dicteeOraleStatus');
         if (statusEl) {
-          statusEl.innerHTML = `⏸️ <strong>Dictée en pause.</strong> Clique sur <em>« Reprendre »</em> dès que tu as fini d'écrire !`;
+          const sNum = Math.min(this.sentences.length, this.currentIndex + 1);
+          statusEl.innerHTML = `⏸️ <strong>Dictée en pause (Phrase ${sNum}/${this.sentences.length}).</strong> Prends ton temps pour écrire sur ton cahier ! Clique sur <em>« Reprendre »</em> dès que tu es prêt(e).`;
         }
       },
 
       stop() {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
         }
-        if (this.timer) clearTimeout(this.timer);
         this.isPlaying = false;
         this.isPaused = false;
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+          } catch (e) {}
+        }
         this.currentIndex = 0;
         this.updateUI();
         this.updateProgressBar();
@@ -8002,13 +8021,23 @@
       },
 
       rewind5s() {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
+        const wasPlaying = this.isPlaying;
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
         }
-        if (this.timer) clearTimeout(this.timer);
+        this.isPlaying = false;
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+          } catch (e) {}
+        }
         this.currentIndex = Math.max(0, this.currentIndex - 1);
         this.updateProgressBar();
-        if (this.isPlaying) {
+        if (wasPlaying) {
+          this.isPlaying = true;
+          this.isPaused = false;
+          this.updateUI();
           this.speakCurrentSentence();
         } else {
           this.isPaused = true;
@@ -8016,7 +8045,7 @@
           const s = this.sentences[this.currentIndex] || "";
           const statusEl = document.getElementById('dicteeOraleStatus');
           if (statusEl) {
-            statusEl.innerHTML = `⏪ <strong>Retour à la phrase ${this.currentIndex + 1}/${this.sentences.length} :</strong> <em>« ${s} »</em>`;
+            statusEl.innerHTML = `⏪ <strong>Retour à la phrase ${this.currentIndex + 1}/${this.sentences.length} :</strong> <em>« ${s} »</em> (Clique sur <em>« Reprendre »</em> pour l'écouter)`;
           }
         }
       },
@@ -8057,17 +8086,21 @@
           this.updateProgressBar();
           if (this.currentIndex < this.sentences.length) {
             if (statusEl) {
-              statusEl.innerHTML = `⏳ <em>Pause d'écriture... Prépare-toi pour la phrase suivante !</em>`;
+              statusEl.innerHTML = `⏳ <em>Pause d'écriture... Prends ton temps pour écrire ! Phrase suivante dans un instant.</em>`;
             }
+            const pauseMs = this.getPauseDuration();
             this.timer = setTimeout(() => {
               this.speakCurrentSentence();
-            }, 3500);
+            }, pauseMs);
           } else {
             this.speakCurrentSentence();
           }
         };
 
         utter.onerror = (e) => {
+          if (e.error === 'canceled' || e.error === 'interrupted') {
+            return;
+          }
           console.error("Speech error:", e);
           this.stop();
         };
