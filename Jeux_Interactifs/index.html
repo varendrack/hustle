@@ -4566,6 +4566,24 @@
             <button onclick="closeDicteeOraleModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
           </div>
 
+          <!-- Sélecteur de Voix & Rythme de Dictée -->
+          <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.85rem;">
+            <div style="display: flex; align-items: center; gap: 6px; flex: 1; min-width: 220px;">
+              <span style="font-weight: 700; color: var(--ink);">🎙️ Voix :</span>
+              <select id="dicteeVoiceSelect" onchange="DicteePlayer.onVoiceChange(this.value)" style="flex: 1; padding: 5px 8px; border-radius: 6px; border: 1.5px solid var(--ink); font-family: inherit; font-size: 0.82rem; background: #ffffff; cursor: pointer; color: var(--ink);">
+                <option value="">✨ Chargement des voix naturelles...</option>
+              </select>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-weight: 700; color: var(--ink);">⚡ Rythme :</span>
+              <select id="dicteeSpeedSelect" onchange="DicteePlayer.onSpeedChange(this.value)" style="padding: 5px 8px; border-radius: 6px; border: 1.5px solid var(--ink); font-family: inherit; font-size: 0.82rem; background: #ffffff; cursor: pointer; color: var(--ink);">
+                <option value="0.75">Lente (idéal écriture)</option>
+                <option value="0.84" selected>Normale (dictée CM2)</option>
+                <option value="0.95">Rapide</option>
+              </select>
+            </div>
+          </div>
+
           <!-- Barre de Progression -->
           <div style="margin-bottom: 14px;">
             <div style="height: 10px; background: var(--ink-faint); border-radius: 6px; border: 1.5px solid var(--ink); overflow: hidden;">
@@ -7579,7 +7597,97 @@
       invariables: ["jadis", "il y a", "aussi", "mais", "plus", "souvent", "pendant", "très", "peu", "entre", "beaucoup", "au fond", "précisément"]
     };
 
-    const DEFAULT_ORAL_DICTEE_TEXT = "Jadis, pendant la Préhistoire, les artistes réalisaient de superbes peintures dans les grottes. Au fond des cavernes, l'homme dessinait un chasseur blessé ou un bison impressionnant. Le spécialiste raconte précisément ce combat mystérieux entre l'être humain et les nombreux animaux.";
+    // Banque tournante de dictées CM2 riches et variées sur le thème de la semaine
+    const ORAL_DICTEE_BANK = [
+      {
+        title: "L'art des cavernes mystérieuses",
+        text: "Jadis, pendant la Préhistoire, les artistes réalisaient de superbes peintures dans les grottes. Au fond des cavernes, l'homme dessinait un chasseur blessé ou un bison impressionnant. Le spécialiste raconte précisément ce combat mystérieux entre l'être humain et les nombreux animaux.",
+        advice: "Vérifie bien les accords des verbes (-ent), les pluriels (-s / -aux) et l'orthographe de « chasseur », « bison » et « au fond » !"
+      },
+      {
+        title: "L'expédition au fond de la grotte",
+        text: "Il y a un an, le spécialiste découvrait une nouvelle grotte préhistorique. Les nombreux artistes d'autrefois ont réalisé des scènes impressionnantes sur la roche. L'homme et le chasseur observaient un bison blessé au cours d'un combat très difficile.",
+        advice: "Attention aux verbes à l'imparfait (-ait, -aient), à l'accord de « nombreux artistes » et aux mots invariables « très » et « au cours d'un »."
+      },
+      {
+        title: "Les signes sacrés de la Préhistoire",
+        text: "Pendant la Préhistoire, l'être humain laissait l'empreinte de sa main sur la paroi. L'artiste peignait aussi un animal rapide et des signes mystérieux. Le spécialiste raconte que ce personnage voyait le monde avec beaucoup de respect.",
+        advice: "Fais bien attention à « animal / animaux », à l'accord de « signes mystérieux » et aux invariables « jadis », « aussi », « beaucoup » !"
+      },
+      {
+        title: "Le grand bison et les artistes",
+        text: "Au fond de la grotte obscure, un artiste préhistorique réalise une peinture remarquable. Il dessine un bison impressionnant face à plusieurs chasseurs courageux. Les spécialistes étudient souvent cette scène entière pleine de mystère.",
+        advice: "Vérifie le sujet de chaque verbe (singulier ou pluriel), les adjectifs (« impressionnant », « courageux ») et l'adverbe « souvent » !"
+      },
+      {
+        title: "La fresque des animaux sauvages",
+        text: "Jadis, les hommes peignaient des animaux blessés entre deux rochers géants. Chaque personnage de la tribu participait à ce grand récit en images. Le spécialiste explique précisément la force de cet art pariétal qui étonne encore tout le monde.",
+        advice: "Pense au 'x' de « animaux », au 't' muet de « récit », et aux mots invariables « jadis », « entre », « précisément »."
+      },
+      {
+        title: "Le combat légendaire du chasseur",
+        text: "Pendant les nuits d'hiver, les anciens racontaient le combat entre l'homme et les bêtes féroces. Au fond de l'abri, la main de l'artiste traçait un bison majestueux. Cet être humain étonnait ses compagnons avec ses magnifiques peintures pariétales.",
+        advice: "Soigne les accords au pluriel (« ses magnifiques peintures ») et vérifie l'orthographe de « combat » (avec un 't' muet) et « préhistoire » !"
+      }
+    ];
+
+    let currentDicteeBankIndex = 0;
+    let availableFrenchVoices = [];
+
+    function loadFrenchVoices() {
+      if (!('speechSynthesis' in window)) return [];
+      const allVoices = window.speechSynthesis.getVoices() || [];
+      availableFrenchVoices = allVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('fr'));
+      
+      // Prioriser les voix naturelles / en ligne / féminines de haute qualité
+      availableFrenchVoices.sort((a, b) => {
+        const nameA = (a.name || "").toLowerCase();
+        const nameB = (b.name || "").toLowerCase();
+        const isNaturalA = nameA.includes('natural') || nameA.includes('online') || nameA.includes('neural') || nameA.includes('denise') || nameA.includes('audrey') || nameA.includes('google') || nameA.includes('siri') || nameA.includes('amelie') || nameA.includes('claire');
+        const isNaturalB = nameB.includes('natural') || nameB.includes('online') || nameB.includes('neural') || nameB.includes('denise') || nameB.includes('audrey') || nameB.includes('google') || nameB.includes('siri') || nameB.includes('amelie') || nameB.includes('claire');
+        if (isNaturalA && !isNaturalB) return -1;
+        if (!isNaturalA && isNaturalB) return 1;
+        return nameA.localeCompare(nameB);
+      });
+
+      populateVoiceDropdown();
+      return availableFrenchVoices;
+    }
+
+    function populateVoiceDropdown() {
+      const select = document.getElementById('dicteeVoiceSelect');
+      if (!select) return;
+      if (availableFrenchVoices.length === 0) {
+        select.innerHTML = '<option value="">Voix française par défaut du système</option>';
+        return;
+      }
+      const previousValue = select.value;
+      select.innerHTML = '';
+      availableFrenchVoices.forEach((voice, idx) => {
+        const opt = document.createElement('option');
+        opt.value = voice.voiceURI || voice.name;
+        let label = voice.name;
+        if (label.toLowerCase().includes('denise') || label.toLowerCase().includes('google') || label.toLowerCase().includes('natural') || label.toLowerCase().includes('audrey') || label.toLowerCase().includes('amelie')) {
+          label = `✨ ${voice.name} (Naturelle)`;
+        } else {
+          label = `🎙️ ${voice.name}`;
+        }
+        opt.textContent = label;
+        if (previousValue ? (opt.value === previousValue) : (idx === 0)) {
+          opt.selected = true;
+        }
+        select.appendChild(opt);
+      });
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        loadFrenchVoices();
+      };
+      setTimeout(loadFrenchVoices, 300);
+    }
+
+    const DEFAULT_ORAL_DICTEE_TEXT = ORAL_DICTEE_BANK[0].text;
 
     const DicteePlayer = {
       text: DEFAULT_ORAL_DICTEE_TEXT,
@@ -7587,7 +7695,9 @@
       currentIndex: 0,
       isPlaying: false,
       isPaused: false,
-      rate: 0.82,
+      rate: 0.84,
+      pitch: 1.02,
+      selectedVoiceURI: null,
       timer: null,
 
       init() {
@@ -7596,6 +7706,7 @@
         this.isPlaying = false;
         this.isPaused = false;
         if (this.timer) clearTimeout(this.timer);
+        loadFrenchVoices();
         this.updateUI();
         this.updateProgressBar();
       },
@@ -7603,6 +7714,29 @@
       splitIntoSentences(fullText) {
         const raw = fullText.match(/[^.!?]+[.!?]+/g) || [fullText];
         return raw.map(s => s.trim()).filter(Boolean);
+      },
+
+      onVoiceChange(voiceURI) {
+        this.selectedVoiceURI = voiceURI;
+        if (this.isPlaying) {
+          this.pause();
+          this.play();
+        }
+      },
+
+      onSpeedChange(speedVal) {
+        this.rate = parseFloat(speedVal) || 0.84;
+      },
+
+      getSelectedVoice() {
+        if (!availableFrenchVoices || availableFrenchVoices.length === 0) {
+          loadFrenchVoices();
+        }
+        if (this.selectedVoiceURI) {
+          const v = availableFrenchVoices.find(x => (x.voiceURI === this.selectedVoiceURI || x.name === this.selectedVoiceURI));
+          if (v) return v;
+        }
+        return availableFrenchVoices[0] || null;
       },
 
       play() {
@@ -7690,7 +7824,12 @@
         const utter = new SpeechSynthesisUtterance(sentence);
         utter.lang = 'fr-FR';
         utter.rate = this.rate;
-        utter.pitch = 1.05;
+        utter.pitch = this.pitch;
+
+        const voice = this.getSelectedVoice();
+        if (voice) {
+          utter.voice = voice;
+        }
 
         const statusEl = document.getElementById('dicteeOraleStatus');
         if (statusEl) {
@@ -7704,11 +7843,11 @@
           this.updateProgressBar();
           if (this.currentIndex < this.sentences.length) {
             if (statusEl) {
-              statusEl.innerHTML = `⏳ <em>Pause d'écriture (${sentence.length > 50 ? '4s' : '3s'})... Prépare-toi pour la phrase suivante !</em>`;
+              statusEl.innerHTML = `⏳ <em>Pause d'écriture... Prépare-toi pour la phrase suivante !</em>`;
             }
             this.timer = setTimeout(() => {
               this.speakCurrentSentence();
-            }, 3400);
+            }, 3500);
           } else {
             this.speakCurrentSentence();
           }
@@ -7795,56 +7934,104 @@
         btn.innerHTML = `<span class="ai-spinner" style="width:14px; height:14px; margin-right:6px;"></span> Création de la dictée...`;
       }
 
+      // Avancement immédiat dans la banque tournante (garantit une nouvelle histoire à chaque clic)
+      currentDicteeBankIndex = (currentDicteeBankIndex + 1) % ORAL_DICTEE_BANK.length;
+      const fallbackItem = ORAL_DICTEE_BANK[currentDicteeBankIndex];
+
+      const storylines = [
+        "Un voyage passionnant dans les grottes préhistoriques et la découverte de peintures de bisons.",
+        "Le quotidien d'un chasseur habile et son respect pour les animaux dessinés sur la roche.",
+        "L'artiste préhistorique qui applique les couleurs et laisse l'empreinte de sa main.",
+        "Une énigme archéologique où un spécialiste découvre des signes gravés au fond d'une caverne.",
+        "Une grande scène de chasse et la transmission des histoires jadis entre les hommes."
+      ];
+      const randomStoryAngle = storylines[Math.floor(Math.random() * storylines.length)];
+      const randomSeed = Math.floor(Math.random() * 1000000);
+
       try {
         const wordsListStr = `Noms: ${CURRENT_WEEK_DICTEE_WORDS.noms.join(', ')} | Verbes: ${CURRENT_WEEK_DICTEE_WORDS.verbes.join(', ')} | Adjectifs: ${CURRENT_WEEK_DICTEE_WORDS.adjectifs.join(', ')} | Invariables: ${CURRENT_WEEK_DICTEE_WORDS.invariables.join(', ')}`;
         const prompt = `Tu es Madame Claire, maîtresse bienveillante de CM2.
-Rédige une NOUVELLE petite dictée de 3 à 4 phrases courtes (environ 35 à 55 mots au total) sur le thème "${CURRENT_WEEK_DICTEE_WORDS.weekTitle}".
-La dictée doit utiliser un maximum de mots de cette liste officielle :
-${wordsListStr}
+Rédige une NOUVELLE dictée UNIQUE, ORIGINALE et DIFFÉRENTE de la précédente (Graine #${randomSeed}).
+Angle thématique : "${randomStoryAngle}".
+Thème de la semaine : "${CURRENT_WEEK_DICTEE_WORDS.weekTitle}".
 
-Elle doit permettre à l'élève d'écrire sur son cahier et de réviser :
-- Les accords sujet-verbe au présent
-- Les accords des adjectifs
-- Les mots invariables
-- Les règles d'orthographe (s / ss, -aux, lettres muettes).
+Contraintes pédagogiques CM2 :
+- Rédige 3 ou 4 phrases bien construites (environ 35 à 55 mots au total).
+- Intègre au moins 5 à 8 mots de cette liste hebdomadaire :
+${wordsListStr}
+- Fais travailler les accords sujet-verbe, les accords des adjectifs et les mots invariables.
 
 Renvoie STRICTEMENT un JSON valide au format suivant :
 {
-  "title": "Titre court avec émoji",
-  "text": "Texte complet de la dictée avec ponctuation claire.",
-  "advice": "Conseil de relecture actif pour les accords et pièges."
+  "title": "Titre évocateur avec émoji",
+  "text": "Texte complet de la nouvelle dictée avec ponctuation claire.",
+  "advice": "Conseil de relecture actif et bienveillant pour les accords et pièges."
 }`;
 
         const res = await callGeminiApi(prompt);
-        if (res && res.text) {
-          DicteePlayer.stop();
-          DicteePlayer.text = res.text;
-          DicteePlayer.init();
+        let finalTitle = fallbackItem.title;
+        let finalText = fallbackItem.text;
+        let finalAdvice = fallbackItem.advice;
 
-          const titleEl = document.getElementById('dicteeOraleTitle');
-          if (titleEl && res.title) titleEl.innerText = `🎙️ ${res.title}`;
-
-          const textEl = document.getElementById('dicteeOraleFullText');
-          if (textEl) textEl.innerText = res.text;
-
-          const adviceEl = document.getElementById('dicteeOraleAdvice');
-          if (adviceEl && res.advice) adviceEl.innerHTML = `💡 <em>${res.advice}</em>`;
-
-          const revealBox = document.getElementById('dicteeOraleRevealBox');
-          if (revealBox) revealBox.style.display = 'none';
-
-          const label = document.getElementById('dicteeToggleTextLabel');
-          if (label) label.innerText = 'Afficher le texte pour corriger';
-
-          const statusEl = document.getElementById('dicteeOraleStatus');
-          if (statusEl) statusEl.innerHTML = `✨ <strong>Nouvelle dictée prête !</strong> Clique sur <em>« Écouter la dictée »</em> pour commencer avec Madame Claire.`;
-
-          playSound('win');
-          triggerConfetti();
-          showAiToast("✨ Madame Claire a créé une nouvelle dictée inédite !");
+        if (res && res.text && res.text.trim().length > 20) {
+          finalTitle = res.title || fallbackItem.title;
+          finalText = res.text.trim();
+          finalAdvice = res.advice || fallbackItem.advice;
         }
+
+        DicteePlayer.stop();
+        DicteePlayer.text = finalText;
+        DicteePlayer.init();
+
+        const titleEl = document.getElementById('dicteeOraleTitle');
+        if (titleEl) titleEl.innerText = `🎙️ ${finalTitle}`;
+
+        const textEl = document.getElementById('dicteeOraleFullText');
+        if (textEl) textEl.innerText = finalText;
+
+        const adviceEl = document.getElementById('dicteeOraleAdvice');
+        if (adviceEl) adviceEl.innerHTML = `💡 <em>${finalAdvice}</em>`;
+
+        const revealBox = document.getElementById('dicteeOraleRevealBox');
+        if (revealBox) revealBox.style.display = 'none';
+
+        const label = document.getElementById('dicteeToggleTextLabel');
+        if (label) label.innerText = 'Afficher le texte pour corriger';
+
+        const statusEl = document.getElementById('dicteeOraleStatus');
+        if (statusEl) statusEl.innerHTML = `✨ <strong>Nouvelle dictée prête !</strong> Clique sur <em>« Écouter la dictée »</em> pour commencer avec Madame Claire.`;
+
+        playSound('win');
+        triggerConfetti();
+        showAiToast("✨ Madame Claire a préparé une nouvelle dictée !");
+
       } catch (err) {
-        alert("⚠️ Erreur lors de la génération de la dictée : " + err.message);
+        console.warn("API fallback to rotating bank:", err);
+        DicteePlayer.stop();
+        DicteePlayer.text = fallbackItem.text;
+        DicteePlayer.init();
+
+        const titleEl = document.getElementById('dicteeOraleTitle');
+        if (titleEl) titleEl.innerText = `🎙️ ${fallbackItem.title}`;
+
+        const textEl = document.getElementById('dicteeOraleFullText');
+        if (textEl) textEl.innerText = fallbackItem.text;
+
+        const adviceEl = document.getElementById('dicteeOraleAdvice');
+        if (adviceEl) adviceEl.innerHTML = `💡 <em>${fallbackItem.advice}</em>`;
+
+        const revealBox = document.getElementById('dicteeOraleRevealBox');
+        if (revealBox) revealBox.style.display = 'none';
+
+        const label = document.getElementById('dicteeToggleTextLabel');
+        if (label) label.innerText = 'Afficher le texte pour corriger';
+
+        const statusEl = document.getElementById('dicteeOraleStatus');
+        if (statusEl) statusEl.innerHTML = `✨ <strong>Nouvelle dictée prête !</strong> Clique sur <em>« Écouter la dictée »</em> pour commencer avec Madame Claire.`;
+
+        playSound('win');
+        triggerConfetti();
+        showAiToast(`✨ Nouvelle dictée : "${fallbackItem.title}"`);
       } finally {
         if (btn) {
           btn.disabled = false;
@@ -8413,7 +8600,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
         throw new Error("Clé API Gemini introuvable.");
       }
 
-      const models = ['gemini-3.5-flash-lite', 'gemini-3.5-flash', 'gemini-2.5-flash'];
+      const models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
       let lastError = null;
 
       for (const model of models) {
