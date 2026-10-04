@@ -12429,9 +12429,8 @@ Format JSON attendu :
           `;
         }
 
-        const speechEscaped = escapeHtml(msg.text || '').replace(/'/g, "\\'");
         const voiceBtn = !isUser ? `
-          <button class="teacher-voice-btn" onclick="speakTeacherMessage('${speechEscaped}', this)" title="Écouter l'explication à voix haute">
+          <button class="teacher-voice-btn" onclick="speakTeacherMessageIndex(${idx}, this)" title="Écouter l'explication à voix haute avec Madame Claire">
             🔊 Écouter
           </button>
         ` : '';
@@ -12668,9 +12667,48 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       if (input) setTimeout(() => input.focus(), 80);
     }
 
-    // Synthèse vocale bienveillante pour lire les réponses à voix haute
+    // =========================================================================
+    // SYNTHÈSE VOCALE MADAME CLAIRE (VOIX MICROSOFT JULIE / DÉBIT MOYEN)
+    // =========================================================================
+    let currentSpeakingTeacherBtn = null;
+
+    function getTeacherJulieVoice() {
+      if (!('speechSynthesis' in window)) return null;
+      const allVoices = window.speechSynthesis.getVoices() || [];
+      const frVoices = allVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('fr'));
+      
+      // 1. Priorité absolue demandée par l'utilisateur : Microsoft Julie
+      const julie = frVoices.find(v => {
+        const n = (v.name || '').toLowerCase();
+        return n.includes('julie');
+      });
+      if (julie) return julie;
+
+      // 2. Repli vers d'autres voix françaises naturelles / féminines de haute qualité
+      const naturalFr = frVoices.find(v => {
+        const n = (v.name || '').toLowerCase();
+        return n.includes('denise') || n.includes('google') || n.includes('natural') || n.includes('audrey') || n.includes('amelie') || n.includes('hortense') || n.includes('celine') || n.includes('virginie') || n.includes('claire');
+      });
+      if (naturalFr) return naturalFr;
+
+      return frVoices[0] || null;
+    }
+
+    function speakTeacherMessageIndex(msgIdx, btn) {
+      const msg = teacherChatMessages[msgIdx];
+      if (!msg) return;
+      
+      let textToSpeak = msg.text;
+      if (!textToSpeak) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = msg.html;
+        textToSpeak = tempDiv.textContent || tempDiv.innerText || '';
+      }
+      speakTeacherMessage(textToSpeak, btn);
+    }
+
     function speakTeacherMessage(text, btn) {
-      if (!window.speechSynthesis) {
+      if (!('speechSynthesis' in window)) {
         alert("La synthèse vocale n'est pas supportée par votre navigateur.");
         return;
       }
@@ -12678,21 +12716,36 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       if (isTeacherSpeaking) {
         window.speechSynthesis.cancel();
         isTeacherSpeaking = false;
+        if (currentSpeakingTeacherBtn) currentSpeakingTeacherBtn.innerHTML = "🔊 Écouter";
         if (btn) btn.innerHTML = "🔊 Écouter";
+        currentSpeakingTeacherBtn = null;
         return;
       }
 
       window.speechSynthesis.cancel();
-      const cleanText = text.replace(/<[^>]*>/g, '').replace(/[•—➔👉💡✨💖🌟]/g, ' ').trim();
+
+      // Nettoyage complet du texte pour une lecture orale fluide et naturelle
+      const cleanText = (text || '')
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/[•—➔👉💡✨💖🌟🎉🏛️📜]/g, ' ')
+        .replace(/[\n\r]+/g, '. ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      if (!cleanText) return;
+
       const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = 'fr-FR';
-      utterance.rate = 0.95; // Rythme posé et doux
-      utterance.pitch = 1.1; // Voix chaleureuse
+      utterance.rate = 1.0; // Débit moyen fluide demandé
+      utterance.pitch = 1.05; // Ton chaleureux et bienveillant
 
-      // Tenter de sélectionner une voix française féminine naturelle si disponible
-      const voices = window.speechSynthesis.getVoices();
-      const frVoice = voices.find(v => v.lang.startsWith('fr') && (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('audrey') || v.name.toLowerCase().includes('amelie') || v.name.toLowerCase().includes('marie') || v.name.toLowerCase().includes('virginie') || v.name.toLowerCase().includes('google français')));
-      if (frVoice) utterance.voice = frVoice;
+      // Sélection de Microsoft Julie (ou fallback naturel)
+      const selectedVoice = getTeacherJulieVoice();
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+
+      currentSpeakingTeacherBtn = btn;
 
       utterance.onstart = () => {
         isTeacherSpeaking = true;
@@ -12702,12 +12755,19 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       utterance.onend = () => {
         isTeacherSpeaking = false;
         if (btn) btn.innerHTML = "🔊 Écouter";
+        currentSpeakingTeacherBtn = null;
       };
 
-      utterance.onerror = () => {
+      utterance.onerror = (e) => {
+        console.warn("Erreur lecture vocale Madame Claire:", e);
         isTeacherSpeaking = false;
         if (btn) btn.innerHTML = "🔊 Écouter";
+        currentSpeakingTeacherBtn = null;
       };
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
 
       window.speechSynthesis.speak(utterance);
     }
