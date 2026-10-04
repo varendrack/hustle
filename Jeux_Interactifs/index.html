@@ -4532,6 +4532,94 @@
     </div>
   </div>
 
+  <!-- MODALE DICTÉE ORALE AVEC MADAME CLAIRE -->
+  <div id="dicteeOraleModal" class="ai-modal-overlay" style="display: none;">
+    <div class="ai-modal-card teacher-modal-card" style="max-width: 860px;">
+      
+      <!-- Colonne GAUCHE : Madame Claire en pied -->
+      <div class="teacher-standing-col" style="cursor: default;" title="Madame Claire dicte ton texte !">
+        <img src="images/madame_claire.jpg" alt="Madame Claire - Maîtresse Bienveillante de CM2" class="teacher-scene-bg" id="dicteeTeacherAvatar">
+        <div class="teacher-figure-badge">
+          <span>🎙️ Madame Claire • Dictée CM2</span>
+        </div>
+        <div class="teacher-speech-bubble-side">
+          « Écoute bien chaque phrase, prends ton temps pour écrire et réfléchir aux accords ! »
+        </div>
+      </div>
+
+      <!-- Colonne DROITE : Lecteur Audio & Outils de Dictée -->
+      <div class="teacher-main-col" style="padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <!-- En-tête -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--ink); padding-bottom: 12px; margin-bottom: 14px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.4rem; color: var(--ink); margin: 0;" id="dicteeOraleTitle">
+                  🎙️ La Dictée Vocale du Jour
+                </h3>
+                <span class="teacher-status-badge">🟢 Voix de Madame Claire</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin-top: 4px;">
+                🦣 Thème : L'art pariétal & la Préhistoire • Entraînement sur cahier
+              </p>
+            </div>
+            <button onclick="closeDicteeOraleModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
+          </div>
+
+          <!-- Barre de Progression -->
+          <div style="margin-bottom: 14px;">
+            <div style="height: 10px; background: var(--ink-faint); border-radius: 6px; border: 1.5px solid var(--ink); overflow: hidden;">
+              <div id="dicteeOraleProgressBar" style="width: 0%; height: 100%; background: var(--bd-blue); transition: width 0.3s ease;"></div>
+            </div>
+          </div>
+
+          <!-- Bandeau Statut & Phrase en cours -->
+          <div id="dicteeOraleStatus" style="background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 12px; padding: 14px; margin-bottom: 16px; font-size: 0.95rem; color: #1e3a8a; min-height: 60px; display: flex; align-items: center;">
+            <span>👋 Clique sur <strong>« Écouter la dictée »</strong> quand tu es prêt(e) avec ton cahier et ton stylo !</span>
+          </div>
+
+          <!-- Contrôles du Lecteur Audio -->
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+            <button id="btnDicteePlayPause" class="action-btn" onclick="toggleDicteePlayPause()" style="flex: 2; min-width: 160px; padding: 12px 18px; font-size: 1.05rem; background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+              ▶️ Écouter la dictée
+            </button>
+            <button class="action-btn" onclick="DicteePlayer.rewind5s()" style="flex: 1; min-width: 120px; padding: 12px 14px; font-size: 0.95rem; background: #ffffff; color: var(--ink); border: 2px solid var(--ink);" title="Revenir 5 secondes en arrière / phrase précédente">
+              ⏪ -5 sec
+            </button>
+            <button class="action-btn" onclick="DicteePlayer.stop()" style="flex: 1; min-width: 120px; padding: 12px 14px; font-size: 0.95rem; background: #ffffff; color: var(--ink); border: 2px solid var(--ink);" title="Recommencer depuis le début">
+              🔄 Recommencer
+            </button>
+          </div>
+
+          <!-- Zone Correction / Texte révélé -->
+          <div style="border-top: 1.5px dashed var(--ink-faint); padding-top: 12px; margin-top: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+              <button class="doc-link-btn" onclick="toggleDicteeOraleText()" style="padding: 6px 14px; font-size: 0.85rem; background: #ffffff;">
+                👁️ <span id="dicteeToggleTextLabel">Afficher le texte pour corriger</span>
+              </button>
+              <button id="btnGenNewOralDictee" class="ai-gen-btn" onclick="generateNewOralDicteeWithAi()" style="padding: 6px 14px; font-size: 0.82rem;">
+                ✨ Encore une autre dictée (IA)
+              </button>
+            </div>
+
+            <div id="dicteeOraleRevealBox" style="display: none; background: #fefce8; border: 2px solid #ca8a04; border-radius: 12px; padding: 14px; font-size: 0.95rem; line-height: 1.7; color: #713f12; margin-top: 8px;">
+              <div style="font-weight: 800; color: #854d0e; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                <span>📝 Texte de la dictée pour relecture active :</span>
+              </div>
+              <p id="dicteeOraleFullText" style="margin-bottom: 8px; font-family: 'Fredoka', sans-serif; font-size: 1.05rem; letter-spacing: 0.3px;">
+                Jadis, pendant la Préhistoire, les artistes réalisaient de superbes peintures dans les grottes. Au fond des cavernes, l'homme dessinait un chasseur blessé ou un bison impressionnant. Le spécialiste raconte précisément ce combat mystérieux entre l'être humain et les nombreux animaux.
+              </p>
+              <div style="font-size: 0.82rem; color: #854d0e; border-top: 1px dashed #ca8a04; padding-top: 6px;" id="dicteeOraleAdvice">
+                💡 <em>Vérifie bien : les accords des verbes (-ent), les pluriels (-s / -aux) et l'orthographe de « chasseur », « bison » et « au fond » !</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- MODALE AIDE-MOI À COMPRENDRE ! (MADAME CLAIRE — MAÎTRESSE VIRTUELLE BIENVEILLANTE) -->
   <div id="teacherHelpModal" class="ai-modal-overlay" style="display: none;">
     <div class="ai-modal-card teacher-modal-card">
@@ -4823,6 +4911,31 @@
               </tbody>
             </table>
           </div>
+        </div>
+
+        <!-- Outil Dictée Vocale avec Madame Claire -->
+        <div style="background: linear-gradient(135deg, #fdfbf7, #fef3c7); border: 2.5px solid var(--ink); border-radius: 16px; padding: 16px; margin: 14px 0; box-shadow: var(--shadow-comic-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--ink); flex-shrink: 0; box-shadow: 2px 2px 0 var(--ink);">
+              <img src="images/madame_claire.jpg" alt="Madame Claire" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%;">
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--ink);">
+                  🎙️ Outil « Dictée Orale » avec Madame Claire
+                </span>
+                <span style="background: #e0e7ff; color: #3730a3; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 10px; font-weight: 800; font-size: 0.76rem;">
+                  Écoute & Écriture
+                </span>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--ink-light); margin-top: 4px;">
+                Madame Claire te dicte le texte phrase par phrase avec boutons Play/Pause, retour 5 sec et relecture active !
+              </p>
+            </div>
+          </div>
+          <button class="action-btn" onclick="openDicteeOraleModal()" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 12px 22px; font-size: 1.02rem; display: inline-flex; align-items: center; gap: 8px;">
+            <span>🎙️ Lancer la Dictée Vocale</span>
+          </button>
         </div>
 
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (Mots de la semaine)</button>
@@ -7465,6 +7578,280 @@
       adjectifs: ["pariétal", "impressionnant", "nombreux", "mystérieux", "humain", "entier", "blessé", "dessiné"],
       invariables: ["jadis", "il y a", "aussi", "mais", "plus", "souvent", "pendant", "très", "peu", "entre", "beaucoup", "au fond", "précisément"]
     };
+
+    const DEFAULT_ORAL_DICTEE_TEXT = "Jadis, pendant la Préhistoire, les artistes réalisaient de superbes peintures dans les grottes. Au fond des cavernes, l'homme dessinait un chasseur blessé ou un bison impressionnant. Le spécialiste raconte précisément ce combat mystérieux entre l'être humain et les nombreux animaux.";
+
+    const DicteePlayer = {
+      text: DEFAULT_ORAL_DICTEE_TEXT,
+      sentences: [],
+      currentIndex: 0,
+      isPlaying: false,
+      isPaused: false,
+      rate: 0.82,
+      timer: null,
+
+      init() {
+        this.sentences = this.splitIntoSentences(this.text);
+        this.currentIndex = 0;
+        this.isPlaying = false;
+        this.isPaused = false;
+        if (this.timer) clearTimeout(this.timer);
+        this.updateUI();
+        this.updateProgressBar();
+      },
+
+      splitIntoSentences(fullText) {
+        const raw = fullText.match(/[^.!?]+[.!?]+/g) || [fullText];
+        return raw.map(s => s.trim()).filter(Boolean);
+      },
+
+      play() {
+        if (!('speechSynthesis' in window)) {
+          alert("La synthèse vocale n'est pas supportée par ce navigateur.");
+          return;
+        }
+        if (this.isPaused) {
+          this.isPaused = false;
+          this.isPlaying = true;
+          this.updateUI();
+          this.speakCurrentSentence();
+          return;
+        }
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.updateUI();
+        this.speakCurrentSentence();
+      },
+
+      pause() {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        if (this.timer) clearTimeout(this.timer);
+        this.isPlaying = false;
+        this.isPaused = true;
+        this.updateUI();
+        const statusEl = document.getElementById('dicteeOraleStatus');
+        if (statusEl) {
+          statusEl.innerHTML = `⏸️ <strong>Dictée en pause.</strong> Clique sur <em>« Reprendre »</em> dès que tu as fini d'écrire !`;
+        }
+      },
+
+      stop() {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        if (this.timer) clearTimeout(this.timer);
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.currentIndex = 0;
+        this.updateUI();
+        this.updateProgressBar();
+        const statusEl = document.getElementById('dicteeOraleStatus');
+        if (statusEl) {
+          statusEl.innerHTML = `👋 Prêt(e) pour la dictée avec Madame Claire ! Clique sur <strong>« Écouter la dictée »</strong>.`;
+        }
+      },
+
+      rewind5s() {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        if (this.timer) clearTimeout(this.timer);
+        this.currentIndex = Math.max(0, this.currentIndex - 1);
+        this.updateProgressBar();
+        if (this.isPlaying) {
+          this.speakCurrentSentence();
+        } else {
+          this.isPaused = true;
+          this.updateUI();
+          const s = this.sentences[this.currentIndex] || "";
+          const statusEl = document.getElementById('dicteeOraleStatus');
+          if (statusEl) {
+            statusEl.innerHTML = `⏪ <strong>Retour à la phrase ${this.currentIndex + 1}/${this.sentences.length} :</strong> <em>« ${s} »</em>`;
+          }
+        }
+      },
+
+      speakCurrentSentence() {
+        if (!this.isPlaying) return;
+        if (this.currentIndex >= this.sentences.length) {
+          this.stop();
+          playSound('win');
+          triggerConfetti();
+          const statusEl = document.getElementById('dicteeOraleStatus');
+          if (statusEl) {
+            statusEl.innerHTML = `🎉 <strong>Dictée terminée avec succès !</strong> Tu peux maintenant relire attentivement et cliquer sur <em>« Afficher le texte pour corriger »</em>.`;
+          }
+          return;
+        }
+
+        const sentence = this.sentences[this.currentIndex];
+        const utter = new SpeechSynthesisUtterance(sentence);
+        utter.lang = 'fr-FR';
+        utter.rate = this.rate;
+        utter.pitch = 1.05;
+
+        const statusEl = document.getElementById('dicteeOraleStatus');
+        if (statusEl) {
+          statusEl.innerHTML = `🗣️ <strong>Phrase ${this.currentIndex + 1}/${this.sentences.length} :</strong> <em>« ${sentence} »</em>`;
+        }
+        this.updateProgressBar();
+
+        utter.onend = () => {
+          if (!this.isPlaying) return;
+          this.currentIndex++;
+          this.updateProgressBar();
+          if (this.currentIndex < this.sentences.length) {
+            if (statusEl) {
+              statusEl.innerHTML = `⏳ <em>Pause d'écriture (${sentence.length > 50 ? '4s' : '3s'})... Prépare-toi pour la phrase suivante !</em>`;
+            }
+            this.timer = setTimeout(() => {
+              this.speakCurrentSentence();
+            }, 3400);
+          } else {
+            this.speakCurrentSentence();
+          }
+        };
+
+        utter.onerror = (e) => {
+          console.error("Speech error:", e);
+          this.stop();
+        };
+
+        window.speechSynthesis.speak(utter);
+      },
+
+      updateUI() {
+        const playBtn = document.getElementById('btnDicteePlayPause');
+        const avatarEl = document.getElementById('dicteeTeacherAvatar');
+        if (playBtn) {
+          if (this.isPlaying) {
+            playBtn.innerHTML = `⏸️ Pause`;
+            playBtn.style.background = 'linear-gradient(135deg, #ea580c, #c2410c)';
+          } else if (this.isPaused) {
+            playBtn.innerHTML = `▶️ Reprendre`;
+            playBtn.style.background = 'linear-gradient(135deg, #16a34a, #15803d)';
+          } else {
+            playBtn.innerHTML = `▶️ Écouter la dictée`;
+            playBtn.style.background = 'linear-gradient(135deg, #2563eb, #1d4ed8)';
+          }
+        }
+        if (avatarEl) {
+          if (this.isPlaying) avatarEl.style.filter = 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.7))';
+          else avatarEl.style.filter = 'none';
+        }
+      },
+
+      updateProgressBar() {
+        const bar = document.getElementById('dicteeOraleProgressBar');
+        if (bar && this.sentences.length > 0) {
+          const pct = Math.min(100, Math.round((this.currentIndex / this.sentences.length) * 100));
+          bar.style.width = pct + '%';
+        }
+      }
+    };
+
+    function openDicteeOraleModal() {
+      const modal = document.getElementById('dicteeOraleModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        DicteePlayer.init();
+      }
+    }
+
+    function closeDicteeOraleModal() {
+      DicteePlayer.stop();
+      const modal = document.getElementById('dicteeOraleModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function toggleDicteePlayPause() {
+      if (DicteePlayer.isPlaying) {
+        DicteePlayer.pause();
+      } else {
+        DicteePlayer.play();
+      }
+    }
+
+    function toggleDicteeOraleText() {
+      const box = document.getElementById('dicteeOraleRevealBox');
+      const label = document.getElementById('dicteeToggleTextLabel');
+      if (!box || !label) return;
+      if (box.style.display === 'none' || box.style.display === '') {
+        box.style.display = 'block';
+        label.innerText = 'Masquer le texte';
+      } else {
+        box.style.display = 'none';
+        label.innerText = 'Afficher le texte pour corriger';
+      }
+    }
+
+    async function generateNewOralDicteeWithAi() {
+      const btn = document.getElementById('btnGenNewOralDictee');
+      const originalText = btn ? btn.innerHTML : "";
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="ai-spinner" style="width:14px; height:14px; margin-right:6px;"></span> Création de la dictée...`;
+      }
+
+      try {
+        const wordsListStr = `Noms: ${CURRENT_WEEK_DICTEE_WORDS.noms.join(', ')} | Verbes: ${CURRENT_WEEK_DICTEE_WORDS.verbes.join(', ')} | Adjectifs: ${CURRENT_WEEK_DICTEE_WORDS.adjectifs.join(', ')} | Invariables: ${CURRENT_WEEK_DICTEE_WORDS.invariables.join(', ')}`;
+        const prompt = `Tu es Madame Claire, maîtresse bienveillante de CM2.
+Rédige une NOUVELLE petite dictée de 3 à 4 phrases courtes (environ 35 à 55 mots au total) sur le thème "${CURRENT_WEEK_DICTEE_WORDS.weekTitle}".
+La dictée doit utiliser un maximum de mots de cette liste officielle :
+${wordsListStr}
+
+Elle doit permettre à l'élève d'écrire sur son cahier et de réviser :
+- Les accords sujet-verbe au présent
+- Les accords des adjectifs
+- Les mots invariables
+- Les règles d'orthographe (s / ss, -aux, lettres muettes).
+
+Renvoie STRICTEMENT un JSON valide au format suivant :
+{
+  "title": "Titre court avec émoji",
+  "text": "Texte complet de la dictée avec ponctuation claire.",
+  "advice": "Conseil de relecture actif pour les accords et pièges."
+}`;
+
+        const res = await callGeminiApi(prompt);
+        if (res && res.text) {
+          DicteePlayer.stop();
+          DicteePlayer.text = res.text;
+          DicteePlayer.init();
+
+          const titleEl = document.getElementById('dicteeOraleTitle');
+          if (titleEl && res.title) titleEl.innerText = `🎙️ ${res.title}`;
+
+          const textEl = document.getElementById('dicteeOraleFullText');
+          if (textEl) textEl.innerText = res.text;
+
+          const adviceEl = document.getElementById('dicteeOraleAdvice');
+          if (adviceEl && res.advice) adviceEl.innerHTML = `💡 <em>${res.advice}</em>`;
+
+          const revealBox = document.getElementById('dicteeOraleRevealBox');
+          if (revealBox) revealBox.style.display = 'none';
+
+          const label = document.getElementById('dicteeToggleTextLabel');
+          if (label) label.innerText = 'Afficher le texte pour corriger';
+
+          const statusEl = document.getElementById('dicteeOraleStatus');
+          if (statusEl) statusEl.innerHTML = `✨ <strong>Nouvelle dictée prête !</strong> Clique sur <em>« Écouter la dictée »</em> pour commencer avec Madame Claire.`;
+
+          playSound('win');
+          triggerConfetti();
+          showAiToast("✨ Madame Claire a créé une nouvelle dictée inédite !");
+        }
+      } catch (err) {
+        alert("⚠️ Erreur lors de la génération de la dictée : " + err.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      }
+    }
 
     const allDicteeMotsQuestions = [
       { display: "Complète l'accord sujet-verbe au présent : <em>« Jadis, les artistes préhistoriques (réaliser) <span class='blank-slot'>...</span> de fascinantes peintures sur la roche. »</em>", options: ["réalisent", "réalise", "réalisons", "réalisez"], correct: "réalisent", tip: "Le sujet est 'les artistes préhistoriques' (3e personne du pluriel, ils) -> terminaison en '-ent' !" },
