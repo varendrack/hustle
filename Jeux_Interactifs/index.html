@@ -4185,7 +4185,9 @@
           <option value="problemes_maths">🔢 Problèmes Mathématiques Pas à Pas (CM2)</option>
           <option value="calcul_mental">⚡ Calcul Mental & Stratégies Express</option>
           <option value="francais_homophones">🎯 Français : Homophones & Accords</option>
+          <option value="francais_orthographe_s">🐍 Français : Orthographe « s » ou « ss »</option>
           <option value="francais_conjugaison">✍️ Français : Conjugaison du Présent</option>
+          <option value="francais_grammaire">📖 Français : Grammaire & Déterminants</option>
           <option value="histoire_cm2">🏛️ Histoire : Préhistoire & Périodes</option>
           <option value="sciences_materiaux">🔬 Sciences : Matériaux & Tour Eiffel</option>
         </select>
@@ -4657,6 +4659,7 @@
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe : « s » ou « ss » (10 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
       </div>
@@ -4684,7 +4687,45 @@
         <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
-      <!-- Français Sub 3: Grammaire G1 -->
+      <!-- Français Sub 3: Orthographe « s » ou « ss » -->
+      <div id="sub-francais-orthographe_s" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid var(--bd-blue); background: var(--bd-cream);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--bd-blue-dark);">
+              📘 Orthographe 4 : Écrire « s » ou « ss »
+            </span>
+            <span style="background: var(--bd-yellow-light); border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #854d0e;">
+              🐍 Le son [s] = le « sss » du serpent
+            </span>
+          </div>
+
+          <div style="margin-bottom: 10px; padding: 8px 12px; background: rgba(255,255,255,0.7); border-radius: 8px; border: 1px solid var(--ink-faint); font-size: 0.92rem;">
+            💡 <strong>Rappel des voyelles :</strong> <span style="letter-spacing: 2px; font-weight: 800; color: var(--bd-red);">a - e - i - o - u - y</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 10px;">
+            <div style="background: #ffffff; padding: 12px; border-radius: 10px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: var(--bd-blue-dark); font-size: 0.95rem;">👉 La lettre « s » toute seule se prononce [s] :</strong>
+              <ul style="margin: 6px 0 0 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li><strong>Entre une voyelle et une consonne</strong> (ex : <em>un arti<strong style="color:var(--bd-red);">s</strong>te</em>, <em>l'e<strong style="color:var(--bd-red);">s</strong>calier</em>, <em>une ve<strong style="color:var(--bd-red);">s</strong>te</em>)</li>
+                <li><strong>En début ou en fin de mot</strong> (ex : <em>un <strong style="color:var(--bd-red);">s</strong>igne</em>, <em>un o<strong style="color:var(--bd-red);">s</strong></em>, <em>du <strong style="color:var(--bd-red);">s</strong>ucre</em>, <em>un bu<strong style="color:var(--bd-red);">s</strong></em>)</li>
+              </ul>
+            </div>
+
+            <div style="background: #ffffff; padding: 12px; border-radius: 10px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: var(--bd-red); font-size: 0.95rem;">👉 On écrit « ss » :</strong>
+              <ul style="margin: 6px 0 0 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li><strong>Pour obtenir le son [s] ENTRE DEUX VOYELLES</strong> (ex : <em>un cha<strong style="color:var(--bd-red);">ss</strong>eur</em>, <em>un de<strong style="color:var(--bd-red);">ss</strong>in</em>, <em>une trou<strong style="color:var(--bd-red);">ss</strong>e</em>, <em>un poi<strong style="color:var(--bd-red);">ss</strong>on</em>)</li>
+                <li>⚠️ <em>Attention au piège : un seul « s » entre 2 voyelles se prononce [z] ! (ex : une mai<strong style="color:var(--bd-green);">s</strong>on, un poi<strong style="color:var(--bd-green);">s</strong>on)</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_s', this)">✨ Générer de nouvelles questions « s » ou « ss » (IA)</button>
+        <div id="quiz-container-orthographe-s" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 4: Grammaire G1 -->
       <div id="sub-francais-grammaire" class="submodule-content">
         <div class="video-doc-card">
           <div class="video-doc-header">
@@ -4697,7 +4738,7 @@
         <div id="quiz-container-grammaire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
-      <!-- Français Sub 4: Conjugaison -->
+      <!-- Français Sub 5: Conjugaison -->
       <div id="sub-francais-conjugaison" class="submodule-content">
         <div class="rule-box">
           ⏳ <strong>Le Présent de l'Indicatif (Fiche Padlet de Maîtresse France)</strong><br>
@@ -7283,6 +7324,19 @@
       { display: "Parmi ces mots, lequel est un <strong>article défini</strong> ?", options: ["les", "des", "ses", "mes"], correct: "les", tip: "'le, la, les, l'' sont les articles définis !" }
     ];
 
+    const allOrthographeSQuestions = [
+      { display: "Complète le mot : <em>« Le cha<span class='blank-slot'>...</span>eur suit la piste du cerf dans les bois. »</em> (son [s] entre deux voyelles : <strong>a</strong> et <strong>e</strong>)", options: ["ss", "s", "c", "ç"], correct: "ss", tip: "Entre deux voyelles ('a' et 'e'), on écrit « ss » pour faire le son [s]. Avec un seul 's', on lirait 'chazeur' !" },
+      { display: "Complète le mot : <em>« L'arti<span class='blank-slot'>...</span>te peint un magnifique tableau. »</em> (son [s] entre la voyelle <strong>i</strong> et la consonne <strong>t</strong>)", options: ["s", "ss", "z", "x"], correct: "s", tip: "Entre une voyelle ('i') et une consonne ('t'), un seul « s » suffit pour faire le son [s] : un artiste !" },
+      { display: "Complète le mot : <em>« Le <span class='blank-slot'>...</span>igne blanc glisse sur l'eau du lac. »</em> (son [s] en début de mot)", options: ["s", "ss", "z", "sc"], correct: "s", tip: "En début de mot, on écrit toujours un seul « s » (on ne commence jamais un mot par 'ss') !" },
+      { display: "Complète le mot : <em>« Le chien ronge un vieil o<span class='blank-slot'>...</span> dans son panier. »</em> (son [s] en fin de mot)", options: ["s", "ss", "x", "ce"], correct: "s", tip: "En fin de mot, on écrit un seul « s » : un os !" },
+      { display: "Complète le mot : <em>« Tom réalise un superbe de<span class='blank-slot'>...</span>in au crayon. »</em> (son [s] entre deux voyelles : <strong>e</strong> et <strong>i</strong>)", options: ["ss", "s", "c", "z"], correct: "ss", tip: "Entre deux voyelles ('e' et 'i'), on met « ss » pour obtenir le son [s] : un dessin !" },
+      { display: "Dans quel mot la lettre « s » toute seule se prononce-t-elle <strong>[z]</strong> (comme l'abeille) ?", options: ["Une maison", "Un signe", "Une veste", "Un artiste"], correct: "Une maison", tip: "Dans 'maison', le 's' se trouve entre deux voyelles ('i' et 'o'), donc il se prononce [z] !" },
+      { display: "Complète la phrase : <em>« Après le repas, nous dégustons un délicieux de<span class='blank-slot'>...</span>ert. »</em>", options: ["ss (dessert)", "s (désert)", "c (décert)", "z (dézert)"], correct: "ss (dessert)", tip: "Un 'dessert' (gourmandise sucrée) s'écrit avec « ss » ! Le 'désert' avec un seul 's' est une zone aride et sans eau." },
+      { display: "Complète le mot : <em>« Léa range ses stylos dans sa trou<span class='blank-slot'>...</span>e. »</em> (son [s] entre deux voyelles : <strong>u</strong> et <strong>e</strong>)", options: ["ss", "s", "z", "c"], correct: "ss", tip: "Entre les deux voyelles ('u' et 'e'), on écrit « ss » : une trousse !" },
+      { display: "Complète le mot : <em>« Les enfants montent l'e<span class='blank-slot'>...</span>calier sans faire de bruit. »</em> (son [s] entre la voyelle <strong>e</strong> et la consonne <strong>c</strong>)", options: ["s", "ss", "z", "x"], correct: "s", tip: "Entre une voyelle ('e') et une consonne ('c'), un seul « s » suffit : un escalier !" },
+      { display: "Quelle phrase est correctement orthographiée ?", options: ["Le poisson rouge nage dans l'aquarium.", "Le poison rouge nage dans l'aquarium.", "Le poicon rouge nage dans l'aquarium.", "Le poizon rouge nage dans l'aquarium."], correct: "Le poisson rouge nage dans l'aquarium.", tip: "Un 'poisson' (animal) prend « ss » entre deux voyelles. Avec un seul 's', c'est du 'poison' !" }
+    ];
+
     const allConjugaisonQuestions = [
       { display: "Conjugue au présent : <em>« Les enfants (faire) <span class='blank-slot'>...</span> leurs devoirs. »</em>", options: ["font", "faisent", "faisons", "fait"], correct: "font", tip: "Verbe faire à la 3e personne du pluriel (ils) -> 'ils font' !" },
       { display: "Conjugue au présent : <em>« Nous (choisir) <span class='blank-slot'>...</span> un bon livre. »</em>", options: ["choisissons", "choisons", "choisit", "choisissez"], correct: "choisissons", tip: "Verbe du 2e groupe en -ir -> terminaison '-issons' avec nous !" },
@@ -7923,6 +7977,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
         } else {
           const themesMap = {
             'francais_homophones': 'Homophones grammaticaux (a/à, et/est, on/ont, son/sont, ses/ces/c\'est/s\'est) CM2',
+            'francais_orthographe_s': 'Orthographe CM2 : Écrire « s » ou « ss » (règle du son [s] : s en début/fin de mot, s entre consonne et voyelle comme artiste/veste/escalier, et ss entre 2 voyelles comme chasseur/dessin/poisson/trousse pour éviter le son [z] comme maison/poison)',
             'francais_grammaire': 'Grammaire CM2 : rôle des déterminants, articles définis, indéfinis, possessifs, démonstratifs',
             'francais_conjugaison': 'Conjugaison CM2 : Présent de l\'indicatif (1er, 2e, 3e groupe et verbes fréquents)',
             'maths_soustraction': 'Calcul et opérations CM2 : soustraction posée, cassage de dizaine et calculs avec retenue',
@@ -7936,6 +7991,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
 
           const containerMap = {
             'francais_homophones': 'quiz-container-homo',
+            'francais_orthographe_s': 'quiz-container-orthographe-s',
             'francais_grammaire': 'quiz-container-grammaire',
             'francais_conjugaison': 'quiz-container-conjugaison',
             'maths_soustraction': 'quiz-container-soustraction',
@@ -7992,8 +8048,14 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
         if (subject.startsWith('problemes')) {
           switchSubject('maths');
           switchSubmodule('maths', 'problemes');
+        } else if (subject === 'francais_orthographe_s') {
+          switchSubject('francais');
+          switchSubmodule('francais', 'orthographe_s');
         } else if (subject.startsWith('francais')) {
           switchSubject('francais');
+          if (subject === 'francais_homophones') switchSubmodule('francais', 'homophones');
+          else if (subject === 'francais_grammaire') switchSubmodule('francais', 'grammaire');
+          else if (subject === 'francais_conjugaison') switchSubmodule('francais', 'conjugaison');
         } else if (subject.startsWith('histoire')) {
           switchSubject('histoire');
         } else if (subject.startsWith('sciences')) {
@@ -13655,6 +13717,7 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
     renderDetectiveMission();
     renderProblemSolver();
+    new QuizRunner('quiz-container-orthographe-s', allOrthographeSQuestions, { title: "Orthographe : « s » ou « ss »", subjectKey: "francais" });
     new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants", subjectKey: "francais" });
     new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent", subjectKey: "francais" });
     new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage", subjectKey: "maths" });
