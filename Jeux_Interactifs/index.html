@@ -4117,53 +4117,52 @@
         flex-shrink: 0 !important;
         height: 48px !important;
         padding: 10px 18px !important;
-    /* Style Tableau Mots de la Dictée (Identique à la fiche CM2) */
+      }
+    }
+
+    /* Style Tableau Mots de la Dictée (Véritable grille avec bordures nettes) */
     .dictee-table-wrap {
       overflow-x: auto;
-      margin: 12px 0;
+      margin: 14px 0;
       border-radius: 12px;
-      border: 2px solid var(--ink);
-      box-shadow: var(--shadow-comic-sm);
+      border: 2px solid #1f1b18;
+      box-shadow: 4px 4px 0px #1f1b18;
       background: #ffffff;
     }
     .dictee-table {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-      color: var(--ink);
+      border-collapse: collapse !important;
+      font-size: 0.96rem;
+      color: #1f1b18;
       background: #ffffff;
     }
     .dictee-table th {
       background: #f1f5f9;
-      color: var(--ink);
+      color: #0f172a;
       font-weight: 800;
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       text-align: center;
-      padding: 10px 8px;
-      border: 1.5px solid var(--ink);
+      padding: 12px 10px;
+      border: 1.5px solid #1f1b18 !important;
     }
     .dictee-table td {
-      border: 1.5px solid var(--ink);
-      padding: 10px 14px;
+      border: 1.5px solid #1f1b18 !important;
+      padding: 12px 14px;
       vertical-align: top;
-      line-height: 1.65;
+      line-height: 1.7;
+    }
+    .dictee-table tbody tr:nth-child(even) {
+      background: #fafaf9;
     }
     .dictee-table td.level-col {
       text-align: center;
       vertical-align: middle;
       font-weight: 800;
-      font-size: 0.88rem;
-      background: #fafaf9;
-      color: var(--ink);
+      font-size: 0.9rem;
+      background: #f8fafc;
+      color: #334155;
       white-space: nowrap;
       line-height: 1.6;
-    }
-    .dictee-table mark.hl {
-      background-color: #fef08a;
-      color: var(--ink);
-      padding: 1px 2px;
-      border-radius: 2px;
-      font-weight: 800;
     }
   </style>
 </head>
@@ -4745,7 +4744,7 @@
           </div>
 
           <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px;">
-            💡 <em>Voici la grille officielle des mots de la dictée avec les difficultés orthographiques surlignées en jaune :</em>
+            💡 <em>Voici la grille officielle des mots de la dictée :</em>
           </p>
 
           <!-- Tableau identique à la capture -->
@@ -4769,30 +4768,30 @@
                     or
                   </td>
                   <td>
-                    un <mark class="hl">an</mark><br>
-                    la p<mark class="hl">ein</mark>ture<br>
-                    l'arti<mark class="hl">s</mark>te<br>
-                    la gro<mark class="hl">tt</mark>e<br>
-                    un animal / des anim<mark class="hl">aux</mark><br>
-                    le si<mark class="hl">gn</mark>e
+                    un an<br>
+                    la peinture<br>
+                    l'artiste<br>
+                    la grotte<br>
+                    un animal / des animaux<br>
+                    le signe
                   </td>
                   <td>
-                    r<mark class="hl">éali</mark>ser<br>
-                    v<mark class="hl">oi</mark>r
+                    réaliser<br>
+                    voir
                   </td>
                   <td>
-                    par<mark class="hl">iéta</mark>l<br>
-                    <mark class="hl">impressio</mark>nn<mark class="hl">ant</mark><br>
-                    nombr<mark class="hl">eux</mark><br>
-                    m<mark class="hl">ystérie</mark>ux
+                    pariétal<br>
+                    impressionnant<br>
+                    nombreux<br>
+                    mystérieux
                   </td>
                   <td>
-                    <mark class="hl">jadis</mark> / il <mark class="hl">y a</mark><br>
-                    <mark class="hl">aussi</mark> / m<mark class="hl">ais</mark><br>
-                    pl<mark class="hl">us</mark> / souv<mark class="hl">ent</mark><br>
-                    p<mark class="hl">end</mark>ant / tr<mark class="hl">ès</mark><br>
-                    p<mark class="hl">eu</mark> / <mark class="hl">entre</mark><br>
-                    b<mark class="hl">eaucoup</mark>
+                    jadis / il y a<br>
+                    aussi / mais<br>
+                    plus / souvent<br>
+                    pendant / très<br>
+                    peu / entre<br>
+                    beaucoup
                   </td>
                 </tr>
                 <tr>
@@ -4802,21 +4801,21 @@
                     or
                   </td>
                   <td>
-                    un <mark class="hl">être</mark> / la Pr<mark class="hl">éh</mark>istoire<br>
-                    la m<mark class="hl">ain</mark> / le p<mark class="hl">ersonna</mark>ge<br>
-                    la <mark class="hl">scène</mark> / le cha<mark class="hl">sseu</mark>r<br>
-                    un bi<mark class="hl">son</mark> / le com<mark class="hl">bat</mark>
+                    un être / la Préhistoire<br>
+                    la main / le personnage<br>
+                    la scène / le chasseur<br>
+                    un bison / le combat
                   </td>
                   <td>
-                    r<mark class="hl">a</mark>conter
+                    raconter
                   </td>
                   <td>
-                    <mark class="hl">humain</mark><br>
-                    <mark class="hl">entier</mark><br>
-                    bl<mark class="hl">essé</mark>
+                    humain<br>
+                    entier<br>
+                    blessé
                   </td>
                   <td>
-                    au <mark class="hl">fond</mark>
+                    au fond
                   </td>
                 </tr>
                 <tr>
@@ -4825,16 +4824,16 @@
                     or
                   </td>
                   <td>
-                    le <mark class="hl">spéciali</mark>ste / l'<mark class="hl">homme</mark>
+                    le spécialiste / l'homme
                   </td>
                   <td>
-                    <mark class="hl">étonner</mark>
+                    étonner
                   </td>
                   <td>
-                    de<mark class="hl">ssiné</mark>
+                    dessiné
                   </td>
                   <td>
-                    pr<mark class="hl">écisém</mark>ent
+                    précisément
                   </td>
                 </tr>
               </tbody>
