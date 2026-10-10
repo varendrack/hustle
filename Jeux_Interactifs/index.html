@@ -4535,6 +4535,281 @@
       margin: 8px 0;
       box-shadow: var(--shadow-comic);
     }
+
+    /* ========================================================= */
+    /* 📐 STUDIO GÉOMÉTRIE & TABLEAU BLANC INTERACTIF (CM2)      */
+    /* ========================================================= */
+    .geo-grid-rules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .geo-rule-card {
+      background: #ffffff;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .geo-rule-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1.5px solid var(--ink);
+      width: fit-content;
+    }
+    .geo-rule-badge.droite { background: #e0f2fe; color: #0369a1; }
+    .geo-rule-badge.segment { background: #fee2e2; color: #b91c1c; }
+    .geo-rule-badge.demi { background: #fef3c7; color: #b45309; }
+    .geo-rule-badge.secante { background: #f3e8ff; color: #7e22ce; }
+    .geo-rule-badge.milieu { background: #dcfce7; color: #15803d; }
+    .geo-rule-badge.usage { background: #ffedd5; color: #c2410c; }
+
+    .geo-rule-title {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .geo-notation-box {
+      background: #f8fafc;
+      border: 2px dashed #94a3b8;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .geo-diagram-svg {
+      background: #fcfbf9;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      height: 80px;
+      width: 100%;
+      display: block;
+    }
+
+    /* Atelier Tableau Blanc */
+    .geo-studio-card {
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-comic);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .geo-studio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+    }
+    .geo-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #f8fafc;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 8px 12px;
+      align-items: center;
+    }
+    .geo-tool-btn {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 7px 13px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .geo-tool-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .geo-tool-btn.active {
+      background: var(--bd-yellow);
+      color: #000;
+      box-shadow: inset 1.5px 1.5px 0 var(--ink), 1px 1px 0 var(--ink);
+      transform: translate(1px, 1px);
+    }
+    .geo-tool-btn.danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #991b1b;
+    }
+    .geo-tool-btn.success {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #166534;
+    }
+    .geo-tool-btn.primary {
+      background: #dbeafe;
+      color: #1e40af;
+      border-color: #1d4ed8;
+    }
+    .geo-canvas-wrap {
+      position: relative;
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
+      touch-action: none;
+      min-height: 520px;
+    }
+    #geoCanvas {
+      display: block;
+      width: 100%;
+      height: 520px;
+      cursor: crosshair;
+      background: #fdfdfe;
+    }
+    .geo-canvas-hud {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      pointer-events: none;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 5;
+    }
+    .geo-ruler-overlay {
+      position: absolute;
+      background: rgba(254, 243, 199, 0.92);
+      border: 2px solid #b45309;
+      border-radius: 6px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      z-index: 10;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .geo-ruler-overlay:active {
+      cursor: grabbing;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    @media (min-width: 960px) {
+      .geo-studio-body {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 16px;
+      }
+    }
+    .geo-checklist-card {
+      background: #fdfbf7;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: fit-content;
+    }
+    .geo-step-item {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.86rem;
+      line-height: 1.4;
+      transition: all 0.2s ease;
+    }
+    .geo-step-item.pending {
+      border-color: #cbd5e1;
+      opacity: 0.85;
+    }
+    .geo-step-item.success {
+      background: #f0fdf4;
+      border-color: #22c55e;
+      border-width: 2px;
+    }
+    .geo-step-item.error {
+      background: #fef2f2;
+      border-color: #ef4444;
+      border-width: 2px;
+    }
+    .geo-step-badge {
+      font-size: 1.1rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .geo-cahier-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .geo-cahier-modal.active {
+      display: flex;
+    }
+    .geo-cahier-modal-content {
+      background: #ffffff;
+      border: 4px solid var(--ink);
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
@@ -4596,6 +4871,7 @@
         </label>
         <select id="aiSubjectSelect" class="ai-config-input" style="background: #ffffff; cursor: pointer; color: var(--ink);">
           <option value="problemes_maths">🔢 Problèmes Mathématiques Pas à Pas (CM2)</option>
+          <option value="maths_geometrie">📐 Géométrie : Droites, Segments & Sécantes</option>
           <option value="calcul_mental">⚡ Calcul Mental & Stratégies Express</option>
           <option value="francais_homophones">🎯 Français : Homophones & Accords</option>
           <option value="francais_dictee_mots">📜 Français : Mots de la Dictée Hebdo</option>
@@ -5532,6 +5808,7 @@
         <button class="submodule-btn active" onclick="switchSubmodule('maths', 'problemes')">🧠 Résolution de Problèmes (Pas à Pas)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'chrono')">⚡ Calcul Rapide & Stratégies</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + Quiz)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'geometrie')">📐 Géométrie : Droites, Segments & Sécantes (Atelier Tracé)</button>
       </div>
 
       <!-- Maths Sub 1: Résolution de Problèmes Pas à Pas -->
@@ -5627,7 +5904,365 @@
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('maths_soustraction', this)">✨ Générer de nouvelles soustractions par cassage (IA)</button>
         <div id="quiz-container-soustraction" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
+
+      <!-- Maths Sub 4: Géométrie - Droites, Segments, Sécantes & Atelier Tableau Blanc -->
+      <div id="sub-maths-geometrie" class="submodule-content">
+        <!-- Fiche Flash Tuteur Géométrie -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #0284c7; margin-bottom: 20px;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title">📐 Leçon Officielle CM2 : Droites, Segments, Demi-droites & Sécantes</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink);">Programme Officiel CM2</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold">
+              <span class="tutor-flash-label" style="color: #ca8a04;">🎯 Règle d'or des Notations</span>
+              <span><strong>( )</strong> = Droite infinie | <strong>[ ]</strong> = Segment délimité | <strong>[ )</strong> = Demi-droite | <strong>AB = 6 cm</strong> = Longueur mesurée (sans crochets !).</span>
+            </div>
+            <div class="tutor-flash-item tip">
+              <span class="tutor-flash-label" style="color: #059669;">🔍 Réflexe Tracé & Soin</span>
+              <span>Crayon à mine bien taillée (2H ou HB), règle propre et plaquée fermement. Un point se repère <strong>toujours par une croix fine ×</strong> et une <strong>lettre majuscule d'imprimerie</strong>.</span>
+            </div>
+            <div class="tutor-flash-item trap">
+              <span class="tutor-flash-label" style="color: #dc2626;">🚫 Le Piège Classique</span>
+              <span>Deux droites sécantes se coupent en <strong>un seul point</strong>. Si elles forment 4 angles droits, elles sont <em>perpendiculaires</em>. Si elles ne se coupent jamais, elles sont <em>parallèles</em>.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grille des 6 Notions Clés -->
+        <div class="geo-grid-rules">
+          <!-- Carte 1 : La Droite -->
+          <div class="geo-rule-card">
+            <div class="geo-rule-badge droite">♾️ Illimitée</div>
+            <h4 class="geo-rule-title">📏 1. La Droite $(d)$ ou $(AB)$</h4>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              Une droite est une ligne droite <strong>infinie</strong> : elle ne s'arrête jamais ni à gauche ni à droite. <strong>On ne peut jamais la mesurer !</strong>
+            </p>
+            <div class="geo-notation-box">
+              <span>Notation :</span>
+              <span style="color: #0284c7;">$(d)$ ou $(AB)$ entre parenthèses</span>
+            </div>
+            <svg class="geo-diagram-svg" viewBox="0 0 320 80">
+              <!-- Grid lines faint -->
+              <line x1="0" y1="40" x2="320" y2="40" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="0" />
+              <!-- Arrows at extremities showing infinity -->
+              <text x="8" y="34" font-family="Fredoka" font-size="12" fill="#0284c7" font-weight="700">...</text>
+              <text x="304" y="34" font-family="Fredoka" font-size="12" fill="#0284c7" font-weight="700">...</text>
+              <!-- Point A -->
+              <line x1="85" y1="35" x2="95" y2="45" stroke="#1f1b18" stroke-width="2" />
+              <line x1="95" y1="35" x2="85" y2="45" stroke="#1f1b18" stroke-width="2" />
+              <text x="88" y="28" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">A</text>
+              <!-- Point B -->
+              <line x1="225" y1="35" x2="235" y2="45" stroke="#1f1b18" stroke-width="2" />
+              <line x1="235" y1="35" x2="225" y2="45" stroke="#1f1b18" stroke-width="2" />
+              <text x="228" y="28" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">B</text>
+              <!-- Label (d) -->
+              <text x="280" y="26" font-family="Fredoka" font-size="13" fill="#0284c7" font-weight="800">(d)</text>
+            </svg>
+          </div>
+
+          <!-- Carte 2 : Le Segment -->
+          <div class="geo-rule-card">
+            <div class="geo-rule-badge segment">📏 Mesurable</div>
+            <h4 class="geo-rule-title">📐 2. Le Segment $[AB]$</h4>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              C'est une portion de droite <strong>délimitée par deux extrémités</strong> $A$ et $B$. Il a un début et une fin : <strong>on peut donc le mesurer !</strong>
+            </p>
+            <div class="geo-notation-box">
+              <span>Segment : <strong style="color: #b91c1c;">$[AB]$</strong></span>
+              <span>Longueur : <strong style="color: #b91c1c;">$AB = 6\text{ cm}$</strong></span>
+            </div>
+            <svg class="geo-diagram-svg" viewBox="0 0 320 80">
+              <!-- Segment AB -->
+              <line x1="60" y1="42" x2="260" y2="42" stroke="#e11d48" stroke-width="3" />
+              <!-- Extremities brackets / ticks -->
+              <line x1="60" y1="32" x2="60" y2="52" stroke="#e11d48" stroke-width="3" />
+              <line x1="260" y1="32" x2="260" y2="52" stroke="#e11d48" stroke-width="3" />
+              <!-- Points labels -->
+              <text x="54" y="25" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">A</text>
+              <text x="254" y="25" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">B</text>
+              <!-- Length indicator -->
+              <text x="140" y="62" font-family="Fredoka" font-size="13" fill="#e11d48" font-weight="800">6 cm</text>
+              <line x1="65" y1="58" x2="130" y2="58" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3" />
+              <line x1="190" y1="58" x2="255" y2="58" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3" />
+            </svg>
+          </div>
+
+          <!-- Carte 3 : La Demi-droite -->
+          <div class="geo-rule-card">
+            <div class="geo-rule-badge demi">🏹 Une Origine</div>
+            <h4 class="geo-rule-title">🏹 3. La Demi-droite $[Ax)$</h4>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              Elle a un <strong>point de départ fixe</strong> appelé son <em>origine</em> ($A$), mais elle continue <strong>à l'infini</strong> de l'autre côté vers $x$.
+            </p>
+            <div class="geo-notation-box">
+              <span>Origine en $A$ :</span>
+              <span style="color: #b45309;">$[Ax)$ ou $[AB)$ (fermé en A, ouvert en B)</span>
+            </div>
+            <svg class="geo-diagram-svg" viewBox="0 0 320 80">
+              <!-- Origin A -->
+              <line x1="60" y1="32" x2="60" y2="52" stroke="#b45309" stroke-width="3" />
+              <text x="54" y="24" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">A</text>
+              <!-- Ray to infinite right -->
+              <line x1="60" y1="42" x2="310" y2="42" stroke="#f59e0b" stroke-width="2.5" />
+              <!-- Point on ray B -->
+              <line x1="185" y1="37" x2="195" y2="47" stroke="#1f1b18" stroke-width="2" />
+              <line x1="195" y1="37" x2="185" y2="47" stroke="#1f1b18" stroke-width="2" />
+              <text x="188" y="28" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">B</text>
+              <!-- Infinite arrow -->
+              <polygon points="310,42 300,37 300,47" fill="#f59e0b" />
+              <text x="270" y="26" font-family="Fredoka" font-size="12" fill="#b45309" font-weight="700">vers l'infini ➔</text>
+            </svg>
+          </div>
+
+          <!-- Carte 4 : Droites Sécantes -->
+          <div class="geo-rule-card">
+            <div class="geo-rule-badge secante">✖️ Point d'intersection</div>
+            <h4 class="geo-rule-title">✖️ 4. Droites Sécantes</h4>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              Deux droites sont <strong>sécantes</strong> quand elles se coupent en <strong>un seul et unique point</strong>, appelé <em>point d'intersection</em>.
+            </p>
+            <div class="geo-notation-box">
+              <span>Exemple du cahier :</span>
+              <span style="color: #7e22ce;">$(e)$ est sécante à $(d)$ en $M$</span>
+            </div>
+            <svg class="geo-diagram-svg" viewBox="0 0 320 80">
+              <!-- Line (d) -->
+              <line x1="10" y1="40" x2="310" y2="40" stroke="#0284c7" stroke-width="2" />
+              <text x="290" y="32" font-family="Fredoka" font-size="12" fill="#0284c7" font-weight="800">(d)</text>
+              <!-- Line (e) crossing -->
+              <line x1="70" y1="10" x2="250" y2="70" stroke="#7e22ce" stroke-width="2" />
+              <text x="250" y="75" font-family="Fredoka" font-size="12" fill="#7e22ce" font-weight="800">(e)</text>
+              <!-- Point M intersection -->
+              <circle cx="160" cy="40" r="4.5" fill="#e11d48" stroke="#1f1b18" stroke-width="1.5" />
+              <text x="166" y="32" font-family="Fredoka" font-size="15" fill="#e11d48" font-weight="900">M</text>
+            </svg>
+          </div>
+
+          <!-- Carte 5 : Le Milieu -->
+          <div class="geo-rule-card">
+            <div class="geo-rule-badge milieu">🎯 Équidistance</div>
+            <h4 class="geo-rule-title">🎯 5. Le Milieu d'un Segment</h4>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              Le <strong>milieu $M$</strong> de $[AB]$ est le point situé sur le segment exactement à <strong>égale distance</strong> de $A$ et de $B$ ($AM = MB = 3\text{ cm}$).
+            </p>
+            <div class="geo-notation-box">
+              <span>Codage :</span>
+              <span style="color: #15803d;">Mêmes petits traits $(//)$ sur chaque moitié</span>
+            </div>
+            <svg class="geo-diagram-svg" viewBox="0 0 320 80">
+              <!-- Segment AB -->
+              <line x1="40" y1="42" x2="280" y2="42" stroke="#1f1b18" stroke-width="2.5" />
+              <!-- Points A and B -->
+              <line x1="40" y1="32" x2="40" y2="52" stroke="#1f1b18" stroke-width="2.5" />
+              <text x="34" y="24" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">A</text>
+              <line x1="280" y1="32" x2="280" y2="52" stroke="#1f1b18" stroke-width="2.5" />
+              <text x="274" y="24" font-family="Fredoka" font-size="14" fill="#1f1b18" font-weight="800">B</text>
+              <!-- Point M -->
+              <line x1="160" y1="34" x2="160" y2="50" stroke="#16a34a" stroke-width="3" />
+              <text x="156" y="24" font-family="Fredoka" font-size="15" fill="#16a34a" font-weight="900">M</text>
+              <!-- Codage double ticks -->
+              <line x1="97" y1="36" x2="103" y2="48" stroke="#16a34a" stroke-width="2" />
+              <line x1="102" y1="36" x2="108" y2="48" stroke="#16a34a" stroke-width="2" />
+              <line x1="217" y1="36" x2="223" y2="48" stroke="#16a34a" stroke-width="2" />
+              <line x1="222" y1="36" x2="228" y2="48" stroke="#16a34a" stroke-width="2" />
+            </svg>
+          </div>
+
+          <!-- Carte 6 : Règles d'Usage & Soin -->
+          <div class="geo-rule-card">
+            <div class="geo-rule-badge usage">✏️ Soin & Rigueur</div>
+            <h4 class="geo-rule-title">📐 6. Règles d'Usage CM2</h4>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              La géométrie demande une précision chirurgicale. Voici les 3 règles exigées par tous les professeurs de CM2 et de 6ème :
+            </p>
+            <div style="font-size: 0.85rem; color: var(--ink); display: flex; flex-direction: column; gap: 4px;">
+              <span>1️⃣ <strong>Mine taillée :</strong> un trait trop épais fausse la mesure d'un demi-millimètre !</span>
+              <span>2️⃣ <strong>Croix nette :</strong> on repère un point par l'intersection de deux petits traits $(\times)$.</span>
+              <span>3️⃣ <strong>Lettres majuscules d'imprimerie :</strong> on écrit $A, B, C, M, I$ (jamais en minuscule).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Cahier Réel de l'Élève (13 Octobre) -->
+        <div style="background: #fffdfa; border: 3px solid #b45309; border-radius: 18px; padding: 18px 20px; margin-bottom: 24px; box-shadow: var(--shadow-comic); display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+          <div style="flex: 1; min-width: 280px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="font-size: 1.6rem;">📖</span>
+              <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: #b45309; margin: 0;">Programme de Construction du Cahier (Mardi 13 Octobre)</h3>
+            </div>
+            <p style="font-size: 0.92rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 12px;">
+              Voici le travail officiel donné en classe sur le cahier d'écolier. C'est exactement cette figure géométrique que tu vas pouvoir tracer et faire corriger automatiquement par le tuteur ci-dessous !
+            </p>
+            <ol style="font-size: 0.9rem; line-height: 1.6; margin: 0 0 14px 20px; padding: 0; color: var(--ink);">
+              <li><strong>Trace une droite $(d)$</strong></li>
+              <li><strong>Place deux points $A$ et $B$ sur la droite $(d)$, avec $[AB] = 6\text{ cm}$</strong></li>
+              <li><strong>Place $M$, milieu de $[AB]$</strong> (donc à $3\text{ cm}$ de $A$ et de $B$)</li>
+              <li><strong>Trace $(e)$ sécante à $(d)$ au point $M$</strong></li>
+              <li><strong>Place $C$ sur $(e)$ à $4\text{ cm}$ de $M$</strong></li>
+              <li><strong>Trace le segment $[AC]$</strong></li>
+              <li><strong>Nomme $(I)$ le point d'intersection de $[AC]$ avec une nouvelle droite $(f)$ passant par $B$</strong></li>
+            </ol>
+            <button class="action-btn" onclick="openCahierPhotoModal()" style="padding: 8px 16px; font-size: 0.88rem; background: #fef3c7; color: #92400e; border-color: #b45309;">
+              🔍 Voir la photo du cahier de classe (Agrandir)
+            </button>
+          </div>
+          <div style="width: 220px; text-align: center; cursor: pointer;" onclick="openCahierPhotoModal()" title="Cliquer pour agrandir le cahier">
+            <img src="images/geometrie_cahier_octobre.jpg" alt="Cahier de géométrie CM2 du 13 octobre" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; border: 2.5px solid var(--ink); box-shadow: var(--shadow-comic-sm); transform: rotate(1.5deg); transition: transform 0.2s;">
+            <span style="display: block; font-size: 0.76rem; font-weight: 800; color: #b45309; margin-top: 6px;">🔎 Cliquez pour zoomer la photo</span>
+          </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- ATELIER TABLEAU BLANC INTERACTIF & CORRECTEUR AUTOMATIQUE -->
+        <!-- ========================================================= -->
+        <div class="geo-studio-card">
+          <div class="geo-studio-header">
+            <div>
+              <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.45rem; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 8px;">
+                <span>📐 Tableau Blanc Géométrique & Correcteur Intelligent</span>
+              </h3>
+              <p style="font-size: 0.88rem; color: var(--ink-light); margin: 4px 0 0 0;">
+                Utilise la barre d'outils pour construire la figure demandée. Le quadrillage est à l'échelle (<strong>1 carreau = 1 cm</strong>). Clique sur « Vérifier & Corriger » pour obtenir ta note et tes conseils !
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="geo-tool-btn success" onclick="geoVerifyProgram()" style="font-size: 0.95rem; padding: 9px 16px;">
+                <span>🔍 Vérifier & Corriger mon tracé</span>
+              </button>
+              <button class="geo-tool-btn primary" onclick="geoShowSolutionStepByStep()">
+                <span>✨ Solution Pas à Pas</span>
+              </button>
+              <button class="geo-tool-btn danger" onclick="geoClearAll()">
+                <span>🗑️ Effacer tout</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Barre d'outils géométrique -->
+          <div class="geo-toolbar">
+            <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--ink-light); margin-right: 4px;">Outils :</span>
+            <button id="geoToolPoint" class="geo-tool-btn active" onclick="geoSetTool('point')">
+              <span>✏️ Point $(\times)$</span>
+            </button>
+            <button id="geoToolDroite" class="geo-tool-btn" onclick="geoSetTool('droite')">
+              <span>📏 Droite $(d)$</span>
+            </button>
+            <button id="geoToolSegment" class="geo-tool-btn" onclick="geoSetTool('segment')">
+              <span>📐 Segment $[AB]$</span>
+            </button>
+            <button id="geoToolDemi" class="geo-tool-btn" onclick="geoSetTool('demi')">
+              <span>🏹 Demi-droite $[Ax)$</span>
+            </button>
+            <button id="geoToolMilieu" class="geo-tool-btn" onclick="geoSetTool('milieu')">
+              <span>🎯 Milieu $M$</span>
+            </button>
+            <button id="geoToolIntersection" class="geo-tool-btn" onclick="geoSetTool('intersection')">
+              <span>✖️ Point Sécant $I$</span>
+            </button>
+            <button id="geoToolRegle" class="geo-tool-btn" onclick="geoToggleRuler()">
+              <span>📏 Règle 15 cm</span>
+            </button>
+            <button id="geoToolSnap" class="geo-tool-btn active" onclick="geoToggleSnap()" title="Aimantation aux carreaux pour des mesures faciles">
+              <span>🧲 Aimantation Grille (ON)</span>
+            </button>
+            <button class="geo-tool-btn" onclick="geoUndo()" title="Annuler le dernier tracé">
+              <span>↩️ Annuler</span>
+            </button>
+          </div>
+
+          <!-- Corps du Studio : Canvas + Panneau Mission -->
+          <div class="geo-studio-body">
+            <!-- Zone Canvas -->
+            <div id="geoCanvasWrap" class="geo-canvas-wrap">
+              <div class="geo-canvas-hud">
+                <span id="geoHudCoords">📍 X: 0 cm | Y: 0 cm</span>
+                <span id="geoHudDist" style="color: #b91c1c;">📏 Distance: 0.0 cm</span>
+                <span id="geoHudTool" style="color: #0369a1;">🛠️ Outil actif : Point (×)</span>
+              </div>
+              <canvas id="geoCanvas"></canvas>
+            </div>
+
+            <!-- Panneau Checklist de la Mission du 13 Octobre -->
+            <div class="geo-checklist-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 8px;">
+                <span style="font-family: 'Fredoka', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--ink);">
+                  📋 Checklist du Programme
+                </span>
+                <span id="geoScoreBadge" style="font-size: 0.82rem; font-weight: 900; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 999px; border: 1.5px solid var(--ink);">
+                  0 / 7 Étapes
+                </span>
+              </div>
+
+              <div id="geoStepList" style="display: flex; flex-direction: column; gap: 8px;">
+                <div id="geoStep1" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>1.</strong> Trace une droite $(d)$</div>
+                </div>
+                <div id="geoStep2" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>2.</strong> Place deux points $A$ et $B$ sur $(d)$, avec $[AB] = 6\text{ cm}$</div>
+                </div>
+                <div id="geoStep3" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>3.</strong> Place $M$, milieu de $[AB]$ ($3\text{ cm}$)</div>
+                </div>
+                <div id="geoStep4" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>4.</strong> Trace $(e)$ sécante à $(d)$ en $M$</div>
+                </div>
+                <div id="geoStep5" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>5.</strong> Place $C$ sur $(e)$ à $4\text{ cm}$ de $M$</div>
+                </div>
+                <div id="geoStep6" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>6.</strong> Trace le segment $[AC]$</div>
+                </div>
+                <div id="geoStep7" class="geo-step-item pending">
+                  <span class="geo-step-badge">⚪</span>
+                  <div><strong>7.</strong> Trace droite $(f)$ par $B$ et nomme $I$ l'intersection avec $[AC]$</div>
+                </div>
+              </div>
+
+              <!-- Bannière de retour diagnostic -->
+              <div id="geoFeedbackBanner" class="geo-correction-banner"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Quiz Défis QCM Géométrie -->
+        <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 8px;">
+              <span>🏆 8 Défis Vocabulaire, Notations & Règles de Géométrie</span>
+            </h3>
+            <button class="ai-gen-btn" style="margin: 0;" onclick="generateAiExercisesFor('maths_geometrie', this)">
+              ✨ Créer de nouveaux défis géométrie avec l'IA
+            </button>
+          </div>
+          <div id="quiz-container-geometrie" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
     </section>
+
+    <!-- Modale Zoom Photo Cahier 13 Octobre -->
+    <div id="geoCahierModal" class="geo-cahier-modal" onclick="closeCahierPhotoModal()">
+      <div class="geo-cahier-modal-content" onclick="event.stopPropagation()">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 14px;">
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 8px;">
+            <span>📖 Cahier de classe : Programme de Construction (Mardi 13 Octobre)</span>
+          </h3>
+          <button onclick="closeCahierPhotoModal()" style="background: transparent; border: none; font-size: 1.6rem; cursor: pointer; color: var(--ink-light); font-weight: 800;">&times;</button>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/geometrie_cahier_octobre.jpg" alt="Cahier de géométrie 13 octobre grand format" style="max-width: 100%; max-height: 70vh; border-radius: 12px; border: 2px solid var(--ink); box-shadow: var(--shadow-comic);">
+        </div>
+        <div style="margin-top: 14px; text-align: center;">
+          <button class="action-btn" onclick="closeCahierPhotoModal()" style="padding: 8px 24px;">Fermer l'aperçu</button>
+        </div>
+      </div>
+    </div>
 
     <!-- ========================================================= -->
     <!-- 3. HISTOIRE -->
@@ -8343,6 +8978,8 @@
       } else if (subject === 'recompenses') {
         if (subKey === 'mesbons') renderClaimedVouchers();
         if (subKey === 'bazar') renderShopRewards();
+      } else if (subject === 'maths' && subKey === 'geometrie') {
+        setTimeout(initGeometryStudio, 80);
       }
     }
 
@@ -10577,6 +11214,7 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
             'francais_grammaire': 'Grammaire CM2 : rôle des déterminants, articles définis, indéfinis, possessifs, démonstratifs',
             'francais_conjugaison': 'Conjugaison CM2 : Présent de l\'indicatif (1er, 2e, 3e groupe et verbes fréquents)',
             'maths_soustraction': 'Calcul et opérations CM2 : soustraction posée, cassage de dizaine et calculs avec retenue',
+            'maths_geometrie': 'Géométrie CM2 : Droite (d) infinie, segment [AB] délimité, demi-droite [Ax), milieu de segment, droites sécantes et point d\'intersection, notations et règles de tracé',
             'histoire_periodes': 'Histoire CM2 : Les 5 grandes périodes (Préhistoire, Antiquité, Moyen Âge, Temps Modernes, Époque Contemporaine)',
             'histoire_prehistoire': 'Histoire CM2 : La Préhistoire complète (1. Paléolithique : pierre taillée, chasseurs nomades, feu, art pariétal de Lascaux ; 2. Néolithique : pierre polie, sédentarisation, agriculture, élevage, poterie, mégalithes ; 3. Âge des Métaux vers -2500 : métallurgie du cuivre/bronze/fer, outils et armes robustes ; 4. Fin de la Préhistoire : invention de l\'écriture vers -3000 et début de l\'Antiquité)',
             'histoire_reims': 'Histoire CM2 : La Cathédrale de Reims, sacre des rois de France, Clovis, Jeanne d\'Arc',
@@ -10593,6 +11231,7 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
             'francais_grammaire': 'quiz-container-grammaire',
             'francais_conjugaison': 'quiz-container-conjugaison',
             'maths_soustraction': 'quiz-container-soustraction',
+            'maths_geometrie': 'quiz-container-geometrie',
             'histoire_periodes': 'quiz-container-periodes',
             'histoire_prehistoire': 'quiz-container-prehistoire',
             'histoire_reims': 'quiz-container-reims',
@@ -10646,6 +11285,9 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
         if (subject.startsWith('problemes')) {
           switchSubject('maths');
           switchSubmodule('maths', 'problemes');
+        } else if (subject === 'maths_geometrie') {
+          switchSubject('maths');
+          switchSubmodule('maths', 'geometrie');
         } else if (subject === 'francais_dictee_mots') {
           switchSubject('francais');
           switchSubmodule('francais', 'dictee_mots');
@@ -16693,6 +17335,918 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     }
 
     // =========================================================================
+    // 📐 GÉOMÉTRIE CM2 : QUESTIONS OFFICIELLES & STUDIO TABLEAU BLANC
+    // =========================================================================
+    const allGeometrieQuestions = [
+      {
+        display: "Pour désigner une <strong>droite infinie</strong> passant par les points A et B, quelle est la notation correcte ?",
+        options: ["(AB) avec des parenthèses", "[AB] avec des crochets", "AB sans rien", "[AB) avec un crochet et une parenthèse"],
+        correct: "(AB) avec des parenthèses",
+        tip: "Une droite est infinie des deux côtés : on utilise TOUJOURS des parenthèses, comme (d) ou (AB) !"
+      },
+      {
+        display: "La distance mesurée entre les deux extrémités d'un segment est de 6 cm. Comment note-t-on correctement cette <strong>longueur</strong> ?",
+        options: ["AB = 6 cm (sans crochets)", "[AB] = 6 cm", "(AB) = 6 cm", "[AB) = 6 cm"],
+        correct: "AB = 6 cm (sans crochets)",
+        tip: "[AB] désigne l'objet géométrique, mais la mesure de sa longueur s'écrit toujours sans crochets : AB = 6 cm !"
+      },
+      {
+        display: "Le point M est le <strong>milieu du segment [AB]</strong> qui mesure 6 cm. Que peut-on affirmer ?",
+        options: ["M est sur [AB] et AM = MB = 3 cm", "M est n'importe où à 3 cm de A", "M est le point de départ de la droite", "AM mesure 6 cm et MB mesure 6 cm"],
+        correct: "M est sur [AB] et AM = MB = 3 cm",
+        tip: "Le milieu est situé sur le segment et le partage en deux moitiés exactement égales !"
+      },
+      {
+        display: "Deux droites qui se coupent en <strong>un seul et unique point</strong> sont appelées :",
+        options: ["Des droites sécantes", "Des droites parallèles", "Des segments fermés", "Des demi-droites"],
+        correct: "Des droites sécantes",
+        tip: "Deux droites sécantes ont un point commun appelé point d'intersection !"
+      },
+      {
+        display: "Que désigne la notation <strong>[Ax)</strong> ?",
+        options: ["Une demi-droite d'origine A et infinie vers x", "Un segment mesurable de longueur Ax", "Une droite infinie des deux côtés", "Un angle aigu"],
+        correct: "Une demi-droite d'origine A et infinie vers x",
+        tip: "Le crochet [A indique le point de départ fermé (origine) et la parenthèse x) montre qu'elle continue à l'infini !"
+      },
+      {
+        display: "En géométrie CM2, comment marque-t-on avec soin l'emplacement précis d'un <strong>point</strong> sur sa feuille ?",
+        options: ["Par une fine croix nette × et une lettre majuscule d'imprimerie", "Par un gros rond colorié au feutre", "Par une lettre minuscule cursive", "Par un simple point à peine visible"],
+        correct: "Par une fine croix nette × et une lettre majuscule d'imprimerie",
+        tip: "On trace une petite croix × et on nomme le point avec une lettre majuscule d'imprimerie (A, B, C...) !"
+      },
+      {
+        display: "Dans notre programme du 13 octobre, la droite (e) coupe la droite (d) au point M. Le point M s'appelle :",
+        options: ["Le point d'intersection des deux droites", "L'origine de la droite", "L'extrémité du segment", "Le sommet de l'angle"],
+        correct: "Le point d'intersection des deux droites",
+        tip: "Le point où deux lignes se croisent s'appelle toujours le point d'intersection !"
+      },
+      {
+        display: "Quelle est la différence fondamentale entre une <strong>droite</strong> et un <strong>segment</strong> ?",
+        options: ["Le segment est limité par deux extrémités et mesurable ; la droite est infinie", "La droite a un début et une fin ; le segment est infini", "Une droite est toujours verticale, un segment est horizontal", "Il n'y a aucune différence"],
+        correct: "Le segment est limité par deux extrémités et mesurable ; la droite est infinie",
+        tip: "Une droite (d) ne s'arrête jamais (infinie), alors qu'un segment [AB] a deux extrémités et peut se mesurer à la règle !"
+      }
+    ];
+
+    // =========================================================================
+    // MOTEUR DU STUDIO GÉOMÉTRIE & TABLEAU BLANC INTERACTIF
+    // =========================================================================
+    let geoCanvas = null;
+    let geoCtx = null;
+    let geoTool = 'point';
+    let geoSnapEnabled = true;
+    let geoRulerVisible = false;
+    let geoPoints = [];
+    let geoLines = [];
+    let geoSegments = [];
+    let geoRays = [];
+    let geoHistory = [];
+    let geoIsDrawing = false;
+    let geoDragStart = null;
+    let geoCurrentPos = { x: 0, y: 0 };
+    let geoRuler = { x: 60, y: 400, angle: 0, lengthCm: 15, isDragging: false, isRotating: false, dragOffset: { x: 0, y: 0 } };
+    const GEO_SCALE = 40; // 1 cm = 40 pixels
+
+    function openCahierPhotoModal() {
+      const modal = document.getElementById('geoCahierModal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeCahierPhotoModal() {
+      const modal = document.getElementById('geoCahierModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function initGeometryStudio() {
+      geoCanvas = document.getElementById('geoCanvas');
+      if (!geoCanvas) return;
+      geoCtx = geoCanvas.getContext('2d');
+      resizeGeometryCanvas();
+
+      geoCanvas.removeEventListener('pointerdown', handleGeoPointerDown);
+      geoCanvas.removeEventListener('pointermove', handleGeoPointerMove);
+      geoCanvas.removeEventListener('pointerup', handleGeoPointerUp);
+      geoCanvas.removeEventListener('pointercancel', handleGeoPointerUp);
+
+      geoCanvas.addEventListener('pointerdown', handleGeoPointerDown);
+      geoCanvas.addEventListener('pointermove', handleGeoPointerMove);
+      geoCanvas.addEventListener('pointerup', handleGeoPointerUp);
+      geoCanvas.addEventListener('pointercancel', handleGeoPointerUp);
+
+      window.addEventListener('resize', resizeGeometryCanvas);
+      geoRender();
+    }
+
+    function resizeGeometryCanvas() {
+      if (!geoCanvas) return;
+      const rect = geoCanvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const dpr = window.devicePixelRatio || 1;
+      geoCanvas.width = rect.width * dpr;
+      geoCanvas.height = 520 * dpr;
+      if (geoCtx) {
+        geoCtx.scale(dpr, dpr);
+      }
+      geoRender();
+    }
+
+    function geoSetTool(tool) {
+      geoTool = tool;
+      document.querySelectorAll('.geo-toolbar .geo-tool-btn').forEach(btn => {
+        if (!btn.id.includes('Snap') && !btn.id.includes('Regle')) {
+          btn.classList.remove('active');
+        }
+      });
+      const toolMap = {
+        point: 'geoToolPoint',
+        droite: 'geoToolDroite',
+        segment: 'geoToolSegment',
+        demi: 'geoToolDemi',
+        milieu: 'geoToolMilieu',
+        intersection: 'geoToolIntersection'
+      };
+      const activeBtn = document.getElementById(toolMap[tool]);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const hudTool = document.getElementById('geoHudTool');
+      const toolLabels = {
+        point: 'Point (×)',
+        droite: 'Droite (d)',
+        segment: 'Segment [AB]',
+        demi: 'Demi-droite [Ax)',
+        milieu: 'Milieu M',
+        intersection: 'Point d\'intersection I'
+      };
+      if (hudTool) hudTool.innerText = `🛠️ Outil actif : ${toolLabels[tool] || tool}`;
+    }
+
+    function geoToggleSnap() {
+      geoSnapEnabled = !geoSnapEnabled;
+      const btn = document.getElementById('geoToolSnap');
+      if (btn) {
+        if (geoSnapEnabled) {
+          btn.classList.add('active');
+          btn.innerHTML = '<span>🧲 Aimantation Grille (ON)</span>';
+        } else {
+          btn.classList.remove('active');
+          btn.innerHTML = '<span>🧲 Aimantation Grille (OFF)</span>';
+        }
+      }
+    }
+
+    function geoToggleRuler() {
+      geoRulerVisible = !geoRulerVisible;
+      const btn = document.getElementById('geoToolRegle');
+      if (btn) {
+        if (geoRulerVisible) {
+          btn.classList.add('active');
+          btn.innerHTML = '<span>📏 Règle 15 cm (Affichée)</span>';
+        } else {
+          btn.classList.remove('active');
+          btn.innerHTML = '<span>📏 Règle 15 cm</span>';
+        }
+      }
+      geoRender();
+    }
+
+    function geoGetCoords(e) {
+      if (!geoCanvas) return { x: 0, y: 0 };
+      const rect = geoCanvas.getBoundingClientRect();
+      let rawX = e.clientX - rect.left;
+      let rawY = e.clientY - rect.top;
+
+      if (geoSnapEnabled) {
+        const snapStep = GEO_SCALE / 2; // snap au demi-centimètre (20px)
+        rawX = Math.round(rawX / snapStep) * snapStep;
+        rawY = Math.round(rawY / snapStep) * snapStep;
+      }
+      return { x: rawX, y: rawY };
+    }
+
+    function handleGeoPointerDown(e) {
+      if (!geoCanvas) return;
+      const coords = geoGetCoords(e);
+      geoCurrentPos = coords;
+
+      // Interaction avec la règle graduée si affichée
+      if (geoRulerVisible) {
+        const dX = coords.x - geoRuler.x;
+        const dY = coords.y - geoRuler.y;
+        const distToOrigin = Math.hypot(dX, dY);
+        // Si clic proche de l'origine de la règle -> déplacement
+        if (distToOrigin < 45) {
+          geoRuler.isDragging = true;
+          geoRuler.dragOffset = { x: coords.x - geoRuler.x, y: coords.y - geoRuler.y };
+          return;
+        }
+        // Si clic sur la poignée de rotation au bout de la règle (15 cm)
+        const rulerEnd = {
+          x: geoRuler.x + Math.cos(geoRuler.angle) * (geoRuler.lengthCm * GEO_SCALE),
+          y: geoRuler.y + Math.sin(geoRuler.angle) * (geoRuler.lengthCm * GEO_SCALE)
+        };
+        if (Math.hypot(coords.x - rulerEnd.x, coords.y - rulerEnd.y) < 35) {
+          geoRuler.isRotating = true;
+          return;
+        }
+      }
+
+      geoIsDrawing = true;
+      geoDragStart = coords;
+
+      if (geoTool === 'point') {
+        const nextLetters = ['A', 'B', 'M', 'C', 'I', 'D', 'E', 'F', 'G'];
+        let label = 'A';
+        for (const l of nextLetters) {
+          if (!geoPoints.some(p => p.label === l)) {
+            label = l;
+            break;
+          }
+        }
+        geoSaveState();
+        geoPoints.push({ x: coords.x, y: coords.y, label: label, id: 'pt_' + Date.now() });
+        playSound('click');
+        geoIsDrawing = false;
+        geoRender();
+      } else if (geoTool === 'milieu') {
+        // Trouve le segment ou les deux points les plus proches
+        if (geoSegments.length > 0) {
+          const seg = geoSegments[geoSegments.length - 1];
+          const midX = (seg.p1.x + seg.p2.x) / 2;
+          const midY = (seg.p1.y + seg.p2.y) / 2;
+          geoSaveState();
+          geoPoints.push({ x: midX, y: midY, label: 'M', id: 'mid_' + Date.now(), isMidpoint: true });
+          playSound('pop');
+          geoIsDrawing = false;
+          geoRender();
+        } else if (geoPoints.length >= 2) {
+          const p1 = geoPoints[0];
+          const p2 = geoPoints[1];
+          const midX = (p1.x + p2.x) / 2;
+          const midY = (p1.y + p2.y) / 2;
+          geoSaveState();
+          geoPoints.push({ x: midX, y: midY, label: 'M', id: 'mid_' + Date.now(), isMidpoint: true });
+          playSound('pop');
+          geoIsDrawing = false;
+          geoRender();
+        }
+      } else if (geoTool === 'intersection') {
+        // Calcule l'intersection entre les deux dernières droites/segments tracés
+        const allLines = [...geoLines, ...geoSegments];
+        if (allLines.length >= 2) {
+          const l1 = allLines[allLines.length - 2];
+          const l2 = allLines[allLines.length - 1];
+          const inter = calculateIntersection(l1.p1, l1.p2, l2.p1, l2.p2);
+          if (inter) {
+            geoSaveState();
+            geoPoints.push({ x: inter.x, y: inter.y, label: 'I', id: 'inter_' + Date.now() });
+            playSound('pop');
+            geoIsDrawing = false;
+            geoRender();
+          }
+        }
+      }
+    }
+
+    function handleGeoPointerMove(e) {
+      if (!geoCanvas) return;
+      const coords = geoGetCoords(e);
+      geoCurrentPos = coords;
+
+      // Mise à jour de l'affichage tête haute (HUD)
+      const hudCoords = document.getElementById('geoHudCoords');
+      const hudDist = document.getElementById('geoHudDist');
+      if (hudCoords) {
+        hudCoords.innerText = `📍 X: ${(coords.x / GEO_SCALE).toFixed(1)} cm | Y: ${(coords.y / GEO_SCALE).toFixed(1)} cm`;
+      }
+
+      if (geoRulerVisible && geoRuler.isDragging) {
+        geoRuler.x = coords.x - geoRuler.dragOffset.x;
+        geoRuler.y = coords.y - geoRuler.dragOffset.y;
+        geoRender();
+        return;
+      }
+      if (geoRulerVisible && geoRuler.isRotating) {
+        geoRuler.angle = Math.atan2(coords.y - geoRuler.y, coords.x - geoRuler.x);
+        geoRender();
+        return;
+      }
+
+      if (geoIsDrawing && geoDragStart) {
+        const distPx = Math.hypot(coords.x - geoDragStart.x, coords.y - geoDragStart.y);
+        const distCm = (distPx / GEO_SCALE).toFixed(1);
+        if (hudDist) {
+          hudDist.innerText = `📏 Longueur tracé : ${distCm} cm`;
+        }
+        geoRender();
+      }
+    }
+
+    function handleGeoPointerUp(e) {
+      if (!geoCanvas) return;
+      if (geoRuler.isDragging || geoRuler.isRotating) {
+        geoRuler.isDragging = false;
+        geoRuler.isRotating = false;
+        return;
+      }
+      if (!geoIsDrawing || !geoDragStart) return;
+
+      const coords = geoGetCoords(e);
+      const distPx = Math.hypot(coords.x - geoDragStart.x, coords.y - geoDragStart.y);
+
+      if (distPx > 10) {
+        geoSaveState();
+        if (geoTool === 'droite') {
+          const nextLabels = ['(d)', '(e)', '(f)', '(g)'];
+          let lbl = '(d)';
+          for (const l of nextLabels) {
+            if (!geoLines.some(line => line.label === l)) {
+              lbl = l;
+              break;
+            }
+          }
+          geoLines.push({ p1: geoDragStart, p2: coords, label: lbl, id: 'line_' + Date.now() });
+          playSound('click');
+        } else if (geoTool === 'segment') {
+          const lengthCm = (distPx / GEO_SCALE).toFixed(1);
+          let p1Lbl = 'A', p2Lbl = 'B';
+          if (geoSegments.length === 1) { p1Lbl = 'A'; p2Lbl = 'C'; }
+          geoSegments.push({ p1: geoDragStart, p2: coords, label: `[${p1Lbl}${p2Lbl}]`, lengthCm: lengthCm, id: 'seg_' + Date.now() });
+          playSound('click');
+        } else if (geoTool === 'demi') {
+          geoRays.push({ origin: geoDragStart, p2: coords, label: '[Ax)', id: 'ray_' + Date.now() });
+          playSound('click');
+        }
+      }
+
+      geoIsDrawing = false;
+      geoDragStart = null;
+      const hudDist = document.getElementById('geoHudDist');
+      if (hudDist) hudDist.innerText = '📏 Distance: 0.0 cm';
+      geoRender();
+    }
+
+    function geoSaveState() {
+      geoHistory.push({
+        points: JSON.parse(JSON.stringify(geoPoints)),
+        lines: JSON.parse(JSON.stringify(geoLines)),
+        segments: JSON.parse(JSON.stringify(geoSegments)),
+        rays: JSON.parse(JSON.stringify(geoRays))
+      });
+      if (geoHistory.length > 25) geoHistory.shift();
+    }
+
+    function geoUndo() {
+      if (geoHistory.length > 0) {
+        const last = geoHistory.pop();
+        geoPoints = last.points;
+        geoLines = last.lines;
+        geoSegments = last.segments;
+        geoRays = last.rays;
+        playSound('pop');
+        geoRender();
+      }
+    }
+
+    function geoClearAll() {
+      geoSaveState();
+      geoPoints = [];
+      geoLines = [];
+      geoSegments = [];
+      geoRays = [];
+      playSound('pop');
+      geoRender();
+
+      // Réinitialise la checklist
+      for (let i = 1; i <= 7; i++) {
+        const item = document.getElementById(`geoStep${i}`);
+        if (item) {
+          item.className = 'geo-step-item pending';
+          const badge = item.querySelector('.geo-step-badge');
+          if (badge) badge.innerText = '⚪';
+        }
+      }
+      const scoreBadge = document.getElementById('geoScoreBadge');
+      if (scoreBadge) scoreBadge.innerText = '0 / 7 Étapes';
+      const feedback = document.getElementById('geoFeedbackBanner');
+      if (feedback) feedback.style.display = 'none';
+    }
+
+    function calculateIntersection(p1, p2, p3, p4) {
+      const denom = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
+      if (Math.abs(denom) < 0.0001) return null; // parallèles
+      const t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) / denom;
+      return {
+        x: p1.x + t * (p2.x - p1.x),
+        y: p1.y + t * (p2.y - p1.y)
+      };
+    }
+
+    function geoRender() {
+      if (!geoCanvas || !geoCtx) return;
+      const w = geoCanvas.getBoundingClientRect().width;
+      const h = 520;
+
+      geoCtx.clearRect(0, 0, w, h);
+
+      // 1. Quadrillage façon cahier d'écolier (Seyes / Petits carreaux)
+      // Carreau mineur : 0.5 cm (20px)
+      geoCtx.lineWidth = 0.6;
+      geoCtx.strokeStyle = '#e2e8f0';
+      for (let x = 0; x <= w; x += 20) {
+        geoCtx.beginPath();
+        geoCtx.moveTo(x, 0);
+        geoCtx.lineTo(x, h);
+        geoCtx.stroke();
+      }
+      for (let y = 0; y <= h; y += 20) {
+        geoCtx.beginPath();
+        geoCtx.moveTo(0, y);
+        geoCtx.lineTo(w, y);
+        geoCtx.stroke();
+      }
+
+      // Carreau majeur : 1 cm (40px)
+      geoCtx.lineWidth = 1.2;
+      geoCtx.strokeStyle = '#cbd5e1';
+      for (let x = 0; x <= w; x += GEO_SCALE) {
+        geoCtx.beginPath();
+        geoCtx.moveTo(x, 0);
+        geoCtx.lineTo(x, h);
+        geoCtx.stroke();
+      }
+      for (let y = 0; y <= h; y += GEO_SCALE) {
+        geoCtx.beginPath();
+        geoCtx.moveTo(0, y);
+        geoCtx.lineTo(w, y);
+        geoCtx.stroke();
+      }
+
+      // 2. Rendu des Droites infinies (d, e, f)
+      geoLines.forEach((line, idx) => {
+        const dx = line.p2.x - line.p1.x;
+        const dy = line.p2.y - line.p1.y;
+        const len = Math.hypot(dx, dy);
+        if (len < 1) return;
+        const colors = ['#0284c7', '#7e22ce', '#ea580c', '#059669'];
+        const strokeCol = colors[idx % colors.length];
+
+        // Prolongement infini jusqu'aux bords
+        const ext = 2000;
+        const x1 = line.p1.x - (dx / len) * ext;
+        const y1 = line.p1.y - (dy / len) * ext;
+        const x2 = line.p2.x + (dx / len) * ext;
+        const y2 = line.p2.y + (dy / len) * ext;
+
+        geoCtx.strokeStyle = strokeCol;
+        geoCtx.lineWidth = 2.2;
+        geoCtx.beginPath();
+        geoCtx.moveTo(x1, y1);
+        geoCtx.lineTo(x2, y2);
+        geoCtx.stroke();
+
+        // Étiquette de la droite
+        geoCtx.fillStyle = strokeCol;
+        geoCtx.font = 'bold 15px Fredoka, sans-serif';
+        const labelX = line.p2.x + 12;
+        const labelY = line.p2.y - 10;
+        geoCtx.fillText(line.label, labelX, labelY);
+      });
+
+      // 3. Rendu des Segments [AB] délimités
+      geoSegments.forEach((seg, idx) => {
+        const colors = ['#e11d48', '#2563eb', '#16a34a'];
+        const col = colors[idx % colors.length];
+
+        geoCtx.strokeStyle = col;
+        geoCtx.lineWidth = 3.2;
+        geoCtx.beginPath();
+        geoCtx.moveTo(seg.p1.x, seg.p1.y);
+        geoCtx.lineTo(seg.p2.x, seg.p2.y);
+        geoCtx.stroke();
+
+        // Petits crochets perpendiculaires aux extrémités
+        const dx = seg.p2.x - seg.p1.x;
+        const dy = seg.p2.y - seg.p1.y;
+        const len = Math.hypot(dx, dy);
+        if (len > 0) {
+          const nx = (-dy / len) * 8;
+          const ny = (dx / len) * 8;
+
+          geoCtx.beginPath();
+          geoCtx.moveTo(seg.p1.x - nx, seg.p1.y - ny);
+          geoCtx.lineTo(seg.p1.x + nx, seg.p1.y + ny);
+          geoCtx.moveTo(seg.p2.x - nx, seg.p2.y - ny);
+          geoCtx.lineTo(seg.p2.x + nx, seg.p2.y + ny);
+          geoCtx.stroke();
+        }
+
+        // Bulle de mesure (longueur en cm)
+        const midX = (seg.p1.x + seg.p2.x) / 2;
+        const midY = (seg.p1.y + seg.p2.y) / 2;
+        geoCtx.fillStyle = '#ffffff';
+        geoCtx.strokeStyle = col;
+        geoCtx.lineWidth = 1.5;
+        geoCtx.beginPath();
+        geoCtx.roundRect(midX - 28, midY - 18, 56, 20, 6);
+        geoCtx.fill();
+        geoCtx.stroke();
+
+        geoCtx.fillStyle = col;
+        geoCtx.font = 'bold 11px Fredoka, sans-serif';
+        geoCtx.textAlign = 'center';
+        geoCtx.textBaseline = 'middle';
+        geoCtx.fillText(`${seg.lengthCm} cm`, midX, midY - 8);
+        geoCtx.textAlign = 'left';
+        geoCtx.textBaseline = 'alphabetic';
+      });
+
+      // 4. Rendu des Demi-droites [Ax)
+      geoRays.forEach(ray => {
+        const dx = ray.p2.x - ray.origin.x;
+        const dy = ray.p2.y - ray.origin.y;
+        const len = Math.hypot(dx, dy);
+        if (len < 1) return;
+
+        const ext = 1500;
+        const x2 = ray.origin.x + (dx / len) * ext;
+        const y2 = ray.origin.y + (dy / len) * ext;
+
+        geoCtx.strokeStyle = '#b45309';
+        geoCtx.lineWidth = 2.5;
+        geoCtx.beginPath();
+        geoCtx.moveTo(ray.origin.x, ray.origin.y);
+        geoCtx.lineTo(x2, y2);
+        geoCtx.stroke();
+
+        // Origine fermée par un crochet
+        const nx = (-dy / len) * 8;
+        const ny = (dx / len) * 8;
+        geoCtx.beginPath();
+        geoCtx.moveTo(ray.origin.x - nx, ray.origin.y - ny);
+        geoCtx.lineTo(ray.origin.x + nx, ray.origin.y + ny);
+        geoCtx.stroke();
+
+        geoCtx.fillStyle = '#b45309';
+        geoCtx.font = 'bold 13px Fredoka, sans-serif';
+        geoCtx.fillText(ray.label, ray.origin.x + 14, ray.origin.y - 10);
+      });
+
+      // 5. Tracé en cours (Preview)
+      if (geoIsDrawing && geoDragStart && geoCurrentPos) {
+        geoCtx.save();
+        geoCtx.setLineDash([5, 5]);
+        geoCtx.strokeStyle = '#f59e0b';
+        geoCtx.lineWidth = 2.5;
+        geoCtx.beginPath();
+        geoCtx.moveTo(geoDragStart.x, geoDragStart.y);
+        geoCtx.lineTo(geoCurrentPos.x, geoCurrentPos.y);
+        geoCtx.stroke();
+        geoCtx.restore();
+      }
+
+      // 6. Rendu des Points (Croix × et lettre majuscule)
+      geoPoints.forEach(pt => {
+        const size = 6;
+        geoCtx.strokeStyle = '#1f1b18';
+        geoCtx.lineWidth = 2.2;
+        geoCtx.beginPath();
+        geoCtx.moveTo(pt.x - size, pt.y - size);
+        geoCtx.lineTo(pt.x + size, pt.y + size);
+        geoCtx.moveTo(pt.x + size, pt.y - size);
+        geoCtx.lineTo(pt.x - size, pt.y + size);
+        geoCtx.stroke();
+
+        // Nom du point
+        geoCtx.fillStyle = '#1f1b18';
+        geoCtx.font = '900 17px Fredoka, sans-serif';
+        geoCtx.fillText(pt.label, pt.x + 8, pt.y - 6);
+
+        // Codage si milieu M
+        if (pt.isMidpoint || pt.label === 'M') {
+          geoCtx.fillStyle = '#16a34a';
+          geoCtx.font = 'bold 11px Fredoka, sans-serif';
+          geoCtx.fillText('// Milieu //', pt.x - 24, pt.y + 18);
+        }
+      });
+
+      // 7. Rendu de la Règle graduée de 15 cm (si active)
+      if (geoRulerVisible) {
+        geoCtx.save();
+        geoCtx.translate(geoRuler.x, geoRuler.y);
+        geoCtx.rotate(geoRuler.angle);
+
+        const rulerW = geoRuler.lengthCm * GEO_SCALE; // 15 cm * 40 = 600px
+        const rulerH = 50;
+
+        // Corps de la règle (jaune translucide acrylique d'écolier)
+        geoCtx.fillStyle = 'rgba(254, 243, 199, 0.92)';
+        geoCtx.strokeStyle = '#b45309';
+        geoCtx.lineWidth = 2.5;
+        geoCtx.beginPath();
+        geoCtx.roundRect(0, 0, rulerW, rulerH, [4, 4, 4, 4]);
+        geoCtx.fill();
+        geoCtx.stroke();
+
+        // Graduations millimètres et centimètres
+        geoCtx.strokeStyle = '#78350f';
+        geoCtx.fillStyle = '#78350f';
+        geoCtx.font = 'bold 11px Fredoka, sans-serif';
+
+        for (let mm = 0; mm <= geoRuler.lengthCm * 10; mm++) {
+          const x = (mm / 10) * GEO_SCALE;
+          let tickH = 6;
+          if (mm % 10 === 0) {
+            tickH = 16;
+            const cmVal = mm / 10;
+            geoCtx.fillText(cmVal.toString(), x - (cmVal >= 10 ? 6 : 3), tickH + 13);
+          } else if (mm % 5 === 0) {
+            tickH = 10;
+          }
+          geoCtx.lineWidth = mm % 10 === 0 ? 1.5 : 0.8;
+          geoCtx.beginPath();
+          geoCtx.moveTo(x, 0);
+          geoCtx.lineTo(x, tickH);
+          geoCtx.stroke();
+        }
+
+        // Poignée de rotation au bout à droite (cercle interactif)
+        geoCtx.fillStyle = '#f59e0b';
+        geoCtx.strokeStyle = '#b45309';
+        geoCtx.lineWidth = 2;
+        geoCtx.beginPath();
+        geoCtx.arc(rulerW, rulerH / 2, 10, 0, Math.PI * 2);
+        geoCtx.fill();
+        geoCtx.stroke();
+        geoCtx.fillStyle = '#ffffff';
+        geoCtx.font = 'bold 10px Fredoka, sans-serif';
+        geoCtx.fillText('↻', rulerW - 4, rulerH / 2 + 3);
+
+        geoCtx.restore();
+      }
+    }
+
+    // =========================================================================
+    // VÉRIFICATEUR AUTOMATIQUE DU PROGRAMME DU 13 OCTOBRE
+    // =========================================================================
+    function geoVerifyProgram() {
+      const results = [false, false, false, false, false, false, false];
+      const errors = [];
+
+      // Étape 1 : Trace une droite (d)
+      const hasLineD = geoLines.some(l => l.label === '(d)') || geoLines.length >= 1;
+      if (hasLineD) {
+        results[0] = true;
+      } else {
+        errors.push("Étape 1 : Trace d'abord une droite avec l'outil 📏 Droite (d).");
+      }
+
+      // Étape 2 : Place deux points A et B sur (d), avec [AB] = 6 cm
+      const ptA = geoPoints.find(p => p.label === 'A');
+      const ptB = geoPoints.find(p => p.label === 'B');
+      if (ptA && ptB) {
+        const distCm = Math.hypot(ptA.x - ptB.x, ptA.y - ptB.y) / GEO_SCALE;
+        // Tolérance : entre 5.5 cm et 6.5 cm
+        if (Math.abs(distCm - 6.0) <= 0.5) {
+          results[1] = true;
+        } else {
+          errors.push(`Étape 2 : Tes points A et B sont séparés de ${distCm.toFixed(1)} cm au lieu de 6.0 cm exacts.`);
+        }
+      } else {
+        errors.push("Étape 2 : Place les points A et B sur la droite (d).");
+      }
+
+      // Étape 3 : Place M, milieu de [AB] (3 cm)
+      const ptM = geoPoints.find(p => p.label === 'M');
+      if (ptM && ptA && ptB) {
+        const dAM = Math.hypot(ptM.x - ptA.x, ptM.y - ptA.y) / GEO_SCALE;
+        const dMB = Math.hypot(ptM.x - ptB.x, ptM.y - ptB.y) / GEO_SCALE;
+        if (Math.abs(dAM - 3.0) <= 0.6 && Math.abs(dMB - 3.0) <= 0.6) {
+          results[2] = true;
+        } else {
+          errors.push(`Étape 3 : Le milieu M doit être à 3 cm de A et de B (actuellement AM=${dAM.toFixed(1)} cm, MB=${dMB.toFixed(1)} cm).`);
+        }
+      } else {
+        errors.push("Étape 3 : Place le point M au milieu de [AB] avec l'outil 🎯 Milieu M.");
+      }
+
+      // Étape 4 : Trace (e) sécante à (d) en M
+      if (ptM && geoLines.length >= 2) {
+        const secant = geoLines.find(l => {
+          const distToM = distPointToLineSegment(ptM, l.p1, l.p2);
+          return distToM < 25;
+        });
+        if (secant) {
+          results[3] = true;
+        } else {
+          errors.push("Étape 4 : Trace une droite (e) qui traverse le point M.");
+        }
+      } else {
+        errors.push("Étape 4 : Trace une deuxième droite (e) sécante à (d) passant par M.");
+      }
+
+      // Étape 5 : Place C sur (e) à 4 cm de M
+      const ptC = geoPoints.find(p => p.label === 'C');
+      if (ptC && ptM) {
+        const dMC = Math.hypot(ptC.x - ptM.x, ptC.y - ptM.y) / GEO_SCALE;
+        if (Math.abs(dMC - 4.0) <= 0.6) {
+          results[4] = true;
+        } else {
+          errors.push(`Étape 5 : Le point C doit être à 4 cm de M (actuellement MC=${dMC.toFixed(1)} cm).`);
+        }
+      } else {
+        errors.push("Étape 5 : Place le point C à 4 cm de M sur la droite sécante.");
+      }
+
+      // Étape 6 : Trace le segment [AC]
+      const hasSegAC = geoSegments.some(s => {
+        if (!ptA || !ptC) return false;
+        const d1 = Math.hypot(s.p1.x - ptA.x, s.p1.y - ptA.y);
+        const d2 = Math.hypot(s.p2.x - ptC.x, s.p2.y - ptC.y);
+        const d3 = Math.hypot(s.p1.x - ptC.x, s.p1.y - ptC.y);
+        const d4 = Math.hypot(s.p2.x - ptA.x, s.p2.y - ptA.y);
+        return (d1 < 30 && d2 < 30) || (d3 < 30 && d4 < 30);
+      });
+      if (hasSegAC) {
+        results[5] = true;
+      } else {
+        errors.push("Étape 6 : Relie A et C avec l'outil 📐 Segment [AB].");
+      }
+
+      // Étape 7 : Nomme I le point d'intersection de [AC] avec droite (f) passant par B
+      const ptI = geoPoints.find(p => p.label === 'I');
+      if (ptI) {
+        results[6] = true;
+      } else {
+        errors.push("Étape 7 : Place et nomme le point (I) à l'intersection avec l'outil ✖️ Point Sécant I.");
+      }
+
+      // Mise à jour de l'affichage de la checklist
+      let passedCount = 0;
+      results.forEach((ok, i) => {
+        const item = document.getElementById(`geoStep${i + 1}`);
+        if (!item) return;
+        const badge = item.querySelector('.geo-step-badge');
+        if (ok) {
+          passedCount++;
+          item.className = 'geo-step-item success';
+          if (badge) badge.innerText = '✅';
+        } else {
+          item.className = 'geo-step-item error';
+          if (badge) badge.innerText = '⚠️';
+        }
+      });
+
+      const scoreBadge = document.getElementById('geoScoreBadge');
+      if (scoreBadge) scoreBadge.innerText = `${passedCount} / 7 Étapes`;
+
+      const fb = document.getElementById('geoFeedbackBanner');
+      if (!fb) return;
+
+      if (passedCount === 7) {
+        fb.className = 'geo-correction-banner success';
+        fb.innerHTML = `
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+            <span style="font-size:2rem;">🎉</span>
+            <div>
+              <strong style="font-size:1.15rem; color:#166534;">PERFECT ! 7 / 7 Étapes Validées avec brio !</strong>
+              <div style="font-size:0.88rem; color:#15803d;">Ta figure est 100% fidèle au programme de construction du cahier de classe du 13 octobre. Tes traits et mesures sont impeccables !</div>
+            </div>
+          </div>
+          <div style="background:#dcfce7; padding:8px 12px; border-radius:8px; font-weight:800; color:#166534; font-size:0.9rem;">
+            🎁 +50 Pièces d'or ajoutées à ta tirelire pour ta rigueur géométrique !
+          </div>
+        `;
+        playSound('win');
+        triggerConfetti();
+        if (typeof window.awardDirectPoints === 'function') {
+          window.awardDirectPoints(50, 'Géométrie CM2 Réussie');
+        }
+      } else {
+        fb.className = 'geo-correction-banner partial';
+        fb.innerHTML = `
+          <div style="font-weight:800; color:#b45309; margin-bottom:6px; font-size:0.95rem;">
+            🔍 Diagnostic du Tuteur (${passedCount}/7 étapes validées) :
+          </div>
+          <div style="font-size:0.86rem; color:#78350f; line-height:1.45;">
+            ${errors[0] || "Continue ta construction étape par étape !"}
+          </div>
+          <div style="margin-top:8px; font-size:0.8rem; color:#92400e;">
+            💡 <em>Astuce : utilise la règle graduée ou le bouton « Solution Pas à Pas » si tu as un doute.</em>
+          </div>
+        `;
+        playSound('click');
+      }
+    }
+
+    function distPointToLineSegment(pt, p1, p2) {
+      const dx = p2.x - p1.x;
+      const dy = p2.y - p1.y;
+      const len = Math.hypot(dx, dy);
+      if (len === 0) return Math.hypot(pt.x - p1.x, pt.y - p1.y);
+      const u = ((pt.x - p1.x) * dx + (pt.y - p1.y) * dy) / (len * len);
+      const projX = p1.x + u * dx;
+      const projY = p1.y + u * dy;
+      return Math.hypot(pt.x - projX, pt.y - projY);
+    }
+
+    // =========================================================================
+    // DÉMONSTRATION PAS À PAS DU PROGRAMME DU 13 OCTOBRE
+    // =========================================================================
+    function geoShowSolutionStepByStep() {
+      geoClearAll();
+      playSound('magic');
+
+      const originX = 140;
+      const originY = 260;
+
+      // 1. Droite (d)
+      geoLines.push({
+        p1: { x: originX, y: originY },
+        p2: { x: originX + 360, y: originY },
+        label: '(d)',
+        id: 'line_d'
+      });
+
+      // 2. Points A et B (AB = 6 cm = 240px)
+      geoPoints.push({ x: originX + 40, y: originY, label: 'A', id: 'pt_A' });
+      geoPoints.push({ x: originX + 280, y: originY, label: 'B', id: 'pt_B' });
+
+      // 3. Milieu M (AM = MB = 3 cm = 120px)
+      geoPoints.push({ x: originX + 160, y: originY, label: 'M', id: 'pt_M', isMidpoint: true });
+
+      // 4. Droite (e) sécante en M
+      geoLines.push({
+        p1: { x: originX + 80, y: originY + 140 },
+        p2: { x: originX + 240, y: originY - 140 },
+        label: '(e)',
+        id: 'line_e'
+      });
+
+      // 5. Point C sur (e) à 4 cm de M (4 cm = 160px à angle)
+      // pente ~ -1.75
+      const angleE = Math.atan2(-140 - 140, 240 - 80);
+      const cX = originX + 160 + Math.cos(angleE) * (4 * GEO_SCALE);
+      const cY = originY + Math.sin(angleE) * (4 * GEO_SCALE);
+      geoPoints.push({ x: cX, y: cY, label: 'C', id: 'pt_C' });
+
+      // 6. Segment [AC]
+      geoSegments.push({
+        p1: { x: originX + 40, y: originY },
+        p2: { x: cX, y: cY },
+        label: '[AC]',
+        lengthCm: ((Math.hypot(cX - (originX + 40), cY - originY)) / GEO_SCALE).toFixed(1),
+        id: 'seg_AC'
+      });
+
+      // 7. Droite (f) passant par B coupant [AC] en I
+      geoLines.push({
+        p1: { x: originX + 280, y: originY },
+        p2: { x: originX - 40, y: originY - 100 },
+        label: '(f)',
+        id: 'line_f'
+      });
+
+      // Intersection I entre (f) et [AC]
+      const interI = calculateIntersection(
+        { x: originX + 40, y: originY },
+        { x: cX, y: cY },
+        { x: originX + 280, y: originY },
+        { x: originX - 40, y: originY - 100 }
+      );
+      if (interI) {
+        geoPoints.push({ x: interI.x, y: interI.y, label: 'I', id: 'pt_I' });
+      }
+
+      geoRender();
+
+      // Coche toutes les étapes dans la checklist
+      for (let i = 1; i <= 7; i++) {
+        const item = document.getElementById(`geoStep${i}`);
+        if (item) {
+          item.className = 'geo-step-item success';
+          const badge = item.querySelector('.geo-step-badge');
+          if (badge) badge.innerText = '✅';
+        }
+      }
+      const scoreBadge = document.getElementById('geoScoreBadge');
+      if (scoreBadge) scoreBadge.innerText = '7 / 7 Étapes';
+
+      const fb = document.getElementById('geoFeedbackBanner');
+      if (fb) {
+        fb.className = 'geo-correction-banner success';
+        fb.innerHTML = `
+          <div style="font-weight:800; color:#166534; font-size:0.95rem;">
+            ✨ Figure Modèle Chargée avec Succès !
+          </div>
+          <div style="font-size:0.86rem; color:#15803d; margin-top:4px;">
+            Voici la construction géométrique parfaite du cahier du 13 octobre. Observe bien l'emplacement de chaque point et les notations !
+          </div>
+        `;
+      }
+      triggerConfetti();
+    }
+
+    // =========================================================================
     // INIT
     // =========================================================================
     initConjugator();
@@ -16701,6 +18255,7 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     initCultureSection();
     initPeriodicTable();
     initMoleculeLab();
+    initGeometryStudio();
 
     updateRewardsDisplays();
     checkBadges();
@@ -16732,6 +18287,7 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants", subjectKey: "francais" });
     new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent", subjectKey: "francais" });
     new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage", subjectKey: "maths" });
+    new QuizRunner('quiz-container-geometrie', allGeometrieQuestions, { title: "Géométrie CM2 : Droites, Segments & Sécantes", subjectKey: "maths" });
     new QuizRunner('quiz-container-periodes', allPeriodesQuestions, { title: "Les 5 Grandes Périodes", subjectKey: "histoire" });
     new QuizRunner('quiz-container-prehistoire', allPrehistoireQuestions, { title: "La Préhistoire", subjectKey: "histoire" });
     new QuizRunner('quiz-container-reims', allReimsQuestions, { title: "La Cathédrale de Reims", subjectKey: "histoire" });

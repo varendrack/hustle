@@ -43,6 +43,10 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
 ---
 
 ### 2. 🔢 [Mathématiques](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Mathématiques)
+- 📐 **[Géométrie : Droites, Segments, Demi-droites & Sécantes](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Mathématiques/Géométrie/Lecon_Droites_Segments_Secantes.md)** :
+  - 📖 Leçon complète illustrée : vocabulaire, notations strictes `( )` vs `[ ]` vs `[ )` vs longueur sans crochets, règles d'usage et soin du tracé.
+  - 📸 Programme de construction réel du cahier de classe du 13 octobre (*droite (d), [AB] = 6 cm, milieu M, sécante (e), C à 4 cm, segment [AC], droite (f) et intersection I*).
+  - 🎨 **Studio Tableau Blanc Interactif dans l'application web :** tracé à la règle graduée 15 cm avec aimantation aux carreaux, et **correcteur automatique intelligent** qui valide les 7 étapes ou donne des conseils de rectification immédiats !
 - ⚡ [Rituels et Défis de Calcul Mental Rapide](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Mathématiques/Calcul_Mental/Rituels_et_Defis_Calcul_Mental.md)
 - 🎬 Vidéo Loustics : *Technique de la soustraction par cassage* (raccourcis `.webloc` / `.url`)
 
