@@ -4164,6 +4164,98 @@
       white-space: nowrap;
       line-height: 1.6;
     }
+
+    /* Sélecteur de Série de Dictée (Série 4, Série 5...) */
+    .dictee-series-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #ffffff, #fef9c3);
+      border-radius: 14px;
+      border: 2px solid var(--ink);
+      box-shadow: var(--shadow-comic-sm);
+    }
+    .dictee-series-title {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dictee-series-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .dictee-series-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 2px solid var(--ink);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: #ffffff;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+    }
+    .dictee-series-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .dictee-series-btn.active {
+      background: #fef08a;
+      color: #713f12;
+      border-color: #854d0e;
+      box-shadow: 2px 2px 0 #854d0e;
+    }
+    .dictee-series-badge-new {
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 1px 6px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .lvl-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      margin: 2px;
+      border-radius: 10px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border: 1px solid var(--ink);
+      text-transform: capitalize;
+    }
+    .lvl-badge.jaune { background: #fef08a; color: #854d0e; }
+    .lvl-badge.vert { background: #dcfce7; color: #166534; }
+    .lvl-badge.violet { background: #ede9fe; color: #5b21b6; }
+    .lvl-badge.or { background: #fef3c7; color: #92400e; border-color: #b45309; }
+    .dictee-reperes-card {
+      background: #ffffff;
+      border: 1.5px solid var(--ink);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     /* ========================================================= */
     /* 📜 DIPLÔME OFFICIEL DE DICTÉE CM2 & IMPRESSION / EXPORT   */
     /* ========================================================= */
@@ -4507,7 +4599,8 @@
           <option value="calcul_mental">⚡ Calcul Mental & Stratégies Express</option>
           <option value="francais_homophones">🎯 Français : Homophones & Accords</option>
           <option value="francais_dictee_mots">📜 Français : Mots de la Dictée Hebdo</option>
-          <option value="francais_orthographe_s">🐍 Français : Orthographe « s » ou « ss »</option>
+          <option value="francais_orthographe_s">🐍 Français : Orthographe 4 (« s » ou « ss »)</option>
+          <option value="francais_orthographe_gn">🎨 Français : Orthographe 5 (Accords dans le GN)</option>
           <option value="francais_conjugaison">✍️ Français : Conjugaison du Présent</option>
           <option value="francais_grammaire">📖 Français : Grammaire & Déterminants</option>
           <option value="histoire_cm2">🏛️ Histoire : Préhistoire & Périodes</option>
@@ -4838,8 +4931,8 @@
                 </h3>
                 <span class="teacher-status-badge">🟢 Voix de Madame Claire</span>
               </div>
-              <p style="font-size: 0.85rem; color: var(--ink-light); margin-top: 4px;">
-                🦣 Thème : L'art pariétal & la Préhistoire • Entraînement sur cahier
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin-top: 4px;" id="dicteeModalThemeSubtitle">
+                🎻 Thème : Les Quatre Saisons (Vivaldi) • Entraînement sur cahier
               </p>
             </div>
             <button onclick="closeDicteeOraleModal()" style="background: transparent; border: none; color: var(--ink-light); font-size: 1.8rem; cursor: pointer; font-weight: 800; line-height: 1; padding: 0 4px;" title="Fermer">&times;</button>
@@ -5203,8 +5296,9 @@
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Semaine)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe : « s » ou « ss » (10 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 4 & 5)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe 4 : « s » ou « ss » (10 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_gn')">🎨 Orthographe 5 : Accords dans le GN (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
       </div>
@@ -5232,99 +5326,27 @@
         <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
-      <!-- Français Sub 3: Mots de la Dictée Hebdomadaire -->
+      <!-- Français Sub 3: Mots de la Dictée Hebdomadaire (Multi-Séries 4 & 5) -->
       <div id="sub-francais-dictee_mots" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #d97706; background: #fffbeb;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
-              📜 Les mots de la dictée (CM2)
-            </span>
-            <span id="dictee-week-badge" style="background: #fef08a; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #854d0e;">
-              🦣 Thème : L'art pariétal & la Préhistoire
-            </span>
+        <!-- Barre de sélection des séries de dictée -->
+        <div class="dictee-series-bar">
+          <div class="dictee-series-title">
+            <span>📚 Série de dictée :</span>
+            <span style="font-size:0.85rem; font-weight:normal; color:var(--ink-light);">(Choisis la leçon à réviser)</span>
           </div>
-
-          <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px;">
-            💡 <em>Voici la grille officielle des mots de la dictée :</em>
-          </p>
-
-          <!-- Tableau officiel Mots de la Dictée sans colonne groupes -->
-          <div class="dictee-table-wrap">
-            <table class="dictee-table">
-              <thead>
-                <tr>
-                  <th style="width: 32%;">Noms</th>
-                  <th style="width: 20%;">Verbes</th>
-                  <th style="width: 24%;">Adjectifs et<br>participes passés</th>
-                  <th style="width: 24%;">Mots invariables</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    un an<br>
-                    la peinture<br>
-                    l'artiste<br>
-                    la grotte<br>
-                    un animal / des animaux<br>
-                    le signe
-                  </td>
-                  <td>
-                    réaliser<br>
-                    voir
-                  </td>
-                  <td>
-                    pariétal<br>
-                    impressionnant<br>
-                    nombreux<br>
-                    mystérieux
-                  </td>
-                  <td>
-                    jadis / il y a<br>
-                    aussi / mais<br>
-                    plus / souvent<br>
-                    pendant / très<br>
-                    peu / entre<br>
-                    beaucoup
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    un être / la Préhistoire<br>
-                    la main / le personnage<br>
-                    la scène / le chasseur<br>
-                    un bison / le combat
-                  </td>
-                  <td>
-                    raconter
-                  </td>
-                  <td>
-                    humain<br>
-                    entier<br>
-                    blessé
-                  </td>
-                  <td>
-                    au fond
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    le spécialiste / l'homme
-                  </td>
-                  <td>
-                    étonner
-                  </td>
-                  <td>
-                    dessiné
-                  </td>
-                  <td>
-                    précisément
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="dictee-series-buttons">
+            <button class="dictee-series-btn" id="btn-series-4" onclick="selectDicteeSeries(4)">
+              <span>🦣 Série 4 : L'art pariétal (Préhistoire)</span>
+            </button>
+            <button class="dictee-series-btn active" id="btn-series-5" onclick="selectDicteeSeries(5)">
+              <span>🎻 Série 5 : Les Quatre Saisons (Vivaldi)</span>
+              <span class="dictee-series-badge-new">NOUVEAU</span>
+            </button>
           </div>
         </div>
+
+        <!-- Conteneur dynamique de la règle, des repères et de la grille (géré par selectDicteeSeries) -->
+        <div id="dictee-series-dynamic-container"></div>
 
         <!-- Outil Dictée Vocale avec Madame Claire -->
         <div style="background: linear-gradient(135deg, #fdfbf7, #fef3c7); border: 2.5px solid var(--ink); border-radius: 16px; padding: 16px; margin: 14px 0; box-shadow: var(--shadow-comic-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
@@ -5337,11 +5359,11 @@
                 <span style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--ink);">
                   🎙️ Outil « Dictée Orale » avec Madame Claire
                 </span>
-                <span style="background: #e0e7ff; color: #3730a3; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 10px; font-weight: 800; font-size: 0.76rem;">
-                  Écoute & Écriture
+                <span id="dictee-oral-series-tag" style="background: #e0e7ff; color: #3730a3; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 10px; font-weight: 800; font-size: 0.76rem;">
+                  Écoute & Écriture • Série 5
                 </span>
               </div>
-              <p style="font-size: 0.88rem; color: var(--ink-light); margin-top: 4px;">
+              <p style="font-size: 0.88rem; color: var(--ink-light); margin-top: 4px;" id="dictee-oral-tagline">
                 Madame Claire te dicte le texte phrase par phrase avec boutons Play/Pause, retour 5 sec et relecture active !
               </p>
             </div>
@@ -5351,11 +5373,11 @@
           </button>
         </div>
 
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (Mots de la semaine)</button>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (<span id="ai-dictee-series-label">Mots de la Série 5</span>)</button>
         <div id="quiz-container-dictee-mots" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
-      <!-- Français Sub 3: Orthographe « s » ou « ss » -->
+      <!-- Français Sub 3: Orthographe 4 : « s » ou « ss » -->
       <div id="sub-francais-orthographe_s" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid var(--bd-blue); background: var(--bd-cream);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
@@ -5391,6 +5413,60 @@
         </div>
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_s', this)">✨ Générer de nouvelles questions « s » ou « ss » (IA)</button>
         <div id="quiz-container-orthographe-s" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 3b: Orthographe 5 : Les accords dans le groupe nominal -->
+      <div id="sub-francais-orthographe_gn" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #2563eb; background: #eff6ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #1e40af;">
+              📘 Orthographe 5 : Les accords dans le groupe nominal
+            </span>
+            <span style="background: #dbeafe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #1e3a8a;">
+              🎨 Règle d'or : L'adjectif s'accorde en genre & en nombre avec son nom !
+            </span>
+          </div>
+
+          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 12px; line-height: 1.6;">
+            Dans le groupe nominal, <strong>l'adjectif qualificatif s'accorde toujours</strong> avec le nom et son déterminant.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 10px;">
+            <!-- Règle 1 : Accord en nombre -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 1.15rem;">1️⃣</span>
+                <strong style="color: #1e40af; font-size: 1rem;">L'accord en nombre : singulier ou pluriel</strong>
+              </div>
+              <ul style="margin: 6px 0 10px 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li>Si le nom est au <strong>singulier</strong> (un seul) ➔ l'adjectif est au <strong>singulier</strong>.</li>
+                <li>Si le nom est au <strong>pluriel</strong> (plusieurs) ➔ l'adjectif est au <strong>pluriel</strong>.</li>
+              </ul>
+              <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
+                <div><em>Exemple singulier :</em> <strong>le <span style="color:#2563eb;">bel</span> instrument</strong></div>
+                <div style="margin-top: 4px;"><em>Exemple pluriel :</em> <strong>les <span style="color:#dc2626;">beaux</span> instrument<span style="color:#dc2626;">s</span></strong></div>
+              </div>
+            </div>
+
+            <!-- Règle 2 : Accord en genre -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 1.15rem;">2️⃣</span>
+                <strong style="color: #9333ea; font-size: 1rem;">L'accord en genre : masculin ou féminin</strong>
+              </div>
+              <ul style="margin: 6px 0 10px 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li>Si le nom est au <strong>masculin</strong> (un) ➔ l'adjectif est au <strong>masculin</strong>.</li>
+                <li>Si le nom est au <strong>féminin</strong> (une) ➔ l'adjectif est au <strong>féminin</strong>.</li>
+              </ul>
+              <div style="background: #f8fafc; border-left: 4px solid #9333ea; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
+                <div><em>Exemple masculin :</em> <strong>le <span style="color:#2563eb;">beau</span> violon</strong></div>
+                <div style="margin-top: 4px;"><em>Exemple féminin :</em> <strong>la <span style="color:#9333ea;">belle</span> viole</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_gn', this)">✨ Générer de nouvelles questions Accords dans le GN (IA)</button>
+        <div id="quiz-container-orthographe-gn" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
       <!-- Français Sub 4: Grammaire G1 -->
@@ -8586,18 +8662,9 @@
     }
 
     // =========================================================================
-    // MOTS DE LA DICTÉE HEBDOMADAIRE (ÉVOLUTIF CHAQUE SEMAINE)
+    // MOTS DE LA DICTÉE HEBDOMADAIRE (SYSTÈME MULTI-SÉRIES : SÉRIE 4 & SÉRIE 5)
     // =========================================================================
-    const CURRENT_WEEK_DICTEE_WORDS = {
-      weekTitle: "L'art pariétal et la Préhistoire",
-      noms: ["un an", "la peinture", "l'artiste", "la grotte", "un animal / des animaux", "le signe", "un être", "la Préhistoire", "la main", "le personnage", "la scène", "le chasseur", "un bison", "le combat", "le spécialiste", "l'homme"],
-      verbes: ["réaliser", "voir", "raconter", "étonner"],
-      adjectifs: ["pariétal", "impressionnant", "nombreux", "mystérieux", "humain", "entier", "blessé", "dessiné"],
-      invariables: ["jadis", "il y a", "aussi", "mais", "plus", "souvent", "pendant", "très", "peu", "entre", "beaucoup", "au fond", "précisément"]
-    };
-
-    // Banque tournante de dictées CM2 riches et variées sur le thème de la semaine
-    const ORAL_DICTEE_BANK = [
+    const ORAL_DICTEE_BANK_S4 = [
       {
         title: "L'art des cavernes mystérieuses",
         text: "Jadis, pendant la Préhistoire, les artistes réalisaient de superbes peintures dans les grottes. Au fond des cavernes, l'homme dessinait un chasseur blessé ou un bison impressionnant. Le spécialiste raconte précisément ce combat mystérieux entre l'être humain et les nombreux animaux.",
@@ -8629,6 +8696,324 @@
         advice: "Soigne les accords au pluriel (« ses magnifiques peintures ») et vérifie l'orthographe de « combat » (avec un 't' muet) et « préhistoire » !"
       }
     ];
+
+    const ORAL_DICTEE_BANK_S5 = [
+      {
+        title: "Les Quatre Saisons de Vivaldi",
+        text: "En 1725, Antonio Vivaldi compose un chef-d'œuvre classique à Venise. Chaque violon joue une mélodie différente avec un bel instrument. Ensemble, les musiciens décrivent d'abord le printemps fleuri, puis un petit oiseau chanteur s'envole sous l'orage. Enfin, le chasseur et son fidèle chien affrontent la longue nuit d'hiver.",
+        advice: "Pense bien aux accords du groupe nominal : « un bel instrument », « le printemps fleuri », « des oiseaux chanteurs » et « la longue nuit » !"
+      },
+      {
+        title: "L'arrivée du printemps en musique",
+        text: "D'abord, le premier violon joue une mélodie douce pour saluer le printemps. Des oiseaux chanteurs se réveillent avec joie dans un arbre fleuri. Mais soudain, un fort orage éclate et chaque petit insecte affolé cherche un abri sous les feuilles. Enfin, la pluie cesse et le soleil se couche sur l'Europe.",
+        advice: "Attention au pluriel de « oiseaux », aux féminins des adjectifs (« douce », « affolée ») et aux mots invariables « d'abord », « sous », « enfin » !"
+      },
+      {
+        title: "La chasse d'automne et les premiers froids",
+        text: "Dans la forêt dorée, le chasseur raconte une longue histoire à ses compagnons. Son fidèle chien court sur la première neige au deuxième mois d'automne. Le vent glacé souffle avec force, mais les musiciens jouent ensemble une musique entraînante pour oublier le grand froid de l'hiver.",
+        advice: "Vérifie bien l'accord de « fidèle chien », « première neige », « longue histoire », et les terminaisons de verbes !"
+      },
+      {
+        title: "Le grand concert de Venise",
+        text: "À Venise, de grands compositeurs écrivent de la musique classique pour toute l'Europe. Un premier artiste prend son instrument pour décrire l'orage et la pluie battante. Ensuite, un troisième violon raconte l'arrivée de l'hiver silencieux. Chaque spectateur écoute attentivement cette magnifique mélodie.",
+        advice: "Veille aux accords en nombre (« de grands compositeurs », « les violons ») et à l'orthographe de « premier », « troisième » et « mélodie » !"
+      },
+      {
+        title: "Les oiseaux sous l'orage d'été",
+        text: "Pendant l'été, le ciel s'assombrit avant une pluie violente. Un oiseau chanteur part se cacher tandis qu'un petit insecte affolé glisse sous une pierre. Le tonnerre gronde très fort, puis le calme revient enfin. Les oiseaux reprennent ensemble leur chant avec un bonheur immense.",
+        advice: "Pense au singulier « un oiseau chanteur » face au pluriel « des oiseaux », et aux verbes comme « part » et « se couche » !"
+      },
+      {
+        title: "Du printemps fleuri aux neiges d'hiver",
+        text: "Vivaldi décrit avec talent les quatre saisons dans son concert réputé. Au printemps fleuri succède le bel été, puis l'automne où le chasseur surveille son chien fidèle. Enfin, le long hiver dépose un manteau blanc de neige. Chaque note de musique fait voyager les enfants à travers toute l'Europe.",
+        advice: "Vérifie l'accord de « son chien fidèle », « le long hiver » et l'orthographe des invariables « avec », « enfin », « chaque » !"
+      }
+    ];
+
+    const DICTEE_SERIES_DATA = {
+      4: {
+        number: 4,
+        weekTitle: "L'art pariétal et la Préhistoire",
+        shortBadge: "🦣 Thème : L'art pariétal & la Préhistoire",
+        themeEmoji: "🦣",
+        borderColor: "#d97706",
+        bgColor: "#fffbeb",
+        titleColor: "#92400e",
+        badgeBg: "#fef08a",
+        badgeColor: "#854d0e",
+        reperes: null,
+        image: null,
+        noms: ["un an", "la peinture", "l'artiste", "la grotte", "un animal / des animaux", "le signe", "un être", "la Préhistoire", "la main", "le personnage", "la scène", "le chasseur", "un bison", "le combat", "le spécialiste", "l'homme"],
+        verbes: ["réaliser", "voir", "raconter", "étonner"],
+        adjectifs: ["pariétal", "impressionnant", "nombreux", "mystérieux", "humain", "entier", "blessé", "dessiné"],
+        invariables: ["jadis", "il y a", "aussi", "mais", "plus", "souvent", "pendant", "très", "peu", "entre", "beaucoup", "au fond", "précisément"],
+        tableRows: [
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            noms: "un an<br>la peinture<br>l'artiste<br>la grotte<br>un animal / des animaux<br>le signe",
+            verbes: "réaliser<br>voir",
+            adjectifs: "pariétal<br>impressionnant<br>nombreux<br>mystérieux",
+            invariables: "jadis / il y a<br>aussi / mais<br>plus / souvent<br>pendant / très<br>peu / entre<br>beaucoup"
+          },
+          {
+            levels: ["vert", "violet", "or"],
+            noms: "un être / la Préhistoire<br>la main / le personnage<br>la scène / le chasseur<br>un bison / le combat",
+            verbes: "raconter",
+            adjectifs: "humain<br>entier<br>blessé",
+            invariables: "au fond"
+          },
+          {
+            levels: ["violet", "or"],
+            noms: "le spécialiste / l'homme",
+            verbes: "étonner",
+            adjectifs: "dessiné",
+            invariables: "précisément"
+          }
+        ],
+        oralBank: ORAL_DICTEE_BANK_S4
+      },
+      5: {
+        number: 5,
+        weekTitle: "Les Quatre Saisons (Antonio Vivaldi)",
+        shortBadge: "🎻 Thème : Les Quatre Saisons (Antonio Vivaldi)",
+        themeEmoji: "🎻",
+        borderColor: "#2563eb",
+        bgColor: "#eff6ff",
+        titleColor: "#1e40af",
+        badgeBg: "#fef08a",
+        badgeColor: "#854d0e",
+        reperes: {
+          titre: "Les Quatre Saisons (Le quattro stagioni)",
+          qui: "Antonio Vivaldi",
+          lieu: "Venise, Italie",
+          quand: "1725",
+          domaine: "Musique classique (violon baroque)"
+        },
+        image: "images/dictee_5_vivaldi.jpg",
+        noms: [
+          "la musique", "le violon", "l'Europe", "la mélodie", "un instrument",
+          "l'arrivée", "la pluie", "le printemps", "l'été", "un oiseau", "des oiseaux", "l'orage", "un insecte",
+          "l'automne", "l'hiver", "le chasseur", "la neige", "le chien", "le froid"
+        ],
+        verbes: ["jouer", "composer", "décrire", "se coucher", "partir", "raconter"],
+        adjectifs: [
+          "classique", "différent", "premier/première", "deuxième", "petit",
+          "fort", "affolé", "fleuri", "chanteur", "troisième", "fidèle", "dernier", "long / longue"
+        ],
+        invariables: [
+          "chaque", "d'abord", "dans", "ensemble", "ensuite", "enfin", "avec", "sous"
+        ],
+        tableRows: [
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            noms: "la musique<br>le violon<br>l'Europe<br>la mélodie<br>un instrument",
+            verbes: "jouer<br>composer",
+            adjectifs: "classique<br>différent",
+            invariables: "chaque<br>d'abord / dans<br>ensemble<br>ensuite / enfin<br>avec / sous"
+          },
+          {
+            levels: ["vert", "violet", "or"],
+            noms: "l'arrivée / la pluie<br>le printemps / l'été<br>un oiseau<br>des oiseaux<br>l'orage / un insecte",
+            verbes: "décrire<br>se coucher<br>partir",
+            adjectifs: "premier/première<br>deuxième / petit<br>fort / affolé<br>fleuri<br>chanteur",
+            invariables: "<em>—</em>"
+          },
+          {
+            levels: ["violet", "or"],
+            noms: "l'automne / l'hiver<br>le chasseur / la neige<br>le chien / le froid",
+            verbes: "raconter",
+            adjectifs: "troisième<br>fidèle / dernier<br>long / longue",
+            invariables: "<em>—</em>"
+          }
+        ],
+        oralBank: ORAL_DICTEE_BANK_S5
+      }
+    };
+
+    let currentDicteeSeriesNum = 5;
+    let CURRENT_WEEK_DICTEE_WORDS = {
+      weekTitle: DICTEE_SERIES_DATA[5].weekTitle,
+      noms: DICTEE_SERIES_DATA[5].noms,
+      verbes: DICTEE_SERIES_DATA[5].verbes,
+      adjectifs: DICTEE_SERIES_DATA[5].adjectifs,
+      invariables: DICTEE_SERIES_DATA[5].invariables
+    };
+    let ORAL_DICTEE_BANK = ORAL_DICTEE_BANK_S5;
+
+    function renderDicteeSeriesUI(num) {
+      const container = document.getElementById('dictee-series-dynamic-container');
+      if (!container) return;
+      const sData = DICTEE_SERIES_DATA[num] || DICTEE_SERIES_DATA[5];
+
+      let reperesHtml = '';
+      if (sData.reperes) {
+        reperesHtml = `
+          <div class="dictee-reperes-card">
+            <div style="flex: 1; min-width: 260px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.3rem;">🏛️</span>
+                <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.05rem; color: #1e3a8a;">Repères de la leçon : ${sData.reperes.titre}</strong>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px; font-size: 0.88rem; color: var(--ink);">
+                <div><strong>• Qui ?</strong> ${sData.reperes.qui}</div>
+                <div><strong>• Lieu de création ?</strong> ${sData.reperes.lieu}</div>
+                <div><strong>• Quand ?</strong> ${sData.reperes.quand}</div>
+                <div><strong>• Domaine ?</strong> ${sData.reperes.domaine}</div>
+              </div>
+              <div style="margin-top: 8px; font-size: 0.82rem; background: #eff6ff; border-left: 3px solid #2563eb; padding: 4px 10px; border-radius: 4px;">
+                ⏳ <strong>Frise chronologique :</strong> Préhistoire ➔ Antiquité ➔ Moyen Âge ➔ <strong style="color:#b45309;">Temps modernes (1725)</strong> ➔ Époque contemporaine
+              </div>
+            </div>
+            ${sData.image ? `
+            <div style="text-align: center; flex-shrink: 0;">
+              <a href="${sData.image}" target="_blank" title="Cliquer pour voir la fiche officielle en grand" style="display: inline-block; border: 2px solid var(--ink); border-radius: 8px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink);">
+                <img src="${sData.image}" alt="Fiche Officielle Série ${num}" style="width: 78px; height: 105px; object-fit: cover; display: block;">
+              </a>
+              <div style="font-size: 0.72rem; color: var(--ink-light); margin-top: 3px;">🔍 Voir la fiche</div>
+            </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      let tableRowsHtml = '';
+      sData.tableRows.forEach(r => {
+        const badgesHtml = r.levels.map(lvl => `<span class="lvl-badge ${lvl}">${lvl}</span>`).join(' ');
+        tableRowsHtml += `
+          <tr>
+            <td class="level-col">${badgesHtml}</td>
+            <td>${r.noms}</td>
+            <td>${r.verbes}</td>
+            <td>${r.adjectifs}</td>
+            <td>${r.invariables}</td>
+          </tr>
+        `;
+      });
+
+      let lessonAdviceHtml = '';
+      if (num === 5) {
+        lessonAdviceHtml = `
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid #2563eb; border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-weight: 800; color: #1e40af; font-size: 0.95rem; margin-bottom: 2px;">
+                📘 Orthographe 5 associée : Les accords dans le groupe nominal
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin: 0;">
+                Règle d'or : L'adjectif s'accorde en <strong>nombre</strong> (<em>le bel instrument / les beaux instruments</em>) et en <strong>genre</strong> (<em>le beau violon / la belle viole</em>).
+              </p>
+            </div>
+            <button class="doc-link-btn" onclick="switchSubmodule('francais', 'orthographe_gn')" style="padding: 6px 14px; font-size: 0.82rem; background: #eff6ff; color: #1e40af; border-color: #2563eb;">
+              👉 Faire les 8 Défis Orthographe 5
+            </button>
+          </div>
+        `;
+      } else if (num === 4) {
+        lessonAdviceHtml = `
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid var(--bd-blue); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-weight: 800; color: var(--bd-blue-dark); font-size: 0.95rem; margin-bottom: 2px;">
+                📘 Orthographe 4 associée : Écrire « s » ou « ss »
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin: 0;">
+                Règle d'or : On écrit « ss » entre 2 voyelles (<em>chasseur, poisson</em>), et un seul « s » ailleurs (<em>artiste, bison</em>).
+              </p>
+            </div>
+            <button class="doc-link-btn" onclick="switchSubmodule('francais', 'orthographe_s')" style="padding: 6px 14px; font-size: 0.82rem; background: var(--bd-cream); color: var(--bd-blue-dark); border-color: var(--bd-blue);">
+              👉 Faire les 10 Défis Orthographe 4
+            </button>
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="rule-box" style="border-left: 5px solid ${sData.borderColor}; background: ${sData.bgColor};">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: ${sData.titleColor};">
+              📜 Les mots de la dictée (CM2) — Série ${num}
+            </span>
+            <span id="dictee-week-badge" style="background: ${sData.badgeBg}; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: ${sData.badgeColor};">
+              ${sData.shortBadge}
+            </span>
+          </div>
+
+          ${reperesHtml}
+
+          <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px;">
+            💡 <em>Voici la grille officielle des mots de la dictée (Série ${num}) classés par groupes de couleurs :</em>
+          </p>
+
+          <div class="dictee-table-wrap">
+            <table class="dictee-table">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Groupes</th>
+                  <th style="width: 27%;">Noms</th>
+                  <th style="width: 18%;">Verbes</th>
+                  <th style="width: 20%;">Adjectifs et<br>participes passés</th>
+                  <th style="width: 20%;">Mots invariables</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${tableRowsHtml}
+              </tbody>
+            </table>
+          </div>
+
+          ${lessonAdviceHtml}
+        </div>
+      `;
+    }
+
+    function selectDicteeSeries(num) {
+      currentDicteeSeriesNum = num;
+      try {
+        localStorage.setItem('cm2_dictee_series', num);
+      } catch (e) {}
+
+      // Mettre à jour l'état visuel des boutons de série
+      document.querySelectorAll('.dictee-series-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-series-${num}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const sData = DICTEE_SERIES_DATA[num] || DICTEE_SERIES_DATA[5];
+
+      // Mettre à jour les données de la semaine en cours
+      CURRENT_WEEK_DICTEE_WORDS = {
+        weekTitle: sData.weekTitle,
+        noms: sData.noms,
+        verbes: sData.verbes,
+        adjectifs: sData.adjectifs,
+        invariables: sData.invariables
+      };
+
+      ORAL_DICTEE_BANK = sData.oralBank;
+      currentDicteeBankIndex = 0;
+
+      // Badges et libellés
+      const tagEl = document.getElementById('dictee-oral-series-tag');
+      if (tagEl) tagEl.innerText = `Écoute & Écriture • Série ${num}`;
+
+      const aiLabel = document.getElementById('ai-dictee-series-label');
+      if (aiLabel) aiLabel.innerText = `Mots de la Série ${num}`;
+
+      // Rendre la grille et la règle
+      renderDicteeSeriesUI(num);
+
+      // Réinitialiser le lecteur vocal
+      if (typeof DicteePlayer !== 'undefined') {
+        DicteePlayer.stop();
+        DicteePlayer.text = ORAL_DICTEE_BANK[0].text;
+      }
+
+      // Recharger le Quiz d'entraînement des mots pour cette série
+      const questions = (num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 : (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions);
+      if (typeof QuizRunner !== 'undefined') {
+        new QuizRunner('quiz-container-dictee-mots', questions, {
+          title: `Mots de la Dictée — Série ${num}`,
+          subjectKey: "francais"
+        });
+      }
+    }
 
     let currentDicteeBankIndex = 0;
     let availableFrenchVoices = [];
@@ -8959,6 +9344,20 @@
       const modal = document.getElementById('dicteeOraleModal');
       if (modal) {
         modal.style.display = 'flex';
+        const sData = (typeof DICTEE_SERIES_DATA !== 'undefined' && DICTEE_SERIES_DATA[currentDicteeSeriesNum]) ? DICTEE_SERIES_DATA[currentDicteeSeriesNum] : DICTEE_SERIES_DATA[5];
+        if (sData) {
+          const subTitleEl = document.getElementById('dicteeModalThemeSubtitle');
+          if (subTitleEl) {
+            subTitleEl.innerText = `${sData.themeEmoji} Thème : ${sData.weekTitle} • Entraînement sur cahier`;
+          }
+          const item = ORAL_DICTEE_BANK[currentDicteeBankIndex] || ORAL_DICTEE_BANK[0];
+          const titleEl = document.getElementById('dicteeOraleTitle');
+          if (titleEl) titleEl.innerText = `🎙️ ${item.title}`;
+          const textEl = document.getElementById('dicteeOraleFullText');
+          if (textEl) textEl.innerText = item.text;
+          const adviceEl = document.getElementById('dicteeOraleAdvice');
+          if (adviceEl) adviceEl.innerHTML = `💡 <em>${item.advice}</em>`;
+        }
         DicteePlayer.init();
       }
     }
@@ -9002,7 +9401,13 @@
       currentDicteeBankIndex = (currentDicteeBankIndex + 1) % ORAL_DICTEE_BANK.length;
       const fallbackItem = ORAL_DICTEE_BANK[currentDicteeBankIndex];
 
-      const storylines = [
+      const storylines = (currentDicteeSeriesNum === 5) ? [
+        "Un concert féerique de Vivaldi à Venise et l'émotion des auditeurs devant les violons.",
+        "Le réveil joyeux de la nature au printemps fleuri avec les chants d'oiseaux.",
+        "Un violent orage d'été et la fuite précipitée des insectes sous la pluie.",
+        "Une partie de chasse au cœur de la forêt d'automne avec un chien fidèle.",
+        "La magie de la première neige d'hiver en Europe et le réconfort de la musique classique."
+      ] : [
         "Un voyage passionnant dans les grottes préhistoriques et la découverte de peintures de bisons.",
         "Le quotidien d'un chasseur habile et son respect pour les animaux dessinés sur la roche.",
         "L'artiste préhistorique qui applique les couleurs et laisse l'empreinte de sa main.",
@@ -9334,7 +9739,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       showAiToast("📥 Ton diplôme a été téléchargé en haute résolution !");
     }
 
-    const allDicteeMotsQuestions = [
+    const allDicteeMotsQuestionsS4 = [
       { display: "Complète l'accord sujet-verbe au présent : <em>« Jadis, les artistes préhistoriques (réaliser) <span class='blank-slot'>...</span> de fascinantes peintures sur la roche. »</em>", options: ["réalisent", "réalise", "réalisons", "réalisez"], correct: "réalisent", tip: "Le sujet est 'les artistes préhistoriques' (3e personne du pluriel, ils) -> terminaison en '-ent' !" },
       { display: "Complète avec le bon adjectif au pluriel : <em>« Au fond de la grotte, nous découvrons de (nombreux) <span class='blank-slot'>...</span> signes gravés. »</em>", options: ["nombreux", "nombreuse", "nombreuses", "nombreuxs"], correct: "nombreux", tip: "L'adjectif 'nombreux' se termine déjà par un 'x' au singulier, il ne change pas au masculin pluriel !" },
       { display: "Orthographe (« s » ou « ss ») : <em>« Le cha<span class='blank-slot'>...</span>eur poursuit un bi<span class='blank-slot'>...</span>on au galop. »</em>", options: ["ss / s (chasseur / bison)", "s / ss (chaseur / bisson)", "ss / ss (chasseur / bisson)", "s / s (chaseur / bison)"], correct: "ss / s (chasseur / bison)", tip: "« chasseur » prend 'ss' pour faire le son [s] entre deux voyelles, alors que « bison » a un seul 's' qui fait le son [z] !" },
@@ -9345,6 +9750,127 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       { display: "Complète l'orthographe : <em>« L'homme a de<span class='blank-slot'>...</span>iné une main entière avec préci<span class='blank-slot'>...</span>ion. »</em>", options: ["ss / s (dessiné / précision)", "s / ss (désiné / précission)", "ss / ss (dessiné / précission)", "s / s (désiné / précision)"], correct: "ss / s (dessiné / précision)", tip: "« dessiné » prend 'ss' (son [s] entre 2 voyelles) et « précision » prend un seul 's' (son [z] entre 2 voyelles) !" },
       { display: "Orthographe des mots invariables : <em>« Les chasseurs avancent <span class='blank-slot'>...</span> de la caverne avec <span class='blank-slot'>...</span> de courage. »</em>", options: ["au fond / beaucoup", "au font / beaucou", "au fond / beaucoups", "aux fond / beaucoup"], correct: "au fond / beaucoup", tip: "« au fond » prend un 'd' muet (comme 'profondeur') et « beaucoup » se termine par un 'p' muet !" },
       { display: "Accord avec sujet inversé : <em>« Entre les parois de la grotte (se trouver) <span class='blank-slot'>...</span> la main d'un être humain. »</em>", options: ["se trouve", "se trouvent", "se trouves", "se trouvons"], correct: "se trouve", tip: "Attention au sujet inversé : qu'est-ce qui se trouve ? 'La main d'un être humain' (singulier) -> 'se trouve' !" }
+    ];
+
+    const allDicteeMotsQuestionsS5 = [
+      {
+        display: "Accord dans le groupe nominal : <em>« Antonio Vivaldi choisit un <span class='blank-slot'>...</span> violon et un <span class='blank-slot'>...</span> instrument baroque. »</em>",
+        options: ["beau / bel", "bel / beau", "beau / beau", "beaux / bel"],
+        correct: "beau / bel",
+        tip: "Devant une consonne on dit « un beau violon », mais devant une voyelle ou un 'h' muet, on dit « un bel instrument » pour faciliter la prononciation !"
+      },
+      {
+        display: "Accord au pluriel (règle de la fiche) : <em>« Les solistes accordent leurs (bel) <span class='blank-slot'>...</span> instruments avant le concert. »</em>",
+        options: ["beaux", "bels", "bel", "beauxs"],
+        correct: "beaux",
+        tip: "Règle de la leçon : « le bel instrument » au singulier devient « les beaux instruments » au pluriel (les mots en -eau prennent un 'x') !"
+      },
+      {
+        display: "Accord en genre (féminin) : <em>« L'artiste joue un beau violon et une <span class='blank-slot'>...</span> viole. »</em>",
+        options: ["belle", "beau", "bel", "belles"],
+        correct: "belle",
+        tip: "Règle de la leçon : 'viole' est un nom féminin singulier -> l'adjectif s'accorde au féminin : « la belle viole » !"
+      },
+      {
+        display: "Pluriel particulier des noms en -eau : <em>« Au printemps, des <span class='blank-slot'>...</span> chanteurs se posent sur les arbres fleuris. »</em>",
+        options: ["oiseaux", "oiseaus", "oiseau", "oiseailles"],
+        correct: "oiseaux",
+        tip: "Les noms terminés par -eau prennent un 'x' au pluriel : un oiseau ➔ des oiseaux !"
+      },
+      {
+        display: "Mots invariables de temps et d'organisation : <em>« <span class='blank-slot'>...</span> le violon joue seul, <span class='blank-slot'>...</span> tout l'orchestre répond, et <span class='blank-slot'>...</span> le public applaudit. »</em>",
+        options: ["D'abord / ensuite / enfin", "D'abords / ensuite / enfins", "Dabord / ensuite / enfin", "D'abord / ensuites / enfin"],
+        correct: "D'abord / ensuite / enfin",
+        tip: "« d'abord », « ensuite » et « enfin » sont des mots invariables indispensables pour structurer les étapes d'un récit ou d'un concert !"
+      },
+      {
+        display: "Accord de l'adjectif féminin singulier : <em>« Le public écoute une <span class='blank-slot'>...</span> mélodie classique. »</em>",
+        options: ["différente", "différent", "différents", "différentes"],
+        correct: "différente",
+        tip: "« mélodie » est un nom féminin singulier -> l'adjectif prend la marque du féminin : « différente » avec un 'e' final !"
+      },
+      {
+        display: "Conjugaison au présent (verbe du 1er groupe) : <em>« Antonio Vivaldi (composer) <span class='blank-slot'>...</span> Les Quatre Saisons en 1725. »</em>",
+        options: ["compose", "composes", "composent", "composons"],
+        correct: "compose",
+        tip: "Le sujet est 'Antonio Vivaldi' (il, 3e pers. du singulier) -> terminaison en '-e' pour un verbe du 1er groupe au présent !"
+      },
+      {
+        display: "Verbe pronominal au présent : <em>« Quand l'orage éclate, les petits oiseaux (se coucher) <span class='blank-slot'>...</span> sous les feuilles. »</em>",
+        options: ["se couchent", "se couche", "se couches", "se couchons"],
+        correct: "se couchent",
+        tip: "Le sujet est 'les petits oiseaux' (ils, 3e pers. du pluriel) -> terminaison en '-ent' : 'se couchent' !"
+      },
+      {
+        display: "Accord de l'adjectif qualificatif au féminin : <em>« Dans la forêt d'automne, la journée est très (long) <span class='blank-slot'>...</span>. »</em>",
+        options: ["longue", "long", "longs", "longues"],
+        correct: "longue",
+        tip: "L'adjectif 'long' fait 'longue' au féminin singulier (avec -ue) : une longue journée !"
+      },
+      {
+        display: "Mots invariables de lieu : <em>« Les musiciens jouent <span class='blank-slot'>...</span> la tente <span class='blank-slot'>...</span> leurs amis d'enfance. »</em>",
+        options: ["sous / avec", "sou / avec", "sous / aveque", "soux / avec"],
+        correct: "sous / avec",
+        tip: "« sous » prend toujours un 's' muet final et « avec » s'écrit avec un 'c' : deux mots invariables très fréquents !"
+      }
+    ];
+
+    let allDicteeMotsQuestions = allDicteeMotsQuestionsS5;
+
+    const allOrthographeGNQuestions = [
+      {
+        display: "Accord en nombre : Quel est le pluriel exact du groupe nominal <strong>« un bel instrument »</strong> ?",
+        options: ["de beaux instruments", "des bels instruments", "des beaux instrument", "de bel instruments"],
+        correct: "de beaux instruments",
+        tip: "Règle officielle de la leçon : « un bel instrument » devient « de beaux instruments » (avec -x à beaux et -s à instruments) !"
+      },
+      {
+        display: "Accord en genre : Complète avec la forme féminine : <em>« un beau violon ➔ une <span class='blank-slot'>...</span> viole »</em>",
+        options: ["belle", "bel", "beauté", "belles"],
+        correct: "belle",
+        tip: "Exemple direct de la leçon : « beau » (masculin) devient « belle » (féminin) devant un nom féminin singulier !"
+      },
+      {
+        display: "Dans le groupe nominal, quel est le mot chef qui donne son genre et son nombre à l'adjectif qualificatif ?",
+        options: ["Le nom principal (le chef)", "Le verbe", "L'adjectif lui-même", "Le point final"],
+        correct: "Le nom principal (le chef)",
+        tip: "Le nom est le noyau ou chef du groupe nominal : le déterminant et l'adjectif s'accordent obligatoirement avec lui !"
+      },
+      {
+        display: "Accord au féminin pluriel : <em>« Au printemps, nous admirons des branches (fleuri) <span class='blank-slot'>...</span>. »</em>",
+        options: ["fleuries", "fleuris", "fleurie", "fleurits"],
+        correct: "fleuries",
+        tip: "« branches » est un nom féminin pluriel -> l'adjectif qualificatif prend la marque du féminin (-e) et du pluriel (-s) : « fleuries » !"
+      },
+      {
+        display: "Accord au pluriel : <em>« Le chasseur avance avec ses deux chiens (fidèle) <span class='blank-slot'>...</span>. »</em>",
+        options: ["fidèles", "fidèle", "fidèls", "fidelles"],
+        correct: "fidèles",
+        tip: "« deux chiens » est au masculin pluriel -> l'adjectif prend la marque du pluriel : « fidèles » avec un 's' !"
+      },
+      {
+        display: "Accord en genre : <em>« Vivaldi a composé la (premier) <span class='blank-slot'>...</span> partie de son concert en Italie. »</em>",
+        options: ["première", "premier", "premiers", "premières"],
+        correct: "première",
+        tip: "« partie » est un nom féminin singulier -> 'premier' devient « première » au féminin !"
+      },
+      {
+        display: "Accord de l'adjectif avec nom masculin singulier : <em>« L'orage provoque un <span class='blank-slot'>...</span> fracas dans le ciel. »</em>",
+        options: ["fort", "forte", "forts", "fortes"],
+        correct: "fort",
+        tip: "« un fracas » est un nom masculin singulier -> l'adjectif s'accorde au masculin singulier : « fort » !"
+      },
+      {
+        display: "Quelle phrase respecte à la perfection tous les accords dans le groupe nominal ?",
+        options: [
+          "Le premier violon joue une longue mélodie classique.",
+          "Les premier violons jouent une longue mélodie classique.",
+          "Le premier violon joue un longue mélodie classique.",
+          "Le première violon joue une long mélodie classique."
+        ],
+        correct: "Le premier violon joue une longue mélodie classique.",
+        tip: "« Le premier violon » (masculin singulier) et « une longue mélodie classique » (féminin singulier) sont impeccablement accordés !"
+      }
     ];
 
     const allGrammaireQuestions = [
@@ -10013,16 +10539,17 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
             showAiToast("✨ 3 nouveaux textes d'enquête générés par l'IA !");
           }
         } else if (subjectKey === 'francais_dictee_mots') {
-          const wordsListStr = `Noms: ${CURRENT_WEEK_DICTEE_WORDS.noms.join(', ')} | Verbes: ${CURRENT_WEEK_DICTEE_WORDS.verbes.join(', ')} | Adjectifs: ${CURRENT_WEEK_DICTEE_WORDS.adjectifs.join(', ')} | Invariables: ${CURRENT_WEEK_DICTEE_WORDS.invariables.join(', ')}`;
+          const sData = (typeof DICTEE_SERIES_DATA !== 'undefined' && DICTEE_SERIES_DATA[currentDicteeSeriesNum]) ? DICTEE_SERIES_DATA[currentDicteeSeriesNum] : DICTEE_SERIES_DATA[5];
+          const wordsListStr = `Noms: ${sData.noms.join(', ')} | Verbes: ${sData.verbes.join(', ')} | Adjectifs: ${sData.adjectifs.join(', ')} | Invariables: ${sData.invariables.join(', ')}`;
 
           const prompt = `Tu es un professeur de français CM2 bienveillant et rigoureux.
-Voici la liste officielle des MOTS DE LA DICTÉE DE LA SEMAINE sur le thème "${CURRENT_WEEK_DICTEE_WORDS.weekTitle}" :
+Voici la liste officielle des MOTS DE LA DICTÉE DE LA SEMAINE sur le thème "${sData.weekTitle}" (Série ${sData.number}) :
 ${wordsListStr}
 
 Génère 8 questions à choix multiples (QCM) stimulantes de niveau CM2 utilisant les mots de cette liste pour faire travailler activement :
-1. Les accords sujet-verbe au présent avec les verbes de la liste (réaliser, voir, raconter, étonner).
-2. L'accord des adjectifs qualificatifs en genre et nombre (pariétal/pariétaux/pariétales, impressionnant(s)/impressionnante(s), nombreux, mystérieux, humain, entier, blessé, dessiné).
-3. L'orthographe des sons : « s » ou « ss » (chasseur, dessin, bison, artiste, spécialiste), pluriels en -aux (animal/animaux), lettres muettes (au fond, combat, jadis, beaucoup, précisément).
+1. Les accords sujet-verbe au présent avec les verbes de la liste (${sData.verbes.join(', ')}).
+2. L'accord des adjectifs qualificatifs en genre et nombre avec la règle du groupe nominal (${sData.adjectifs.join(', ')}).
+3. L'orthographe des sons, pluriels (ex: oiseau/oiseaux, animal/animaux), lettres muettes (ex: bel/beaux, long/longue, d'abord, ensuite, enfin, sous, avec).
 4. Les mots invariables et homophones.
 
 Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
@@ -10036,16 +10563,17 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
 ]`;
           const generated = await callGeminiApi(prompt);
           if (Array.isArray(generated) && generated.length > 0) {
-            new QuizRunner('quiz-container-dictee-mots', generated, { title: "Défis IA : Mots de la Dictée", subjectKey: 'francais' });
+            new QuizRunner('quiz-container-dictee-mots', generated, { title: `Défis IA : Mots de la Dictée (Série ${sData.number})`, subjectKey: 'francais' });
             playSound('win');
             triggerConfetti();
-            showAiToast("✨ 8 nouvelles phrases d'entraînement générées sur les mots de la semaine !");
+            showAiToast(`✨ 8 nouvelles phrases d'entraînement générées sur la Série ${sData.number} !`);
           }
         } else {
           const themesMap = {
             'francais_homophones': 'Homophones grammaticaux (a/à, et/est, on/ont, son/sont, ses/ces/c\'est/s\'est) CM2',
-            'francais_dictee_mots': 'Orthographe et accords CM2 sur les mots de la dictée hebdomadaire (art pariétal, préhistoire, accords sujet-verbe et adjectifs)',
+            'francais_dictee_mots': 'Orthographe et accords CM2 sur les mots de la dictée hebdomadaire',
             'francais_orthographe_s': 'Orthographe CM2 : Écrire « s » ou « ss » (règle du son [s] : s en début/fin de mot, s entre consonne et voyelle comme artiste/veste/escalier, et ss entre 2 voyelles comme chasseur/dessin/poisson/trousse pour éviter le son [z] comme maison/poison)',
+            'francais_orthographe_gn': 'Orthographe CM2 : Les accords dans le groupe nominal (accord en genre : le beau violon / la belle viole, accord en nombre : le bel instrument / les beaux instruments, chef de groupe et adjectifs qualificatifs)',
             'francais_grammaire': 'Grammaire CM2 : rôle des déterminants, articles définis, indéfinis, possessifs, démonstratifs',
             'francais_conjugaison': 'Conjugaison CM2 : Présent de l\'indicatif (1er, 2e, 3e groupe et verbes fréquents)',
             'maths_soustraction': 'Calcul et opérations CM2 : soustraction posée, cassage de dizaine et calculs avec retenue',
@@ -10061,6 +10589,7 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
             'francais_homophones': 'quiz-container-homo',
             'francais_dictee_mots': 'quiz-container-dictee-mots',
             'francais_orthographe_s': 'quiz-container-orthographe-s',
+            'francais_orthographe_gn': 'quiz-container-orthographe-gn',
             'francais_grammaire': 'quiz-container-grammaire',
             'francais_conjugaison': 'quiz-container-conjugaison',
             'maths_soustraction': 'quiz-container-soustraction',
@@ -10123,6 +10652,9 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
         } else if (subject === 'francais_orthographe_s') {
           switchSubject('francais');
           switchSubmodule('francais', 'orthographe_s');
+        } else if (subject === 'francais_orthographe_gn') {
+          switchSubject('francais');
+          switchSubmodule('francais', 'orthographe_gn');
         } else if (subject.startsWith('francais')) {
           switchSubject('francais');
           if (subject === 'francais_homophones') switchSubmodule('francais', 'homophones');
@@ -16190,8 +16722,13 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
     renderDetectiveMission();
     renderProblemSolver();
-    new QuizRunner('quiz-container-dictee-mots', allDicteeMotsQuestions, { title: "Mots de la Dictée Hebdo", subjectKey: "francais" });
-    new QuizRunner('quiz-container-orthographe-s', allOrthographeSQuestions, { title: "Orthographe : « s » ou « ss »", subjectKey: "francais" });
+    
+    // Initialisation de la Série de Dictée (Série 5 par défaut ou selon choix mémorisé)
+    const initialSeries = parseInt(localStorage.getItem('cm2_dictee_series') || '5', 10);
+    selectDicteeSeries(initialSeries === 4 ? 4 : 5);
+
+    new QuizRunner('quiz-container-orthographe-s', allOrthographeSQuestions, { title: "Orthographe 4 : « s » ou « ss »", subjectKey: "francais" });
+    new QuizRunner('quiz-container-orthographe-gn', allOrthographeGNQuestions, { title: "Orthographe 5 : Les Accords dans le GN", subjectKey: "francais" });
     new QuizRunner('quiz-container-grammaire', allGrammaireQuestions, { title: "Grammaire G1 & Déterminants", subjectKey: "francais" });
     new QuizRunner('quiz-container-conjugaison', allConjugaisonQuestions, { title: "Conjugaison : Le Présent", subjectKey: "francais" });
     new QuizRunner('quiz-container-soustraction', allSoustractionQuestions, { title: "Soustraction par Cassage", subjectKey: "maths" });

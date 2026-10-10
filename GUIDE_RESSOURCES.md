@@ -30,6 +30,7 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
   - 📝 [Dictee_1_Mots_a_apprendre.jpeg](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Dictées/Dictee_1_Mots_a_apprendre.jpeg)
   - 📝 [Dictee_2_Mots_a_apprendre.jpeg](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Dictées/Dictee_2_Mots_a_apprendre.jpeg)
   - 📝 [Dictee_3_Mots_a_apprendre.jpg](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Dictées/Dictee_3_Mots_a_apprendre.jpg)
+  - 📝 [Dictee_5_Mots_a_apprendre.jpg](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Dictées/Dictee_5_Mots_a_apprendre.jpg) *(Série 5 : Les Quatre Saisons - Antonio Vivaldi & Orthographe 5 : Les accords dans le GN)*
 - **[Grammaire](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Grammaire)** :
   - 📄 [Fiche_G1_cm2.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Français/Grammaire/Fiche_G1_cm2.pdf)
   - 🔗 Vidéo Réseau Canopé (*Le rôle des déterminants*)
