@@ -4810,6 +4810,259 @@
       position: relative;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
+
+    /* ========================================================= */
+    /* 🔬 SCIENCES : LES FAMILLES DE MATÉRIAUX & RECYCLAGE (CM2) */
+    /* ========================================================= */
+    .mat-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .mat-thumb-card {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-comic-sm);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .mat-thumb-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .mat-thumb-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1.5px solid var(--ink-faint);
+    }
+    .mat-thumb-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .mat-family-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .mat-family-card {
+      background: #ffffff;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mat-family-badge {
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1.5px solid var(--ink);
+      width: fit-content;
+    }
+    .mat-family-badge.organique { background: #dcfce7; color: #166534; }
+    .mat-family-badge.metallique { background: #e0f2fe; color: #0369a1; }
+    .mat-family-badge.mineral { background: #fef3c7; color: #b45309; }
+    .mat-family-badge.plastique { background: #fee2e2; color: #b91c1c; }
+    .mat-family-badge.composite { background: #f3e8ff; color: #7e22ce; }
+
+    /* Jeu de Tri des Matériaux */
+    .mat-interactive-card {
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-comic);
+      margin-bottom: 24px;
+    }
+    .mat-pool-container {
+      background: #f8fafc;
+      border: 2px dashed #94a3b8;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 60px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .mat-item-pill {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 6px 14px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mat-item-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .mat-item-pill.selected {
+      background: var(--bd-yellow);
+      transform: scale(1.05);
+      border-color: #000;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .mat-bins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+    .mat-bin-box {
+      background: #fdfbf7;
+      border: 2.5px solid var(--ink);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 150px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .mat-bin-box:hover {
+      background: #fefce8;
+      border-color: #ca8a04;
+    }
+    .mat-bin-header {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1.5px solid var(--ink-faint);
+      padding-bottom: 6px;
+    }
+
+    /* Simulateur de Four Thermique */
+    .mat-furnace-wrap {
+      background: #1e1b18;
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      padding: 20px;
+      color: #ffffff;
+      box-shadow: var(--shadow-comic);
+      margin-bottom: 22px;
+    }
+    .mat-furnace-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .mat-furnace-display-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .mat-furnace-item-card {
+      background: #2d2824;
+      border: 2px solid #57534e;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+    .mat-state-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .mat-state-badge.solide { background: #3b82f6; color: #ffffff; }
+    .mat-state-badge.liquide { background: #ef4444; color: #ffffff; animation: pulseGlow 1.5s infinite; }
+
+    /* Équivalences du Recyclage */
+    .mat-equiv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .mat-equiv-card {
+      background: #f0fdf4;
+      border: 2px solid #16a34a;
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mat-equiv-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* Modal Zoom Images Sciences */
+    .mat-doc-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .mat-doc-modal.active {
+      display: flex;
+    }
+    .mat-doc-modal-content {
+      background: #ffffff;
+      border: 4px solid var(--ink);
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
@@ -6288,6 +6541,24 @@
       </div>
     </div>
 
+    <!-- Modale Zoom Documents Sciences & Matériaux -->
+    <div id="matDocModal" class="mat-doc-modal" onclick="closeMatDocModal()">
+      <div class="mat-doc-modal-content" onclick="event.stopPropagation()">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 14px;">
+          <h3 id="matDocModalTitle" style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 8px;">
+            <span>🔬 Document de Classe : Les Matériaux</span>
+          </h3>
+          <button onclick="closeMatDocModal()" style="background: transparent; border: none; font-size: 1.6rem; cursor: pointer; color: var(--ink-light); font-weight: 800;">&times;</button>
+        </div>
+        <div style="text-align: center;">
+          <img id="matDocModalImg" src="" alt="Fiche Sciences Matériaux" style="max-width: 100%; max-height: 72vh; border-radius: 12px; border: 2px solid var(--ink); box-shadow: var(--shadow-comic);">
+        </div>
+        <div style="margin-top: 14px; text-align: center;">
+          <button class="action-btn" onclick="closeMatDocModal()" style="padding: 8px 24px;">Fermer l'aperçu</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ========================================================= -->
     <!-- 3. HISTOIRE -->
     <!-- ========================================================= -->
@@ -6600,6 +6871,321 @@
 
       <!-- Sciences Sub 1: Materiaux -->
       <div id="sub-sciences-materiaux" class="submodule-content active">
+        <!-- Bandeau Flash Synthèse Tuteur Matériaux -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #16a34a; margin-bottom: 20px;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title">🔬 Leçon Sciences CM2 : Les Familles de Matériaux & le Recyclage</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink);">Cahier de Lucie & Manuel p. 6 à 9</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold">
+              <span class="tutor-flash-label" style="color: #ca8a04;">🎯 Définition Clé (Cahier de Lucie)</span>
+              <span>« Un <strong>matériau</strong> est une matière utilisée pour fabriquer un objet. Un même objet peut être fabriqué avec plusieurs matériaux (ex: bouteille en verre ou en plastique). »</span>
+            </div>
+            <div class="tutor-flash-item tip">
+              <span class="tutor-flash-label" style="color: #059669;">🔍 Règle du Choix</span>
+              <span>On choisit un matériau selon ses <strong>propriétés</strong> (légèreté, dureté, imperméabilité, conductivité) et l'<strong>utilisation</strong> que l'on veut en faire.</span>
+            </div>
+            <div class="tutor-flash-item trap">
+              <span class="tutor-flash-label" style="color: #dc2626;">🚫 Le Piège du Four ($1\,000^\circ\text{C}$)</span>
+              <span>Dans un four à $1\,000^\circ\text{C}$ : l'<strong>aluminium est LIQUIDE</strong> (fond à $650^\circ\text{C}$), mais l'<strong>acier est encore SOLIDE</strong> (fond à $1\,500^\circ\text{C}$) !</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Galerie des 5 Fiches Originales (Cahier & Manuel de Classe) -->
+        <div style="background: #fffdfa; border: 2.5px solid #b45309; border-radius: 16px; padding: 16px; margin-bottom: 22px; box-shadow: var(--shadow-comic-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.5rem;">📖</span>
+              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #b45309;">
+                Documents Officiels de Classe (Cahier de Lucie & Manuel)
+              </strong>
+            </div>
+            <span style="font-size: 0.8rem; font-weight: 800; color: #78350f;">Cliquez sur une fiche pour l'agrandir 🔎</span>
+          </div>
+          <div class="mat-gallery-grid">
+            <div class="mat-thumb-card" onclick="openMatDocModal('images/materiaux_cahier_lecon.jpg', 'Cahier de Lucie : Leçon 1 - Les familles de matériaux')">
+              <img src="images/materiaux_cahier_lecon.jpg" alt="Cahier Lucie" class="mat-thumb-img">
+              <span class="mat-thumb-title">📝 Cahier : Leçon 1<br>(Les 4 familles)</span>
+            </div>
+            <div class="mat-thumb-card" onclick="openMatDocModal('images/materiaux_manuel_p6.jpg', 'Manuel Page 6 : 1. Quels matériaux nous entourent ?')">
+              <img src="images/materiaux_manuel_p6.jpg" alt="Manuel p.6" class="mat-thumb-img">
+              <span class="mat-thumb-title">📄 Manuel Page 6<br>(Origines & Familles)</span>
+            </div>
+            <div class="mat-thumb-card" onclick="openMatDocModal('images/materiaux_manuel_p7.jpg', 'Manuel Page 7 : Pourquoi utiliser le plastique & comment le remplacer ?')">
+              <img src="images/materiaux_manuel_p7.jpg" alt="Manuel p.7" class="mat-thumb-img">
+              <span class="mat-thumb-title">📄 Manuel Page 7<br>(Défis du Plastique)</span>
+            </div>
+            <div class="mat-thumb-card" onclick="openMatDocModal('images/materiaux_manuel_p8.jpg', 'Manuel Page 8 : 2. D\'autres matières que l\'eau changent-elles d\'état ? (Tri)')">
+              <img src="images/materiaux_manuel_p8.jpg" alt="Manuel p.8" class="mat-thumb-img">
+              <span class="mat-thumb-title">📄 Manuel Page 8<br>(Tri & Équivalences)</span>
+            </div>
+            <div class="mat-thumb-card" onclick="openMatDocModal('images/materiaux_manuel_p9.jpg', 'Manuel Page 9 : Recyclage du verre, des métaux, fusion & températures')">
+              <img src="images/materiaux_manuel_p9.jpg" alt="Manuel p.9" class="mat-thumb-img">
+              <span class="mat-thumb-title">📄 Manuel Page 9<br>(Fusion & Recyclage)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Les 4 Grandes Familles (+ Composites) -->
+        <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0 0 14px 0; display: flex; align-items: center; gap: 8px;">
+          <span>📦 Les Familles de Matériaux à Retenir</span>
+        </h3>
+        <div class="mat-family-grid">
+          <!-- 1. Organiques -->
+          <div class="mat-family-card" style="border-top: 6px solid #16a34a;">
+            <div class="mat-family-badge organique">🌿 Organiques Naturels</div>
+            <strong style="color: #166534; font-size: 1.05rem;">Issus du vivant (végétaux ou animaux)</strong>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              • <strong>Végétal :</strong> bois, coton, paille, liège, papier (arbres).<br>
+              • <strong>Animal :</strong> laine (mouton), cuir (bovins), soie (ver à soie), cire (abeilles).<br>
+              <em>Propriétés :</em> biodégradables, souvent légers et isolants thermiques.
+            </p>
+          </div>
+
+          <!-- 2. Métalliques -->
+          <div class="mat-family-card" style="border-top: 6px solid #0284c7;">
+            <div class="mat-family-badge metallique">⚙️ Métalliques</div>
+            <strong style="color: #0369a1; font-size: 1.05rem;">Issus de minerais rocheux</strong>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              • <strong>Métaux purs :</strong> fer, cuivre, aluminium, zinc, or, argent.<br>
+              • <strong>Alliages (mélanges) :</strong> acier (fer + carbone), bronze (cuivre + étain), fonte.<br>
+              <em>Propriétés :</em> excellents conducteurs électriques et de chaleur, très résistants.
+            </p>
+          </div>
+
+          <!-- 3. Minéraux -->
+          <div class="mat-family-card" style="border-top: 6px solid #d97706;">
+            <div class="mat-family-badge mineral">🪨 Minéraux ou Inorganiques</div>
+            <strong style="color: #b45309; font-size: 1.05rem;">Roches & Terres façonnées</strong>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              • <strong>Exemples :</strong> sable, verre (sable fondu), roche, céramique, brique, porcelaine.<br>
+              <em>Propriétés :</em> très durs, isolants électriques, résistent au feu, mais <strong>cassants</strong> au choc.
+            </p>
+          </div>
+
+          <!-- 4. Plastiques -->
+          <div class="mat-family-card" style="border-top: 6px solid #e11d48;">
+            <div class="mat-family-badge plastique">🧴 Plastiques (Synthétiques)</div>
+            <strong style="color: #b91c1c; font-size: 1.05rem;">Issus de combustibles fossiles (pétrole)</strong>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              • <strong>Exemples :</strong> PVC, bouteilles PET (transparent), flacons PEHD (opaque).<br>
+              <em>Avantages :</em> très légers, formes variées, isolants.<br>
+              ⚠️ <em>Défaut majeur :</em> <strong>non biodégradables</strong> (mettent des siècles à disparaître !).
+            </p>
+          </div>
+
+          <!-- 5. Composites -->
+          <div class="mat-family-card" style="border-top: 6px solid #7c3aed;">
+            <div class="mat-family-badge composite">🧱 Matériaux Composites</div>
+            <strong style="color: #7e22ce; font-size: 1.05rem;">Mélange d'au moins 2 matériaux</strong>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin: 0; line-height: 1.45;">
+              • <strong>Exemple phare :</strong> le <strong>béton armé</strong> (béton minéral + armature en acier métallique).<br>
+              <em>Propriété :</em> combine la résistance à la compression du béton et la flexibilité de l'acier !
+            </p>
+          </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- JEU INTERACTIF 1 : LE GRAND TRI DES MATÉRIAUX (CM2)       -->
+        <!-- ========================================================= -->
+        <div class="mat-interactive-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h4 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.3rem; color: var(--ink); margin: 0;">
+                🎯 Atelier 1 : Le Grand Tri des Familles de Matériaux
+              </h4>
+              <p style="font-size: 0.88rem; color: var(--ink-light); margin: 4px 0 0 0;">
+                Clique sur un élément de la pioche, puis clique sur le bon bac pour le ranger ! (Exercice officiel du manuel p. 7).
+              </p>
+            </div>
+            <button class="action-btn" onclick="resetMatSortGame()" style="padding: 6px 14px; font-size: 0.85rem;">🔄 Recommencer</button>
+          </div>
+
+          <!-- Pioche des éléments à trier -->
+          <div id="matSortPool" class="mat-pool-container"></div>
+
+          <!-- Les 4 Bacs de Tri -->
+          <div class="mat-bins-grid">
+            <div class="mat-bin-box" id="bin-organique" onclick="placeMatItem('organique')">
+              <div class="mat-bin-header" style="color: #166534;">
+                <span>🌿 Organiques</span>
+                <span class="mat-bin-count" id="count-organique" style="font-size: 0.78rem; color: var(--ink-light);">(0)</span>
+              </div>
+              <div class="mat-bin-content" id="items-organique" style="display: flex; flex-direction: column; gap: 4px;"></div>
+            </div>
+
+            <div class="mat-bin-box" id="bin-metallique" onclick="placeMatItem('metallique')">
+              <div class="mat-bin-header" style="color: #0369a1;">
+                <span>⚙️ Métalliques</span>
+                <span class="mat-bin-count" id="count-metallique" style="font-size: 0.78rem; color: var(--ink-light);">(0)</span>
+              </div>
+              <div class="mat-bin-content" id="items-metallique" style="display: flex; flex-direction: column; gap: 4px;"></div>
+            </div>
+
+            <div class="mat-bin-box" id="bin-mineral" onclick="placeMatItem('mineral')">
+              <div class="mat-bin-header" style="color: #b45309;">
+                <span>🪨 Minéraux</span>
+                <span class="mat-bin-count" id="count-mineral" style="font-size: 0.78rem; color: var(--ink-light);">(0)</span>
+              </div>
+              <div class="mat-bin-content" id="items-mineral" style="display: flex; flex-direction: column; gap: 4px;"></div>
+            </div>
+
+            <div class="mat-bin-box" id="bin-plastique" onclick="placeMatItem('plastique')">
+              <div class="mat-bin-header" style="color: #b91c1c;">
+                <span>🧴 Plastiques</span>
+                <span class="mat-bin-count" id="count-plastique" style="font-size: 0.78rem; color: var(--ink-light);">(0)</span>
+              </div>
+              <div class="mat-bin-content" id="items-plastique" style="display: flex; flex-direction: column; gap: 4px;"></div>
+            </div>
+          </div>
+
+          <div id="matSortFeedback" style="display: none; margin-top: 14px; padding: 10px 14px; border-radius: 10px; font-weight: 800; font-size: 0.92rem; text-align: center;"></div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- JEU INTERACTIF 2 : LE FOUR THERMIQUE & LA FUSION (P. 9)   -->
+        <!-- ========================================================= -->
+        <div class="mat-furnace-wrap">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <span style="font-size: 0.75rem; font-weight: 900; background: #ea580c; color: #fff; padding: 2px 8px; border-radius: 4px; text-transform: uppercase;">
+                Expérience Manuel Page 9
+              </span>
+              <h4 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.35rem; color: #fef08a; margin: 4px 0 0 0;">
+                🔥 L'Épreuve du Four Thermique : Qui fond en premier ?
+              </h4>
+            </div>
+            <div style="font-size: 0.88rem; color: #fcd34d;">
+              Déplace le curseur pour monter la température du four !
+            </div>
+          </div>
+
+          <div class="mat-furnace-slider-row">
+            <span style="font-weight: 800; font-size: 1.1rem; color: #fff;">🌡️ Température :</span>
+            <input type="range" id="furnaceTempRange" min="20" max="1600" step="10" value="20" oninput="updateFurnaceSimulator(this.value)" style="flex: 1; min-width: 220px; accent-color: #ea580c; cursor: pointer;">
+            <span id="furnaceTempDisplay" style="font-family: monospace; font-size: 1.5rem; font-weight: 900; color: #f59e0b; min-width: 110px;">
+              20 °C
+            </span>
+          </div>
+
+          <!-- Raccourcis de température officielle -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+            <button class="action-btn" onclick="setFurnaceTemp(20)" style="padding: 4px 10px; font-size: 0.78rem; background: #374151; color: #fff; border-color: #4b5563;">❄️ Ambiante (20°C)</button>
+            <button class="action-btn" onclick="setFurnaceTemp(250)" style="padding: 4px 10px; font-size: 0.78rem; background: #b91c1c; color: #fff; border-color: #991b1b;">🧴 Fusion Plastique (250°C)</button>
+            <button class="action-btn" onclick="setFurnaceTemp(650)" style="padding: 4px 10px; font-size: 0.78rem; background: #d97706; color: #fff; border-color: #b45309;">🥫 Fusion Aluminium (650°C)</button>
+            <button class="action-btn" onclick="setFurnaceTemp(1000)" style="padding: 4px 10px; font-size: 0.78rem; background: #ea580c; color: #fff; border-color: #c2410c;">❓ Question Manuel (1 000°C)</button>
+            <button class="action-btn" onclick="setFurnaceTemp(1500)" style="padding: 4px 10px; font-size: 0.78rem; background: #ef4444; color: #fff; border-color: #dc2626;">🔥 Fusion Acier & Verre (1 500°C)</button>
+          </div>
+
+          <!-- Échantillons dans le four -->
+          <div class="mat-furnace-display-grid">
+            <div class="mat-furnace-item-card" id="furnace-plastique">
+              <div style="font-size: 1.8rem;">🧴</div>
+              <strong style="color: #fef08a; font-size: 0.88rem;">Plastique</strong>
+              <div style="font-size: 0.75rem; color: #94a3b8;">Fond à ~250°C</div>
+              <span class="mat-state-badge solide" id="badge-state-plastique">Solide 🧊</span>
+            </div>
+
+            <div class="mat-furnace-item-card" id="furnace-alu">
+              <div style="font-size: 1.8rem;">🥫</div>
+              <strong style="color: #fef08a; font-size: 0.88rem;">Aluminium</strong>
+              <div style="font-size: 0.75rem; color: #94a3b8;">Fond à ~650°C</div>
+              <span class="mat-state-badge solide" id="badge-state-alu">Solide 🧊</span>
+            </div>
+
+            <div class="mat-furnace-item-card" id="furnace-verre">
+              <div style="font-size: 1.8rem;">🍶</div>
+              <strong style="color: #fef08a; font-size: 0.88rem;">Verre</strong>
+              <div style="font-size: 0.75rem; color: #94a3b8;">Fond à ~1 500°C</div>
+              <span class="mat-state-badge solide" id="badge-state-verre">Solide 🧊</span>
+            </div>
+
+            <div class="mat-furnace-item-card" id="furnace-acier">
+              <div style="font-size: 1.8rem;">🔩</div>
+              <strong style="color: #fef08a; font-size: 0.88rem;">Acier</strong>
+              <div style="font-size: 0.75rem; color: #94a3b8;">Fond à ~1 500°C</div>
+              <span class="mat-state-badge solide" id="badge-state-acier">Solide 🧊</span>
+            </div>
+          </div>
+
+          <!-- Explication de la fusion pour le CM2 -->
+          <div id="furnaceExplanationBox" style="margin-top: 14px; background: rgba(0,0,0,0.4); border-left: 4px solid #f59e0b; padding: 10px 14px; border-radius: 8px; font-size: 0.86rem; line-height: 1.45;">
+            💡 <strong>La Fusion :</strong> Le passage de l'état <strong>solide</strong> à l'état <strong>liquide</strong> sous l'effet de la chaleur. En usine de recyclage, fondre le verre et les métaux permet de les couler dans de nouveaux moules !
+          </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- ÉQUIVALENCES MAGIQUES DU RECYCLAGE (MANUEL PAGE 8)        -->
+        <!-- ========================================================= -->
+        <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0 0 14px 0; display: flex; align-items: center; gap: 8px;">
+          <span>♻️ Que deviennent les déchets recyclés ? (Manuel p. 8)</span>
+        </h3>
+        <div class="mat-equiv-grid">
+          <div class="mat-equiv-card">
+            <span class="mat-equiv-icon">🚲</span>
+            <div>
+              <div style="font-weight: 800; color: #15803d; font-size: 0.95rem;">670 canettes alu</div>
+              <div style="font-size: 0.82rem; color: var(--ink);">➔ <strong>1 cadre de vélo</strong></div>
+            </div>
+          </div>
+          <div class="mat-equiv-card">
+            <span class="mat-equiv-icon">👕</span>
+            <div>
+              <div style="font-weight: 800; color: #15803d; font-size: 0.95rem;">15 bouteilles PET (eau)</div>
+              <div style="font-size: 0.82rem; color: var(--ink);">➔ <strong>1 t-shirt ou 1 polaire</strong></div>
+            </div>
+          </div>
+          <div class="mat-equiv-card">
+            <span class="mat-equiv-icon">🪴</span>
+            <div>
+              <div style="font-weight: 800; color: #15803d; font-size: 0.95rem;">15 bouteilles PEHD (lait)</div>
+              <div style="font-size: 0.82rem; color: var(--ink);">➔ <strong>1 arrosoir de jardin</strong></div>
+            </div>
+          </div>
+          <div class="mat-equiv-card">
+            <span class="mat-equiv-icon">⚪</span>
+            <div>
+              <div style="font-weight: 800; color: #15803d; font-size: 0.95rem;">8 boîtes de conserve</div>
+              <div style="font-size: 0.82rem; color: var(--ink);">➔ <strong>1 boule de pétanque</strong></div>
+            </div>
+          </div>
+          <div class="mat-equiv-card">
+            <span class="mat-equiv-icon">🧻</span>
+            <div>
+              <div style="font-weight: 800; color: #15803d; font-size: 0.95rem;">6 briques de soupe</div>
+              <div style="font-size: 0.82rem; color: var(--ink);">➔ <strong>1 rouleau de papier toilette</strong></div>
+            </div>
+          </div>
+          <div class="mat-equiv-card">
+            <span class="mat-equiv-icon">📰</span>
+            <div>
+              <div style="font-weight: 800; color: #15803d; font-size: 0.95rem;">10 kg de journaux</div>
+              <div style="font-size: 0.82rem; color: var(--ink);">➔ <strong>9 kg de papier recyclé</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alternatives écologiques au plastique (Page 7) -->
+        <div style="background: #ecfdf5; border: 2.5px solid #059669; border-radius: 16px; padding: 16px; margin-bottom: 22px; box-shadow: var(--shadow-comic-sm);">
+          <h4 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.15rem; color: #065f46; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
+            <span>🌱 Comment remplacer le plastique dans notre quotidien ? (Manuel p. 7)</span>
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.88rem; color: var(--ink);">
+            <div style="background: #ffffff; padding: 10px; border-radius: 10px; border: 1.5px solid #a7f3d0;">
+              🛍️ <strong>Sac en plastique :</strong> remplacé par un <strong>sac en tissu</strong> (lavable et réutilisable indéfiniment).
+            </div>
+            <div style="background: #ffffff; padding: 10px; border-radius: 10px; border: 1.5px solid #a7f3d0;">
+              🪥 <strong>Brosse à dents en plastique :</strong> remplacée par du <strong>bois ou bambou</strong> (matière organique 100% biodégradable).
+            </div>
+            <div style="background: #ffffff; padding: 10px; border-radius: 10px; border: 1.5px solid #a7f3d0;">
+              🍼 <strong>Bouteille en plastique jetable :</strong> remplacée par une <strong>bouteille en verre</strong> ou <strong>gourde inox</strong> (recyclable à l'infini).
+            </div>
+          </div>
+        </div>
+
+        <!-- Vidéo officielle du Padlet (L'Esprit Sorcier) -->
         <div class="video-doc-card">
           <div class="video-doc-header">
             <span class="video-doc-title">🔬 Vidéo du Padlet : Les matériaux qui nous entourent (L'Esprit Sorcier)</span>
@@ -6614,7 +7200,13 @@
             <a href="https://youtu.be/_GV35WRH23E" target="_blank" class="yt-btn">▶️ Lancer l'émission L'Esprit Sorcier</a>
           </div>
         </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('sciences_materiaux', this)">✨ Générer de nouveaux défis Matériaux (IA)</button>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 24px 0 12px 0; flex-wrap: wrap; gap: 10px;">
+          <h4 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.35rem; color: var(--ink); margin: 0; display: flex; align-items: center; gap: 8px;">
+            <span>🏆 10 Défis Officiels : Les Matériaux & le Recyclage (CM2)</span>
+          </h4>
+          <button class="ai-gen-btn" style="margin: 0;" onclick="generateAiExercisesFor('sciences_materiaux', this)">✨ Générer de nouveaux défis Matériaux (IA)</button>
+        </div>
         <div id="quiz-container-materiaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -10616,14 +11208,66 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
     ];
 
     const allMateriauxQuestions = [
-      { display: "À quelle famille de matériaux appartient le <strong>bois</strong> ou la <strong>laine</strong> ?", options: ["Matières organiques", "Métaux", "Plastiques", "Céramiques"], correct: "Matières organiques", tip: "Les matières organiques proviennent d'êtres vivants (végétaux ou animaux) !" },
-      { display: "Quel matériau est particulièrement réputé pour conduire très bien l'<strong>électricité</strong> ?", options: ["Le cuivre (métal)", "Le verre", "Le plastique", "Le bois sec"], correct: "Le cuivre (métal)", tip: "Les métaux comme le cuivre sont d'excellents conducteurs électriques !" },
-      { display: "Quelle est la principale propriété des <strong>plastiques</strong> ?", options: ["Légers, faciles à mouler et isolants", "Très lourds et conducteurs", "Cassants comme du verre", "Issus directement des arbres"], correct: "Légers, faciles à mouler et isolants", tip: "Les plastiques sont fabriqués à partir du pétrole et sont de très bons isolants !" },
-      { display: "La porcelaine, la brique et le carrelage font partie de la famille des :", options: ["Céramiques", "Métaux", "Plastiques", "Matières organiques"], correct: "Céramiques", tip: "Les céramiques résistent très bien à la chaleur mais sont cassantes !" },
-      { display: "Un matériau qui ne laisse pas passer le courant électrique s'appelle un :", options: ["Isolant", "Conducteur", "Aimant", "Métal"], correct: "Isolant", tip: "Le plastique, le verre et le caoutchouc sont des isolants électriques !" },
-      { display: "Pourquoi utilise-t-on de l'<strong>aluminium</strong> pour fabriquer les canettes ou les avions ?", options: ["Il est léger et résistant à la corrosion", "Il est lourd comme le plomb", "Il est transparent", "Il est comestible"], correct: "Il est léger et résistant à la corrosion", tip: "L'aluminium est 3 fois plus léger que l'acier !" },
-      { display: "Le coton et le cuir proviennent de la nature vivante, ce sont des :", options: ["Matières organiques", "Matériaux céramiques", "Métaux précieux", "Plastiques"], correct: "Matières organiques", tip: "Le coton vient d'une plante, le cuir d'un animal !" },
-      { display: "Quelle propriété permet au verre d'être utilisé pour les fenêtres ?", options: ["Sa transparence", "Sa conductivité électrique", "Sa souplesse", "Sa légèreté"], correct: "Sa transparence", tip: "Le verre laisse passer la lumière du soleil tout en protégeant du vent !" }
+      {
+        display: "Selon la définition de la leçon (cahier de Lucie), qu'est-ce qu'un <strong>matériau</strong> ?",
+        options: ["Une matière utilisée pour fabriquer un objet", "Un objet déjà terminé et vendu en magasin", "Uniquement un métal précieux comme l'or", "Une roche volcanique liquide"],
+        correct: "Une matière utilisée pour fabriquer un objet",
+        tip: "Un matériau est la matière (naturelle ou artificielle) façonnée par l'être humain pour fabriquer un objet !"
+      },
+      {
+        display: "À quelle famille appartiennent la <strong>laine</strong> (mouton), le <strong>cuir</strong> (bovins) et le <strong>coton</strong> (plante) ?",
+        options: ["Les matériaux organiques naturels", "Les matériaux métalliques", "Les matières plastiques", "Les minéraux inorganiques"],
+        correct: "Les matériaux organiques naturels",
+        tip: "Les matériaux organiques naturels proviennent toujours du vivant : végétaux (arbres, plantes) ou animaux (laine, cuir, soie, cire) !"
+      },
+      {
+        display: "D'où proviennent principalement les <strong>matériaux métalliques</strong> (fer, cuivre, aluminium, or) ?",
+        options: ["De minerais extraits de la roche", "Des arbres et des forêts", "Du pétrole fossile", "Des animaux marins"],
+        correct: "De minerais extraits de la roche",
+        tip: "Les métaux sont extraits de minerais rocheux du sol, puis fondus pour obtenir des métaux purs ou des alliages !"
+      },
+      {
+        display: "À partir de quoi la grande majorité des <strong>matières plastiques</strong> (PVC, PET, PEHD) sont-elles fabriquées ?",
+        options: ["De combustibles fossiles comme le pétrole", "De sable fin chauffé à blanc", "De fibres de coton tressées", "D'os d'animaux broyés"],
+        correct: "De combustibles fossiles comme le pétrole",
+        tip: "Les plastiques sont créés artificiellement par l'être humain à partir de dérivés du pétrole !"
+      },
+      {
+        display: "Quel est le <strong>défaut majeur du plastique</strong> souligné dans le manuel (page 7) ?",
+        options: ["Il n'est pas biodégradable et met des siècles à se dégrader", "Il conduit trop l'électricité", "Il est trop lourd à transporter", "Il rouille sous la pluie"],
+        correct: "Il n'est pas biodégradable et met des siècles à se dégrader",
+        tip: "Les plastiques ne sont pas biodégradables : abandonnés dans la nature, ils polluent les océans et les sols pendant des centaines d'années !"
+      },
+      {
+        display: "Dans un four chauffé à <strong>1 000 °C</strong> (expérience p. 9), dans quel état physique seront l'acier et l'aluminium ?",
+        options: ["L'aluminium est liquide (fond à 650°C) et l'acier est solide (fond à 1 500°C)", "Les deux sont devenus solides", "Les deux sont totalement liquides", "L'acier est liquide et l'aluminium est solide"],
+        correct: "L'aluminium est liquide (fond à 650°C) et l'acier est solide (fond à 1 500°C)",
+        tip: "L'aluminium fond dès 650°C (donc liquide à 1 000°C) alors que l'acier nécessite 1 500°C pour fondre (donc solide à 1 000°C) !"
+      },
+      {
+        display: "D'après les équivalences du manuel (p. 8), que peut-on fabriquer avec <strong>670 canettes en aluminium</strong> recyclées ?",
+        options: ["1 cadre de vélo", "1 voiture entière", "1 arrosoir de jardin", "1 boule de pétanque"],
+        correct: "1 cadre de vélo",
+        tip: "Grâce au recyclage de l'aluminium, 670 canettes permettent de mouler un cadre complet de vélo !"
+      },
+      {
+        display: "Comment appelle-t-on le changement d'état quand le verre ou le métal passe de <strong>solide à liquide</strong> sous l'effet de la chaleur ?",
+        options: ["La fusion", "La solidification", "La vaporisation", "La condensation"],
+        correct: "La fusion",
+        tip: "La fusion est le passage de solide à liquide par chauffage (ex: le verre à 1 500°C, l'acier à 1 500°C, le glaçon à 0°C) !"
+      },
+      {
+        display: "Que permet de fabriquer le recyclage de <strong>15 bouteilles d'eau en plastique transparent</strong> (PET) ?",
+        options: ["1 t-shirt ou 1 laine polaire", "1 arrosoir de jardin", "1 rouleau de papier toilette", "1 pneu de voiture"],
+        correct: "1 t-shirt ou 1 laine polaire",
+        tip: "Le plastique PET des bouteilles transparentes est étiré en fibres textiles pour tricoter des t-shirts et des polaires !"
+      },
+      {
+        display: "Le <strong>béton armé</strong> est composé de béton (minéral) et d'acier (métallique). C'est un exemple de :",
+        options: ["Matériau composite", "Matériau organique pur", "Matière plastique fossile", "Métal pur non allié"],
+        correct: "Matériau composite",
+        tip: "Un matériau composite est l'assemblage d'au moins deux matériaux différents pour combiner leurs points forts !"
+      }
     ];
 
     const allEiffelQuestions = [
@@ -18271,6 +18915,247 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     }
 
     // =========================================================================
+    // 🔬 SCIENCES : LES MATÉRIAUX & ATELIERS INTERACTIFS
+    // =========================================================================
+    function openMatDocModal(src, title) {
+      const modal = document.getElementById('matDocModal');
+      const img = document.getElementById('matDocModalImg');
+      const titleEl = document.getElementById('matDocModalTitle');
+      if (modal && img) {
+        img.src = src;
+        if (titleEl && title) titleEl.innerHTML = `<span>🔬 ${title}</span>`;
+        modal.classList.add('active');
+      }
+    }
+
+    function closeMatDocModal() {
+      const modal = document.getElementById('matDocModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    // --- Atelier 1 : Jeu de Tri des Familles de Matériaux ---
+    const MAT_ITEMS_POOL = [
+      { id: 'paille', label: '🌾 La paille', family: 'organique', origin: 'Végétal' },
+      { id: 'pvc', label: '🧪 Le tuyau PVC', family: 'plastique', origin: 'Pétrole fossile' },
+      { id: 'coton', label: '☁️ Le coton', family: 'organique', origin: 'Végétal' },
+      { id: 'sable', label: '🏖️ Le sable', family: 'mineral', origin: 'Minéral' },
+      { id: 'verre', label: '🍶 Le verre', family: 'mineral', origin: 'Minéral (sable fondu)' },
+      { id: 'fer', label: '🪨 Minerai de fer', family: 'metallique', origin: 'Minerai rocheux' },
+      { id: 'cuir', label: '👞 Le cuir', family: 'organique', origin: 'Animal' },
+      { id: 'cuivre', label: '🔌 Le fil de cuivre', family: 'metallique', origin: 'Métal pur conducteur' },
+      { id: 'bouteille', label: '🧴 Bouteille (PET)', family: 'plastique', origin: 'Combustibles fossiles' },
+      { id: 'laine', label: '🐑 La laine', family: 'organique', origin: 'Animal' }
+    ];
+
+    let matSortCurrentItems = [];
+    let matSortSelectedId = null;
+    let matSortPlaced = { organique: [], metallique: [], mineral: [], plastique: [] };
+
+    function initMatSortGame() {
+      resetMatSortGame();
+    }
+
+    function resetMatSortGame() {
+      matSortCurrentItems = JSON.parse(JSON.stringify(MAT_ITEMS_POOL));
+      matSortSelectedId = null;
+      matSortPlaced = { organique: [], metallique: [], mineral: [], plastique: [] };
+      renderMatSortGame();
+      const fb = document.getElementById('matSortFeedback');
+      if (fb) fb.style.display = 'none';
+    }
+
+    function renderMatSortGame() {
+      const poolEl = document.getElementById('matSortPool');
+      if (!poolEl) return;
+
+      if (matSortCurrentItems.length === 0) {
+        poolEl.innerHTML = '<span style="color:#16a34a; font-weight:800; font-size:0.95rem;">🎉 Bravo ! Tous les matériaux ont été correctement triés !</span>';
+      } else {
+        poolEl.innerHTML = matSortCurrentItems.map(item => `
+          <button class="mat-item-pill ${matSortSelectedId === item.id ? 'selected' : ''}" onclick="selectMatItem('${item.id}')">
+            ${item.label}
+          </button>
+        `).join('');
+      }
+
+      ['organique', 'metallique', 'mineral', 'plastique'].forEach(cat => {
+        const countEl = document.getElementById(`count-${cat}`);
+        const itemsEl = document.getElementById(`items-${cat}`);
+        if (countEl) countEl.innerText = `(${matSortPlaced[cat].length})`;
+        if (itemsEl) {
+          itemsEl.innerHTML = matSortPlaced[cat].map(it => `
+            <span style="font-size:0.82rem; font-weight:700; color:var(--ink); background:#ffffff; border:1px solid #cbd5e1; padding:2px 8px; border-radius:6px; box-shadow:1px 1px 0 rgba(0,0,0,0.06);">
+              ✅ ${it.label}
+            </span>
+          `).join('');
+        }
+      });
+    }
+
+    function selectMatItem(id) {
+      matSortSelectedId = id;
+      playSound('click');
+      renderMatSortGame();
+    }
+
+    function placeMatItem(targetFamily) {
+      if (!matSortSelectedId) {
+        showMatSortFeedback("💡 Clique d'abord sur un matériau dans la boîte du dessus pour le sélectionner !", "info");
+        return;
+      }
+      const item = matSortCurrentItems.find(i => i.id === matSortSelectedId);
+      if (!item) return;
+
+      if (item.family === targetFamily) {
+        // Bonne réponse
+        playSound('pop');
+        matSortPlaced[targetFamily].push(item);
+        matSortCurrentItems = matSortCurrentItems.filter(i => i.id !== matSortSelectedId);
+        matSortSelectedId = null;
+        renderMatSortGame();
+
+        if (matSortCurrentItems.length === 0) {
+          playSound('win');
+          triggerConfetti();
+          if (typeof window.awardDirectPoints === 'function') {
+            window.awardDirectPoints(25, 'Tri des Matériaux Réussi');
+          }
+          showMatSortFeedback("🌟 EXCELLENT ! Tu as classé tous les matériaux dans leur vraie famille comme dans le cahier de Lucie ! (+25 pièces d'or)", "success");
+        } else {
+          showMatSortFeedback(`✅ Bravo ! ${item.label} appartient bien aux matériaux ${targetFamily}s (${item.origin}).`, "success");
+        }
+      } else {
+        // Erreur
+        playSound('wrong');
+        showMatSortFeedback(`❌ Attention : ${item.label} ne fait pas partie des ${targetFamily}s. (${item.origin})`, "error");
+      }
+    }
+
+    function showMatSortFeedback(msg, type) {
+      const fb = document.getElementById('matSortFeedback');
+      if (!fb) return;
+      fb.style.display = 'block';
+      if (type === 'success') {
+        fb.style.background = '#dcfce7';
+        fb.style.color = '#166534';
+        fb.style.border = '2px solid #22c55e';
+      } else if (type === 'error') {
+        fb.style.background = '#fee2e2';
+        fb.style.color = '#991b1b';
+        fb.style.border = '2px solid #ef4444';
+      } else {
+        fb.style.background = '#fef3c7';
+        fb.style.color = '#92400e';
+        fb.style.border = '2px solid #f59e0b';
+      }
+      fb.innerHTML = msg;
+    }
+
+    // --- Atelier 2 : Simulateur du Four Thermique & Fusion (Manuel p. 9) ---
+    function setFurnaceTemp(val) {
+      const slider = document.getElementById('furnaceTempRange');
+      if (slider) slider.value = val;
+      updateFurnaceSimulator(val);
+    }
+
+    function updateFurnaceSimulator(tempVal) {
+      const temp = parseInt(tempVal, 10);
+      const displayEl = document.getElementById('furnaceTempDisplay');
+      if (displayEl) displayEl.innerText = `${temp} °C`;
+
+      // 1. Plastique (fond à 250°C)
+      const plastBadge = document.getElementById('badge-state-plastique');
+      const plastCard = document.getElementById('furnace-plastique');
+      if (plastBadge && plastCard) {
+        if (temp >= 250) {
+          plastBadge.className = 'mat-state-badge liquide';
+          plastBadge.innerText = 'Liquide 💧 (Fondu)';
+          plastCard.style.borderColor = '#ef4444';
+          plastCard.style.background = '#450a0a';
+        } else {
+          plastBadge.className = 'mat-state-badge solide';
+          plastBadge.innerText = 'Solide 🧊';
+          plastCard.style.borderColor = '#57534e';
+          plastCard.style.background = '#2d2824';
+        }
+      }
+
+      // 2. Aluminium (fond à 650°C)
+      const aluBadge = document.getElementById('badge-state-alu');
+      const aluCard = document.getElementById('furnace-alu');
+      if (aluBadge && aluCard) {
+        if (temp >= 650) {
+          aluBadge.className = 'mat-state-badge liquide';
+          aluBadge.innerText = 'Liquide 💧 (Fondu)';
+          aluCard.style.borderColor = '#ea580c';
+          aluCard.style.background = '#431407';
+        } else {
+          aluBadge.className = 'mat-state-badge solide';
+          aluBadge.innerText = 'Solide 🧊';
+          aluCard.style.borderColor = '#57534e';
+          aluCard.style.background = '#2d2824';
+        }
+      }
+
+      // 3. Verre (fond à 1500°C)
+      const verreBadge = document.getElementById('badge-state-verre');
+      const verreCard = document.getElementById('furnace-verre');
+      if (verreBadge && verreCard) {
+        if (temp >= 1500) {
+          verreBadge.className = 'mat-state-badge liquide';
+          verreBadge.innerText = 'Liquide 💧 (Pâte en fusion)';
+          verreCard.style.borderColor = '#e11d48';
+          verreCard.style.background = '#4c0519';
+        } else {
+          verreBadge.className = 'mat-state-badge solide';
+          verreBadge.innerText = 'Solide 🧊';
+          verreCard.style.borderColor = '#57534e';
+          verreCard.style.background = '#2d2824';
+        }
+      }
+
+      // 4. Acier (fond à 1500°C)
+      const acierBadge = document.getElementById('badge-state-acier');
+      const acierCard = document.getElementById('furnace-acier');
+      if (acierBadge && acierCard) {
+        if (temp >= 1500) {
+          acierBadge.className = 'mat-state-badge liquide';
+          acierBadge.innerText = 'Liquide 💧 (Acier en fusion)';
+          acierCard.style.borderColor = '#dc2626';
+          acierCard.style.background = '#450a0a';
+        } else {
+          acierBadge.className = 'mat-state-badge solide';
+          acierBadge.innerText = 'Solide 🧊';
+          acierCard.style.borderColor = '#57534e';
+          acierCard.style.background = '#2d2824';
+        }
+      }
+
+      // Explication dynamique
+      const expBox = document.getElementById('furnaceExplanationBox');
+      if (expBox) {
+        if (temp === 1000) {
+          expBox.innerHTML = `
+            🎯 <strong>Question du Manuel (page 9) résolue :</strong> Dans un four à <strong>1 000 °C</strong> :<br>
+            • L'<strong>acier est SOLIDE 🧊</strong> car sa température de fusion ($1\\,500^\\circ\\text{C}$) n'est pas encore atteinte !<br>
+            • L'<strong>aluminium est LIQUIDE 💧</strong> car il a déjà fondu dès $650^\\circ\\text{C}$ !
+          `;
+          expBox.style.borderColor = '#ea580c';
+        } else if (temp >= 1500) {
+          expBox.innerHTML = `
+            🔥 <strong>Température maximale ($1\\,500^\\circ\\text{C}$) :</strong> Le verre et l'acier sont en pleine fusion liquide ! Les industriels peuvent alors les verser dans des moules neufs.
+          `;
+          expBox.style.borderColor = '#ef4444';
+        } else {
+          expBox.innerHTML = `
+            💡 <strong>La Fusion :</strong> Passage de l'état <strong>solide</strong> à l'état <strong>liquide</strong> sous l'effet de la chaleur. Le plastique fond dès $250^\\circ\\text{C}$, l'alu à $650^\\circ\\text{C}$, et l'acier/verre à $1\\,500^\\circ\\text{C}$.
+          `;
+          expBox.style.borderColor = '#f59e0b';
+        }
+      }
+    }
+
+    // =========================================================================
     // INIT
     // =========================================================================
     initConjugator();
@@ -18280,6 +19165,8 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     initPeriodicTable();
     initMoleculeLab();
     initGeometryStudio();
+    initMatSortGame();
+    updateFurnaceSimulator(20);
 
     updateRewardsDisplays();
     checkBadges();

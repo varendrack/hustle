@@ -53,6 +53,12 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
 ---
 
 ### 3. 🏛️ & 🔬 [Histoire et Sciences](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences)
+- 🔬 **[Cours Complet & Recyclage : Les Familles de Matériaux (Cahier & Manuel p. 6 à 9)](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/Lecon_Familles_Materiaux_Recyclage.md)** :
+  - 📖 Leçon 1 / S1 : Définition, 4 grandes familles (organiques, métalliques, minéraux, plastiques) + composites, critères de choix selon propriétés et usage.
+  - 📸 Galerie des 5 documents originaux haute définition avec zoom interactif.
+  - ♻️ Filières de recyclage, équivalences concrètes (670 canettes = 1 cadre de vélo, etc.) et alternatives au plastique.
+  - 🔥 Changements d'état & fusion (plastique $250^\circ\text{C}$, alu $650^\circ\text{C}$, acier/verre $1\,500^\circ\text{C}$).
+  - 🎮 **Ateliers interactifs dans l'application web :** Grand jeu de tri des matériaux dans leurs bacs, simulateur de four thermique ($20^\circ\text{C}$ à $1\,600^\circ\text{C}$) et QCM officiel 10 questions !
 - 📖 [Fiche Découverte & Quiz : Histoire de France](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/Fiche_Decouverte_Histoire.md)
 - 🧪 [Fiche Découverte & Quiz : Sciences & Arts (Matériaux, Éléments & Tour Eiffel)](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/Fiche_Decouverte_Sciences_et_Arts.md)
 - ⚛️ [Tableau Périodique des Éléments Chimiques](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Histoire_et_Sciences/tables_elements.png)
@@ -62,6 +68,7 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
   - 👑 *La cathédrale de Reims*
   - 🎧 *Dans la classe de Gustave Eiffel*
   - 🔬 *Les matériaux qui nous entourent (L'Esprit Sorcier)*
+  - ♻️ *Le recyclage des déchets (1 jour 1 question)*
 
 ---
 
