@@ -5569,18 +5569,42 @@
         </div>
       </div>
 
+      <!-- Bandeau d'Annonce Flash : NOUVELLE DICTÉE SÉRIE 5 -->
+      <div style="background: linear-gradient(135deg, #fef3c7, #fefce8); border: 2.5px solid #b45309; border-radius: 16px; padding: 14px 18px; margin-bottom: 16px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">🎻</span>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <span style="background: #b45309; color: #ffffff; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px;">NOUVEAU • SÉRIE 5</span>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #92400e;">Dictée Hebdomadaire & Leçon de la Semaine</span>
+            </div>
+            <div style="font-family: 'Fredoka', sans-serif; font-weight: 800; color: #78350f; font-size: 1.15rem; margin-top: 2px;">
+              Les Quatre Saisons (Antonio Vivaldi) & Orthographe 5 (Accords dans le GN)
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(5);" style="padding: 8px 16px; font-size: 0.88rem; background: #b45309; color: #ffffff; border-color: #78350f;">
+            📜 Voir la Grille & Dictée Vocale (Série 5)
+          </button>
+          <button class="action-btn" onclick="switchSubmodule('francais', 'orthographe_gn')" style="padding: 8px 16px; font-size: 0.88rem; background: #2563eb; color: #ffffff; border-color: #1d4ed8;">
+            🎨 8 Défis Orthographe 5
+          </button>
+        </div>
+      </div>
+
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 5 🆕 & 4)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_gn')">🎨 Orthographe 5 : Accords dans le GN (8 Défis 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 4 & 5)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe 4 : « s » ou « ss » (10 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_gn')">🎨 Orthographe 5 : Accords dans le GN (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
       </div>
 
       <!-- Français Sub 1: Homophones -->
-      <div id="sub-francais-homophones" class="submodule-content active">
+      <div id="sub-francais-homophones" class="submodule-content">
         <div class="rule-box">
           ✨ <strong>Les Réflexes Magiques :</strong><br>
           • <strong>a / à :</strong> Remplace par <em>« avait »</em> ➡️ <strong>a</strong> (verbe avoir). Sinon ➡️ <strong>à</strong>.<br>
@@ -5603,7 +5627,7 @@
       </div>
 
       <!-- Français Sub 3: Mots de la Dictée Hebdomadaire (Multi-Séries 4 & 5) -->
-      <div id="sub-francais-dictee_mots" class="submodule-content">
+      <div id="sub-francais-dictee_mots" class="submodule-content active">
         <!-- Barre de sélection des séries de dictée -->
         <div class="dictee-series-bar">
           <div class="dictee-series-title">
@@ -18278,9 +18302,8 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     renderDetectiveMission();
     renderProblemSolver();
     
-    // Initialisation de la Série de Dictée (Série 5 par défaut ou selon choix mémorisé)
-    const initialSeries = parseInt(localStorage.getItem('cm2_dictee_series') || '5', 10);
-    selectDicteeSeries(initialSeries === 4 ? 4 : 5);
+    // Initialisation de la Série de Dictée (Série 5 - Les Quatre Saisons par défaut)
+    selectDicteeSeries(5);
 
     new QuizRunner('quiz-container-orthographe-s', allOrthographeSQuestions, { title: "Orthographe 4 : « s » ou « ss »", subjectKey: "francais" });
     new QuizRunner('quiz-container-orthographe-gn', allOrthographeGNQuestions, { title: "Orthographe 5 : Les Accords dans le GN", subjectKey: "francais" });
