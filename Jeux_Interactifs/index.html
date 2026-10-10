@@ -8316,8 +8316,24 @@
 
       <!-- Panneau 3 : TABLEAU DE CONVERSIONS SEYÈS -->
       <div id="tool-panel-conversion" class="tool-panel">
-        <div class="rule-box" style="background: #eff6ff; border: 2px solid var(--ink); margin-bottom: 16px;">
-          💡 <strong>Le Tableau de Conversion Seyès :</strong> Tape un nombre, sélectionne son unité de départ et ton unité cible. Regarde comment la <strong>virgule rouge</strong> se déplace automatiquement colonne par colonne !
+        <div class="rule-box" style="background: #eff6ff; border: 2px solid var(--ink); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            💡 <strong>Le Tableau de Conversion Seyès :</strong> Tape un nombre, sélectionne son unité de départ et ton unité cible. Regarde comment la <strong>virgule rouge</strong> se déplace automatiquement colonne par colonne !
+          </div>
+          <button class="action-btn" onclick="startConversionMiniQuiz()" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 8px 18px; font-size: 0.92rem; white-space: nowrap;">
+            🎯 Défi Flash (+1 ⭐)
+          </button>
+        </div>
+
+        <!-- Boîte du Mini-Défi Interactif Conversions -->
+        <div id="convMiniQuizContainer" style="display: none; background: #f0f9ff; border: 2.5px solid #0284c7; border-radius: 16px; padding: 16px; margin-bottom: 18px; box-shadow: var(--shadow-comic-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <strong style="color: #0369a1; font-size: 1.05rem;">🎯 Défi Éclair de Conversions CM2 :</strong>
+            <span style="font-size: 0.85rem; font-weight: 800; color: #0284c7;">Gagne +1 ⭐ pour la Boutique !</span>
+          </div>
+          <div id="convQuizQuestion" style="font-size: 1.15rem; font-weight: 800; color: var(--ink); margin-bottom: 12px;"></div>
+          <div id="convQuizOptions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;"></div>
+          <div id="convQuizFeedback" style="display: none; margin-top: 12px; font-weight: 800; padding: 8px 12px; border-radius: 8px;"></div>
         </div>
 
         <div class="conversion-controls">
@@ -8474,11 +8490,25 @@
                 <button class="t-chip" onclick="setPoemMaskLevel(25)" id="maskBtn25">-25% mots</button>
                 <button class="t-chip" onclick="setPoemMaskLevel(50)" id="maskBtn50">-50% mots</button>
                 <button class="t-chip" onclick="setPoemMaskLevel(100)" id="maskBtn100">🏆 Par Cœur</button>
+                <button class="action-btn" onclick="startPoemMiniQuiz()" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); padding: 5px 14px; font-size: 0.86rem; box-shadow: var(--shadow-comic-sm);">
+                  🎯 Défi Par Cœur (+2 ⭐)
+                </button>
                 <button class="doc-link-btn" onclick="speakCurrentPoem()" style="padding: 4px 10px; font-size: 0.85rem;" title="Écouter la lecture vocale">🔊 Écouter</button>
                 <button class="doc-link-btn" onclick="dislikeCurrentPoem()" style="padding: 4px 10px; font-size: 0.85rem; border-color: var(--bd-red); color: var(--bd-red); background: #fef2f2;" title="Je n'aime pas cette poésie (la retirer de ma sélection)">
                   👎 Retirer
                 </button>
               </div>
+            </div>
+
+            <!-- Boîte du Défi Mémoire Poésie -->
+            <div id="poemQuizContainer" style="display: none; background: #faf5ff; border: 2.5px solid #8b5cf6; border-radius: 16px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow-comic-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong style="color: #6b21a8; font-size: 1.05rem;">📜 Défi Récitation & Mémoire Poétique :</strong>
+                <span style="font-size: 0.85rem; font-weight: 800; color: #7c3aed;">Gagne +2 ⭐ pour la Boutique !</span>
+              </div>
+              <div id="poemQuizQuestion" style="font-size: 1.15rem; font-weight: 800; color: var(--ink); margin-bottom: 12px; line-height: 1.5;"></div>
+              <div id="poemQuizOptions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;"></div>
+              <div id="poemQuizFeedback" style="display: none; margin-top: 12px; font-weight: 800; padding: 8px 12px; border-radius: 8px;"></div>
             </div>
 
             <div id="poemStanzasContainer" style="font-size: 1.15rem; line-height: 1.8; color: var(--ink);">
@@ -16515,6 +16545,133 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       }).join('')}</tr>`;
     }
 
+    // --- MINI-DÉFI ÉCLAIR DE CONVERSIONS SEYÈS ---
+    let currentConvQuizData = null;
+
+    const cm2PrebuiltConversions = [
+      { type: 'longueur', val: 3.5, from: 'm', to: 'cm', label: '3,5 m en cm' },
+      { type: 'longueur', val: 1.2, from: 'km', to: 'm', label: '1,2 km en m' },
+      { type: 'longueur', val: 45, from: 'dm', to: 'mm', label: '45 dm en mm' },
+      { type: 'longueur', val: 750, from: 'm', to: 'km', label: '750 m en km' },
+      { type: 'longueur', val: 80, from: 'cm', to: 'm', label: '80 cm en m' },
+      { type: 'longueur', val: 6.8, from: 'dam', to: 'm', label: '6,8 dam en m' },
+      { type: 'masse', val: 2.5, from: 'kg', to: 'g', label: '2,5 kg en g' },
+      { type: 'masse', val: 350, from: 'g', to: 'kg', label: '350 g en kg' },
+      { type: 'masse', val: 4, from: 't', to: 'kg', label: '4 t en kg' },
+      { type: 'masse', val: 500, from: 'mg', to: 'g', label: '500 mg en g' },
+      { type: 'masse', val: 0.75, from: 'kg', to: 'dag', label: '0,75 kg en dag' },
+      { type: 'capacite', val: 1.5, from: 'L', to: 'cL', label: '1,5 L en cL' },
+      { type: 'capacite', val: 25, from: 'dL', to: 'L', label: '25 dL en L' },
+      { type: 'capacite', val: 33, from: 'cL', to: 'mL', label: '33 cL en mL' },
+      { type: 'capacite', val: 2.5, from: 'hL', to: 'L', label: '2,5 hL en L' },
+      { type: 'capacite', val: 75, from: 'cL', to: 'L', label: '75 cL en L' }
+    ];
+
+    function startConversionMiniQuiz() {
+      const q = cm2PrebuiltConversions[Math.floor(Math.random() * cm2PrebuiltConversions.length)];
+      const units = convUnitsData[q.type];
+      const fromUnit = units.find(u => u.id === q.from);
+      const toUnit = units.find(u => u.id === q.to);
+
+      const valInBase = q.val * fromUnit.factor;
+      const targetVal = valInBase / toUnit.factor;
+      const correctVal = Math.round(targetVal * 1000000) / 1000000;
+      const correctStr = String(correctVal).replace('.', ',');
+
+      // Distracteurs réalistes basés sur les décalages de zéros / virgule typiques du CM2
+      const distractors = new Set();
+      distractors.add(correctStr);
+      distractors.add(String(Math.round(correctVal * 10 * 1000000) / 1000000).replace('.', ','));
+      distractors.add(String(Math.round(correctVal / 10 * 1000000) / 1000000).replace('.', ','));
+      distractors.add(String(Math.round(correctVal * 100 * 1000000) / 1000000).replace('.', ','));
+      distractors.add(String(Math.round(correctVal / 100 * 1000000) / 1000000).replace('.', ','));
+      distractors.add(String(q.val).replace('.', ','));
+
+      let options = Array.from(distractors).filter(v => v !== correctStr).slice(0, 3);
+      options.push(correctStr);
+      options = shuffle(options);
+
+      currentConvQuizData = {
+        ...q,
+        correctVal: correctVal,
+        correctStr: correctStr
+      };
+
+      const box = document.getElementById('convMiniQuizContainer');
+      const qEl = document.getElementById('convQuizQuestion');
+      const optEl = document.getElementById('convQuizOptions');
+      const feed = document.getElementById('convQuizFeedback');
+
+      if (!box || !qEl || !optEl) return;
+
+      qEl.innerHTML = `Convertis : <span style="color:#0284c7; font-size:1.3rem;">${String(q.val).replace('.', ',')} ${q.from}</span> = <strong style="color:var(--bd-red);">[ ... ]</strong> <span style="color:#0284c7;">${q.to}</span>`;
+      if (feed) feed.style.display = 'none';
+
+      optEl.innerHTML = options.map(opt => `
+        <button class="action-btn" onclick="checkConversionMiniQuiz('${opt}', this)" style="background: #ffffff; color: var(--ink); border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); font-size: 1.05rem; padding: 10px;">
+          ${opt} ${q.to}
+        </button>
+      `).join('');
+
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function checkConversionMiniQuiz(chosen, btnEl) {
+      if (!currentConvQuizData) return;
+      const feed = document.getElementById('convQuizFeedback');
+      const isCorrect = chosen.trim() === currentConvQuizData.correctStr.trim();
+
+      document.querySelectorAll('#convQuizOptions button').forEach(b => {
+        b.disabled = true;
+        if (b.innerText.startsWith(currentConvQuizData.correctStr)) {
+          b.style.background = '#dcfce7';
+          b.style.borderColor = '#15803d';
+        }
+      });
+
+      // Synchroniser le tableau Seyès en direct avec la conversion demandée
+      const typeSel = document.getElementById('convTypeSelect');
+      const valInput = document.getElementById('convValueInput');
+      const fromSel = document.getElementById('convFromUnitSelect');
+      const toSel = document.getElementById('convToUnitSelect');
+      if (typeSel && valInput && fromSel && toSel) {
+        typeSel.value = currentConvQuizData.type;
+        onConvTypeChanged();
+        valInput.value = currentConvQuizData.val;
+        fromSel.value = currentConvQuizData.from;
+        toSel.value = currentConvQuizData.to;
+        updateConversionTable();
+      }
+
+      if (isCorrect) {
+        playSound('correct');
+        triggerConfetti();
+        gainStars(1);
+        recordQuestionAttempt('maths', true, { title: "Dojo des Conversions Seyès", question: `${currentConvQuizData.val} ${currentConvQuizData.from} en ${currentConvQuizData.to}` });
+        if (feed) {
+          feed.style.display = 'block';
+          feed.style.background = '#dcfce7';
+          feed.style.color = '#14532d';
+          feed.style.border = '2px solid #15803d';
+          feed.innerHTML = `🎉 <strong>Bravo !</strong> ${String(currentConvQuizData.val).replace('.', ',')} ${currentConvQuizData.from} = <strong>${currentConvQuizData.correctStr} ${currentConvQuizData.to}</strong>. Tu gagnes <strong>+1 ⭐</strong> pour la Boutique ! Regarde le tableau Seyès ci-dessous, la virgule rouge et les chiffres sont parfaitement alignés !`;
+        }
+      } else {
+        playSound('wrong');
+        recordQuestionAttempt('maths', false, { title: "Dojo des Conversions Seyès", question: `${currentConvQuizData.val} ${currentConvQuizData.from} en ${currentConvQuizData.to}`, selected: chosen, correct: currentConvQuizData.correctStr, tip: "Utilise les colonnes du tableau Seyès pour décaler la virgule" });
+        const penalty = deductScore(1, 'maths');
+        btnEl.style.background = '#fee2e2';
+        btnEl.style.borderColor = '#b91c1c';
+        if (feed) {
+          feed.style.display = 'block';
+          feed.style.background = '#fef2f2';
+          feed.style.color = '#7f1d1d';
+          feed.style.border = '2px solid #b91c1c';
+          feed.innerHTML = `❌ <strong>Presque !</strong> La bonne réponse était : <strong>${currentConvQuizData.correctStr} ${currentConvQuizData.to}</strong>.<br><strong style="color:var(--bd-red);">⚠️ Malus : -${penalty.penaltyPts} ⭐</strong> Le tableau Seyès ci-dessous a été complété automatiquement pour te montrer l'alignement exact.`;
+        }
+      }
+    }
+
     // --- SABLIER ZEN & CONCENTRATION ---
     let zenDurationSeconds = 15 * 60;
     let zenRemainingSeconds = 15 * 60;
@@ -17030,6 +17187,119 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
       playSound('click');
     }
 
+    // --- MINI-DÉFI RÉCITATION & MÉMOIRE POÉTIQUE (+2 ⭐) ---
+    let currentPoemQuizData = null;
+
+    function startPoemMiniQuiz() {
+      const activePoems = getActivePoems();
+      const poem = activePoems[currentPoemIdx] || activePoems[0];
+      if (!poem) return;
+
+      // Rassembler tous les vers éligibles de la poésie en cours
+      const allLines = [];
+      poem.stanzas.forEach(st => {
+        st.forEach(line => {
+          if (line.trim().length > 15) allLines.push(line.trim());
+        });
+      });
+
+      if (allLines.length === 0) return;
+      const targetLine = allLines[Math.floor(Math.random() * allLines.length)];
+
+      // Trouver des mots intéressants (au moins 4 lettres)
+      const words = targetLine.split(/\s+/).map(w => w.replace(/[«»,.;:!?()"]/g, '').trim()).filter(w => w.length >= 4);
+      if (words.length === 0) return;
+      const keyWord = words[Math.floor(Math.random() * words.length)];
+
+      // Créer la phrase à trous
+      const maskedLine = targetLine.replace(new RegExp(`\\b${keyWord}\\b`, 'i'), '<strong style="color: #7c3aed; text-decoration: underline;">[ ... ]</strong>');
+
+      // Chercher des distracteurs parmi d'autres mots de la même poésie ou du vocabulaire poétique
+      const otherWords = new Set();
+      allLines.forEach(l => {
+        l.split(/\s+/).forEach(w => {
+          const clean = w.replace(/[«»,.;:!?()"]/g, '').trim();
+          if (clean.length >= 4 && clean.toLowerCase() !== keyWord.toLowerCase()) {
+            otherWords.add(clean.toLowerCase());
+          }
+        });
+      });
+
+      // Distracteurs de secours si poésie courte
+      ['soleil', 'cœur', 'ombre', 'matin', 'silence', 'chemin', 'voyage', 'regard', 'plume', 'étoile', 'chanson'].forEach(w => otherWords.add(w));
+
+      let distList = Array.from(otherWords).filter(w => w !== keyWord.toLowerCase());
+      distList = shuffle(distList).slice(0, 3);
+      distList.push(keyWord);
+      distList = shuffle(distList);
+
+      currentPoemQuizData = {
+        poemTitle: poem.title,
+        fullLine: targetLine,
+        correct: keyWord
+      };
+
+      const box = document.getElementById('poemQuizContainer');
+      const qEl = document.getElementById('poemQuizQuestion');
+      const optEl = document.getElementById('poemQuizOptions');
+      const feed = document.getElementById('poemQuizFeedback');
+
+      if (!box || !qEl || !optEl) return;
+
+      qEl.innerHTML = `📜 Dans <em>« ${poem.title} »</em>, quel est le mot exact pour compléter le vers :<br><div style="margin-top: 8px; font-style: italic; font-size: 1.15rem; color: #4c1d95; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1.5px solid #c4b5fd;">« ${maskedLine} »</div>`;
+      if (feed) feed.style.display = 'none';
+
+      optEl.innerHTML = distList.map(opt => `
+        <button class="action-btn" onclick="checkPoemMiniQuiz('${opt.replace(/'/g, "\\'")}', this)" style="background: #ffffff; color: var(--ink); border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); font-size: 1.05rem; padding: 10px;">
+          ${opt}
+        </button>
+      `).join('');
+
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function checkPoemMiniQuiz(chosen, btnEl) {
+      if (!currentPoemQuizData) return;
+      const feed = document.getElementById('poemQuizFeedback');
+      const isCorrect = chosen.trim().toLowerCase() === currentPoemQuizData.correct.toLowerCase();
+
+      document.querySelectorAll('#poemQuizOptions button').forEach(b => {
+        b.disabled = true;
+        if (b.innerText.trim().toLowerCase() === currentPoemQuizData.correct.toLowerCase()) {
+          b.style.background = '#dcfce7';
+          b.style.borderColor = '#15803d';
+        }
+      });
+
+      if (isCorrect) {
+        playSound('correct');
+        triggerConfetti();
+        gainStars(2);
+        recordQuestionAttempt('francais', true, { title: "Défi Poésie & Récitation", question: `${currentPoemQuizData.poemTitle} : « ${currentPoemQuizData.correct} »` });
+        if (feed) {
+          feed.style.display = 'block';
+          feed.style.background = '#dcfce7';
+          feed.style.color = '#14532d';
+          feed.style.border = '2px solid #15803d';
+          feed.innerHTML = `🎉 <strong>Mémorisation parfaite !</strong> Le vers complet était bien :<br><em>« ${currentPoemQuizData.fullLine} »</em>.<br>Tu gagnes <strong>+2 ⭐</strong> pour ta Boutique Cadeaux !`;
+        }
+      } else {
+        playSound('wrong');
+        recordQuestionAttempt('francais', false, { title: "Défi Poésie & Récitation", question: `${currentPoemQuizData.poemTitle} : « ${currentPoemQuizData.correct} »`, selected: chosen, correct: currentPoemQuizData.correct, tip: "Relis la poésie avec attention ou utilise le masquage progressif" });
+        const penalty = deductScore(1, 'francais');
+        btnEl.style.background = '#fee2e2';
+        btnEl.style.borderColor = '#b91c1c';
+        if (feed) {
+          feed.style.display = 'block';
+          feed.style.background = '#fef2f2';
+          feed.style.color = '#7f1d1d';
+          feed.style.border = '2px solid #b91c1c';
+          feed.innerHTML = `❌ <strong>Presque !</strong> Le mot attendu était : <strong>${currentPoemQuizData.correct}</strong>.<br><em>« ${currentPoemQuizData.fullLine} »</em>.<br><strong style="color:var(--bd-red);">⚠️ Malus : -${penalty.penaltyPts} ⭐</strong> Entraîne-toi encore en masquant -25% ou -50% des mots !`;
+        }
+      }
+    }
+
     // --- SUPPRESSION / POUCE VERS LE BAS POÉSIE ---
     function dislikeCurrentPoem() {
       const activePoems = getActivePoems();
@@ -17402,6 +17672,9 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
         addScore(pts);
       }
     }
+    window.awardDirectPoints = function(pts, reason) {
+      gainStars(pts);
+    };
 
     // --- Tableau Périodique (Lettres officielles prioritaires) ---
     const periodicElementsData = [
