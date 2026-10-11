@@ -11723,7 +11723,11 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
     // =========================================================================
     // GEMINI AI INTEGRATION (CLÉ INTÉGRÉE & GÉNÉRATEUR DIRECT 1-CLIC)
     // =========================================================================
-    const DEFAULT_GEMINI_KEY = "AQ.Ab8RN6IzwAoEVSrw7ppBsMlE_7ODBOzy61JNZs957BIyPK7Skw";
+    const DEFAULT_GEMINI_KEY = "";
+    // Nettoyage automatique au cas où une ancienne clé désactivée était mémorisée sur l'appareil
+    if (localStorage.getItem('gemini_api_key') === "AQ.Ab8RN6IzwAoEVSrw7ppBsMlE_7ODBOzy61JNZs957BIyPK7Skw") {
+      localStorage.removeItem('gemini_api_key');
+    }
 
     function showAiToast(msg, isSuccess = true) {
       let toast = document.getElementById('aiToast');
@@ -11741,7 +11745,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
     function toggleAiModal() {
       const m = document.getElementById('aiModal');
       m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
-      const savedKey = localStorage.getItem('gemini_api_key') || DEFAULT_GEMINI_KEY;
+      const savedKey = localStorage.getItem('gemini_api_key') || "";
       if (savedKey) document.getElementById('geminiApiKey').value = savedKey;
     }
 
@@ -11750,53 +11754,83 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       if (key) {
         localStorage.setItem('gemini_api_key', key);
         alert("✅ Clé API Gemini enregistrée avec succès sur cet appareil !");
+      } else {
+        localStorage.removeItem('gemini_api_key');
+        alert("🗑️ Clé locale réinitialisée. L'application utilisera le service Cloudflare.");
       }
     }
 
     async function callGeminiApi(promptText) {
-      const apiKey = localStorage.getItem('gemini_api_key') || DEFAULT_GEMINI_KEY;
-      if (!apiKey) {
-        throw new Error("Clé API Gemini introuvable.");
-      }
+      // 1. Appel prioritaire via le proxy Cloudflare sécurisé (la clé reste protégée côté serveur)
+      const workerUrl = (window.location.hostname.includes('workers.dev') || window.location.protocol.startsWith('http'))
+        ? '/api/gemini'
+        : 'https://ecole.yvasseur.workers.dev/api/gemini';
 
-      const models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
-      let lastError = null;
+      try {
+        const response = await fetch(workerUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: promptText })
+        });
 
-      for (const model of models) {
-        try {
-          const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-          const payload = {
-            contents: [{
-              parts: [{ text: promptText }]
-            }],
-            generationConfig: {
-              temperature: 0.7,
-              responseMimeType: "application/json"
-            }
-          };
-
-          const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          if (!response.ok) {
-            const errData = await response.json().catch(() => ({}));
-            throw new Error(errData.error?.message || `Erreur API Gemini (${response.status})`);
-          }
-
+        if (response.ok) {
           const data = await response.json();
-          const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (!rawText) throw new Error("Réponse vide de Gemini");
-          return JSON.parse(rawText);
-        } catch (err) {
-          console.warn(`Tentative avec ${model} échouée:`, err);
-          lastError = err;
+          if (data && (Array.isArray(data) || typeof data === 'object')) {
+            return data;
+          }
+        } else {
+          const errData = await response.json().catch(() => ({}));
+          if (errData && errData.error) {
+            console.warn("Proxy Cloudflare :", errData.error);
+          }
         }
+      } catch (workerErr) {
+        console.warn("Proxy Cloudflare indisponible :", workerErr);
       }
 
-      throw lastError || new Error("Impossible de joindre les modèles Gemini.");
+      // 2. Repli : si une clé locale valide a été enregistrée manuellement sur cet appareil
+      const apiKey = localStorage.getItem('gemini_api_key');
+      if (apiKey) {
+        const models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+        let lastError = null;
+
+        for (const model of models) {
+          try {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            const payload = {
+              contents: [{
+                parts: [{ text: promptText }]
+              }],
+              generationConfig: {
+                temperature: 0.7,
+                responseMimeType: "application/json"
+              }
+            };
+
+            const response = await fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+              const errData = await response.json().catch(() => ({}));
+              throw new Error(errData.error?.message || `Erreur API Gemini (${response.status})`);
+            }
+
+            const data = await response.json();
+            const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (!rawText) throw new Error("Réponse vide de Gemini");
+            return JSON.parse(rawText);
+          } catch (err) {
+            console.warn(`Tentative avec ${model} échouée:`, err);
+            lastError = err;
+          }
+        }
+        if (lastError) throw lastError;
+      }
+
+      throw new Error("Service IA non configuré. Veuillez renseigner le secret GEMINI_API_KEY dans Cloudflare ou entrer une clé dans les paramètres.");
     }
 
     // Direct 1-Click AI Generation for any submodule
@@ -11960,6 +11994,9 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
         }
       } catch (err) {
         alert("⚠️ Erreur lors de la création : " + err.message);
+        if (err.message && (err.message.includes("service account") || err.message.includes("non configuré") || err.message.includes("Clé API"))) {
+          toggleAiModal();
+        }
       } finally {
         if (btnElement) {
           btnElement.disabled = false;
