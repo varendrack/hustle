@@ -5478,9 +5478,9 @@
             <div style="display: flex; align-items: center; gap: 6px;">
               <span style="font-weight: 700; color: var(--ink);">⚡ Rythme :</span>
               <select id="dicteeSpeedSelect" onchange="DicteePlayer.onSpeedChange(this.value)" style="padding: 5px 8px; border-radius: 6px; border: 1.5px solid var(--ink); font-family: inherit; font-size: 0.82rem; background: #ffffff; cursor: pointer; color: var(--ink);">
-                <option value="0.75">Lente (idéal écriture)</option>
-                <option value="0.84" selected>Normale (dictée CM2)</option>
-                <option value="0.95">Rapide</option>
+                <option value="0.65">Très lente (écriture)</option>
+                <option value="0.72" selected>Lente & posée (recommandée CM2)</option>
+                <option value="0.82">Normale</option>
               </select>
             </div>
           </div>
@@ -5502,8 +5502,8 @@
             <button id="btnDicteePlayPause" class="action-btn" onclick="toggleDicteePlayPause()" style="flex: 2; min-width: 160px; padding: 12px 18px; font-size: 1.05rem; background: linear-gradient(135deg, #2563eb, #1d4ed8);">
               ▶️ Écouter la dictée
             </button>
-            <button class="action-btn" onclick="DicteePlayer.rewind5s()" style="flex: 1; min-width: 120px; padding: 12px 14px; font-size: 0.95rem; background: #ffffff; color: var(--ink); border: 2px solid var(--ink);" title="Revenir 5 secondes en arrière / phrase précédente">
-              ⏪ -5 sec
+            <button class="action-btn" onclick="DicteePlayer.rewind5s()" style="flex: 1; min-width: 120px; padding: 12px 14px; font-size: 0.95rem; background: #ffffff; color: var(--ink); border: 2px solid var(--ink);" title="Réécouter le morceau de 3 mots depuis le début (3 fois)">
+              ⏪ Réécouter
             </button>
             <button class="action-btn" onclick="DicteePlayer.stop()" style="flex: 1; min-width: 120px; padding: 12px 14px; font-size: 0.95rem; background: #ffffff; color: var(--ink); border: 2px solid var(--ink);" title="Recommencer depuis le début">
               🔄 Recommencer
@@ -10356,31 +10356,98 @@
 
     const DEFAULT_ORAL_DICTEE_TEXT = ORAL_DICTEE_BANK[0].text;
 
+    function splitSentenceIntoChunks(sentence) {
+      const tokens = sentence.trim().split(/\s+/).filter(Boolean);
+      const chunks = [];
+      let i = 0;
+      while (i < tokens.length) {
+        const remaining = tokens.length - i;
+        let take = Math.min(3, remaining);
+
+        // Si exactement 4 mots restants au total, on équilibre en 2 et 2
+        if (remaining === 4) {
+          take = 2;
+        }
+
+        // Si une ponctuation se trouve dans les premiers mots, on coupe dessus (max 3 mots)
+        let punctFound = false;
+        for (let k = 0; k < take; k++) {
+          if (/[,;:!?.«»]$/.test(tokens[i + k])) {
+            take = k + 1;
+            punctFound = true;
+            break;
+          }
+        }
+
+        // Si pas de ponctuation mais que le 4ème mot en a une, on prend 2 mots pour équilibrer
+        if (!punctFound && remaining >= 4 && /[,;:!?.«»]$/.test(tokens[i + 3])) {
+          take = 2;
+        }
+
+        const chunkTokens = tokens.slice(i, i + take);
+        chunks.push(chunkTokens.join(' '));
+        i += take;
+      }
+      return chunks.filter(c => c.trim().length > 0);
+    }
+
     const DicteePlayer = {
       text: DEFAULT_ORAL_DICTEE_TEXT,
-      sentences: [],
-      currentIndex: 0,
+      chunks: [],
+      currentChunkIndex: 0,
+      currentRepeatIndex: 1, // 1, 2 ou 3 répétitions par morceau de mots
       isPlaying: false,
       isPaused: false,
-      rate: 0.84,
+      rate: 0.72, // Rythme posé et lent recommandé pour l'écriture CM2
       pitch: 1.02,
       selectedVoiceURI: null,
       timer: null,
 
       init() {
-        this.sentences = this.splitIntoSentences(this.text);
-        this.currentIndex = 0;
+        this.chunks = this.buildChunks(this.text);
+        this.currentChunkIndex = 0;
+        this.currentRepeatIndex = 1;
         this.isPlaying = false;
         this.isPaused = false;
-        if (this.timer) clearTimeout(this.timer);
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
+        }
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+          } catch (e) {}
+        }
         loadFrenchVoices();
         this.updateUI();
         this.updateProgressBar();
       },
 
-      splitIntoSentences(fullText) {
+      buildChunks(fullText) {
         const raw = fullText.match(/[^.!?]+[.!?]+/g) || [fullText];
-        return raw.map(s => s.trim()).filter(Boolean);
+        const sentences = raw.map(s => s.trim()).filter(Boolean);
+        const result = [];
+        sentences.forEach((sentence, sIdx) => {
+          const sChunks = splitSentenceIntoChunks(sentence);
+          sChunks.forEach((cText, cIdx) => {
+            result.push({
+              text: cText,
+              spokenText: this.getSpokenPunctuation(cText),
+              sentenceNum: sIdx + 1,
+              totalSentences: sentences.length,
+              chunkInSentence: cIdx + 1,
+              totalChunksInSentence: sChunks.length
+            });
+          });
+        });
+        return result.length > 0 ? result : [{
+          text: fullText,
+          spokenText: this.getSpokenPunctuation(fullText),
+          sentenceNum: 1,
+          totalSentences: 1,
+          chunkInSentence: 1,
+          totalChunksInSentence: 1
+        }];
       },
 
       onVoiceChange(voiceURI) {
@@ -10392,7 +10459,7 @@
       },
 
       onSpeedChange(speedVal) {
-        this.rate = parseFloat(speedVal) || 0.84;
+        this.rate = parseFloat(speedVal) || 0.72;
       },
 
       getSelectedVoice() {
@@ -10404,12 +10471,6 @@
           if (v) return v;
         }
         return availableFrenchVoices[0] || null;
-      },
-
-      getPauseDuration() {
-        if (this.rate <= 0.78) return 4500;
-        if (this.rate >= 0.92) return 2500;
-        return 3500;
       },
 
       getSpokenPunctuation(text) {
@@ -10434,21 +10495,25 @@
           alert("La synthèse vocale n'est pas supportée par ce navigateur.");
           return;
         }
-        if (this.isPlaying) return; // Prevent double playback
-        
+        if (this.isPlaying) return; // Évite les doubles démarrages
+
+        // Anti-triche : masquer impérativement le texte pour ne pas que l'élève le lise pendant la dictée
+        const revealBox = document.getElementById('dicteeOraleRevealBox');
+        if (revealBox) revealBox.style.display = 'none';
+        const label = document.getElementById('dicteeToggleTextLabel');
+        if (label) label.innerText = 'Afficher le texte pour corriger';
+
         if (this.isPaused) {
           this.isPaused = false;
           this.isPlaying = true;
           this.updateUI();
-          window.speechSynthesis.resume();
-          if (!window.speechSynthesis.speaking) {
-            this.speakCurrentSentence();
-          }
+          this.speakCurrentStep();
           return;
         }
 
-        if (this.currentIndex >= this.sentences.length) {
-          this.currentIndex = 0;
+        if (this.currentChunkIndex >= this.chunks.length) {
+          this.currentChunkIndex = 0;
+          this.currentRepeatIndex = 1;
         }
         if (this.timer) {
           clearTimeout(this.timer);
@@ -10457,27 +10522,42 @@
         this.isPlaying = true;
         this.isPaused = false;
         this.updateUI();
-        this.speakCurrentSentence();
+        this.speakCurrentStep();
       },
 
       pause() {
+        // Annule immédiatement tout compte à rebours
         if (this.timer) {
           clearTimeout(this.timer);
           this.timer = null;
-        } else if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
-          try {
-            window.speechSynthesis.pause();
-          } catch (e) {
-            console.warn("speechSynthesis pause error:", e);
-          }
         }
         this.isPlaying = false;
         this.isPaused = true;
+
+        // Coupe IMMÉDIATEMENT la voix sans continuer à parler
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+          } catch (e) {
+            console.warn("speechSynthesis cancel error:", e);
+          }
+        }
         this.updateUI();
+
         const statusEl = document.getElementById('dicteeOraleStatus');
         if (statusEl) {
-          const sNum = Math.min(this.sentences.length, this.currentIndex + 1);
-          statusEl.innerHTML = `⏸️ <strong>Dictée en pause (Phrase ${sNum}/${this.sentences.length}).</strong> Prends ton temps pour écrire sur ton cahier ! Clique sur <em>« Reprendre »</em> dès que tu es prêt(e).`;
+          const chunk = this.chunks[this.currentChunkIndex] || { sentenceNum: 1, totalSentences: 1, chunkInSentence: 1, totalChunksInSentence: 1 };
+          const rep = this.currentRepeatIndex;
+          statusEl.innerHTML = `
+            <div style="width: 100%;">
+              <div style="font-size: 1rem; font-weight: 800; color: #c2410c;">
+                ⏸️ Dictée en pause (Phrase ${chunk.sentenceNum}/${chunk.totalSentences} • Morceau ${chunk.chunkInSentence}/${chunk.totalChunksInSentence} • Écoute ${rep}/3)
+              </div>
+              <div style="font-size: 0.86rem; color: #1e40af; margin-top: 4px;">
+                Prends ton temps pour écrire sur ton cahier ! Clique sur <em>« Reprendre »</em> dès que tu es prête.
+              </div>
+            </div>
+          `;
         }
       },
 
@@ -10491,15 +10571,15 @@
         if ('speechSynthesis' in window) {
           try {
             window.speechSynthesis.cancel();
-            window.speechSynthesis.resume(); // Bug workaround
           } catch (e) {}
         }
-        this.currentIndex = 0;
+        this.currentChunkIndex = 0;
+        this.currentRepeatIndex = 1;
         this.updateUI();
         this.updateProgressBar();
         const statusEl = document.getElementById('dicteeOraleStatus');
         if (statusEl) {
-          statusEl.innerHTML = `👋 Prêt(e) pour la dictée avec Madame Claire ! Clique sur <strong>« Écouter la dictée »</strong>.`;
+          statusEl.innerHTML = `👋 Prête pour la dictée avec Madame Claire ! Clique sur <strong>« Écouter la dictée »</strong> quand tu as ton cahier et ton stylo.`;
         }
       },
 
@@ -10513,42 +10593,62 @@
         if ('speechSynthesis' in window) {
           try {
             window.speechSynthesis.cancel();
-            window.speechSynthesis.resume(); // Bug workaround
           } catch (e) {}
         }
-        this.currentIndex = Math.max(0, this.currentIndex - 1);
+
+        // Si on était à la 2ème ou 3ème répétition, on réécoute le même morceau dès la 1ère écoute
+        // Si on était déjà à la 1ère écoute, on recule au morceau précédent
+        if (this.currentRepeatIndex > 1) {
+          this.currentRepeatIndex = 1;
+        } else {
+          this.currentChunkIndex = Math.max(0, this.currentChunkIndex - 1);
+          this.currentRepeatIndex = 1;
+        }
+
         this.updateProgressBar();
         if (wasPlaying) {
           this.isPlaying = true;
           this.isPaused = false;
           this.updateUI();
-          this.speakCurrentSentence();
+          this.speakCurrentStep();
         } else {
           this.isPaused = true;
           this.updateUI();
-          const s = this.sentences[this.currentIndex] || "";
           const statusEl = document.getElementById('dicteeOraleStatus');
           if (statusEl) {
-            statusEl.innerHTML = `⏪ <strong>Retour à la phrase ${this.currentIndex + 1}/${this.sentences.length} :</strong> <em>« ${s} »</em> (Clique sur <em>« Reprendre »</em> pour l'écouter)`;
+            const chunk = this.chunks[this.currentChunkIndex] || { sentenceNum: 1, totalSentences: 1, chunkInSentence: 1, totalChunksInSentence: 1 };
+            statusEl.innerHTML = `
+              <div style="width: 100%;">
+                <div style="font-size: 0.95rem; font-weight: 700; color: #1e3a8a;">
+                  ⏪ <strong>Retour au morceau (Phrase ${chunk.sentenceNum}/${chunk.totalSentences} • Morceau ${chunk.chunkInSentence}/${chunk.totalChunksInSentence})</strong>
+                </div>
+                <div style="font-size: 0.86rem; color: #1e40af; margin-top: 3px;">
+                  Clique sur <em>« Reprendre »</em> pour réécouter ce morceau (3 fois de suite).
+                </div>
+              </div>
+            `;
           }
         }
       },
 
-      speakCurrentSentence() {
+      speakCurrentStep() {
         if (!this.isPlaying) return;
-        if (this.currentIndex >= this.sentences.length) {
+
+        if (this.currentChunkIndex >= this.chunks.length) {
           this.stop();
           playSound('win');
           triggerConfetti();
           const statusEl = document.getElementById('dicteeOraleStatus');
           if (statusEl) {
-            statusEl.innerHTML = `🎉 <strong>Dictée terminée avec succès !</strong> Tu peux maintenant relire attentivement et cliquer sur <em>« Afficher le texte pour corriger »</em>.`;
+            statusEl.innerHTML = `🎉 <strong>Dictée terminée avec succès !</strong><br><span style="font-size:0.86rem; color:#1e40af; margin-top:3px; display:inline-block;">Relis attentivement ton cahier (sujet-verbe, accords, homophones), puis clique sur <em>« Afficher le texte pour corriger »</em> ci-dessous !</span>`;
           }
           return;
         }
 
-        const sentence = this.sentences[this.currentIndex];
-        const spokenText = this.getSpokenPunctuation(sentence);
+        const chunk = this.chunks[this.currentChunkIndex];
+        const repeat = this.currentRepeatIndex; // 1, 2 ou 3
+        const spokenText = chunk.spokenText;
+
         const utter = new SpeechSynthesisUtterance(spokenText);
         utter.lang = 'fr-FR';
         utter.rate = this.rate;
@@ -10561,24 +10661,86 @@
 
         const statusEl = document.getElementById('dicteeOraleStatus');
         if (statusEl) {
-          statusEl.innerHTML = `🗣️ <strong>Phrase ${this.currentIndex + 1}/${this.sentences.length} :</strong> <em>« ${sentence} »</em>`;
+          let repeatBadge = '';
+          let adviceText = '';
+          if (repeat === 1) {
+            repeatBadge = '1ère écoute sur 3 • Écoute bien 🎧';
+            adviceText = '🎧 Écoute attentivement ces quelques mots...';
+          } else if (repeat === 2) {
+            repeatBadge = '2ème écoute sur 3 • Écris sur ton cahier ✍️';
+            adviceText = '✍️ Écris sur ton cahier au fur et à mesure !';
+          } else {
+            repeatBadge = '3ème écoute sur 3 • Relis et vérifie 🔍';
+            adviceText = '🔍 Vérifie chaque mot et chaque accord sur ton cahier !';
+          }
+
+          statusEl.innerHTML = `
+            <div style="width: 100%;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 1rem; font-weight: 800; color: #1e3a8a;">
+                  🗣️ Phrase ${chunk.sentenceNum}/${chunk.totalSentences} • Morceau ${chunk.chunkInSentence}/${chunk.totalChunksInSentence}
+                </span>
+                <span style="background: #dbeafe; color: #1e40af; border: 1.5px solid #93c5fd; padding: 2px 10px; border-radius: 12px; font-weight: 700; font-size: 0.8rem;">
+                  ${repeatBadge}
+                </span>
+              </div>
+              <div style="font-size: 0.86rem; color: #1e40af; margin-top: 5px;">
+                ${adviceText}
+              </div>
+            </div>
+          `;
         }
         this.updateProgressBar();
 
         utter.onend = () => {
           if (!this.isPlaying) return;
-          this.currentIndex++;
-          this.updateProgressBar();
-          if (this.currentIndex < this.sentences.length) {
+
+          // Pause adaptée selon le rythme choisi
+          let pauseMs = 3000;
+          if (this.rate <= 0.68) pauseMs = 3800;
+          else if (this.rate >= 0.80) pauseMs = 2400;
+
+          if (repeat < 3) {
             if (statusEl) {
-              statusEl.innerHTML = `⏳ <em>Pause d'écriture... Prends ton temps pour écrire ! Phrase suivante dans un instant.</em>`;
+              const nextRep = repeat + 1;
+              const nextLabel = nextRep === 2 ? 'Écris sur ton cahier' : 'Dernière vérification';
+              statusEl.innerHTML = `
+                <div style="width: 100%;">
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #1e3a8a;">
+                    ⏳ <strong>Pause d'écriture...</strong>
+                  </div>
+                  <div style="font-size: 0.86rem; color: #1e40af; margin-top: 3px;">
+                    Prends ton temps ! Répétition ${nextRep}/3 dans un instant (${nextLabel}).
+                  </div>
+                </div>
+              `;
             }
-            const pauseMs = this.getPauseDuration();
             this.timer = setTimeout(() => {
-              this.speakCurrentSentence();
+              if (!this.isPlaying) return;
+              this.currentRepeatIndex++;
+              this.speakCurrentStep();
             }, pauseMs);
           } else {
-            this.speakCurrentSentence();
+            // Après la 3ème répétition, pause de transition avant le morceau suivant
+            const nextPauseMs = pauseMs + 600;
+            if (statusEl) {
+              statusEl.innerHTML = `
+                <div style="width: 100%;">
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #166534;">
+                    ✅ <strong>Morceau vérifié !</strong>
+                  </div>
+                  <div style="font-size: 0.86rem; color: #166534; margin-top: 3px;">
+                    Suite de la dictée dans quelques secondes...
+                  </div>
+                </div>
+              `;
+            }
+            this.timer = setTimeout(() => {
+              if (!this.isPlaying) return;
+              this.currentChunkIndex++;
+              this.currentRepeatIndex = 1;
+              this.speakCurrentStep();
+            }, nextPauseMs);
           }
         };
 
@@ -10616,8 +10778,8 @@
 
       updateProgressBar() {
         const bar = document.getElementById('dicteeOraleProgressBar');
-        if (bar && this.sentences.length > 0) {
-          const pct = Math.min(100, Math.round((this.currentIndex / this.sentences.length) * 100));
+        if (bar && this.chunks.length > 0) {
+          const pct = Math.min(100, Math.round((this.currentChunkIndex / this.chunks.length) * 100));
           bar.style.width = pct + '%';
         }
       }
@@ -10627,6 +10789,12 @@
       const modal = document.getElementById('dicteeOraleModal');
       if (modal) {
         modal.style.display = 'flex';
+        // Anti-triche : cacher impérativement le texte corrigé à l'ouverture
+        const revealBox = document.getElementById('dicteeOraleRevealBox');
+        if (revealBox) revealBox.style.display = 'none';
+        const label = document.getElementById('dicteeToggleTextLabel');
+        if (label) label.innerText = 'Afficher le texte pour corriger';
+
         const sData = (typeof DICTEE_SERIES_DATA !== 'undefined' && DICTEE_SERIES_DATA[currentDicteeSeriesNum]) ? DICTEE_SERIES_DATA[currentDicteeSeriesNum] : DICTEE_SERIES_DATA[5];
         if (sData) {
           const subTitleEl = document.getElementById('dicteeModalThemeSubtitle');
@@ -10634,6 +10802,7 @@
             subTitleEl.innerText = `${sData.themeEmoji} Thème : ${sData.weekTitle} • Entraînement sur cahier`;
           }
           const item = ORAL_DICTEE_BANK[currentDicteeBankIndex] || ORAL_DICTEE_BANK[0];
+          DicteePlayer.text = item.text;
           const titleEl = document.getElementById('dicteeOraleTitle');
           if (titleEl) titleEl.innerText = `🎙️ ${item.title}`;
           const textEl = document.getElementById('dicteeOraleFullText');
@@ -10664,6 +10833,11 @@
       const label = document.getElementById('dicteeToggleTextLabel');
       if (!box || !label) return;
       if (box.style.display === 'none' || box.style.display === '') {
+        if (DicteePlayer && DicteePlayer.isPlaying) {
+          if (!confirm("⚠️ La dictée est encore en cours d'écoute ! Afficher le texte maintenant risque de dévoiler les réponses (tricher). Veux-tu quand même l'afficher ?")) {
+            return;
+          }
+        }
         box.style.display = 'block';
         label.innerText = 'Masquer le texte';
       } else {
