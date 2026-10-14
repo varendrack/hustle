@@ -5063,7 +5063,271 @@
       position: relative;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
-  </style>
+  
+    /* ========================================================================= */
+    /* 🇬🇧 ESPACE ANGLAIS & VOCABULARY ENGINE */
+    /* ========================================================================= */
+    .word-grid-english {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+      width: 100%;
+    }
+    .word-card-english {
+      background: #ffffff;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow-comic);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .word-card-english:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-comic-lg);
+    }
+    .word-card-english .num-badge {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: var(--bd-red);
+      color: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+    }
+    .word-card-english .category-tag {
+      align-self: flex-end;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+    .word-card-english .category-tag.animal {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #86efac;
+    }
+    .word-card-english .category-tag.routine {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #fde68a;
+    }
+    .word-card-english .word-main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .word-card-english .word-term {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.5px;
+    }
+    .word-card-english .word-phonetic {
+      font-size: 0.82rem;
+      color: #64748b;
+      font-style: italic;
+    }
+    .word-card-english .word-translation {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bd-blue-dark);
+      background: #eff6ff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border-left: 3px solid var(--bd-blue);
+    }
+    .word-card-english .word-example {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      background: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .audio-play-btn {
+      background: var(--bd-blue);
+      color: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+    }
+    .audio-play-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 var(--ink);
+      background: var(--bd-blue-dark);
+    }
+    .audio-play-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+    .audio-icon-btn {
+      background: #f1f5f9;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .audio-icon-btn:hover {
+      background: #e2e8f0;
+      transform: scale(1.05);
+    }
+
+    /* Scene Labeling Game Cards (Exercice 2) */
+    .scene-exercise-card {
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-comic-lg);
+      margin-bottom: 24px;
+    }
+    .scene-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+    .scene-title {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scene-interactive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .scene-slot-item {
+      background: #fffdfa;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .scene-slot-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .scene-slot-header .number-bubble {
+      background: #ea580c;
+      color: #ffffff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      border: 1.5px solid var(--ink);
+    }
+    .scene-select-input {
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+    }
+    .scene-select-input:focus {
+      border-color: var(--bd-blue);
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+    }
+    .ai-magic-banner {
+      background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 50%, #eff6ff 100%);
+      border: 2.5px solid #a855f7;
+      border-radius: 18px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-comic);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .ai-magic-btn {
+      background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+      color: #ffffff;
+      border: 2.5px solid var(--ink);
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-weight: 900;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: var(--shadow-comic-sm);
+      transition: all 0.2s ease;
+    }
+    .ai-magic-btn:hover {
+      transform: translate(-1px, -1px) scale(1.02);
+      box-shadow: var(--shadow-comic);
+      filter: brightness(1.05);
+    }
+    .ai-magic-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+</style>
 </head>
 <body>
   <canvas id="confettiCanvas"></canvas>
@@ -5123,6 +5387,7 @@
           📚 Matière & Thème à générer :
         </label>
         <select id="aiSubjectSelect" class="ai-config-input" style="background: #ffffff; cursor: pointer; color: var(--ink);">
+          <option value="anglais_vocabulaire">🇬🇧 Anglais : Vocabulaire Animaux & Routine (What is it?)</option>
           <option value="problemes_maths">🔢 Problèmes Mathématiques Pas à Pas (CM2)</option>
           <option value="maths_geometrie">📐 Géométrie : Droites, Segments & Sécantes</option>
           <option value="calcul_mental">⚡ Calcul Mental & Stratégies Express</option>
@@ -7461,6 +7726,533 @@
     <!-- ========================================================= -->
     <!-- 5. VIDÉOTHÈQUE & DOCUMENTS COMPLETS -->
     <!-- ========================================================= -->
+        <!-- ========================================================= -->
+    <!-- 🇬🇧 5. ANGLAIS (WHAT IS IT? - ANIMALS & DAILY ROUTINE) -->
+    <!-- ========================================================= -->
+    <section id="subject-anglais" class="subject-section">
+      <div class="hero-banner">
+        <img src="images/english_hero.jpg" alt="Anglais CM2 - What is it?">
+        <div class="hero-banner-overlay">
+          <div class="hero-title">🇬🇧 Espace Anglais CM2 : What is it?</div>
+          <div class="hero-tag">Animals & Daily Routine</div>
+        </div>
+      </div>
+
+      <!-- Bandeau Flash Synthèse Tuteur Élite (Coach Winston) -->
+      <div class="tutor-flash-card">
+        <div class="tutor-flash-header">
+          <span class="tutor-flash-title">🇬🇧 Flash Coach Winston : L'Essentiel Vocabulaire Anglais CM2</span>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #15803d; background: #dcfce7; padding: 2px 8px; border-radius: 6px;">⏱️ 30 secondes chrono</span>
+        </div>
+        <div class="tutor-flash-grid">
+          <div class="tutor-flash-item gold">
+            <span class="tutor-flash-label" style="color: #ca8a04;">🔊 Règle d'or (Audio & Écoute)</span>
+            <span>Clique sur chaque haut-parleur <strong>🔊</strong> pour écouter la prononciation authentique et répète à voix haute ! En anglais, la musique de la phrase compte autant que les mots.</span>
+          </div>
+          <div class="tutor-flash-item tip">
+            <span class="tutor-flash-label" style="color: #059669;">⏰ Réflexe Routine</span>
+            <span>Pour raconter ta journée : <strong>I wake up</strong> (je me réveille) ➔ <strong>I wash my face</strong> (je me lave le visage) ➔ <strong>I brush my teeth</strong> (je me brosse les dents) ➔ <strong>I go to school</strong> (je vais à l'école).</span>
+          </div>
+          <div class="tutor-flash-item trap">
+            <span class="tutor-flash-label" style="color: #dc2626;">🦔 Le Piège à éviter</span>
+            <span>Ne confonds pas <strong>cow</strong> (la vache) et <strong>owl</strong> (la chouette). Et attention à l'orthographe de <strong>porcupine</strong> (porc-épic) qui s'écrit avec un <em>c</em> !</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barre de navigation des sous-modules Anglais -->
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('anglais', 'memo')">📚 Fiche Mémo & Audio (12 Mots)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('anglais', 'quiz')">🎯 Grand Test de Vocabulaire & IA ✨</button>
+        <button class="submodule-btn" onclick="switchSubmodule('anglais', 'scenes')">🖼️ Défi des 2 Scènes (Exercice 2)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('anglais', 'manuel')">📖 Page Originale du Manuel</button>
+      </div>
+
+      <!-- Sous-module 1 : Fiche Mémo & Audio (12 Mots Officiels) -->
+      <div id="sub-anglais-memo" class="submodule-content active">
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; padding: 18px 22px; margin-bottom: 20px; box-shadow: var(--shadow-comic);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div>
+              <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.4rem; color: var(--ink);">
+                🐾 Leçon 1 : Animals (Les 6 Animaux)
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Écoute chaque mot, répète-le et observe son utilisation en contexte :</p>
+            </div>
+            <button class="action-btn" onclick="switchSubmodule('anglais', 'quiz')" style="font-size: 0.88rem; padding: 8px 16px;">
+              🚀 Passer au Test de Vocabulaire ➔
+            </button>
+          </div>
+
+          <div class="word-grid-english">
+            <!-- 1. cow -->
+            <div class="word-card-english">
+              <span class="num-badge">1</span>
+              <span class="category-tag animal">Animal</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🐮 cow</div>
+                  <div class="word-phonetic">[kaʊ]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('cow')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">La vache</div>
+              <div class="word-example">
+                <span>"The <strong>cow</strong> gives delicious milk."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('The cow gives delicious milk')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 2. goat -->
+            <div class="word-card-english">
+              <span class="num-badge">2</span>
+              <span class="category-tag animal">Animal</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🐐 goat</div>
+                  <div class="word-phonetic">[ɡoʊt]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('goat')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">La chèvre</div>
+              <div class="word-example">
+                <span>"The <strong>goat</strong> climbs on the green hill."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('The goat climbs on the green hill')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 3. donkey -->
+            <div class="word-card-english">
+              <span class="num-badge">3</span>
+              <span class="category-tag animal">Animal</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🫏 donkey</div>
+                  <div class="word-phonetic">[ˈdɒŋ.ki]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('donkey')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">L'âne</div>
+              <div class="word-example">
+                <span>"The <strong>donkey</strong> has long ears."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('The donkey has long ears')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 4. owl -->
+            <div class="word-card-english">
+              <span class="num-badge">4</span>
+              <span class="category-tag animal">Animal</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🦉 owl</div>
+                  <div class="word-phonetic">[aʊl]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('owl')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">La chouette / Le hibou</div>
+              <div class="word-example">
+                <span>"The <strong>owl</strong> flies quietly in the dark."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('The owl flies quietly in the dark')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 5. porcupine -->
+            <div class="word-card-english">
+              <span class="num-badge">5</span>
+              <span class="category-tag animal">Animal</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🦔 porcupine</div>
+                  <div class="word-phonetic">[ˈpɔːr.kjʊ.paɪn]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('porcupine')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Le porc-épic</div>
+              <div class="word-example">
+                <span>"The <strong>porcupine</strong> has sharp quills."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('The porcupine has sharp quills')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 6. bat -->
+            <div class="word-card-english">
+              <span class="num-badge">6</span>
+              <span class="category-tag animal">Animal</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🦇 bat</div>
+                  <div class="word-phonetic">[bæt]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('bat')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">La chauve-souris</div>
+              <div class="word-example">
+                <span>"The <strong>bat</strong> sleeps upside down."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('The bat sleeps upside down')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; padding: 18px 22px; margin-bottom: 20px; box-shadow: var(--shadow-comic);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div>
+              <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.4rem; color: var(--ink);">
+                ⏰ Leçon 2 : Daily Routine (La Routine Quotidienne)
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Les 6 verbes et actions clés de ta journée en anglais :</p>
+            </div>
+          </div>
+
+          <div class="word-grid-english">
+            <!-- 7. eat -->
+            <div class="word-card-english">
+              <span class="num-badge">7</span>
+              <span class="category-tag routine">Routine</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🍽️ eat</div>
+                  <div class="word-phonetic">[iːt]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('eat')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Manger</div>
+              <div class="word-example">
+                <span>"I <strong>eat</strong> an apple for my snack."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('I eat an apple for my snack')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 8. wake up -->
+            <div class="word-card-english">
+              <span class="num-badge">8</span>
+              <span class="category-tag routine">Routine</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">⏰ wake up</div>
+                  <div class="word-phonetic">[weɪk ʌp]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('wake up')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Se réveiller</div>
+              <div class="word-example">
+                <span>"I <strong>wake up</strong> early in the morning."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('I wake up early in the morning')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 9. sleep -->
+            <div class="word-card-english">
+              <span class="num-badge">9</span>
+              <span class="category-tag routine">Routine</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">😴 sleep</div>
+                  <div class="word-phonetic">[sliːp]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('sleep')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Dormir</div>
+              <div class="word-example">
+                <span>"Good night, time to <strong>sleep</strong>!"</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('Good night, time to sleep')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 10. brush my teeth -->
+            <div class="word-card-english">
+              <span class="num-badge">10</span>
+              <span class="category-tag routine">Routine</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🪥 brush my teeth</div>
+                  <div class="word-phonetic">[brʌʃ maɪ tiːθ]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('brush my teeth')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Me brosser les dents</div>
+              <div class="word-example">
+                <span>"I <strong>brush my teeth</strong> after eating."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('I brush my teeth after eating')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 11. wash my face -->
+            <div class="word-card-english">
+              <span class="num-badge">11</span>
+              <span class="category-tag routine">Routine</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🧼 wash my face</div>
+                  <div class="word-phonetic">[wɒʃ maɪ feɪs]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('wash my face')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Me laver le visage</div>
+              <div class="word-example">
+                <span>"I <strong>wash my face</strong> with cold water."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('I wash my face with cold water')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+
+            <!-- 12. go to school -->
+            <div class="word-card-english">
+              <span class="num-badge">12</span>
+              <span class="category-tag routine">Routine</span>
+              <div class="word-main-row">
+                <div>
+                  <div class="word-term">🎒 go to school</div>
+                  <div class="word-phonetic">[ɡoʊ tuː skuːl]</div>
+                </div>
+                <button class="audio-play-btn" onclick="speakEnglish('go to school')">🔊 Écouter</button>
+              </div>
+              <div class="word-translation">Aller à l'école</div>
+              <div class="word-example">
+                <span>"I <strong>go to school</strong> with my friends."</span>
+                <button class="audio-icon-btn" onclick="speakEnglish('I go to school with my friends')" title="Écouter la phrase">🔊</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sous-module 2 : Grand Test de Vocabulaire & Générateur IA -->
+      <div id="sub-anglais-quiz" class="submodule-content">
+        <!-- Bandeau Magique IA Gemini -->
+        <div class="ai-magic-banner">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(168,85,247,0.3));">✨</span>
+            <div>
+              <div style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.25rem; font-weight: 800; color: #6b21a8;">
+                Générateur d'Exercices d'Anglais par IA
+              </div>
+              <p style="font-size: 0.88rem; color: #4b5563; margin-top: 2px;">
+                Gemini compose instantanément 8 nouveaux défis inédits (animaux, routine, devinettes & écoute) !
+              </p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="ai-magic-btn" id="btnGenAiEnglish" onclick="generateAiExercisesFor('anglais_vocabulaire', this)">
+              <span>✨ Générer un nouvel exercice par IA</span>
+            </button>
+            <button class="action-btn" onclick="restartEnglishOfficialQuiz()" style="padding: 10px 16px; font-size: 0.9rem; background: #ffffff; color: var(--ink);">
+              🔄 Rejouer la série officielle
+            </button>
+          </div>
+        </div>
+
+        <!-- Conteneur QuizRunner Interactif -->
+        <div id="quiz-container-anglais-vocab" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Sous-module 3 : Défi des 2 Scènes du Manuel (Exercice 2) -->
+      <div id="sub-anglais-scenes" class="submodule-content">
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; padding: 18px 22px; margin-bottom: 20px; box-shadow: var(--shadow-comic);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div>
+              <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.4rem; color: var(--ink);">
+                🖼️ Exercice 2 du Manuel : Label the pictures
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Associe chaque numéro (1, 2, 3, 4) au bon mot d'anglais appris dans la leçon, comme sur ton cahier !
+              </p>
+            </div>
+            <button class="action-btn" onclick="switchSubmodule('anglais', 'manuel')" style="font-size: 0.85rem; padding: 6px 14px;">
+              👁️ Voir l'illustration du livre
+            </button>
+          </div>
+
+          <!-- Scène a : Night Scene -->
+          <div class="scene-exercise-card">
+            <div class="scene-header">
+              <span class="scene-title">🌙 Scène a : The Night Scene (La Nuit des Animaux)</span>
+              <span style="font-size: 0.82rem; font-weight: 800; color: #1e3a8a; background: #dbeafe; padding: 4px 10px; border-radius: 8px;">
+                4 Animaux nocturnes ou endormis
+              </span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 12px;">
+              Dans la nuit sombre éclairée par la lune : 1 vole dans le ciel, 2 dort paisiblement sous l'arbre, 3 avance sous les branchages, et 4 est couché dans l'herbe.
+            </p>
+
+            <div class="scene-interactive-grid">
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">1</span>
+                  <span>Animal volant dans la nuit :</span>
+                </div>
+                <select id="scene-a-1" class="scene-select-input">
+                  <option value="">-- Choisis le mot --</option>
+                  <option value="bat">bat (chauve-souris)</option>
+                  <option value="cow">cow (vache)</option>
+                  <option value="porcupine">porcupine (porc-épic)</option>
+                  <option value="goat">goat (chèvre)</option>
+                  <option value="donkey">donkey (âne)</option>
+                  <option value="owl">owl (chouette)</option>
+                </select>
+              </div>
+
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">2</span>
+                  <span>Animal endormi sous l'arbre :</span>
+                </div>
+                <select id="scene-a-2" class="scene-select-input">
+                  <option value="">-- Choisis le mot --</option>
+                  <option value="bat">bat (chauve-souris)</option>
+                  <option value="cow">cow (vache)</option>
+                  <option value="porcupine">porcupine (porc-épic)</option>
+                  <option value="goat">goat (chèvre)</option>
+                  <option value="donkey">donkey (âne)</option>
+                  <option value="owl">owl (chouette)</option>
+                </select>
+              </div>
+
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">3</span>
+                  <span>Animal piquant sous les arbres :</span>
+                </div>
+                <select id="scene-a-3" class="scene-select-input">
+                  <option value="">-- Choisis le mot --</option>
+                  <option value="bat">bat (chauve-souris)</option>
+                  <option value="cow">cow (vache)</option>
+                  <option value="porcupine">porcupine (porc-épic)</option>
+                  <option value="goat">goat (chèvre)</option>
+                  <option value="donkey">donkey (âne)</option>
+                  <option value="owl">owl (chouette)</option>
+                </select>
+              </div>
+
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">4</span>
+                  <span>Animal à cornes couché :</span>
+                </div>
+                <select id="scene-a-4" class="scene-select-input">
+                  <option value="">-- Choisis le mot --</option>
+                  <option value="bat">bat (chauve-souris)</option>
+                  <option value="cow">cow (vache)</option>
+                  <option value="porcupine">porcupine (porc-épic)</option>
+                  <option value="goat">goat (chèvre)</option>
+                  <option value="donkey">donkey (âne)</option>
+                  <option value="owl">owl (chouette)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+              <button class="action-btn" onclick="verifyEnglishScene('a')" style="background: #1e40af; color: #ffffff;">
+                ✅ Vérifier la Scène a (+4 ⭐)
+              </button>
+              <div id="feedback-scene-a" style="font-weight: 800; font-size: 0.95rem;"></div>
+            </div>
+          </div>
+
+          <!-- Scène b : Camp Routine -->
+          <div class="scene-exercise-card">
+            <div class="scene-header">
+              <span class="scene-title">🏕️ Scène b : The Camp Routine (La Journée au Campement)</span>
+              <span style="font-size: 0.82rem; font-weight: 800; color: #92400e; background: #fef3c7; padding: 4px 10px; border-radius: 8px;">
+                4 Actions de la routine quotidienne
+              </span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 12px;">
+              Au camp dans la forêt : 1 dort dans le hamac, 2 se lave le visage à la fontaine, 3 mange son goûter sur le tronc de bois, et 4 part avec son sac à dos.
+            </p>
+
+            <div class="scene-interactive-grid">
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">1</span>
+                  <span>Enfant dans le hamac :</span>
+                </div>
+                <select id="scene-b-1" class="scene-select-input">
+                  <option value="">-- Choisis l'action --</option>
+                  <option value="sleep">sleep (dormir)</option>
+                  <option value="wash my face">wash my face (me laver le visage)</option>
+                  <option value="eat">eat (manger)</option>
+                  <option value="go to school">go to school (aller à l'école / partir)</option>
+                  <option value="wake up">wake up (se réveiller)</option>
+                  <option value="brush my teeth">brush my teeth (se brosser les dents)</option>
+                </select>
+              </div>
+
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">2</span>
+                  <span>Enfant au point d'eau :</span>
+                </div>
+                <select id="scene-b-2" class="scene-select-input">
+                  <option value="">-- Choisis l'action --</option>
+                  <option value="sleep">sleep (dormir)</option>
+                  <option value="wash my face">wash my face (me laver le visage)</option>
+                  <option value="eat">eat (manger)</option>
+                  <option value="go to school">go to school (aller à l'école / partir)</option>
+                  <option value="wake up">wake up (se réveiller)</option>
+                  <option value="brush my teeth">brush my teeth (se brosser les dents)</option>
+                </select>
+              </div>
+
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">3</span>
+                  <span>Fille assise sur le tronc :</span>
+                </div>
+                <select id="scene-b-3" class="scene-select-input">
+                  <option value="">-- Choisis l'action --</option>
+                  <option value="sleep">sleep (dormir)</option>
+                  <option value="wash my face">wash my face (me laver le visage)</option>
+                  <option value="eat">eat (manger)</option>
+                  <option value="go to school">go to school (aller à l'école / partir)</option>
+                  <option value="wake up">wake up (se réveiller)</option>
+                  <option value="brush my teeth">brush my teeth (se brosser les dents)</option>
+                </select>
+              </div>
+
+              <div class="scene-slot-item">
+                <div class="scene-slot-header">
+                  <span class="number-bubble">4</span>
+                  <span>Garçon avec son sac à dos :</span>
+                </div>
+                <select id="scene-b-4" class="scene-select-input">
+                  <option value="">-- Choisis l'action --</option>
+                  <option value="sleep">sleep (dormir)</option>
+                  <option value="wash my face">wash my face (me laver le visage)</option>
+                  <option value="eat">eat (manger)</option>
+                  <option value="go to school">go to school (aller à l'école / partir)</option>
+                  <option value="wake up">wake up (se réveiller)</option>
+                  <option value="brush my teeth">brush my teeth (se brosser les dents)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+              <button class="action-btn" onclick="verifyEnglishScene('b')" style="background: #b45309; color: #ffffff;">
+                ✅ Vérifier la Scène b (+4 ⭐)
+              </button>
+              <div id="feedback-scene-b" style="font-weight: 800; font-size: 0.95rem;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sous-module 4 : Page Originale du Manuel Scolaire -->
+      <div id="sub-anglais-manuel" class="submodule-content">
+        <div style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-comic); text-align: center;">
+          <h3 style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.5rem; color: var(--ink); margin-bottom: 8px;">
+            📖 Page 26 du Manuel d'Anglais : "What is it?"
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">
+            Document officiel scanné du cours de CM2 (Exercice 1 : Listen, point and repeat & Exercice 2 : Label the pictures) :
+          </p>
+          <div style="max-width: 780px; margin: 0 auto; border: 2.5px solid var(--ink); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-comic-lg);">
+            <img src="images/anglais_manuel_vocabulaire.jpg" alt="Manuel Anglais CM2 - What is it?" style="width: 100%; height: auto; display: block;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <section id="subject-videotheque" class="subject-section">
       <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.8rem; margin-bottom: 14px;">🎬 Vidéothèque & Espace Documentaire CM2</h2>
       <p style="color: var(--text-muted); margin-bottom: 16px;">Toutes les vidéos officielles du Padlet en haute qualité, garanties sans blocage :</p>
@@ -8059,7 +8851,22 @@
                 </div>
               </div>
 
-              <!-- 5. Culture & Arts -->
+              <!-- 5. Anglais -->
+              <div class="parent-slider-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--ink); font-size: 0.92rem;">🇬🇧 Anglais</strong>
+                  <span id="multValBadge-anglais" style="font-weight: 800; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; background: #ffe4e6; border: 1px solid #e11d48; color: #be123c;">x1.0 ⭐</span>
+                </div>
+                <input type="range" id="multSlider-anglais" min="0.5" max="3.0" step="0.25" value="1.0" oninput="onMultiplierSliderChange('anglais', this.value)" style="width: 100%; cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-light);">
+                  <span>0.5x</span>
+                  <span>1.0x (Normal)</span>
+                  <span>2.0x (Double)</span>
+                  <span>3.0x</span>
+                </div>
+              </div>
+
+              <!-- 6. Culture & Arts -->
               <div class="parent-slider-card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <strong style="color: var(--ink); font-size: 0.92rem;">🎭 Poésie & Arts</strong>
@@ -8705,6 +9512,7 @@
       maths: 1.5,
       histoire: 1.0,
       sciences: 1.0,
+      anglais: 1.0,
       culture: 1.0
     };
 
@@ -8713,6 +9521,7 @@
       maths: { label: "Mathématiques", icon: "🔢", color: "#d97706", bg: "#fef3c7" },
       histoire: { label: "Histoire-Géo", icon: "🏛️", color: "#0284c7", bg: "#e0f2fe" },
       sciences: { label: "Sciences", icon: "🔬", color: "#059669", bg: "#d1fae5" },
+      anglais: { label: "Anglais", icon: "🇬🇧", color: "#e11d48", bg: "#ffe4e6" },
       culture: { label: "Arts & Poésie", icon: "🎨", color: "#9333ea", bg: "#f3e8ff" }
     };
 
@@ -12149,7 +12958,8 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
             'histoire_reims': 'Histoire CM2 : La Cathédrale de Reims, sacre des rois de France, Clovis, Jeanne d\'Arc',
             'sciences_materiaux': 'Sciences CM2 : Les matériaux (métaux, plastiques, céramiques, matières organiques), conductivité et recyclage',
             'sciences_eiffel': 'Sciences & Histoire CM2 : Gustave Eiffel, la Tour Eiffel, fer puddlé, Exposition Universelle de 1889',
-            'sciences_elements': 'Sciences CM2 : Tableau périodique des éléments (Fe, Cu, Al, O, C, He, Au, Ag)'
+            'sciences_elements': 'Sciences CM2 : Tableau périodique des éléments (Fe, Cu, Al, O, C, He, Au, Ag)',
+            'anglais_vocabulaire': 'Anglais CM2 : Vocabulaire de la leçon "What is it?" comprenant les animaux (cow, goat, donkey, owl, porcupine, bat) et la routine quotidienne (wake up, brush my teeth, wash my face, eat, go to school, sleep)'
           };
 
           const containerMap = {
@@ -12166,7 +12976,8 @@ Renvoie STRICTEMENT un JSON valide sous la forme d'un tableau d'objets :
             'histoire_reims': 'quiz-container-reims',
             'sciences_materiaux': 'quiz-container-materiaux',
             'sciences_eiffel': 'quiz-container-eiffel',
-            'sciences_elements': 'quiz-container-elements'
+            'sciences_elements': 'quiz-container-elements',
+            'anglais_vocabulaire': 'quiz-container-anglais-vocab'
           };
 
           const themeDesc = themesMap[subjectKey] || subjectKey;
@@ -19904,6 +20715,283 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     initSessionAutoTracker();
     initCloudAutoSync();
 
+    
+    // =========================================================================
+    // 🇬🇧 ANGLAIS (WHAT IS IT? - ANIMALS & DAILY ROUTINE)
+    // =========================================================================
+    function speakEnglish(text) {
+      if (!('speechSynthesis' in window)) {
+        alert("La synthèse vocale n'est pas disponible sur cet appareil.");
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.88;
+        const voices = window.speechSynthesis.getVoices();
+        const enVoice = voices.find(v => (v.lang === 'en-US' || v.lang.startsWith('en')) && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('George')));
+        if (enVoice) u.voice = enVoice;
+        window.speechSynthesis.speak(u);
+      } catch (err) {
+        console.warn("Speech synthesis error:", err);
+      }
+    }
+
+    const allAnglaisVocabQuestions = [
+      {
+        display: "🐮 <em>'What is it?'</em> Cet animal de la ferme donne du bon lait frais. C'est a <span class='blank-slot'>...</span> !",
+        options: ["cow", "goat", "donkey", "porcupine"],
+        correct: "cow",
+        tip: "Cow = vache. Pense au cri 'meuh' et aux cow-boys qui gardent les troupeaux de vaches !"
+      },
+      {
+        display: "🐐 Cet animal agile avec de petites cornes qui grimpe partout : it's a <span class='blank-slot'>...</span> !",
+        options: ["goat", "owl", "bat", "donkey"],
+        correct: "goat",
+        tip: "Goat = chèvre. Se prononce 'gôte'."
+      },
+      {
+        display: "🫏 Cet animal patient aux grandes oreilles qui porte des charges : it's a <span class='blank-slot'>...</span> !",
+        options: ["donkey", "cow", "goat", "bat"],
+        correct: "donkey",
+        tip: "Donkey = âne. Comme l'âne Donkey dans le film Shrek !"
+      },
+      {
+        display: "🦉 Cet oiseau nocturne très sage avec de grands yeux ronds : it's an <span class='blank-slot'>...</span> !",
+        options: ["owl", "bat", "porcupine", "goat"],
+        correct: "owl",
+        tip: "Owl = chouette ou hibou. Comme Hedwige dans Harry Potter ! Se prononce 'aoul'."
+      },
+      {
+        display: "🦔 Attention aux piquants ! Cet animal piquant qui se met en boule : it's a <span class='blank-slot'>...</span> !",
+        options: ["porcupine", "donkey", "cow", "owl"],
+        correct: "porcupine",
+        tip: "Porcupine = porc-épic. Remarque la racine proche du français 'porc' !"
+      },
+      {
+        display: "🦇 Ce mammifère volant qui sort la nuit et dort la tête en bas : it's a <span class='blank-slot'>...</span> !",
+        options: ["bat", "owl", "goat", "cow"],
+        correct: "bat",
+        tip: "Bat = chauve-souris. Exactement comme le super-héros Batman !"
+      },
+      {
+        display: "⏰ Le matin à 7h00 quand le réveil sonne : I <span class='blank-slot'>...</span> !",
+        options: ["wake up", "sleep", "eat", "go to school"],
+        correct: "wake up",
+        tip: "Wake up = se réveiller. 'Wake' = s'éveiller, 'up' = se lever !"
+      },
+      {
+        display: "🪥 Après le petit-déjeuner, pour avoir des dents blanches et propres : I <span class='blank-slot'>...</span> !",
+        options: ["brush my teeth", "wash my face", "wake up", "eat"],
+        correct: "brush my teeth",
+        tip: "Brush my teeth = me brosser les dents. Teeth est le pluriel de tooth (dent)."
+      },
+      {
+        display: "🧼 Dans la salle de bain, avec de l'eau fraîche et du savon : I <span class='blank-slot'>...</span> !",
+        options: ["wash my face", "brush my teeth", "sleep", "go to school"],
+        correct: "wash my face",
+        tip: "Wash my face = me laver le visage. To wash = laver, face = visage."
+      },
+      {
+        display: "🍽️ À midi, j'ai faim et je prends mon repas : I <span class='blank-slot'>...</span> an apple !",
+        options: ["eat", "sleep", "wake up", "brush my teeth"],
+        correct: "eat",
+        tip: "To eat = manger. Se prononce 'iite'."
+      },
+      {
+        display: "🎒 Je mets mon cartable sur le dos et je rejoins mes copains : I <span class='blank-slot'>...</span> !",
+        options: ["go to school", "wake up", "sleep", "wash my face"],
+        correct: "go to school",
+        tip: "Go to school = aller à l'école. To go = aller, school = école."
+      },
+      {
+        display: "😴 Le soir quand la lune brille et que je suis fatigué dans mon lit : I <span class='blank-slot'>...</span>.",
+        options: ["sleep", "eat", "wake up", "brush my teeth"],
+        correct: "sleep",
+        tip: "Sleep = dormir. Pense au sac de couchage 'sleeping bag' !"
+      },
+      {
+        display: "🌙 In the night scene (scène a du livre), which animal is sleeping on the grass? The <span class='blank-slot'>...</span>.",
+        options: ["cow", "bat", "owl", "donkey"],
+        correct: "cow",
+        tip: "Dans la scène a du livre, la vache (cow) dort paisiblement dans le pré."
+      },
+      {
+        display: "🏕️ In the camp scene (scène b du livre), the boy in the hammock is having a <span class='blank-slot'>...</span>.",
+        options: ["sleep", "wash my face", "brush my teeth", "go to school"],
+        correct: "sleep",
+        tip: "Dans le hamac entre les deux arbres, le garçon dort (sleep) !"
+      }
+    ];
+
+    let englishQuizRunner = null;
+
+    function initAnglaisSection() {
+      if (!englishQuizRunner) {
+        englishQuizRunner = new QuizRunner('quiz-container-anglais-vocab', allAnglaisVocabQuestions, {
+          title: "Vocabulaire Anglais : What is it?",
+          subjectKey: "anglais"
+        });
+      }
+    }
+
+    function restartEnglishOfficialQuiz() {
+      englishQuizRunner = new QuizRunner('quiz-container-anglais-vocab', allAnglaisVocabQuestions, {
+        title: "Vocabulaire Anglais : What is it?",
+        subjectKey: "anglais"
+      });
+      showAiToast("🔄 Série officielle réinitialisée !");
+    }
+
+    function generateFallbackEnglishQuestions() {
+      const bank = [
+        {
+          display: "🦉 <em>'What is it?'</em> A nocturnal bird with big eyes: it's an <span class='blank-slot'>...</span> !",
+          options: ["owl", "bat", "cow", "goat"],
+          correct: "owl",
+          tip: "Owl = la chouette / le hibou. Oiseau de nuit sage et silencieux !"
+        },
+        {
+          display: "🦇 <em>'What is it?'</em> It has wings and flies at night: it's a <span class='blank-slot'>...</span> !",
+          options: ["bat", "owl", "donkey", "porcupine"],
+          correct: "bat",
+          tip: "Bat = la chauve-souris. Comme Batman !"
+        },
+        {
+          display: "🐮 <em>'What is it?'</em> A big black and white animal that gives milk: it's a <span class='blank-slot'>...</span> !",
+          options: ["cow", "goat", "donkey", "porcupine"],
+          correct: "cow",
+          tip: "Cow = la vache."
+        },
+        {
+          display: "🦔 <em>'What is it?'</em> Be careful with its needles: it's a <span class='blank-slot'>...</span> !",
+          options: ["porcupine", "donkey", "goat", "cow"],
+          correct: "porcupine",
+          tip: "Porcupine = le porc-épic."
+        },
+        {
+          display: "🫏 <em>'What is it?'</em> It looks like a small horse with long ears: it's a <span class='blank-slot'>...</span> !",
+          options: ["donkey", "cow", "goat", "bat"],
+          correct: "donkey",
+          tip: "Donkey = l'âne."
+        },
+        {
+          display: "🐐 <em>'What is it?'</em> An animal that has horns and loves mountains: it's a <span class='blank-slot'>...</span> !",
+          options: ["goat", "owl", "donkey", "bat"],
+          correct: "goat",
+          tip: "Goat = la chèvre."
+        },
+        {
+          display: "⏰ In the morning, my alarm rings at 7:00: I <span class='blank-slot'>...</span> !",
+          options: ["wake up", "sleep", "eat", "go to school"],
+          correct: "wake up",
+          tip: "Wake up = se réveiller."
+        },
+        {
+          display: "🪥 With toothpaste and my toothbrush, I <span class='blank-slot'>...</span> !",
+          options: ["brush my teeth", "wash my face", "sleep", "eat"],
+          correct: "brush my teeth",
+          tip: "Brush my teeth = se brosser les dents."
+        },
+        {
+          display: "🧼 In the bathroom, with soap and clean water, I <span class='blank-slot'>...</span> !",
+          options: ["wash my face", "brush my teeth", "wake up", "sleep"],
+          correct: "wash my face",
+          tip: "Wash my face = se laver le visage."
+        },
+        {
+          display: "🍽️ At lunch time, I am hungry: I <span class='blank-slot'>...</span> my sandwich !",
+          options: ["eat", "sleep", "wake up", "wash my face"],
+          correct: "eat",
+          tip: "To eat = manger."
+        },
+        {
+          display: "🎒 I take my backpack and walk to the classroom: I <span class='blank-slot'>...</span> !",
+          options: ["go to school", "sleep", "wake up", "brush my teeth"],
+          correct: "go to school",
+          tip: "Go to school = aller à l'école."
+        },
+        {
+          display: "😴 At night in my warm bed, it's time to <span class='blank-slot'>...</span>.",
+          options: ["sleep", "eat", "wake up", "go to school"],
+          correct: "sleep",
+          tip: "Sleep = dormir."
+        }
+      ];
+      return shuffleArray(bank).slice(0, 8);
+    }
+
+    // Interactive Scene Verification (Exercise 2)
+    function verifyEnglishScene(sceneKey) {
+      const fb = document.getElementById('feedback-scene-' + sceneKey);
+      if (!fb) return;
+
+      if (sceneKey === 'a') {
+        const v1 = document.getElementById('scene-a-1').value;
+        const v2 = document.getElementById('scene-a-2').value;
+        const v3 = document.getElementById('scene-a-3').value;
+        const v4 = document.getElementById('scene-a-4').value;
+
+        if (!v1 || !v2 || !v3 || !v4) {
+          fb.innerHTML = '<span style="color:#ea580c;">⚠️ Choisis une réponse pour chaque numéro (1, 2, 3 et 4) !</span>';
+          return;
+        }
+
+        const isOk1 = (v1 === 'bat');
+        const isOk2 = (v2 === 'cow');
+        const isOk3 = (v3 === 'porcupine');
+        const isOk4 = (v4 === 'goat');
+
+        if (isOk1 && isOk2 && isOk3 && isOk4) {
+          fb.innerHTML = '<span style="color:#15803d;">🎉 Bravo ! 4/4 ! 1: bat, 2: cow, 3: porcupine, 4: goat (+4 ⭐)</span>';
+          playSound('win');
+          triggerConfetti();
+          addScore(4, 'anglais');
+        } else {
+          let errs = [];
+          if (!isOk1) errs.push('1: bat (chauve-souris)');
+          if (!isOk2) errs.push('2: cow (vache)');
+          if (!isOk3) errs.push('3: porcupine (porc-épic)');
+          if (!isOk4) errs.push('4: goat (chèvre)');
+          fb.innerHTML = `<span style="color:#dc2626;">❌ Il y a des erreurs. Indice : ${errs.join(', ')}. Réessaie !</span>`;
+          playSound('wrong');
+        }
+      } else if (sceneKey === 'b') {
+        const v1 = document.getElementById('scene-b-1').value;
+        const v2 = document.getElementById('scene-b-2').value;
+        const v3 = document.getElementById('scene-b-3').value;
+        const v4 = document.getElementById('scene-b-4').value;
+
+        if (!v1 || !v2 || !v3 || !v4) {
+          fb.innerHTML = '<span style="color:#ea580c;">⚠️ Choisis une réponse pour chaque numéro (1, 2, 3 et 4) !</span>';
+          return;
+        }
+
+        const isOk1 = (v1 === 'sleep');
+        const isOk2 = (v2 === 'wash my face');
+        const isOk3 = (v3 === 'eat');
+        const isOk4 = (v4 === 'go to school');
+
+        if (isOk1 && isOk2 && isOk3 && isOk4) {
+          fb.innerHTML = '<span style="color:#15803d;">🎉 Excellent ! 4/4 ! 1: sleep, 2: wash my face, 3: eat, 4: go to school (+4 ⭐)</span>';
+          playSound('win');
+          triggerConfetti();
+          addScore(4, 'anglais');
+        } else {
+          let errs = [];
+          if (!isOk1) errs.push('1: sleep (dormir)');
+          if (!isOk2) errs.push('2: wash my face (me laver le visage)');
+          if (!isOk3) errs.push('3: eat (manger)');
+          if (!isOk4) errs.push("4: go to school (aller à l'école)");
+          fb.innerHTML = `<span style="color:#dc2626;">❌ Il y a des erreurs. Indice : ${errs.join(', ')}. Réessaie !</span>`;
+          playSound('wrong');
+        }
+      }
+    }
+
+
+    initAnglaisSection();
     new QuizRunner('quiz-container-homo', allHomophoneQuestions, { title: "Duel des Homophones", subjectKey: "francais" });
     renderDetectiveMission();
     renderProblemSolver();

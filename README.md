@@ -13,6 +13,7 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
 - 🔢 **Mathématiques :** Chrono-Calcul Mental (45s), Soustraction par cassage avec vidéo pas à pas.
 - 🏛️ **Histoire :** Les 5 grandes périodes (en chanson), la Préhistoire (Quelle Histoire), la Cathédrale de Reims.
 - 🔬 **Sciences & Arts :** Les familles de matériaux (L'Esprit Sorcier), le projet & défi Gustave Eiffel.
+- 🇬🇧 **Anglais :** Vocabulaire thématique (*What is it? Animals & Daily Routine*), prononciation vocale native interactive, test de vocabulaire avec générateur d'exercices par IA (Gemini).
 - 💡 **Boîte à Pense-Bêtes :** Toutes les astuces mnémotechniques indispensables.
 
 ---
@@ -65,7 +66,14 @@ L'application intègre toutes les matières avec des **lecteurs vidéos YouTube 
 
 ---
 
-### 5. 📋 [Organisation et Vie de classe](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Organisation_et_Vie_de_classe)
+### 5. 🇬🇧 [Anglais](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Anglais)
+- **[Vocabulaire](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Anglais/Vocabulaire)** :
+  - 🐾 [What_Is_It_Animaux_et_Routine.md](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Anglais/Vocabulaire/What_Is_It_Animaux_et_Routine.md) *(Page 26 : Les 12 mots du manuel, animaux, routine quotidienne, prononciation audio & scènes a et b)*
+  - 🎮 Application interactive : Fiches sonorisées, test de vocabulaire avec scores & générateur IA 1-clic.
+
+---
+
+### 6. 📋 [Organisation et Vie de classe](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Organisation_et_Vie_de_classe)
 - 📅 [Planning_de_la_semaine.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Organisation_et_Vie_de_classe/Planning_de_la_semaine.pdf)
 - 🗓️ [Calendrier_Septembre.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Organisation_et_Vie_de_classe/Calendrier_Septembre.pdf)
 - ⭐ [Planning_eleves_vedettes.pdf](file:///Users/yvasseur/Desktop/Privé/Dropbox/CM2/Organisation_et_Vie_de_classe/Planning_eleves_vedettes.pdf)
