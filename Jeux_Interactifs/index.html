@@ -5327,6 +5327,532 @@
       box-shadow: 1px 1px 0 var(--ink);
     }
 
+    /* ========================================================= */
+    /* 🏎️ TURBO TABLES : VITESSE & ÉTOILES STYLES (BD COMIC)    */
+    /* ========================================================= */
+    .turbo-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .turbo-banner {
+      width: 100%;
+      background: linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%);
+      border: 2.5px solid var(--ink);
+      border-radius: 18px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-comic);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .turbo-banner-title {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #713f12;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .turbo-banner-sub {
+      font-size: 0.9rem;
+      color: #854d0e;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .turbo-badge-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .turbo-rule-pill {
+      background: #ffffff;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--ink);
+      box-shadow: 1px 1px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Sélecteur de mode & de tables */
+    .turbo-selector-card {
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .turbo-tables-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .turbo-pill-btn {
+      background: #f8fafc;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 7px 14px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      transition: all 0.15s ease;
+    }
+
+    .turbo-pill-btn:hover {
+      background: #fef08a;
+      transform: translate(-1px, -1px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .turbo-pill-btn.active {
+      background: var(--bd-yellow);
+      border-color: var(--ink);
+      box-shadow: var(--shadow-comic-sm);
+      transform: translate(-1px, -1px);
+    }
+
+    .turbo-modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .turbo-mode-card {
+      background: #fffdfa;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow-comic-sm);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .turbo-mode-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-comic);
+      background: #ffffff;
+    }
+
+    .turbo-mode-card.primary {
+      border-color: #ca8a04;
+      background: linear-gradient(135deg, #ffffff 0%, #fefce8 100%);
+    }
+
+    .turbo-mode-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .turbo-mode-title {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .turbo-mode-badge {
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1.5px solid var(--ink);
+      text-transform: uppercase;
+    }
+
+    .turbo-mode-desc {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Arène de Jeu Active */
+    .turbo-arena {
+      width: 100%;
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-comic-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .turbo-arena-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .turbo-stat-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 1rem;
+      background: #f8fafc;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 6px 14px;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+    }
+
+    .turbo-nitro-wrapper {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .turbo-nitro-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--ink-light);
+    }
+
+    .turbo-nitro-track {
+      width: 100%;
+      height: 16px;
+      background: #f1f5f9;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .turbo-nitro-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #06b6d4 0%, #10b981 40%, #f59e0b 75%, #ef4444 100%);
+      border-radius: 999px;
+      transition: width 0.05s linear;
+    }
+
+    .turbo-nitro-zone-mark {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--ink);
+      z-index: 2;
+    }
+
+    /* Carte de la Question */
+    .turbo-question-card {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--ink);
+      text-shadow: 3px 3px 0 var(--bd-yellow);
+      margin: 10px 0;
+      text-align: center;
+      letter-spacing: 1px;
+      animation: turboPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes turboPop {
+      0% { transform: scale(0.85); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Grille des 4 Choix Tactiles Géants */
+    .turbo-choices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .turbo-choice-btn {
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      padding: 18px 12px;
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: var(--shadow-comic);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      transition: all 0.12s ease;
+      touch-action: manipulation;
+    }
+
+    .turbo-choice-btn:hover {
+      background: #fef08a;
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-comic-lg);
+    }
+
+    .turbo-choice-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    .turbo-choice-key {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--ink-light);
+      background: #f1f5f9;
+      border: 1px solid var(--ink-faint);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .turbo-choice-btn.correct-flash {
+      background: #86efac !important;
+      border-color: #15803d !important;
+      color: #14532d !important;
+      transform: scale(1.04);
+    }
+
+    .turbo-choice-btn.wrong-flash {
+      background: #fecaca !important;
+      border-color: #b91c1c !important;
+      color: #7f1d1d !important;
+      animation: turboShake 0.3s ease;
+    }
+
+    @keyframes turboShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* Combo Badge Animé */
+    .turbo-combo-pill {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 14px;
+      border: 2px solid var(--ink);
+      box-shadow: var(--shadow-comic-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .turbo-combo-pill.level-1 { background: #e0f2fe; color: #0369a1; }
+    .turbo-combo-pill.level-2 { background: #fef08a; color: #854d0e; transform: scale(1.05); }
+    .turbo-combo-pill.level-3 { background: #ffedd5; color: #c2410c; border-color: #ea580c; animation: turboFlame 0.8s infinite alternate; }
+
+    @keyframes turboFlame {
+      from { transform: scale(1.05); box-shadow: 0 0 10px rgba(234, 88, 12, 0.5); }
+      to { transform: scale(1.12); box-shadow: 0 0 18px rgba(234, 88, 12, 0.8); }
+    }
+
+    /* Toast / Feedback Flash */
+    .turbo-feedback-msg {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      color: var(--ink);
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* Astuce Flash Pop-in */
+    .turbo-tip-card {
+      width: 100%;
+      max-width: 520px;
+      background: #fefce8;
+      border: 2px solid #ca8a04;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #854d0e;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-comic-sm);
+      animation: fadeIn 0.25s ease;
+    }
+
+    /* Course Fantôme (Ghost Mode Track) */
+    .ghost-race-track {
+      width: 100%;
+      max-width: 540px;
+      background: #fffdfa;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ghost-lane {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ghost-lane-label {
+      width: 90px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ghost-lane-progress-bg {
+      flex: 1;
+      height: 20px;
+      background: #e2e8f0;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ghost-lane-bar-player {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ghost-lane-bar-ghost {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+      border-radius: 999px;
+      transition: width 0.5s linear;
+    }
+
+    .ghost-vehicle-icon {
+      position: absolute;
+      top: -4px;
+      transform: translateX(-50%);
+      font-size: 1.3rem;
+      transition: left 0.3s ease;
+    }
+
+    /* Modal / Écran de Fin de Session */
+    .turbo-finish-card {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-comic-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: turboPop 0.35s ease;
+    }
+
+    .turbo-finish-medal {
+      font-size: 4rem;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+    }
+
+    .turbo-finish-title {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .turbo-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      margin: 8px 0;
+    }
+
+    .turbo-stat-tile {
+      background: #f8fafc;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 10px 6px;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+    }
+
+    .turbo-stat-tile-val {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--bd-blue);
+    }
+
+    .turbo-stat-tile-lbl {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--ink-light);
+      margin-top: 2px;
+    }
+
 </style>
 </head>
 <body>
@@ -6348,6 +6874,7 @@
 
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('maths', 'problemes')">🧠 Résolution de Problèmes (Pas à Pas)</button>
+        <button class="submodule-btn" id="subBtnMathsTurbo" onclick="switchSubmodule('maths', 'turbo')" style="background: linear-gradient(135deg, #fef08a, #fde047); border-color: #ca8a04; color: #713f12; font-weight: 900;">⚡ Turbo Tables (Vitesse & Étoiles)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'chrono')">⚡ Calcul Rapide & Stratégies</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + Quiz)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'geometrie')">📐 Géométrie : Droites, Segments & Sécantes (Atelier Tracé)</button>
@@ -6424,6 +6951,232 @@
           <div id="calcFeedback" class="feedback-banner"></div>
 
           <button onclick="stopCalcGame()" style="background: transparent; border: 1px solid var(--card-border); color: var(--text-muted); padding: 6px 14px; border-radius: 10px; cursor: pointer; margin-top: 14px;">Quitter la session</button>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- Maths Sub 2bis : Turbo Tables (Vitesse & Étoiles)         -->
+      <!-- ========================================================= -->
+      <div id="sub-maths-turbo" class="submodule-content">
+        <div class="turbo-container">
+          <!-- Bandeau Titre & Règles d'Or Bienveillantes -->
+          <div class="turbo-banner">
+            <div>
+              <div class="turbo-banner-title">
+                <span>🏎️ Le Circuit Turbo des Tables CM2</span>
+                <span style="font-size: 0.85rem; background: #ffffff; border: 1.5px solid var(--ink); padding: 2px 10px; border-radius: 999px; color: #713f12;">Spécial Réflexes & Vitesse</span>
+              </div>
+              <div class="turbo-banner-sub">
+                Gagne des étoiles pour ton Coffre et la Boutique à la vitesse de l'éclair ! Pas de stress : aucune pénalité en cas d'erreur.
+              </div>
+            </div>
+            <div class="turbo-badge-bar">
+              <span class="turbo-rule-pill" style="background: #e0f2fe; color: #0369a1;">⚡ &lt; 2,2s = <strong>+3 ⭐</strong> (Éclair)</span>
+              <span class="turbo-rule-pill" style="background: #dcfce7; color: #15803d;">🚀 &lt; 4,5s = <strong>+2 ⭐</strong> (Super Rythme)</span>
+              <span class="turbo-rule-pill" style="background: #fef9c3; color: #854d0e;">💡 &gt; 4,5s = <strong>+1 ⭐</strong> (Réfléchi)</span>
+              <span class="turbo-rule-pill" style="background: #f1f5f9; color: var(--ink);">🛡️ Erreur = <strong>0 perte</strong> + Astuce</span>
+            </div>
+          </div>
+
+          <!-- VUE 1 : CHOIX DE LA SÉRIE ET DU MODE DE JEU -->
+          <div id="turbo-start-view" style="width: 100%; display: flex; flex-direction: column; gap: 16px;">
+            <!-- Sélecteur de tables -->
+            <div class="turbo-selector-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 1rem; font-weight: 800; color: var(--ink);">🎯 Choisis ton défi de tables :</span>
+                <span style="font-size: 0.82rem; font-weight: 700; color: var(--ink-light);">Sélection active : <strong id="turboCurrentFilterLabel" style="color: var(--bd-red);">🎯 Les 10 Bêtes Noires du CM2</strong></span>
+              </div>
+
+              <div class="turbo-tables-pills">
+                <button class="turbo-pill-btn active" onclick="setTurboFilter('betes_noires', this)">🎯 Les 10 Bêtes Noires (7×8, 6×9, 8×9...)</button>
+                <button class="turbo-pill-btn" onclick="setTurboFilter('tables_cles', this)">⚡ Tables Clés (6, 7, 8, 9)</button>
+                <button class="turbo-pill-btn" onclick="setTurboFilter('carres', this)">🌟 Carrés Parfaits (6×6, 7×7, 8×8...)</button>
+                <button class="turbo-pill-btn" onclick="setTurboFilter('all', this)">💥 Grand Mix Aléatoire (1 à 10)</button>
+              </div>
+
+              <!-- Sélecteur individuel de table -->
+              <div style="display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 4px; padding-top: 8px; border-top: 1.5px dashed var(--ink-faint);">
+                <span style="font-size: 0.82rem; font-weight: 800; color: var(--ink-light);">Ou cible une seule table :</span>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(3, this)">×3</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(4, this)">×4</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(6, this)">×6</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(7, this)">×7</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(8, this)">×8</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(9, this)">×9</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(12, this)">×12</button>
+              </div>
+            </div>
+
+            <!-- Choix des 2 modes de jeu -->
+            <div class="turbo-modes-grid">
+              <!-- Mode 1 : Le Turbo Bolide (Sprint 60 secondes) -->
+              <div class="turbo-mode-card primary" onclick="startTurboGame('bolide')">
+                <div class="turbo-mode-card-header">
+                  <div class="turbo-mode-title">
+                    <span>🏎️ Le Turbo Bolide</span>
+                  </div>
+                  <span class="turbo-mode-badge" style="background: #fef08a; color: #854d0e;">Sprint 60s</span>
+                </div>
+                <div class="turbo-mode-desc">
+                  Réponds le plus vite possible aux 4 boutons géants tactiles. Enchaîne les calculs en moins de 2,2s pour activer le <strong>Nitro</strong> et multiplier tes ⭐ par 2 ou 3 !
+                </div>
+                <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.85rem; font-weight: 800; color: #0284c7;">⚡ Zéro clavier nécessaire</span>
+                  <button class="action-btn" style="padding: 8px 16px; font-size: 0.9rem; pointer-events: none;">Démarrer le Sprint 🚀</button>
+                </div>
+              </div>
+
+              <!-- Mode 2 : Le Duel contre son Fantôme (Ghost Time Attack) -->
+              <div class="turbo-mode-card" onclick="startTurboGame('ghost')">
+                <div class="turbo-mode-card-header">
+                  <div class="turbo-mode-title">
+                    <span>🛸 Le Duel contre son Fantôme</span>
+                  </div>
+                  <span class="turbo-mode-badge" style="background: #e0f2fe; color: #0369a1;">10 Défis Fixes</span>
+                </div>
+                <div class="turbo-mode-desc">
+                  Affronte ton propre record personnel ! 10 calculs clés à enchaîner. Bats le temps de ton fantôme pour décrocher le <strong>Trophée Éclair</strong> et un méga bonus de <strong>+10 ⭐</strong> !
+                </div>
+                <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.82rem; font-weight: 800; color: #15803d;">Record actuel : <strong id="turboGhostRecordDisplay">36.0s</strong></span>
+                  <button class="action-btn" style="padding: 8px 16px; font-size: 0.9rem; background: linear-gradient(135deg, #0284c7, #0369a1); pointer-events: none;">Lancer le Duel 👻</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tiroir Accordéon : Le Dojo des Astuces Éclair -->
+            <details style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 14px 18px; box-shadow: var(--shadow-comic-sm); cursor: pointer;">
+              <summary style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px; user-select: none;">
+                <span>💡 Dojo des Secrets : 5 Astuces Magiques pour aller 2× plus vite !</span>
+                <span style="font-size: 0.82rem; font-weight: 700; color: var(--ink-light); margin-left: auto;">(Clique pour ouvrir/fermer)</span>
+              </summary>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; cursor: default;">
+                <div style="background: #fefce8; border: 1.5px solid #ca8a04; border-radius: 12px; padding: 10px 14px;">
+                  <strong style="color: #ca8a04;">1. 🎯 L'astuce « 5, 6, 7, 8 » (7 × 8) :</strong><br>
+                  <span style="font-size: 0.88rem; color: var(--ink);">Les chiffres se suivent : <strong>5 6 = 7 × 8</strong> ! C'est la table la plus posée aux évaluations.</span>
+                </div>
+                <div style="background: #eff6ff; border: 1.5px solid #0284c7; border-radius: 12px; padding: 10px 14px;">
+                  <strong style="color: #0284c7;">2. ⚡ L'astuce magique de 9 :</strong><br>
+                  <span style="font-size: 0.88rem; color: var(--ink);">Fais × 10 puis enlève une fois le nombre : <strong>9 × 7 = 70 - 7 = 63</strong>. En plus, 6 + 3 = 9 !</span>
+                </div>
+                <div style="background: #f0fdf4; border: 1.5px solid #16a34a; border-radius: 12px; padding: 10px 14px;">
+                  <strong style="color: #16a34a;">3. 🌟 Les Carrés Parfaits qui riment :</strong><br>
+                  <span style="font-size: 0.88rem; color: var(--ink);">6 × 6 = <strong>36</strong> | 7 × 7 = <strong>49</strong> | 8 × 8 = <strong>64</strong> | 9 × 9 = <strong>81</strong> !</span>
+                </div>
+                <div style="background: #faf5ff; border: 1.5px solid #9333ea; border-radius: 12px; padding: 10px 14px;">
+                  <strong style="color: #9333ea;">4. ➗ Multiplier par 5 en un clin d'œil :</strong><br>
+                  <span style="font-size: 0.88rem; color: var(--ink);">Prends la moitié puis ajoute un 0 : ex. 14 × 5 ➔ la moitié de 14 c'est 7 ➔ <strong>70</strong> !</span>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- VUE 2 : ARÈNE DE JEU ACTIVE -->
+          <div id="turbo-play-view" style="display: none; width: 100%; flex-direction: column; align-items: center; gap: 14px;">
+            <div class="turbo-arena">
+              <!-- En-tête de l'Arène : Chrono/Objectif, Score et Combo -->
+              <div class="turbo-arena-top">
+                <div class="turbo-stat-box" id="turboTimerBox">
+                  <span>⏱️</span>
+                  <span id="turboTimerText">60s</span>
+                </div>
+
+                <div id="turboComboBadge" class="turbo-combo-pill level-1">
+                  <span>🔥 COMBO ×1</span>
+                </div>
+
+                <div class="turbo-stat-box" style="background: #fefce8; border-color: #ca8a04;">
+                  <span>⭐</span>
+                  <span id="turboStarsText">0 ⭐</span>
+                </div>
+              </div>
+
+              <!-- Piste de course pour le mode Fantôme (visible uniquement en mode ghost) -->
+              <div id="turboGhostTrack" class="ghost-race-track" style="display: none;">
+                <div class="ghost-lane">
+                  <div class="ghost-lane-label">🏎️ Toi :</div>
+                  <div class="ghost-lane-progress-bg">
+                    <div id="ghostPlayerBar" class="ghost-lane-bar-player"></div>
+                    <span id="ghostPlayerIcon" class="ghost-vehicle-icon" style="left: 0%;">🏎️</span>
+                  </div>
+                </div>
+                <div class="ghost-lane">
+                  <div class="ghost-lane-label">👻 Fantôme :</div>
+                  <div class="ghost-lane-progress-bg">
+                    <div id="ghostGhostBar" class="ghost-lane-bar-ghost"></div>
+                    <span id="ghostGhostIcon" class="ghost-vehicle-icon" style="left: 0%;">👻</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Jauge Nitro de Vitesse (Temps Réflexe) -->
+              <div class="turbo-nitro-wrapper">
+                <div class="turbo-nitro-labels">
+                  <span style="color: #0284c7;">⚡ Vitesse Éclair (&lt; 2,2s : +3 ⭐)</span>
+                  <span style="color: #ca8a04;">🚀 Super Rythme (&lt; 4,5s : +2 ⭐)</span>
+                </div>
+                <div class="turbo-nitro-track">
+                  <div id="turboNitroFill" class="turbo-nitro-fill"></div>
+                  <div class="turbo-nitro-zone-mark" style="left: 50%;" title="Limite Zone Éclair"></div>
+                </div>
+              </div>
+
+              <!-- Carte Centrale de la Question Géante -->
+              <div class="turbo-question-card" id="turboQuestionDisplay">7 × 8</div>
+
+              <!-- 4 Choix Géants Tactiles -->
+              <div class="turbo-choices-grid" id="turboChoicesContainer">
+                <!-- Rempli dynamiquement -->
+              </div>
+
+              <!-- Bannière de Feedback Flash -->
+              <div id="turboFeedbackDisplay" class="turbo-feedback-msg"></div>
+
+              <!-- Boîte d'Astuce Mnémotechnique en cas de besoin -->
+              <div id="turboTipDisplay" class="turbo-tip-card" style="display: none;">
+                <span>💡</span>
+                <span id="turboTipText">Astuce : 5, 6, 7, 8 ➔ 56 = 7 × 8 !</span>
+              </div>
+
+              <!-- Bouton Quitter -->
+              <button onclick="stopTurboGame()" style="background: transparent; border: 1.5px solid var(--ink-light); color: var(--ink-light); padding: 6px 16px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 700; margin-top: 6px;">
+                Quitter la session
+              </button>
+            </div>
+          </div>
+
+          <!-- VUE 3 : BILAN ET PODIUM DE FIN -->
+          <div id="turbo-finish-view" style="display: none; width: 100%; flex-direction: column; align-items: center;">
+            <div class="turbo-finish-card">
+              <div id="turboFinishMedal" class="turbo-finish-medal">🥇</div>
+              <div id="turboFinishTitle" class="turbo-finish-title">Session Turbo Terminée !</div>
+              <div id="turboFinishSubtitle" style="font-size: 0.95rem; color: var(--ink-light); font-weight: 600;">
+                Tu as fait chauffer les réflexes avec brio !
+              </div>
+
+              <div class="turbo-stats-grid">
+                <div class="turbo-stat-tile">
+                  <div id="turboStatSolved" class="turbo-stat-tile-val">16</div>
+                  <div class="turbo-stat-tile-lbl">Réussites</div>
+                </div>
+                <div class="turbo-stat-tile" style="background: #fefce8; border-color: #ca8a04;">
+                  <div id="turboStatStars" class="turbo-stat-tile-val" style="color: #b45309;">+38 ⭐</div>
+                  <div class="turbo-stat-tile-lbl">Étoiles Récoltées</div>
+                </div>
+                <div class="turbo-stat-tile">
+                  <div id="turboStatSpeed" class="turbo-stat-tile-val" style="color: #059669;">1.9s</div>
+                  <div class="turbo-stat-tile-lbl">Vitesse Moyenne</div>
+                </div>
+              </div>
+
+              <div id="turboGhostRecordMsg" style="display: none; background: #dcfce7; border: 2px solid #16a34a; border-radius: 12px; padding: 10px 14px; font-size: 0.92rem; font-weight: 800; color: #15803d; width: 100%;"></div>
+
+              <div style="display: flex; gap: 12px; justify-content: center; width: 100%; margin-top: 8px;">
+                <button class="action-btn" onclick="initTurboTablesView()">🔄 Rejouer une session</button>
+                <button onclick="switchSubmodule('maths', 'problemes')" style="background: #ffffff; border: 2px solid var(--ink); padding: 10px 18px; border-radius: 14px; font-weight: 800; cursor: pointer; box-shadow: 2px 2px 0 var(--ink);">Retour aux Maths</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -10458,6 +11211,8 @@
         if (subKey === 'bazar') renderShopRewards();
       } else if (subject === 'maths' && subKey === 'geometrie') {
         setTimeout(initGeometryStudio, 80);
+      } else if (subject === 'maths' && subKey === 'turbo') {
+        initTurboTablesView();
       }
     }
 
@@ -12722,6 +13477,481 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       }
     }
     document.getElementById('calcAnswerInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') submitCalcAnswer(); });
+
+
+    // =========================================================================
+    // 🏎️ MOTEUR TURBO TABLES : VITESSE & ÉTOILES (MULTI-MODES & GHOST RUN)
+    // =========================================================================
+    const TURBO_BETES_NOIRES = [
+      { n1: 7, n2: 8, tip: "💡 Astuce 5, 6, 7, 8 ➔ 56 = 7 × 8 !" },
+      { n1: 8, n2: 7, tip: "💡 Astuce 5, 6, 7, 8 ➔ 56 = 8 × 7 !" },
+      { n1: 6, n2: 9, tip: "💡 6 × 9 = 54 (et 5 + 4 = 9) !" },
+      { n1: 9, n2: 6, tip: "💡 9 × 6 = 54 (et 5 + 4 = 9) !" },
+      { n1: 8, n2: 9, tip: "💡 8 × 9 = 72 (et 7 + 2 = 9) !" },
+      { n1: 9, n2: 8, tip: "💡 9 × 8 = 72 (et 7 + 2 = 9) !" },
+      { n1: 6, n2: 7, tip: "💡 Le grand classique : 6 × 7 = 42 !" },
+      { n1: 7, n2: 6, tip: "💡 7 × 6 = 42 !" },
+      { n1: 7, n2: 9, tip: "💡 7 × 9 = 63 (et 6 + 3 = 9) !" },
+      { n1: 9, n2: 7, tip: "💡 9 × 7 = 63 (et 6 + 3 = 9) !" },
+      { n1: 8, n2: 8, tip: "💡 Carré parfait : 8 × 8 = 64 !" },
+      { n1: 7, n2: 7, tip: "💡 Carré parfait : 7 × 7 = 49 !" },
+      { n1: 6, n2: 8, tip: "💡 6 × 8 = 48 !" },
+      { n1: 8, n2: 6, tip: "💡 8 × 6 = 48 !" },
+      { n1: 9, n2: 9, tip: "💡 Carré parfait : 9 × 9 = 81 !" },
+      { n1: 6, n2: 6, tip: "💡 Carré parfait : 6 × 6 = 36 !" },
+      { n1: 12, n2: 5, tip: "💡 Astuce ×5 : la moitié de 12 c'est 6 ➔ 60 !" },
+      { n1: 8, n2: 4, tip: "💡 Astuce ×4 : Double deux fois : 8 ➔ 16 ➔ 32 !" }
+    ];
+
+    let turboState = {
+      mode: 'bolide',
+      filter: 'betes_noires',
+      running: false,
+      timer: null,
+      timeLeft: 60,
+      questionStartTime: 0,
+      currentQ: null,
+      combo: 1,
+      starsEarned: 0,
+      correctCount: 0,
+      totalCount: 0,
+      reactionTimes: [],
+      missedQueue: [],
+      choices: [],
+      canClick: true,
+      ghostIndex: 0,
+      ghostTotal: 10,
+      ghostElapsed: 0,
+      ghostTimer: null,
+      ghostBestTime: parseFloat(localStorage.getItem('cm2_ghost_best_time') || "36.0"),
+      nitroTimer: null
+    };
+
+    function initTurboTablesView() {
+      stopTurboGame();
+      document.getElementById('turbo-start-view').style.display = 'flex';
+      document.getElementById('turbo-play-view').style.display = 'none';
+      document.getElementById('turbo-finish-view').style.display = 'none';
+      const recordEl = document.getElementById('turboGhostRecordDisplay');
+      if (recordEl) {
+        recordEl.innerText = turboState.ghostBestTime.toFixed(1) + 's';
+      }
+    }
+
+    function setTurboFilter(filterVal, btn) {
+      turboState.filter = filterVal;
+      document.querySelectorAll('.turbo-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const lbl = document.getElementById('turboCurrentFilterLabel');
+      if (lbl) {
+        if (filterVal === 'betes_noires') lbl.innerText = "🎯 Les 10 Bêtes Noires du CM2";
+        else if (filterVal === 'tables_cles') lbl.innerText = "⚡ Tables Clés (6, 7, 8, 9)";
+        else if (filterVal === 'carres') lbl.innerText = "🌟 Carrés Parfaits (6×6, 7×7...)";
+        else if (filterVal === 'all') lbl.innerText = "💥 Grand Mix Aléatoire (1 à 10)";
+        else lbl.innerText = `🔢 Table de ${filterVal}`;
+      }
+      playSound('click');
+    }
+
+    function generateTurboMultiplication() {
+      let n1, n2, tip = "";
+
+      // Priorité 1 : Retravailler une table ratée précédemment
+      if (turboState.missedQueue.length > 0 && Math.random() > 0.35) {
+        const missed = turboState.missedQueue.shift();
+        return missed;
+      }
+
+      if (turboState.filter === 'betes_noires') {
+        const item = TURBO_BETES_NOIRES[Math.floor(Math.random() * TURBO_BETES_NOIRES.length)];
+        n1 = item.n1; n2 = item.n2; tip = item.tip;
+      } else if (turboState.filter === 'tables_cles') {
+        const keys = [6, 7, 8, 9];
+        n1 = keys[Math.floor(Math.random() * keys.length)];
+        n2 = Math.floor(Math.random() * 8) + 3;
+      } else if (turboState.filter === 'carres') {
+        n1 = Math.floor(Math.random() * 9) + 4; // 4..12
+        n2 = n1;
+        tip = `💡 Carré parfait : ${n1} × ${n1} = ${n1 * n1} !`;
+      } else if (typeof turboState.filter === 'number') {
+        n1 = turboState.filter;
+        n2 = Math.floor(Math.random() * 9) + 2;
+      } else {
+        // all
+        n1 = Math.floor(Math.random() * 9) + 2;
+        n2 = Math.floor(Math.random() * 9) + 2;
+      }
+
+      const ans = n1 * n2;
+      if (!tip) {
+        if ((n1 === 7 && n2 === 8) || (n1 === 8 && n2 === 7)) tip = "💡 5, 6, 7, 8 ➔ 56 = 7 × 8 !";
+        else if (n1 === 9 || n2 === 9) tip = "💡 Astuce ×9 : Multiplie par 10 puis enlève une fois le nombre !";
+        else if ((n1 === 6 && n2 === 7) || (n1 === 7 && n2 === 6)) tip = "💡 6 × 7 = 42 !";
+        else if (n1 === n2) tip = `💡 Carré parfait : ${n1} × ${n2} = ${ans} !`;
+        else tip = `💡 Astuce : ${n1} × ${n2} = ${ans}`;
+      }
+
+      // Générer 3 leurres crédibles
+      const distractors = new Set();
+      const candidates = [
+        ans + n1, ans - n1, ans + n2, ans - n2,
+        ans + 10, ans - 10,
+        (n1 + 1) * n2, (n1 - 1) * n2
+      ];
+
+      // Piège chiffres inversés
+      if (ans > 12 && ans < 99) {
+        const inv = parseInt(ans.toString().split('').reverse().join(''));
+        if (inv !== ans && inv > 0) candidates.unshift(inv);
+      }
+
+      for (let c of candidates) {
+        if (c > 0 && c !== ans && !distractors.has(c)) {
+          distractors.add(c);
+          if (distractors.size === 3) break;
+        }
+      }
+
+      // Compléter si besoin
+      let offset = 2;
+      while (distractors.size < 3) {
+        if (ans + offset !== ans && ans + offset > 0) distractors.add(ans + offset);
+        offset += 2;
+      }
+
+      const choices = Array.from(distractors);
+      choices.push(ans);
+      // Mélange aléatoire
+      for (let i = choices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [choices[i], choices[j]] = [choices[j], choices[i]];
+      }
+
+      return { n1, n2, ans, tip, choices };
+    }
+
+    function startTurboGame(mode = 'bolide') {
+      turboState.mode = mode;
+      turboState.running = true;
+      turboState.timeLeft = 60;
+      turboState.starsEarned = 0;
+      turboState.correctCount = 0;
+      turboState.totalCount = 0;
+      turboState.reactionTimes = [];
+      turboState.combo = 1;
+      turboState.missedQueue = [];
+      turboState.canClick = true;
+
+      document.getElementById('turbo-start-view').style.display = 'none';
+      document.getElementById('turbo-finish-view').style.display = 'none';
+      document.getElementById('turbo-play-view').style.display = 'flex';
+
+      const timerBox = document.getElementById('turboTimerBox');
+      const timerText = document.getElementById('turboTimerText');
+      const ghostTrack = document.getElementById('turboGhostTrack');
+      const tipBox = document.getElementById('turboTipDisplay');
+      if (tipBox) tipBox.style.display = 'none';
+
+      updateTurboComboUI();
+      document.getElementById('turboStarsText').innerText = `+0 ⭐`;
+
+      if (mode === 'bolide') {
+        ghostTrack.style.display = 'none';
+        timerBox.style.display = 'flex';
+        timerText.innerText = `60s`;
+
+        clearInterval(turboState.timer);
+        turboState.timer = setInterval(() => {
+          turboState.timeLeft--;
+          timerText.innerText = `${turboState.timeLeft}s`;
+          if (turboState.timeLeft <= 10) {
+            timerBox.style.borderColor = 'var(--bd-red)';
+            timerBox.style.background = '#fee2e2';
+          } else {
+            timerBox.style.borderColor = 'var(--ink)';
+            timerBox.style.background = '#f8fafc';
+          }
+          if (turboState.timeLeft <= 0) {
+            finishTurboGame();
+          }
+        }, 1000);
+      } else {
+        // Mode Ghost
+        ghostTrack.style.display = 'flex';
+        timerBox.style.display = 'flex';
+        turboState.ghostIndex = 0;
+        turboState.ghostElapsed = 0;
+        timerText.innerText = `Défi 1/10`;
+
+        updateGhostPositions();
+
+        clearInterval(turboState.ghostTimer);
+        turboState.ghostTimer = setInterval(() => {
+          turboState.ghostElapsed += 0.1;
+          updateGhostPositions();
+        }, 100);
+      }
+
+      nextTurboQuestion();
+      playSound('click');
+    }
+
+    function updateGhostPositions() {
+      const playerBar = document.getElementById('ghostPlayerBar');
+      const playerIcon = document.getElementById('ghostPlayerIcon');
+      const ghostBar = document.getElementById('ghostGhostBar');
+      const ghostIcon = document.getElementById('ghostGhostIcon');
+
+      const playerPct = Math.min(100, (turboState.ghostIndex / turboState.ghostTotal) * 100);
+      const ghostPct = Math.min(100, (turboState.ghostElapsed / turboState.ghostBestTime) * 100);
+
+      if (playerBar) playerBar.style.width = `${playerPct}%`;
+      if (playerIcon) playerIcon.style.left = `${playerPct}%`;
+      if (ghostBar) ghostBar.style.width = `${ghostPct}%`;
+      if (ghostIcon) ghostIcon.style.left = `${ghostPct}%`;
+    }
+
+    function updateTurboComboUI() {
+      const badge = document.getElementById('turboComboBadge');
+      if (!badge) return;
+      badge.className = `turbo-combo-pill level-${turboState.combo}`;
+      if (turboState.combo === 1) badge.innerHTML = `<span>🔥 COMBO ×1</span>`;
+      else if (turboState.combo === 2) badge.innerHTML = `<span>⚡ COMBO ×2 !</span>`;
+      else badge.innerHTML = `<span>🚀 ULTRA NITRO ×3 !!</span>`;
+    }
+
+    function nextTurboQuestion() {
+      if (!turboState.running) return;
+
+      turboState.canClick = true;
+      turboState.currentQ = generateTurboMultiplication();
+
+      const qEl = document.getElementById('turboQuestionDisplay');
+      qEl.innerText = `${turboState.currentQ.n1} × ${turboState.currentQ.n2}`;
+
+      const container = document.getElementById('turboChoicesContainer');
+      container.innerHTML = '';
+
+      turboState.currentQ.choices.forEach((val, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'turbo-choice-btn';
+        btn.setAttribute('onclick', `submitTurboChoice(${idx})`);
+        btn.innerHTML = `<span class="turbo-choice-key">${idx + 1}</span><span class="val">${val}</span>`;
+        container.appendChild(btn);
+      });
+
+      const fb = document.getElementById('turboFeedbackDisplay');
+      if (fb) fb.innerText = '';
+
+      // Démarrage Nitro Bar & Chrono Question
+      turboState.questionStartTime = performance.now();
+      resetNitroBar();
+
+      if (turboState.mode === 'ghost') {
+        const tText = document.getElementById('turboTimerText');
+        if (tText) tText.innerText = `Défi ${turboState.ghostIndex + 1}/10`;
+      }
+    }
+
+    function resetNitroBar() {
+      if (turboState.nitroTimer) clearInterval(turboState.nitroTimer);
+      const fill = document.getElementById('turboNitroFill');
+      if (!fill) return;
+
+      fill.style.width = '100%';
+      const start = performance.now();
+      const duration = 4500; // 4.5s max
+
+      turboState.nitroTimer = setInterval(() => {
+        const elapsed = performance.now() - start;
+        const remainingPct = Math.max(0, 100 - (elapsed / duration) * 100);
+        fill.style.width = `${remainingPct}%`;
+
+        if (remainingPct <= 0) {
+          clearInterval(turboState.nitroTimer);
+        }
+      }, 30);
+    }
+
+    function submitTurboChoice(choiceIdx) {
+      if (!turboState.running || !turboState.canClick) return;
+      turboState.canClick = false;
+
+      if (turboState.nitroTimer) clearInterval(turboState.nitroTimer);
+
+      const reactionTime = (performance.now() - turboState.questionStartTime) / 1000;
+      const selectedVal = turboState.currentQ.choices[choiceIdx];
+      const correctVal = turboState.currentQ.ans;
+      const isCorrect = (selectedVal === correctVal);
+
+      const buttons = document.querySelectorAll('.turbo-choice-btn');
+      const clickedBtn = buttons[choiceIdx];
+      const fb = document.getElementById('turboFeedbackDisplay');
+      const tipBox = document.getElementById('turboTipDisplay');
+
+      turboState.totalCount++;
+
+      if (isCorrect) {
+        let earned = 1;
+        let speedLabel = "";
+
+        if (reactionTime < 2.2) {
+          turboState.combo = Math.min(turboState.combo + 1, 3);
+          earned = 3 * turboState.combo;
+          speedLabel = `⚡ VITESSE ÉCLAIR ! (${reactionTime.toFixed(1)}s)`;
+          playSound('win');
+        } else if (reactionTime < 4.5) {
+          earned = 2;
+          speedLabel = `🚀 Super Rythme ! (${reactionTime.toFixed(1)}s)`;
+          playSound('correct');
+        } else {
+          turboState.combo = 1;
+          earned = 1;
+          speedLabel = `💡 Bien Trouvé ! (${reactionTime.toFixed(1)}s)`;
+          playSound('correct');
+        }
+
+        turboState.starsEarned += earned;
+        turboState.correctCount++;
+        turboState.reactionTimes.push(reactionTime);
+
+        // Crédit points dans l'écosystème global
+        addScore(earned, 'maths');
+        recordQuestionAttempt('maths', true, {
+          title: "Turbo Tables",
+          question: `${turboState.currentQ.n1} × ${turboState.currentQ.n2} = ${correctVal}`
+        });
+
+        document.getElementById('turboStarsText').innerText = `+${turboState.starsEarned} ⭐`;
+        updateTurboComboUI();
+
+        if (clickedBtn) clickedBtn.classList.add('correct-flash');
+        if (fb) {
+          fb.innerHTML = `<span style="color: #15803d;">${speedLabel} <strong>+${earned} ⭐</strong></span>`;
+        }
+
+        if (tipBox) tipBox.style.display = 'none';
+
+        if (turboState.mode === 'ghost') {
+          turboState.ghostIndex++;
+          updateGhostPositions();
+          if (turboState.ghostIndex >= turboState.ghostTotal) {
+            setTimeout(finishTurboGame, 400);
+            return;
+          }
+        }
+
+        setTimeout(nextTurboQuestion, 380);
+      } else {
+        // Erreur : ZÉRO PÉNALITÉ !
+        turboState.combo = 1;
+        updateTurboComboUI();
+        playSound('wrong');
+
+        if (clickedBtn) clickedBtn.classList.add('wrong-flash');
+
+        // Mettre en évidence la bonne réponse
+        buttons.forEach((b, i) => {
+          if (turboState.currentQ.choices[i] === correctVal) {
+            b.classList.add('correct-flash');
+          }
+        });
+
+        if (fb) {
+          fb.innerHTML = `<span style="color: #b91c1c;">C'était <strong>${correctVal}</strong> ! Pas de panique : 0 perte ⭐</span>`;
+        }
+
+        // Afficher l'astuce mnémotechnique
+        if (tipBox) {
+          document.getElementById('turboTipText').innerText = turboState.currentQ.tip;
+          tipBox.style.display = 'flex';
+        }
+
+        // Remettre en file pour répétition espacée
+        turboState.missedQueue.push(turboState.currentQ);
+
+        // Pause un peu plus longue pour lire l'astuce
+        setTimeout(nextTurboQuestion, 1400);
+      }
+    }
+
+    function stopTurboGame() {
+      turboState.running = false;
+      if (turboState.timer) clearInterval(turboState.timer);
+      if (turboState.ghostTimer) clearInterval(turboState.ghostTimer);
+      if (turboState.nitroTimer) clearInterval(turboState.nitroTimer);
+      document.getElementById('turbo-play-view').style.display = 'none';
+      document.getElementById('turbo-start-view').style.display = 'flex';
+    }
+
+    function finishTurboGame() {
+      stopTurboGame();
+      document.getElementById('turbo-start-view').style.display = 'none';
+      document.getElementById('turbo-play-view').style.display = 'none';
+      document.getElementById('turbo-finish-view').style.display = 'flex';
+
+      const avgSpeed = turboState.reactionTimes.length > 0
+        ? (turboState.reactionTimes.reduce((a, b) => a + b, 0) / turboState.reactionTimes.length).toFixed(1) + 's'
+        : '--';
+
+      document.getElementById('turboStatSolved').innerText = `${turboState.correctCount}`;
+      document.getElementById('turboStatStars').innerText = `+${turboState.starsEarned} ⭐`;
+      document.getElementById('turboStatSpeed').innerText = `${avgSpeed}`;
+
+      const medalEl = document.getElementById('turboFinishMedal');
+      const titleEl = document.getElementById('turboFinishTitle');
+      const recordMsg = document.getElementById('turboGhostRecordMsg');
+
+      if (parseFloat(avgSpeed) <= 2.2) {
+        medalEl.innerText = '⚡';
+        titleEl.innerText = 'Pilote Éclair CM2 !';
+      } else if (parseFloat(avgSpeed) <= 3.8) {
+        medalEl.innerText = '🥇';
+        titleEl.innerText = 'Super Championne des Tables !';
+      } else {
+        medalEl.innerText = '🥈';
+        titleEl.innerText = 'Bel Entraînement des Réflexes !';
+      }
+
+      if (turboState.mode === 'ghost') {
+        recordMsg.style.display = 'block';
+        const finalTime = turboState.ghostElapsed;
+        if (finalTime < turboState.ghostBestTime || turboState.ghostBestTime >= 40) {
+          const oldTime = turboState.ghostBestTime;
+          turboState.ghostBestTime = finalTime;
+          localStorage.setItem('cm2_ghost_best_time', finalTime.toFixed(1));
+          recordMsg.innerHTML = `🏆 <strong>NOUVEAU RECORD BATTU !</strong><br>Tu as pulvérisé ton fantôme en <strong>${finalTime.toFixed(1)}s</strong> (Ancien record : ${oldTime.toFixed(1)}s) ! Tu remportes <strong>+10 ⭐ bonus</strong> pour la Boutique !`;
+          addScore(10, 'maths', true);
+          triggerConfetti();
+        } else {
+          recordMsg.innerHTML = `👻 <strong>Temps réalisé : ${finalTime.toFixed(1)}s</strong> (Ton record : ${turboState.ghostBestTime.toFixed(1)}s). Encore un petit effort pour le battre !`;
+        }
+      } else {
+        recordMsg.style.display = 'none';
+        if (turboState.starsEarned >= 25) triggerConfetti();
+      }
+
+      playSound('win');
+    }
+
+    // Support des raccourcis clavier 1, 2, 3, 4 et Pavé Numérique
+    window.addEventListener('keydown', (e) => {
+      const turboView = document.getElementById('turbo-play-view');
+      if (!turboView || turboView.style.display !== 'flex') return;
+
+      const keyMap = {
+        '1': 0, '2': 1, '3': 2, '4': 3,
+        'Numpad1': 0, 'Numpad2': 1, 'Numpad3': 2, 'Numpad4': 3,
+        '&': 0, 'é': 1, '"': 2, "'": 3 // Raccourcis AZERTY chiffres non shiftés
+      };
+
+      if (keyMap.hasOwnProperty(e.key) || keyMap.hasOwnProperty(e.code)) {
+        const idx = keyMap[e.key] !== undefined ? keyMap[e.key] : keyMap[e.code];
+        submitTurboChoice(idx);
+      }
+    });
+
 
     // =========================================================================
     // GEMINI AI INTEGRATION (CLÉ API & GÉNÉRATEUR DYNAMIQUE)
