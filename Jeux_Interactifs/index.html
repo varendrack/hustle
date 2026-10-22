@@ -7005,6 +7005,21 @@
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(9, this)">×9</button>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(12, this)">×12</button>
               </div>
+
+              <!-- Ligne Générateur IA & Badge Série Thématique -->
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1.5px dashed var(--ink-faint);">
+                <button class="ai-magic-btn" id="btnGenAiTurbo" onclick="generateAiExercisesFor('turbo_tables', this)">
+                  <span>✨ Renouveler la Série avec l'IA (Gemini)</span>
+                </button>
+                <div id="turboAiActiveBox" style="display: none; align-items: center; gap: 8px;">
+                  <span style="background: #fdf2f8; border: 1.5px solid #ec4899; color: #be185d; padding: 5px 14px; border-radius: 999px; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                    🤖 Série IA : <strong id="turboAiThemeTitle">Les Pièges Cosmiques</strong>
+                  </span>
+                  <button class="turbo-pill-btn" onclick="resetTurboAiSeries()" style="padding: 4px 10px; font-size: 0.8rem; background: #ffffff;">
+                    🔄 Rétablir classique
+                  </button>
+                </div>
+              </div>
             </div>
 
             <!-- Choix des 2 modes de jeu -->
@@ -13538,7 +13553,90 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       }
     }
 
+    const AI_TURBO_FALLBACK_BANK = [
+      {
+        themeTitle: "🚀 Les Pièges Cosmiques du CM2",
+        operations: [
+          { n1: 7, n2: 8, tip: "💡 Astuce 5, 6, 7, 8 ➔ 56 = 7 × 8 !" },
+          { n1: 8, n2: 9, tip: "💡 Astuce ×9 : 8 × 10 = 80 - 8 = 72 !" },
+          { n1: 6, n2: 7, tip: "💡 Le classique des pièges : 6 × 7 = 42 !" },
+          { n1: 7, n2: 9, tip: "💡 7 × 9 = 63 (remarque : 6 + 3 = 9) !" },
+          { n1: 8, n2: 8, tip: "💡 Carré parfait : 8 × 8 = 64 !" },
+          { n1: 6, n2: 9, tip: "💡 6 × 9 = 54 (remarque : 5 + 4 = 9) !" },
+          { n1: 12, n2: 5, tip: "💡 Astuce ×5 : la moitié de 12 (6) × 10 = 60 !" },
+          { n1: 9, n2: 9, tip: "💡 Carré parfait : 9 × 9 = 81 !" },
+          { n1: 6, n2: 8, tip: "💡 6 × 8 = 48 !" },
+          { n1: 7, n2: 7, tip: "💡 Carré parfait : 7 × 7 = 49 !" },
+          { n1: 12, n2: 4, tip: "💡 Astuce ×4 : Double deux fois : 12 ➔ 24 ➔ 48 !" },
+          { n1: 8, n2: 7, tip: "💡 5, 6, 7, 8 ➔ 56 = 8 × 7 !" }
+        ]
+      },
+      {
+        themeTitle: "🕵️ Le Mystère des Carrés & des Doubles",
+        operations: [
+          { n1: 6, n2: 6, tip: "💡 Carré parfait : 6 × 6 = 36 !" },
+          { n1: 7, n2: 7, tip: "💡 Carré parfait : 7 × 7 = 49 !" },
+          { n1: 8, n2: 8, tip: "💡 Carré parfait : 8 × 8 = 64 !" },
+          { n1: 9, n2: 9, tip: "💡 Carré parfait : 9 × 9 = 81 !" },
+          { n1: 12, n2: 12, tip: "💡 Le méga carré : 12 × 12 = 144 !" },
+          { n1: 14, n2: 5, tip: "💡 Moitié de 14 (7) puis 0 ➔ 70 !" },
+          { n1: 16, n2: 5, tip: "💡 Moitié de 16 (8) puis 0 ➔ 80 !" },
+          { n1: 15, n2: 4, tip: "💡 Double deux fois : 15 ➔ 30 ➔ 60 !" },
+          { n1: 25, n2: 4, tip: "💡 4 pièces de 25 centimes font 100 !" },
+          { n1: 11, n2: 9, tip: "💡 Règle de 11 : 9 répété deux fois ➔ 99 !" }
+        ]
+      },
+      {
+        themeTitle: "⚡ Le Sprint des Bêtes Noires",
+        operations: [
+          { n1: 7, n2: 8, tip: "💡 5, 6, 7, 8 ➔ 56 = 7 × 8 !" },
+          { n1: 6, n2: 7, tip: "💡 6 × 7 = 42 !" },
+          { n1: 8, n2: 9, tip: "💡 8 × 9 = 72 !" },
+          { n1: 6, n2: 9, tip: "💡 6 × 9 = 54 !" },
+          { n1: 7, n2: 9, tip: "💡 7 × 9 = 63 !" },
+          { n1: 8, n2: 7, tip: "💡 8 × 7 = 56 !" },
+          { n1: 9, n2: 8, tip: "💡 9 × 8 = 72 !" },
+          { n1: 7, n2: 6, tip: "💡 7 × 6 = 42 !" },
+          { n1: 8, n2: 6, tip: "💡 8 × 6 = 48 !" },
+          { n1: 9, n2: 6, tip: "💡 9 × 6 = 54 !" }
+        ]
+      }
+    ];
+
+    function applyAiTurboSeries(generated) {
+      turboState.aiSeries = generated.operations || [];
+      turboState.aiActive = true;
+      turboState.aiThemeTitle = generated.themeTitle || "Défis IA Inédits";
+
+      const box = document.getElementById('turboAiActiveBox');
+      const titleEl = document.getElementById('turboAiThemeTitle');
+      if (box && titleEl) {
+        titleEl.innerText = turboState.aiThemeTitle;
+        box.style.display = 'inline-flex';
+      }
+
+      const lbl = document.getElementById('turboCurrentFilterLabel');
+      if (lbl) {
+        lbl.innerHTML = `<span style="color: #db2777;">🤖 Série IA : ${turboState.aiThemeTitle}</span>`;
+      }
+      document.querySelectorAll('.turbo-pill-btn').forEach(b => b.classList.remove('active'));
+    }
+
+    function resetTurboAiSeries() {
+      turboState.aiActive = false;
+      turboState.aiSeries = [];
+      const box = document.getElementById('turboAiActiveBox');
+      if (box) box.style.display = 'none';
+      const firstBtn = document.querySelector('.turbo-pill-btn');
+      setTurboFilter('betes_noires', firstBtn);
+      showAiToast("Série officielle standard rétablie !");
+    }
+
     function setTurboFilter(filterVal, btn) {
+      turboState.aiActive = false;
+      const box = document.getElementById('turboAiActiveBox');
+      if (box) box.style.display = 'none';
+
       turboState.filter = filterVal;
       document.querySelectorAll('.turbo-pill-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -13563,7 +13661,13 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
         return missed;
       }
 
-      if (turboState.filter === 'betes_noires') {
+      // Priorité 2 : Si une série IA personnalisée est active
+      if (turboState.aiActive && turboState.aiSeries && turboState.aiSeries.length > 0) {
+        const item = turboState.aiSeries[Math.floor(Math.random() * turboState.aiSeries.length)];
+        n1 = item.n1;
+        n2 = item.n2;
+        tip = item.tip || `💡 Astuce IA : ${n1} × ${n2} = ${n1 * n2} !`;
+      } else if (turboState.filter === 'betes_noires') {
         const item = TURBO_BETES_NOIRES[Math.floor(Math.random() * TURBO_BETES_NOIRES.length)];
         n1 = item.n1; n2 = item.n2; tip = item.tip;
       } else if (turboState.filter === 'tables_cles') {
@@ -14078,7 +14182,49 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       }
 
       try {
-        if (subjectKey === 'problemes_maths') {
+        if (subjectKey === 'turbo_tables') {
+          const themes = [
+            "Les Pièges Cosmiques des Tables (6, 7, 8, 9, 12)",
+            "Défi Éclair : Multiplications Secrètes et Doubles Magiques",
+            "Mission Spatiale : Les Carrés Parfaits et Pièges Fréquents",
+            "Le Grand Tournoi des Tables CM2 : Réflexes & Rimes"
+          ];
+          const chosenTheme = themes[Math.floor(Math.random() * themes.length)];
+
+          const prompt = `Tu es un professeur de mathématiques CM2 spécialiste du calcul mental rapide et de la mémorisation bienveillante.
+Génère une série exclusive de 10 à 12 opérations de multiplications ciblées pour faire progresser la vitesse de calcul d'une élève de 10 ans sur les tables (notamment 6, 7, 8, 9, 12, carrés parfaits et pièges fréquents comme 7×8, 6×9, 8×9, 6×7, 8×8, etc.).
+Pour chaque calcul, fournis une astuce mnémotechnique stimulante, courte et facile à retenir ("tip").
+
+Renvoie STRICTEMENT un JSON valide au format suivant :
+{
+  "themeTitle": "${chosenTheme}",
+  "operations": [
+    {
+      "n1": 7,
+      "n2": 8,
+      "tip": "💡 Astuce 5, 6, 7, 8 ➔ 56 = 7 × 8 !"
+    }
+  ]
+}`;
+          try {
+            const generated = await callGeminiApi(prompt);
+            if (generated && generated.operations && Array.isArray(generated.operations) && generated.operations.length > 0) {
+              applyAiTurboSeries(generated);
+              playSound('win');
+              triggerConfetti();
+              showAiToast(`✨ Nouvelle série IA créée : "${generated.themeTitle || chosenTheme}" !`);
+            } else {
+              throw new Error("Format inattendu");
+            }
+          } catch (aiErr) {
+            console.warn("Utilisation de la banque de secours IA pour Turbo Tables :", aiErr);
+            const fallbackItem = AI_TURBO_FALLBACK_BANK[Math.floor(Math.random() * AI_TURBO_FALLBACK_BANK.length)];
+            applyAiTurboSeries(fallbackItem);
+            playSound('win');
+            triggerConfetti();
+            showAiToast(`✨ Nouvelle série thématique : "${fallbackItem.themeTitle}" !`);
+          }
+        } else if (subjectKey === 'problemes_maths') {
           const prompt = `Génère 4 problèmes mathématiques progressifs de niveau CM2 pour une élève en difficulté.
 Chaque problème doit être résolu en 3 étapes guidées (Étape 1: Comprendre les données, Étape 2: Choisir la bonne opération, Étape 3: Calculer et rédiger la réponse).
 Renvoie STRICTEMENT un JSON valide au format suivant :
