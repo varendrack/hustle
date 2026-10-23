@@ -6912,7 +6912,7 @@
               <div class="m-desc">Multiplications, compléments à 100 et additions express</div>
             </div>
             <div class="mode-card-btn" onclick="selectCalcMode('tables', this)">
-              <div class="m-title">✖️ Tables Clés (6, 7, 8, 9, 12)</div>
+              <div class="m-title">✖️ Tables Clés (6, 7, 8, 9)</div>
               <div class="m-desc">7×8, 6×9, 8×9... Les pièges classiques</div>
             </div>
             <div class="mode-card-btn" onclick="selectCalcMode('complements', this)">
@@ -6999,11 +6999,11 @@
                 <span style="font-size: 0.82rem; font-weight: 800; color: var(--ink-light);">Ou cible une seule table :</span>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(3, this)">×3</button>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(4, this)">×4</button>
+                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(5, this)">×5</button>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(6, this)">×6</button>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(7, this)">×7</button>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(8, this)">×8</button>
                 <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(9, this)">×9</button>
-                <button class="turbo-pill-btn" style="padding: 4px 10px; font-size: 0.82rem;" onclick="setTurboFilter(12, this)">×12</button>
               </div>
 
               <!-- Ligne Générateur IA & Badge Série Thématique -->
@@ -9894,9 +9894,6 @@
             Survole ou clique sur une case !
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <button class="doc-link-btn" onclick="togglePythagorasSize()" id="btnPythagorasToggleSize" style="background: #ffffff; border-color: var(--ink);">
-              🔄 Passer à 12 × 12
-            </button>
             <button class="action-btn" onclick="startPythagorasChallenge()" style="background: linear-gradient(135deg, #f59e0b, #d97706); padding: 8px 16px; font-size: 0.9rem;">
               ⚡ Défi Vitesse (+1 ⭐)
             </button>
@@ -10617,7 +10614,7 @@
         } else if (cat.includes("Orthographe")) {
           adviceList.push(`🐍 Orthographe (${count} fautes, ${pct}%) : Règle du 's' entre deux voyelles qui fait [z], nécessitant 'ss' pour faire le son [s].`);
         } else if (cat.includes("Calcul Mental") || cat.includes("Mathématiques")) {
-          adviceList.push(`⚡ Mathématiques & Calcul (${count} fautes, ${pct}%) : Pratiquer 5 minutes sur le Dojo des Tables de Pythagore et utiliser les décompositions (ex: x11 = x10 + nombre). Soustraction par cassage : barrer la dizaine voisine.`);
+          adviceList.push(`⚡ Mathématiques & Calcul (${count} fautes, ${pct}%) : Pratiquer 5 minutes sur le Dojo des Tables de Pythagore et utiliser les décompositions (ex: x9 = x10 - nombre). Soustraction par cassage : barrer la dizaine voisine.`);
         } else if (cat.includes("Soustraction")) {
           adviceList.push(`➖ Soustraction par Cassage (${count} fautes, ${pct}%) : Revoir la vidéo explicative du Padlet : barrer la dizaine supérieure et ajouter 10 unités.`);
         } else if (cat.includes("Problèmes")) {
@@ -13361,7 +13358,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
 
       const modeNames = {
         all: "🔥 Défi Mix Complet",
-        tables: "✖️ Tables Clés (6, 7, 8, 9, 12)",
+        tables: "✖️ Tables Clés (6, 7, 8, 9)",
         complements: "💯 Compléments à 100 & 1000",
         astuces: "⚡ Astuces Rapides"
       };
@@ -13408,7 +13405,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       }
 
       if (t === 'tables') {
-        const tables = [6, 7, 8, 9, 12, 15];
+        const tables = [6, 7, 8, 9];
         const n1 = tables[Math.floor(Math.random() * tables.length)];
         const n2 = Math.floor(Math.random() * 8) + 3;
         let hint = "";
@@ -13514,7 +13511,6 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       { n1: 8, n2: 6, tip: "💡 8 × 6 = 48 !" },
       { n1: 9, n2: 9, tip: "💡 Carré parfait : 9 × 9 = 81 !" },
       { n1: 6, n2: 6, tip: "💡 Carré parfait : 6 × 6 = 36 !" },
-      { n1: 12, n2: 5, tip: "💡 Astuce ×5 : la moitié de 12 c'est 6 ➔ 60 !" },
       { n1: 8, n2: 4, tip: "💡 Astuce ×4 : Double deux fois : 8 ➔ 16 ➔ 32 !" }
     ];
 
@@ -13563,11 +13559,11 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
           { n1: 7, n2: 9, tip: "💡 7 × 9 = 63 (remarque : 6 + 3 = 9) !" },
           { n1: 8, n2: 8, tip: "💡 Carré parfait : 8 × 8 = 64 !" },
           { n1: 6, n2: 9, tip: "💡 6 × 9 = 54 (remarque : 5 + 4 = 9) !" },
-          { n1: 12, n2: 5, tip: "💡 Astuce ×5 : la moitié de 12 (6) × 10 = 60 !" },
+          { n1: 6, n2: 6, tip: "💡 Carré parfait : 6 × 6 = 36 !" },
           { n1: 9, n2: 9, tip: "💡 Carré parfait : 9 × 9 = 81 !" },
           { n1: 6, n2: 8, tip: "💡 6 × 8 = 48 !" },
           { n1: 7, n2: 7, tip: "💡 Carré parfait : 7 × 7 = 49 !" },
-          { n1: 12, n2: 4, tip: "💡 Astuce ×4 : Double deux fois : 12 ➔ 24 ➔ 48 !" },
+          { n1: 8, n2: 4, tip: "💡 Astuce ×4 : Double deux fois : 8 ➔ 16 ➔ 32 !" },
           { n1: 8, n2: 7, tip: "💡 5, 6, 7, 8 ➔ 56 = 8 × 7 !" }
         ]
       },
@@ -13578,12 +13574,12 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
           { n1: 7, n2: 7, tip: "💡 Carré parfait : 7 × 7 = 49 !" },
           { n1: 8, n2: 8, tip: "💡 Carré parfait : 8 × 8 = 64 !" },
           { n1: 9, n2: 9, tip: "💡 Carré parfait : 9 × 9 = 81 !" },
-          { n1: 12, n2: 12, tip: "💡 Le méga carré : 12 × 12 = 144 !" },
+          { n1: 10, n2: 10, tip: "💡 Carré parfait : 10 × 10 = 100 !" },
           { n1: 14, n2: 5, tip: "💡 Moitié de 14 (7) puis 0 ➔ 70 !" },
           { n1: 16, n2: 5, tip: "💡 Moitié de 16 (8) puis 0 ➔ 80 !" },
           { n1: 15, n2: 4, tip: "💡 Double deux fois : 15 ➔ 30 ➔ 60 !" },
           { n1: 25, n2: 4, tip: "💡 4 pièces de 25 centimes font 100 !" },
-          { n1: 11, n2: 9, tip: "💡 Règle de 11 : 9 répété deux fois ➔ 99 !" }
+          { n1: 5, n2: 5, tip: "💡 Carré parfait : 5 × 5 = 25 !" }
         ]
       },
       {
@@ -13675,7 +13671,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
         n1 = keys[Math.floor(Math.random() * keys.length)];
         n2 = Math.floor(Math.random() * 8) + 3;
       } else if (turboState.filter === 'carres') {
-        n1 = Math.floor(Math.random() * 9) + 4; // 4..12
+        n1 = Math.floor(Math.random() * 7) + 4; // 4..10
         n2 = n1;
         tip = `💡 Carré parfait : ${n1} × ${n1} = ${n1 * n1} !`;
       } else if (typeof turboState.filter === 'number') {
@@ -14184,7 +14180,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       try {
         if (subjectKey === 'turbo_tables') {
           const themes = [
-            "Les Pièges Cosmiques des Tables (6, 7, 8, 9, 12)",
+            "Les Pièges Cosmiques des Tables (6, 7, 8, 9)",
             "Défi Éclair : Multiplications Secrètes et Doubles Magiques",
             "Mission Spatiale : Les Carrés Parfaits et Pièges Fréquents",
             "Le Grand Tournoi des Tables CM2 : Réflexes & Rimes"
@@ -14192,7 +14188,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
           const chosenTheme = themes[Math.floor(Math.random() * themes.length)];
 
           const prompt = `Tu es un professeur de mathématiques CM2 spécialiste du calcul mental rapide et de la mémorisation bienveillante.
-Génère une série exclusive de 10 à 12 opérations de multiplications ciblées pour faire progresser la vitesse de calcul d'une élève de 10 ans sur les tables (notamment 6, 7, 8, 9, 12, carrés parfaits et pièges fréquents comme 7×8, 6×9, 8×9, 6×7, 8×8, etc.).
+Génère une série exclusive de 10 opérations de multiplications ciblées pour faire progresser la vitesse de calcul d'une élève de 10 ans sur les tables (notamment 6, 7, 8, 9, carrés parfaits de 2 à 10 et pièges fréquents comme 7×8, 6×9, 8×9, 6×7, 8×8, etc. Attention : exclure impérativement les tables de 11 et 12, se limiter strictement aux tables de 2 à 10).
 Pour chaque calcul, fournis une astuce mnémotechnique stimulante, courte et facile à retenir ("tip").
 
 Renvoie STRICTEMENT un JSON valide au format suivant :
@@ -18963,9 +18959,7 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
     }
 
     function togglePythagorasSize() {
-      pythagorasSize = pythagorasSize === 10 ? 12 : 10;
-      const btn = document.getElementById('btnPythagorasToggleSize');
-      if (btn) btn.innerText = pythagorasSize === 10 ? "🔄 Passer à 12 × 12" : "🔄 Revenir à 10 × 10";
+      pythagorasSize = 10;
       initPythagorasTable();
     }
 
