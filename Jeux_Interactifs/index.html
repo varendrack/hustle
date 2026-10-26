@@ -6959,7 +6959,7 @@
       <!-- ========================================================= -->
       <div id="sub-maths-turbo" class="submodule-content">
         <div class="turbo-container">
-          <!-- Bandeau Titre & Règles d'Or Bienveillantes -->
+          <!-- Bandeau Titre & Règles du Circuit -->
           <div class="turbo-banner">
             <div>
               <div class="turbo-banner-title">
@@ -6967,14 +6967,14 @@
                 <span style="font-size: 0.85rem; background: #ffffff; border: 1.5px solid var(--ink); padding: 2px 10px; border-radius: 999px; color: #713f12;">Spécial Réflexes & Vitesse</span>
               </div>
               <div class="turbo-banner-sub">
-                Gagne des étoiles pour ton Coffre et la Boutique à la vitesse de l'éclair ! Pas de stress : aucune pénalité en cas d'erreur.
+                Gagne des étoiles pour ton Coffre et la Boutique à la vitesse de l'éclair ! Précision et réflexes : attention au malus en cas d'erreur.
               </div>
             </div>
             <div class="turbo-badge-bar">
               <span class="turbo-rule-pill" style="background: #e0f2fe; color: #0369a1;">⚡ &lt; 2,2s = <strong>+3 ⭐</strong> (Éclair)</span>
               <span class="turbo-rule-pill" style="background: #dcfce7; color: #15803d;">🚀 &lt; 4,5s = <strong>+2 ⭐</strong> (Super Rythme)</span>
               <span class="turbo-rule-pill" style="background: #fef9c3; color: #854d0e;">💡 &gt; 4,5s = <strong>+1 ⭐</strong> (Réfléchi)</span>
-              <span class="turbo-rule-pill" style="background: #f1f5f9; color: var(--ink);">🛡️ Erreur = <strong>0 perte</strong> + Astuce</span>
+              <span class="turbo-rule-pill" style="background: #fee2e2; color: #b91c1c; border-color: #ef4444;">⚠️ Erreur = <strong>-1 ⭐</strong> + Astuce</span>
             </div>
           </div>
 
@@ -13472,7 +13472,7 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
       if (isNaN(val)) return;
       if (val === currentCalcAnswer) {
         playSound('correct');
-        addScore(1);
+        addScore(1, 'maths');
         recordQuestionAttempt('maths', true, { title: "Calcul Mental & Stratégies", question: document.getElementById('calcQuestion')?.innerText || "Calcul" });
         f.className = 'feedback-banner correct';
         f.innerText = '⚡ Bravo ! +1 ⭐';
@@ -13944,10 +13944,24 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
 
         setTimeout(nextTurboQuestion, 380);
       } else {
-        // Erreur : ZÉRO PÉNALITÉ !
+        // Erreur : Malus de points comme les autres exercices
         turboState.combo = 1;
         updateTurboComboUI();
         playSound('wrong');
+        resetStreak();
+
+        const penalty = deductScore(1, 'maths');
+        turboState.starsEarned = Math.max(0, turboState.starsEarned - penalty.penaltyPts);
+        const starEl = document.getElementById('turboStarsText');
+        if (starEl) starEl.innerText = `+${turboState.starsEarned} ⭐`;
+
+        recordQuestionAttempt('maths', false, {
+          title: "Turbo Tables",
+          question: `${turboState.currentQ.n1} × ${turboState.currentQ.n2}`,
+          selected: selectedVal,
+          correct: correctVal,
+          tip: turboState.currentQ.tip || "Revoir la table correspondante"
+        });
 
         if (clickedBtn) clickedBtn.classList.add('wrong-flash');
 
@@ -13959,7 +13973,8 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
         });
 
         if (fb) {
-          fb.innerHTML = `<span style="color: #b91c1c;">C'était <strong>${correctVal}</strong> ! Pas de panique : 0 perte ⭐</span>`;
+          const boostMsg = penalty.mult > 1.0 ? ` (🔥 Malus Maths x${penalty.mult.toFixed(1)})` : '';
+          fb.innerHTML = `<span style="color: #b91c1c;">C'était <strong>${correctVal}</strong> ! Malus : <strong>-${penalty.penaltyPts} ⭐</strong>${boostMsg}</span>`;
         }
 
         // Afficher l'astuce mnémotechnique
