@@ -5854,7 +5854,256 @@
       margin-top: 2px;
     }
 
-</style>
+
+    /* --- Styles Ergonomie & Consigne des Anciennes Leçons (Archives Période 1) --- */
+    .tab-btn-archive {
+      background: #f1f5f9 !important;
+      border-color: #64748b !important;
+      color: #334155 !important;
+    }
+    .tab-btn-archive:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    .tab-btn-archive.active {
+      background: #334155 !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
+    }
+
+    .current-period-callout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #eff6ff;
+      border: 2px solid #3b82f6;
+      border-radius: 14px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+    }
+    .period-callout-badge {
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .period-callout-text {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      flex: 1;
+      min-width: 240px;
+    }
+    .period-callout-btn {
+      background: #ffffff;
+      border: 1.5px solid #2563eb;
+      color: #1d4ed8;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 7px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    }
+    .period-callout-btn:hover {
+      background: #dbeafe;
+      transform: translateY(-1px);
+    }
+
+    .archive-header-card {
+      width: 100%;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+    }
+    .archive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      background: #e2e8f0;
+      color: #334155;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .archive-pills-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .archive-nav-pill {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      color: #475569;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .archive-nav-pill:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #1e293b;
+      transform: translateY(-1px);
+    }
+    .archive-nav-pill.active {
+      background: #334155 !important;
+      border-color: #1e293b !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+    }
+    .archived-pane {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInPane 0.2s ease-out;
+    }
+    .archived-pane.active {
+      display: flex;
+    }
+    @keyframes fadeInPane {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Styles pour la Section Globale Archives */
+    .archive-filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0 22px 0;
+      justify-content: center;
+    }
+    .archive-filter-btn {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+    }
+    .archive-filter-btn:hover {
+      background: #fef08a;
+      transform: translateY(-1px);
+    }
+    .archive-filter-btn.active {
+      background: var(--ink);
+      color: #ffffff;
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+    .archive-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+      width: 100%;
+    }
+    .archive-subject-card {
+      background: #ffffff;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-comic-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    .archive-card-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .archive-card-icon {
+      font-size: 1.9rem;
+    }
+    .archive-card-list {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .archive-card-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      gap: 10px;
+      transition: all 0.15s ease;
+    }
+    .archive-card-item:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      transform: translateX(2px);
+    }
+    .archive-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .archive-item-info strong {
+      font-size: 0.9rem;
+      color: #1e293b;
+    }
+    .archive-item-info span {
+      font-size: 0.77rem;
+      color: #64748b;
+    }
+    .archive-open-btn {
+      background: var(--ink);
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+    }
+    .archive-open-btn:hover {
+      background: #2563eb;
+      transform: scale(1.04);
+    }
+    
+  </style>
 </head>
 <body>
   <canvas id="confettiCanvas"></canvas>
@@ -6611,6 +6860,7 @@
       <span class="tabs-group-tag">🛠️ Boîte à Outils & Éveil</span>
       <button class="tab-btn tab-btn-highlight" id="tabBtnOutils" onclick="switchSubject('outils')">🧰 Boîte à Outils (Conjugeur, Tables...)</button>
       <button class="tab-btn tab-btn-culture" id="tabBtnCulture" onclick="switchSubject('culture')">🎭 Poésie & Arts</button>
+      <button class="tab-btn tab-btn-archive" id="tabBtnArchives" onclick="switchSubject('archives')" title="Consulter toutes les anciennes leçons de septembre et octobre">📦 Archives des Leçons (P1)</button>
     </div>
 
     <!-- Pôle 2 : Espaces de l'Enfant -->
@@ -6627,6 +6877,7 @@
     <!-- 1. FRANÇAIS -->
     <!-- ========================================================= -->
     <section id="subject-francais" class="subject-section active">
+
       <div class="hero-banner">
         <img src="images/french_hero.jpg" alt="Français CM2 Détective">
         <div class="hero-banner-overlay">
@@ -6684,44 +6935,26 @@
         </div>
       </div>
 
+      
+
+      <!-- Français Sub 1: Homophones -->
+
+      <div class="current-period-callout">
+        <div class="period-callout-badge">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
+        <div class="period-callout-text">Focus du moment : Dictée 6 René Magritte, Grammaire G3 (Complément du nom), Conjugaison C2 (Ring des 8 verbes) & Autodictée 1.</div>
+        <button class="period-callout-btn" onclick="switchSubmodule('francais', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
+      </div>
+
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 6 🆕, 5 & 4)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🧩 G3 : Complément du Nom (10 Défis 🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_c2')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C2 : Les 8 Verbes du Présent (Ring 🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'autodictee')" style="border-color:#7c3aed; color:#6d28d9; font-weight:800;">🏛️ Autodictée 1 : Patrimoine (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_c2')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C2 : Ring des 8 Verbes (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'autodictee')" style="border-color:#7c3aed; color:#6d28d9; font-weight:800;">🏛️ Autodictée 1 : Lascaux (🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_gn')">🎨 Orthographe 5 : Accords dans le GN (8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe 4 : « s » ou « ss » (10 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison Classique (8 Défis)</button>
+        <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('francais', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
       </div>
 
-      <!-- Français Sub 1: Homophones -->
-      <div id="sub-francais-homophones" class="submodule-content">
-        <div class="rule-box">
-          ✨ <strong>Les Réflexes Magiques :</strong><br>
-          • <strong>a / à :</strong> Remplace par <em>« avait »</em> ➡️ <strong>a</strong> (verbe avoir). Sinon ➡️ <strong>à</strong>.<br>
-          • <strong>et / est :</strong> Remplace par <em>« était »</em> ➡️ <strong>est</strong> (verbe être). Si <em>« et puis »</em> ➡️ <strong>et</strong>.<br>
-          • <strong>ses / s'est / c'est / ces :</strong> <strong>ses</strong> (les siens), <strong>s'est</strong> (verbe pronominal), <strong>c'est</strong> (cela est), <strong>ces</strong> (on montre).
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_homophones', this)">✨ Créer de nouvelles phrases avec l'IA</button>
-        <div id="quiz-container-homo" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Français Sub 2: Detective Dictée -->
-      <div id="sub-francais-detective" class="submodule-content">
-        <div class="rule-box">
-          🕵️‍♀️ <strong>La Méthode des 4 Loupes :</strong><br>
-          1. <em>Le Sens</em> (mot oublié ?) | 2. <em>Sujet + Verbe</em> (accord) | 3. <em>Pluriels</em> (-s / -x) | 4. <em>Homophones</em> (avait / était).<br>
-          💡 <em>Clique sur les mots contenant une erreur pour les corriger !</em>
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('detective', this)">🕵️‍♀️ Créer un nouveau texte à corriger avec l'IA</button>
-        <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Français Sub 3: Mots de la Dictée Hebdomadaire (Multi-Séries 4 & 5) -->
-      <div id="sub-francais-dictee_mots" class="submodule-content active">
+<div id="sub-francais-dictee_mots" class="submodule-content active">
         <!-- Barre de sélection des séries de dictée -->
         <div class="dictee-series-bar">
           <div class="dictee-series-title">
@@ -6775,123 +7008,8 @@
       </div>
 
       <!-- Français Sub 3: Orthographe 4 : « s » ou « ss » -->
-      <div id="sub-francais-orthographe_s" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid var(--bd-blue); background: var(--bd-cream);">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--bd-blue-dark);">
-              📘 Orthographe 4 : Écrire « s » ou « ss »
-            </span>
-            <span style="background: var(--bd-yellow-light); border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #854d0e;">
-              🐍 Le son [s] = le « sss » du serpent
-            </span>
-          </div>
 
-          <div style="margin-bottom: 10px; padding: 8px 12px; background: rgba(255,255,255,0.7); border-radius: 8px; border: 1px solid var(--ink-faint); font-size: 0.92rem;">
-            💡 <strong>Rappel des voyelles :</strong> <span style="letter-spacing: 2px; font-weight: 800; color: var(--bd-red);">a - e - i - o - u - y</span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 10px;">
-            <div style="background: #ffffff; padding: 12px; border-radius: 10px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: var(--bd-blue-dark); font-size: 0.95rem;">👉 La lettre « s » toute seule se prononce [s] :</strong>
-              <ul style="margin: 6px 0 0 18px; font-size: 0.88rem; line-height: 1.5;">
-                <li><strong>Entre une voyelle et une consonne</strong> (ex : <em>un arti<strong style="color:var(--bd-red);">s</strong>te</em>, <em>l'e<strong style="color:var(--bd-red);">s</strong>calier</em>, <em>une ve<strong style="color:var(--bd-red);">s</strong>te</em>)</li>
-                <li><strong>En début ou en fin de mot</strong> (ex : <em>un <strong style="color:var(--bd-red);">s</strong>igne</em>, <em>un o<strong style="color:var(--bd-red);">s</strong></em>, <em>du <strong style="color:var(--bd-red);">s</strong>ucre</em>, <em>un bu<strong style="color:var(--bd-red);">s</strong></em>)</li>
-              </ul>
-            </div>
-
-            <div style="background: #ffffff; padding: 12px; border-radius: 10px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: var(--bd-red); font-size: 0.95rem;">👉 On écrit « ss » :</strong>
-              <ul style="margin: 6px 0 0 18px; font-size: 0.88rem; line-height: 1.5;">
-                <li><strong>Pour obtenir le son [s] ENTRE DEUX VOYELLES</strong> (ex : <em>un cha<strong style="color:var(--bd-red);">ss</strong>eur</em>, <em>un de<strong style="color:var(--bd-red);">ss</strong>in</em>, <em>une trou<strong style="color:var(--bd-red);">ss</strong>e</em>, <em>un poi<strong style="color:var(--bd-red);">ss</strong>on</em>)</li>
-                <li>⚠️ <em>Attention au piège : un seul « s » entre 2 voyelles se prononce [z] ! (ex : une mai<strong style="color:var(--bd-green);">s</strong>on, un poi<strong style="color:var(--bd-green);">s</strong>on)</em></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_s', this)">✨ Générer de nouvelles questions « s » ou « ss » (IA)</button>
-        <div id="quiz-container-orthographe-s" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Français Sub 3b: Orthographe 5 : Les accords dans le groupe nominal -->
-      <div id="sub-francais-orthographe_gn" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #2563eb; background: #eff6ff;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #1e40af;">
-              📘 Orthographe 5 : Les accords dans le groupe nominal
-            </span>
-            <span style="background: #dbeafe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #1e3a8a;">
-              🎨 Règle d'or : L'adjectif s'accorde en genre & en nombre avec son nom !
-            </span>
-          </div>
-
-          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 12px; line-height: 1.6;">
-            Dans le groupe nominal, <strong>l'adjectif qualificatif s'accorde toujours</strong> avec le nom et son déterminant.
-          </p>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 10px;">
-            <!-- Règle 1 : Accord en nombre -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                <span style="font-size: 1.15rem;">1️⃣</span>
-                <strong style="color: #1e40af; font-size: 1rem;">L'accord en nombre : singulier ou pluriel</strong>
-              </div>
-              <ul style="margin: 6px 0 10px 18px; font-size: 0.88rem; line-height: 1.5;">
-                <li>Si le nom est au <strong>singulier</strong> (un seul) ➔ l'adjectif est au <strong>singulier</strong>.</li>
-                <li>Si le nom est au <strong>pluriel</strong> (plusieurs) ➔ l'adjectif est au <strong>pluriel</strong>.</li>
-              </ul>
-              <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
-                <div><em>Exemple singulier :</em> <strong>le <span style="color:#2563eb;">bel</span> instrument</strong></div>
-                <div style="margin-top: 4px;"><em>Exemple pluriel :</em> <strong>les <span style="color:#dc2626;">beaux</span> instrument<span style="color:#dc2626;">s</span></strong></div>
-              </div>
-            </div>
-
-            <!-- Règle 2 : Accord en genre -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                <span style="font-size: 1.15rem;">2️⃣</span>
-                <strong style="color: #9333ea; font-size: 1rem;">L'accord en genre : masculin ou féminin</strong>
-              </div>
-              <ul style="margin: 6px 0 10px 18px; font-size: 0.88rem; line-height: 1.5;">
-                <li>Si le nom est au <strong>masculin</strong> (un) ➔ l'adjectif est au <strong>masculin</strong>.</li>
-                <li>Si le nom est au <strong>féminin</strong> (une) ➔ l'adjectif est au <strong>féminin</strong>.</li>
-              </ul>
-              <div style="background: #f8fafc; border-left: 4px solid #9333ea; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
-                <div><em>Exemple masculin :</em> <strong>le <span style="color:#2563eb;">beau</span> violon</strong></div>
-                <div style="margin-top: 4px;"><em>Exemple féminin :</em> <strong>la <span style="color:#9333ea;">belle</span> viole</strong></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_gn', this)">✨ Générer de nouvelles questions Accords dans le GN (IA)</button>
-        <div id="quiz-container-orthographe-gn" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Français Sub 4: Grammaire G1 -->
-      <div id="sub-francais-grammaire" class="submodule-content">
-        <div class="video-doc-card">
-          <div class="video-doc-header">
-            <span class="video-doc-title">🎓 Cours Réseau Canopé : Le rôle des déterminants</span>
-            <a href="https://lesfondamentaux.reseau-canope.fr/video/francais/grammaire/les-determinants/le-role-des-determinants-12" target="_blank" class="doc-link-btn">🔗 Ouvrir la vidéo Canopé</a>
-          </div>
-          <p style="font-size: 0.9rem; color: var(--text-muted);">Visionne la leçon avant de répondre aux 8 questions ci-dessous :</p>
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_grammaire', this)">✨ Générer de nouvelles questions Grammaire (IA)</button>
-        <div id="quiz-container-grammaire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Français Sub 5: Conjugaison -->
-      <div id="sub-francais-conjugaison" class="submodule-content">
-        <div class="rule-box">
-          ⏳ <strong>Le Présent de l'Indicatif (Fiche Padlet de Maîtresse France)</strong><br>
-          • 1er gr. (-er) : <em>-e, -es, -e, -ons, -ez, -ent</em> | 2e gr. (-ir) : <em>-is, -is, -it, -issons, -issez, -issent</em><br>
-          • 3e gr. et irréguliers : <em>faire, aller, prendre, dire, voir, vouloir, pouvoir</em>.
-        </div>
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_conjugaison', this)">✨ Générer de nouvelles questions Conjugaison (IA)</button>
-        <div id="quiz-container-conjugaison" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-    
-      <!-- Français Sub : G3 Le Groupe Nominal et le Complément du Nom (Leçon du 2 Novembre) -->
-      <div id="sub-francais-grammaire_g3" class="submodule-content">
+<div id="sub-francais-grammaire_g3" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
@@ -6945,7 +7063,8 @@
       </div>
 
       <!-- Français Sub : C2 Ring des 8 Verbes du Présent (Fiche Officielle Padlet) -->
-      <div id="sub-francais-conjugaison_c2" class="submodule-content">
+
+<div id="sub-francais-conjugaison_c2" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #d97706; background: #fffbeb;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
@@ -6997,7 +7116,8 @@
       </div>
 
       <!-- Français Sub : Autodictée 1 Les Trésors de l'Art et de l'Histoire -->
-      <div id="sub-francais-autodictee" class="submodule-content">
+
+<div id="sub-francais-autodictee" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #7c3aed; background: #faf5ff;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #ddd6fe; padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #5b21b6;">
@@ -7043,12 +7163,175 @@
         </div>
       </div>
 
+<div id="sub-francais-orthographe_gn" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #2563eb; background: #eff6ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #1e40af;">
+              📘 Orthographe 5 : Les accords dans le groupe nominal
+            </span>
+            <span style="background: #dbeafe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #1e3a8a;">
+              🎨 Règle d'or : L'adjectif s'accorde en genre & en nombre avec son nom !
+            </span>
+          </div>
+
+          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 12px; line-height: 1.6;">
+            Dans le groupe nominal, <strong>l'adjectif qualificatif s'accorde toujours</strong> avec le nom et son déterminant.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 10px;">
+            <!-- Règle 1 : Accord en nombre -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 1.15rem;">1️⃣</span>
+                <strong style="color: #1e40af; font-size: 1rem;">L'accord en nombre : singulier ou pluriel</strong>
+              </div>
+              <ul style="margin: 6px 0 10px 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li>Si le nom est au <strong>singulier</strong> (un seul) ➔ l'adjectif est au <strong>singulier</strong>.</li>
+                <li>Si le nom est au <strong>pluriel</strong> (plusieurs) ➔ l'adjectif est au <strong>pluriel</strong>.</li>
+              </ul>
+              <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
+                <div><em>Exemple singulier :</em> <strong>le <span style="color:#2563eb;">bel</span> instrument</strong></div>
+                <div style="margin-top: 4px;"><em>Exemple pluriel :</em> <strong>les <span style="color:#dc2626;">beaux</span> instrument<span style="color:#dc2626;">s</span></strong></div>
+              </div>
+            </div>
+
+            <!-- Règle 2 : Accord en genre -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 1.15rem;">2️⃣</span>
+                <strong style="color: #9333ea; font-size: 1rem;">L'accord en genre : masculin ou féminin</strong>
+              </div>
+              <ul style="margin: 6px 0 10px 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li>Si le nom est au <strong>masculin</strong> (un) ➔ l'adjectif est au <strong>masculin</strong>.</li>
+                <li>Si le nom est au <strong>féminin</strong> (une) ➔ l'adjectif est au <strong>féminin</strong>.</li>
+              </ul>
+              <div style="background: #f8fafc; border-left: 4px solid #9333ea; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
+                <div><em>Exemple masculin :</em> <strong>le <span style="color:#2563eb;">beau</span> violon</strong></div>
+                <div style="margin-top: 4px;"><em>Exemple féminin :</em> <strong>la <span style="color:#9333ea;">belle</span> viole</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_gn', this)">✨ Générer de nouvelles questions Accords dans le GN (IA)</button>
+        <div id="quiz-container-orthographe-gn" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 4: Grammaire G1 -->
+
+
+      <!-- Conteneur Consigné des Anciennes Leçons de Français (Période 1) -->
+      <div id="sub-francais-archives_p1" class="submodule-content">
+        <div class="archive-header-card">
+          <div class="archive-header-left">
+            <span class="archive-badge">📦 Archives Français • Période 1 (Septembre - Octobre)</span>
+            <h3 style="margin: 4px 0 0 0; font-size: 1.15rem; color: #1e293b;">Leçons & Entraînements du Début d'Année</h3>
+            <p style="margin: 2px 0 0 0; font-size: 0.85rem; color: #64748b;">Retrouve ici tous les modules de la Période 1 pour réviser tes bases en toute autonomie.</p>
+          </div>
+          <div class="archive-pills-bar">
+            <button class="archive-nav-pill active" onclick="switchArchivedLesson('francais', 'homophones', this)">🎯 Duel des Homophones (12 Défis)</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('francais', 'detective', this)">🔍 Détective de Dictée (4 Missions)</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('francais', 'orthographe_s', this)">🐍 « s » ou « ss » (10 Défis)</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('francais', 'grammaire', this)">📖 Grammaire G1 & Déterminants</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('francais', 'conjugaison', this)">✍️ Conjugaison Classique (8 Défis)</button>
+          </div>
+        </div>
+
+        <div class="archived-body-wrap" style="width: 100%;">
+          <div id="sub-francais-homophones" class="archived-pane active">
+        <div class="rule-box">
+          ✨ <strong>Les Réflexes Magiques :</strong><br>
+          • <strong>a / à :</strong> Remplace par <em>« avait »</em> ➡️ <strong>a</strong> (verbe avoir). Sinon ➡️ <strong>à</strong>.<br>
+          • <strong>et / est :</strong> Remplace par <em>« était »</em> ➡️ <strong>est</strong> (verbe être). Si <em>« et puis »</em> ➡️ <strong>et</strong>.<br>
+          • <strong>ses / s'est / c'est / ces :</strong> <strong>ses</strong> (les siens), <strong>s'est</strong> (verbe pronominal), <strong>c'est</strong> (cela est), <strong>ces</strong> (on montre).
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_homophones', this)">✨ Créer de nouvelles phrases avec l'IA</button>
+        <div id="quiz-container-homo" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 2: Detective Dictée -->
+          <div id="sub-francais-detective" class="archived-pane">
+        <div class="rule-box">
+          🕵️‍♀️ <strong>La Méthode des 4 Loupes :</strong><br>
+          1. <em>Le Sens</em> (mot oublié ?) | 2. <em>Sujet + Verbe</em> (accord) | 3. <em>Pluriels</em> (-s / -x) | 4. <em>Homophones</em> (avait / était).<br>
+          💡 <em>Clique sur les mots contenant une erreur pour les corriger !</em>
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('detective', this)">🕵️‍♀️ Créer un nouveau texte à corriger avec l'IA</button>
+        <div id="detective-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 3: Mots de la Dictée Hebdomadaire (Multi-Séries 4 & 5) -->
+          <div id="sub-francais-orthographe_s" class="archived-pane">
+        <div class="rule-box" style="border-left: 5px solid var(--bd-blue); background: var(--bd-cream);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--bd-blue-dark);">
+              📘 Orthographe 4 : Écrire « s » ou « ss »
+            </span>
+            <span style="background: var(--bd-yellow-light); border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #854d0e;">
+              🐍 Le son [s] = le « sss » du serpent
+            </span>
+          </div>
+
+          <div style="margin-bottom: 10px; padding: 8px 12px; background: rgba(255,255,255,0.7); border-radius: 8px; border: 1px solid var(--ink-faint); font-size: 0.92rem;">
+            💡 <strong>Rappel des voyelles :</strong> <span style="letter-spacing: 2px; font-weight: 800; color: var(--bd-red);">a - e - i - o - u - y</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 10px;">
+            <div style="background: #ffffff; padding: 12px; border-radius: 10px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: var(--bd-blue-dark); font-size: 0.95rem;">👉 La lettre « s » toute seule se prononce [s] :</strong>
+              <ul style="margin: 6px 0 0 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li><strong>Entre une voyelle et une consonne</strong> (ex : <em>un arti<strong style="color:var(--bd-red);">s</strong>te</em>, <em>l'e<strong style="color:var(--bd-red);">s</strong>calier</em>, <em>une ve<strong style="color:var(--bd-red);">s</strong>te</em>)</li>
+                <li><strong>En début ou en fin de mot</strong> (ex : <em>un <strong style="color:var(--bd-red);">s</strong>igne</em>, <em>un o<strong style="color:var(--bd-red);">s</strong></em>, <em>du <strong style="color:var(--bd-red);">s</strong>ucre</em>, <em>un bu<strong style="color:var(--bd-red);">s</strong></em>)</li>
+              </ul>
+            </div>
+
+            <div style="background: #ffffff; padding: 12px; border-radius: 10px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: var(--bd-red); font-size: 0.95rem;">👉 On écrit « ss » :</strong>
+              <ul style="margin: 6px 0 0 18px; font-size: 0.88rem; line-height: 1.5;">
+                <li><strong>Pour obtenir le son [s] ENTRE DEUX VOYELLES</strong> (ex : <em>un cha<strong style="color:var(--bd-red);">ss</strong>eur</em>, <em>un de<strong style="color:var(--bd-red);">ss</strong>in</em>, <em>une trou<strong style="color:var(--bd-red);">ss</strong>e</em>, <em>un poi<strong style="color:var(--bd-red);">ss</strong>on</em>)</li>
+                <li>⚠️ <em>Attention au piège : un seul « s » entre 2 voyelles se prononce [z] ! (ex : une mai<strong style="color:var(--bd-green);">s</strong>on, un poi<strong style="color:var(--bd-green);">s</strong>on)</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_orthographe_s', this)">✨ Générer de nouvelles questions « s » ou « ss » (IA)</button>
+        <div id="quiz-container-orthographe-s" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 3b: Orthographe 5 : Les accords dans le groupe nominal -->
+          <div id="sub-francais-grammaire" class="archived-pane">
+        <div class="video-doc-card">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🎓 Cours Réseau Canopé : Le rôle des déterminants</span>
+            <a href="https://lesfondamentaux.reseau-canope.fr/video/francais/grammaire/les-determinants/le-role-des-determinants-12" target="_blank" class="doc-link-btn">🔗 Ouvrir la vidéo Canopé</a>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Visionne la leçon avant de répondre aux 8 questions ci-dessous :</p>
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_grammaire', this)">✨ Générer de nouvelles questions Grammaire (IA)</button>
+        <div id="quiz-container-grammaire" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub 5: Conjugaison -->
+          <div id="sub-francais-conjugaison" class="archived-pane">
+        <div class="rule-box">
+          ⏳ <strong>Le Présent de l'Indicatif (Fiche Padlet de Maîtresse France)</strong><br>
+          • 1er gr. (-er) : <em>-e, -es, -e, -ons, -ez, -ent</em> | 2e gr. (-ir) : <em>-is, -is, -it, -issons, -issez, -issent</em><br>
+          • 3e gr. et irréguliers : <em>faire, aller, prendre, dire, voir, vouloir, pouvoir</em>.
+        </div>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_conjugaison', this)">✨ Générer de nouvelles questions Conjugaison (IA)</button>
+        <div id="quiz-container-conjugaison" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+    
+      <!-- Français Sub : G3 Le Groupe Nominal et le Complément du Nom (Leçon du 2 Novembre) -->
+        </div>
+      </div>
+
     </section>
 
     <!-- ========================================================= -->
     <!-- 2. MATHÉMATIQUES (OPTIMISÉ : PROBLÈMES & CALCUL RAPIDE) -->
     <!-- ========================================================= -->
     <section id="subject-maths" class="subject-section">
+
       <div class="hero-banner">
         <img src="images/math_hero.jpg" alt="Mathématiques CM2 Super-Héros">
         <div class="hero-banner-overlay">
@@ -7079,95 +7362,215 @@
         </div>
       </div>
 
-      <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'problemes')">🧠 Résolution de Problèmes (Pas à Pas)</button>
-        <button class="submodule-btn" id="subBtnMathsTurbo" onclick="switchSubmodule('maths', 'turbo')" style="background: linear-gradient(135deg, #fef08a, #fde047); border-color: #ca8a04; color: #713f12; font-weight: 900;">⚡ Turbo Tables (Vitesse & Étoiles)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'chrono')">⚡ Calcul Rapide & Stratégies</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + Quiz)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'geometrie')">📐 Géométrie : Droites & Sécantes (Atelier)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'decimaux')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🔢 Décodeur Décimal & Glisse-Nombre (MHM 🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'devoir_construction')" style="border-color:#b45309; color:#92400e; font-weight:800;">📐 Devoir Noté : 5 Programmes (🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:800;">✏️ Frise Seyès (2 Nov 🆕)</button>
-      </div>
+      
 
       <!-- Maths Sub 1: Résolution de Problèmes Pas à Pas -->
-      <div id="sub-maths-problemes" class="submodule-content active">
-        <div class="rule-box" style="background: rgba(168, 85, 247, 0.15); border-color: var(--primary);">
-          🧭 <strong>La Méthode d'Or en 3 Étapes pour réussir TOUS les Problèmes :</strong><br>
-          <strong>1. Comprendre :</strong> Que cherche-t-on ? Quelles sont les données utiles ?<br>
-          <strong>2. Choisir l'Opération :</strong> Ajouter (+), Enlever/Écart (-), Répéter (×), Partager (÷) ?<br>
-          <strong>3. Calculer & Répondre :</strong> Pose le calcul avec précision et formule la phrase avec l'unité (€, kg, cm...).
-        </div>
 
-        <button class="ai-gen-btn" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);" onclick="generateAiExercisesFor('problemes_maths', this)">
-          🧠 Créer de nouveaux problèmes inédits avec l'IA
-        </button>
-
-        <!-- Conteneur Dynamique des Problèmes -->
-        <div id="problem-solver-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      <div class="current-period-callout" style="border-color: #d97706; background: #fffbeb;">
+        <div class="period-callout-badge" style="background: #f59e0b; color: #ffffff;">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
+        <div class="period-callout-text" style="color: #92400e;">Focus du moment : Décodeur Décimal, Glisse-Nombre MHM, 5 Programmes de géométrie notés & Frise Seyès.</div>
+        <button class="period-callout-btn" style="border-color: #b45309; color: #78350f;" onclick="switchSubmodule('maths', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
       </div>
 
-      <!-- Maths Sub 2: Calcul Rapide & Stratégies Paramétrables -->
-      <div id="sub-maths-chrono" class="submodule-content">
-        <div id="calc-start-view" style="text-align: center; width: 100%;">
-          <div class="rule-box">
-            🎯 <strong>Choisis ton entraînement ciblé de Calcul Rapide :</strong><br>
-            💡 <em>Sélectionne une stratégie pour t'entraîner à ton rythme ou lance le Défi Chrono !</em>
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'decimaux')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🔢 Décodeur Décimal & Glisse-Nombre (MHM 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'devoir_construction')" style="border-color:#b45309; color:#92400e; font-weight:800;">📐 Devoir Noté : 5 Programmes (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:800;">✏️ Frise Seyès (2 Nov 🆕)</button>
+        <button class="submodule-btn" id="subBtnMathsTurbo" onclick="switchSubmodule('maths', 'turbo')" style="background: linear-gradient(135deg, #fef08a, #fde047); border-color: #ca8a04; color: #713f12; font-weight: 900;">⚡ Turbo Tables CM2</button>
+        <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('maths', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
+      </div>
+
+<div id="sub-maths-decimaux" class="submodule-content active">
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
+              🔢 Leçon MHM : Les nombres décimaux & les chiffres de la partie décimale
+            </span>
+            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
+              Réseau Canopé & Glisse-Nombre MHM
+            </span>
           </div>
 
-          <!-- Choix du mode de calcul rapide -->
-          <div class="mode-select-grid">
-            <div class="mode-card-btn active" onclick="selectCalcMode('all', this)">
-              <div class="m-title">🔥 Défi Mix Complet</div>
-              <div class="m-desc">Multiplications, compléments à 100 et additions express</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 10px;">
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #0369a1; font-size: 1rem;">1️⃣ Partie Entière vs Partie Décimale</strong>
+              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
+                La <strong>virgule</strong> sépare la partie entière (les unités complètes) de la <strong>partie décimale</strong> (les morceaux d'unité partagés en 10, 100, 1000).
+              </p>
+              <div style="background: #f8fafc; border-left: 4px solid #0284c7; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
+                Dans <strong>34,852</strong> :<br>
+                • <strong>34</strong> est la <em>partie entière</em> (3 dizaines, 4 unités)<br>
+                • <strong>8</strong> est le chiffre des <em>dixièmes</em> (8/10)<br>
+                • <strong>5</strong> est le chiffre des <em>centièmes</em> (5/100)<br>
+                • <strong>2</strong> est le chiffre des <em>millièmes</em> (2/1000)
+              </div>
             </div>
-            <div class="mode-card-btn" onclick="selectCalcMode('tables', this)">
-              <div class="m-title">✖️ Tables Clés (6, 7, 8, 9)</div>
-              <div class="m-desc">7×8, 6×9, 8×9... Les pièges classiques</div>
-            </div>
-            <div class="mode-card-btn" onclick="selectCalcMode('complements', this)">
-              <div class="m-title">💯 Compléments à 100 & 1000</div>
-              <div class="m-desc">100 - 37, 100 - 64, 1000 - 450...</div>
-            </div>
-            <div class="mode-card-btn" onclick="selectCalcMode('astuces', this)">
-              <div class="m-title">⚡ Astuces ×10, ×100, ×5, Doubles</div>
-              <div class="m-desc">Techniques ultra-rapides sans poser</div>
+
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #b45309; font-size: 1rem;">2️⃣ Le Piège d'Or des Zéros</strong>
+              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
+                • <strong>Zéro inutile :</strong> à la fin de la partie décimale, il ne change pas la valeur ! <em>3,50 = 3,5</em> (3 unités et 50 centièmes = 3 unités et 5 dixièmes).<br>
+                • <strong>Zéro indispensable :</strong> s'il est coincé entre la virgule et un chiffre, il change tout ! <em>3,05 ≠ 3,5</em> (3 unités et 5 centièmes ≠ 3 unités et 5 dixièmes).
+              </p>
+              <div style="background: #fef3c7; border: 1px solid #fde68a; padding: 6px 10px; border-radius: 8px; font-size: 0.88rem; color: #92400e;">
+                ⚠️ <strong>Piège de comparaison :</strong> 3,25 < 3,8 car 3,8 = 3,80 et 25 centièmes < 80 centièmes !
+              </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-            <button class="action-btn" onclick="startCalcGame(45)">⏱️ Sprint Chrono (45 secondes)</button>
-            <button class="action-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);" onclick="startCalcGame(0)">🧘 Entraînement Zen (Sans Chrono)</button>
+          <!-- Simulateur Interactif Glisse-Nombre -->
+          <div style="background: #ffffff; padding: 18px; border-radius: 14px; border: 2px solid var(--ink); box-shadow: var(--shadow-comic); margin-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #0369a1;">
+                🎛️ Simulateur Interactif : Le Glisse-Nombre MHM
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Multiplie ou divise pour voir les chiffres glisser !</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;">
+              <label for="glisseInput" style="font-weight: 800; font-size: 0.92rem;">Nombre de départ :</label>
+              <input type="number" id="glisseInput" value="3.45" step="0.01" style="width: 110px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-align: center;">
+              <button class="t-chip" onclick="setGlissePreset(3.45)">3,45</button>
+              <button class="t-chip" onclick="setGlissePreset(12.8)">12,8</button>
+              <button class="t-chip" onclick="setGlissePreset(0.75)">0,75</button>
+              <button class="t-chip" onclick="setGlissePreset(250)">250</button>
+            </div>
+
+            <!-- Tableau Glisse-Nombre Visuel -->
+            <div style="overflow-x: auto; margin-bottom: 12px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-family: 'Fredoka', sans-serif; min-width: 460px;">
+                <thead>
+                  <tr style="background: #0284c7; color: #ffffff; font-size: 0.85rem;">
+                    <th style="padding: 6px; border: 1px solid #0369a1;">Centaines (C)</th>
+                    <th style="padding: 6px; border: 1px solid #0369a1;">Dizaines (D)</th>
+                    <th style="padding: 6px; border: 1px solid #0369a1;">Unités (U)</th>
+                    <th style="padding: 6px; border: 1px solid #dc2626; background: #dc2626; color: #fff;">,</th>
+                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Dixièmes (1/10)</th>
+                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Centièmes (1/100)</th>
+                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Millièmes (1/1000)</th>
+                  </tr>
+                </thead>
+                <tbody id="glisseTableBody" style="font-size: 1.3rem; font-weight: 800; background: #f8fafc;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#0284c7;">3</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#dc2626; font-weight:900;">,</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">4</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">5</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Boutons d'Action Glissement -->
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+              <button class="action-btn" onclick="applyGlisseOperation('x10')" style="background: #16a34a; padding: 8px 16px;">× 10 (Glisse vers la gauche ⬅️)</button>
+              <button class="action-btn" onclick="applyGlisseOperation('x100')" style="background: #15803d; padding: 8px 16px;">× 100 (Glisse de 2 rangs ⬅️)</button>
+              <button class="action-btn" onclick="applyGlisseOperation('/10')" style="background: #d97706; padding: 8px 16px;">÷ 10 (Glisse vers la droite ➡️)</button>
+              <button class="action-btn" onclick="applyGlisseOperation('/100')" style="background: #b45309; padding: 8px 16px;">÷ 100 (Glisse de 2 rangs ➡️)</button>
+              <button class="action-btn" onclick="resetGlisseSimulator()" style="background: #64748b; padding: 8px 14px;">🔄 Réinitialiser</button>
+            </div>
+            <div id="glisseFeedbackText" style="text-align: center; margin-top: 10px; font-weight: 700; color: #0369a1; font-size: 0.95rem;"></div>
           </div>
         </div>
 
-        <div id="calc-play-view" style="display: none; width: 100%; flex-direction: column; align-items: center;">
-          <div class="timer-container" id="calcTimerContainer">
-            <div class="timer-bar" id="calcTimerBar"></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; width: 100%; max-width: 450px; margin-bottom: 8px;">
-            <span style="font-size: 1.05rem; color: var(--accent-amber); font-weight: 700;" id="calcTimeLeft">Temps restant : 45s</span>
-            <span style="font-size: 0.95rem; color: var(--accent-cyan); font-weight: 700;" id="calcModeBadge">Mix Complet</span>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('maths_decimaux', this)">✨ Générer de nouveaux défis Nombres Décimaux (IA)</button>
+        <div id="quiz-container-decimaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Maths Sub : Devoir Noté Géométrie (Les 5 Programmes du Padlet) -->
+
+<div id="sub-maths-devoir_construction" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
+              📐 Devoir Noté : Les 5 Programmes de Construction CM2
+            </span>
+            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
+              Document Officiel CM2 (15 Octobre) • Note sur 20
+            </span>
           </div>
 
-          <div class="calc-card" id="calcQuestion">7 × 8 = ?</div>
-          
-          <div class="calc-input-wrapper">
-            <input type="number" id="calcAnswerInput" class="calc-input" placeholder="?" autocomplete="off">
-            <button class="action-btn" style="padding: 10px 20px;" onclick="submitCalcAnswer()">Valider</button>
+          <!-- Sélecteur des 5 programmes du devoir -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+            <button class="action-btn" onclick="selectConstructionProg(1)" id="btnConstProg1" style="background:#b45309; padding:6px 14px; font-size:0.85rem;">Programme 1 : Carré (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(2)" id="btnConstProg2" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 2 : Triangle rectangle (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(3)" id="btnConstProg3" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 3 : Triangle isocèle (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(4)" id="btnConstProg4" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 4 : Triangle équilatéral (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(5)" id="btnConstProg5" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 5 : Cerf-volant (4 pts)</button>
           </div>
 
-          <div id="calcHintText" style="color: var(--text-muted); font-size: 0.9rem; min-height: 24px; text-align: center;"></div>
-          <div id="calcFeedback" class="feedback-banner"></div>
+          <!-- Visualiseur Interactif SVG de la Figure -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; background: #ffffff; padding: 16px; border-radius: 14px; border: 1.5px solid var(--ink);">
+            <div>
+              <div id="constProgTitle" style="font-weight: 800; color: #92400e; font-size: 1.1rem; margin-bottom: 6px;"></div>
+              <div id="constProgSteps" style="font-size: 0.9rem; line-height: 1.6; color: #1f2937;"></div>
+              <div style="margin-top: 12px; padding: 8px 12px; background: #fef9c3; border-radius: 8px; border: 1px solid #fde047; font-size: 0.88rem; font-weight: 700; color: #854d0e;" id="constProgAnswerBox">
+                🎯 <strong>Figure obtenue :</strong> <span id="constProgFigName">...</span>
+              </div>
+            </div>
 
-          <button onclick="stopCalcGame()" style="background: transparent; border: 1px solid var(--card-border); color: var(--text-muted); padding: 6px 14px; border-radius: 10px; cursor: pointer; margin-top: 14px;">Quitter la session</button>
+            <!-- Espace Dessin SVG Dynamique -->
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fafafa; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 10px; min-height: 220px;">
+              <svg id="constSvgCanvas" width="280" height="200" viewBox="0 0 280 200" style="overflow: visible;"></svg>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">Représentation géométrique exacte à l'échelle</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #92400e; margin-bottom: 8px;">🏆 8 Défis Officiels sur les 5 Programmes de Géométrie :</div>
+          <div id="quiz-container-devoir-const" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
         </div>
       </div>
 
-      <!-- ========================================================= -->
-      <!-- Maths Sub 2bis : Turbo Tables (Vitesse & Étoiles)         -->
-      <!-- ========================================================= -->
-      <div id="sub-maths-turbo" class="submodule-content">
+      <!-- Maths Sub : Frise Géométrique Seyès (2 Novembre) -->
+
+<div id="sub-maths-frise_seyes" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
+              ✏️ Atelier Cahier : Frise géométrique sur réglure Seyès
+            </span>
+            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
+              Exercice publié le 2 Novembre sur le Padlet
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+            <div>
+              <p style="font-size: 0.95rem; line-height: 1.6; color: #14532d;">
+                <strong>Consigne de Maîtresse France :</strong><br>
+                <em>« Reproduis cette frise sur ton cahier en utilisant ton crayon de papier et ta règle. Choisis deux couleurs (crayons de couleur) et colorie chaque figure. »</em>
+              </p>
+              <div style="margin-top: 10px; border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/maths_2nov.jpeg" alt="Frise Seyès originale du cahier" style="width: 100%; display: block;">
+              </div>
+            </div>
+
+            <!-- Simulateur interactif de frise -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <strong style="color: #166534; font-size: 1rem;">🎨 Atelier Numérique Interactif :</strong>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 12px 0;">
+                  Clique sur les cases pour alterner tes deux couleurs (bleu & jaune ou vert & violet) et faire vivre le motif géométrique régulier !
+                </p>
+                <div id="friseInteractiveGrid" style="display: flex; gap: 4px; overflow-x: auto; padding: 10px 4px; background: #fafafa; border: 1.5px solid #cbd5e1; border-radius: 8px;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
+                <button class="action-btn" onclick="resetFriseInteractive()" style="background: #64748b; padding: 6px 14px; font-size: 0.85rem;">🔄 Effacer la frise</button>
+                <button class="action-btn" onclick="autoColorFrise()" style="background: #16a34a; padding: 6px 14px; font-size: 0.85rem;">✨ Colorier en alternance auto</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+          </div>
+
+<div id="sub-maths-turbo" class="submodule-content">
         <div class="turbo-container">
           <!-- Bandeau Titre & Règles du Circuit -->
           <div class="turbo-banner">
@@ -7406,7 +7809,102 @@
       </div>
 
       <!-- Maths Sub 3: Soustraction par cassage -->
-      <div id="sub-maths-soustraction" class="submodule-content">
+
+
+      <!-- Conteneur Consigné des Anciennes Leçons de Mathématiques (Période 1) -->
+      <div id="sub-maths-archives_p1" class="submodule-content">
+        <div class="archive-header-card">
+          <div class="archive-header-left">
+            <span class="archive-badge" style="background: #fef3c7; color: #92400e;">📦 Archives Mathématiques • Période 1 (Septembre - Octobre)</span>
+            <h3 style="margin: 4px 0 0 0; font-size: 1.15rem; color: #1e293b;">Leçons & Entraînements du Début d'Année</h3>
+            <p style="margin: 2px 0 0 0; font-size: 0.85rem; color: #64748b;">Retrouve ici tous les modules de calcul, problèmes et géométrie de la Période 1.</p>
+          </div>
+          <div class="archive-pills-bar">
+            <button class="archive-nav-pill active" onclick="switchArchivedLesson('maths', 'problemes', this)">🧠 Résolution de Problèmes Pas à Pas</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('maths', 'chrono', this)">⚡ Calcul Rapide & Stratégies</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('maths', 'soustraction', this)">➖ Soustractions par Cassage</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('maths', 'geometrie', this)">📐 Géométrie : Droites & Sécantes</button>
+          </div>
+        </div>
+
+        <div class="archived-body-wrap" style="width: 100%;">
+          <div id="sub-maths-problemes" class="archived-pane active">
+        <div class="rule-box" style="background: rgba(168, 85, 247, 0.15); border-color: var(--primary);">
+          🧭 <strong>La Méthode d'Or en 3 Étapes pour réussir TOUS les Problèmes :</strong><br>
+          <strong>1. Comprendre :</strong> Que cherche-t-on ? Quelles sont les données utiles ?<br>
+          <strong>2. Choisir l'Opération :</strong> Ajouter (+), Enlever/Écart (-), Répéter (×), Partager (÷) ?<br>
+          <strong>3. Calculer & Répondre :</strong> Pose le calcul avec précision et formule la phrase avec l'unité (€, kg, cm...).
+        </div>
+
+        <button class="ai-gen-btn" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);" onclick="generateAiExercisesFor('problemes_maths', this)">
+          🧠 Créer de nouveaux problèmes inédits avec l'IA
+        </button>
+
+        <!-- Conteneur Dynamique des Problèmes -->
+        <div id="problem-solver-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Maths Sub 2: Calcul Rapide & Stratégies Paramétrables -->
+          <div id="sub-maths-chrono" class="archived-pane">
+        <div id="calc-start-view" style="text-align: center; width: 100%;">
+          <div class="rule-box">
+            🎯 <strong>Choisis ton entraînement ciblé de Calcul Rapide :</strong><br>
+            💡 <em>Sélectionne une stratégie pour t'entraîner à ton rythme ou lance le Défi Chrono !</em>
+          </div>
+
+          <!-- Choix du mode de calcul rapide -->
+          <div class="mode-select-grid">
+            <div class="mode-card-btn active" onclick="selectCalcMode('all', this)">
+              <div class="m-title">🔥 Défi Mix Complet</div>
+              <div class="m-desc">Multiplications, compléments à 100 et additions express</div>
+            </div>
+            <div class="mode-card-btn" onclick="selectCalcMode('tables', this)">
+              <div class="m-title">✖️ Tables Clés (6, 7, 8, 9)</div>
+              <div class="m-desc">7×8, 6×9, 8×9... Les pièges classiques</div>
+            </div>
+            <div class="mode-card-btn" onclick="selectCalcMode('complements', this)">
+              <div class="m-title">💯 Compléments à 100 & 1000</div>
+              <div class="m-desc">100 - 37, 100 - 64, 1000 - 450...</div>
+            </div>
+            <div class="mode-card-btn" onclick="selectCalcMode('astuces', this)">
+              <div class="m-title">⚡ Astuces ×10, ×100, ×5, Doubles</div>
+              <div class="m-desc">Techniques ultra-rapides sans poser</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <button class="action-btn" onclick="startCalcGame(45)">⏱️ Sprint Chrono (45 secondes)</button>
+            <button class="action-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);" onclick="startCalcGame(0)">🧘 Entraînement Zen (Sans Chrono)</button>
+          </div>
+        </div>
+
+        <div id="calc-play-view" style="display: none; width: 100%; flex-direction: column; align-items: center;">
+          <div class="timer-container" id="calcTimerContainer">
+            <div class="timer-bar" id="calcTimerBar"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; width: 100%; max-width: 450px; margin-bottom: 8px;">
+            <span style="font-size: 1.05rem; color: var(--accent-amber); font-weight: 700;" id="calcTimeLeft">Temps restant : 45s</span>
+            <span style="font-size: 0.95rem; color: var(--accent-cyan); font-weight: 700;" id="calcModeBadge">Mix Complet</span>
+          </div>
+
+          <div class="calc-card" id="calcQuestion">7 × 8 = ?</div>
+          
+          <div class="calc-input-wrapper">
+            <input type="number" id="calcAnswerInput" class="calc-input" placeholder="?" autocomplete="off">
+            <button class="action-btn" style="padding: 10px 20px;" onclick="submitCalcAnswer()">Valider</button>
+          </div>
+
+          <div id="calcHintText" style="color: var(--text-muted); font-size: 0.9rem; min-height: 24px; text-align: center;"></div>
+          <div id="calcFeedback" class="feedback-banner"></div>
+
+          <button onclick="stopCalcGame()" style="background: transparent; border: 1px solid var(--card-border); color: var(--text-muted); padding: 6px 14px; border-radius: 10px; cursor: pointer; margin-top: 14px;">Quitter la session</button>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- Maths Sub 2bis : Turbo Tables (Vitesse & Étoiles)         -->
+      <!-- ========================================================= -->
+          <div id="sub-maths-soustraction" class="archived-pane">
         <div class="video-doc-card">
           <div class="video-doc-header">
             <span class="video-doc-title">🎬 Vidéo du Padlet : La soustraction par cassage (Loustics Nathalie)</span>
@@ -7426,7 +7924,7 @@
       </div>
 
       <!-- Maths Sub 4: Géométrie - Droites, Segments, Sécantes & Atelier Tableau Blanc -->
-      <div id="sub-maths-geometrie" class="submodule-content">
+          <div id="sub-maths-geometrie" class="archived-pane">
         <!-- Fiche Flash Tuteur Géométrie -->
         <div class="tutor-flash-card" style="border-left: 6px solid #0284c7; margin-bottom: 20px;">
           <div class="tutor-flash-header">
@@ -7765,193 +8263,9 @@
         </div>
 
       <!-- Maths Sub : Le Décodeur Décimal (MHM Canopé & Glisse-Nombre) -->
-      <div id="sub-maths-decimaux" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
-              🔢 Leçon MHM : Les nombres décimaux & les chiffres de la partie décimale
-            </span>
-            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
-              Réseau Canopé & Glisse-Nombre MHM
-            </span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 10px;">
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: #0369a1; font-size: 1rem;">1️⃣ Partie Entière vs Partie Décimale</strong>
-              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
-                La <strong>virgule</strong> sépare la partie entière (les unités complètes) de la <strong>partie décimale</strong> (les morceaux d'unité partagés en 10, 100, 1000).
-              </p>
-              <div style="background: #f8fafc; border-left: 4px solid #0284c7; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
-                Dans <strong>34,852</strong> :<br>
-                • <strong>34</strong> est la <em>partie entière</em> (3 dizaines, 4 unités)<br>
-                • <strong>8</strong> est le chiffre des <em>dixièmes</em> (8/10)<br>
-                • <strong>5</strong> est le chiffre des <em>centièmes</em> (5/100)<br>
-                • <strong>2</strong> est le chiffre des <em>millièmes</em> (2/1000)
-              </div>
-            </div>
-
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: #b45309; font-size: 1rem;">2️⃣ Le Piège d'Or des Zéros</strong>
-              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
-                • <strong>Zéro inutile :</strong> à la fin de la partie décimale, il ne change pas la valeur ! <em>3,50 = 3,5</em> (3 unités et 50 centièmes = 3 unités et 5 dixièmes).<br>
-                • <strong>Zéro indispensable :</strong> s'il est coincé entre la virgule et un chiffre, il change tout ! <em>3,05 ≠ 3,5</em> (3 unités et 5 centièmes ≠ 3 unités et 5 dixièmes).
-              </p>
-              <div style="background: #fef3c7; border: 1px solid #fde68a; padding: 6px 10px; border-radius: 8px; font-size: 0.88rem; color: #92400e;">
-                ⚠️ <strong>Piège de comparaison :</strong> 3,25 < 3,8 car 3,8 = 3,80 et 25 centièmes < 80 centièmes !
-              </div>
-            </div>
-          </div>
-
-          <!-- Simulateur Interactif Glisse-Nombre -->
-          <div style="background: #ffffff; padding: 18px; border-radius: 14px; border: 2px solid var(--ink); box-shadow: var(--shadow-comic); margin-top: 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
-              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #0369a1;">
-                🎛️ Simulateur Interactif : Le Glisse-Nombre MHM
-              </strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">Multiplie ou divise pour voir les chiffres glisser !</span>
-            </div>
-
-            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;">
-              <label for="glisseInput" style="font-weight: 800; font-size: 0.92rem;">Nombre de départ :</label>
-              <input type="number" id="glisseInput" value="3.45" step="0.01" style="width: 110px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-align: center;">
-              <button class="t-chip" onclick="setGlissePreset(3.45)">3,45</button>
-              <button class="t-chip" onclick="setGlissePreset(12.8)">12,8</button>
-              <button class="t-chip" onclick="setGlissePreset(0.75)">0,75</button>
-              <button class="t-chip" onclick="setGlissePreset(250)">250</button>
-            </div>
-
-            <!-- Tableau Glisse-Nombre Visuel -->
-            <div style="overflow-x: auto; margin-bottom: 12px;">
-              <table style="width: 100%; border-collapse: collapse; text-align: center; font-family: 'Fredoka', sans-serif; min-width: 460px;">
-                <thead>
-                  <tr style="background: #0284c7; color: #ffffff; font-size: 0.85rem;">
-                    <th style="padding: 6px; border: 1px solid #0369a1;">Centaines (C)</th>
-                    <th style="padding: 6px; border: 1px solid #0369a1;">Dizaines (D)</th>
-                    <th style="padding: 6px; border: 1px solid #0369a1;">Unités (U)</th>
-                    <th style="padding: 6px; border: 1px solid #dc2626; background: #dc2626; color: #fff;">,</th>
-                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Dixièmes (1/10)</th>
-                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Centièmes (1/100)</th>
-                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Millièmes (1/1000)</th>
-                  </tr>
-                </thead>
-                <tbody id="glisseTableBody" style="font-size: 1.3rem; font-weight: 800; background: #f8fafc;">
-                  <tr>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#0284c7;">3</td>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#dc2626; font-weight:900;">,</td>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">4</td>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">5</td>
-                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Boutons d'Action Glissement -->
-            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-              <button class="action-btn" onclick="applyGlisseOperation('x10')" style="background: #16a34a; padding: 8px 16px;">× 10 (Glisse vers la gauche ⬅️)</button>
-              <button class="action-btn" onclick="applyGlisseOperation('x100')" style="background: #15803d; padding: 8px 16px;">× 100 (Glisse de 2 rangs ⬅️)</button>
-              <button class="action-btn" onclick="applyGlisseOperation('/10')" style="background: #d97706; padding: 8px 16px;">÷ 10 (Glisse vers la droite ➡️)</button>
-              <button class="action-btn" onclick="applyGlisseOperation('/100')" style="background: #b45309; padding: 8px 16px;">÷ 100 (Glisse de 2 rangs ➡️)</button>
-              <button class="action-btn" onclick="resetGlisseSimulator()" style="background: #64748b; padding: 8px 14px;">🔄 Réinitialiser</button>
-            </div>
-            <div id="glisseFeedbackText" style="text-align: center; margin-top: 10px; font-weight: 700; color: #0369a1; font-size: 0.95rem;"></div>
-          </div>
-        </div>
-
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('maths_decimaux', this)">✨ Générer de nouveaux défis Nombres Décimaux (IA)</button>
-        <div id="quiz-container-decimaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-      </div>
-
-      <!-- Maths Sub : Devoir Noté Géométrie (Les 5 Programmes du Padlet) -->
-      <div id="sub-maths-devoir_construction" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
-              📐 Devoir Noté : Les 5 Programmes de Construction CM2
-            </span>
-            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
-              Document Officiel CM2 (15 Octobre) • Note sur 20
-            </span>
-          </div>
-
-          <!-- Sélecteur des 5 programmes du devoir -->
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
-            <button class="action-btn" onclick="selectConstructionProg(1)" id="btnConstProg1" style="background:#b45309; padding:6px 14px; font-size:0.85rem;">Programme 1 : Carré (4 pts)</button>
-            <button class="action-btn" onclick="selectConstructionProg(2)" id="btnConstProg2" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 2 : Triangle rectangle (4 pts)</button>
-            <button class="action-btn" onclick="selectConstructionProg(3)" id="btnConstProg3" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 3 : Triangle isocèle (4 pts)</button>
-            <button class="action-btn" onclick="selectConstructionProg(4)" id="btnConstProg4" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 4 : Triangle équilatéral (4 pts)</button>
-            <button class="action-btn" onclick="selectConstructionProg(5)" id="btnConstProg5" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 5 : Cerf-volant (4 pts)</button>
-          </div>
-
-          <!-- Visualiseur Interactif SVG de la Figure -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; background: #ffffff; padding: 16px; border-radius: 14px; border: 1.5px solid var(--ink);">
-            <div>
-              <div id="constProgTitle" style="font-weight: 800; color: #92400e; font-size: 1.1rem; margin-bottom: 6px;"></div>
-              <div id="constProgSteps" style="font-size: 0.9rem; line-height: 1.6; color: #1f2937;"></div>
-              <div style="margin-top: 12px; padding: 8px 12px; background: #fef9c3; border-radius: 8px; border: 1px solid #fde047; font-size: 0.88rem; font-weight: 700; color: #854d0e;" id="constProgAnswerBox">
-                🎯 <strong>Figure obtenue :</strong> <span id="constProgFigName">...</span>
-              </div>
-            </div>
-
-            <!-- Espace Dessin SVG Dynamique -->
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fafafa; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 10px; min-height: 220px;">
-              <svg id="constSvgCanvas" width="280" height="200" viewBox="0 0 280 200" style="overflow: visible;"></svg>
-              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">Représentation géométrique exacte à l'échelle</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 18px;">
-          <div style="font-weight: 800; font-size: 1.1rem; color: #92400e; margin-bottom: 8px;">🏆 8 Défis Officiels sur les 5 Programmes de Géométrie :</div>
-          <div id="quiz-container-devoir-const" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
         </div>
       </div>
 
-      <!-- Maths Sub : Frise Géométrique Seyès (2 Novembre) -->
-      <div id="sub-maths-frise_seyes" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
-              ✏️ Atelier Cahier : Frise géométrique sur réglure Seyès
-            </span>
-            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
-              Exercice publié le 2 Novembre sur le Padlet
-            </span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
-            <div>
-              <p style="font-size: 0.95rem; line-height: 1.6; color: #14532d;">
-                <strong>Consigne de Maîtresse France :</strong><br>
-                <em>« Reproduis cette frise sur ton cahier en utilisant ton crayon de papier et ta règle. Choisis deux couleurs (crayons de couleur) et colorie chaque figure. »</em>
-              </p>
-              <div style="margin-top: 10px; border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-                <img src="images/maths_2nov.jpeg" alt="Frise Seyès originale du cahier" style="width: 100%; display: block;">
-              </div>
-            </div>
-
-            <!-- Simulateur interactif de frise -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
-              <div>
-                <strong style="color: #166534; font-size: 1rem;">🎨 Atelier Numérique Interactif :</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 12px 0;">
-                  Clique sur les cases pour alterner tes deux couleurs (bleu & jaune ou vert & violet) et faire vivre le motif géométrique régulier !
-                </p>
-                <div id="friseInteractiveGrid" style="display: flex; gap: 4px; overflow-x: auto; padding: 10px 4px; background: #fafafa; border: 1.5px solid #cbd5e1; border-radius: 8px;"></div>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
-                <button class="action-btn" onclick="resetFriseInteractive()" style="background: #64748b; padding: 6px 14px; font-size: 0.85rem;">🔄 Effacer la frise</button>
-                <button class="action-btn" onclick="autoColorFrise()" style="background: #16a34a; padding: 6px 14px; font-size: 0.85rem;">✨ Colorier en alternance auto</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-          </div>
     </section>
 
     <!-- Modale Zoom Photo Cahier 13 Octobre -->
@@ -7994,6 +8308,7 @@
     <!-- 3. HISTOIRE -->
     <!-- ========================================================= -->
     <section id="subject-histoire" class="subject-section">
+
       <div class="hero-banner">
         <img src="images/history_hero.jpg" alt="Histoire CM2">
         <div class="hero-banner-overlay">
@@ -8024,16 +8339,134 @@
         </div>
       </div>
 
-      <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'periodes')">⏳ Les 5 Périodes (Vidéo + 8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'prehistoire')">🦣 La Préhistoire (Vidéo + 8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'reims')">👑 Cathédrale de Reims (Vidéo + 6 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'gaulois')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚔️ Les Gaulois & les Celtes (Société 🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🌍 Géo : L'Italie & Arcimboldo (Semaine du Goût 🆕)</button>
-      </div>
+      
 
       <!-- Histoire Sub 1: Periodes -->
-      <div id="sub-histoire-periodes" class="submodule-content active">
+
+      <div class="current-period-callout" style="border-color: #0284c7; background: #f0f9ff;">
+        <div class="period-callout-badge" style="background: #0284c7; color: #ffffff;">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
+        <div class="period-callout-text" style="color: #075985;">Focus du moment : Les Gaulois et Celtes (société, druides, oppidums) & Semaine du Goût (Italie).</div>
+        <button class="period-callout-btn" style="border-color: #0369a1; color: #0c4a6e;" onclick="switchSubmodule('histoire', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'gaulois')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚔️ Les Gaulois & les Celtes (Société 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🌍 Géo : L'Italie & Arcimboldo (Semaine du Goût 🆕)</button>
+        <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('histoire', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
+      </div>
+
+<div id="sub-histoire-gaulois" class="submodule-content active">
+        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
+              ⚔️ Histoire CM2 : Les Celtes & la Société Gauloise
+            </span>
+            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
+              Documents officiels du Padlet (7 Octobre)
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 800; color: #92400e; margin-bottom: 6px;">🌍 L'expansion celte au VIIe siècle av. J.-C. :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/celtes_peuplement.jpg" alt="Carte expansion celte" style="width: 100%; display: block;">
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+                Partis d'Europe centrale, les Celtes s'installent en Gaule, dans les îles britanniques, en Espagne et au nord de l'Italie.
+              </p>
+            </div>
+
+            <div>
+              <div style="font-weight: 800; color: #92400e; margin-bottom: 6px;">👥 La société gauloise (Cahier & Manuel) :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/gaulois_societe.jpg" alt="Classes sociales société gauloise" style="width: 100%; display: block;">
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+                La société se divise en 3 grands groupes : les <strong>nobles/guerriers</strong> (Chef-roi, cavaliers), les <strong>druides</strong> (religion, justice, savoir oral sans écrit), et le <strong>peuple</strong> (artisans forgerons réputés, éleveurs, agriculteurs).
+              </p>
+            </div>
+          </div>
+
+          <div class="video-doc-card">
+            <div class="video-doc-header">
+              <span class="video-doc-title">🎬 Vidéo Quelle Histoire : Les Gaulois</span>
+            </div>
+            <div class="video-preview-box" onclick="window.open('https://youtu.be/iJwnr4pSZ3g', '_blank')">
+              <img src="https://img.youtube.com/vi/iJwnr4pSZ3g/hqdefault.jpg" alt="Vidéo Les Gaulois Quelle Histoire" class="video-preview-thumb">
+              <div class="video-play-overlay">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-actions-row">
+              <a href="https://youtu.be/iJwnr4pSZ3g" target="_blank" class="yt-btn">▶️ Visionner la vidéo officielle des Gaulois</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #92400e; margin-bottom: 8px;">🏆 8 Questions Flash : Société Gauloise & Celtes :</div>
+          <div id="quiz-container-gaulois" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
+      <!-- Géographie Sub : Benvenuti in Italia & Arcimboldo (Semaine du Goût) -->
+
+<div id="sub-histoire-italie" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
+              🇮🇹 Géographie & Culture : Benvenuti in Italia ! (Semaine du Goût)
+            </span>
+            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
+              Padlet CM1-CM2 École Bossuet (12-16 Octobre)
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 800; color: #0369a1; margin-bottom: 6px;">🗺️ La Botte Italienne & les Spécialités :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/geo_semaine_gout.png" alt="Affiche Benvenuti in Italia" style="width: 100%; display: block;">
+              </div>
+            </div>
+
+            <div>
+              <div style="font-weight: 800; color: #16a34a; margin-bottom: 6px;">🎨 Arcimboldo & Art Gourmand en Pâtes :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/geo_espace_1.png" alt="Atelier Arcimboldo en pâtes" style="width: 100%; display: block;">
+              </div>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">
+                À la manière de Giuseppe Arcimboldo (1527-1593), la classe a composé le portrait « Giulia » avec des pâtes colorées (farfalle, penne, coquillettes) avant la dégustation du tiramisu !
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #0369a1; margin-bottom: 8px;">🏆 8 Défis Géographie & Culture Italienne :</div>
+          <div id="quiz-container-italie" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
+
+      <!-- Conteneur Consigné des Anciennes Leçons d'Histoire (Période 1) -->
+      <div id="sub-histoire-archives_p1" class="submodule-content">
+        <div class="archive-header-card">
+          <div class="archive-header-left">
+            <span class="archive-badge" style="background: #e0f2fe; color: #0369a1;">📦 Archives Histoire • Période 1 (Septembre - Octobre)</span>
+            <h3 style="margin: 4px 0 0 0; font-size: 1.15rem; color: #1e293b;">Repères Historiques & Début d'Année</h3>
+            <p style="margin: 2px 0 0 0; font-size: 0.85rem; color: #64748b;">Les grandes périodes, la Préhistoire et les rois de France.</p>
+          </div>
+          <div class="archive-pills-bar">
+            <button class="archive-nav-pill active" onclick="switchArchivedLesson('histoire', 'periodes', this)">⏳ Les 5 Grandes Périodes</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('histoire', 'prehistoire', this)">🦣 La Préhistoire (Paléo / Néo)</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('histoire', 'reims', this)">👑 Cathédrale de Reims (Sacre)</button>
+          </div>
+        </div>
+
+        <div class="archived-body-wrap" style="width: 100%;">
+          <div id="sub-histoire-periodes" class="archived-pane active">
         <div class="video-doc-card">
           <div class="video-doc-header">
             <span class="video-doc-title">🎶 Chanson du Padlet : Les 5 grandes périodes de l'histoire</span>
@@ -8053,7 +8486,7 @@
       </div>
 
       <!-- Histoire Sub 2: Prehistoire -->
-      <div id="sub-histoire-prehistoire" class="submodule-content">
+          <div id="sub-histoire-prehistoire" class="archived-pane">
         <div class="video-doc-card">
           <div class="video-doc-header">
             <span class="video-doc-title">🦕 Vidéo du Padlet : La Préhistoire (Quelle Histoire - TV5 Monde)</span>
@@ -8241,7 +8674,7 @@
       </div>
 
       <!-- Histoire Sub 3: Reims -->
-      <div id="sub-histoire-reims" class="submodule-content">
+          <div id="sub-histoire-reims" class="archived-pane">
         <div class="video-doc-card">
           <div class="video-doc-header">
             <span class="video-doc-title">👑 Vidéo du Padlet : La cathédrale de Reims, au cœur de l'Histoire</span>
@@ -8261,105 +8694,16 @@
       </div>
    
       <!-- Histoire Sub : Les Gaulois & les Celtes (Leçon Officielle Padlet) -->
-      <div id="sub-histoire-gaulois" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
-              ⚔️ Histoire CM2 : Les Celtes & la Société Gauloise
-            </span>
-            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
-              Documents officiels du Padlet (7 Octobre)
-            </span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-bottom: 14px;">
-            <div>
-              <div style="font-weight: 800; color: #92400e; margin-bottom: 6px;">🌍 L'expansion celte au VIIe siècle av. J.-C. :</div>
-              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-                <img src="images/celtes_peuplement.jpg" alt="Carte expansion celte" style="width: 100%; display: block;">
-              </div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-                Partis d'Europe centrale, les Celtes s'installent en Gaule, dans les îles britanniques, en Espagne et au nord de l'Italie.
-              </p>
-            </div>
-
-            <div>
-              <div style="font-weight: 800; color: #92400e; margin-bottom: 6px;">👥 La société gauloise (Cahier & Manuel) :</div>
-              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-                <img src="images/gaulois_societe.jpg" alt="Classes sociales société gauloise" style="width: 100%; display: block;">
-              </div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-                La société se divise en 3 grands groupes : les <strong>nobles/guerriers</strong> (Chef-roi, cavaliers), les <strong>druides</strong> (religion, justice, savoir oral sans écrit), et le <strong>peuple</strong> (artisans forgerons réputés, éleveurs, agriculteurs).
-              </p>
-            </div>
-          </div>
-
-          <div class="video-doc-card">
-            <div class="video-doc-header">
-              <span class="video-doc-title">🎬 Vidéo Quelle Histoire : Les Gaulois</span>
-            </div>
-            <div class="video-preview-box" onclick="window.open('https://youtu.be/iJwnr4pSZ3g', '_blank')">
-              <img src="https://img.youtube.com/vi/iJwnr4pSZ3g/hqdefault.jpg" alt="Vidéo Les Gaulois Quelle Histoire" class="video-preview-thumb">
-              <div class="video-play-overlay">
-                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </div>
-            </div>
-            <div class="video-actions-row">
-              <a href="https://youtu.be/iJwnr4pSZ3g" target="_blank" class="yt-btn">▶️ Visionner la vidéo officielle des Gaulois</a>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 18px;">
-          <div style="font-weight: 800; font-size: 1.1rem; color: #92400e; margin-bottom: 8px;">🏆 8 Questions Flash : Société Gauloise & Celtes :</div>
-          <div id="quiz-container-gaulois" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
         </div>
       </div>
 
-      <!-- Géographie Sub : Benvenuti in Italia & Arcimboldo (Semaine du Goût) -->
-      <div id="sub-histoire-italie" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
-              🇮🇹 Géographie & Culture : Benvenuti in Italia ! (Semaine du Goût)
-            </span>
-            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
-              Padlet CM1-CM2 École Bossuet (12-16 Octobre)
-            </span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-bottom: 14px;">
-            <div>
-              <div style="font-weight: 800; color: #0369a1; margin-bottom: 6px;">🗺️ La Botte Italienne & les Spécialités :</div>
-              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-                <img src="images/geo_semaine_gout.png" alt="Affiche Benvenuti in Italia" style="width: 100%; display: block;">
-              </div>
-            </div>
-
-            <div>
-              <div style="font-weight: 800; color: #16a34a; margin-bottom: 6px;">🎨 Arcimboldo & Art Gourmand en Pâtes :</div>
-              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-                <img src="images/geo_espace_1.png" alt="Atelier Arcimboldo en pâtes" style="width: 100%; display: block;">
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">
-                À la manière de Giuseppe Arcimboldo (1527-1593), la classe a composé le portrait « Giulia » avec des pâtes colorées (farfalle, penne, coquillettes) avant la dégustation du tiramisu !
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 18px;">
-          <div style="font-weight: 800; font-size: 1.1rem; color: #0369a1; margin-bottom: 8px;">🏆 8 Défis Géographie & Culture Italienne :</div>
-          <div id="quiz-container-italie" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-        </div>
-      </div>
-
-     </section>
+    </section>
 
     <!-- ========================================================= -->
     <!-- 4. SCIENCES & ARTS -->
     <!-- ========================================================= -->
     <section id="subject-sciences" class="subject-section">
+
       <div class="hero-banner">
         <img src="images/history_hero.jpg" alt="Sciences et Tour Eiffel">
         <div class="hero-banner-overlay">
@@ -8390,16 +8734,305 @@
         </div>
       </div>
 
-      <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('sciences', 'materiaux')">🧪 Les Matériaux (Vidéo + 8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'eiffel')">🗼 Projet Gustave Eiffel (Podcast + 8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'elements')">⚛️ Tableau des Éléments (Lettres & Quiz)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'labo')">⚗️ Le Labo des Molécules (Jeu de Fusion Réel)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'anti_lacunes')" style="border-color:#16a34a; color:#166534; font-weight:800;">⚡ Pack Power Anti-Lacunes SVT (4 Défis Majeurs 🆕)</button>
-      </div>
+      
 
       <!-- Sciences Sub 1: Materiaux -->
-      <div id="sub-sciences-materiaux" class="submodule-content active">
+
+      <div class="current-period-callout" style="border-color: #059669; background: #ecfdf5;">
+        <div class="period-callout-badge" style="background: #059669; color: #ffffff;">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
+        <div class="period-callout-text" style="color: #065f46;">Focus du moment : Pack Power Anti-Lacunes SVT (Respiration, Circulation, Énergie & Matériaux).</div>
+        <button class="period-callout-btn" style="border-color: #047857; color: #064e3b;" onclick="switchSubmodule('sciences', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
+      </div>
+
+      <div class="submodule-bar">
+        <button class="submodule-btn active" onclick="switchSubmodule('sciences', 'anti_lacunes')" style="border-color:#16a34a; color:#166534; font-weight:800;">⚡ Pack Power Anti-Lacunes SVT (4 Défis Majeurs 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'labo')">⚗️ Le Labo des Molécules (Jeu de Fusion Réel)</button>
+        <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('sciences', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
+      </div>
+
+<div id="sub-sciences-anti_lacunes" class="submodule-content active">
+        <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
+              ⚡ SVT & Sciences CM2 : Pack Power Anti-Lacunes de la Matière
+            </span>
+            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
+              Matière • Conductivité • Tri Sévère & Recyclabilité
+            </span>
+          </div>
+
+          <p style="font-size: 0.95rem; color: #14532d; line-height: 1.5; margin-bottom: 14px;">
+            En CM2 et à l'entrée en 6e, 4 pièges récurrents piègent les élèves. Voici les 4 vérités scientifiques incontournables :
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+            <!-- Piège 1 : Aimant & Métaux -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #dc2626; font-size: 1rem;">🧲 1. Le Piège Suprême de l'Aimant</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                Tous les métaux conduisent l'électricité. <strong>MAIS TOUS LES MÉTAUX NE SONT PAS MAGNÉTIQUES !</strong><br>
+                • <strong>Seul le FER (et l'acier)</strong> est attiré par un aimant.<br>
+                • <strong>L'aluminium, le cuivre, l'or et l'argent</strong> ne sont <em>JAMAIS</em> attirés par un aimant !
+              </p>
+            </div>
+
+            <!-- Piège 2 : Recyclabilité à l'infini -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #16a34a; font-size: 1rem;">♻️ 2. Recyclable à l'Infini ou Pas ?</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                • <strong>À l'infini :</strong> Le <strong>verre</strong> et les <strong>métaux (acier, aluminium)</strong> se recyclent 100% à l'infini sans perte de qualité.<br>
+                • <strong>Limité :</strong> Le <strong>papier/carton</strong> (5 à 7 fois max car les fibres s'usent). Le <strong>plastique</strong> (1 à 3 fois seulement !).
+              </p>
+            </div>
+
+            <!-- Piège 3 : Temps de Décomposition -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #b45309; font-size: 1rem;">⏳ 3. Persistance des Déchets Abandonnés</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                • <em>Pelure de banane</em> : 3 à 4 semaines<br>
+                • <em>Mégot de cigarette</em> : 1 à 2 ans (pollue 500 L d'eau)<br>
+                • <em>Canette en métal</em> : 50 à 100 ans<br>
+                • <em>Bouteille en plastique</em> : 450 ans<br>
+                • <em>Bouteille en verre</em> : <strong>4 000 ans</strong> (ne disparaît jamais).
+              </p>
+            </div>
+
+            <!-- Piège 4 : Origine des Matières -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #0284c7; font-size: 1rem;">🌲 4. Origine Naturelle vs Synthétique</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                • <strong>Minérale :</strong> Verre (sable de silice), Brique (argile), Métaux (minerais).<br>
+                • <strong>Végétale :</strong> Bois, papier, coton, liège.<br>
+                • <strong>Animale :</strong> Laine, cuir, soie.<br>
+                • <strong>Fossile / Synthétique :</strong> Plastiques (pétrole brut).
+              </p>
+            </div>
+          </div>
+
+          <!-- Simulateur Interactif de Circuit Électrique & Conductivité -->
+          <div style="background: #ffffff; padding: 16px; border-radius: 14px; border: 2px solid var(--ink); margin-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #166534;">
+                💡 Laboratoire Virtuel : Testeur de Circuit & Aimant
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Teste le matériau entre les deux pinces crocodiles !</span>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+              <button class="t-chip" onclick="testMaterialCircuit('fer')">Clou en Fer</button>
+              <button class="t-chip" onclick="testMaterialCircuit('alu')">Canette en Aluminium</button>
+              <button class="t-chip" onclick="testMaterialCircuit('cuivre')">Fil de Cuivre</button>
+              <button class="t-chip" onclick="testMaterialCircuit('bois')">Règle en Bois</button>
+              <button class="t-chip" onclick="testMaterialCircuit('plastique')">Bouchon en Plastique</button>
+              <button class="t-chip" onclick="testMaterialCircuit('verre')">Bille en Verre</button>
+              <button class="t-chip" onclick="testMaterialCircuit('eau_salee')">Eau Salée</button>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-around; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 14px; flex-wrap: wrap; gap: 12px;">
+              <div style="text-align: center;">
+                <div style="font-size: 2.2rem;">🔋</div>
+                <div style="font-weight: 800; font-size: 0.85rem;">Pile 4.5V</div>
+              </div>
+              <div style="text-align: center;">
+                <div id="circuitMatName" style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">Clou en Fer</div>
+                <div id="circuitMatStatus" style="font-size: 0.85rem; font-weight: 700; color: #16a34a;">Conducteur électrique !</div>
+              </div>
+              <div style="text-align: center;">
+                <div id="circuitBulbIcon" style="font-size: 2.5rem; filter: drop-shadow(0 0 10px #facc15);">💡</div>
+                <div id="circuitBulbText" style="font-weight: 800; font-size: 0.85rem; color: #ca8a04;">Ampoule ALLUMÉE</div>
+              </div>
+              <div style="text-align: center; border-left: 2px dashed #cbd5e1; padding-left: 14px;">
+                <div style="font-size: 2.2rem;">🧲</div>
+                <div id="circuitMagnetStatus" style="font-weight: 800; font-size: 0.85rem; color: #dc2626;">Attiré par l'aimant !</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #166534; margin-bottom: 8px;">🏆 10 Défis Power Anti-Lacunes SVT :</div>
+          <div id="quiz-container-svt-anti-lacunes" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
+<div id="sub-sciences-labo" class="submodule-content">
+        <!-- En-tête du Labo -->
+        <div class="video-doc-card" style="background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%); border-color: #059669;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; margin: 0; color: #065f46;">⚗️ Le Grand Laboratoire des Molécules Réelles</h3>
+              <p style="color: #047857; margin: 4px 0 0 0; font-size: 0.95rem;">
+                Associe de vrais atomes pour synthétiser de la matière réelle ! Découvre les 14 molécules du Codex et gagne <strong>+2 ⭐ par découverte</strong> pour le Coffre aux Récompenses.
+              </p>
+            </div>
+            <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 6px 14px; font-weight: 800; box-shadow: 2px 2px 0 var(--ink);">
+              🧪 Collection : <span id="labCodexCount" style="color: #2563eb;">0</span> / 14 Molécules
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode Quiz / Quêtes Guidées -->
+        <div class="labo-card" style="margin-bottom: 20px; border-left: 6px solid #2563eb;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.6rem;">🎯</span>
+              <div>
+                <span id="labMissionNumber" style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #2563eb; letter-spacing: 0.5px;">MISSION 1 / 10</span>
+                <h4 id="labMissionTitle" style="margin: 0; font-size: 1.15rem; font-family: 'Fredoka', sans-serif; color: var(--ink);">Mission Hydratation Spatiale</h4>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="doc-link-btn" onclick="prevLabMission()" style="padding: 6px 10px; font-size: 0.85rem;">◀️ Précédente</button>
+              <button class="doc-link-btn" onclick="nextLabMission()" style="padding: 6px 10px; font-size: 0.85rem;">Suivante ▶️</button>
+            </div>
+          </div>
+
+          <p id="labMissionDesc" style="margin: 10px 0 12px 0; color: #334155; font-size: 0.94rem; line-height: 1.4;">
+            Les astronautes de la station spatiale ont soif ! Synthétise une molécule d'Eau pure pour remplir leur gourde.
+          </p>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: #f8fafc; border-radius: 10px; padding: 10px 14px; border: 1px solid #e2e8f0;">
+            <div style="font-size: 0.88rem; color: #475569;">
+              💡 <strong>Indice Chimie :</strong> <span id="labMissionHint">2 atomes d'Hydrogène (H) + 1 atome d'Oxygène (O)</span>
+            </div>
+            <button class="doc-link-btn" onclick="loadMissionIngredients()" style="background: #eff6ff; color: #1d4ed8; border-color: #3b82f6; font-weight: 800; font-size: 0.85rem;">
+              📥 Déposer les atomes dans le bécher
+            </button>
+          </div>
+        </div>
+
+        <!-- L'Atelier de Fusion Chimique -->
+        <div class="labo-bench">
+          <!-- Colonne Gauche : Palette d'Atomes avec Lettres Bien Visibles -->
+          <div class="labo-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h4 style="margin: 0; font-family: 'Fredoka', sans-serif; font-size: 1.15rem;">1️⃣ Palette d'Atomes (Lettres Officielles)</h4>
+              <span style="font-size: 0.78rem; font-weight: 700; color: #64748b;">Clique pour ajouter</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 4px 0 10px 0;">
+              Chaque lettre majuscule représente l'élément officiel de la nature :
+            </p>
+
+            <div class="atom-palette-grid">
+              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('H')">
+                <span class="atom-p-sym">H</span>
+                <span class="atom-p-name">Hydrogène (1)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('C')">
+                <span class="atom-p-sym">C</span>
+                <span class="atom-p-name">Carbone (6)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('N')">
+                <span class="atom-p-sym">N</span>
+                <span class="atom-p-name">Azote (7)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('O')">
+                <span class="atom-p-sym">O</span>
+                <span class="atom-p-name">Oxygène (8)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Na')">
+                <span class="atom-p-sym">Na</span>
+                <span class="atom-p-name">Sodium (11)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-metalloid" onclick="addAtomToBeaker('Si')">
+                <span class="atom-p-sym">Si</span>
+                <span class="atom-p-name">Silicium (14)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-nonmetal" onclick="addAtomToBeaker('Cl')">
+                <span class="atom-p-sym">Cl</span>
+                <span class="atom-p-name">Chlore (17)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Ca')">
+                <span class="atom-p-sym">Ca</span>
+                <span class="atom-p-name">Calcium (20)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Fe')">
+                <span class="atom-p-sym">Fe</span>
+                <span class="atom-p-name">Fer (26)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Cu')">
+                <span class="atom-p-sym">Cu</span>
+                <span class="atom-p-name">Cuivre (29)</span>
+              </button>
+              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Sn')">
+                <span class="atom-p-sym">Sn</span>
+                <span class="atom-p-name">Étain (50)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Colonne Droite : Le Bécher de Fusion -->
+          <div class="labo-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <h4 style="margin: 0; font-family: 'Fredoka', sans-serif; font-size: 1.15rem;">2️⃣ Bécher de Réaction Chimique</h4>
+              <span id="beakerCountBadge" style="font-size: 0.8rem; font-weight: 800; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 10px;">
+                0 atome
+              </span>
+            </div>
+
+            <div class="beaker-flask-container">
+              <div id="beakerAtomsContainer" class="beaker-atoms-tray">
+                <div class="beaker-empty-text">
+                  🧪 Le bécher est vide !<br>
+                  Clique sur les atomes à gauche pour les mélanger.
+                </div>
+              </div>
+
+              <div class="beaker-controls">
+                <button class="btn-fusion-trigger" onclick="triggerFusionReaction()">
+                  ⚡ Lancer la Réaction !
+                </button>
+                <button class="btn-fusion-clear" onclick="clearBeaker()">
+                  🧹 Vider
+                </button>
+              </div>
+            </div>
+
+            <!-- Résultat de la réaction -->
+            <div id="fusionResultPanel" class="fusion-result-panel"></div>
+          </div>
+        </div>
+
+        <!-- Le Grand Codex des 14 Molécules Réelles -->
+        <div class="labo-card" style="margin-top: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; margin: 0; color: var(--ink);">
+                📜 Le Grand Codex des 14 Molécules & Matériaux Réels
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 0 0;">
+                Toutes les combinaisons sont réelles et basées sur la physique et la chimie ! (+2 ⭐ par découverte)
+              </p>
+            </div>
+            <button class="doc-link-btn" onclick="resetDiscoveredMolecules()" style="font-size: 0.78rem; padding: 4px 10px; color: #64748b;">
+              🔄 Recommencer la collection
+            </button>
+          </div>
+
+          <div id="codexGrid" class="codex-grid"></div>
+        </div>
+      </div>
+
+      <!-- Sciences Sub : Pack Power Anti-Lacunes SVT (Matière, Tri, Électricité & Recyclage) -->
+
+
+      <!-- Conteneur Consigné des Anciennes Leçons de Sciences (Période 1) -->
+      <div id="sub-sciences-archives_p1" class="submodule-content">
+        <div class="archive-header-card">
+          <div class="archive-header-left">
+            <span class="archive-badge" style="background: #d1fae5; color: #065f46;">📦 Archives Sciences • Période 1 (Septembre - Octobre)</span>
+            <h3 style="margin: 4px 0 0 0; font-size: 1.15rem; color: #1e293b;">Défis Scientifiques & Découvertes de P1</h3>
+            <p style="margin: 2px 0 0 0; font-size: 0.85rem; color: #64748b;">Matériaux, tour Eiffel et éléments chimiques.</p>
+          </div>
+          <div class="archive-pills-bar">
+            <button class="archive-nav-pill active" onclick="switchArchivedLesson('sciences', 'materiaux', this)">🧪 Les Familles de Matériaux</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('sciences', 'eiffel', this)">🗼 Projet Gustave Eiffel</button>
+            <button class="archive-nav-pill" onclick="switchArchivedLesson('sciences', 'elements', this)">⚛️ Tableau des Éléments</button>
+          </div>
+        </div>
+
+        <div class="archived-body-wrap" style="width: 100%;">
+          <div id="sub-sciences-materiaux" class="archived-pane active">
         <!-- Bandeau Flash Synthèse Tuteur Matériaux -->
         <div class="tutor-flash-card" style="border-left: 6px solid #16a34a; margin-bottom: 20px;">
           <div class="tutor-flash-header">
@@ -8740,7 +9373,7 @@
       </div>
 
       <!-- Sciences Sub 2: Gustave Eiffel -->
-      <div id="sub-sciences-eiffel" class="submodule-content">
+          <div id="sub-sciences-eiffel" class="archived-pane">
         <div class="video-doc-card">
           <div class="video-doc-header">
             <span class="video-doc-title">🎧 Podcast & Vidéo du Padlet : Dans la classe de... Gustave Eiffel</span>
@@ -8760,7 +9393,7 @@
       </div>
 
       <!-- Sciences Sub 3: Tableau des Éléments -->
-      <div id="sub-sciences-elements" class="submodule-content">
+          <div id="sub-sciences-elements" class="archived-pane">
 
         <!-- Bannière d'accès direct au jeu de fusion -->
         <div class="chem-banner-callout">
@@ -8828,267 +9461,6 @@
       </div>
 
       <!-- Sciences Sub 4: Labo des Molécules (Jeu de Fusion Réel) -->
-      <div id="sub-sciences-labo" class="submodule-content">
-        <!-- En-tête du Labo -->
-        <div class="video-doc-card" style="background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%); border-color: #059669;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; margin: 0; color: #065f46;">⚗️ Le Grand Laboratoire des Molécules Réelles</h3>
-              <p style="color: #047857; margin: 4px 0 0 0; font-size: 0.95rem;">
-                Associe de vrais atomes pour synthétiser de la matière réelle ! Découvre les 14 molécules du Codex et gagne <strong>+2 ⭐ par découverte</strong> pour le Coffre aux Récompenses.
-              </p>
-            </div>
-            <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 6px 14px; font-weight: 800; box-shadow: 2px 2px 0 var(--ink);">
-              🧪 Collection : <span id="labCodexCount" style="color: #2563eb;">0</span> / 14 Molécules
-            </div>
-          </div>
-        </div>
-
-        <!-- Mode Quiz / Quêtes Guidées -->
-        <div class="labo-card" style="margin-bottom: 20px; border-left: 6px solid #2563eb;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.6rem;">🎯</span>
-              <div>
-                <span id="labMissionNumber" style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #2563eb; letter-spacing: 0.5px;">MISSION 1 / 10</span>
-                <h4 id="labMissionTitle" style="margin: 0; font-size: 1.15rem; font-family: 'Fredoka', sans-serif; color: var(--ink);">Mission Hydratation Spatiale</h4>
-              </div>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              <button class="doc-link-btn" onclick="prevLabMission()" style="padding: 6px 10px; font-size: 0.85rem;">◀️ Précédente</button>
-              <button class="doc-link-btn" onclick="nextLabMission()" style="padding: 6px 10px; font-size: 0.85rem;">Suivante ▶️</button>
-            </div>
-          </div>
-
-          <p id="labMissionDesc" style="margin: 10px 0 12px 0; color: #334155; font-size: 0.94rem; line-height: 1.4;">
-            Les astronautes de la station spatiale ont soif ! Synthétise une molécule d'Eau pure pour remplir leur gourde.
-          </p>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: #f8fafc; border-radius: 10px; padding: 10px 14px; border: 1px solid #e2e8f0;">
-            <div style="font-size: 0.88rem; color: #475569;">
-              💡 <strong>Indice Chimie :</strong> <span id="labMissionHint">2 atomes d'Hydrogène (H) + 1 atome d'Oxygène (O)</span>
-            </div>
-            <button class="doc-link-btn" onclick="loadMissionIngredients()" style="background: #eff6ff; color: #1d4ed8; border-color: #3b82f6; font-weight: 800; font-size: 0.85rem;">
-              📥 Déposer les atomes dans le bécher
-            </button>
-          </div>
-        </div>
-
-        <!-- L'Atelier de Fusion Chimique -->
-        <div class="labo-bench">
-          <!-- Colonne Gauche : Palette d'Atomes avec Lettres Bien Visibles -->
-          <div class="labo-card">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <h4 style="margin: 0; font-family: 'Fredoka', sans-serif; font-size: 1.15rem;">1️⃣ Palette d'Atomes (Lettres Officielles)</h4>
-              <span style="font-size: 0.78rem; font-weight: 700; color: #64748b;">Clique pour ajouter</span>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 4px 0 10px 0;">
-              Chaque lettre majuscule représente l'élément officiel de la nature :
-            </p>
-
-            <div class="atom-palette-grid">
-              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('H')">
-                <span class="atom-p-sym">H</span>
-                <span class="atom-p-name">Hydrogène (1)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('C')">
-                <span class="atom-p-sym">C</span>
-                <span class="atom-p-name">Carbone (6)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('N')">
-                <span class="atom-p-sym">N</span>
-                <span class="atom-p-name">Azote (7)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-life" onclick="addAtomToBeaker('O')">
-                <span class="atom-p-sym">O</span>
-                <span class="atom-p-name">Oxygène (8)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Na')">
-                <span class="atom-p-sym">Na</span>
-                <span class="atom-p-name">Sodium (11)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-metalloid" onclick="addAtomToBeaker('Si')">
-                <span class="atom-p-sym">Si</span>
-                <span class="atom-p-name">Silicium (14)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-nonmetal" onclick="addAtomToBeaker('Cl')">
-                <span class="atom-p-sym">Cl</span>
-                <span class="atom-p-name">Chlore (17)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Ca')">
-                <span class="atom-p-sym">Ca</span>
-                <span class="atom-p-name">Calcium (20)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Fe')">
-                <span class="atom-p-sym">Fe</span>
-                <span class="atom-p-name">Fer (26)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Cu')">
-                <span class="atom-p-sym">Cu</span>
-                <span class="atom-p-name">Cuivre (29)</span>
-              </button>
-              <button class="atom-palette-btn el-cat-metal" onclick="addAtomToBeaker('Sn')">
-                <span class="atom-p-sym">Sn</span>
-                <span class="atom-p-name">Étain (50)</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Colonne Droite : Le Bécher de Fusion -->
-          <div class="labo-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <h4 style="margin: 0; font-family: 'Fredoka', sans-serif; font-size: 1.15rem;">2️⃣ Bécher de Réaction Chimique</h4>
-              <span id="beakerCountBadge" style="font-size: 0.8rem; font-weight: 800; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 10px;">
-                0 atome
-              </span>
-            </div>
-
-            <div class="beaker-flask-container">
-              <div id="beakerAtomsContainer" class="beaker-atoms-tray">
-                <div class="beaker-empty-text">
-                  🧪 Le bécher est vide !<br>
-                  Clique sur les atomes à gauche pour les mélanger.
-                </div>
-              </div>
-
-              <div class="beaker-controls">
-                <button class="btn-fusion-trigger" onclick="triggerFusionReaction()">
-                  ⚡ Lancer la Réaction !
-                </button>
-                <button class="btn-fusion-clear" onclick="clearBeaker()">
-                  🧹 Vider
-                </button>
-              </div>
-            </div>
-
-            <!-- Résultat de la réaction -->
-            <div id="fusionResultPanel" class="fusion-result-panel"></div>
-          </div>
-        </div>
-
-        <!-- Le Grand Codex des 14 Molécules Réelles -->
-        <div class="labo-card" style="margin-top: 24px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <div>
-              <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.35rem; margin: 0; color: var(--ink);">
-                📜 Le Grand Codex des 14 Molécules & Matériaux Réels
-              </h3>
-              <p style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 0 0;">
-                Toutes les combinaisons sont réelles et basées sur la physique et la chimie ! (+2 ⭐ par découverte)
-              </p>
-            </div>
-            <button class="doc-link-btn" onclick="resetDiscoveredMolecules()" style="font-size: 0.78rem; padding: 4px 10px; color: #64748b;">
-              🔄 Recommencer la collection
-            </button>
-          </div>
-
-          <div id="codexGrid" class="codex-grid"></div>
-        </div>
-      </div>
-
-      <!-- Sciences Sub : Pack Power Anti-Lacunes SVT (Matière, Tri, Électricité & Recyclage) -->
-      <div id="sub-sciences-anti_lacunes" class="submodule-content">
-        <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
-              ⚡ SVT & Sciences CM2 : Pack Power Anti-Lacunes de la Matière
-            </span>
-            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
-              Matière • Conductivité • Tri Sévère & Recyclabilité
-            </span>
-          </div>
-
-          <p style="font-size: 0.95rem; color: #14532d; line-height: 1.5; margin-bottom: 14px;">
-            En CM2 et à l'entrée en 6e, 4 pièges récurrents piègent les élèves. Voici les 4 vérités scientifiques incontournables :
-          </p>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
-            <!-- Piège 1 : Aimant & Métaux -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: #dc2626; font-size: 1rem;">🧲 1. Le Piège Suprême de l'Aimant</strong>
-              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
-                Tous les métaux conduisent l'électricité. <strong>MAIS TOUS LES MÉTAUX NE SONT PAS MAGNÉTIQUES !</strong><br>
-                • <strong>Seul le FER (et l'acier)</strong> est attiré par un aimant.<br>
-                • <strong>L'aluminium, le cuivre, l'or et l'argent</strong> ne sont <em>JAMAIS</em> attirés par un aimant !
-              </p>
-            </div>
-
-            <!-- Piège 2 : Recyclabilité à l'infini -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: #16a34a; font-size: 1rem;">♻️ 2. Recyclable à l'Infini ou Pas ?</strong>
-              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
-                • <strong>À l'infini :</strong> Le <strong>verre</strong> et les <strong>métaux (acier, aluminium)</strong> se recyclent 100% à l'infini sans perte de qualité.<br>
-                • <strong>Limité :</strong> Le <strong>papier/carton</strong> (5 à 7 fois max car les fibres s'usent). Le <strong>plastique</strong> (1 à 3 fois seulement !).
-              </p>
-            </div>
-
-            <!-- Piège 3 : Temps de Décomposition -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: #b45309; font-size: 1rem;">⏳ 3. Persistance des Déchets Abandonnés</strong>
-              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
-                • <em>Pelure de banane</em> : 3 à 4 semaines<br>
-                • <em>Mégot de cigarette</em> : 1 à 2 ans (pollue 500 L d'eau)<br>
-                • <em>Canette en métal</em> : 50 à 100 ans<br>
-                • <em>Bouteille en plastique</em> : 450 ans<br>
-                • <em>Bouteille en verre</em> : <strong>4 000 ans</strong> (ne disparaît jamais).
-              </p>
-            </div>
-
-            <!-- Piège 4 : Origine des Matières -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-              <strong style="color: #0284c7; font-size: 1rem;">🌲 4. Origine Naturelle vs Synthétique</strong>
-              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
-                • <strong>Minérale :</strong> Verre (sable de silice), Brique (argile), Métaux (minerais).<br>
-                • <strong>Végétale :</strong> Bois, papier, coton, liège.<br>
-                • <strong>Animale :</strong> Laine, cuir, soie.<br>
-                • <strong>Fossile / Synthétique :</strong> Plastiques (pétrole brut).
-              </p>
-            </div>
-          </div>
-
-          <!-- Simulateur Interactif de Circuit Électrique & Conductivité -->
-          <div style="background: #ffffff; padding: 16px; border-radius: 14px; border: 2px solid var(--ink); margin-top: 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
-              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #166534;">
-                💡 Laboratoire Virtuel : Testeur de Circuit & Aimant
-              </strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">Teste le matériau entre les deux pinces crocodiles !</span>
-            </div>
-
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
-              <button class="t-chip" onclick="testMaterialCircuit('fer')">Clou en Fer</button>
-              <button class="t-chip" onclick="testMaterialCircuit('alu')">Canette en Aluminium</button>
-              <button class="t-chip" onclick="testMaterialCircuit('cuivre')">Fil de Cuivre</button>
-              <button class="t-chip" onclick="testMaterialCircuit('bois')">Règle en Bois</button>
-              <button class="t-chip" onclick="testMaterialCircuit('plastique')">Bouchon en Plastique</button>
-              <button class="t-chip" onclick="testMaterialCircuit('verre')">Bille en Verre</button>
-              <button class="t-chip" onclick="testMaterialCircuit('eau_salee')">Eau Salée</button>
-            </div>
-
-            <div style="display: flex; align-items: center; justify-content: space-around; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 14px; flex-wrap: wrap; gap: 12px;">
-              <div style="text-align: center;">
-                <div style="font-size: 2.2rem;">🔋</div>
-                <div style="font-weight: 800; font-size: 0.85rem;">Pile 4.5V</div>
-              </div>
-              <div style="text-align: center;">
-                <div id="circuitMatName" style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">Clou en Fer</div>
-                <div id="circuitMatStatus" style="font-size: 0.85rem; font-weight: 700; color: #16a34a;">Conducteur électrique !</div>
-              </div>
-              <div style="text-align: center;">
-                <div id="circuitBulbIcon" style="font-size: 2.5rem; filter: drop-shadow(0 0 10px #facc15);">💡</div>
-                <div id="circuitBulbText" style="font-weight: 800; font-size: 0.85rem; color: #ca8a04;">Ampoule ALLUMÉE</div>
-              </div>
-              <div style="text-align: center; border-left: 2px dashed #cbd5e1; padding-left: 14px;">
-                <div style="font-size: 2.2rem;">🧲</div>
-                <div id="circuitMagnetStatus" style="font-weight: 800; font-size: 0.85rem; color: #dc2626;">Attiré par l'aimant !</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 18px;">
-          <div style="font-weight: 800; font-size: 1.1rem; color: #166534; margin-bottom: 8px;">🏆 10 Défis Power Anti-Lacunes SVT :</div>
-          <div id="quiz-container-svt-anti-lacunes" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
         </div>
       </div>
 
@@ -9618,6 +9990,196 @@
           </p>
           <div style="max-width: 780px; margin: 0 auto; border: 2.5px solid var(--ink); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-comic-lg);">
             <img src="images/anglais_manuel_vocabulaire.jpg" alt="Manuel Anglais CM2 - What is it?" style="width: 100%; height: auto; display: block;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    
+    <!-- ========================================================= -->
+    <!-- SECTION GLOBALE : ARCHIVES DES ANCIENNES LEÇONS (P1)     -->
+    <!-- ========================================================= -->
+    <section id="subject-archives" class="subject-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #1e293b, #334155);">
+        <div class="hero-banner-overlay" style="background: rgba(15, 23, 42, 0.75);">
+          <div class="hero-title" style="color: #f8fafc;">📦 Armoire des Archives • Période 1 (Septembre - Octobre)</div>
+          <div class="hero-tag" style="background: #fbbf24; color: #78350f;">15 Leçons & Entraînements Intégrés</div>
+        </div>
+      </div>
+
+      <div class="rule-box" style="margin-top: 18px; background: #f8fafc; border-color: #64748b;">
+        🏛️ <strong>Bienvenue dans l'espace d'archivage CM2 :</strong><br>
+        Toutes les leçons, vidéos et entraînements du début d'année (Période 1) sont précieusement conservés ici pour tes révisions.<br>
+        L'espace principal du site est désormais dédié aux <strong>nouveaux apprentissages (Période 2)</strong>.<br>
+        💡 <em>Clique sur n'importe quel bouton ci-dessous pour ouvrir directement la leçon dans son espace interactif !</em>
+      </div>
+
+      <!-- Filtres par matière pour les archives -->
+      <div class="archive-filter-bar">
+        <button class="archive-filter-btn active" onclick="filterArchiveCards('all', this)">🌟 Tout voir (15 modules)</button>
+        <button class="archive-filter-btn" onclick="filterArchiveCards('francais', this)">🇫🇷 Français (5)</button>
+        <button class="archive-filter-btn" onclick="filterArchiveCards('maths', this)">🔢 Maths (4)</button>
+        <button class="archive-filter-btn" onclick="filterArchiveCards('histoire', this)">🏛️ Histoire (3)</button>
+        <button class="archive-filter-btn" onclick="filterArchiveCards('sciences', this)">🔬 Sciences (3)</button>
+      </div>
+
+      <!-- Grille des Cartes d'Archives -->
+      <div class="archive-cards-grid">
+        <!-- Français Card -->
+        <div class="archive-subject-card" data-archive-subject="francais">
+          <div class="archive-card-header" style="background: #eff6ff; border-bottom: 2px solid #bfdbfe;">
+            <span class="archive-card-icon">🇫🇷</span>
+            <div>
+              <h3 style="margin: 0; color: #1e40af; font-size: 1.1rem;">Français • Période 1</h3>
+              <span style="font-size: 0.8rem; color: #3b82f6; font-weight: 700;">Grammaire, Orthographe & Relecture</span>
+            </div>
+          </div>
+          <div class="archive-card-list">
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🎯 Duel des Homophones</strong>
+                <span>a/à, et/est, on/ont, son/sont (12 défis avec tuteur)</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('francais', 'homophones')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🔍 Détective de Dictée</strong>
+                <span>La méthode des 4 loupes de relecture active</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('francais', 'detective')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🐍 Orthographe 4 : « s » ou « ss »</strong>
+                <span>10 défis pour maîtriser le son [s] et le piège du zèbre</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('francais', 'orthographe_s')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>📖 Grammaire G1 : Les Déterminants</strong>
+                <span>Articles définis, indéfinis, possessifs & démonstratifs</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('francais', 'grammaire')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>✍️ Conjugaison Classique</strong>
+                <span>Présent des 3 groupes de verbes (8 défis)</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('francais', 'conjugaison')">Ouvrir ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maths Card -->
+        <div class="archive-subject-card" data-archive-subject="maths">
+          <div class="archive-card-header" style="background: #fef3c7; border-bottom: 2px solid #fde68a;">
+            <span class="archive-card-icon">🔢</span>
+            <div>
+              <h3 style="margin: 0; color: #92400e; font-size: 1.1rem;">Mathématiques • Période 1</h3>
+              <span style="font-size: 0.8rem; color: #d97706; font-weight: 700;">Calcul, Problèmes & Géométrie</span>
+            </div>
+          </div>
+          <div class="archive-card-list">
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🧠 Résolution de Problèmes</strong>
+                <span>Méthode en 3 étapes & 12 problèmes guidés pas à pas</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('maths', 'problemes')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>⚡ Calcul Rapide & Stratégies</strong>
+                <span>Mode chrono 45 secondes et calcul mental</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('maths', 'chrono')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>➖ Soustractions par Cassage</strong>
+                <span>Vidéo Padlet explicative + quiz de calculs posés</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('maths', 'soustraction')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>📐 Droites Perpendiculaires & Parallèles</strong>
+                <span>Atelier géométrique interactif avec équerre virtuelle</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('maths', 'geometrie')">Ouvrir ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Histoire Card -->
+        <div class="archive-subject-card" data-archive-subject="histoire">
+          <div class="archive-card-header" style="background: #e0f2fe; border-bottom: 2px solid #bae6fd;">
+            <span class="archive-card-icon">🏛️</span>
+            <div>
+              <h3 style="margin: 0; color: #0369a1; font-size: 1.1rem;">Histoire • Période 1</h3>
+              <span style="font-size: 0.8rem; color: #0284c7; font-weight: 700;">Repères chronologiques & Préhistoire</span>
+            </div>
+          </div>
+          <div class="archive-card-list">
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>⏳ Les 5 Grandes Périodes</strong>
+                <span>Chanson vidéo du Padlet & 8 défis chronologiques</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('histoire', 'periodes')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🦣 La Préhistoire</strong>
+                <span>Paléolithique, Néolithique, feu, chasse & agriculture</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('histoire', 'prehistoire')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>👑 Le Sacre des Rois à Reims</strong>
+                <span>Visite vidéo de la cathédrale & 6 défis du sacre</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('histoire', 'reims')">Ouvrir ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sciences Card -->
+        <div class="archive-subject-card" data-archive-subject="sciences">
+          <div class="archive-card-header" style="background: #d1fae5; border-bottom: 2px solid #a7f3d0;">
+            <span class="archive-card-icon">🔬</span>
+            <div>
+              <h3 style="margin: 0; color: #065f46; font-size: 1.1rem;">Sciences • Période 1</h3>
+              <span style="font-size: 0.8rem; color: #059669; font-weight: 700;">Matière, Matériaux & Inventions</span>
+            </div>
+          </div>
+          <div class="archive-card-list">
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🧪 Les Familles de Matériaux</strong>
+                <span>Métaux, verres, organiques & plastiques (8 défis)</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('sciences', 'materiaux')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>🗼 Le Projet Gustave Eiffel</strong>
+                <span>Podcast audio & histoire de la tour de 300 mètres</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('sciences', 'eiffel')">Ouvrir ➔</button>
+            </div>
+            <div class="archive-card-item">
+              <div class="archive-item-info">
+                <strong>⚛️ Tableau des Éléments Chimiques</strong>
+                <span>Atomes, symboles périodiques & grand quiz</span>
+              </div>
+              <button class="archive-open-btn" onclick="switchSubjectAndSub('sciences', 'elements')">Ouvrir ➔</button>
+            </div>
           </div>
         </div>
       </div>
@@ -11788,7 +12350,15 @@
       const target = document.getElementById('subject-' + subj);
       if (target) target.classList.add('active');
 
-      if (subj === 'blocnotes') {
+      if (subj === 'maths') {
+        if (typeof renderGlisseTable === 'function' && typeof currentGlisseValue !== 'undefined') {
+          renderGlisseTable(currentGlisseValue);
+        }
+      } else if (subj === 'sciences') {
+        if (typeof testMaterialCircuit === 'function') {
+          testMaterialCircuit('fer');
+        }
+      } else if (subj === 'blocnotes') {
         renderMemos();
         setTimeout(resizeScratchpadCanvas, 80);
       } else if (subj === 'recompenses') {
@@ -11807,18 +12377,85 @@
       renderDailyBalanceWidget();
     }
 
+    // Mapping des anciennes leçons consignées en archives (Période 1)
+    const ARCHIVED_LESSON_MAP = {
+      francais: ['homophones', 'detective', 'orthographe_s', 'grammaire', 'conjugaison'],
+      maths: ['problemes', 'chrono', 'soustraction', 'geometrie'],
+      histoire: ['periodes', 'prehistoire', 'reims'],
+      sciences: ['materiaux', 'eiffel', 'elements']
+    };
+
+    function isArchivedLesson(subject, subKey) {
+      return Boolean(ARCHIVED_LESSON_MAP[subject] && ARCHIVED_LESSON_MAP[subject].includes(subKey));
+    }
+
+    function switchArchivedLesson(subject, lessonKey, btn) {
+      const container = document.getElementById(`sub-${subject}-archives_p1`);
+      if (!container) return;
+
+      // 1. Mettre à jour les pilules d'archives
+      container.querySelectorAll('.archive-nav-pill').forEach(p => p.classList.remove('active'));
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const matchingBtn = container.querySelector(`.archive-nav-pill[onclick*="'${lessonKey}'"]`);
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      // 2. Basculer les volets consignés
+      container.querySelectorAll('.archived-pane').forEach(pane => pane.classList.remove('active'));
+      const targetPane = document.getElementById(`sub-${subject}-${lessonKey}`);
+      if (targetPane) {
+        targetPane.classList.add('active');
+      }
+
+      // 3. Initialisations spécifiques si nécessaire
+      if (subject === 'maths' && lessonKey === 'geometrie') {
+        setTimeout(initGeometryStudio, 80);
+      }
+    }
+
     function switchSubmodule(subject, subKey) {
+      // Redirection automatique si le module demandé est une ancienne leçon archivée
+      if (isArchivedLesson(subject, subKey)) {
+        switchSubmodule(subject, 'archives_p1');
+        switchArchivedLesson(subject, subKey);
+        return;
+      }
+
       const parent = document.getElementById('subject-' + subject);
       if (!parent) return;
+
+      // Désactiver tous les boutons de sous-module et contenus
       parent.querySelectorAll('.submodule-btn').forEach(b => b.classList.remove('active'));
       parent.querySelectorAll('.submodule-content').forEach(c => c.classList.remove('active'));
-      if (window.event && window.event.target) {
-        const b = window.event.target.closest('.submodule-btn');
-        if (b) b.classList.add('active');
-      }
-      const sub = document.getElementById(`sub-${subject}-${subKey}`);
-      if (sub) sub.classList.add('active');
 
+      // Activer le bouton correspondant
+      let clickedBtn = null;
+      if (window.event && window.event.target) {
+        clickedBtn = window.event.target.closest('.submodule-btn');
+      }
+      if (!clickedBtn) {
+        clickedBtn = parent.querySelector(`.submodule-btn[onclick*="'${subKey}'"]`);
+      }
+      if (clickedBtn) clickedBtn.classList.add('active');
+
+      // Activer le conteneur cible
+      const sub = document.getElementById(`sub-${subject}-${subKey}`);
+      if (sub) {
+        sub.classList.add('active');
+      }
+
+      // Si on ouvre l'onglet archives_p1 et qu'aucun volet n'est actif, activer le 1er par défaut
+      if (subKey === 'archives_p1' && sub) {
+        const activeArchived = sub.querySelector('.archived-pane.active');
+        if (!activeArchived) {
+          const firstArchived = ARCHIVED_LESSON_MAP[subject]?.[0];
+          if (firstArchived) switchArchivedLesson(subject, firstArchived);
+        }
+      }
+
+      // Déclencheurs spécifiques aux nouveaux apprentissages
       if (subject === 'blocnotes' && subKey === 'ardoise') {
         setTimeout(resizeScratchpadCanvas, 80);
       } else if (subject === 'recompenses') {
@@ -11837,6 +12474,32 @@
       } else if (subject === 'sciences' && subKey === 'anti_lacunes') {
         testMaterialCircuit('fer');
       }
+    }
+
+    // Passerelle directe depuis le Hub Global d'Archives
+    function switchSubjectAndSub(subject, subKey) {
+      switchSubject(subject);
+      setTimeout(() => {
+        switchSubmodule(subject, subKey);
+        const target = document.getElementById(`sub-${subject}-${subKey}`) || document.getElementById(`sub-${subject}-archives_p1`);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    }
+
+    // Filtre des cartes du Hub d'Archives
+    function filterArchiveCards(subj, btn) {
+      document.querySelectorAll('.archive-filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const cards = document.querySelectorAll('.archive-subject-card');
+      cards.forEach(card => {
+        if (subj === 'all' || card.getAttribute('data-archive-subject') === subj) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
 
 
