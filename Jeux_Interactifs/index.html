@@ -6613,38 +6613,44 @@
         </div>
       </div>
 
-      <!-- Bandeau d'Annonce Flash : NOUVELLE DICTÉE SÉRIE 5 -->
-      <div style="background: linear-gradient(135deg, #fef3c7, #fefce8); border: 2.5px solid #b45309; border-radius: 16px; padding: 14px 18px; margin-bottom: 16px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <!-- Bandeau d'Annonce Flash : NOUVELLE DICTÉE SÉRIE 6 MAGRITTE -->
+      <div style="background: linear-gradient(135deg, #f5f3ff, #faf5ff); border: 2.5px solid #7c3aed; border-radius: 16px; padding: 14px 18px; margin-bottom: 16px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">🎻</span>
+          <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">🎨</span>
           <div>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <span style="background: #b45309; color: #ffffff; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px;">NOUVEAU • SÉRIE 5</span>
-              <span style="font-size: 0.78rem; font-weight: 800; color: #92400e;">Dictée Hebdomadaire & Leçon de la Semaine</span>
+              <span style="background: #7c3aed; color: #ffffff; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px;">NOUVEAU • DICTÉE 6 (PADLET)</span>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #6d28d9;">Semaine du 2 Novembre • Histoire de l'Art & Surréalisme</span>
             </div>
-            <div style="font-family: 'Fredoka', sans-serif; font-weight: 800; color: #78350f; font-size: 1.15rem; margin-top: 2px;">
-              Les Quatre Saisons (Antonio Vivaldi) & Orthographe 5 (Accords dans le GN)
+            <div style="font-family: 'Fredoka', sans-serif; font-weight: 800; color: #4c1d95; font-size: 1.15rem; margin-top: 2px;">
+              « La Trahison des images » (René Magritte) • 36 Mots Clés, Vocale & G3 (Complément du Nom)
             </div>
           </div>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(5);" style="padding: 8px 16px; font-size: 0.88rem; background: #b45309; color: #ffffff; border-color: #78350f;">
-            📜 Voir la Grille & Dictée Vocale (Série 5)
+          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(6);" style="padding: 8px 16px; font-size: 0.88rem; background: #7c3aed; color: #ffffff; border-color: #5b21b6;">
+            🎨 Grille Série 6 & Dictée Vocale
           </button>
-          <button class="action-btn" onclick="switchSubmodule('francais', 'orthographe_gn')" style="padding: 8px 16px; font-size: 0.88rem; background: #2563eb; color: #ffffff; border-color: #1d4ed8;">
-            🎨 8 Défis Orthographe 5
+          <button class="action-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="padding: 8px 16px; font-size: 0.88rem; background: #0284c7; color: #ffffff; border-color: #0369a1;">
+            🧩 Leçon & Défis G3 (Complément du Nom)
+          </button>
+          <button class="action-btn" onclick="switchSubmodule('francais', 'autodictee')" style="padding: 8px 16px; font-size: 0.88rem; background: #d97706; color: #ffffff; border-color: #b45309;">
+            🏛️ Autodictée 1 Patrimoine
           </button>
         </div>
       </div>
 
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 5 🆕 & 4)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_gn')">🎨 Orthographe 5 : Accords dans le GN (8 Défis 🆕)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 6 🆕, 5 & 4)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🧩 G3 : Complément du Nom (10 Défis 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_c2')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C2 : Les 8 Verbes du Présent (Ring 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'autodictee')" style="border-color:#7c3aed; color:#6d28d9; font-weight:800;">🏛️ Autodictée 1 : Patrimoine (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_gn')">🎨 Orthographe 5 : Accords dans le GN (8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'homophones')">🎯 Duel des Homophones (12 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'detective')">🔍 Détective de Dictée (4 Missions)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_s')">🐍 Orthographe 4 : « s » ou « ss » (10 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire')">📖 Grammaire G1 & Déterminants (8 Défis)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison : Le Présent (8 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison')">✍️ Conjugaison Classique (8 Défis)</button>
       </div>
 
       <!-- Français Sub 1: Homophones -->
@@ -6682,8 +6688,11 @@
             <button class="dictee-series-btn" id="btn-series-4" onclick="selectDicteeSeries(4)">
               <span>🦣 Série 4 : L'art pariétal (Préhistoire)</span>
             </button>
-            <button class="dictee-series-btn active" id="btn-series-5" onclick="selectDicteeSeries(5)">
+            <button class="dictee-series-btn" id="btn-series-5" onclick="selectDicteeSeries(5)">
               <span>🎻 Série 5 : Les Quatre Saisons (Vivaldi)</span>
+            </button>
+            <button class="dictee-series-btn active" id="btn-series-6" onclick="selectDicteeSeries(6)">
+              <span>🎨 Série 6 : La Trahison des images (René Magritte)</span>
               <span class="dictee-series-badge-new">NOUVEAU</span>
             </button>
           </div>
@@ -6836,6 +6845,160 @@
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_conjugaison', this)">✨ Générer de nouvelles questions Conjugaison (IA)</button>
         <div id="quiz-container-conjugaison" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
+    
+      <!-- Français Sub : G3 Le Groupe Nominal et le Complément du Nom (Leçon du 2 Novembre) -->
+      <div id="sub-francais-grammaire_g3" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
+              📘 Leçon G3 : Le groupe nominal & le complément du nom (CDN)
+            </span>
+            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
+              Maîtresse France • Semaine du 2 Novembre
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 10px;">
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #0369a1; font-size: 1rem;">1️⃣ Le Nom Noyau & les Expansions</strong>
+              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
+                Le <strong>groupe nominal (GN)</strong> s'organise autour d'un nom principal : le <strong>nom noyau</strong>.
+                On peut enrichir le nom avec :
+              </p>
+              <ul style="margin: 4px 0 8px 18px; font-size: 0.88rem;">
+                <li>Un <strong>adjectif qualificatif</strong> : <em>un <span style="color:#0284c7; font-weight:bold;">grand</span> chien</em>, <em>un jardin <span style="color:#0284c7; font-weight:bold;">fleuri</span></em>.</li>
+                <li>Un <strong>complément du nom (CDN)</strong> : <em>une maison <span style="color:#b45309; font-weight:bold;">de campagne</span></em>, <em>un gâteau <span style="color:#b45309; font-weight:bold;">au chocolat</span></em>.</li>
+              </ul>
+            </div>
+
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #b45309; font-size: 1rem;">2️⃣ Comment reconnaître le CDN ?</strong>
+              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
+                Le <strong>complément du nom</strong> est introduit par une <strong>préposition</strong> :
+              </p>
+              <div style="background: #fef3c7; border: 1px solid #fde68a; padding: 6px 10px; border-radius: 8px; font-weight: 800; color: #92400e; font-size: 0.92rem; text-align: center; margin: 6px 0;">
+                à • de • en • pour • sans • avec
+              </div>
+              <p style="font-size: 0.88rem; margin: 4px 0; line-height: 1.4;">
+                <em>Exemples :</em> une tasse <strong>de</strong> thé, une robe <strong>en</strong> coton, une brosse <strong>à</strong> dents, un livre <strong>pour</strong> enfants.
+              </p>
+            </div>
+
+            <div style="background: #fff7ed; padding: 14px; border-radius: 12px; border: 2px solid #ea580c; box-shadow: var(--shadow-comic-sm); grid-column: 1 / -1;">
+              <strong style="color: #c2410c; font-size: 1.05rem;">🚫 La Règle d'Or Anti-Pièges CM2 : L'ACCORD</strong>
+              <p style="font-size: 0.92rem; margin: 6px 0; line-height: 1.5;">
+                Contrairement à l'adjectif qui s'accorde toujours en genre et en nombre avec le nom noyau, le <strong>complément du nom NE S'ACCORDE PAS</strong> avec le nom noyau !<br>
+                • <em>Une veste en cuir</em> ➔ <em>Des vestes en <strong>cuir</strong></em> (le cuir ne change pas !)<br>
+                • <em>Des brosses à <strong>dents</strong></em> (plusieurs dents par le sens, mais pas d'accord avec 'brosses')<br>
+                • <em>Des tartes aux <strong>pommes</strong></em> (plusieurs pommes dans la tarte).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_grammaire_g3', this)">✨ Générer de nouveaux défis Complément du Nom (IA)</button>
+        <div id="quiz-container-grammaire-g3" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub : C2 Ring des 8 Verbes du Présent (Fiche Officielle Padlet) -->
+      <div id="sub-francais-conjugaison_c2" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #d97706; background: #fffbeb;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
+              🥊 Fiche C2 : Les 8 Verbes Clés du Présent de l'Indicatif
+            </span>
+            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
+              Fiche de révision officielle • Padlet CM2
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-top: 10px;">
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">FAIRE (3e gr.)</strong><br>
+              <small>je fais, tu fais, il fait<br>nous faisons, <strong style="color:#dc2626;">vous faites</strong>, <strong style="color:#dc2626;">ils font</strong></small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">PRENDRE (3e gr.)</strong><br>
+              <small>je prends, tu prends, il prend<br>nous prenons, vous prenez, <strong style="color:#dc2626;">ils prennent (2 n)</strong></small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">VENIR (3e gr.)</strong><br>
+              <small>je viens, tu viens, il vient<br>nous venons, vous venez, <strong style="color:#dc2626;">ils viennent (2 n)</strong></small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">ALLER (3e gr.)</strong><br>
+              <small>je vais, tu vas, il va<br>nous allons, vous allez, <strong style="color:#dc2626;">ils vont</strong></small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">MANGER (1er gr. piège)</strong><br>
+              <small>je mange, tu manges, il mange<br><strong style="color:#dc2626;">nous mangeons (avec un e !)</strong>, vous mangez, ils mangent</small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">LANCER (1er gr. piège)</strong><br>
+              <small>je lance, tu lances, il lance<br><strong style="color:#dc2626;">nous lançons (cédille ç !)</strong>, vous lancez, ils lancent</small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">ÊTRE</strong><br>
+              <small>je suis, tu es, il est<br><strong style="color:#dc2626;">nous sommes</strong>, <strong style="color:#dc2626;">vous êtes</strong>, ils sont</small>
+            </div>
+            <div style="background: #ffffff; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--ink);">
+              <strong style="color: #b45309;">AVOIR</strong><br>
+              <small>j'ai, tu as, il a<br>nous avons, vous avez, <strong style="color:#dc2626;">ils ont</strong></small>
+            </div>
+          </div>
+        </div>
+
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_conjugaison_c2', this)">✨ Générer de nouveaux défis Le Ring des Verbes (IA)</button>
+        <div id="quiz-container-conjugaison-c2" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+      <!-- Français Sub : Autodictée 1 Les Trésors de l'Art et de l'Histoire -->
+      <div id="sub-francais-autodictee" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #7c3aed; background: #faf5ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #ddd6fe; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #5b21b6;">
+              🏛️ Autodictée 1 : Les trésors de l'art et de l'histoire
+            </span>
+            <span style="background: #ede9fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #6d28d9;">
+              Document Officiel A4 • Padlet CM2
+            </span>
+          </div>
+
+          <div style="background: #ffffff; padding: 16px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm); margin-bottom: 14px;">
+            <div style="font-weight: 800; color: #6d28d9; margin-bottom: 6px; font-size: 0.95rem;">📜 Texte intégral à mémoriser :</div>
+            <div id="autodicteeFullTextDisplay" style="font-size: 1.05rem; line-height: 1.7; color: #1e1b4b; background: #fdf4ff; padding: 12px 16px; border-radius: 8px; border-left: 4px solid #c026d3;">
+              « <strong>La grotte de Lascaux</strong> abrite de magnifiques <em>peintures préhistoriques</em>. À <strong>Nîmes</strong>, les <strong>Romains</strong> assistaient à des spectacles dans un grand <em>amphithéâtre</em>. <strong>La cathédrale de Reims</strong> est célèbre pour ses <em>vitraux colorés</em>. À <strong>Paris</strong>, <strong>la tour Eiffel</strong> attire des millions de visiteurs chaque année. Enfin, le musicien <strong>Vivaldi</strong> a composé <em>quatre concertos</em> pour raconter les saisons. Ces cinq œuvres nous font découvrir la richesse de notre histoire et de notre culture. »
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+              <button class="action-btn" onclick="toggleAutodicteeMask()" id="btnToggleAutodicteeMask" style="background: #7c3aed; padding: 8px 16px; font-size: 0.88rem;">
+                🙈 Masquer le texte pour t'entraîner
+              </button>
+              <button class="action-btn" onclick="listenAutodicteeAudio()" style="background: #0284c7; padding: 8px 16px; font-size: 0.88rem;">
+                🎙️ Écouter la lecture de Maîtresse France
+              </button>
+            </div>
+          </div>
+
+          <!-- Zone de test autodictée interactive -->
+          <div style="background: #ffffff; padding: 16px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+            <div style="font-weight: 800; color: #1e1b4b; margin-bottom: 8px;">✍️ Écris l'autodictée de mémoire (sans regarder !) :</div>
+            <textarea id="autodicteeInputArea" rows="6" style="width: 100%; border: 2px solid var(--ink); border-radius: 8px; padding: 10px; font-family: inherit; font-size: 1rem; line-height: 1.5; resize: vertical;" placeholder="Commence à taper ici : La grotte de Lascaux..."></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 8px;">
+              <button class="action-btn" onclick="verifyAutodicteeSubmission()" style="background: #16a34a; padding: 10px 20px;">
+                ✅ Vérifier ma dictée & Corriger mes erreurs
+              </button>
+              <span id="autodicteeResultScore" style="font-weight: 800; font-size: 1rem; color: #16a34a;"></span>
+            </div>
+            <div id="autodicteeFeedbackBox" style="display:none; margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 0.95rem; line-height: 1.6;"></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #5b21b6; margin-bottom: 8px;">🎯 8 Défis d'Analyse & Orthographe sur l'Autodictée 1 :</div>
+          <div id="quiz-container-autodictee" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ========================================================= -->
@@ -6877,7 +7040,10 @@
         <button class="submodule-btn" id="subBtnMathsTurbo" onclick="switchSubmodule('maths', 'turbo')" style="background: linear-gradient(135deg, #fef08a, #fde047); border-color: #ca8a04; color: #713f12; font-weight: 900;">⚡ Turbo Tables (Vitesse & Étoiles)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'chrono')">⚡ Calcul Rapide & Stratégies</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'soustraction')">➖ Soustractions par Cassage (Vidéo + Quiz)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'geometrie')">📐 Géométrie : Droites, Segments & Sécantes (Atelier Tracé)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'geometrie')">📐 Géométrie : Droites & Sécantes (Atelier)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'decimaux')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🔢 Décodeur Décimal & Glisse-Nombre (MHM 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'devoir_construction')" style="border-color:#b45309; color:#92400e; font-weight:800;">📐 Devoir Noté : 5 Programmes (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:800;">✏️ Frise Seyès (2 Nov 🆕)</button>
       </div>
 
       <!-- Maths Sub 1: Résolution de Problèmes Pas à Pas -->
@@ -7553,7 +7719,195 @@
           </div>
           <div id="quiz-container-geometrie" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
         </div>
+
+      <!-- Maths Sub : Le Décodeur Décimal (MHM Canopé & Glisse-Nombre) -->
+      <div id="sub-maths-decimaux" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
+              🔢 Leçon MHM : Les nombres décimaux & les chiffres de la partie décimale
+            </span>
+            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
+              Réseau Canopé & Glisse-Nombre MHM
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 10px;">
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #0369a1; font-size: 1rem;">1️⃣ Partie Entière vs Partie Décimale</strong>
+              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
+                La <strong>virgule</strong> sépare la partie entière (les unités complètes) de la <strong>partie décimale</strong> (les morceaux d'unité partagés en 10, 100, 1000).
+              </p>
+              <div style="background: #f8fafc; border-left: 4px solid #0284c7; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;">
+                Dans <strong>34,852</strong> :<br>
+                • <strong>34</strong> est la <em>partie entière</em> (3 dizaines, 4 unités)<br>
+                • <strong>8</strong> est le chiffre des <em>dixièmes</em> (8/10)<br>
+                • <strong>5</strong> est le chiffre des <em>centièmes</em> (5/100)<br>
+                • <strong>2</strong> est le chiffre des <em>millièmes</em> (2/1000)
+              </div>
+            </div>
+
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #b45309; font-size: 1rem;">2️⃣ Le Piège d'Or des Zéros</strong>
+              <p style="font-size: 0.9rem; margin: 6px 0; line-height: 1.5;">
+                • <strong>Zéro inutile :</strong> à la fin de la partie décimale, il ne change pas la valeur ! <em>3,50 = 3,5</em> (3 unités et 50 centièmes = 3 unités et 5 dixièmes).<br>
+                • <strong>Zéro indispensable :</strong> s'il est coincé entre la virgule et un chiffre, il change tout ! <em>3,05 ≠ 3,5</em> (3 unités et 5 centièmes ≠ 3 unités et 5 dixièmes).
+              </p>
+              <div style="background: #fef3c7; border: 1px solid #fde68a; padding: 6px 10px; border-radius: 8px; font-size: 0.88rem; color: #92400e;">
+                ⚠️ <strong>Piège de comparaison :</strong> 3,25 < 3,8 car 3,8 = 3,80 et 25 centièmes < 80 centièmes !
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulateur Interactif Glisse-Nombre -->
+          <div style="background: #ffffff; padding: 18px; border-radius: 14px; border: 2px solid var(--ink); box-shadow: var(--shadow-comic); margin-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #0369a1;">
+                🎛️ Simulateur Interactif : Le Glisse-Nombre MHM
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Multiplie ou divise pour voir les chiffres glisser !</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;">
+              <label for="glisseInput" style="font-weight: 800; font-size: 0.92rem;">Nombre de départ :</label>
+              <input type="number" id="glisseInput" value="3.45" step="0.01" style="width: 110px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-align: center;">
+              <button class="t-chip" onclick="setGlissePreset(3.45)">3,45</button>
+              <button class="t-chip" onclick="setGlissePreset(12.8)">12,8</button>
+              <button class="t-chip" onclick="setGlissePreset(0.75)">0,75</button>
+              <button class="t-chip" onclick="setGlissePreset(250)">250</button>
+            </div>
+
+            <!-- Tableau Glisse-Nombre Visuel -->
+            <div style="overflow-x: auto; margin-bottom: 12px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-family: 'Fredoka', sans-serif; min-width: 460px;">
+                <thead>
+                  <tr style="background: #0284c7; color: #ffffff; font-size: 0.85rem;">
+                    <th style="padding: 6px; border: 1px solid #0369a1;">Centaines (C)</th>
+                    <th style="padding: 6px; border: 1px solid #0369a1;">Dizaines (D)</th>
+                    <th style="padding: 6px; border: 1px solid #0369a1;">Unités (U)</th>
+                    <th style="padding: 6px; border: 1px solid #dc2626; background: #dc2626; color: #fff;">,</th>
+                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Dixièmes (1/10)</th>
+                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Centièmes (1/100)</th>
+                    <th style="padding: 6px; border: 1px solid #b45309; background: #d97706;">Millièmes (1/1000)</th>
+                  </tr>
+                </thead>
+                <tbody id="glisseTableBody" style="font-size: 1.3rem; font-weight: 800; background: #f8fafc;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#0284c7;">3</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#dc2626; font-weight:900;">,</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">4</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">5</td>
+                    <td style="padding: 10px; border: 1px solid var(--ink-faint);">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Boutons d'Action Glissement -->
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+              <button class="action-btn" onclick="applyGlisseOperation('x10')" style="background: #16a34a; padding: 8px 16px;">× 10 (Glisse vers la gauche ⬅️)</button>
+              <button class="action-btn" onclick="applyGlisseOperation('x100')" style="background: #15803d; padding: 8px 16px;">× 100 (Glisse de 2 rangs ⬅️)</button>
+              <button class="action-btn" onclick="applyGlisseOperation('/10')" style="background: #d97706; padding: 8px 16px;">÷ 10 (Glisse vers la droite ➡️)</button>
+              <button class="action-btn" onclick="applyGlisseOperation('/100')" style="background: #b45309; padding: 8px 16px;">÷ 100 (Glisse de 2 rangs ➡️)</button>
+              <button class="action-btn" onclick="resetGlisseSimulator()" style="background: #64748b; padding: 8px 14px;">🔄 Réinitialiser</button>
+            </div>
+            <div id="glisseFeedbackText" style="text-align: center; margin-top: 10px; font-weight: 700; color: #0369a1; font-size: 0.95rem;"></div>
+          </div>
+        </div>
+
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('maths_decimaux', this)">✨ Générer de nouveaux défis Nombres Décimaux (IA)</button>
+        <div id="quiz-container-decimaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
+
+      <!-- Maths Sub : Devoir Noté Géométrie (Les 5 Programmes du Padlet) -->
+      <div id="sub-maths-devoir_construction" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
+              📐 Devoir Noté : Les 5 Programmes de Construction CM2
+            </span>
+            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
+              Document Officiel CM2 (15 Octobre) • Note sur 20
+            </span>
+          </div>
+
+          <!-- Sélecteur des 5 programmes du devoir -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+            <button class="action-btn" onclick="selectConstructionProg(1)" id="btnConstProg1" style="background:#b45309; padding:6px 14px; font-size:0.85rem;">Programme 1 : Carré (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(2)" id="btnConstProg2" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 2 : Triangle rectangle (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(3)" id="btnConstProg3" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 3 : Triangle isocèle (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(4)" id="btnConstProg4" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 4 : Triangle équilatéral (4 pts)</button>
+            <button class="action-btn" onclick="selectConstructionProg(5)" id="btnConstProg5" style="background:#64748b; padding:6px 14px; font-size:0.85rem;">Programme 5 : Cerf-volant (4 pts)</button>
+          </div>
+
+          <!-- Visualiseur Interactif SVG de la Figure -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; background: #ffffff; padding: 16px; border-radius: 14px; border: 1.5px solid var(--ink);">
+            <div>
+              <div id="constProgTitle" style="font-weight: 800; color: #92400e; font-size: 1.1rem; margin-bottom: 6px;"></div>
+              <div id="constProgSteps" style="font-size: 0.9rem; line-height: 1.6; color: #1f2937;"></div>
+              <div style="margin-top: 12px; padding: 8px 12px; background: #fef9c3; border-radius: 8px; border: 1px solid #fde047; font-size: 0.88rem; font-weight: 700; color: #854d0e;" id="constProgAnswerBox">
+                🎯 <strong>Figure obtenue :</strong> <span id="constProgFigName">...</span>
+              </div>
+            </div>
+
+            <!-- Espace Dessin SVG Dynamique -->
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fafafa; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 10px; min-height: 220px;">
+              <svg id="constSvgCanvas" width="280" height="200" viewBox="0 0 280 200" style="overflow: visible;"></svg>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">Représentation géométrique exacte à l'échelle</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #92400e; margin-bottom: 8px;">🏆 8 Défis Officiels sur les 5 Programmes de Géométrie :</div>
+          <div id="quiz-container-devoir-const" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
+      <!-- Maths Sub : Frise Géométrique Seyès (2 Novembre) -->
+      <div id="sub-maths-frise_seyes" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
+              ✏️ Atelier Cahier : Frise géométrique sur réglure Seyès
+            </span>
+            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
+              Exercice publié le 2 Novembre sur le Padlet
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+            <div>
+              <p style="font-size: 0.95rem; line-height: 1.6; color: #14532d;">
+                <strong>Consigne de Maîtresse France :</strong><br>
+                <em>« Reproduis cette frise sur ton cahier en utilisant ton crayon de papier et ta règle. Choisis deux couleurs (crayons de couleur) et colorie chaque figure. »</em>
+              </p>
+              <div style="margin-top: 10px; border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/maths_2nov.jpeg" alt="Frise Seyès originale du cahier" style="width: 100%; display: block;">
+              </div>
+            </div>
+
+            <!-- Simulateur interactif de frise -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <strong style="color: #166534; font-size: 1rem;">🎨 Atelier Numérique Interactif :</strong>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 12px 0;">
+                  Clique sur les cases pour alterner tes deux couleurs (bleu & jaune ou vert & violet) et faire vivre le motif géométrique régulier !
+                </p>
+                <div id="friseInteractiveGrid" style="display: flex; gap: 4px; overflow-x: auto; padding: 10px 4px; background: #fafafa; border: 1.5px solid #cbd5e1; border-radius: 8px;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
+                <button class="action-btn" onclick="resetFriseInteractive()" style="background: #64748b; padding: 6px 14px; font-size: 0.85rem;">🔄 Effacer la frise</button>
+                <button class="action-btn" onclick="autoColorFrise()" style="background: #16a34a; padding: 6px 14px; font-size: 0.85rem;">✨ Colorier en alternance auto</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+          </div>
     </section>
 
     <!-- Modale Zoom Photo Cahier 13 Octobre -->
@@ -7630,6 +7984,8 @@
         <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'periodes')">⏳ Les 5 Périodes (Vidéo + 8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('histoire', 'prehistoire')">🦣 La Préhistoire (Vidéo + 8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('histoire', 'reims')">👑 Cathédrale de Reims (Vidéo + 6 Défis)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'gaulois')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚔️ Les Gaulois & les Celtes (Société 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🌍 Géo : L'Italie & Arcimboldo (Semaine du Goût 🆕)</button>
       </div>
 
       <!-- Histoire Sub 1: Periodes -->
@@ -7859,7 +8215,102 @@
         <button class="ai-gen-btn" onclick="generateAiExercisesFor('histoire_reims', this)">✨ Générer un nouveau quiz sur Reims (IA)</button>
         <div id="quiz-container-reims" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
-    </section>
+   
+      <!-- Histoire Sub : Les Gaulois & les Celtes (Leçon Officielle Padlet) -->
+      <div id="sub-histoire-gaulois" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
+              ⚔️ Histoire CM2 : Les Celtes & la Société Gauloise
+            </span>
+            <span style="background: #fef3c7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #b45309;">
+              Documents officiels du Padlet (7 Octobre)
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 800; color: #92400e; margin-bottom: 6px;">🌍 L'expansion celte au VIIe siècle av. J.-C. :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/celtes_peuplement.jpg" alt="Carte expansion celte" style="width: 100%; display: block;">
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+                Partis d'Europe centrale, les Celtes s'installent en Gaule, dans les îles britanniques, en Espagne et au nord de l'Italie.
+              </p>
+            </div>
+
+            <div>
+              <div style="font-weight: 800; color: #92400e; margin-bottom: 6px;">👥 La société gauloise (Cahier & Manuel) :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/gaulois_societe.jpg" alt="Classes sociales société gauloise" style="width: 100%; display: block;">
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+                La société se divise en 3 grands groupes : les <strong>nobles/guerriers</strong> (Chef-roi, cavaliers), les <strong>druides</strong> (religion, justice, savoir oral sans écrit), et le <strong>peuple</strong> (artisans forgerons réputés, éleveurs, agriculteurs).
+              </p>
+            </div>
+          </div>
+
+          <div class="video-doc-card">
+            <div class="video-doc-header">
+              <span class="video-doc-title">🎬 Vidéo Quelle Histoire : Les Gaulois</span>
+            </div>
+            <div class="video-preview-box" onclick="window.open('https://youtu.be/iJwnr4pSZ3g', '_blank')">
+              <img src="https://img.youtube.com/vi/iJwnr4pSZ3g/hqdefault.jpg" alt="Vidéo Les Gaulois Quelle Histoire" class="video-preview-thumb">
+              <div class="video-play-overlay">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-actions-row">
+              <a href="https://youtu.be/iJwnr4pSZ3g" target="_blank" class="yt-btn">▶️ Visionner la vidéo officielle des Gaulois</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #92400e; margin-bottom: 8px;">🏆 8 Questions Flash : Société Gauloise & Celtes :</div>
+          <div id="quiz-container-gaulois" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
+      <!-- Géographie Sub : Benvenuti in Italia & Arcimboldo (Semaine du Goût) -->
+      <div id="sub-histoire-italie" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
+              🇮🇹 Géographie & Culture : Benvenuti in Italia ! (Semaine du Goût)
+            </span>
+            <span style="background: #e0f2fe; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #075985;">
+              Padlet CM1-CM2 École Bossuet (12-16 Octobre)
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 800; color: #0369a1; margin-bottom: 6px;">🗺️ La Botte Italienne & les Spécialités :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/geo_semaine_gout.png" alt="Affiche Benvenuti in Italia" style="width: 100%; display: block;">
+              </div>
+            </div>
+
+            <div>
+              <div style="font-weight: 800; color: #16a34a; margin-bottom: 6px;">🎨 Arcimboldo & Art Gourmand en Pâtes :</div>
+              <div style="border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                <img src="images/geo_espace_1.png" alt="Atelier Arcimboldo en pâtes" style="width: 100%; display: block;">
+              </div>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">
+                À la manière de Giuseppe Arcimboldo (1527-1593), la classe a composé le portrait « Giulia » avec des pâtes colorées (farfalle, penne, coquillettes) avant la dégustation du tiramisu !
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #0369a1; margin-bottom: 8px;">🏆 8 Défis Géographie & Culture Italienne :</div>
+          <div id="quiz-container-italie" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
+     </section>
 
     <!-- ========================================================= -->
     <!-- 4. SCIENCES & ARTS -->
@@ -7900,6 +8351,7 @@
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'eiffel')">🗼 Projet Gustave Eiffel (Podcast + 8 Défis)</button>
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'elements')">⚛️ Tableau des Éléments (Lettres & Quiz)</button>
         <button class="submodule-btn" onclick="switchSubmodule('sciences', 'labo')">⚗️ Le Labo des Molécules (Jeu de Fusion Réel)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('sciences', 'anti_lacunes')" style="border-color:#16a34a; color:#166534; font-weight:800;">⚡ Pack Power Anti-Lacunes SVT (4 Défis Majeurs 🆕)</button>
       </div>
 
       <!-- Sciences Sub 1: Materiaux -->
@@ -8489,6 +8941,113 @@
           <div id="codexGrid" class="codex-grid"></div>
         </div>
       </div>
+
+      <!-- Sciences Sub : Pack Power Anti-Lacunes SVT (Matière, Tri, Électricité & Recyclage) -->
+      <div id="sub-sciences-anti_lacunes" class="submodule-content">
+        <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
+              ⚡ SVT & Sciences CM2 : Pack Power Anti-Lacunes de la Matière
+            </span>
+            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
+              Matière • Conductivité • Tri Sévère & Recyclabilité
+            </span>
+          </div>
+
+          <p style="font-size: 0.95rem; color: #14532d; line-height: 1.5; margin-bottom: 14px;">
+            En CM2 et à l'entrée en 6e, 4 pièges récurrents piègent les élèves. Voici les 4 vérités scientifiques incontournables :
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+            <!-- Piège 1 : Aimant & Métaux -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #dc2626; font-size: 1rem;">🧲 1. Le Piège Suprême de l'Aimant</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                Tous les métaux conduisent l'électricité. <strong>MAIS TOUS LES MÉTAUX NE SONT PAS MAGNÉTIQUES !</strong><br>
+                • <strong>Seul le FER (et l'acier)</strong> est attiré par un aimant.<br>
+                • <strong>L'aluminium, le cuivre, l'or et l'argent</strong> ne sont <em>JAMAIS</em> attirés par un aimant !
+              </p>
+            </div>
+
+            <!-- Piège 2 : Recyclabilité à l'infini -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #16a34a; font-size: 1rem;">♻️ 2. Recyclable à l'Infini ou Pas ?</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                • <strong>À l'infini :</strong> Le <strong>verre</strong> et les <strong>métaux (acier, aluminium)</strong> se recyclent 100% à l'infini sans perte de qualité.<br>
+                • <strong>Limité :</strong> Le <strong>papier/carton</strong> (5 à 7 fois max car les fibres s'usent). Le <strong>plastique</strong> (1 à 3 fois seulement !).
+              </p>
+            </div>
+
+            <!-- Piège 3 : Temps de Décomposition -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #b45309; font-size: 1rem;">⏳ 3. Persistance des Déchets Abandonnés</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                • <em>Pelure de banane</em> : 3 à 4 semaines<br>
+                • <em>Mégot de cigarette</em> : 1 à 2 ans (pollue 500 L d'eau)<br>
+                • <em>Canette en métal</em> : 50 à 100 ans<br>
+                • <em>Bouteille en plastique</em> : 450 ans<br>
+                • <em>Bouteille en verre</em> : <strong>4 000 ans</strong> (ne disparaît jamais).
+              </p>
+            </div>
+
+            <!-- Piège 4 : Origine des Matières -->
+            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+              <strong style="color: #0284c7; font-size: 1rem;">🌲 4. Origine Naturelle vs Synthétique</strong>
+              <p style="font-size: 0.88rem; margin: 6px 0; line-height: 1.5;">
+                • <strong>Minérale :</strong> Verre (sable de silice), Brique (argile), Métaux (minerais).<br>
+                • <strong>Végétale :</strong> Bois, papier, coton, liège.<br>
+                • <strong>Animale :</strong> Laine, cuir, soie.<br>
+                • <strong>Fossile / Synthétique :</strong> Plastiques (pétrole brut).
+              </p>
+            </div>
+          </div>
+
+          <!-- Simulateur Interactif de Circuit Électrique & Conductivité -->
+          <div style="background: #ffffff; padding: 16px; border-radius: 14px; border: 2px solid var(--ink); margin-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+              <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #166534;">
+                💡 Laboratoire Virtuel : Testeur de Circuit & Aimant
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Teste le matériau entre les deux pinces crocodiles !</span>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+              <button class="t-chip" onclick="testMaterialCircuit('fer')">Clou en Fer</button>
+              <button class="t-chip" onclick="testMaterialCircuit('alu')">Canette en Aluminium</button>
+              <button class="t-chip" onclick="testMaterialCircuit('cuivre')">Fil de Cuivre</button>
+              <button class="t-chip" onclick="testMaterialCircuit('bois')">Règle en Bois</button>
+              <button class="t-chip" onclick="testMaterialCircuit('plastique')">Bouchon en Plastique</button>
+              <button class="t-chip" onclick="testMaterialCircuit('verre')">Bille en Verre</button>
+              <button class="t-chip" onclick="testMaterialCircuit('eau_salee')">Eau Salée</button>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-around; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 14px; flex-wrap: wrap; gap: 12px;">
+              <div style="text-align: center;">
+                <div style="font-size: 2.2rem;">🔋</div>
+                <div style="font-weight: 800; font-size: 0.85rem;">Pile 4.5V</div>
+              </div>
+              <div style="text-align: center;">
+                <div id="circuitMatName" style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">Clou en Fer</div>
+                <div id="circuitMatStatus" style="font-size: 0.85rem; font-weight: 700; color: #16a34a;">Conducteur électrique !</div>
+              </div>
+              <div style="text-align: center;">
+                <div id="circuitBulbIcon" style="font-size: 2.5rem; filter: drop-shadow(0 0 10px #facc15);">💡</div>
+                <div id="circuitBulbText" style="font-weight: 800; font-size: 0.85rem; color: #ca8a04;">Ampoule ALLUMÉE</div>
+              </div>
+              <div style="text-align: center; border-left: 2px dashed #cbd5e1; padding-left: 14px;">
+                <div style="font-size: 2.2rem;">🧲</div>
+                <div id="circuitMagnetStatus" style="font-weight: 800; font-size: 0.85rem; color: #dc2626;">Attiré par l'aimant !</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #166534; margin-bottom: 8px;">🏆 10 Défis Power Anti-Lacunes SVT :</div>
+          <div id="quiz-container-svt-anti-lacunes" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ========================================================= -->
@@ -11225,10 +11784,425 @@
         setTimeout(initGeometryStudio, 80);
       } else if (subject === 'maths' && subKey === 'turbo') {
         initTurboTablesView();
+      } else if (subject === 'maths' && subKey === 'decimaux') {
+        renderGlisseTable(currentGlisseValue);
+      } else if (subject === 'maths' && subKey === 'devoir_construction') {
+        selectConstructionProg(1);
+      } else if (subject === 'maths' && subKey === 'frise_seyes') {
+        initFriseInteractive();
+      } else if (subject === 'sciences' && subKey === 'anti_lacunes') {
+        testMaterialCircuit('fer');
       }
     }
 
+
     // =========================================================================
+    // MOTEURS INTERACTIFS DÉCIMAUX, GÉOMÉTRIE, SVT & AUTODICTÉE
+    // =========================================================================
+
+    // A. SIMULATEUR GLISSE-NOMBRE MHM
+    let currentGlisseValue = 3.45;
+
+    function renderGlisseTable(val) {
+      currentGlisseValue = val;
+      const input = document.getElementById('glisseInput');
+      if (input) input.value = val;
+
+      const body = document.getElementById('glisseTableBody');
+      if (!body) return;
+
+      // Décomposer le nombre en chiffres
+      const str = Math.abs(val).toFixed(3);
+      const parts = str.split('.');
+      const intPart = parts[0].padStart(3, ' ');
+      const decPart = parts[1];
+
+      const c = intPart[intPart.length - 3] === ' ' ? '-' : intPart[intPart.length - 3];
+      const d = intPart[intPart.length - 2] === ' ' ? '-' : intPart[intPart.length - 2];
+      const u = intPart[intPart.length - 1];
+      const d1 = decPart[0];
+      const c1 = decPart[1];
+      const m1 = decPart[2];
+
+      body.innerHTML = `
+        <tr>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#0369a1;">${c}</td>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#0369a1;">${d}</td>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#0284c7; font-weight:900;">${u}</td>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#dc2626; font-weight:900;">,</td>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706; font-weight:900;">${d1}</td>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">${c1}</td>
+          <td style="padding: 10px; border: 1px solid var(--ink-faint); color:#d97706;">${m1 === '0' ? '-' : m1}</td>
+        </tr>
+      `;
+    }
+
+    function setGlissePreset(val) {
+      renderGlisseTable(val);
+      const fb = document.getElementById('glisseFeedbackText');
+      if (fb) fb.innerText = `Nombre sélectionné : ${val}`;
+    }
+
+    function applyGlisseOperation(op) {
+      let prev = currentGlisseValue;
+      let next = prev;
+      let explanation = "";
+
+      if (op === 'x10') {
+        next = Math.round(prev * 10 * 1000) / 1000;
+        explanation = `Multiplication par 10 : chaque chiffre GLISSE d'un rang vers la GAUCHE (⬅️) et devient 10 fois plus grand !`;
+      } else if (op === 'x100') {
+        next = Math.round(prev * 100 * 1000) / 1000;
+        explanation = `Multiplication par 100 : chaque chiffre GLISSE de deux rangs vers la GAUCHE (⬅️) !`;
+      } else if (op === '/10') {
+        next = Math.round((prev / 10) * 1000) / 1000;
+        explanation = `Division par 10 : chaque chiffre GLISSE d'un rang vers la DROITE (➡️) et devient 10 fois plus petit !`;
+      } else if (op === '/100') {
+        next = Math.round((prev / 100) * 1000) / 1000;
+        explanation = `Division par 100 : chaque chiffre GLISSE de deux rangs vers la DROITE (➡️) !`;
+      }
+
+      renderGlisseTable(next);
+      const fb = document.getElementById('glisseFeedbackText');
+      if (fb) {
+        fb.innerHTML = `<span>${prev} ➔ <strong>${next}</strong></span><br><span style="font-size:0.85rem; color:#15803d;">${explanation}</span>`;
+      }
+      playSound('correct');
+    }
+
+    function resetGlisseSimulator() {
+      setGlissePreset(3.45);
+    }
+
+
+    // B. DEVOIR NOTÉ DE GÉOMÉTRIE (Les 5 Programmes)
+    const CONSTRUCTION_PROGRAMS = {
+      1: {
+        title: "Programme 1 : Le Carré (4 points)",
+        steps: [
+          "1. Trace un segment [EF] de 5 cm.",
+          "2. Trace les perpendiculaires à [EF] passant par E et F.",
+          "3. Place G à 5 cm de F et H à 5 cm de E, du même côté de [EF].",
+          "4. Relie G à H."
+        ],
+        figName: "Carré parfait EFGH de 5 cm de côté (4 angles droits, 4 côtés égaux)",
+        svg: `
+          <rect x="65" y="30" width="140" height="140" fill="rgba(217, 119, 6, 0.15)" stroke="#b45309" stroke-width="3" />
+          <line x1="65" y1="170" x2="205" y2="170" stroke="#b45309" stroke-width="4" />
+          <!-- Angles droits -->
+          <rect x="65" y="150" width="14" height="20" fill="none" stroke="#dc2626" stroke-width="1.5" />
+          <rect x="191" y="150" width="14" height="20" fill="none" stroke="#dc2626" stroke-width="1.5" />
+          <!-- Sommets -->
+          <text x="50" y="175" font-weight="900" font-size="14" fill="#b45309">E</text>
+          <text x="215" y="175" font-weight="900" font-size="14" fill="#b45309">F</text>
+          <text x="215" y="35" font-weight="900" font-size="14" fill="#b45309">G</text>
+          <text x="50" y="35" font-weight="900" font-size="14" fill="#b45309">H</text>
+          <text x="120" y="188" font-size="12" font-weight="bold" fill="#0369a1">5 cm</text>
+          <text x="212" y="105" font-size="12" font-weight="bold" fill="#0369a1">5 cm</text>
+        `
+      },
+      2: {
+        title: "Programme 2 : Le Triangle Rectangle (4 points)",
+        steps: [
+          "1. Trace un segment [AB] de 6 cm.",
+          "2. Trace la perpendiculaire à [AB] passant par A.",
+          "3. Place C sur cette droite, à 4 cm de A.",
+          "4. Relie B à C."
+        ],
+        figName: "Triangle rectangle en A (AB = 6 cm, AC = 4 cm)",
+        svg: `
+          <polygon points="50,160 220,160 50,50" fill="rgba(37, 99, 235, 0.15)" stroke="#1d4ed8" stroke-width="3" />
+          <!-- Angle droit en A -->
+          <rect x="50" y="142" width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" />
+          <text x="35" y="175" font-weight="900" font-size="14" fill="#1d4ed8">A</text>
+          <text x="230" y="165" font-weight="900" font-size="14" fill="#1d4ed8">B</text>
+          <text x="40" y="45" font-weight="900" font-size="14" fill="#1d4ed8">C</text>
+          <text x="125" y="178" font-size="12" font-weight="bold" fill="#0369a1">6 cm</text>
+          <text x="18" y="110" font-size="12" font-weight="bold" fill="#0369a1">4 cm</text>
+        `
+      },
+      3: {
+        title: "Programme 3 : Le Triangle Isocèle par Médiatrice (4 points)",
+        steps: [
+          "1. Trace un segment [AB] de 6 cm.",
+          "2. Marque I, milieu de [AB].",
+          "3. Trace la perpendiculaire à [AB] passant par I.",
+          "4. Place C sur cette droite, à 4 cm de I.",
+          "5. Relie A à C et B à C."
+        ],
+        figName: "Triangle isocèle en C (AC = BC car C est sur la médiatrice de [AB])",
+        svg: `
+          <polygon points="40,160 220,160 130,40" fill="rgba(16, 185, 129, 0.15)" stroke="#059669" stroke-width="3" />
+          <!-- Médiatrice pointillée -->
+          <line x1="130" y1="20" x2="130" y2="180" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4" />
+          <circle cx="130" cy="160" r="4" fill="#dc2626" />
+          <rect x="130" y="142" width="14" height="18" fill="none" stroke="#dc2626" stroke-width="1.5" />
+          <text x="25" y="165" font-weight="900" font-size="14" fill="#059669">A</text>
+          <text x="230" y="165" font-weight="900" font-size="14" fill="#059669">B</text>
+          <text x="125" y="180" font-weight="900" font-size="12" fill="#dc2626">I</text>
+          <text x="125" y="30" font-weight="900" font-size="14" fill="#059669">C</text>
+          <!-- Marques d'égalité de longueur -->
+          <line x1="80" y1="95" x2="90" y2="105" stroke="#059669" stroke-width="2" />
+          <line x1="170" y1="95" x2="180" y2="105" stroke="#059669" stroke-width="2" />
+        `
+      },
+      4: {
+        title: "Programme 4 : Le Triangle Équilatéral au Compas (4 points)",
+        steps: [
+          "1. Trace un segment [AB] de 5 cm.",
+          "2. Avec ton compas, trace un arc de cercle de centre A et de rayon 5 cm.",
+          "3. Trace un deuxième arc de cercle de centre B et de rayon 5 cm.",
+          "4. Nomme C l'un des points d'intersection des deux arcs.",
+          "5. Relie A à C et B à C."
+        ],
+        figName: "Triangle équilatéral ABC (3 côtés égaux à 5 cm)",
+        svg: `
+          <polygon points="50,160 210,160 130,30" fill="rgba(147, 51, 234, 0.15)" stroke="#9333ea" stroke-width="3" />
+          <!-- Arcs de cercle au compas -->
+          <path d="M 100,50 A 150 150 0 0 1 160,20" fill="none" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="3" />
+          <path d="M 160,50 A 150 150 0 0 0 100,20" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3" />
+          <circle cx="130" cy="30" r="4" fill="#9333ea" />
+          <text x="35" y="165" font-weight="900" font-size="14" fill="#9333ea">A</text>
+          <text x="220" y="165" font-weight="900" font-size="14" fill="#9333ea">B</text>
+          <text x="125" y="20" font-weight="900" font-size="14" fill="#9333ea">C</text>
+          <text x="120" y="180" font-size="12" font-weight="bold" fill="#0369a1">5 cm</text>
+        `
+      },
+      5: {
+        title: "Programme 5 : Le Cerf-Volant à Diagonales Perpendiculaires (4 points)",
+        steps: [
+          "1. Trace un segment [AC] de 8 cm.",
+          "2. Place O sur [AC], à 3 cm de A.",
+          "3. Trace la perpendiculaire à [AC] passant par O.",
+          "4. Place B et D sur cette perpendiculaire, de part et d'autre de O, à 2 cm de O.",
+          "5. Relie A, B, C et D dans cet ordre."
+        ],
+        figName: "Cerf-volant ABCD (diagonales perpendiculaires, BD coupée en son milieu O)",
+        svg: `
+          <polygon points="40,100 110,40 230,100 110,160" fill="rgba(234, 88, 12, 0.15)" stroke="#ea580c" stroke-width="3" />
+          <!-- Diagonales -->
+          <line x1="40" y1="100" x2="230" y2="100" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3" />
+          <line x1="110" y1="40" x2="110" y2="160" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3" />
+          <rect x="110" y="100" width="12" height="12" fill="none" stroke="#dc2626" stroke-width="1.5" />
+          <circle cx="110" cy="100" r="3" fill="#dc2626" />
+          <text x="25" y="105" font-weight="900" font-size="14" fill="#ea580c">A</text>
+          <text x="105" y="30" font-weight="900" font-size="14" fill="#ea580c">B</text>
+          <text x="240" y="105" font-weight="900" font-size="14" fill="#ea580c">C</text>
+          <text x="105" y="178" font-weight="900" font-size="14" fill="#ea580c">D</text>
+          <text x="114" y="96" font-size="11" font-weight="bold" fill="#dc2626">O</text>
+        `
+      }
+    };
+
+    function selectConstructionProg(progNum) {
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`btnConstProg${i}`);
+        if (btn) btn.style.background = (i === progNum) ? '#b45309' : '#64748b';
+      }
+
+      const p = CONSTRUCTION_PROGRAMS[progNum] || CONSTRUCTION_PROGRAMS[1];
+      const titleEl = document.getElementById('constProgTitle');
+      const stepsEl = document.getElementById('constProgSteps');
+      const figEl = document.getElementById('constProgFigName');
+      const svgEl = document.getElementById('constSvgCanvas');
+
+      if (titleEl) titleEl.innerText = p.title;
+      if (stepsEl) stepsEl.innerHTML = p.steps.map(s => `<div>${s}</div>`).join('');
+      if (figEl) figEl.innerText = p.figName;
+      if (svgEl) svgEl.innerHTML = p.svg;
+    }
+
+
+    // C. ATELIER FRISE GÉOMÉTRIQUE SEYÈS DU 2 NOVEMBRE
+    const FRISE_COLORS = ['#3b82f6', '#facc15']; // bleu et jaune par défaut
+    let friseCells = Array(16).fill(null);
+
+    function initFriseInteractive() {
+      const grid = document.getElementById('friseInteractiveGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      for (let i = 0; i < 16; i++) {
+        const d = document.createElement('div');
+        d.style.minWidth = '24px';
+        d.style.height = '60px';
+        d.style.transform = 'skewX(-20deg)';
+        d.style.border = '2px solid #0f172a';
+        d.style.cursor = 'pointer';
+        d.style.transition = 'all 0.2s';
+        d.style.background = friseCells[i] || '#ffffff';
+        d.title = `Parallélogramme ${i + 1}`;
+        d.onclick = () => toggleFriseCell(i, d);
+        grid.appendChild(d);
+      }
+    }
+
+    function toggleFriseCell(index, el) {
+      const current = friseCells[index];
+      let next = FRISE_COLORS[0];
+      if (current === FRISE_COLORS[0]) next = FRISE_COLORS[1];
+      else if (current === FRISE_COLORS[1]) next = null;
+
+      friseCells[index] = next;
+      el.style.background = next || '#ffffff';
+      playSound('correct');
+    }
+
+    function autoColorFrise() {
+      for (let i = 0; i < 16; i++) {
+        friseCells[i] = (i % 2 === 0) ? FRISE_COLORS[0] : FRISE_COLORS[1];
+      }
+      initFriseInteractive();
+      playSound('badge');
+    }
+
+    function resetFriseInteractive() {
+      friseCells = Array(16).fill(null);
+      initFriseInteractive();
+    }
+
+
+    // D. TESTEUR VIRTUEL SVT : CIRCUIT & AIMANT
+    const SVT_MATERIALS = {
+      fer: { name: "Clou en Fer (Acier)", conductor: true, magnet: true, desc: "Métal ferromagnétique : conduit l'électricité ET colle à l'aimant !" },
+      alu: { name: "Canette en Aluminium", conductor: true, magnet: false, desc: "Métal conducteur, MAIS NON MAGNÉTIQUE (l'aimant ne colle pas) !" },
+      cuivre: { name: "Fil de Cuivre", conductor: true, magnet: false, desc: "Excellent conducteur électrique, NON MAGNÉTIQUE !" },
+      bois: { name: "Règle en Bois", conductor: false, magnet: false, desc: "Matériau organique isolant électrique et non magnétique." },
+      plastique: { name: "Bouchon en Plastique", conductor: false, magnet: false, desc: "Matière synthétique isolante électrique et insensible à l'aimant." },
+      verre: { name: "Bille en Verre", conductor: false, magnet: false, desc: "Matériau minéral transparent et isolant électrique." },
+      eau_salee: { name: "Eau Salée", conductor: true, magnet: false, desc: "Les sels dissous permettent le passage du courant électrique !" }
+    };
+
+    function testMaterialCircuit(key) {
+      const m = SVT_MATERIALS[key] || SVT_MATERIALS['fer'];
+      const nameEl = document.getElementById('circuitMatName');
+      const statusEl = document.getElementById('circuitMatStatus');
+      const bulbEl = document.getElementById('circuitBulbIcon');
+      const bulbTxt = document.getElementById('circuitBulbText');
+      const magEl = document.getElementById('circuitMagnetStatus');
+
+      if (nameEl) nameEl.innerText = m.name;
+      if (statusEl) {
+        statusEl.innerText = m.conductor ? "Conducteur électrique !" : "Isolant électrique (bloque le courant)";
+        statusEl.style.color = m.conductor ? "#16a34a" : "#dc2626";
+      }
+      if (bulbEl) {
+        bulbEl.style.filter = m.conductor ? "drop-shadow(0 0 12px #facc15)" : "grayscale(100%) opacity(30%)";
+      }
+      if (bulbTxt) {
+        bulbTxt.innerText = m.conductor ? "Ampoule ALLUMÉE 💡" : "Ampoule ÉTEINTE ⚫";
+        bulbTxt.style.color = m.conductor ? "#ca8a04" : "#64748b";
+      }
+      if (magEl) {
+        magEl.innerText = m.magnet ? "🧲 ATTIRÉ PAR L'AIMANT !" : "❌ Insensible à l'aimant";
+        magEl.style.color = m.magnet ? "#dc2626" : "#64748b";
+      }
+      playSound(m.conductor ? 'correct' : 'wrong');
+    }
+
+
+    // E. VÉRIFICATEUR INTERACTIF D'AUTODICTÉE 1
+    const OFFICIAL_AUTODICTEE_1 = "La grotte de Lascaux abrite de magnifiques peintures préhistoriques. À Nîmes, les Romains assistaient à des spectacles dans un grand amphithéâtre. La cathédrale de Reims est célèbre pour ses vitraux colorés. À Paris, la tour Eiffel attire des millions de visiteurs chaque année. Enfin, le musicien Vivaldi a composé quatre concertos pour raconter les saisons. Ces cinq œuvres nous font découvrir la richesse de notre histoire et de notre culture.";
+
+    let isAutodicteeMasked = false;
+
+    function toggleAutodicteeMask() {
+      const display = document.getElementById('autodicteeFullTextDisplay');
+      const btn = document.getElementById('btnToggleAutodicteeMask');
+      if (!display || !btn) return;
+
+      isAutodicteeMasked = !isAutodicteeMasked;
+      if (isAutodicteeMasked) {
+        display.style.filter = 'blur(8px)';
+        display.style.userSelect = 'none';
+        btn.innerText = '👀 Réafficher le modèle pour vérifier';
+        btn.style.background = '#0284c7';
+      } else {
+        display.style.filter = 'none';
+        display.style.userSelect = 'auto';
+        btn.innerText = "🙈 Masquer le texte pour t'entraîner";
+        btn.style.background = '#7c3aed';
+      }
+    }
+
+    function listenAutodicteeAudio() {
+      if (!('speechSynthesis' in window)) {
+        alert("La synthèse vocale n'est pas supportée par ton navigateur.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(OFFICIAL_AUTODICTEE_1);
+      u.lang = 'fr-FR';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    }
+
+    function verifyAutodicteeSubmission() {
+      const input = document.getElementById('autodicteeInputArea');
+      const fb = document.getElementById('autodicteeFeedbackBox');
+      const scoreEl = document.getElementById('autodicteeResultScore');
+      if (!input || !fb) return;
+
+      const userText = input.value.trim();
+      if (!userText) {
+        alert("Écris d'abord ton autodictée dans la case avant de vérifier !");
+        return;
+      }
+
+      // Normalisation pour calcul d'erreur
+      const cleanOfficial = OFFICIAL_AUTODICTEE_1.replace(/\s+/g, ' ');
+      const cleanUser = userText.replace(/\s+/g, ' ');
+
+      const officialWords = cleanOfficial.split(' ');
+      const userWords = cleanUser.split(' ');
+
+      let correctWords = 0;
+      let diffHtml = "";
+
+      officialWords.forEach((word, idx) => {
+        const uWord = userWords[idx] || "";
+        const wNorm = word.replace(/[.,«»]/g, '').toLowerCase();
+        const uNorm = uWord.replace(/[.,«»]/g, '').toLowerCase();
+
+        if (wNorm === uNorm) {
+          correctWords++;
+          diffHtml += `<span style="color:#16a34a; font-weight:bold;">${uWord || word}</span> `;
+        } else {
+          diffHtml += `<span style="color:#dc2626; text-decoration:underline; font-weight:bold;" title="Attendu: ${word}">${uWord || '___'}</span> `;
+        }
+      });
+
+      const accuracy = Math.round((correctWords / officialWords.length) * 100);
+
+      fb.style.display = 'block';
+      fb.style.background = accuracy >= 80 ? '#f0fdf4' : '#fef2f2';
+      fb.style.border = accuracy >= 80 ? '2px solid #16a34a' : '2px solid #dc2626';
+
+      fb.innerHTML = `
+        <div style="font-weight:800; font-size:1.05rem; margin-bottom:6px;">
+          ${accuracy >= 90 ? '🌟 Bravo Championne ! Autodictée mémorisée avec brio !' : (accuracy >= 70 ? '👍 Très bon travail, encore quelques détails d\'orthographe à ajuster !' : '💪 Bon entraînement, relis bien le modèle et recommence !')}
+        </div>
+        <div style="margin-bottom:8px;"><strong>Score de précision :</strong> ${correctWords} / ${officialWords.length} mots exacts (${accuracy}%)</div>
+        <div style="background:#ffffff; padding:10px; border-radius:6px; border:1px solid #cbd5e1; font-size:0.95rem; line-height:1.6;">
+          ${diffHtml}
+        </div>
+        <div style="font-size:0.82rem; color:#64748b; margin-top:6px;">(Les mots en vert sont justes, les mots en rouge souligné contiennent une erreur ou un oubli).</div>
+      `;
+
+      if (scoreEl) {
+        scoreEl.innerText = `${accuracy}% de réussite`;
+        scoreEl.style.color = accuracy >= 80 ? '#16a34a' : '#dc2626';
+      }
+
+      if (accuracy >= 70) {
+        playSound('badge');
+        addScore(15);
+      } else {
+        playSound('correct');
+      }
+    }
+
+
+        // =========================================================================
     // QUIZ RUNNER ENGINE (ANTI-FARMING + MULTIPLIER SUPPORT)
     // =========================================================================
     class QuizRunner {
@@ -11612,7 +12586,77 @@
       }
     ];
 
+    
+    const ORAL_DICTEE_BANK_S6 = [
+      {
+        title: "Le mystère de la pipe peinte",
+        text: "L'artiste belge René Magritte peint un tableau étrange à Paris. Sous l'image précise d'une pipe, il écrit une phrase surprenante. Le peintre affirme avec malice que ce dessin n'est pas une vraie pipe mais une simple représentation.",
+        advice: "Pense aux accords du sujet avec le verbe : « René Magritte peint », « il écrit ». N'oublie pas l'accent circonflexe sur « fête » et « rêve », et le 'd' muet à « hasard » !"
+      },
+      {
+        title: "L'imagination sans limites",
+        text: "Plus tard, plusieurs poètes et écrivains rencontrent le peintre dans son atelier. Ils rêvent ensemble d'images nouvelles où le hasard et l'imagination bousculent la réalité. L'artiste gagne alors une grande réputation dans le monde entier.",
+        advice: "Vérifie l'accord au pluriel : « plusieurs poètes rencontrent » (-ent au verbe !), « ils rêvent ». Le mot invariable « plusieurs » prend toujours un 's'."
+      },
+      {
+        title: "L'art et la publicité",
+        text: "D'abord, le jeune homme dessine des affiches pour la publicité afin de gagner sa vie. Ensuite, il déménage avec son épouse et s'installe confortablement. Ses toiles célèbres émerveillent aujourd'hui les visiteurs du musée.",
+        advice: "Attention aux verbes du premier groupe au présent : « il dessine », « il déménage », « il s'installe ». Attention aux mots invariables : « d'abord » et « ensuite »."
+      }
+    ];
+
     const DICTEE_SERIES_DATA = {
+      6: {
+        number: 6,
+        weekTitle: "La Trahison des images (René Magritte)",
+        shortBadge: "🎨 Thème : La Trahison des images (René Magritte)",
+        themeEmoji: "🎨",
+        borderColor: "#7c3aed",
+        bgColor: "#faf5ff",
+        titleColor: "#5b21b6",
+        badgeBg: "#ede9fe",
+        badgeColor: "#6d28d9",
+        reperes: {
+          titre: "La Trahison des images (« Ceci n'est pas une pipe »)",
+          qui: "René Magritte (peintre surréaliste belge, 1898-1967)",
+          lieu: "Bruxelles (Belgique) / Paris",
+          quand: "1929",
+          domaine: "Surréalisme & Poésie visuelle"
+        },
+        image: "images/dictee6_mots.jpeg",
+        noms: [
+          "la fête", "une année", "un artiste", "la femme", "le modèle", "la publicité",
+          "France", "Paris", "un époux", "une affiche", "un peintre", "le mot",
+          "le poète", "l'écrivain", "le musicien", "le rêve", "l'imagination", "le hasard", "l'image"
+        ],
+        verbes: ["rencontrer", "rêver", "devenir", "déménager", "gagner", "dessiner", "s'installer", "s'intéresser", "jouer"],
+        adjectifs: ["belge", "forain", "entier", "étrange"],
+        invariables: ["quand", "plusieurs", "plus", "tard", "d'abord", "ensuite", "près", "là", "comme", "avec"],
+        tableRows: [
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            noms: "la fête / une année<br>un artiste / la femme<br>le modèle / la publicité<br>France / Paris",
+            verbes: "rencontrer<br>rêver",
+            adjectifs: "belge",
+            invariables: "quand / plusieurs<br>plus / tard"
+          },
+          {
+            levels: ["vert", "violet", "or"],
+            noms: "un époux / une affiche<br>un peintre / le mot<br>le poète / l'écrivain<br>le musicien",
+            verbes: "devenir<br>déménager<br>gagner",
+            adjectifs: "forain",
+            invariables: "d'abord / ensuite"
+          },
+          {
+            levels: ["violet", "or"],
+            noms: "le rêve / l'imagination<br>le hasard / l'image",
+            verbes: "dessiner<br>s'installer<br>s'intéresser<br>jouer",
+            adjectifs: "entier<br>étrange",
+            invariables: "près / là<br>comme / avec"
+          }
+        ],
+        oralBank: ORAL_DICTEE_BANK_S6
+      },
       4: {
         number: 4,
         weekTitle: "L'art pariétal et la Préhistoire",
@@ -11888,7 +12932,7 @@
       }
 
       // Recharger le Quiz d'entraînement des mots pour cette série
-      const questions = (num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 : (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions);
+      const questions = (num === 6 && typeof allDicteeMotsQuestionsS6 !== 'undefined') ? allDicteeMotsQuestionsS6 : ((num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 : (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions));
       if (typeof QuizRunner !== 'undefined') {
         new QuizRunner('quiz-container-dictee-mots', questions, {
           title: `Mots de la Dictée — Série ${num}`,
@@ -12457,7 +13501,13 @@
       currentDicteeBankIndex = (currentDicteeBankIndex + 1) % ORAL_DICTEE_BANK.length;
       const fallbackItem = ORAL_DICTEE_BANK[currentDicteeBankIndex];
 
-      const storylines = (currentDicteeSeriesNum === 5) ? [
+      const storylines = (currentDicteeSeriesNum === 6) ? [
+        "Le mystère de la pipe de Magritte et la surprise des visiteurs parisiens.",
+        "Une rencontre amicale entre le peintre surréaliste et des poètes à Bruxelles.",
+        "La création d'une affiche publicitaire qui se transforme en œuvre d'art.",
+        "Le jeu malicieux entre les mots et les images dans l'atelier de peinture.",
+        "Un rêve étrange où les objets du quotidien prennent une signification magique."
+      ] : (currentDicteeSeriesNum === 5) ? [
         "Un concert féerique de Vivaldi à Venise et l'émotion des auditeurs devant les violons.",
         "Le réveil joyeux de la nature au printemps fleuri avec les chants d'oiseaux.",
         "Un violent orage d'été et la fuite précipitée des insectes sous la pluie.",
@@ -12868,6 +13918,527 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
         options: ["sous / avec", "sou / avec", "sous / aveque", "soux / avec"],
         correct: "sous / avec",
         tip: "« sous » prend toujours un 's' muet final et « avec » s'écrit avec un 'c' : deux mots invariables très fréquents !"
+      }
+    ];
+
+    
+    // =========================================================================
+    // NOUVELLES BANQUES DE QUESTIONS PADLET (NOVEMBRE / OCTOBRE)
+    // =========================================================================
+
+    // 1. FRANÇAIS - DICTÉE SÉRIE 6 : MAGRITTE & LA TRAHISON DES IMAGES (8 questions)
+    const allDicteeMotsQuestionsS6 = [
+      {
+        display: "Orthographe de la liste officielle : Comment s'écrit le mot désignant une annonce commerciale ?",
+        options: ["publicité", "publiciter", "publicitte", "publisité"],
+        correct: "publicité",
+        tip: "Règle de la liste de Maîtresse France : « la publicité » s'écrit avec un seul 'l' et un accent aigu 'é' !"
+      },
+      {
+        display: "Consonne muette finale : Complète la phrase : <em>« Le peintre laisse une part au <span class='blank-slot'>...</span> dans ses toiles. »</em>",
+        options: ["hasard", "hasart", "hazart", "hasare"],
+        correct: "hasard",
+        tip: "« Le hasard » prend un 'd' muet à la fin (pense à l'adjectif dérivé : hasardeux) !"
+      },
+      {
+        display: "Accord verbe avec sujet pluriel : <em>« René Magritte et les écrivains <span class='blank-slot'>...</span> souvent à Paris. »</em>",
+        options: ["déménagent", "déménage", "déménages", "déménagèrent"],
+        correct: "déménagent",
+        tip: "Le sujet est pluriel (René Magritte et les écrivains = ils) ➔ le verbe prend la terminaison '-ent' !"
+      },
+      {
+        display: "Homophone invariable : <em>« <span class='blank-slot'>...</span> l'artiste peint sa célèbre pipe, il s'amuse avec les mots. »</em>",
+        options: ["Quand", "Quant", "Qu'en", "Camp"],
+        correct: "Quand",
+        tip: "« Quand » indique le moment (lorsque). « Quant » ne s'utilise que dans l'expression « quant à » !"
+      },
+      {
+        display: "Orthographe des métiers artistiques : Complète : <em>« Le <span class='blank-slot'>...</span> et le <span class='blank-slot'>...</span> échangent leurs idées. »</em>",
+        options: ["poète / écrivain", "poête / écrivaint", "poéte / écrivein", "poète / écrivin"],
+        correct: "poète / écrivain",
+        tip: "« Poète » prend un accent grave è, et « écrivain » s'écrit avec 'ai' !"
+      },
+      {
+        display: "Histoire de l'Art : Dans son tableau « La Trahison des images », pourquoi Magritte écrit-il <em>« Ceci n'est pas une pipe »</em> ?",
+        options: ["Parce que c'est une image peinte et non l'objet réel", "Parce qu'il s'est trompé de dessin", "Parce que c'est un saxophone masqué", "Parce qu'il ne savait pas fumer"],
+        correct: "Parce que c'est une image peinte et non l'objet réel",
+        tip: "Magritte explique : « Si j'avais écrit sur mon tableau 'Ceci est une pipe', j'aurais menti ! On ne peut pas fumer une toile de peinture. »"
+      },
+      {
+        display: "Accord de l'adjectif qualificatif : <em>« René Magritte est un célèbre peintre <span class='blank-slot'>...</span> né en 1898. »</em>",
+        options: ["belge", "belges", "belgique", "belgeois"],
+        correct: "belge",
+        tip: "L'adjectif de nationalité de la Belgique est « belge » (masculin singulier pour s'accorder avec peintre) !"
+      },
+      {
+        display: "Mots invariables de succession : <em>« <span class='blank-slot'>...</span>, l'artiste dessine des affiches, <span class='blank-slot'>...</span> il peint des toiles magiques. »</em>",
+        options: ["D'abord / ensuite", "Dabor / ensuitte", "D'abords / en suite", "D'abord / ensuyte"],
+        correct: "D'abord / ensuite",
+        tip: "« D'abord » et « ensuite » sont les deux mots invariables officiels de la fiche du Padlet pour chronométrer les actions !"
+      }
+    ];
+
+    // 2. FRANÇAIS - LEÇON G3 : COMPLÉMENT DU NOM VS ADJECTIF (10 questions)
+    const allGrammaireG3Questions = [
+      {
+        display: "Identification du nom noyau : Dans le groupe nominal <em>« Une grande maison de campagne »</em>, quel est le nom noyau ?",
+        options: ["maison", "campagne", "grande", "une"],
+        correct: "maison",
+        tip: "Le nom noyau est le nom principal autour duquel s'organise tout le groupe nominal : c'est de la maison dont on parle !"
+      },
+      {
+        display: "Fonction grammaticale : Dans <em>« une maison de campagne »</em>, quelle est la fonction de <em>« de campagne »</em> ?",
+        options: ["Complément du nom (CDN)", "Adjectif qualificatif", "Verbe conjugué", "Sujet du verbe"],
+        correct: "Complément du nom (CDN)",
+        tip: "« de campagne » complète le nom 'maison' et est introduit par la préposition 'de' : c'est un complément du nom !"
+      },
+      {
+        display: "Nature grammaticale : Dans <em>« une maison ancienne »</em>, quelle est la classe de <em>« ancienne »</em> ?",
+        options: ["Adjectif qualificatif", "Complément du nom", "Nom propre", "Déterminant"],
+        correct: "Adjectif qualificatif",
+        tip: "« ancienne » est un adjectif qualificatif qui apporte une précision directe et s'accorde en genre et en nombre avec 'maison' !"
+      },
+      {
+        display: "Prépositions du CDN : Quelles prépositions introduisent le plus souvent un complément du nom ?",
+        options: ["à, de, en, pour, sans, avec", "le, la, les, un, une, des", "mais, ou, et, donc, or, ni, car", "je, tu, il, nous, vous, ils"],
+        correct: "à, de, en, pour, sans, avec",
+        tip: "Règle de la leçon G3 : Le complément du nom est presque toujours introduit par : à, de, en, pour, sans, avec !"
+      },
+      {
+        display: "Règle d'or anti-piège de l'accord : Choisis la bonne graphie : <em>« Maman a acheté des brosses à <span class='blank-slot'>...</span> pour toute la famille. »</em>",
+        options: ["dents", "dent", "dentes", "dentz"],
+        correct: "dents",
+        tip: "Par le sens, une brosse sert à nettoyer plusieurs dents, donc 'dents' prend un 's' !"
+      },
+      {
+        display: "Règle d'or anti-piège de l'accord : Choisis la bonne graphie : <em>« Les cavaliers portent de magnifiques vestes en <span class='blank-slot'>...</span>. »</em>",
+        options: ["cuir", "cuirs", "cuires", "cuirt"],
+        correct: "cuir",
+        tip: "Le complément du nom NE S'ACCORDE PAS avec le nom noyau ! La matière 'cuir' reste au singulier !"
+      },
+      {
+        display: "Règle d'or anti-piège de l'accord : Choisis la bonne graphie : <em>« Le pâtissier prépare trois délicieuses tartes aux <span class='blank-slot'>...</span>. »</em>",
+        options: ["pommes", "pomme", "pommes-s", "pomes"],
+        correct: "pommes",
+        tip: "Dans une tarte, il y a plusieurs morceaux de pommes : par le sens, 'pommes' se met au pluriel !"
+      },
+      {
+        display: "Règle d'or anti-piège de l'accord : Choisis la bonne graphie : <em>« Je commande une boisson fraîche sans <span class='blank-slot'>...</span>. »</em>",
+        options: ["sucre", "sucres", "sucrest", "sucr"],
+        correct: "sucre",
+        tip: "« sans sucre » indique l'absence totale de la matière sucre ➔ singulier !"
+      },
+      {
+        display: "Repérage du CDN : Quel est le groupe nominal enrichi d'un complément du nom ?",
+        options: ["Une magnifique robe en coton", "Une robe rouge et soyeuse", "Cette belle robe", "La robe neuve"],
+        correct: "Une magnifique robe en coton",
+        tip: "« en coton » est un complément du nom introduit par la préposition 'en' !"
+      },
+      {
+        display: "Différence essentielle : Contrairement à l'adjectif qualificatif, le complément du nom...",
+        options: ["ne s'accorde pas avec le nom noyau", "s'accorde toujours au féminin pluriel", "est toujours placé avant le nom", "ne peut jamais être supprimé"],
+        correct: "ne s'accorde pas avec le nom noyau",
+        tip: "Règle fondamentale CM2 : L'adjectif s'accorde avec le nom noyau, alors que le complément du nom ne prend pas les marques d'accord du nom noyau !"
+      }
+    ];
+
+    // 3. FRANÇAIS - LEÇON C2 : RING DES 8 VERBES DU PRÉSENT (10 questions)
+    const allConjugaisonC2Questions = [
+      {
+        display: "FAIRE au présent : <em>« Vous <span class='blank-slot'>...</span> toujours de remarquables efforts en classe. »</em>",
+        options: ["faites", "faisez", "faite", "faîtes"],
+        correct: "faites",
+        tip: "Attention au piège classique CM2 ! On dit et on écrit « vous faites » (et jamais 'faisez') !"
+      },
+      {
+        display: "FAIRE au présent : <em>« Les enfants <span class='blank-slot'>...</span> attention aux consignes de la maîtresse. »</em>",
+        options: ["font", "fesent", "faient", "fons"],
+        correct: "font",
+        tip: "À la 3e personne du pluriel, le verbe faire devient « ils / elles font » !"
+      },
+      {
+        display: "PRENDRE au présent : <em>« Avec leur compas, ils <span class='blank-slot'>...</span> un écartement de cinq centimètres. »</em>",
+        options: ["prennent", "prenent", "prendent", "prent"],
+        correct: "prennent",
+        tip: "Le verbe prendre double sa consonne 'n' à la 3e personne du pluriel : « ils prennent » !"
+      },
+      {
+        display: "VENIR au présent : <em>« Les archéologues <span class='blank-slot'>...</span> explorer les grottes préhistoriques. »</em>",
+        options: ["viennent", "vienent", "vennent", "viennent-ils"],
+        correct: "viennent",
+        tip: "Le verbe venir prend deux 'n' avec ils/elles : « ils viennent » !"
+      },
+      {
+        display: "ALLER au présent : <em>« Mes camarades et moi <span class='blank-slot'>...</span> au musée des beaux-arts. »</em>",
+        options: ["allons", "allont", "vont", "allez"],
+        correct: "allons",
+        tip: "« Mes camarades et moi » équivaut au pronom 'nous' ➔ « nous allons » !"
+      },
+      {
+        display: "ALLER au présent : <em>« Elles <span class='blank-slot'>...</span> visiter la cathédrale de Reims demain. »</em>",
+        options: ["vont", "vonts", "vas", "allent"],
+        correct: "vont",
+        tip: "Le verbe aller à la 3e personne du pluriel donne « elles vont » !"
+      },
+      {
+        display: "Piège en -GER : <em>« Chaque midi, nous <span class='blank-slot'>...</span> ensemble à la cantine de l'école. »</em>",
+        options: ["mangeons", "mangons", "mangeon", "mangont"],
+        correct: "mangeons",
+        tip: "Pour garder le son doux [ʒ], les verbes en -ger conservent la lettre 'e' devant le 'o' de nous : « nous mangeons » !"
+      },
+      {
+        display: "Piège en -CER : <em>« En cours d'EPS, nous <span class='blank-slot'>...</span> le ballon vers le panier. »</em>",
+        options: ["lançons", "lanssons", "lancons", "lançons-nous"],
+        correct: "lançons",
+        tip: "Pour garder le son [s] devant la lettre 'o', on doit obligatoirement ajouter une cédille sous le 'c' : « nous lançons » !"
+      },
+      {
+        display: "ÊTRE au présent : <em>« Vous <span class='blank-slot'>...</span> les délégués officiels de notre classe. »</em>",
+        options: ["êtes", "etes", "êtres", "soyez"],
+        correct: "êtes",
+        tip: "Avec le pronom 'vous', être s'écrit « vous êtes » avec un accent circonflexe sur le premier 'e' !"
+      },
+      {
+        display: "AVOIR vs ÊTRE : <em>« Les élèves <span class='blank-slot'>...</span> hâte de commencer la dictée numéro six. »</em>",
+        options: ["ont", "sont", "on", "son"],
+        correct: "ont",
+        tip: "C'est l'expression « avoir hâte » ➔ « ils ont » (avec le verbe avoir) !"
+      }
+    ];
+
+    // 4. FRANÇAIS - AUTODICTÉE 1 : LES TRÉSORS DU PATRIMOINE (8 questions)
+    const allAutodicteeQuestions = [
+      {
+        display: "Majuscules aux noms propres : Dans <em>« À Nîmes, les ... assistaient à des spectacles »</em>, comment s'écrit le nom du peuple ?",
+        options: ["Romains (avec une majuscule)", "romains (sans majuscule)", "romins", "Romins"],
+        correct: "Romains (avec une majuscule)",
+        tip: "Quand il désigne les habitants ou le peuple, le mot prend toujours une majuscule : « les Romains » !"
+      },
+      {
+        display: "Accord de l'adjectif qualificatif : <em>« La grotte de Lascaux abrite de magnifiques peintures <span class='blank-slot'>...</span>. »</em>",
+        options: ["préhistoriques", "préhistorique", "préhistorics", "préhistoriquesse"],
+        correct: "préhistoriques",
+        tip: "« peintures » est un nom féminin pluriel ➔ l'adjectif s'accorde au pluriel : « préhistoriques » !"
+      },
+      {
+        display: "Accord de l'adjectif qualificatif : <em>« La cathédrale de Reims est célèbre pour ses vitraux <span class='blank-slot'>...</span>. »</em>",
+        options: ["colorés", "coloré", "colorée", "colorées"],
+        correct: "colorés",
+        tip: "« vitraux » est un nom masculin pluriel ➔ l'adjectif prend la terminaison '-és' : « colorés » !"
+      },
+      {
+        display: "Accord du verbe au présent : <em>« À Paris, la tour Eiffel <span class='blank-slot'>...</span> des millions de visiteurs chaque année. »</em>",
+        options: ["attire", "attirent", "attires", "attirait"],
+        correct: "attire",
+        tip: "Le sujet est « la tour Eiffel » (singulier) ➔ le verbe prend '-e' : « attire » !"
+      },
+      {
+        display: "Participe passé avec l'auxiliaire avoir : <em>« Le musicien Vivaldi a <span class='blank-slot'>...</span> quatre concertos. »</em>",
+        options: ["composé", "composer", "composez", "composés"],
+        correct: "composé",
+        tip: "Après l'auxiliaire avoir au passé composé, le participe passé des verbes en -er se termine par '-é' !"
+      },
+      {
+        display: "Orthographe complexe : Comment s'écrit le monument antique ovale de Nîmes ?",
+        options: ["amphithéâtre", "ampithéatre", "amfithéâtre", "amphithéatre"],
+        correct: "amphithéâtre",
+        tip: "« Amphithéâtre » s'écrit avec 'ph', un accent aigu sur le premier 'e', un 'th' et un accent circonflexe sur le 'a' !"
+      },
+      {
+        display: "Accord du déterminant démonstratif : <em>« <span class='blank-slot'>...</span> cinq œuvres nous font découvrir la richesse de notre histoire. »</em>",
+        options: ["Ces", "Ses", "C'est", "S'est"],
+        correct: "Ces",
+        tip: "On montre les cinq œuvres citées plus haut ➔ déterminant démonstratif « ces » !"
+      },
+      {
+        display: "Repère historique : À quelle période historique se rattachent les peintures de la grotte de Lascaux ?",
+        options: ["La Préhistoire (Paléolithique supérieur)", "L'Antiquité romaine", "Le Moyen Âge", "Les Temps Modernes"],
+        correct: "La Préhistoire (Paléolithique supérieur)",
+        tip: "La grotte de Lascaux date d'environ 18 000 ans avant J.-C., en plein Paléolithique supérieur !"
+      }
+    ];
+
+    // 5. MATHÉMATIQUES - LE DÉCODEUR DÉCIMAL MHM (10 questions)
+    const allDecimauxQuestions = [
+      {
+        display: "Position du chiffre : Dans le nombre <strong>34,852</strong>, quel est le chiffre des <strong>centièmes</strong> ?",
+        options: ["5", "8", "2", "4"],
+        correct: "5",
+        tip: "Après la virgule, le premier rang est les dixièmes (8), le deuxième est les centièmes (5), le troisième est les millièmes (2) !"
+      },
+      {
+        display: "Position du chiffre : Dans le nombre <strong>149,076</strong>, quel est le chiffre des <strong>dixièmes</strong> ?",
+        options: ["0", "7", "6", "9"],
+        correct: "0",
+        tip: "Le premier chiffre juste après la virgule représente les dixièmes : ici c'est 0 !"
+      },
+      {
+        display: "Le piège des zéros inutiles : Lequel de ces nombres possède un zéro inutile que l'on peut effacer sans changer sa valeur ?",
+        options: ["4,50", "4,05", "40,5", "405"],
+        correct: "4,50",
+        tip: "Dans 4,50, le zéro final après la virgule n'ajoute aucune valeur : 4,50 = 4,5 !"
+      },
+      {
+        display: "Le piège des zéros indispensables : Dans quel nombre le zéro est-il INDISPENSABLE ?",
+        options: ["7,08", "7,80", "07,8", "7,800"],
+        correct: "7,08",
+        tip: "Dans 7,08, le zéro indique qu'il y a 0 dixième. Si on l'enlève, 7,8 vaut 7 unités et 8 dixièmes, ce qui est 10 fois plus grand !"
+      },
+      {
+        display: "Duel de comparaison anti-piège : Quel signe relie correctement <strong>3,25</strong> et <strong>3,8</strong> ?",
+        options: ["3,25 < 3,8", "3,25 > 3,8", "3,25 = 3,8", "Impossible à comparer"],
+        correct: "3,25 < 3,8",
+        tip: "Grand piège classique CM2 ! 3,8 = 3,80. On compare les dixièmes : 2 dixièmes < 8 dixièmes, donc 3,25 < 3,80 !"
+      },
+      {
+        display: "Fractions décimales : Quelle écriture à virgule correspond à la fraction <strong>45/100</strong> ?",
+        options: ["0,45", "4,5", "45,0", "0,045"],
+        correct: "0,45",
+        tip: "45 centièmes s'écrit 0 unité et 45 centièmes ➔ 0,45 !"
+      },
+      {
+        display: "Décomposition : Quelle écriture décimale est égale à <strong>3 + 7/10 + 2/100</strong> ?",
+        options: ["3,72", "3,27", "37,2", "3,702"],
+        correct: "3,72",
+        tip: "3 unités + 7 dixièmes + 2 centièmes = 3,72 !"
+      },
+      {
+        display: "Attention au zéro intercalé : Quelle écriture correspond à <strong>5 + 4/100</strong> ?",
+        options: ["5,04", "5,4", "5,40", "0,54"],
+        correct: "5,04",
+        tip: "Il n'y a pas de dixièmes (0 dixième), donc le chiffre des dixièmes est 0 ➔ 5,04 !"
+      },
+      {
+        display: "Simulateur Glisse-Nombre : Si on multiplie <strong>2,35 par 10</strong>, que devient le nombre ?",
+        options: ["23,5", "2,350", "0,235", "235"],
+        correct: "23,5",
+        tip: "Chaque chiffre glisse d'un rang vers la gauche (devient 10 fois plus grand) : le 2 passe dans les dizaines ➔ 23,5 !"
+      },
+      {
+        display: "Partage décimal : Dans une unité complète, combien y a-t-il de millièmes (1/1000) ?",
+        options: ["1 000 millièmes", "100 millièmes", "10 millièmes", "10 000 millièmes"],
+        correct: "1 000 millièmes",
+        tip: "1 unité = 10 dixièmes = 100 centièmes = 1 000 millièmes !"
+      }
+    ];
+
+    // 6. MATHÉMATIQUES - DEVOIR NOTÉ DE GÉOMÉTRIE (8 questions)
+    const allDevoirConstructionQuestions = [
+      {
+        display: "Programme 1 (Devoir noté) : On trace [EF] de 5 cm, les perpendiculaires en E et F, et on place G et H à 5 cm du même côté. Quelle figure obtient-on ?",
+        options: ["Un carré", "Un rectangle non carré", "Un losange", "Un triangle équilatéral"],
+        correct: "Un carré",
+        tip: "4 angles droits et 4 côtés égaux de 5 cm ➔ c'est un carré parfait !"
+      },
+      {
+        display: "Programme 2 (Devoir noté) : On trace [AB] de 6 cm, la perpendiculaire en A, le point C à 4 cm sur cette droite, et on relie B à C. Quelle figure obtient-on ?",
+        options: ["Un triangle rectangle en A", "Un triangle isocèle en A", "Un triangle équilatéral", "Un carré"],
+        correct: "Un triangle rectangle en A",
+        tip: "Le triangle possède un angle droit au sommet A ➔ c'est un triangle rectangle en A !"
+      },
+      {
+        display: "Programme 3 (Devoir noté) : On place le milieu I de [AB] (6 cm), on trace la perpendiculaire passant par I, on place C à 4 cm de I et on relie AC et BC. Quelle figure obtient-on ?",
+        options: ["Un triangle isocèle en C", "Un triangle rectangle", "Un triangle scalène quelconque", "Un quadrilatère"],
+        correct: "Un triangle isocèle en C",
+        tip: "La perpendiculaire passant par le milieu I est la médiatrice de [AB]. Tout point de cette droite est à égale distance de A et B ➔ AC = BC ➔ triangle isocèle !"
+      },
+      {
+        display: "Vocabulaire de géométrie : Comment s'appelle la droite perpendiculaire à un segment passant par son milieu ?",
+        options: ["La médiatrice", "La bissectrice", "La diagonale", "La parallèle"],
+        correct: "La médiatrice",
+        tip: "Règle officielle CM2 : La médiatrice est la droite perpendiculaire au segment qui coupe ce segment exactement en son milieu !"
+      },
+      {
+        display: "Programme 4 (Devoir noté) : Pour tracer un triangle équilatéral de 5 cm de côté, quel instrument est indispensable pour trouver le 3e sommet C ?",
+        options: ["Le compas", "Le rapporteur", "La gomme", "Le taille-crayon"],
+        correct: "Le compas",
+        tip: "On trace deux arcs de cercle de rayon 5 cm centrés en A et en B avec le compas pour trouver le point C !"
+      },
+      {
+        display: "Programme 5 (Devoir noté) : On trace [AC] de 8 cm. Le point O est à 3 cm de A. La perpendiculaire en O porte B et D à 2 cm de part et d'autre. Quelle figure obtient-on en reliant A, B, C, D ?",
+        options: ["Un cerf-volant", "Un carré", "Un rectangle", "Un trapèze"],
+        correct: "Un cerf-volant",
+        tip: "Les diagonales [AC] et [BD] sont perpendiculaires, [BD] est coupée en son milieu mais pas [AC] : c'est un cerf-volant !"
+      },
+      {
+        display: "Notation géométrique : Quelle est la différence entre [AB] et (AB) ?",
+        options: ["[AB] est un segment mesurable, (AB) est une droite infinie", "(AB) est un segment, [AB] est une droite", "Les crochets signifient qu'on doit effacer la droite", "Il n'y a aucune différence"],
+        correct: ["[AB] est un segment mesurable, (AB) est une droite infinie"],
+        tip: "Les crochets [AB] enferment les extrémités d'un segment mesurable en centimètres. Les parenthèses (AB) désignent une droite infinie !"
+      },
+      {
+        display: "Règle de précision : Pour réussir un programme de construction géométrique noté sur 20, quelle règle doit-on respecter ?",
+        options: ["Avoir un crayon à papier bien taillé et tracer des traits fins sans appuyer trop fort", "Tracer au feutre épais pour que la maîtresse voie bien", "Faire les tracés à main levée sans règle", "Utiliser un compas sans serrer la pointe"],
+        correct: ["Avoir un crayon à papier bien taillé et tracer des traits fins sans appuyer trop fort"],
+        tip: "La précision est la clé de la géométrie au CM2 : crayon HB bien affûté et tracés fins et précis !"
+      }
+    ];
+
+    // 7. SCIENCES & SVT - POWER ANTI-LACUNES (10 questions)
+    const allSvtAntiLacunesQuestions = [
+      {
+        display: "Le piège suprême de l'aimant : Parmi ces métaux usuels, lequel est attiré par un aimant ?",
+        options: ["Le fer (et l'acier)", "L'aluminium", "Le cuivre", "L'or"],
+        correct: "Le fer (et l'acier)",
+        tip: "Lacune n°1 des élèves ! Seuls le fer, le nickel et l'acier sont ferromagnétiques. L'aluminium et le cuivre ne sont JAMAIS attirés par un aimant !"
+      },
+      {
+        display: "Test de magnétisme : Une canette en aluminium de soda est-elle attirée par un aimant puissant ?",
+        options: ["Non, l'aluminium n'est pas magnétique", "Oui, car tous les métaux sont magnétiques", "Oui, mais seulement si elle est pleine", "Oui, si elle est chaude"],
+        correct: "Non, l'aluminium n'est pas magnétique",
+        tip: "L'aluminium est un métal non magnétique : l'aimant ne collera jamais sur une canette en aluminium !"
+      },
+      {
+        display: "Conductivité électrique : Lequel de ces matériaux est un conducteur électrique qui allume l'ampoule dans un circuit ?",
+        options: ["Le fil de cuivre", "La règle en plastique", "Le bouchon en liège", "La feuille de verre"],
+        correct: "Le fil de cuivre",
+        tip: "Tous les métaux conduisent très bien le courant électrique !"
+      },
+      {
+        display: "Sécurité et isolants : Pourquoi les électriciens portent-ils des gants en caoutchouc ou manipulent-ils des outils à manche plastique ?",
+        options: ["Parce que le plastique et le caoutchouc sont des isolants électriques", "Pour ne pas se salir les mains", "Pour conduire le courant plus vite", "Parce que c'est plus léger"],
+        correct: "Parce que le plastique et le caoutchouc sont des isolants électriques",
+        tip: "Les isolants électriques empêchent le courant de passer et protègent du risque mortel d'électrocution !"
+      },
+      {
+        display: "Recyclabilité à l'infini : Quels matériaux peuvent être fondus et recyclés 100% À L'INFINI sans perdre de qualité ?",
+        options: ["Le verre et les métaux (acier, alu)", "Le plastique et le papier", "Le bois et le coton", "Le polystyrène et le carton"],
+        correct: "Le verre et les métaux (acier, alu)",
+        tip: "Le verre et les métaux se recyclent à 100% et indéfiniment. Le plastique ne se recycle que 1 à 3 fois !"
+      },
+      {
+        display: "Recyclage du papier : Pourquoi une feuille de papier ne peut-elle être recyclée que 5 à 7 fois ?",
+        options: ["Parce que les fibres de bois se raccourcissent à chaque lavage", "Parce que l'encre détruit le papier", "Parce que la colle s'évapore", "Parce que la loi l'interdit"],
+        correct: "Parce que les fibres de bois se raccourcissent à chaque lavage",
+        tip: "À chaque recyclage, les fibres de cellulose du bois se cassent et deviennent trop courtes pour reformer une feuille solide !"
+      },
+      {
+        display: "Tri sélectif sans erreur : Dans quel bac de tri doit-on jeter une boîte de conserve en acier bien vidée ?",
+        options: ["Le bac jaune (recyclables)", "Le bac vert (verre)", "Le bac marron (compost)", "La poubelle grise (ordures ménagères)"],
+        correct: "Le bac jaune (recyclables)",
+        tip: "Tous les emballages en métal (acier, aluminium), les cartons et les plastiques vont dans le bac de tri jaune !"
+      },
+      {
+        display: "Chrono décomposition : Combien de temps met une bouteille en plastique jetée dans la nature pour disparaître ?",
+        options: ["Environ 450 ans", "3 semaines", "2 ans", "10 ans"],
+        correct: "Environ 450 ans",
+        tip: "Une bouteille en plastique met environ 450 ans à se fragmenter en microplastiques toxiques pour les océans !"
+      },
+      {
+        display: "Persistance maximale : Quel objet abandonné met environ 4 000 ans à se dégrader (quasiment éternel) ?",
+        options: ["Une bouteille en verre", "Une pelure de pomme", "Un journal en papier", "Un mouchoir en tissu"],
+        correct: "Une bouteille en verre",
+        tip: "Le verre est fabriqué à partir de silice minérale très stable : il met 4 000 ans à s'éroder dans la nature !"
+      },
+      {
+        display: "Origine des matières : Quelle est la matière première naturelle utilisée pour fabriquer le verre ?",
+        options: ["Le sable de silice (origine minérale)", "Le pétrole brut (origine fossile)", "La sève des arbres (origine végétale)", "La laine des moutons (origine animale)"],
+        correct: "Le sable de silice (origine minérale)",
+        tip: "Le verre est obtenu en fondant du sable de silice à très haute température (environ 1 500 °C) !"
+      }
+    ];
+
+    // 8. HISTOIRE - LES GAULOIS & LES CELTES (8 questions)
+    const allGauloisQuestions = [
+      {
+        display: "Expansion celte : À quelle époque commence la grande expansion des peuples celtes depuis l'Europe centrale ?",
+        options: ["Au VIIe siècle avant J.-C.", "Au Moyen Âge en l'an 800", "Pendant la Préhistoire il y a 100 000 ans", "Au XIXe siècle"],
+        correct: "Au VIIe siècle avant J.-C.",
+        tip: "Règle officielle du cours : Au VIIe siècle avant J.-C., les Celtes se répandent en Gaule, dans les îles britanniques et en Espagne !"
+      },
+      {
+        display: "La société gauloise : Quel personnage sacré occupe le rôle de prêtre, de juge et de maître d'école dans la tribu ?",
+        options: ["Le druide", "Le chef-roi", "Le forgeron", "Le légionnaire"],
+        correct: "Le druide",
+        tip: "Le druide est le chef spirituel des Gaulois : il rend la justice, conseille les rois et enseigne le savoir !"
+      },
+      {
+        display: "Transmission du savoir : Pourquoi les Gaulois n'ont-ils pas laissé de livres écrits d'histoire ?",
+        options: ["Parce que les druides interdisaient d'écrire leur savoir sacré (transmission orale)", "Parce qu'ils ne savaient pas parler", "Parce que leurs livres ont tous brûlé", "Parce qu'ils n'avaient pas d'encre"],
+        correct: "Parce que les druides interdisaient d'écrire leur savoir sacré (transmission orale)",
+        tip: "Les druides privilégiaient la mémoire orale afin de protéger leurs secrets et entraîner la mémoire des jeunes !"
+      },
+      {
+        display: "Artisanat et métallurgie : Pourquoi les guerriers et artisans gaulois étaient-ils si réputés dans toute l'Europe ?",
+        options: ["Pour leur maîtrise exceptionnelle du fer, des épées et de la cotte de mailles", "Pour la fabrication de fusées", "Pour leurs pyramides en pierre", "Pour la porcelaine"],
+        correct: "Pour leur maîtrise exceptionnelle du fer, des épées et de la cotte de mailles",
+        tip: "Les forgerons gaulois ont inventé la cotte de mailles, perfectionné le tonneau en bois et forgé des armes en fer redoutables !"
+      },
+      {
+        display: "Organisation politique : Comment la Gaule était-elle gouvernée à l'époque ?",
+        options: ["Elle était divisée en une soixantaine de tribus souvent rivales", "Elle avait un seul président élu", "Elle était gouvernée par le roi de Rome", "Elle n'avait aucun habitant"],
+        correct: "Elle était divisée en une soixantaine de tribus souvent rivales",
+        tip: "La Gaule n'était pas un pays unifié, mais une mosaïque d'une soixantaine de peuples (Arvernes, Éduens, Sénons, etc.) !"
+      },
+      {
+        display: "Habitat gaulois : Comment appelait-on les grandes villes fortifiées construites sur des collines par les Gaulois ?",
+        options: ["Des oppidums (un oppidum)", "Des châteaux forts", "Des igloos", "Des pyramides"],
+        correct: "Des oppidums (un oppidum)",
+        tip: "Un oppidum était une forteresse entourée de remparts de terre, de pierre et de bois (le « murus gallicus ») !"
+      },
+      {
+        display: "Vie quotidienne : Quelle était l'activité de la majorité de la population gauloise ?",
+        options: ["L'agriculture et l'élevage", "La piraterie en mer", "La conquête spatiale", "La diplomatie romaine"],
+        correct: "L'agriculture et l'élevage",
+        tip: "La plupart des Gaulois étaient des agriculteurs ingénieux (invention de la moissonneuse gauloise, culture du blé, élevage de porcs) !"
+      },
+      {
+        display: "Vrai ou Faux : Les Gaulois portaient-ils des casques avec des cornes ou de grandes ailes sur le champ de bataille ?",
+        options: ["FAUX : c'est une invention imaginaire des artistes du XIXe siècle", "VRAI : pour faire peur aux aigles", "VRAI : tous les guerriers avaient des cornes de taureau", "VRAI : pour voler plus vite"],
+        correct: "FAUX : c'est une invention imaginaire des artistes du XIXe siècle",
+        tip: "En réalité, les casques gaulois de combat étaient en fer ou en bronze lisses, pour faire glisser les coups d'épée sans s'accrocher !"
+      }
+    ];
+
+    // 9. GÉOGRAPHIE & CULTURE - L'ITALIE & ARCIMBOLDO (8 questions)
+    const allItalieQuestions = [
+      {
+        display: "Capitale européenne : Quelle est la capitale de l'Italie ?",
+        options: ["Rome (Roma)", "Venise (Venezia)", "Milan (Milano)", "Naples (Napoli)"],
+        correct: "Rome (Roma)",
+        tip: "Rome est la capitale de l'Italie, célèbre pour le Colisée et son histoire millénaire !"
+      },
+      {
+        display: "Mers d'Europe : Quelle mer borde la côte ouest de la péninsule italienne (entre Rome et la Sardaigne) ?",
+        options: ["La mer Tyrrhénienne", "La mer Adriatique", "La mer du Nord", "L'océan Atlantique"],
+        correct: "La mer Tyrrhénienne",
+        tip: "La mer Tyrrhénienne baigne l'ouest de l'Italie, tandis que la mer Adriatique borde l'est !"
+      },
+      {
+        display: "Géographie insulaire : Quelle est la plus grande île de la Méditerranée située à la pointe de la botte italienne ?",
+        options: ["La Sicile (Sicilia)", "La Corse", "La Sardaigne", "Majorque"],
+        correct: "La Sicile (Sicilia)",
+        tip: "La Sicile est la grande île triangulaire située au bout de la botte italienne, dominée par le volcan Etna !"
+      },
+      {
+        display: "Histoire des Arts : Quel peintre italien (1527-1593) a inspiré l'atelier d'art de la classe avec ses portraits gourmands ?",
+        options: ["Giuseppe Arcimboldo", "Léonard de Vinci", "Michel-Ange", "Raphaël"],
+        correct: "Giuseppe Arcimboldo",
+        tip: "Arcimboldo est célèbre pour avoir composé des têtes humaines entièrement constituées de légumes, de fruits, de fleurs et de poissons !"
+      },
+      {
+        display: "Atelier de classe (Semaine du goût) : Quel tableau en relief les élèves de CM1-CM2 ont-ils créé en classe le jeudi ?",
+        options: ["Le portrait « Giulia » réalisé avec des pâtes alimentaires colorées", "Une sculpture en argile de la tour Eiffel", "Un dessin de pyramide", "Une peinture à l'huile de Venise"],
+        correct: "Le portrait « Giulia » réalisé avec des pâtes alimentaires colorées",
+        tip: "La classe a composé le magnifique portrait « Giulia » avec des farfalle, des penne et des macaronis colorés !"
+      },
+      {
+        display: "Gastronomie italienne : Quel délicieux dessert italien au café et mascarpone la classe a-t-elle dégusté le vendredi ?",
+        options: ["Le tiramisu", "La tarte aux pommes", "L'éclair au chocolat", "La crêpe suzette"],
+        correct: "Le tiramisu",
+        tip: "Le tiramisu est un dessert emblématique d'Italie savouré par les élèves pour clôturer la semaine du goût !"
+      },
+      {
+        display: "Langue italienne : Que signifie l'expression italienne <em>« Buongiorno »</em> apprise sur l'affiche de classe ?",
+        options: ["Bonjour !", "Au revoir !", "Merci !", "S'il vous plaît !"],
+        correct: "Bonjour !",
+        tip: "« Buongiorno » veut dire Bonjour ! (tandis que 'Grazie' signifie Merci et 'Arrivederci' Au revoir) !"
+      },
+      {
+        display: "Repère géophysique : Quel célèbre volcan italien encore en activité se situe près de la ville de Naples ?",
+        options: ["Le Vésuve", "Le Mont Blanc", "L'Himalaya", "Les Pyrénées"],
+        correct: "Le Vésuve",
+        tip: "Le Vésuve est le volcan qui a détruit la cité romaine de Pompéi en 79 après J.-C. !"
       }
     ];
 
@@ -22381,8 +23952,25 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     renderDetectiveMission();
     renderProblemSolver();
     
-    // Initialisation de la Série de Dictée (Série 5 - Les Quatre Saisons par défaut)
-    selectDicteeSeries(5);
+    // Initialisation de la Série de Dictée (Série 6 - Magritte & Trahison des images par défaut)
+    selectDicteeSeries(6);
+
+    // Initialisation des Nouveaux Modules Padlet (Novembre & Octobre)
+    new QuizRunner('quiz-container-grammaire-g3', allGrammaireG3Questions, { title: "G3 : Complément du Nom vs Adjectif", subjectKey: "francais" });
+    new QuizRunner('quiz-container-conjugaison-c2', allConjugaisonC2Questions, { title: "C2 : Ring des 8 Verbes Clés", subjectKey: "francais" });
+    new QuizRunner('quiz-container-autodictee', allAutodicteeQuestions, { title: "Autodictée 1 : Trésors du Patrimoine", subjectKey: "francais" });
+    new QuizRunner('quiz-container-decimaux', allDecimauxQuestions, { title: "Le Décodeur Décimal MHM", subjectKey: "maths" });
+    new QuizRunner('quiz-container-devoir-const', allDevoirConstructionQuestions, { title: "Devoir Géométrie : 5 Programmes", subjectKey: "maths" });
+    new QuizRunner('quiz-container-svt-anti-lacunes', allSvtAntiLacunesQuestions, { title: "Power Anti-Lacunes SVT", subjectKey: "sciences" });
+    new QuizRunner('quiz-container-gaulois', allGauloisQuestions, { title: "Les Gaulois & les Celtes", subjectKey: "histoire" });
+    new QuizRunner('quiz-container-italie', allItalieQuestions, { title: "L'Italie & Arcimboldo (Semaine du Goût)", subjectKey: "histoire" });
+
+    // Initialisation des Moteurs Visuels
+    renderGlisseTable(3.45);
+    selectConstructionProg(1);
+    initFriseInteractive();
+    testMaterialCircuit('fer');
+
 
     new QuizRunner('quiz-container-orthographe-s', allOrthographeSQuestions, { title: "Orthographe 4 : « s » ou « ss »", subjectKey: "francais" });
     new QuizRunner('quiz-container-orthographe-gn', allOrthographeGNQuestions, { title: "Orthographe 5 : Les Accords dans le GN", subjectKey: "francais" });
