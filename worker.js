@@ -63,6 +63,8 @@ export default {
           });
         }
 
+        const isChat = body.mode === 'chat' || body.format === 'text';
+
         // Modèles Gemini testés par ordre de rapidité / quota
         const models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
         let lastError = null;
@@ -77,7 +79,7 @@ export default {
                 contents: [{ parts: [{ text: promptText }] }],
                 generationConfig: {
                   temperature: 0.7,
-                  responseMimeType: 'application/json',
+                  ...(isChat ? {} : { responseMimeType: 'application/json' }),
                 },
               }),
             });
@@ -90,6 +92,16 @@ export default {
             const data = await geminiRes.json();
             const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
             if (!rawText) throw new Error('Réponse vide de Gemini');
+
+            if (isChat) {
+              return new Response(JSON.stringify({ reply: rawText }), {
+                status: 200,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': '*',
+                },
+              });
+            }
 
             const parsed = JSON.parse(rawText);
             return new Response(JSON.stringify(parsed), {

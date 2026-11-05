@@ -2941,7 +2941,8 @@
     }
     .teacher-subject-tabs {
       display: flex;
-      gap: 4px;
+      flex-wrap: wrap;
+      gap: 5px;
     }
     .t-subj-tab {
       background: #ffffff;
@@ -6454,7 +6455,7 @@
               <span class="teacher-status-badge">🟢 En ligne & à ton écoute</span>
             </div>
             <p style="font-size: 0.82rem; color: var(--ink-light); margin: 2px 0 0 0;">
-              Ta maîtresse bienveillante • Pose toutes tes questions sans stress !
+              Ta maîtresse bienveillante pour toutes tes matières : Français, Maths, Histoire, Géo, Sciences, Anglais !
             </p>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
@@ -6468,10 +6469,14 @@
         <!-- Sélecteur de Matières Rapides / Sujets fréquents -->
         <div class="teacher-topics-bar">
           <div class="teacher-topics-header">
-            <span>💡 Suggestions de questions rapides :</span>
+            <span>💡 Choisis une matière pour voir des suggestions :</span>
             <div class="teacher-subject-tabs">
               <button class="t-subj-tab active" onclick="switchTeacherTopicTab('francais', this)">🇫🇷 Français</button>
               <button class="t-subj-tab" onclick="switchTeacherTopicTab('maths', this)">🔢 Maths</button>
+              <button class="t-subj-tab" onclick="switchTeacherTopicTab('histoire', this)">🏛️ Histoire</button>
+              <button class="t-subj-tab" onclick="switchTeacherTopicTab('geo', this)">🌍 Géo</button>
+              <button class="t-subj-tab" onclick="switchTeacherTopicTab('sciences', this)">🔬 Sciences</button>
+              <button class="t-subj-tab" onclick="switchTeacherTopicTab('anglais', this)">🇬🇧 Anglais</button>
               <button class="t-subj-tab" onclick="switchTeacherTopicTab('methode', this)">🧠 Méthode</button>
             </div>
           </div>
@@ -6479,26 +6484,65 @@
           <div id="teacherChipsFrancais" class="teacher-chips-tray active">
             <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus jamais confondre a et à ?')">a ou à ?</button>
             <button class="t-chip" onclick="quickTeacherAsk('Comment faire la différence entre et et est ?')">et ou est ?</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Quand utilise-t-on l\'imparfait et le passé composé ?')">Imparfait vs Passé composé</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Pourquoi met-on toujours un S avec TU ?')">Règle du TU</button>
+            <button class="t-chip" onclick="quickTeacherAsk('C\'est quoi le complément du nom G3 et les prépositions ?')">G3 Complément du Nom</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment conjuguer les 8 verbes du présent (C2) ?')">Les 8 verbes du présent</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Qui est René Magritte et pourquoi dit-on ceci n\'est pas une pipe ?')">Dictée 6 Magritte</button>
             <button class="t-chip" onclick="quickTeacherAsk('Comment savoir si un verbe se termine par -er ou -é ?')">-er ou -é ?</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Comment accorder le participe passé simplement ?')">Accord participe passé</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Pourquoi met-on toujours un S avec TU ?')">Règle du TU</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment accorder les mots dans le groupe nominal ?')">Accords dans le GN</button>
           </div>
 
           <div id="teacherChipsMaths" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Comment fonctionne la soustraction par cassage pas-à-pas ?')">Soustraction cassage</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Explique-moi les dixièmes, centièmes et le glisse-nombre')">Décodeur décimal & Glisse-Nombre</button>
             <button class="t-chip" onclick="quickTeacherAsk('Comment poser une division à deux chiffres simplement ?')">Division posée</button>
             <button class="t-chip" onclick="quickTeacherAsk('Comment additionner des fractions simples ?')">Fractions faciles</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Comment convertir des millimètres en mètres sans me tromper ?')">Tableau de conversion</button>
+            <button class="t-chip" onclick="quickTeacherAsk('C\'est quoi des droites sécantes, perpendiculaires et parallèles ?')">Droites & Géométrie</button>
             <button class="t-chip" onclick="quickTeacherAsk('Quelle est la différence entre le périmètre et l\'aire d\'une figure ?')">Périmètre vs Aire</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Comment multiplier un nombre décimal par 10 ou 100 ?')">Multiplier décimaux</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Comment bien poser une soustraction avec retenue ?')">Soustraction retenue</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment convertir des millimètres en mètres sans me tromper ?')">Tableau de conversion</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment bien réussir ma frise géométrique Seyès du cahier ?')">Frise Seyès</button>
+          </div>
+
+          <div id="teacherChipsHistoire" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Qui étaient les Celtes et comment vivaient les Gaulois ?')">Les Celtes & les Gaulois</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quels étaient les 3 grands groupes de la société gauloise ?')">La société gauloise</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Qui étaient Vercingétorix et Jules César à Alésia ?')">Vercingétorix & Alésia</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quelles sont les 5 grandes périodes de l\'Histoire ?')">Les 5 grandes périodes</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quelle est la différence entre le Paléolithique et le Néolithique ?')">Préhistoire (Lascaux)</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Pourquoi la cathédrale de Reims est-elle célèbre ?')">Cathédrale de Reims</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Pourquoi a-t-on construit la Tour Eiffel en 1889 ?')">Tour Eiffel & Eiffel</button>
+          </div>
+
+          <div id="teacherChipsGeo" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Parle-moi de l\'Italie, de sa forme de botte et des spécialités culinaires')">L'Italie & Semaine du Goût</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Qui était Giuseppe Arcimboldo et ses tableaux gourmands ?')">Giuseppe Arcimboldo</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quels sont les 6 continents et les 5 océans de la Terre ?')">Continents & Océans</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quels sont les grands fleuves et les montagnes de France ?')">Relief de la France</button>
+          </div>
+
+          <div id="teacherChipsSciences" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Quelles sont les grandes familles de matériaux (métaux, verres, plastiques...) ?')">Familles de matériaux</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Dans quelle poubelle doit-on jeter chaque type de déchet pour le recyclage ?')">Tri sélectif & Recyclage</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment fonctionne un circuit électrique simple ?')">Circuit électrique</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Qu\'est-ce qu\'un matériau conducteur et un isolant électrique ?')">Conducteurs vs Isolants</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quels sont les 3 états de l\'eau (solide, liquide, gaz) ?')">Les 3 états de l'eau</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Combien y a-t-il de planètes dans le système solaire ?')">Le système solaire</button>
+          </div>
+
+          <div id="teacherChipsAnglais" class="teacher-chips-tray">
+            <button class="t-chip" onclick="quickTeacherAsk('Comment utiliser la question What is it? et répondre en anglais ?')">What is it?</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment dit-on les animaux du cours en anglais (dog, cat, horse...) ?')">Les animaux en anglais</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment raconter sa journée en anglais (Daily routine) ?')">Daily Routine</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment saluer en anglais (Hello, Good morning, How are you) ?')">Salutations</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Comment dit-on les jours de la semaine et les nombres en anglais ?')">Jours & Nombres</button>
           </div>
 
           <div id="teacherChipsMethode" class="teacher-chips-tray">
             <button class="t-chip" onclick="quickTeacherAsk('Comment faire pour bien apprendre et retenir ma leçon par cœur ?')">Mémoriser une leçon</button>
-            <button class="t-chip" onclick="quickTeacherAsk('Quelle est la meilleure méthode pour relire ma dictée et trouver mes fautes ?')">Chasse aux fautes dictée</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Quelle est la meilleure méthode pour relire ma dictée et trouver mes fautes ?')">Chasse aux fautes (Détective)</button>
             <button class="t-chip" onclick="quickTeacherAsk('Comment ne plus stresser avant une évaluation en classe ?')">Gérer le stress</button>
             <button class="t-chip" onclick="quickTeacherAsk('Comment bien comprendre un problème de maths sans me perdre ?')">Méthode problèmes</button>
+            <button class="t-chip" onclick="quickTeacherAsk('Pourquoi faut-il faire des sessions courtes de 45 minutes ?')">Règle des 45 min</button>
           </div>
         </div>
 
@@ -6518,7 +6562,7 @@
 
         <!-- Barre de saisie du message pour l'enfant -->
         <div class="teacher-input-container">
-          <textarea id="teacherQuestionInput" class="teacher-chat-textarea" placeholder="Tape ta question ici (ex: Je ne comprends pas cet exercice, réexplique-moi...)" rows="1" onkeydown="handleTeacherInputKeydown(event)"></textarea>
+          <textarea id="teacherQuestionInput" class="teacher-chat-textarea" placeholder="Tape ta question sur n'importe quel cours (Français, Maths, Histoire, Géo, Sciences, Anglais)..." rows="1" onkeydown="handleTeacherInputKeydown(event)"></textarea>
           <button class="action-btn teacher-send-btn" id="teacherSubmitBtn" onclick="askTeacherHelp()" title="Envoyer mon message">
             <span>✨ Envoyer</span>
           </button>
@@ -19601,64 +19645,581 @@ Format JSON attendu :
     // =========================================================================
     // 2. MODALE D'AIDE BIENVEILLANTE : MADAME CLAIRE (CHAT INTERACTIF & MULTI-TOURS)
     // =========================================================================
-    const madameClaireKnowledge = {
-      "a": {
+
+    // Moteur de normalisation de texte pour une recherche sans bavure
+    function cleanTeacherQuery(str) {
+      return " " + (str || "").toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, " ")
+        .replace(/\s+/g, " ") + " ";
+    }
+
+    // Base de Connaissances Universelle de Madame Claire (Couvre 100% des matières du site)
+    const madameClaireKnowledge = [
+      // =========================================================================
+      // 1. FRANÇAIS (Grammaire, Conjugaison, Homophones, Dictées, Orthographe)
+      // =========================================================================
+      {
+        id: "homophone_a",
+        subject: "francais",
         title: "L'astuce magique de « a » vs « à »",
+        keys: [" a ou a ", " a et a ", " a vs a ", " accent sur a ", " regle du a ", " verbe avoir ou a ", " quand mettre a ", " a sans accent "],
         html: "<strong>L'astuce magique de « a » vs « à » :</strong><br>Remplace par <em>« avait »</em> !<br>• Si la phrase a toujours du sens, c'est le verbe <strong>avoir</strong> ➔ écris <strong>a sans accent</strong> (ex: <em>Il a faim</em> ➔ <em>Il avait faim</em>).<br>• Si la phrase devient bizarre, c'est la préposition ➔ écris <strong>à avec accent</strong> (ex: <em>Je vais à la piscine</em>) !",
-        example: "Exemple : « Léa <strong>a</strong> donné un livre <strong>à</strong> son frère » ➔ On peut dire « Léa <em>avait</em> donné... » mais pas « ...<em>avait</em> son frère » !"
+        example: "« Léa <strong>a</strong> donné un livre <strong>à</strong> son frère » ➔ On peut dire « Léa <em>avait</em> donné... » mais pas « ...<em>avait</em> son frère » !"
       },
-      "et": {
+      {
+        id: "homophone_et",
+        subject: "francais",
         title: "L'astuce magique de « et » vs « est »",
+        keys: [" et ou est ", " et et est ", " et vs est ", " regle de et et est "],
         html: "<strong>L'astuce magique de « et » vs « est » :</strong><br>Remplace par <em>« était »</em> !<br>• Si ça fonctionne, c'est le verbe <strong>être</strong> ➔ écris <strong>est</strong> (ex: <em>Le ciel est bleu</em> ➔ <em>Le ciel était bleu</em>).<br>• Sinon, remplace par <em>« et puis »</em> ➔ écris <strong>et</strong> (ex: <em>Un chat et un chien</em> ➔ <em>Un chat et puis un chien</em>) !",
-        example: "Exemple : « Tom <strong>est</strong> courageux <strong>et</strong> gentil » ➔ « Tom <em>était</em> courageux <em>et puis</em> gentil » !"
+        example: "« Tom <strong>est</strong> courageux <strong>et</strong> gentil » ➔ « Tom <em>était</em> courageux <em>et puis</em> gentil » !"
       },
-      "division": {
-        title: "Poser une division à deux chiffres simplement",
-        html: "<strong>La méthode magique des 4 étapes qui tournent en boucle :</strong><br>1. <strong>Je partage / J'estime :</strong> Combien de fois rentre le diviseur dans les premiers chiffres ? (Pense aux tables !)<br>2. <strong>Je multiplie :</strong> Je pose le résultat sous le dividende.<br>3. <strong>Je soustrais :</strong> Je calcule la différence pour trouver le reste.<br>4. <strong>J'abaisse :</strong> Je descends le chiffre suivant et je recommence !<br><em>💡 Règle d'or : à chaque étape, ton reste doit être plus petit que le diviseur !</em>",
-        example: "Pour diviser par 24 : écris vite la petite table de 24 au brouillon (24, 48, 72, 96...) pour trouver le bon chiffre en un coup d'œil !"
+      {
+        id: "homophone_on",
+        subject: "francais",
+        title: "L'astuce de « on » vs « ont »",
+        keys: [" on ou ont ", " on et ont ", " on vs ont ", " ont avec t "],
+        html: "<strong>L'astuce de « on » vs « ont » :</strong><br>Remplace par <em>« avaient »</em> !<br>• Si la phrase fonctionne ➔ c'est le verbe <strong>avoir</strong>, écris <strong>ont avec un t</strong> (ex: <em>Ils ont froid</em> ➔ <em>Ils avaient froid</em>).<br>• Si ça ne fonctionne pas, remplace par <em>« il »</em> ➔ c'est le pronom sujet, écris <strong>on sans t</strong> (ex: <em>On chante</em> ➔ <em>Il chante</em>) !",
+        example: "« <strong>On</strong> sait qu'ils <strong>ont</strong> gagné » ➔ « <em>Il</em> sait qu'ils <em>avaient</em> gagné » !"
       },
-      "imparfait": {
-        title: "Imparfait vs Passé Composé",
-        html: "<strong>Imparfait ou Passé Composé ? Voici le secret :</strong><br>• L'<strong>Imparfait</strong> sert pour le décor, une habitude ou une action longue qui n'a pas de fin précise (ex: <em>Il pleuvait doucement et nous marchions...</em>). Terminaisons : <em>-ais, -ais, -ait, -ions, -iez, -aient</em>.<br>• Le <strong>Passé Composé</strong> sert pour un événement soudain, précis et court qui fait avancer l'histoire (ex: <em>Soudain, le téléphone a sonné !</em>).",
-        example: "Exemple : « Je <strong>lisais</strong> tranquillement (action longue) quand mon chat <strong>a sauté</strong> sur la table (action soudaine) ! »"
+      {
+        id: "homophone_son",
+        subject: "francais",
+        title: "L'astuce de « son » vs « sont »",
+        keys: [" son ou sont ", " son et sont ", " son vs sont ", " sont avec t "],
+        html: "<strong>L'astuce de « son » vs « sont » :</strong><br>Remplace par <em>« étaient »</em> !<br>• Si ça a du sens ➔ c'est le verbe <strong>être</strong>, écris <strong>sont avec un t</strong> (ex: <em>Ils sont contents</em> ➔ <em>Ils étaient contents</em>).<br>• Sinon, remplace par <em>« mon »</em> ➔ c'est le déterminant possessif, écris <strong>son sans t</strong> (ex: <em>Son vélo</em> ➔ <em>Mon vélo</em>) !",
+        example: "« Les enfants <strong>sont</strong> avec <strong>son</strong> grand-père » ➔ « ...<em>étaient</em> avec <em>mon</em> grand-père » !"
       },
-      "conversion": {
-        title: "Tableau de conversion sans jamais se tromper",
-        html: "<strong>Le secret des conversions en 3 étapes :</strong><br>1. <strong>Trouve le chiffre des unités</strong> de ton nombre (ex: dans 45,8 m, le chiffre des unités est le 5).<br>2. <strong>Pose ce chiffre dans la colonne de l'unité de départ</strong> (ici dans les mètres).<br>3. <strong>Déplace la virgule</strong> ou ajoute des zéros jusqu'à la colonne demandée !",
-        example: "Pour convertir 45,8 m en cm : le 5 est dans les m, le 8 dans les dm, on ajoute un 0 dans les cm ➔ <strong>4 580 cm</strong> !"
+      {
+        id: "homophone_ou",
+        subject: "francais",
+        title: "L'astuce de « ou » vs « où »",
+        keys: [" ou ou ou ", " ou avec accent ", " ou sans accent ", " ou lieu ", " ou bien ou "],
+        html: "<strong>L'astuce de « ou » vs « où » :</strong><br>Remplace par <em>« ou bien »</em> !<br>• Si ça marche ➔ écris <strong>ou sans accent</strong> (c'est un choix : <em>Poire ou pomme</em> ➔ <em>Poire ou bien pomme</em>).<br>• Si on indique un <strong>lieu ou un endroit</strong> ➔ écris <strong>où avec accent</strong> (ex: <em>La ville où j'habite</em>) !",
+        example: "« <strong>Où</strong> vas-tu ? À la mer <strong>ou</strong> à la montagne ? » (lieu ➔ où / choix ➔ ou bien) !"
       },
-      "fractions": {
-        title: "Fractions simples et faciles",
-        html: "<strong>Additionner des fractions de même dénominateur :</strong><br>Rappelle-toi l'image d'un gâteau coupé en parts !<br>• Si les fractions ont le <strong>même nombre en bas</strong> (le dénominateur), tu additionnes <strong>UNIQUEMENT les nombres du haut</strong> (les numérateurs).<br>• Le bas ne change jamais car les parts ont la même taille !",
-        example: "Exemple : <strong>3/8 + 2/8 = 5/8</strong> (3 parts de pizza + 2 parts de pizza = 5 parts sur 8) !"
+      {
+        id: "homophone_ce_se",
+        subject: "francais",
+        title: "« ce / se » et « ces / ses / c'est / s'est »",
+        keys: [" ce ou se ", " ce et se ", " ces ou ses ", " c est ou s est ", " homophones ces ses "],
+        html: "<strong>La boîte à secrets des homophones en S/C :</strong><br>• <strong>ce / ces</strong> (avec un C comme <em>Cibler du doigt</em>) : on montre du doigt (ex: <em>Ce livre, ces cahiers</em>).<br>• <strong>se / ses</strong> (avec un S comme <em>Soi-même / Sa possession</em>) : c'est à lui (ex: <em>Ses chaussures</em> ➔ <em>Mes chaussures</em>) ou un verbe pronominal (<em>Il se lave</em>).<br>• <strong>c'est</strong> = remplace par <em>« cela est »</em> (ex: <em>C'est beau !</em>).<br>• <strong>s'est</strong> = suivi d'un participe passé avec un sujet (ex: <em>Il s'est endormi</em> ➔ <em>Je me suis endormi</em>).",
+        example: "« <strong>C'est</strong> Lucas qui a rangé <strong>ses</strong> affaires dans <strong>ce</strong> placard. »"
       },
-      "tu": {
-        title: "La règle d'or du pronom TU",
-        html: "<strong>La règle inséparable du « TU » :</strong><br>En français, le pronom <strong>TU</strong> a un meilleur ami dont il ne se sépare jamais : la lettre <strong>S</strong> !<br>À presque tous les temps (présent, imparfait, futur, conditionnel), le verbe avec <em>TU</em> se termine par un <strong>S</strong> (ou un <strong>X</strong> pour <em>tu peux, tu veux, tu vaux</em>).",
-        example: "Exemples : <em>Tu manges</em>, <em>tu finissais</em>, <em>tu prendras</em>, <em>tu as</em>, <em>tu es</em> !"
+      {
+        id: "grammaire_g1",
+        subject: "francais",
+        title: "G1 : Le rôle des déterminants",
+        keys: [" determinant ", " determinants ", " g1 ", " articles definis ", " articles indefinis ", " determinants possessifs "],
+        html: "<strong>Le rôle magique du déterminant (Leçon G1) :</strong><br>Le déterminant est le petit mot placé <strong>devant le nom</strong>. Il donne deux informations capitales :<br>1. Le <strong>genre</strong> : masculin ou féminin (<em>un / une</em>, <em>le / la</em>).<br>2. Le <strong>nombre</strong> : singulier ou pluriel (<em>des, les, mes, ces</em>).<br>• <em>Articles définis :</em> le, la, les, l' (on sait précisément de quoi on parle).<br>• <em>Articles indéfinis :</em> un, une, des (on parle d'un élément en général).<br>• <em>Déterminants possessifs :</em> mon, ton, son, notre, votre, leur...<br>• <em>Déterminants démonstratifs :</em> ce, cet, cette, ces...",
+        example: "Dans « <em>Les</em> trois petits cochons mangent <em>leur</em> soupe », <em>Les</em> et <em>leur</em> sont des déterminants !"
       },
-      "er": {
+      {
+        id: "grammaire_g2",
+        subject: "francais",
+        title: "G2 : Les adjectifs qualificatifs",
+        keys: [" adjectif ", " adjectifs ", " qualificatif ", " g2 ", " accord adjectif ", " adjectif qualificatif "],
+        html: "<strong>L'adjectif qualificatif (Leçon G2) :</strong><br>L'adjectif est un mot qui <strong>décrit et donne des précisions</strong> sur le nom (comment est la chose ou la personne ?).<br>• Il fait partie des <em>expansions du nom</em> : on peut souvent le supprimer sans casser la phrase.<br>• <strong>Règle d'or d'accord :</strong> L'adjectif s'accorde TOUJOURS en genre (masculin/féminin) et en nombre (singulier/pluriel) avec le nom qu'il qualifie !",
+        example: "« Une <em>grande</em> forêt <em>sombre</em> » ➔ forêt est féminin singulier, donc grande (+e) et sombre (+e) !"
+      },
+      {
+        id: "grammaire_g3",
+        subject: "francais",
+        title: "G3 : Le complément du nom (CDN)",
+        keys: [" complement du nom ", " cdn ", " g3 ", " prepositions a de en pour sans avec ", " nom noyau "],
+        html: "<strong>Le Complément du Nom (Leçon G3 du 2 Novembre) :</strong><br>Dans un Groupe Nominal, le <strong>nom noyau</strong> peut être enrichi par un <strong>Complément du Nom (CDN)</strong>.<br>• Il est presque toujours introduit par une <strong>préposition</strong> : <em>à, de, en, pour, sans, avec</em> (pense à la formule mnémotechnique : <em>« Adam part pour Anvers avec 200 sous »</em> !).<br>• Il ne s'accorde généralement pas avec le nom noyau, il apporte juste une précision sur la matière, l'usage, l'origine ou le contenu.",
+        example: "« Une tarte <strong>aux pommes</strong> », « Un bracelet <strong>en or</strong> », « Une brosse <strong>à dents</strong> », « Une maison <strong>de campagne</strong> » !"
+      },
+      {
+        id: "conjugaison_c2",
+        subject: "francais",
+        title: "C2 : Le Ring des 8 verbes du présent",
+        keys: [" 8 verbes ", " verbes du present ", " c2 ", " ring des verbes ", " present etre avoir ", " conjuguer aller faire ", " present faire dire "],
+        html: "<strong>Le Ring des 8 verbes du présent (Fiche Officielle C2) :</strong><br>En CM2, ces 8 verbes du 3e groupe doivent être connus sur le bout des doigts :<br>• <strong>ÊTRE :</strong> je suis, tu es, il est, nous sommes, vous êtes, ils sont.<br>• <strong>AVOIR :</strong> j'ai, tu as, il a, nous avons, vous avez, ils ont.<br>• <strong>ALLER :</strong> je vais, tu vas, il va, nous allons, vous allez, ils vont.<br>• <strong>FAIRE :</strong> je fais, tu fais, il fait, nous faisons, <em>vous faites</em>, <em>ils font</em>.<br>• <strong>DIRE :</strong> je dis, tu dis, il dit, nous disons, <em>vous dites</em>, ils disent.<br>• <strong>VENIR :</strong> je viens, tu viens, il vient, nous venons, vous venez, ils viennent.<br>• <strong>POUVOIR :</strong> je peux, tu peux, il peut, nous pouvons, vous pouvez, ils peuvent.<br>• <strong>VOIR :</strong> je vois, tu vois, il voit, nous voyons, vous voyez, ils voient.<br><em>⚠️ Attention aux 3 pièges classiques : vous faites, vous dites, ils font !</em>",
+        example: "« Vous <strong>faites</strong> du vélo et vous <strong>dites</strong> bonjour ! » (jamais de « faisez » ni « disez ») !"
+      },
+      {
+        id: "conjugaison_present_er",
+        subject: "francais",
+        title: "Présent des verbes en -ER (1er groupe)",
+        keys: [" verbes en er ", " terminaisons present ", " present 1er groupe ", " conjuguer au present "],
+        html: "<strong>Le présent des verbes en -ER :</strong><br>Pour conjuguer un verbe en -er au présent, on prend le radical et on ajoute :<br>👉 <strong>-e, -es, -e, -ons, -ez, -ent</strong><br>• Avec <em>je</em> ➔ <strong>-e</strong> (ex: <em>je chante</em>).<br>• Avec <em>tu</em> ➔ <strong>-es</strong> (ex: <em>tu chantes</em>).<br>• Avec <em>il / elle / on</em> ➔ <strong>-e</strong> (ex: <em>il chante</em>).<br>• Avec <em>ils / elles</em> ➔ <strong>-ent</strong> (ex: <em>ils chantent</em>, attention c'est muet !).",
+        example: "« Tu <em>regardes</em> les étoiles et elles <em>brillent</em> dans la nuit. »"
+      },
+      {
+        id: "conjugaison_imparfait",
+        subject: "francais",
+        title: "L'Imparfait de l'indicatif",
+        keys: [" imparfait ", " terminaisons imparfait ", " conjuguer imparfait ", " quand utiliser imparfait "],
+        html: "<strong>L'Imparfait de l'indicatif :</strong><br>C'est le temps du passé pour décrire un paysage, une habitude ou une action longue qui dure :<br>👉 Terminaisons uniques pour TOUS les verbes : <strong>-ais, -ais, -ait, -ions, -iez, -aient</strong>.<br>• Avec <em>nous</em> et <em>vous</em>, n'oublie jamais le <strong>I</strong> (<em>nous chantions</em>, <em>vous chantiez</em>).",
+        example: "« Tous les matins, nous <strong>mangions</strong> ensemble pendant qu'il <strong>pleuvait</strong>. »"
+      },
+      {
+        id: "conjugaison_futur",
+        subject: "francais",
+        title: "Le Futur simple",
+        keys: [" futur ", " futur simple ", " terminaisons futur ", " conjuguer au futur "],
+        html: "<strong>Le Futur simple :</strong><br>C'est le temps le plus régulier ! On prend souvent l'<strong>infinitif complet</strong> et on ajoute les terminaisons du verbe AVOIR :<br>👉 <strong>-ai, -as, -a, -ons, -ez, -ont</strong><br>• Attention : avec <em>je</em>, c'est <strong>-ai</strong> (sans s !).<br>• Avec <em>ils/elles</em>, c'est <strong>-ont</strong>.",
+        example: "« Demain, je <strong>marcherai</strong> (infinitif marcher + ai) et nous <strong>finirons</strong> nos devoirs. »"
+      },
+      {
+        id: "orthographe_er_e",
+        subject: "francais",
         title: "-er ou -é à la fin d'un verbe ?",
+        keys: [" er ou e ", " infinitif ou participe ", " mordre ou mordu "],
         html: "<strong>L'astuce magique de « -er » vs « -é » :</strong><br>Remplace le verbe par <strong>« mordre / vendre »</strong> (infinitif) ou par <strong>« mordu / vendu »</strong> (participe passé) !<br>• Si on peut dire <em>mordre</em> ➔ écris <strong>-er</strong> (infinitif).<br>• Si on peut dire <em>mordu</em> ➔ écris <strong>-é</strong> (participe passé) !",
-        example: "Exemple : « Il va <em>manger</em> » (il va <em>mordre</em> ➔ -er) vs « Il a <em>mangé</em> » (il a <em>mordu</em> ➔ -é) !"
+        example: "« Il va <em>manger</em> » (il va <em>mordre</em> ➔ -er) vs « Il a <em>mangé</em> » (il a <em>mordu</em> ➔ -é) !"
       },
-      "participe": {
+      {
+        id: "orthographe_tu",
+        subject: "francais",
+        title: "La règle d'or du pronom TU",
+        keys: [" regle du tu ", " s avec tu ", " tu march ", " pronom tu "],
+        html: "<strong>La règle inséparable du « TU » :</strong><br>En français, le pronom <strong>TU</strong> a un meilleur ami dont il ne se sépare jamais : la lettre <strong>S</strong> !<br>À presque tous les temps (présent, imparfait, futur, conditionnel), le verbe avec <em>TU</em> se termine par un <strong>S</strong> (ou un <strong>X</strong> pour <em>tu peux, tu veux, tu vaux</em>).",
+        example: "<em>Tu manges</em>, <em>tu finissais</em>, <em>tu prendras</em>, <em>tu as</em>, <em>tu es</em> !"
+      },
+      {
+        id: "orthographe_accords_gn",
+        subject: "francais",
+        title: "Les accords dans le Groupe Nominal (GN)",
+        keys: [" accord dans le gn ", " accord groupe nominal ", " chaine d accords ", " accords gn "],
+        html: "<strong>La chaîne d'accords dans le GN :</strong><br>Le <strong>nom</strong> est le chef d'équipe ! Il donne son genre (masculin/féminin) et son nombre (singulier/pluriel) au <strong>déterminant</strong> et à tous les <strong>adjectifs</strong> qui l'accompagnent.<br>• Si le nom passe au pluriel (+s ou +x), l'adjectif prend aussi un +s ou +x !<br>• Si le nom est féminin (+e), l'adjectif prend un +e !",
+        example: "« Un <strong>joli papillon bleu</strong> » ➔ « De <strong>jolis papillons bleus</strong> » (tout le monde prend un s) !"
+      },
+      {
+        id: "orthographe_participe",
+        subject: "francais",
         title: "Accords du participe passé avec Être et Avoir",
+        keys: [" accord participe passe ", " participe passe avec etre ", " participe passe avec avoir ", " auxiliaire etre avoir "],
         html: "<strong>Le grand secret du participe passé :</strong><br>• Avec l'auxiliaire <strong>ÊTRE</strong> : il s'accorde TOUJOURS en genre et en nombre avec le sujet (ex: <em>Elles sont arrivé<strong>es</strong></em>).<br>• Avec l'auxiliaire <strong>AVOIR</strong> : il ne s'accorde JAMAIS avec le sujet ! (ex: <em>Elles ont mangé</em>). <em>(Sauf si le COD est placé avant, mais garde déjà cette règle en tête !)</em>",
         example: "Pense à la formule : <em>Être = Copain avec le sujet (accord)</em> | <em>Avoir = Solitaire (pas d'accord avec le sujet)</em> !"
       },
-      "perimetre": {
-        title: "Différence entre Périmètre et Aire",
-        html: "<strong>Périmètre vs Aire :</strong><br>• Le <strong>Périmètre</strong>, c'est la <strong>clôture</strong> autour du jardin (on additionne toutes les longueurs des côtés, résultat en cm ou m).<br>• L'<strong>Aire</strong>, c'est la <strong>surface de pelouse</strong> à l'intérieur du jardin (pour un rectangle : Longueur × largeur, résultat en cm² ou m²) !",
-        example: "Un rectangle de 4 cm par 3 cm :<br>• Périmètre = (4 + 3) × 2 = <strong>14 cm</strong><br>• Aire = 4 × 3 = <strong>12 cm²</strong> !"
+      {
+        id: "dictee_magritte",
+        subject: "francais",
+        title: "Dictée 6 : René Magritte (La Trahison des images)",
+        keys: [" magritte ", " trahison des images ", " surrealisme ", " dictee 6 ", " ceci n est pas une pipe ", " pipe "],
+        html: "<strong>La Dictée 6 : René Magritte & le Surréalisme :</strong><br>René Magritte (1898-1967) est un grand peintre surréaliste belge. En 1929, il peint un tableau représentant une pipe avec l'inscription <em>« Ceci n'est pas une pipe »</em>.<br>• Pourquoi ? Parce que ce n'est pas un objet réel que l'on peut fumer, c'est seulement <strong>l'image peinte</strong> d'une pipe ! C'est ce qu'on appelle la trahison des images.<br>• Les 36 mots de la dictée explorent le monde des artistes, de l'affiche publicitaire, du poète, du rêve et de l'imagination.<br>• <em>Attention à l'orthographe :</em> affiche (2 f), modèle (accent grave), femme (2 m), poète (accent grave), écrivain !",
+        example: "« Le peintre surréaliste compose une affiche pleine d'imagination. »"
       },
-      "methode": {
-        title: "Comment bien mémoriser et retenir une leçon ?",
-        html: "<strong>Les 3 étapes de la super-mémoire :</strong><br>1. <strong>Lis la leçon à voix haute</strong> pour que ton cerveau l'entende.<br>2. <strong>Ferme les yeux et réexplique-la avec tes propres mots</strong> comme si tu l'expliquais à une amie.<br>3. <strong>Écris 3 questions clés</strong> sur ton ardoise et réponds-y le lendemain matin !",
-        example: "Le sommeil consolide les apprentissages : réviser 10 minutes le soir + 5 minutes le matin est 10 fois plus efficace que de stresser 1 heure d'un coup !"
-      }
-    };
+      {
+        id: "dictee_vivaldi",
+        subject: "francais",
+        title: "Dictée 5 : Les Quatre Saisons d'Antonio Vivaldi",
+        keys: [" vivaldi ", " quatre saisons ", " dictee 5 ", " violon ", " concerto "],
+        html: "<strong>La Dictée 5 : Antonio Vivaldi & les Quatre Saisons :</strong><br>Antonio Vivaldi (1678-1741) est un célèbre compositeur et violoniste italien de l'époque baroque.<br>• Ses <em>Quatre Saisons</em> (Le Printemps, L'Été, L'Automne, L'Hiver) sont des concertos pour violon où la musique imite la nature : le chant des oiseaux, l'orage grondant, le crépitement du feu en hiver.<br>• La dictée met en valeur le violon, l'archet, la mélodie, l'orchestre et les accords dans le groupe nominal.",
+        example: "« Les mélodies harmonieuses du violon résonnent dans l'orchestre italien. »"
+      },
+      {
+        id: "dictee_lascaux",
+        subject: "francais",
+        title: "Dictée 4 & Autodictée 1 : L'art pariétal et Lascaux",
+        keys: [" lascaux ", " art parietal ", " grotte de lascaux ", " dictee 4 ", " autodictee ", " patrimoine ", " bisons chevaux "],
+        html: "<strong>L'art pariétal & la Grotte de Lascaux (Autodictée 1) :</strong><br>Découverte en 1940 en Dordogne par quatre adolescents, la grotte de Lascaux est un chef-d'œuvre de la Préhistoire (Paléolithique supérieur, environ 18 000 ans av. J.-C.).<br>• Les hommes préhistoriques ont peint sur les parois rocheuses de magnifiques animaux : des chevaux, des taureaux, des cerfs et des bisons.<br>• Pour peindre, ils utilisaient des pigments naturels (ocre rouge, charbon de bois) et soufflaient la couleur avec des sarbacanes en os !<br>• <em>Astuce pour l'autodictée :</em> mémorise phrase par phrase en visualisant la scène dans ta tête.",
+        example: "« Sur les parois calcaires de la grotte, les artistes préhistoriques ont représenté de grands taureaux. »"
+      },
 
+      // =========================================================================
+      // 2. MATHÉMATIQUES (Soustraction, Décimaux, Fractions, Géométrie, Mesures)
+      // =========================================================================
+      {
+        id: "maths_soustraction",
+        subject: "maths",
+        title: "La Soustraction par cassage pas-à-pas",
+        keys: [" cassage ", " soustraction ", " soustraire ", " retenue ", " soustraction par cassage ", " casser une dizaine "],
+        html: "<strong>La méthode de la soustraction par cassage :</strong><br>Quand le chiffre du haut est trop petit pour soustraire le chiffre du bas (ex: 3 - 8), <strong>on ne peut pas le faire directement</strong> !<br>1. <strong>Je regarde la colonne de gauche (les dizaines) :</strong> je barre le chiffre et j'enlève 1 (ex: un 5 devient 4).<br>2. <strong>Je donne cette dizaine cassée à mes unités :</strong> 1 dizaine = 10 unités ! Mon 3 devient 13 (3 + 10).<br>3. <strong>Maintenant je soustrais sans retenue cachée :</strong> 13 - 8 = 5 !<br><em>💡 Règle d'or : On ne fait JAMAIS « le plus grand moins le plus petit » à l'envers ! On part toujours du nombre du haut.</em>",
+        example: "Pour 53 - 28 : On ne peut pas faire 3 - 8. On casse le 5 des dizaines (il reste 4 dizaines). On ajoute 10 au 3 ➔ 13. Alors : 13 - 8 = 5 (unités) et 4 - 2 = 2 (dizaines) ➔ <strong>25</strong> !"
+      },
+      {
+        id: "maths_decimaux",
+        subject: "maths",
+        title: "Le Décodeur Décimal & Glisse-Nombre (MHM)",
+        keys: [" decimal ", " decimaux ", " virgule ", " glisse nombre ", " dixieme ", " centieme ", " millieme ", " decodeur decimal ", " nombres a virgule "],
+        html: "<strong>Le Décodeur Décimal & le Glisse-Nombre :</strong><br>Un nombre décimal se compose de deux parties séparées par la virgule :<br>• À <strong>gauche</strong> de la virgule : la <strong>partie entière</strong> (unités, dizaines, centaines).<br>• À <strong>droite</strong> de la virgule : la <strong>partie décimale</strong> (les morceaux d'unités) :<br>  1. 1er chiffre après la virgule = les <strong>dixièmes</strong> (1/10 = 0,1).<br>  2. 2e chiffre après la virgule = les <strong>centièmes</strong> (1/100 = 0,01).<br>  3. 3e chiffre après la virgule = les <strong>millièmes</strong> (1/1000 = 0,001).<br>• <em>Avec le Glisse-Nombre :</em> Quand on multiplie par 10, tous les chiffres glissent d'1 colonne vers la gauche (ils deviennent 10 fois plus grands) !",
+        example: "Dans 4,25 : 4 est la partie entière (4 unités), 2 est le chiffre des dixièmes, 5 est le chiffre des centièmes. 4,25 = 4 + 2/10 + 5/100 !"
+      },
+      {
+        id: "maths_division",
+        subject: "maths",
+        title: "Poser une division à deux chiffres simplement",
+        keys: [" division ", " poser une division ", " diviser ", " quotient ", " dividende ", " reste ", " diviseur "],
+        html: "<strong>La méthode magique des 4 étapes qui tournent en boucle :</strong><br>1. <strong>Je partage / J'estime :</strong> Combien de fois rentre le diviseur dans les premiers chiffres ? (Pense aux tables !)<br>2. <strong>Je multiplie :</strong> Je pose le résultat sous le dividende.<br>3. <strong>Je soustrais :</strong> Je calcule la différence pour trouver le reste.<br>4. <strong>J'abaisse :</strong> Je descends le chiffre suivant et je recommence !<br><em>💡 Règle d'or : à chaque étape, ton reste doit être plus petit que le diviseur !</em>",
+        example: "Pour diviser par 24 : écris vite la petite table de 24 au brouillon (24, 48, 72, 96...) pour trouver le bon chiffre en un coup d'œil !"
+      },
+      {
+        id: "maths_multiplication",
+        subject: "maths",
+        title: "Tables de multiplication & Turbo Tables",
+        keys: [" table ", " tables ", " turbo tables ", " multiplier ", " multiplication ", " table de 9 ", " multiplier par 10 "],
+        html: "<strong>Astuces de choc pour les multiplications :</strong><br>• <strong>Multiplier par 10, 100, 1000 :</strong> Ajoute 1, 2 ou 3 zéros (ou décale la virgule vers la droite) !<br>• <strong>L'astuce magique de la table de 9 :</strong> La somme des chiffres du résultat fait toujours 9 ! (ex: 9×4=36 ➔ 3+6=9 ; 9×7=63 ➔ 6+3=9). Sur les doigts : baisse le 4e doigt ➔ 3 doigts à gauche, 6 à droite = 36 !<br>• <strong>Commutativité :</strong> 7 × 8, c'est pareil que 8 × 7 = 56 ! Si une table te bloque, inverse les deux nombres.",
+        example: "9 × 6 = 54 (5 + 4 = 9) ; 24 × 100 = 2 400 !"
+      },
+      {
+        id: "maths_fractions",
+        subject: "maths",
+        title: "Fractions simples et faciles",
+        keys: [" fraction ", " fractions ", " numerateur ", " denominateur ", " demi ", " tiers ", " quart ", " additionner fractions "],
+        html: "<strong>Additionner des fractions de même dénominateur :</strong><br>Rappelle-toi l'image d'une pizza coupée en parts égales !<br>• Le <strong>numérateur (en haut)</strong> compte le nombre de parts qu'on mange.<br>• Le <strong>dénominateur (en bas)</strong> indique en combien de parts la pizza est coupée.<br>• Si deux fractions ont le <strong>même dénominateur en bas</strong>, on additionne <strong>UNIQUEMENT le haut</strong> ! Le bas ne change jamais car la taille des parts ne change pas.",
+        example: "<strong>3/8 + 2/8 = 5/8</strong> (3 parts sur 8 + 2 parts sur 8 = 5 parts sur 8) !"
+      },
+      {
+        id: "maths_conversion",
+        subject: "maths",
+        title: "Tableau de conversion sans jamais se tromper",
+        keys: [" conversion ", " convertir ", " millimetre ", " metre ", " kilometre ", " tableau de conversion ", " litres ", " grammes "],
+        html: "<strong>Le secret des conversions en 3 étapes :</strong><br>1. <strong>Repère le chiffre des unités</strong> de ton nombre (ex: dans 45,8 m, le chiffre des unités est le 5).<br>2. <strong>Pose ce chiffre dans la colonne de l'unité de départ</strong> (ici dans la colonne des mètres).<br>3. <strong>Déplace la virgule ou complète avec des zéros</strong> jusqu'à la colonne de l'unité demandée !<br>• <em>Ordre des colonnes :</em> km | hm | dam | m | dm | cm | mm (marche aussi pour kg / g et L / mL) !",
+        example: "Pour convertir 45,8 m en cm : le 5 est dans les m, le 8 dans les dm, on ajoute un 0 dans les cm ➔ <strong>4 580 cm</strong> !"
+      },
+      {
+        id: "maths_geometrie_droites",
+        subject: "maths",
+        title: "Droites sécantes, perpendiculaires et parallèles",
+        keys: [" perpendiculaire ", " perpendiculaires ", " parallele ", " paralleles ", " secante ", " secantes ", " angle droit ", " equerre ", " geometrie "],
+        html: "<strong>Les 3 types de droites en géométrie :</strong><br>• <strong>Droites sécantes :</strong> Deux droites qui se coupent en un point unique.<br>• <strong>Droites perpendiculaires :</strong> Deux droites sécantes qui forment un <strong>angle droit (90°)</strong>. On le vérifie toujours avec l'<strong>équerre</strong> ! Symbole : ⟂.<br>• <strong>Droites parallèles :</strong> Deux droites qui ne se coupent jamais, même si on les prolonge à l'infini. L'écartement entre elles est toujours identique (comme les rails du train) ! Symbole : //.",
+        example: "Pour tracer deux parallèles : trace une droite (d), trace une perpendiculaire (p) avec ton équerre, puis trace la perpendiculaire à (p). Les deux droites obtenues sont parallèles !"
+      },
+      {
+        id: "maths_geometrie_programmes",
+        subject: "maths",
+        title: "Réussir un programme de construction géométrique noté",
+        keys: [" programme de construction ", " construction geometrique ", " tracer geometrie ", " devoir note geometrie "],
+        html: "<strong>La méthode infaillible pour les programmes de géométrie :</strong><br>1. <strong>Avoir le bon matériel :</strong> Un crayon à papier très bien taillé, une règle plate propre, une équerre et un compas bien serré.<br>2. <strong>Lire une seule consigne à la fois :</strong> Coche chaque étape au crayon au fur et à mesure que tu la réalises.<br>3. <strong>Nommer les points immédiatement :</strong> Dès que tu places un point A ou B, écris son nom tout de suite avec une petite croix nette (+).<br>4. <strong>Coder ta figure :</strong> Ajoute le petit carré pour les angles droits et les petits traits pour les segments de même longueur.",
+        example: "1. Trace un segment [AB] de 6 cm. 2. Place le milieu M à 3 cm. 3. Avec l'équerre, trace la perpendiculaire à [AB] passant par M."
+      },
+      {
+        id: "maths_frise",
+        subject: "maths",
+        title: "Frise géométrique Seyès du cahier",
+        keys: [" frise ", " seyes ", " carreaux ", " frise geometrique ", " frise cahier ", " reproduction frise "],
+        html: "<strong>Réussir sa frise géométrique sur cahier Seyès :</strong><br>1. <strong>Repère le motif de base :</strong> Compte exactement le nombre de carreaux en largeur et en hauteur d'un motif avant de le répéter.<br>2. <strong>Trace au crayon de papier et à la règle :</strong> Tous les segments droits doivent être tracés à la règle, sans trembler.<br>3. <strong>Colorie soigneusement :</strong> Choisis 2 belles couleurs de crayons de couleur (jamais de feutre qui traverse la page) et colorie toujours dans le même sens avec douceur.",
+        example: "Frise du 2 Novembre : un motif géométrique régulier alterné avec 2 couleurs bien distinctes pour créer un effet de damier ou de tresse !"
+      },
+      {
+        id: "maths_perimetre_aire",
+        subject: "maths",
+        title: "Différence entre Périmètre et Aire",
+        keys: [" perimetre ", " aire ", " surface ", " cloture ", " aire vs perimetre ", " perimetre et aire "],
+        html: "<strong>Périmètre vs Aire (L'image du jardin) :</strong><br>• Le <strong>Périmètre</strong>, c'est la <strong>clôture</strong> qui fait le tour du jardin ! On additionne la longueur de tous les côtés (résultat en cm ou m). Pour un rectangle : (L + l) × 2.<br>• L'<strong>Aire</strong>, c'est la <strong>surface de pelouse</strong> à l'intérieur du jardin ! On calcule l'espace intérieur (résultat en cm² ou m²). Pour un rectangle : Longueur × largeur.",
+        example: "Pour un rectangle de 5 cm de long et 3 cm de large :<br>• Périmètre = (5 + 3) × 2 = <strong>16 cm</strong>.<br>• Aire = 5 × 3 = <strong>15 cm²</strong> !"
+      },
+      {
+        id: "maths_problemes",
+        subject: "maths",
+        title: "Comment résoudre un problème de maths sans stress",
+        keys: [" probleme ", " problemes ", " resoudre probleme ", " methode problemes ", " enonce probleme "],
+        html: "<strong>La méthode en 3 étapes pour tout problème de maths :</strong><br>1. <strong>Je lis et je cherche la question :</strong> Qu'est-ce qu'on me demande de trouver ? (un prix, une quantité, une durée ?).<br>2. <strong>Je trie les données et je fais un schéma :</strong> Surligne les nombres utiles. Fais un petit dessin rapide au brouillon (des ronds, un rectangle, une ligne du temps).<br>3. <strong>J'écris le calcul et la phrase réponse :</strong> Pose ton opération clairement, et termine toujours par une phrase réponse complète avec l'unité (ex: <em>Il reste 14 pommes dans le panier.</em>).",
+        example: "Si Paul achète 3 livres à 8 € : Calcul = 3 × 8 = 24. Phrase réponse = Paul a dépensé 24 €."
+      },
+
+      // =========================================================================
+      // 3. HISTOIRE (5 Périodes, Préhistoire, Celtes, Gaulois, Reims, Eiffel)
+      // =========================================================================
+      {
+        id: "histoire_5periodes",
+        subject: "histoire",
+        title: "Les 5 grandes périodes de l'Histoire",
+        keys: [" 5 periodes ", " grandes periodes ", " chronologie ", " epoques de l histoire ", " chanson des 5 periodes "],
+        html: "<strong>Les 5 grandes périodes de l'Histoire :</strong><br>1. <strong>La Préhistoire :</strong> Des premiers hommes jusqu'à l'invention de l'écriture vers -3300 av. J.-C.<br>2. <strong>L'Antiquité :</strong> De -3300 jusqu'à la chute de l'Empire romain en 476 (Gaulois, Grecs, Romains).<br>3. <strong>Le Moyen Âge :</strong> De 476 jusqu'à la découverte de l'Amérique par Christophe Colomb en 1492 (châteaux forts, chevaliers, cathédrales).<br>4. <strong>Les Temps Modernes :</strong> De 1492 jusqu'à la Révolution française en 1789 (Renaissance, Louis XIV, châteaux de la Loire).<br>5. <strong>L'Époque Contemporaine :</strong> De 1789 jusqu'à nos jours (inventions, Tour Eiffel, République).",
+        example: "Pense à la chronologie : Préhistoire ➔ Antiquité ➔ Moyen Âge ➔ Temps Modernes ➔ Époque Contemporaine !"
+      },
+      {
+        id: "histoire_prehistoire",
+        subject: "histoire",
+        title: "Préhistoire : Paléolithique vs Néolithique",
+        keys: [" prehistoire ", " paleolithique ", " neolithique ", " hommes prehistoriques ", " feu ", " chasseurs cueilleurs "],
+        html: "<strong>Paléolithique vs Néolithique (Les deux âges de la Préhistoire) :</strong><br>• <strong>Le Paléolithique (Âge de la pierre taillée) :</strong> Les hommes sont des <strong>nomades</strong>. Ils se déplacent pour suivre le gibier, vivent de la chasse, de la pêche et de la cueillette. Ils maîtrisent le feu et peignent dans les grottes (Lascaux).<br>• <strong>Le Néolithique (Âge de la pierre polie, vers -10 000) :</strong> Révolution ! Les hommes deviennent <strong>sédentaires</strong>. Ils construisent les premiers villages, inventent l'<strong>agriculture</strong>, l'<strong>élevage</strong> et la poterie.",
+        example: "Au Paléolithique on chasse le mammouth et on vit sous des tentes en peaux ; au Néolithique on cultive le blé et on élève des moutons dans un village !"
+      },
+      {
+        id: "histoire_gaulois",
+        subject: "histoire",
+        title: "Les Celtes & la société gauloise",
+        keys: [" gaulois ", " gaule ", " celtes ", " celte ", " druide ", " druides ", " societe gauloise ", " peuples gaulois "],
+        html: "<strong>Les Celtes et la Société Gauloise (Leçon du 2 Novembre) :</strong><br>Au VIIe siècle av. J.-C., les Celtes, venus d'Europe centrale, s'installent en Gaule.<br>La société gauloise est divisée en <strong>3 grands groupes</strong> :<br>1. <strong>Les nobles et guerriers :</strong> Menés par un chef ou un roi, ce sont de redoutables cavaliers qui protègent la tribu.<br>2. <strong>Les druides :</strong> Les chefs religieux, juges et savants. Ils transmettent leur immense savoir <strong>uniquement à l'oral</strong> (aucun livre écrit !). Ils récoltent le gui sacré.<br>3. <strong>Le peuple :</strong> Les agriculteurs, éleveurs et des <strong>artisans forgerons exceptionnels</strong> réputés pour le travail du fer, du bronze et l'invention du tonneau !",
+        example: "Les Gaulois vivaient dans des oppidums (villages fortifiés) et n'étaient pas un peuple uni, mais une soixantaine de tribus cousines !"
+      },
+      {
+        id: "histoire_vercingetorix",
+        subject: "histoire",
+        title: "Vercingétorix & la bataille d'Alésia",
+        keys: [" vercingetorix ", " alesia ", " jules cesar ", " guerre des gaules ", " 52 av jc ", " gergovie "],
+        html: "<strong>Vercingétorix & Jules César (La Guerre des Gaules) :</strong><br>En 58 av. J.-C., le général romain Jules César envahit la Gaule.<br>• <strong>Vercingétorix</strong>, jeune chef arverne, réussit l'exploit d'unir les tribus gauloises pour résister aux Romains.<br>• Il bat César à la bataille de <strong>Gergovie</strong>, mais est ensuite encerclé par les légions romaines à <strong>Alésia en 52 av. J.-C.</strong>.<br>• Après un long siège et pour sauver ses hommes de la famine, Vercingétorix dépose ses armes aux pieds de César. La Gaule devient romaine (Gallo-romains).",
+        example: "Alésia en 52 avant J.-C. marque le début de la paix gallo-romaine et la construction d'arènes, d'aqueducs et de thermes !"
+      },
+      {
+        id: "histoire_reims",
+        subject: "histoire",
+        title: "La Cathédrale de Reims et le baptême de Clovis",
+        keys: [" reims ", " cathedrale de reims ", " clovis ", " sacre des rois ", " bapteme de clovis "],
+        html: "<strong>La Cathédrale Notre-Dame de Reims :</strong><br>Surnommée « la cathédrale des sacres », c'est un chef-d'œuvre de l'<strong>art gothique</strong> du Moyen Âge.<br>• En 496, <strong>Clovis</strong>, premier roi des Francs, y est baptisé par l'évêque saint Remi, faisant de la France un royaume chrétien.<br>• Par la suite, presque <strong>tous les rois de France y ont été sacrés</strong> avec la Sainte Ampoule (dont Charles VII conduit par Jeanne d'Arc) !<br>• Elle est célèbre pour sa façade ornée de statues dont le célèbre <em>Ange au Sourire</em> et ses magnifiques vitraux.",
+        example: "De Clovis à Charles X, plus de 30 rois de France ont reçu leur couronne royale dans la cathédrale de Reims !"
+      },
+      {
+        id: "histoire_eiffel",
+        subject: "histoire",
+        title: "Gustave Eiffel et la Tour Eiffel (1889)",
+        keys: [" eiffel ", " tour eiffel ", " exposition universelle ", " gustave eiffel ", " 1889 "],
+        html: "<strong>Gustave Eiffel & la Tour Eiffel (1889) :</strong><br>Construite par l'ingénieur Gustave Eiffel pour l'<strong>Exposition Universelle de Paris en 1889</strong>, elle célébrait le centenaire de la Révolution française (1789).<br>• Haute de plus de 300 mètres, elle est faite en <strong>fer puddlé</strong> (plus de 18 000 pièces assemblées par 2,5 millions de rivets !).<br>• Au départ, beaucoup d'artistes la détestaient et elle devait être détruite au bout de 20 ans ! Mais Eiffel la sauva en y installant des antennes météo et de radio transmission.",
+        example: "Aujourd'hui, la Tour Eiffel est le monument payant le plus visité au monde et le symbole universel de la France !"
+      },
+
+      // =========================================================================
+      // 4. GÉOGRAPHIE (L'Italie, Semaine du Goût, Continents, Relief de France)
+      // =========================================================================
+      {
+        id: "geo_italie",
+        subject: "geo",
+        title: "L'Italie & la Semaine du Goût",
+        keys: [" italie ", " italien ", " italienne ", " botte ", " rome ", " semaine du gout ", " pates ", " pizza ", " tiramisu "],
+        html: "<strong>L'Italie & la Semaine du Goût (Leçon du 2 Novembre) :</strong><br>• L'Italie est un pays européen voisin du sud-est de la France, bordé par la mer Méditerranée. Sa forme géographique ressemble à une <strong>botte</strong> qui semble taper dans un ballon (l'île de Sicile) !<br>• Sa capitale est <strong>Rome</strong> (la ville éternelle).<br>• Pour la Semaine du Goût, la classe explore sa cuisine célèbre dans le monde entier : les pâtes (penne, farfalle, spaghetti), la pizza margherita, le parmesan, le pesto et le tiramisu !",
+        example: "La Botte italienne a pour voisins la France, la Suisse, l'Autriche et la Slovénie. Sa monnaie est l'Euro (€)."
+      },
+      {
+        id: "geo_arcimboldo",
+        subject: "geo",
+        title: "Giuseppe Arcimboldo et l'art gourmand",
+        keys: [" arcimboldo ", " giuseppe arcimboldo ", " tableaux fruits ", " portrait pates ", " giulia "],
+        html: "<strong>Giuseppe Arcimboldo (1527-1593) :</strong><br>Peintre italien de la Renaissance célèbre pour ses portraits composés d'objets du quotidien et d'aliments !<br>• Il créait des visages en assemblant des <strong>fruits, légumes, fleurs, poissons ou livres</strong> (comme ses célèbres séries sur <em>Les Quatre Saisons</em> et <em>Les Quatre Éléments</em>).<br>• <em>Atelier classe du 2 Novembre :</em> Les élèves ont réalisé le portrait « Giulia » en utilisant des pâtes colorées (farfalle pour les nœuds, penne pour les cheveux, coquillettes) à la manière d'Arcimboldo !",
+        example: "Dans son tableau <em>L'Été</em>, le nez est une courgette, la joue est une pêche et la robe est faite d'épis de blé !"
+      },
+      {
+        id: "geo_continents",
+        subject: "geo",
+        title: "Les 6 continents et les 5 océans",
+        keys: [" continent ", " continents ", " ocean ", " oceans ", " planisphere ", " globe ", " planete terre "],
+        html: "<strong>Les Continents et Océans de la Terre :</strong><br>Notre planète est couverte à 71% d'eau (la « planète bleue ») :<br>• <strong>Les 6 continents :</strong> L'Europe (le nôtre), l'Asie (le plus grand et le plus peuplé), l'Afrique, l'Amérique (du Nord et du Sud), l'Océanie (avec l'Australie) et l'Antarctique (au pôle Sud, recouvert de glace).<br>• <strong>Les 5 océans :</strong> L'océan Pacifique (le plus vaste), l'océan Atlantique (qui borde la France), l'océan Indien, l'océan Arctique (au pôle Nord) et l'océan Antarctique (au pôle Sud).",
+        example: "La France métropolitaine se trouve en Europe de l'Ouest et est bordée par l'océan Atlantique et la mer Méditerranée."
+      },
+      {
+        id: "geo_relief_france",
+        subject: "geo",
+        title: "Les paysages et le relief de la France",
+        keys: [" relief ", " montagnes ", " fleuves ", " alpes ", " pyrenees ", " seine ", " loire ", " rhone ", " garonne "],
+        html: "<strong>Le Relief et les Fleuves de France :</strong><br>• <strong>Les montagnes jeunes (très hautes avec sommets pointus) :</strong> Les Alpes (Mont Blanc, 4 807 m) et les Pyrénées.<br>• <strong>Les montagnes anciennes (sommets arrondis) :</strong> Le Massif Central, les Vosges, le Jura.<br>• <strong>Les 4 grands fleuves qui se jettent dans la mer :</strong><br>  1. La <strong>Seine</strong> (traverse Paris et se jette dans la Manche).<br>  2. La <strong>Loire</strong> (le plus long, se jette dans l'Atlantique).<br>  3. La <strong>Garonne</strong> (se jette dans l'Atlantique par l'estuaire de la Gironde).<br>  4. Le <strong>Rhône</strong> (le plus puissant, se jette dans la Méditerranée).",
+        example: "Un fleuve se jette toujours dans la mer ou l'océan, alors qu'une rivière se jette dans un autre cours d'eau !"
+      },
+
+      // =========================================================================
+      // 5. SCIENCES & SVT (Matériaux, Tri & Recyclage, Électricité, Eau, Système Solaire)
+      // =========================================================================
+      {
+        id: "sciences_materiaux",
+        subject: "sciences",
+        title: "Les grandes familles de matériaux",
+        keys: [" materiau ", " materiaux ", " metaux ", " plastique ", " verre ", " ceramique ", " polymere ", " composite ", " familles de materiaux "],
+        html: "<strong>Les 4 grandes familles de matériaux :</strong><br>Tout objet autour de nous est fabriqué avec des matériaux choisis selon leurs propriétés :<br>1. <strong>Les métaux :</strong> Fer, cuivre, aluminium, or. Propriétés : brillants, très solides, excellents conducteurs d'électricité et de chaleur.<br>2. <strong>Les céramiques et verres :</strong> Verre, porcelaine, brique, poterie. Propriétés : durs, isolants, mais très fragiles et cassants.<br>3. <strong>Les matières organiques et polymères :</strong><br>   • Naturelles : le bois, la laine, le cuir, le coton.<br>   • Synthétiques (plastiques) : PVC, polystyrène, bouteilles en PET. Propriétés : légers, isolants, faciles à mouler.<br>4. <strong>Les composites :</strong> Assemblage de plusieurs matériaux pour combiner leurs forces (ex: béton armé, fibre de carbone).",
+        example: "Une casserole a un fond en métal (pour conduire la chaleur) et une poignée en plastique ou bois (isolant pour ne pas se brûler la main) !"
+      },
+      {
+        id: "sciences_tri_recyclage",
+        subject: "sciences",
+        title: "Le tri sélectif et le recyclage des déchets",
+        keys: [" recyclage ", " tri ", " poubelle jaune ", " dechets ", " composter ", " compost ", " tri selectif "],
+        html: "<strong>Le Tri des déchets & le Recyclage (Mission Écolo CM2) :</strong><br>Trier permet d'éviter l'épuisement des ressources de la planète :<br>• <strong>Bac Jaune (emballages) :</strong> Bouteilles en plastique, flacons, boîtes de conserve en métal, canettes en aluminium, briques de lait et cartons. Tout se recycle !<br>• <strong>Bac à Verre (vert) :</strong> Bouteilles, pots de confiture et bocaux en verre (le verre est recyclable à l'infini sans perte de qualité !).<br>• <strong>Bac Compost :</strong> Épluchures de légumes, marc de café, feuilles mortes (se transforment en terreau fertile pour les plantes).<br>• <strong>Bac Gris / Noir :</strong> Déchets ménagers résiduels non recyclables (mouchoirs souillés, restes de viande).",
+        example: "Recycler 27 bouteilles plastiques permet de fabriquer un pull polaire tout chaud !"
+      },
+      {
+        id: "sciences_electricite",
+        subject: "sciences",
+        title: "Le circuit électrique simple & conducteurs",
+        keys: [" electricite ", " circuit electrique ", " pile ", " ampoule ", " conducteur ", " isolant ", " interrupteur ", " circuit ferme "],
+        html: "<strong>Le Circuit Électrique Simple :</strong><br>Pour qu'une ampoule brille, le courant électrique doit pouvoir circuler en boucle continue :<br>• <strong>Générateur :</strong> La pile (avec borne + et borne -).<br>• <strong>Récepteur :</strong> L'ampoule ou le moteur.<br>• <strong>Fils de connexion :</strong> En cuivre pour transporter le courant.<br>• <strong>Interrupteur :</strong><br>  - Circuit <strong>fermé</strong> ➔ Le courant passe ➔ L'ampoule s'allume !<br>  - Circuit <strong>ouvert</strong> ➔ Le courant est coupé ➔ L'ampoule s'éteint.<br>• <strong>Conducteurs vs Isolants :</strong> Les métaux et l'eau salée sont conducteurs ; le bois, le plastique, le verre et l'air sont isolants.",
+        example: "Si un fil est débranché, le circuit est ouvert : l'ampoule s'éteint immédiatement car le courant ne peut plus faire sa boucle complète."
+      },
+      {
+        id: "sciences_etats_eau",
+        subject: "sciences",
+        title: "Les 3 états de l'eau et les changements d'état",
+        keys: [" etats de l eau ", " solide liquide gaz ", " evaporation ", " condensation ", " cycle de l eau ", " fusion solidification "],
+        html: "<strong>L'Eau et ses 3 états dans la nature :</strong><br>1. <strong>État solide :</strong> Glace, neige, grêle (l'eau a une forme propre).<br>2. <strong>État liquide :</strong> Eau du robinet, pluie, mer (l'eau coule et prend la forme du récipient).<br>3. <strong>État gazeux :</strong> Vapeur d'eau (invisible dans l'air).<br>• <strong>Les changements d'état :</strong><br>  • <em>Fusion :</em> Solide ➔ Liquide (la glace fond au-dessus de 0°C).<br>  • <em>Solidification :</em> Liquide ➔ Solide (l'eau gèle en-dessous de 0°C).<br>  • <em>Évaporation :</em> Liquide ➔ Gaz (l'eau chauffe et s'évapore).<br>  • <em>Condensation :</em> Gaz ➔ Liquide (la vapeur refroidit et forme des gouttes).",
+        example: "Dans le cycle de l'eau : le soleil chauffe l'océan (évaporation), la vapeur forme des nuages qui se condensent en pluie, puis l'eau retourne aux rivières !"
+      },
+      {
+        id: "sciences_systeme_solaire",
+        subject: "sciences",
+        title: "Le Système solaire et ses 8 planètes",
+        keys: [" systeme solaire ", " planete ", " planetes ", " terre ", " soleil ", " lune ", " 8 planetes "],
+        html: "<strong>Le Système Solaire et ses 8 planètes :</strong><br>Au centre se trouve notre étoile : le <strong>Soleil</strong>. Huit planètes tournent autour sur leur orbite :<br>• <strong>Les 4 planètes rocheuses (telluriques) proches du soleil :</strong><br>  1. <strong>Mercure</strong> (la plus petite et proche du soleil)<br>  2. <strong>Vénus</strong> (la plus chaude, l'étoile du berger)<br>  3. <strong>La Terre</strong> (la nôtre, avec de l'eau liquide et la vie)<br>  4. <strong>Mars</strong> (la planète rouge)<br>• <strong>Les 4 planètes géantes gazeuses plus éloignées :</strong><br>  5. <strong>Jupiter</strong> (la plus gigantesque de toutes)<br>  6. <strong>Saturne</strong> (célèbre pour ses spectaculaires anneaux de glace)<br>  7. <strong>Uranus</strong> (géante de glace bleue)<br>  8. <strong>Neptune</strong> (la plus lointaine et froide).<br>• <em>Phrase magique pour l'ordre :</em> <strong>M</strong>on <strong>V</strong>ieux <strong>T</strong>u <strong>M</strong>'as <strong>J</strong>eté <strong>S</strong>ur <strong>U</strong>ne <strong>N</strong>appe !",
+        example: "La Terre met exactement 365 jours et quart pour faire un tour complet autour du Soleil (c'est 1 an) !"
+      },
+
+      // =========================================================================
+      // 6. ANGLAIS (What is it, Animals, Daily Routine, Salutations, Nombres)
+      // =========================================================================
+      {
+        id: "anglais_what_is_it",
+        subject: "anglais",
+        title: "Anglais : La question « What is it? »",
+        keys: [" what is it ", " c est quoi en anglais ", " comment on dit en anglais ", " quest ce que c est en anglais ", " it is a "],
+        html: "<strong>Poser une question en anglais : « What is it? » :</strong><br>• <strong>What is it?</strong> signifie : <em>« Qu'est-ce que c'est ? »</em>.<br>• Pour répondre, on utilise toujours la structure :<br>👉 <strong>« It's a ... »</strong> (devant une consonne : <em>It's a cat</em>, <em>It's a dog</em>, <em>It's a pencil</em>).<br>👉 <strong>« It's an ... »</strong> (devant une voyelle a, e, i, o, u : <em>It's an apple</em>, <em>It's an elephant</em>) !<br>• Au pluriel : <em>« They are cats »</em> (sans a/an).",
+        example: "Question : « What is it? » ➔ Réponse en montrant un cheval : « <strong>It's a horse!</strong> »"
+      },
+      {
+        id: "anglais_animals",
+        subject: "anglais",
+        title: "Anglais : Le vocabulaire des animaux",
+        keys: [" animal ", " animals ", " animaux en anglais ", " chien en anglais ", " chat en anglais ", " cheval en anglais ", " oiseaux en anglais "],
+        html: "<strong>Le vocabulaire des animaux en anglais (Animals) :</strong><br>• <strong>Les animaux de compagnie et de la ferme :</strong><br>  - A dog (un chien) | A cat (un chat)<br>  - A horse (un cheval) | A cow (une vache)<br>  - A sheep (un mouton) | A pig (un cochon)<br>  - A rabbit (un lapin) | A bird (un oiseau)<br>• <strong>Les animaux sauvages :</strong><br>  - A lion (un lion) | A tiger (un tigre)<br>  - An elephant (un éléphant) | A monkey (un singe)<br>  - A bear (un ours) | A snake (un serpent).",
+        example: "« The dog is running after the black cat. » (Le chien court après le chat noir)."
+      },
+      {
+        id: "anglais_routine",
+        subject: "anglais",
+        title: "Anglais : My Daily Routine (Ma journée)",
+        keys: [" daily routine ", " routine ", " se reveiller en anglais ", " brosser les dents en anglais ", " aller a l ecole en anglais ", " routine quotidienne "],
+        html: "<strong>Raconter sa journée en anglais (My Daily Routine) :</strong><br>Voici les actions essentielles dans l'ordre chronologique :<br>1. <strong>I wake up</strong> (je me réveille).<br>2. <strong>I get up</strong> (je me lève du lit).<br>3. <strong>I wash my face</strong> (je me lave le visage).<br>4. <strong>I brush my teeth</strong> (je me brosse les dents).<br>5. <strong>I have breakfast</strong> (je prends mon petit déjeuner).<br>6. <strong>I get dressed</strong> (je m'habille).<br>7. <strong>I go to school</strong> (je vais à l'école).<br>8. <strong>I do my homework</strong> (je fais mes devoirs).<br>9. <strong>I go to bed</strong> (je vais me coucher).",
+        example: "« In the morning, I wake up at seven o'clock and I brush my teeth. »"
+      },
+      {
+        id: "anglais_salutations",
+        subject: "anglais",
+        title: "Anglais : Les Salutations & Présentations",
+        keys: [" dire bonjour en anglais ", " hello ", " good morning ", " how are you ", " salutations anglais ", " au revoir en anglais "],
+        html: "<strong>Les Salutations en anglais (Greetings) :</strong><br>• Pour dire bonjour :<br>  - <strong>Hello / Hi !</strong> (Salut / Bonjour amical)<br>  - <strong>Good morning !</strong> (Bonjour le matin)<br>  - <strong>Good afternoon !</strong> (Bonjour l'après-midi).<br>• Pour demander des nouvelles :<br>  - <strong>How are you?</strong> ➔ Réponse : <strong>« I am fine, thank you! And you? »</strong> (Je vais bien, merci ! Et toi ?).<br>• Pour se présenter : <strong>« My name is Emma, I am 10 years old. »</strong><br>• Pour dire au revoir : <strong>« Goodbye ! / See you tomorrow ! »</strong> (À demain !).",
+        example: "« Good morning teacher! How are you today? »"
+      },
+
+      // =========================================================================
+      // 7. MÉTHODOLOGIE (Mémorisation, Relecture Détective, Gestion du Stress)
+      // =========================================================================
+      {
+        id: "methode_memoriser",
+        subject: "methode",
+        title: "Comment bien mémoriser et retenir une leçon ?",
+        keys: [" memoriser ", " retenir ", " apprendre par coeur ", " memoire ", " apprendre ", " lecon ", " lecons ", " apprendre ma lecon "],
+        html: "<strong>Les 3 étapes de la super-mémoire :</strong><br>1. <strong>Lis la leçon à voix haute</strong> pour que ton cerveau l'entende et l'imprime visuellement.<br>2. <strong>Ferme les yeux et réexplique-la avec tes propres mots</strong> comme si tu l'expliquais à une amie imaginaire ou à tes peluches !<br>3. <strong>Écris 3 questions clés</strong> sur ton ardoise et réponds-y le lendemain matin avant de partir à l'école !<br>• <em>Le secret du sommeil :</em> réviser 10 minutes le soir + 5 minutes le matin est 10 fois plus efficace que de stresser 1 heure d'un coup !",
+        example: "Après avoir lu la leçon sur les Gaulois, demande-toi : « Quels étaient les 3 groupes sociaux ? » et réponds sans regarder ta feuille !"
+      },
+      {
+        id: "methode_relecture",
+        subject: "methode",
+        title: "La Méthode Détective en 4 Loupes (Dictée)",
+        keys: [" relire ", " relecture ", " detective ", " fautes dictee ", " loupes ", " chasse aux fautes ", " 4 loupes "],
+        html: "<strong>La Méthode Détective en 4 Loupes pour ne plus laisser de fautes :</strong><br>Ne relis jamais toute la dictée d'un coup ! Fais 4 passages avec une mission précise pour chaque loupe :<br>🔍 <strong>Loupe 1 (Les Verbes & Sujets) :</strong> Trouve chaque verbe conjugué, cherche son sujet (qui est-ce qui ?) et vérifie la terminaison.<br>🔍 <strong>Loupe 2 (Les Accords du Groupe Nominal) :</strong> Vérifie le déterminant, le nom et les adjectifs (s'il y a un pluriel, cherche les S et les X !).<br>🔍 <strong>Loupe 3 (Les Homophones) :</strong> Traque les pièges : a/à, et/est, son/sont, on/ont.<br>🔍 <strong>Loupe 4 (Majuscules & Ponctuation) :</strong> Vérifie la majuscule au début de chaque phrase et les points.",
+        example: "Avec cette méthode, les élèves éliminent en moyenne 80% de leurs étourderies à chaque dictée !"
+      },
+      {
+        id: "methode_stress",
+        subject: "methode",
+        title: "Comment ne plus stresser avant une évaluation",
+        keys: [" stress ", " peur ", " controle ", " evaluation ", " panique ", " angoisse ", " rassurer "],
+        html: "<strong>Comment chasser le stress et avoir confiance en toi :</strong><br>1. <strong>La respiration ventrale magique :</strong> Pose ta main sur ton ventre, inspire lentement par le nez pendant 4 secondes en gonflant le ventre, puis souffle doucement par la bouche pendant 6 secondes. Fais-le 3 fois : ton cœur ralentit et ton cerveau se calme instantanément !<br>2. <strong>Commence par ce que tu sais faire :</strong> Feuillete ton évaluation et réponds d'abord aux exercices faciles pour accumuler des points et te mettre en confiance.<br>3. <strong>Se tromper fait partie de l'apprentissage :</strong> Une erreur n'est pas un échec, c'est un indice pour t'aider à progresser !",
+        example: "Dis-toi avant de commencer : « J'ai révisé, j'ai les compétences, je fais de mon mieux ! »"
+      },
+      {
+        id: "methode_concentration",
+        subject: "methode",
+        title: "La règle d'or des 45 minutes et la concentration",
+        keys: [" concentration ", " 45 minutes ", " pause ", " fatigue ", " temps d ecran ", " organiser ses devoirs "],
+        html: "<strong>La règle des 45 minutes d'efficacité maximale :</strong><br>Le cerveau d'un élève de CM2 est hyper performant pendant <strong>35 à 45 minutes d'affilée</strong>, puis la concentration chute naturellement.<br>• Travaille 40 minutes à fond, sans musique avec paroles ni notifications.<br>• Fais ensuite une <strong>vraie pause de 10 minutes</strong> : va boire un grand verre d'eau, étire-toi, fais quelques pas ou regarde au loin par la fenêtre (sans écran !).<br>• Ton cerveau assimile les leçons pendant la pause !",
+        example: "40 minutes de travail concentré valent bien mieux que 2 heures passées à rêvasser devant un cahier !"
+      }
+    ];
+
+    // Mini-défis interactifs toutes matières pour l'option "Teste-moi"
+    const madameClaireMiniDefis = [
+      {
+        subject: "francais",
+        topic: "Orthographe",
+        question: "Dans la phrase : « Tu march... tranquillement dans la forêt », quelle lettre dois-tu impérativement mettre à la fin du verbe ?",
+        expected: ["s"],
+        explanation: "Bravo ! Avec le pronom <strong>TU</strong>, le verbe prend TOUJOURS un <strong>S</strong> (ou un X pour peux, veux, vaux) !"
+      },
+      {
+        subject: "francais",
+        topic: "Homophones",
+        question: "Dans la phrase : « Léo a donné une pomme ... son camarade », faut-il écrire « a » ou « à » ?",
+        expected: ["a avec accent", "à", "a accent"],
+        explanation: "Exactement ! On écrit <strong>à avec accent</strong> car on ne peut pas remplacer par « avait son camarade » !"
+      },
+      {
+        subject: "francais",
+        topic: "Grammaire G3",
+        question: "Dans le groupe nominal : « une tarte aux fraises », quel est le complément du nom (CDN) ?",
+        expected: ["aux fraises", "fraises"],
+        explanation: "Parfait ! <strong>aux fraises</strong> est le complément du nom qui apporte une précision sur la tarte, introduit par la préposition aux (à les) !"
+      },
+      {
+        subject: "maths",
+        topic: "Soustraction par cassage",
+        question: "Pour calculer 52 - 27 par cassage : si on casse 1 dizaine du 5, quel nombre d'unités obtient-on pour soustraire 7 ?",
+        expected: ["12"],
+        explanation: "Brillant ! 1 dizaine cassée = 10 unités. 2 + 10 = <strong>12</strong>, et 12 - 7 = 5 !"
+      },
+      {
+        subject: "maths",
+        topic: "Géométrie & Aire",
+        question: "Quelle est l'aire (la surface) d'un rectangle mesurant 6 cm de long et 4 cm de large ? (Donne juste le nombre)",
+        expected: ["24", "24 cm2", "24 cm²"],
+        explanation: "Exactement ! L'aire d'un rectangle se calcule par Longueur × largeur : 6 × 4 = <strong>24 cm²</strong> !"
+      },
+      {
+        subject: "maths",
+        topic: "Fractions",
+        question: "Combien font 3/8 + 2/8 ? (Écris le résultat sous forme de fraction, ex: 5/8)",
+        expected: ["5/8"],
+        explanation: "Bravo ! Comme les dénominateurs sont identiques (8), on additionne uniquement les numérateurs du haut : 3 + 2 = <strong>5/8</strong> !"
+      },
+      {
+        subject: "histoire",
+        topic: "Les Gaulois",
+        question: "Dans la société gauloise, comment s'appelaient les chefs religieux et savants qui cueillaient le gui sacré ?",
+        expected: ["druide", "druides", "les druides"],
+        explanation: "Tout à fait ! Ce sont les <strong>druides</strong>, qui transmettaient tout leur savoir oralement sans jamais l'écrire !"
+      },
+      {
+        subject: "histoire",
+        topic: "Alésia",
+        question: "En quelle année avant J.-C. s'est déroulée la célèbre bataille d'Alésia opposant Vercingétorix à Jules César ? (Donne juste le nombre d'années)",
+        expected: ["52", "52 av jc", "52 avant jc"],
+        explanation: "Impressionnant ! C'était en <strong>52 av. J.-C.</strong>. Après un long siège, Vercingétorix a déposé ses armes devant César."
+      },
+      {
+        subject: "geo",
+        topic: "L'Italie",
+        question: "Quelle est la capitale de l'Italie, le pays en forme de botte au sud de l'Europe ?",
+        expected: ["rome"],
+        explanation: "Parfait ! C'est <strong>Rome</strong>, la capitale italienne célèbre pour le Colisée !"
+      },
+      {
+        subject: "geo",
+        topic: "Art & Géographie",
+        question: "Quel peintre italien de la Renaissance créait des portraits composés uniquement de fruits, légumes et aliments ?",
+        expected: ["arcimboldo", "giuseppe arcimboldo"],
+        explanation: "C'est bien <strong>Giuseppe Arcimboldo</strong> ! Ses tableaux d'art gourmand ont inspiré l'atelier de la classe !"
+      },
+      {
+        subject: "sciences",
+        topic: "Tri & Recyclage",
+        question: "Dans quelle poubelle (jaune, verte ou noire) doit-on déposer une canette de soda en aluminium et une boîte de conserve ?",
+        expected: ["jaune", "bac jaune", "la jaune", "poubelle jaune"],
+        explanation: "Exact ! C'est la <strong>poubelle jaune</strong> qui accueille tous les emballages en métal, carton et plastique !"
+      },
+      {
+        subject: "sciences",
+        topic: "Électricité",
+        question: "Le fer et le cuivre sont-ils des matériaux conducteurs ou des isolants électriques ?",
+        expected: ["conducteur", "conducteurs", "des conducteurs"],
+        explanation: "Très bien ! Tous les métaux sont d'excellents <strong>conducteurs</strong> d'électricité !"
+      },
+      {
+        subject: "anglais",
+        topic: "Animals",
+        question: "Comment dit-on « un chien » et « un chat » en anglais ? (Écris les mots en anglais)",
+        expected: ["dog", "cat"],
+        explanation: "Well done ! On dit <strong>a dog</strong> et <strong>a cat</strong> !"
+      },
+      {
+        subject: "anglais",
+        topic: "What is it?",
+        question: "Si je te montre une pomme en anglais et te demande « What is it? », que réponds-tu ? (It's an ...)",
+        expected: ["apple", "it is an apple", "it s an apple"],
+        explanation: "Super ! On répond : <strong>It's an apple!</strong> (avec 'an' car apple commence par une voyelle) !"
+      }
+    ];
+
+    let currentTeacherTest = null;
     let teacherChatMessages = [];
     let isTeacherSpeaking = false;
 
@@ -19677,13 +20238,20 @@ Format JSON attendu :
       if (teacherChatMessages.length === 0) {
         const welcomeHtml = `Bonjour mon champion ! 🌟<br>
         Je suis <strong>Madame Claire</strong>, ta maîtresse virtuelle bienveillante.<br><br>
-        Si un exercice te bloque, si une leçon te semble floue ou si tu hésites sur une règle, <strong>pose-moi ta question</strong> ci-dessous.<br>
+        Je suis là pour répondre à <strong>TOUTES tes questions sur l'ensemble des cours du site</strong> :<br>
+        🇫🇷 <strong>Français</strong> (Grammaire G1/G2/G3, Conjugaison C2, Dictées & Homophones)<br>
+        🔢 <strong>Mathématiques</strong> (Calcul mental, Soustraction par cassage, Décimaux, Géométrie, Fractions)<br>
+        🏛️ <strong>Histoire</strong> (Les 5 périodes, Préhistoire, Celtes & Société gauloise, Reims, Tour Eiffel)<br>
+        🌍 <strong>Géographie</strong> (L'Italie, Semaine du Goût, Arcimboldo, Continents & Reliefs)<br>
+        🔬 <strong>Sciences & SVT</strong> (Familles de matériaux, Tri & Recyclage, Électricité, États de l'eau)<br>
+        🇬🇧 <strong>Anglais</strong> (Vocabulaire, Animals, Daily Routine, What is it?, Salutations)<br>
+        🧠 <strong>Méthodologie</strong> (Mémorisation en 3 étapes, Relecture Détective, Gestion du stress)<br><br>
         N'aie jamais peur de te tromper : ici, chaque question est un pas de géant vers la réussite ! Que regardons-nous ensemble ?`;
         
         teacherChatMessages.push({
           role: 'model',
           html: welcomeHtml,
-          text: "Bonjour mon champion ! Je suis Madame Claire, ta maîtresse virtuelle bienveillante. Si un exercice te bloque ou si tu hésites, pose-moi ta question. N'aie jamais peur de te tromper !",
+          text: "Bonjour mon champion ! Je suis Madame Claire, ta maîtresse virtuelle bienveillante. Je suis là pour répondre à toutes tes questions sur l'ensemble des cours du site : Français, Maths, Histoire, Géographie, Sciences et Anglais. N'aie jamais peur de te tromper !",
           showFollowUps: false,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
@@ -19699,16 +20267,15 @@ Format JSON attendu :
         const isUser = msg.role === 'user';
         const senderName = isUser ? "Toi" : "Madame Claire";
         const avatar = isUser ? "👧" : '<img src="images/madame_claire.jpg" alt="Madame Claire" style="width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:center 20%; display:block;">';
-        const isLastModel = (!isUser && idx === teacherChatMessages.length - 1);
 
         let followUpsHtml = '';
         if (!isUser && msg.showFollowUps) {
           followUpsHtml = `
             <div class="teacher-followups-tray">
-              <button class="t-followup-btn" onclick="askTeacherFollowUp('Peux-tu me donner un autre exemple très concret avec des choses du quotidien ?')">💡 Un autre exemple</button>
-              <button class="t-followup-btn" onclick="askTeacherFollowUp('Je n\\'ai pas bien compris, peux-tu me réexpliquer encore plus simplement ?')">🤔 Pas bien compris</button>
-              <button class="t-followup-btn" onclick="askTeacherFollowUp('Pose-moi une petite question facile pour vérifier si j\\'ai bien compris !')">🎯 Teste-moi</button>
-              <button class="t-followup-btn" onclick="askTeacherFollowUp('Merci beaucoup Madame Claire, c\\'est très clair !')">💖 Merci !</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Peux-tu me donner un autre exemple très concret ?')">💡 Un autre exemple</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Je n\'ai pas bien compris, peux-tu me réexpliquer encore plus simplement ?')">🤔 Pas bien compris</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Pose-moi une petite question pour vérifier si j\'ai bien compris !')">🎯 Teste-moi</button>
+              <button class="t-followup-btn" onclick="askTeacherFollowUp('Merci beaucoup Madame Claire, c\'est très clair !')">💖 Merci !</button>
             </div>
           `;
         }
@@ -19767,6 +20334,7 @@ Format JSON attendu :
       if (window.speechSynthesis) window.speechSynthesis.cancel();
       isTeacherSpeaking = false;
       teacherChatMessages = [];
+      currentTeacherTest = null;
       initTeacherChatThread();
       const input = document.getElementById('teacherQuestionInput');
       if (input) {
@@ -19793,6 +20361,26 @@ Format JSON attendu :
         e.preventDefault();
         askTeacherHelp();
       }
+    }
+
+    // Moteur intelligent de recherche de cours dans la base de connaissances
+    function matchTeacherKnowledge(rawQuery) {
+      const c = cleanTeacherQuery(rawQuery);
+      let best = null;
+      let bestScore = 0;
+      for (let item of madameClaireKnowledge) {
+        let score = 0;
+        for (let k of item.keys) {
+          if (c.includes(k)) {
+            score += k.trim().length;
+          }
+        }
+        if (score > bestScore) {
+          bestScore = score;
+          best = item;
+        }
+      }
+      return bestScore >= 3 ? best : null;
     }
 
     async function askTeacherHelp() {
@@ -19826,27 +20414,34 @@ Format JSON attendu :
       let answerHtml = '';
       let rawAnswerText = '';
 
+      // 1. TENTATIVE VIA L'IA (Si clé locale configurée)
       if (apiKey) {
         try {
-          // Préparer l'historique multi-tours pour Gemini
           const contents = [
             {
               role: 'user',
               parts: [{
-                text: `Consignes de rôle pour tout le dialogue : Tu es le Tuteur Pédagogique d'Élite de CM2 (Madame Claire). Tu es extrêmement bienveillante, directe et ultra-synthétique.
-Ta mission absolue : Combattre la surcharge cognitive de l'élève en appliquant un filtre strict sur l'essentiel du programme de CM2.
-Tu fonctionnes sous la règle inviolable d'efficacité : 45 minutes maximum par session sans dispersion.
+                text: `Consignes de rôle pour tout le dialogue : Tu es Madame Claire, Maîtresse d'Élite et Tutrice Pédagogique bienveillante de CM2.
+Tu es compétente pour répondre à TOUTES les questions sur l'ensemble des cours du site :
+1. Français : Homophones, Grammaire (G1, G2, G3 complément du nom), Conjugaison (les 8 verbes du présent C2, imparfait, futur, passé composé), Dictées (René Magritte, Vivaldi, Lascaux), Autodictée et Relecture détective.
+2. Mathématiques : Calcul mental, Turbo Tables, Soustraction par cassage, Décodeur décimal et glisse-nombre, Fractions, Géométrie (droites sécantes, perpendiculaires, parallèles, programmes notés, frise Seyès), Périmètre et Aire, Conversions, Résolution de problèmes.
+3. Histoire : Les 5 grandes périodes, Préhistoire (Paléolithique et Néolithique), Les Celtes et la société gauloise (druides, guerriers, peuple), Vercingétorix et Alésia, La Cathédrale de Reims et Clovis, Gustave Eiffel et la Tour Eiffel.
+4. Géographie : L'Italie et la Semaine du Goût, Giuseppe Arcimboldo, Les 6 continents et 5 océans, Les paysages et reliefs de France.
+5. Sciences & SVT : Les grandes familles de matériaux, Le tri sélectif et le recyclage, Le circuit électrique simple (conducteurs/isolants), Les 3 états de l'eau, Le système solaire et les 8 planètes.
+6. Anglais : Vocabulaire, Animaux (dog, cat, horse...), My daily routine, Questions What is it?, Salutations et présentations.
+7. Méthodologie : Mémorisation en 3 étapes, Gestion du stress, Organisation en sessions de 45 minutes.
+
 Ton style :
 1. Ultra-synthétique et direct : Maximum 3 points clés ou étapes numérotées très courtes. Zéro bavardage superflu.
 2. Formule d'or : Règle essentielle en 1 phrase + 1 exemple concret immédiat + 1 piège classique à éviter.
-3. Toujours bienveillant, encourageant et clair pour un enfant de 10 ans.
+3. Toujours bienveillante, chaleureuse et encourageante pour un enfant de 10 ans.
 Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si besoin, sans balises <html> ni <body>).`
               }]
             },
             {
               role: 'model',
               parts: [{
-                text: `Bonjour mon champion ! C'est compris, je suis ton Tuteur d'Élite : direct, bienveillant et ultra-synthétique pour un apprentissage sans surcharge !`
+                text: `Bonjour mon champion ! C'est compris, je suis Madame Claire, ta maîtresse virtuelle pour TOUTES les matières du site : Français, Maths, Histoire, Géo, Sciences, Anglais et Méthodologie ! Directe, bienveillante et ultra-synthétique.`
               }]
             }
           ];
@@ -19868,7 +20463,6 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
           const data = await response.json();
           if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
             answerHtml = data.candidates[0].content.parts[0].text.replace(/```html/g, '').replace(/```/g, '').trim();
-            // Créer une version texte propre pour la synthèse vocale
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = answerHtml;
             rawAnswerText = tempDiv.textContent || tempDiv.innerText || '';
@@ -19878,36 +20472,87 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
         }
       }
 
-      // Fallback local intelligent si pas d'API ou erreur réseau
+      // 2. MOTEUR LOCAL INTELLIGENT TOUTES MATIÈRES (Utilisé par défaut en mode hors-ligne / GitHub Pages)
       if (!answerHtml) {
-        const lower = question.toLowerCase();
-        let matched = null;
+        const cQuery = cleanTeacherQuery(question);
 
-        if (lower.includes('merci')) {
-          answerHtml = `Avec tout mon cœur ! 💖<br>Tu as fait du super travail aujourd'hui. N'oublie jamais que poser des questions est la meilleure preuve de ton intelligence et de ta curiosité !<br><br>🌟 <em>« Reste toujours aussi curieuse et fière de toi ! »</em>`;
+        // A. L'élève répond à un mini-défi en cours posé par Madame Claire
+        if (currentTeacherTest && currentTeacherTest.expected) {
+          const isCorrect = currentTeacherTest.expected.some(exp => cQuery.includes(cleanTeacherQuery(exp).trim()));
+          if (isCorrect) {
+            answerHtml = `🎉 <strong>BRAVO MON CHAMPION !</strong> C'est la réponse exacte ! 🌟<br><br>
+            ${currentTeacherTest.explanation}<br><br>
+            ✨ <em>Tu as gagné <strong>+2 Étoiles ⭐</strong> dans ton coffre pour ta perspicacité !</em><br>
+            💖 <em>« Tu vois comme tout devient facile quand on est attentif ? »</em>`;
+            rawAnswerText = "Bravo mon champion ! C'est la réponse exacte ! Tu as gagné deux étoiles dans ton coffre. Tu as toutes les qualités pour réussir !";
+            currentTeacherTest = null;
+            if (typeof walletStars !== 'undefined') {
+              walletStars = (walletStars || 0) + 2;
+              const wEl = document.getElementById('walletStars');
+              if (wEl) wEl.innerText = walletStars;
+            }
+            playSound('correct');
+          } else if (cQuery.includes(' je ne sais pas ') || cQuery.includes(' donne moi la reponse ') || cQuery.includes(' aucune idee ')) {
+            answerHtml = `Ce n'est pas grave du tout, on apprend justement en cherchant ! 🤗<br><br>
+            ${currentTeacherTest.explanation}<br><br>
+            Dis-moi si tu veux tenter un autre défi ou explorer un autre cours ! ✨`;
+            rawAnswerText = "Ce n'est pas grave du tout ! Voici l'explication. Dis-moi si tu veux tenter un autre défi !";
+            currentTeacherTest = null;
+          } else {
+            answerHtml = `Tu y es presque, continue à chercher ! 💪<br><br>
+            💡 <strong>Petit indice bienveillant :</strong> Réfléchis bien à la règle du cours ou regarde les mots clés.<br><br>
+            👉 <em>Question :</em> ${currentTeacherTest.question}<br><br>
+            <em>(Fais une autre proposition ou dis-moi « je ne sais pas » pour voir l'explication !)</em>`;
+            rawAnswerText = "Tu y es presque ! Réfléchis bien et fais une autre proposition, ou demande-moi l'explication !";
+          }
+        }
+        // B. Remerciements
+        else if (cQuery.includes(' merci ') || cQuery.includes(' super ') || cQuery.includes(' genial ')) {
+          answerHtml = `Avec tout mon cœur ! 💖<br>Tu as fait du super travail aujourd'hui. Poser des questions sur tes cours est la plus belle preuve de ton intelligence et de ta curiosité !<br><br>🌟 <em>« Reste toujours aussi curieuse et fière de toi ! »</em>`;
           rawAnswerText = "Avec tout mon cœur ! Tu as fait du super travail aujourd'hui. Reste toujours aussi curieuse et fière de toi !";
-        } else if (lower.includes('pas compris') || lower.includes('plus simple')) {
+        }
+        // C. L'élève demande de réexpliquer plus simplement
+        else if (cQuery.includes(' pas compris ') || cQuery.includes(' plus simple ') || cQuery.includes(' reexplique ')) {
           answerHtml = `C'est tout à fait normal, prenons notre temps ! 🤗<br><br>
           💡 <strong>Regardons les choses autrement :</strong><br>
           Quand une notion semble compliquée, on la coupe en petits morceaux faciles :<br>
-          • 1. <strong>Prends ton brouillon</strong> et écris seulement le premier mot ou chiffre.<br>
-          • 2. <strong>Pose-toi la question :</strong> <em>« Qu'est-ce qu'on me demande de trouver ? »</em><br>
-          • 3. <strong>Fais un petit schéma ou dessin rapide</strong> (des ronds pour des fractions, une flèche pour la chronologie...).<br><br>
+          • 1. <strong>Prends ton brouillon ou ton ardoise</strong> pour tester sans crainte.<br>
+          • 2. <strong>Pose-toi la question :</strong> <em>« Qu'est-ce qu'on cherche précisément ? »</em><br>
+          • 3. <strong>Fais un petit schéma rapide :</strong> un dessin pour une fraction, des colonnes pour une conversion, une flèche du temps pour l'Histoire...<br><br>
           Dis-moi précisément quel mot ou quelle phrase te bloque et nous allons la décortiquer ensemble ! ✨`;
-          rawAnswerText = "C'est tout à fait normal, prenons notre temps ! Regardons les choses autrement. Dis-moi précisément quel mot te bloque et nous allons le décortiquer ensemble.";
-        } else if (lower.includes('teste-moi') || lower.includes('question')) {
-          answerHtml = `C'est parti pour le mini-défi de Madame Claire ! 🎯<br><br>
-          Voici ta petite question :<br>
-          👉 <strong>Dans la phrase : « Tu march... dans le parc », quelle lettre dois-tu impérativement mettre à la fin ?</strong><br><br>
-          <em>(Tape ta réponse dans la case en bas et envoie-la moi !)</em> 💪✨`;
-          rawAnswerText = "C'est parti pour le mini-défi de Madame Claire ! Dans la phrase : Tu marches dans le parc, quelle lettre dois-tu impérativement mettre à la fin ? Tape ta réponse en bas !";
-        } else {
-          for (let key of Object.keys(madameClaireKnowledge)) {
-            if (lower.includes(key)) {
-              matched = madameClaireKnowledge[key];
-              break;
-            }
+          rawAnswerText = "C'est tout à fait normal, prenons notre temps ! Dis-moi précisément quel mot ou quelle phrase te bloque et nous allons la décortiquer ensemble.";
+        }
+        // D. L'élève demande un mini-défi ("Teste-moi")
+        else if (cQuery.includes(' teste moi ') || cQuery.includes(' test moi ') || cQuery.includes(' question ') || cQuery.includes(' defi ')) {
+          // Filtrer par matière si mentionnée
+          let pool = madameClaireMiniDefis;
+          if (cQuery.includes(' math ') || cQuery.includes(' calcul ') || cQuery.includes(' fraction ')) {
+            pool = madameClaireMiniDefis.filter(d => d.subject === 'maths');
+          } else if (cQuery.includes(' histoir ') || cQuery.includes(' gaulois ') || cQuery.includes(' eiffel ')) {
+            pool = madameClaireMiniDefis.filter(d => d.subject === 'histoire');
+          } else if (cQuery.includes(' geo ') || cQuery.includes(' italie ') || cQuery.includes(' arcimboldo ')) {
+            pool = madameClaireMiniDefis.filter(d => d.subject === 'geo');
+          } else if (cQuery.includes(' scienc ') || cQuery.includes(' materiau ') || cQuery.includes(' recyclage ')) {
+            pool = madameClaireMiniDefis.filter(d => d.subject === 'sciences');
+          } else if (cQuery.includes(' anglais ') || cQuery.includes(' english ')) {
+            pool = madameClaireMiniDefis.filter(d => d.subject === 'anglais');
+          } else if (cQuery.includes(' francais ') || cQuery.includes(' grammaire ') || cQuery.includes(' dictee ')) {
+            pool = madameClaireMiniDefis.filter(d => d.subject === 'francais');
           }
+          if (!pool || pool.length === 0) pool = madameClaireMiniDefis;
+
+          const chosen = pool[Math.floor(Math.random() * pool.length)];
+          currentTeacherTest = chosen;
+
+          answerHtml = `C'est parti pour le mini-défi de Madame Claire ! 🎯<br><br>
+          📚 <strong>Domaine :</strong> ${chosen.topic} (${chosen.subject.toUpperCase()})<br>
+          👉 <strong>${chosen.question}</strong><br><br>
+          <em>(Tape ta réponse dans la case en bas et envoie-la moi pour gagner des étoiles !)</em> 💪✨`;
+          rawAnswerText = `C'est parti pour le mini-défi de Madame Claire en ${chosen.topic} ! ${chosen.question}. Tape ta réponse en bas !`;
+        }
+        // E. Recherche d'un cours correspondant dans la base toutes matières
+        else {
+          const matched = matchTeacherKnowledge(question);
 
           if (matched) {
             answerHtml = `Bravo pour cette excellente question ! 💡<br><br>
@@ -19920,13 +20565,16 @@ Réponds en français au format HTML léger (avec <strong>, <em>, <ul>, <li> si 
             rawAnswerText = tempDiv.textContent || tempDiv.innerText || '';
           } else {
             answerHtml = `C'est une très bonne question mon champion ! 🌟<br><br>
-            💡 <strong>Le conseil pas-à-pas de Madame Claire :</strong><br>
-            1. <strong>Prends ton temps</strong> et relis l'énoncé deux fois calmement.<br>
-            2. <strong>Surligne les indices</strong> (les verbes, les sujets, les unités de mesure).<br>
-            3. <strong>Fais un schéma ou une ardoise</strong> pour tester tes calculs sans stress.<br><br>
-            <em>(Pour que je puisse répondre sur-mesure à n'importe quel exercice spécifique, tu peux renseigner ta clé gratuite dans ⚙️ Clé IA en haut de la page !)</em><br><br>
-            💖 <em>« J'ai confiance en toi, tu as toutes les compétences pour réussir ! »</em>`;
-            rawAnswerText = "C'est une très bonne question ! Prends ton temps, relis calmement et fais confiance à tes capacités. Tu vas y arriver !";
+            💡 <strong>Le conseil bienveillant de Madame Claire :</strong><br>
+            Je peux t'expliquer <strong>tous les cours du site</strong> :<br>
+            • 🇫🇷 <strong>Français :</strong> Homophones (a/à, et/est), G1 déterminants, G2 adjectifs, G3 complément du nom, Dictée 6 Magritte, les 8 verbes du présent...<br>
+            • 🔢 <strong>Maths :</strong> Soustraction par cassage, décodeur décimal et glisse-nombre, fractions, droites parallèles/perpendiculaires, périmètre/aire, conversions...<br>
+            • 🏛️ <strong>Histoire :</strong> Les 5 périodes, les Celtes et Gaulois, Alésia et Vercingétorix, la cathédrale de Reims, la Tour Eiffel...<br>
+            • 🌍 <strong>Géographie :</strong> L'Italie et la Semaine du Goût, Giuseppe Arcimboldo, les continents et reliefs...<br>
+            • 🔬 <strong>Sciences :</strong> Familles de matériaux, tri sélectif et recyclage, circuit électrique, les 3 états de l'eau, système solaire...<br>
+            • 🇬🇧 <strong>Anglais :</strong> What is it?, vocabulaire des animaux, daily routine, salutations...<br><br>
+            👉 <em>Clique sur l'une des suggestions en haut ou précise ta question pour que je t'explique tout pas-à-pas !</em>`;
+            rawAnswerText = "C'est une très bonne question ! Je peux t'expliquer tous les cours du site : Français, Maths, Histoire, Géographie, Sciences et Anglais. Clique sur l'une des suggestions en haut ou précise ta question !";
           }
         }
       }
