@@ -7301,15 +7301,15 @@
           <div class="tutor-flash-grid">
             <div class="tutor-flash-item gold">
               <span class="tutor-flash-label" style="color: #ca8a04;">🎯 Les 3 Niveaux de Traits</span>
-              <span><strong>Grands traits</strong> = Entiers (1, 2, 3, 4, 5). <strong>Traits moyens</strong> = Demi-unités (1,5 ; 2,5 ; 3,5 ; 4,5). <strong>Petits traits fins</strong> = Dixièmes (0,1).</span>
+              <span><strong>Grands traits</strong> = Entiers ou Dixièmes. <strong>Traits moyens</strong> = Demi-unités (0,5) ou 5 centièmes (0,05). <strong>Petits traits fins</strong> = Dixièmes (0,1) ou Centièmes (0,01 = 2 chiffres après la virgule).</span>
             </div>
             <div class="tutor-flash-item tip">
-              <span class="tutor-flash-label" style="color: #059669;">🔍 Exemple d'or : Placer 3,2</span>
-              <span>1. Repère l'entier <strong>3</strong>.<br>2. Compte <strong>2 petits traits fins</strong> (2 dixièmes) vers la droite.<br>3. Vérifie : 3,2 est <strong>avant 3,5</strong> car 2 dixièmes < 5 dixièmes !</span>
+              <span class="tutor-flash-label" style="color: #059669;">🔍 Exemple Exigeant : Placer 3,25 (2 décimales)</span>
+              <span>1. Repère le dixième <strong>3,2</strong> (3,20).<br>2. Avance de <strong>5 petits traits millimétrés</strong> (5 centièmes).<br>3. Vérifie : 3,25 est <strong>pile sur le trait intermédiaire</strong> entre 3,20 et 3,30 !</span>
             </div>
             <div class="tutor-flash-item trap">
               <span class="tutor-flash-label" style="color: #dc2626;">🚫 Le Piège Classique</span>
-              <span>Ne confonds pas <strong>3,5</strong> (la moitié entre 3 et 4) et <strong>3,05</strong> (cinq centièmes). Entre 3 et 4, il y a 10 dixièmes (10 petits millimètres) !</span>
+              <span>Ne confonds jamais <strong>3,5</strong> (la moitié = 3,50) et <strong>3,05</strong> (cinq centièmes, juste après 3). Rappel : 3,2 = 3,20, donc 3,25 est situé après 3,20 !</span>
             </div>
           </div>
         </div>
@@ -7317,49 +7317,64 @@
         <!-- Simulateur Papier Millimétré Haute Précision -->
         <div class="video-doc-card" style="margin-bottom: 22px; background: #ffffff;">
           <div class="video-doc-header">
-            <span class="video-doc-title">📐 Le Réglet Millimétré Interactif (Axe de 1 à 5)</span>
+            <span class="video-doc-title" id="rulerCardHeaderTitle">📐 Le Réglet Millimétré Interactif & Défis Décimaux</span>
             <div style="display: flex; gap: 6px;">
               <button class="filter-pill active" id="btn-mode-ruler-explore" onclick="switchRulerMode('explore')">🔍 Mode Découverte</button>
-              <button class="filter-pill" id="btn-mode-ruler-quiz" onclick="switchRulerMode('quiz')">🎯 Mode Défi Cible (+2 ⭐)</button>
+              <button class="filter-pill" id="btn-mode-ruler-quiz" onclick="switchRulerMode('quiz')">🎯 Mode Défi Cible (+2 à +3 ⭐)</button>
+            </div>
+          </div>
+
+          <!-- Barre de sélection des Échelles / Réglettes & Zooms -->
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; padding: 10px 14px; background: #f8fafc; border-radius: 12px; border: 1.5px solid #cbd5e1;">
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 0.82rem; font-weight: 800; color: #334155; margin-right: 4px;">Échelle :</span>
+              <button class="filter-pill active" id="scale-btn-0_5" onclick="selectRulerScale('0_5')" style="font-size: 0.8rem; padding: 4px 10px;">📏 Axe 0 à 5</button>
+              <button class="filter-pill" id="scale-btn-5_10" onclick="selectRulerScale('5_10')" style="font-size: 0.8rem; padding: 4px 10px;">📏 Axe 5 à 10</button>
+              <button class="filter-pill" id="scale-btn-10_15" onclick="selectRulerScale('10_15')" style="font-size: 0.8rem; padding: 4px 10px;">📏 Axe 10 à 15</button>
+              <button class="filter-pill" id="scale-btn-zoom_3_4" onclick="selectRulerScale('zoom_3_4')" style="font-size: 0.8rem; padding: 4px 10px; background: #faf5ff; border-color: #a855f7; color: #7e22ce;">🔬 Zoom [3,00 à 4,00] (2 décimales)</button>
+              <button class="filter-pill" id="scale-btn-zoom_7_8" onclick="selectRulerScale('zoom_7_8')" style="font-size: 0.8rem; padding: 4px 10px; background: #faf5ff; border-color: #a855f7; color: #7e22ce;">🔬 Zoom [7,00 à 8,00] (2 décimales)</button>
+            </div>
+            <div id="rulerScaleBadge" style="font-size: 0.78rem; font-weight: 800; background: #e0f2fe; color: #0284c7; padding: 3px 10px; border-radius: 999px; border: 1px solid #bae6fd;">
+              Précision : Dixièmes (0,1)
             </div>
           </div>
 
           <!-- Règle SVG Canvas Papier Millimétré -->
-          <div style="width: 100%; overflow-x: auto; padding: 12px 0;">
-            <div id="millimeterRulerContainer" style="min-width: 680px; position: relative; background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 20px 20px 40px 20px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);">
+          <div style="width: 100%; overflow-x: auto; padding: 10px 0;">
+            <div id="millimeterRulerContainer" style="min-width: 680px; position: relative; background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 18px 20px 38px 20px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);">
               <!-- Le SVG sera injecté et géré dynamiquement par renderMillimeterRuler() -->
             </div>
           </div>
 
-          <!-- Panneau d'Information en Direct -->
+          <!-- Panneau d'Information en Direct & Ajustement Fin -->
           <div id="rulerFeedbackPanel" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 12px 18px; margin-top: 14px;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 1.4rem; font-weight: 900; color: #0284c7;" id="rulerCurrentValLabel">3,2</span>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span style="font-size: 1.5rem; font-weight: 900; color: #0284c7; min-width: 60px;" id="rulerCurrentValLabel">3,2</span>
+              <div style="display: flex; gap: 4px;">
+                <button class="doc-link-btn" onclick="nudgeRulerValue(-1)" title="Reculer d'un trait" style="padding: 4px 8px; font-weight: 900; font-size: 0.82rem;">◀ -1 trait</button>
+                <button class="doc-link-btn" onclick="nudgeRulerValue(1)" title="Avancer d'un trait" style="padding: 4px 8px; font-weight: 900; font-size: 0.82rem;">+1 trait ▶</button>
+              </div>
               <div style="display: flex; flex-direction: column;">
                 <span style="font-size: 0.88rem; font-weight: 800; color: #1e293b;" id="rulerDecompLabel">3 unités + 2 dixièmes (3 + 2/10)</span>
                 <span style="font-size: 0.78rem; color: #64748b;" id="rulerPositionDesc">Positionné 2 traits après 3, avant 3,5.</span>
               </div>
             </div>
             <!-- Boutons préréglages rapides -->
-            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="rulerPresetsTray">
-              <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; align-self: center;">Exemples :</span>
-              <button class="doc-link-btn" onclick="setRulerValue(3.2)" style="padding: 4px 10px; font-size: 0.8rem; background: #e0f2fe; border-color: #0284c7; color: #0369a1;">3,2</button>
-              <button class="doc-link-btn" onclick="setRulerValue(1.5)" style="padding: 4px 10px; font-size: 0.8rem;">1,5</button>
-              <button class="doc-link-btn" onclick="setRulerValue(2.8)" style="padding: 4px 10px; font-size: 0.8rem;">2,8</button>
-              <button class="doc-link-btn" onclick="setRulerValue(4.1)" style="padding: 4px 10px; font-size: 0.8rem;">4,1</button>
-              <button class="doc-link-btn" onclick="setRulerValue(3.5)" style="padding: 4px 10px; font-size: 0.8rem;">3,5</button>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;" id="rulerPresetsTray">
+              <span style="font-size: 0.78rem; font-weight: 700; color: #64748b;">Exemples :</span>
             </div>
           </div>
 
           <!-- Zone du Défi Interactif (Visible en Mode Défi) -->
           <div id="rulerChallengeBox" style="display: none; margin-top: 14px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 14px; padding: 14px 18px; text-align: center;">
-            <div style="font-size: 1.1rem; font-weight: 800; color: #92400e;" id="rulerChallengeInstruction">
-              🎯 Mission : Clique exactement sur <span style="font-size: 1.35rem; color: #b45309; text-decoration: underline;" id="rulerTargetNum">3,2</span> sur la droite graduée !
+            <div id="rulerChallengeBadgeContainer" style="margin-bottom: 8px;"></div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #92400e;" id="rulerChallengeInstruction">
+              🎯 Mission : Clique exactement sur <span style="font-size: 1.45rem; color: #b45309; text-decoration: underline;" id="rulerTargetNum">3,2</span> sur la droite graduée !
             </div>
-            <p style="font-size: 0.84rem; color: #78350f; margin: 4px 0 10px 0;">
-              Aide-toi des traits intermédiaires de 0,5 et compte les dixièmes avec précision.
+            <p style="font-size: 0.84rem; color: #78350f; margin: 4px 0 10px 0;" id="rulerChallengeHint">
+              Aide-toi des traits intermédiaires et compte les graduations avec précision.
             </p>
-            <div style="display: flex; justify-content: center; gap: 10px;">
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
               <button class="action-btn" onclick="validateRulerTarget()" style="padding: 8px 22px; font-size: 0.92rem;">
                 ✨ Valider ma Position
               </button>
@@ -12762,91 +12777,237 @@
     // =========================================================================
 
     // -------------------------------------------------------------------------
-    // 1. DROITE GRADUÉE & PAPIER MILLIMÉTRÉ (Axe de 1 à 5, pas de 0,5 et 0,1)
+    // 1. DROITE GRADUÉE & PAPIER MILLIMÉTRÉ (Multi-axes & Mode Exigeant 2 décimales)
     // -------------------------------------------------------------------------
+    const RULER_SCALES = {
+      '0_5': {
+        id: '0_5',
+        title: 'Axe 0 à 5',
+        min: 0.0,
+        max: 5.0,
+        step: 0.1,
+        precision: 1,
+        defaultVal: 3.2,
+        presets: [0.5, 1.8, 2.5, 3.2, 4.7],
+        badgeText: 'Précision : Dixièmes (0,1)',
+        badgeStyle: 'background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd;'
+      },
+      '5_10': {
+        id: '5_10',
+        title: 'Axe 5 à 10',
+        min: 5.0,
+        max: 10.0,
+        step: 0.1,
+        precision: 1,
+        defaultVal: 7.4,
+        presets: [5.5, 6.2, 7.5, 8.8, 9.4],
+        badgeText: 'Précision : Dixièmes (0,1)',
+        badgeStyle: 'background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd;'
+      },
+      '10_15': {
+        id: '10_15',
+        title: 'Axe 10 à 15',
+        min: 10.0,
+        max: 15.0,
+        step: 0.1,
+        precision: 1,
+        defaultVal: 12.6,
+        presets: [10.5, 11.2, 12.5, 13.8, 14.6],
+        badgeText: 'Précision : Dixièmes (0,1)',
+        badgeStyle: 'background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd;'
+      },
+      'zoom_3_4': {
+        id: 'zoom_3_4',
+        title: 'Zoom Exigeant [3,00 à 4,00]',
+        min: 3.0,
+        max: 4.0,
+        step: 0.01,
+        precision: 2,
+        defaultVal: 3.25,
+        presets: [3.15, 3.25, 3.50, 3.75, 3.92],
+        badgeText: '🔬 Zoom Exigeant : Centièmes (0,01)',
+        badgeStyle: 'background: #faf5ff; color: #7e22ce; border: 1px solid #d8b4fe;'
+      },
+      'zoom_7_8': {
+        id: 'zoom_7_8',
+        title: 'Zoom Exigeant [7,00 à 8,00]',
+        min: 7.0,
+        max: 8.0,
+        step: 0.01,
+        precision: 2,
+        defaultVal: 7.45,
+        presets: [7.10, 7.25, 7.50, 7.65, 7.85],
+        badgeText: '🔬 Zoom Exigeant : Centièmes (0,01)',
+        badgeStyle: 'background: #faf5ff; color: #7e22ce; border: 1px solid #d8b4fe;'
+      }
+    };
+
+    let currentRulerScaleKey = '0_5';
     let currentRulerValue = 3.2;
     let rulerChallengeTarget = 3.2;
     let currentRulerMode = 'explore'; // 'explore' ou 'quiz'
+    let rulerChallengeIsExpert = false; // true si le défi porte sur les centièmes (2 décimales)
+
+    function selectRulerScale(scaleKey) {
+      if (!RULER_SCALES[scaleKey]) return;
+      currentRulerScaleKey = scaleKey;
+      const scale = RULER_SCALES[scaleKey];
+
+      // Mettre à jour l'apparence des boutons de sélection d'échelle
+      Object.keys(RULER_SCALES).forEach(k => {
+        const btn = document.getElementById('scale-btn-' + k);
+        if (btn) {
+          if (k === scaleKey) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      });
+
+      // Mettre à jour le badge d'échelle
+      const badge = document.getElementById('rulerScaleBadge');
+      if (badge) {
+        badge.innerText = scale.badgeText;
+        badge.setAttribute('style', `font-size: 0.78rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; ${scale.badgeStyle}`);
+      }
+
+      // Si la valeur actuelle est hors limites, repositionner
+      if (currentRulerValue < scale.min || currentRulerValue > scale.max) {
+        currentRulerValue = scale.defaultVal;
+      } else {
+        if (scale.precision === 2) {
+          currentRulerValue = Math.round(currentRulerValue * 100) / 100;
+        } else {
+          currentRulerValue = Math.round(currentRulerValue * 10) / 10;
+        }
+      }
+
+      renderMillimeterRuler();
+    }
 
     function renderMillimeterRuler() {
       const container = document.getElementById('millimeterRulerContainer');
       if (!container) return;
 
-      const minVal = 1.0;
-      const maxVal = 5.0;
-      const totalUnits = maxVal - minVal; // 4 unités
+      const scale = RULER_SCALES[currentRulerScaleKey] || RULER_SCALES['0_5'];
+      const minVal = scale.min;
+      const maxVal = scale.max;
+      const totalUnits = maxVal - minVal;
+      const isCentiemes = (scale.precision === 2);
+
       const width = 720;
       const height = 150;
-      const marginLeft = 35;
-      const marginRight = 35;
-      const usableWidth = width - marginLeft - marginRight; // 650px
-      const pxPerUnit = usableWidth / totalUnits; // 162.5 px par unité (16.25 px par dixième)
+      const marginLeft = 38;
+      const marginRight = 38;
+      const usableWidth = width - marginLeft - marginRight; // 644px
 
       let ticksHtml = "";
-      // Dessiner les graduations : dixièmes (0.1), demi-unités (0.5), entiers (1.0)
-      const totalTenths = Math.round(totalUnits * 10);
-      for (let i = 0; i <= totalTenths; i++) {
-        const val = minVal + i * 0.1;
-        const x = marginLeft + (i * 0.1 / totalUnits) * usableWidth;
-        const isInteger = (i % 10 === 0);
-        const isHalf = (i % 5 === 0 && !isInteger);
 
-        if (isInteger) {
-          // Grand trait entier
-          ticksHtml += `
-            <line x1="${x}" y1="35" x2="${x}" y2="95" stroke="#1e293b" stroke-width="3" />
-            <text x="${x}" y="122" font-family="'Fredoka', sans-serif" font-size="20" font-weight="900" fill="#0f172a" text-anchor="middle">${Math.round(val)}</text>
-          `;
-        } else if (isHalf) {
-          // Trait intermédiaire demi-unité (0,5)
-          ticksHtml += `
-            <line x1="${x}" y1="45" x2="${x}" y2="90" stroke="#d97706" stroke-width="2.5" />
-            <text x="${x}" y="112" font-family="'Fredoka', sans-serif" font-size="12" font-weight="800" fill="#b45309" text-anchor="middle">${val.toFixed(1).replace('.', ',')}</text>
-          `;
-        } else {
-          // Petit trait millimétré (dixième 0,1)
-          ticksHtml += `
-            <line x1="${x}" y1="55" x2="${x}" y2="85" stroke="#64748b" stroke-width="1.2" />
-          `;
+      if (isCentiemes) {
+        // ÉCHELLE ZOOMÉE EN CENTIÈMES (100 centièmes de 0,01 chacun)
+        const totalHundredths = 100;
+        for (let i = 0; i <= totalHundredths; i++) {
+          const val = minVal + i * 0.01;
+          const x = marginLeft + (i / totalHundredths) * usableWidth;
+          const isDizieme = (i % 10 === 0);
+          const isDemiDizieme = (i % 5 === 0 && !isDizieme);
+
+          if (isDizieme) {
+            // Grand trait = Dixième (3,0 ; 3,1 ; 3,2 ... 4,0)
+            const labelStr = val.toFixed(1).replace('.', ',');
+            const isBound = (i === 0 || i === 100);
+            ticksHtml += `
+              <line x1="${x}" y1="32" x2="${x}" y2="95" stroke="#0f172a" stroke-width="${isBound ? 3.5 : 2.5}" />
+              <text x="${x}" y="120" font-family="'Fredoka', sans-serif" font-size="${isBound ? 18 : 13.5}" font-weight="900" fill="#0f172a" text-anchor="middle">${labelStr}</text>
+            `;
+          } else if (isDemiDizieme) {
+            // Trait intermédiaire = Demi-dixième (5 centièmes = 0,05)
+            const labelStr = val.toFixed(2).replace('.', ',');
+            ticksHtml += `
+              <line x1="${x}" y1="42" x2="${x}" y2="90" stroke="#7e22ce" stroke-width="2" />
+              <text x="${x}" y="108" font-family="'Fredoka', sans-serif" font-size="9" font-weight="800" fill="#7e22ce" text-anchor="middle">${labelStr}</text>
+            `;
+          } else {
+            // Petit trait millimétré fin = 1 centième (0,01)
+            ticksHtml += `
+              <line x1="${x}" y1="52" x2="${x}" y2="84" stroke="#64748b" stroke-width="0.9" />
+            `;
+          }
+        }
+      } else {
+        // ÉCHELLE STANDARD EN DIXIÈMES (e.g. 0 à 5, 5 à 10, 10 à 15)
+        const totalTenths = Math.round(totalUnits * 10);
+        for (let i = 0; i <= totalTenths; i++) {
+          const val = minVal + i * 0.1;
+          const x = marginLeft + (i / totalTenths) * usableWidth;
+          const isInteger = (i % 10 === 0);
+          const isHalf = (i % 5 === 0 && !isInteger);
+
+          if (isInteger) {
+            // Grand trait entier
+            ticksHtml += `
+              <line x1="${x}" y1="32" x2="${x}" y2="95" stroke="#0f172a" stroke-width="3" />
+              <text x="${x}" y="122" font-family="'Fredoka', sans-serif" font-size="20" font-weight="900" fill="#0f172a" text-anchor="middle">${Math.round(val)}</text>
+            `;
+          } else if (isHalf) {
+            // Trait intermédiaire demi-unité (0,5)
+            ticksHtml += `
+              <line x1="${x}" y1="42" x2="${x}" y2="90" stroke="#d97706" stroke-width="2.5" />
+              <text x="${x}" y="112" font-family="'Fredoka', sans-serif" font-size="12" font-weight="800" fill="#b45309" text-anchor="middle">${val.toFixed(1).replace('.', ',')}</text>
+            `;
+          } else {
+            // Petit trait millimétré (dixième 0,1)
+            ticksHtml += `
+              <line x1="${x}" y1="52" x2="${x}" y2="84" stroke="#64748b" stroke-width="1.2" />
+            `;
+          }
         }
       }
 
       // Position du curseur actuel
-      const cursorX = marginLeft + ((currentRulerValue - minVal) / totalUnits) * usableWidth;
+      const clampedVal = Math.max(minVal, Math.min(maxVal, currentRulerValue));
+      const cursorRatio = (clampedVal - minVal) / totalUnits;
+      const cursorX = marginLeft + cursorRatio * usableWidth;
+      const formattedVal = isCentiemes ? clampedVal.toFixed(2).replace('.', ',') : clampedVal.toFixed(1).replace('.', ',');
+
+      // Pattern quadrillage millimétré
+      const gridPatternWidth = isCentiemes ? (usableWidth / 100) : (usableWidth / (totalUnits * 10));
 
       container.innerHTML = `
-        <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; display: block; overflow: visible; cursor: pointer;" onclick="handleRulerSvgClick(event, ${marginLeft}, ${usableWidth}, ${minVal}, ${totalUnits})">
+        <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; display: block; overflow: visible; cursor: pointer; user-select: none;" onclick="handleRulerSvgClick(event, ${marginLeft}, ${usableWidth}, ${minVal}, ${totalUnits}, ${scale.precision})">
           <!-- Fond quadrillé papier millimétré -->
           <defs>
-            <pattern id="millimeterGrid" width="16.25" height="10" patternUnits="userSpaceOnUse">
-              <line x1="0" y1="0" x2="16.25" y2="0" stroke="#bbf7d0" stroke-width="0.8" />
+            <pattern id="millimeterGrid" width="${gridPatternWidth}" height="10" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="${gridPatternWidth}" y2="0" stroke="#bbf7d0" stroke-width="0.8" />
               <line x1="0" y1="0" x2="0" y2="10" stroke="#bbf7d0" stroke-width="0.8" />
             </pattern>
           </defs>
-          <rect x="${marginLeft}" y="35" width="${usableWidth}" height="55" fill="url(#millimeterGrid)" rx="4" opacity="0.6" />
+          <rect x="${marginLeft}" y="32" width="${usableWidth}" height="56" fill="url(#millimeterGrid)" rx="4" opacity="0.6" />
 
           <!-- Axe principal horizontal -->
-          <line x1="${marginLeft - 15}" y1="65" x2="${width - marginRight + 15}" y2="65" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" />
+          <line x1="${marginLeft - 15}" y1="64" x2="${width - marginRight + 15}" y2="64" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" />
           <!-- Flèche au bout -->
-          <polygon points="${width - marginRight + 15},65 ${width - marginRight + 5},60 ${width - marginRight + 5},70" fill="#0f172a" />
+          <polygon points="${width - marginRight + 15},64 ${width - marginRight + 5},59 ${width - marginRight + 5},69" fill="#0f172a" />
 
           <!-- Graduations -->
           ${ticksHtml}
 
-          <!-- Curseur / Flèche rouge interactif -->
+          <!-- Curseur / Flèche rouge interactif avec bulle de repère -->
           <g id="rulerCursorGroup" transform="translate(${cursorX}, 0)">
-            <polygon points="0,55 -10,18 10,18" fill="#dc2626" stroke="#991b1b" stroke-width="1.5" />
-            <circle cx="0" cy="18" r="14" fill="#ef4444" stroke="#ffffff" stroke-width="2" />
-            <text x="0" y="22" font-family="'Fredoka', sans-serif" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle">📍</text>
-            <line x1="0" y1="55" x2="0" y2="95" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="3,2" />
+            <line x1="0" y1="52" x2="0" y2="96" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="3,2" />
+            <polygon points="0,52 -9,22 9,22" fill="#dc2626" stroke="#991b1b" stroke-width="1.5" />
+            <rect x="-24" y="2" width="48" height="20" rx="10" fill="#ef4444" stroke="#ffffff" stroke-width="2" />
+            <text x="0" y="16" font-family="'Fredoka', sans-serif" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">${formattedVal}</text>
           </g>
         </svg>
       `;
 
       updateRulerLabels();
+      renderRulerPresets();
     }
 
-    function handleRulerSvgClick(event, marginLeft, usableWidth, minVal, totalUnits) {
+    function handleRulerSvgClick(event, marginLeft, usableWidth, minVal, totalUnits, precision) {
       const svg = event.currentTarget;
       const rect = svg.getBoundingClientRect();
       const clickXClient = event.clientX - rect.left;
@@ -12856,14 +13017,46 @@
       let ratio = (clickXSvg - marginLeft) / usableWidth;
       ratio = Math.max(0, Math.min(1, ratio));
       const rawVal = minVal + ratio * totalUnits;
-      // Arrondir au dixième le plus proche (pas de 0,1)
-      const rounded = Math.round(rawVal * 10) / 10;
+
+      let rounded;
+      if (precision === 2) {
+        rounded = Math.round(rawVal * 100) / 100;
+      } else {
+        rounded = Math.round(rawVal * 10) / 10;
+      }
       setRulerValue(rounded);
     }
 
     function setRulerValue(val) {
-      currentRulerValue = Math.max(1.0, Math.min(5.0, Math.round(val * 10) / 10));
+      const scale = RULER_SCALES[currentRulerScaleKey] || RULER_SCALES['0_5'];
+      if (scale.precision === 2) {
+        currentRulerValue = Math.max(scale.min, Math.min(scale.max, Math.round(val * 100) / 100));
+      } else {
+        currentRulerValue = Math.max(scale.min, Math.min(scale.max, Math.round(val * 10) / 10));
+      }
       renderMillimeterRuler();
+    }
+
+    function nudgeRulerValue(stepCount) {
+      const scale = RULER_SCALES[currentRulerScaleKey] || RULER_SCALES['0_5'];
+      const delta = (scale.precision === 2 ? 0.01 : 0.1) * stepCount;
+      setRulerValue(currentRulerValue + delta);
+    }
+
+    function renderRulerPresets() {
+      const tray = document.getElementById('rulerPresetsTray');
+      if (!tray) return;
+      const scale = RULER_SCALES[currentRulerScaleKey] || RULER_SCALES['0_5'];
+      const presets = scale.presets || [];
+
+      let html = `<span style="font-size: 0.78rem; font-weight: 700; color: #64748b;">Exemples :</span>`;
+      presets.forEach(p => {
+        const formatted = scale.precision === 2 ? p.toFixed(2).replace('.', ',') : p.toFixed(1).replace('.', ',');
+        const isSelected = Math.abs(currentRulerValue - p) < 0.001;
+        const activeStyle = isSelected ? 'background: #e0f2fe; border-color: #0284c7; color: #0369a1; font-weight: 800;' : '';
+        html += `<button class="doc-link-btn" onclick="setRulerValue(${p})" style="padding: 4px 10px; font-size: 0.8rem; ${activeStyle}">${formatted}</button>`;
+      });
+      tray.innerHTML = html;
     }
 
     function updateRulerLabels() {
@@ -12872,22 +13065,48 @@
       const descLabel = document.getElementById('rulerPositionDesc');
       if (!valLabel || !decompLabel || !descLabel) return;
 
-      const formatted = currentRulerValue.toFixed(1).replace('.', ',');
-      valLabel.innerText = formatted;
+      const scale = RULER_SCALES[currentRulerScaleKey] || RULER_SCALES['0_5'];
 
-      const entier = Math.floor(currentRulerValue);
-      const dixieme = Math.round((currentRulerValue - entier) * 10);
+      if (scale.precision === 2) {
+        // MODE 2 DÉCIMALES (CENTIÈMES)
+        const formatted = currentRulerValue.toFixed(2).replace('.', ',');
+        valLabel.innerText = formatted;
 
-      decompLabel.innerText = `${entier} unité${entier > 1 ? 's' : ''} + ${dixieme} dixième${dixieme > 1 ? 's' : ''} (${entier} + ${dixieme}/10)`;
+        const entier = Math.floor(currentRulerValue);
+        const rest = Math.round((currentRulerValue - entier) * 100);
+        const dixiemes = Math.floor(rest / 10);
+        const centiemes = rest % 10;
 
-      if (dixieme === 0) {
-        descLabel.innerText = `Exactement sur le grand trait de l'entier ${entier}.`;
-      } else if (dixieme === 5) {
-        descLabel.innerText = `Exactement sur la demi-unité (${formatted}), au milieu parfait entre ${entier} et ${entier + 1}.`;
-      } else if (dixieme < 5) {
-        descLabel.innerText = `Situé ${dixieme} petit${dixieme > 1 ? 's' : ''} trait${dixieme > 1 ? 's' : ''} (mm) après ${entier}, avant la moitié ${entier},5.`;
+        decompLabel.innerText = `${entier} unité${entier > 1 ? 's' : ''} + ${dixiemes} dixième${dixiemes > 1 ? 's' : ''} + ${centiemes} centième${centiemes > 1 ? 's' : ''} (${entier} + ${dixiemes}/10 + ${centiemes}/100 = ${formatted})`;
+
+        if (centiemes === 0) {
+          descLabel.innerText = `Exactement sur le grand trait du dixième ${entier},${dixiemes} (${entier},${dixiemes}0).`;
+        } else if (centiemes === 5) {
+          descLabel.innerText = `Exactement sur le trait violet intermédiaire de 5 centièmes (${formatted}), à mi-chemin entre ${entier},${dixiemes}0 et ${entier},${dixiemes + 1}0.`;
+        } else if (centiemes < 5) {
+          descLabel.innerText = `Situé ${centiemes} petit${centiemes > 1 ? 's' : ''} millimètre${centiemes > 1 ? 's' : ''} après ${entier},${dixiemes}0, avant le repère ${entier},${dixiemes}5.`;
+        } else {
+          descLabel.innerText = `Situé ${centiemes - 5} petit${centiemes - 5 > 1 ? 's' : ''} millimètre${centiemes - 5 > 1 ? 's' : ''} après le repère ${entier},${dixiemes}5, avant ${entier},${dixiemes + 1}0.`;
+        }
       } else {
-        descLabel.innerText = `Situé ${dixieme - 5} petit${dixieme - 5 > 1 ? 's' : ''} trait${dixieme - 5 > 1 ? 's' : ''} (mm) après la moitié ${entier},5, avant ${entier + 1}.`;
+        // MODE 1 DÉCIMALE (DIXIÈMES)
+        const formatted = currentRulerValue.toFixed(1).replace('.', ',');
+        valLabel.innerText = formatted;
+
+        const entier = Math.floor(currentRulerValue);
+        const dixieme = Math.round((currentRulerValue - entier) * 10);
+
+        decompLabel.innerText = `${entier} unité${entier > 1 ? 's' : ''} + ${dixieme} dixième${dixieme > 1 ? 's' : ''} (${entier} + ${dixieme}/10)`;
+
+        if (dixieme === 0) {
+          descLabel.innerText = `Exactement sur le grand trait de l'entier ${entier}.`;
+        } else if (dixieme === 5) {
+          descLabel.innerText = `Exactement sur la demi-unité (${formatted}), au milieu parfait entre ${entier} et ${entier + 1}.`;
+        } else if (dixieme < 5) {
+          descLabel.innerText = `Situé ${dixieme} petit${dixieme > 1 ? 's' : ''} trait${dixieme > 1 ? 's' : ''} (mm) après ${entier}, avant la moitié ${entier},5.`;
+        } else {
+          descLabel.innerText = `Situé ${dixieme - 5} petit${dixieme - 5 > 1 ? 's' : ''} trait${dixieme - 5 > 1 ? 's' : ''} (mm) après la moitié ${entier},5, avant ${entier + 1}.`;
+        }
       }
     }
 
@@ -12914,22 +13133,79 @@
     }
 
     function generateNewRulerChallenge() {
-      // Choisir une cible avec des décimaux variés entre 1.1 et 4.9
-      const targets = [3.2, 1.5, 2.8, 4.1, 3.5, 2.3, 1.7, 4.6, 2.5, 3.8, 1.2, 4.5];
-      let newTarget = targets[Math.floor(Math.random() * targets.length)];
-      if (newTarget === rulerChallengeTarget) {
-        newTarget = (newTarget === 3.2) ? 2.7 : 3.2;
-      }
-      rulerChallengeTarget = newTarget;
+      // Alterner ou tirer aléatoirement un défi exigeant à 2 décimales (~50% de chance)
+      rulerChallengeIsExpert = (Math.random() < 0.5);
 
+      const badgeContainer = document.getElementById('rulerChallengeBadgeContainer');
+      const instructionEl = document.getElementById('rulerChallengeInstruction');
+      const hintEl = document.getElementById('rulerChallengeHint');
       const targetEl = document.getElementById('rulerTargetNum');
-      if (targetEl) targetEl.innerText = rulerChallengeTarget.toFixed(1).replace('.', ',');
-
       const feedback = document.getElementById('rulerChallengeFeedback');
       if (feedback) feedback.innerHTML = '';
 
-      // Placer le curseur un peu plus loin pour commencer
-      setRulerValue(rulerChallengeTarget > 3 ? 1.5 : 4.5);
+      if (rulerChallengeIsExpert) {
+        // DÉFI EXIGEANT : 2 CHIFFRES APRÈS LA VIRGULE (CENTIÈMES)
+        const expertScales = ['zoom_3_4', 'zoom_7_8'];
+        const chosenScale = expertScales[Math.floor(Math.random() * expertScales.length)];
+        selectRulerScale(chosenScale);
+
+        const centiemesTargets = (chosenScale === 'zoom_3_4')
+          ? [3.25, 3.75, 3.15, 3.45, 3.65, 3.85, 3.08, 3.12, 3.28, 3.42, 3.58, 3.72, 3.95]
+          : [7.25, 7.50, 7.75, 7.15, 7.35, 7.65, 7.85, 7.08, 7.22, 7.42, 7.68, 7.82, 7.95];
+
+        let newTarget = centiemesTargets[Math.floor(Math.random() * centiemesTargets.length)];
+        if (newTarget === rulerChallengeTarget) {
+          newTarget = (chosenScale === 'zoom_3_4') ? 3.25 : 7.75;
+        }
+        rulerChallengeTarget = newTarget;
+
+        const formattedTarget = rulerChallengeTarget.toFixed(2).replace('.', ',');
+        if (badgeContainer) {
+          badgeContainer.innerHTML = `<span style="background: #faf5ff; color: #7e22ce; border: 1.5px solid #c084fc; padding: 4px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 900; letter-spacing: 0.4px;">🔥 DÉFI EXIGEANT : 2 CHIFFRES APRÈS LA VIRGULE (+3 ⭐)</span>`;
+        }
+        if (instructionEl) {
+          instructionEl.innerHTML = `🎯 Mission Exigeante : Clique exactement sur <span style="font-size: 1.45rem; color: #7e22ce; text-decoration: underline;" id="rulerTargetNum">${formattedTarget}</span> sur le zoom millimétré !`;
+        }
+        if (hintEl) {
+          hintEl.innerText = `Aide-toi des traits violets (0,05) et compte chaque petit millimètre de centième (0,01) avec précision.`;
+        }
+
+        // Curseur de départ à l'opposé de la cible
+        const scale = RULER_SCALES[chosenScale];
+        setRulerValue(rulerChallengeTarget > (scale.min + 0.5) ? scale.min + 0.10 : scale.max - 0.10);
+
+      } else {
+        // DÉFI STANDARD : 1 CHIFFRE APRÈS LA VIRGULE (DIXIÈMES)
+        const standardScales = ['0_5', '5_10', '10_15'];
+        const chosenScale = standardScales[Math.floor(Math.random() * standardScales.length)];
+        selectRulerScale(chosenScale);
+
+        let targets;
+        if (chosenScale === '0_5') targets = [0.8, 1.2, 1.5, 2.3, 2.8, 3.2, 3.5, 4.1, 4.6];
+        else if (chosenScale === '5_10') targets = [5.4, 5.8, 6.2, 6.5, 7.3, 7.5, 8.1, 8.7, 9.4];
+        else targets = [10.5, 11.2, 11.8, 12.3, 12.5, 13.4, 13.9, 14.2, 14.7];
+
+        let newTarget = targets[Math.floor(Math.random() * targets.length)];
+        if (newTarget === rulerChallengeTarget) {
+          newTarget = targets[0];
+        }
+        rulerChallengeTarget = newTarget;
+
+        const formattedTarget = rulerChallengeTarget.toFixed(1).replace('.', ',');
+        if (badgeContainer) {
+          badgeContainer.innerHTML = `<span style="background: #eff6ff; color: #1d4ed8; border: 1.5px solid #93c5fd; padding: 4px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 800;">📏 DÉFI STANDARD : DIXIÈMES (+2 ⭐)</span>`;
+        }
+        if (instructionEl) {
+          instructionEl.innerHTML = `🎯 Mission : Clique exactement sur <span style="font-size: 1.45rem; color: #b45309; text-decoration: underline;" id="rulerTargetNum">${formattedTarget}</span> sur la droite graduée !`;
+        }
+        if (hintEl) {
+          hintEl.innerText = `Aide-toi des traits intermédiaires orange (0,5) et compte les dixièmes avec précision.`;
+        }
+
+        // Curseur de départ à l'opposé de la cible
+        const scale = RULER_SCALES[chosenScale];
+        setRulerValue(rulerChallengeTarget > (scale.min + 2.5) ? scale.min + 0.5 : scale.max - 0.5);
+      }
     }
 
     function validateRulerTarget() {
@@ -12937,29 +13213,64 @@
       if (!feedback) return;
 
       const diff = Math.abs(currentRulerValue - rulerChallengeTarget);
-      const formattedCur = currentRulerValue.toFixed(1).replace('.', ',');
-      const formattedTarget = rulerChallengeTarget.toFixed(1).replace('.', ',');
 
-      if (diff < 0.05) {
-        feedback.innerHTML = `
-          <div style="background: #dcfce7; color: #166534; padding: 10px 16px; border-radius: 10px; border: 2px solid #16a34a;">
-            🎉 <strong>BRAVO, CIBLE EXACTE !</strong> Tu as placé la flèche pile sur <strong>${formattedTarget}</strong> ! (+2 ⭐)
-          </div>
-        `;
-        if (typeof addScore === 'function') addScore(2, 'maths', true);
-        if (typeof playSoundEffect === 'function') playSoundEffect('correct');
-        setTimeout(() => {
-          generateNewRulerChallenge();
-        }, 2200);
+      if (rulerChallengeIsExpert) {
+        // Validation centièmes (seuil 0.005)
+        const formattedCur = currentRulerValue.toFixed(2).replace('.', ',');
+        const formattedTarget = rulerChallengeTarget.toFixed(2).replace('.', ',');
+
+        if (diff < 0.006) {
+          const entier = Math.floor(rulerChallengeTarget);
+          const rest = Math.round((rulerChallengeTarget - entier) * 100);
+          const dixiemes = Math.floor(rest / 10);
+          const centiemes = rest % 10;
+          feedback.innerHTML = `
+            <div style="background: #faf5ff; color: #581c87; padding: 12px 18px; border-radius: 12px; border: 2px solid #a855f7;">
+              🎉 <strong>EXTRAORDINAIRE, PRÉCISION MILLIMÉTRIQUE !</strong><br>
+              Tu as placé le curseur pile sur <strong>${formattedTarget}</strong> (${entier} unités + ${dixiemes} dixième${dixiemes > 1 ? 's' : ''} + ${centiemes} centième${centiemes > 1 ? 's' : ''}) ! (+3 ⭐)
+            </div>
+          `;
+          if (typeof addScore === 'function') addScore(3, 'maths', true);
+          if (typeof playSoundEffect === 'function') playSoundEffect('correct');
+          setTimeout(() => {
+            generateNewRulerChallenge();
+          }, 2400);
+        } else {
+          const centiemesEcart = Math.round(diff * 100);
+          const direction = currentRulerValue < rulerChallengeTarget ? "trop à gauche" : "trop à droite";
+          feedback.innerHTML = `
+            <div style="background: #fee2e2; color: #991b1b; padding: 10px 16px; border-radius: 10px; border: 2px solid #ef4444;">
+              ⚠️ Tu es sur <strong>${formattedCur}</strong> (${direction} de <strong>${centiemesEcart} centième${centiemesEcart > 1 ? 's' : ''}</strong> / trait millimétrique). Vise <strong>${formattedTarget}</strong> !
+            </div>
+          `;
+          if (typeof playSoundEffect === 'function') playSoundEffect('wrong');
+        }
       } else {
-        const dixiemesEcart = Math.round(diff * 10);
-        const direction = currentRulerValue < rulerChallengeTarget ? "trop à gauche" : "trop à droite";
-        feedback.innerHTML = `
-          <div style="background: #fee2e2; color: #991b1b; padding: 10px 16px; border-radius: 10px; border: 2px solid #ef4444;">
-            ⚠️ Tu es sur <strong>${formattedCur}</strong> (${direction} de ${dixiemesEcart} petit${dixiemesEcart > 1 ? 's traits' : ' trait'}). Vise <strong>${formattedTarget}</strong> !
-          </div>
-        `;
-        if (typeof playSoundEffect === 'function') playSoundEffect('wrong');
+        // Validation dixièmes (seuil 0.05)
+        const formattedCur = currentRulerValue.toFixed(1).replace('.', ',');
+        const formattedTarget = rulerChallengeTarget.toFixed(1).replace('.', ',');
+
+        if (diff < 0.05) {
+          feedback.innerHTML = `
+            <div style="background: #dcfce7; color: #166534; padding: 12px 18px; border-radius: 12px; border: 2px solid #16a34a;">
+              🎉 <strong>BRAVO, CIBLE EXACTE !</strong> Tu as placé la flèche pile sur <strong>${formattedTarget}</strong> ! (+2 ⭐)
+            </div>
+          `;
+          if (typeof addScore === 'function') addScore(2, 'maths', true);
+          if (typeof playSoundEffect === 'function') playSoundEffect('correct');
+          setTimeout(() => {
+            generateNewRulerChallenge();
+          }, 2200);
+        } else {
+          const dixiemesEcart = Math.round(diff * 10);
+          const direction = currentRulerValue < rulerChallengeTarget ? "trop à gauche" : "trop à droite";
+          feedback.innerHTML = `
+            <div style="background: #fee2e2; color: #991b1b; padding: 10px 16px; border-radius: 10px; border: 2px solid #ef4444;">
+              ⚠️ Tu es sur <strong>${formattedCur}</strong> (${direction} de <strong>${dixiemesEcart} dixième${dixiemesEcart > 1 ? 's' : ''}</strong>). Vise <strong>${formattedTarget}</strong> !
+            </div>
+          `;
+          if (typeof playSoundEffect === 'function') playSoundEffect('wrong');
+        }
       }
     }
 
