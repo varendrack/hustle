@@ -6775,7 +6775,7 @@
           </div>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(6);" style="padding: 8px 16px; font-size: 0.88rem; background: #7c3aed; color: #ffffff; border-color: #5b21b6;">
+          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(7);" style="padding: 8px 16px; font-size: 0.88rem; background: #7c3aed; color: #ffffff; border-color: #5b21b6;">
             🎨 Grille Série 6 & Dictée Vocale
           </button>
           <button class="action-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="padding: 8px 16px; font-size: 0.88rem; background: #0284c7; color: #ffffff; border-color: #0369a1;">
@@ -6793,12 +6793,13 @@
 
       <div class="current-period-callout">
         <div class="period-callout-badge">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
-        <div class="period-callout-text">Focus du moment : Dictée 6 René Magritte, Grammaire G3 (Complément du nom), Conjugaison C2 (Ring des 8 verbes) & Autodictée 1.</div>
+        <div class="period-callout-text">Focus du moment : Dictée 7 Persée et Méduse (🆕), Les 4 Valeurs du Présent (DM 🆕), Grammaire G3 & C2 Ring des 8 verbes.</div>
         <button class="period-callout-btn" onclick="switchSubmodule('francais', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
       </div>
 
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Mots de la Dictée (Série 6 🆕, 5 & 4)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Dictée 7 : Persée & Méduse (🆕, Séries 6, 5 & 4)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_valeurs')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C3 : Les 4 Valeurs du Présent (DM 🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🧩 G3 : Complément du Nom (10 Défis 🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_c2')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C2 : Ring des 8 Verbes (🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'autodictee')" style="border-color:#7c3aed; color:#6d28d9; font-weight:800;">🏛️ Autodictée 1 : Lascaux (🆕)</button>
@@ -6820,7 +6821,10 @@
             <button class="dictee-series-btn" id="btn-series-5" onclick="selectDicteeSeries(5)">
               <span>🎻 Série 5 : Les Quatre Saisons (Vivaldi)</span>
             </button>
-            <button class="dictee-series-btn active" id="btn-series-6" onclick="selectDicteeSeries(6)">
+            <button class="dictee-series-btn active" id="btn-series-7" onclick="selectDicteeSeries(7)">
+            <span>⚔️ Série 7 : Persée et Méduse (🆕)</span>
+          </button>
+          <button class="dictee-series-btn" id="btn-series-6" onclick="selectDicteeSeries(6)">
               <span>🎨 Série 6 : La Trahison des images (René Magritte)</span>
               <span class="dictee-series-badge-new">NOUVEAU</span>
             </button>
@@ -6861,7 +6865,56 @@
 
       <!-- Français Sub 3: Orthographe 4 : « s » ou « ss » -->
 
-<div id="sub-francais-grammaire_g3" class="submodule-content">
+
+      <!-- ========================================================= -->
+      <!-- FRANÇAIS SUBMODULE : LES 4 VALEURS DU PRÉSENT (C3 - NOUVEAU) -->
+      <!-- ========================================================= -->
+      <div id="sub-francais-conjugaison_valeurs" class="submodule-content">
+        <!-- Bandeau Flash Tuteur : Les 4 Valeurs du Présent -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #d97706; margin-bottom: 20px;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title">✍️ Leçon Conjugaison CM2 : Les 4 Valeurs d'Emploi du Présent de l'Indicatif</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink);">Cahier de classe & Corrigé DM</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold">
+              <span class="tutor-flash-label" style="color: #ca8a04;">🟢 1. Présent d'Actualité / d'Énonciation</span>
+              <span>L'action a lieu au moment même où l'on parle. <em>« En ce moment, Lucie écrit la leçon. »</em></span>
+            </div>
+            <div class="tutor-flash-item tip">
+              <span class="tutor-flash-label" style="color: #059669;">🟡 2. Présent d'Habitude / de Répétition</span>
+              <span>Action qui se répète régulièrement. <em>« Ils dînent vers 19h tous les soirs. Elle va à la piscine deux fois par semaine. »</em></span>
+            </div>
+            <div class="tutor-flash-item ok">
+              <span class="tutor-flash-label" style="color: #2563eb;">🔵 3. Présent de Vérité Générale</span>
+              <span>Fait toujours vrai (lois scientifiques, nature, proverbes). <em>« La Terre tourne autour du Soleil. Les chats n'ont jamais su nager. »</em></span>
+            </div>
+            <div class="tutor-flash-item trap">
+              <span class="tutor-flash-label" style="color: #7c3aed;">🟣 4. Présent de Narration / Historique</span>
+              <span>Événements passés racontés au présent pour donner du rythme. <em>« En 52 av. J.-C., Vercingétorix dépose ses armes. »</em></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atelier Interactif de Tri des Phrases (Corrigé DM) -->
+        <div class="video-doc-card" style="margin-bottom: 22px;">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🎯 Atelier Interactif : Classe la Phrase sous la bonne Valeur du Présent !</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #fef3c7; color: #92400e; padding: 3px 10px; border-radius: 999px;">Défis du DM Padlet</span>
+          </div>
+          <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 14px 0;">
+            Lis attentivement chaque phrase et clique sur la valeur correspondante. Gagne <strong>+2 ⭐</strong> pour chaque classification réussie !
+          </p>
+
+          <div id="valeurs-sorting-zone" style="width: 100%; display: flex; flex-direction: column; gap: 14px;"></div>
+        </div>
+
+        <!-- Grand Quiz Interactif : Les 4 Valeurs du Présent -->
+        <div id="quiz-container-valeurs-present" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+
+      <div id="sub-francais-grammaire_g3" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
@@ -7220,19 +7273,192 @@
 
       <div class="current-period-callout" style="border-color: #d97706; background: #fffbeb;">
         <div class="period-callout-badge" style="background: #f59e0b; color: #ffffff;">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
-        <div class="period-callout-text" style="color: #92400e;">Focus du moment : Décodeur Décimal, Glisse-Nombre MHM, 5 Programmes de géométrie notés & Frise Seyès.</div>
+        <div class="period-callout-text" style="color: #92400e;">Focus du moment : Droite Graduée & Papier Millimétré (Décimaux 🆕), Leçon & Conversions des Contenances (L, dL, cL, mL 🆕) & Glisse-Nombre MHM.</div>
         <button class="period-callout-btn" style="border-color: #b45309; color: #78350f;" onclick="switchSubmodule('maths', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
       </div>
 
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'decimaux')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🔢 Décodeur Décimal & Glisse-Nombre (MHM 🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'devoir_construction')" style="border-color:#b45309; color:#92400e; font-weight:800;">📐 Devoir Noté : 5 Programmes (🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:800;">✏️ Frise Seyès (2 Nov 🆕)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('maths', 'droite_graduee')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">📏 Droite Graduée & Papier Millimétré (Décimaux 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'contenances')" style="border-color:#16a34a; color:#166534; font-weight:800;">🧪 Les Contenances : L, dL, cL, mL (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'decimaux')" style="border-color:#0284c7; color:#0369a1; font-weight:700;">🔢 Décodeur Décimal & Glisse-Nombre (MHM)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'devoir_construction')" style="border-color:#b45309; color:#92400e; font-weight:700;">📐 Devoir Noté : 5 Programmes</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:700;">✏️ Frise Seyès (2 Nov)</button>
         <button class="submodule-btn" id="subBtnMathsTurbo" onclick="switchSubmodule('maths', 'turbo')" style="background: linear-gradient(135deg, #fef08a, #fde047); border-color: #ca8a04; color: #713f12; font-weight: 900;">⚡ Turbo Tables CM2</button>
         <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('maths', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
       </div>
 
-<div id="sub-maths-decimaux" class="submodule-content active">
+
+      <!-- ========================================================= -->
+      <!-- MATHS SUBMODULE 1 : DROITE GRADUÉE & PAPIER MILLIMÉTRÉ   -->
+      <!-- ========================================================= -->
+      <div id="sub-maths-droite_graduee" class="submodule-content active">
+        <!-- Bandeau Tuteur Droite Graduée -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #0284c7; margin-bottom: 20px;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title">📏 Droite Graduée & Papier Millimétré : Placer et Repérer les Décimaux</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink);">Nombres & Repères CM2</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold">
+              <span class="tutor-flash-label" style="color: #ca8a04;">🎯 Les 3 Niveaux de Traits</span>
+              <span><strong>Grands traits</strong> = Entiers (1, 2, 3, 4, 5). <strong>Traits moyens</strong> = Demi-unités (1,5 ; 2,5 ; 3,5 ; 4,5). <strong>Petits traits fins</strong> = Dixièmes (0,1).</span>
+            </div>
+            <div class="tutor-flash-item tip">
+              <span class="tutor-flash-label" style="color: #059669;">🔍 Exemple d'or : Placer 3,2</span>
+              <span>1. Repère l'entier <strong>3</strong>.<br>2. Compte <strong>2 petits traits fins</strong> (2 dixièmes) vers la droite.<br>3. Vérifie : 3,2 est <strong>avant 3,5</strong> car 2 dixièmes < 5 dixièmes !</span>
+            </div>
+            <div class="tutor-flash-item trap">
+              <span class="tutor-flash-label" style="color: #dc2626;">🚫 Le Piège Classique</span>
+              <span>Ne confonds pas <strong>3,5</strong> (la moitié entre 3 et 4) et <strong>3,05</strong> (cinq centièmes). Entre 3 et 4, il y a 10 dixièmes (10 petits millimètres) !</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulateur Papier Millimétré Haute Précision -->
+        <div class="video-doc-card" style="margin-bottom: 22px; background: #ffffff;">
+          <div class="video-doc-header">
+            <span class="video-doc-title">📐 Le Réglet Millimétré Interactif (Axe de 1 à 5)</span>
+            <div style="display: flex; gap: 6px;">
+              <button class="filter-pill active" id="btn-mode-ruler-explore" onclick="switchRulerMode('explore')">🔍 Mode Découverte</button>
+              <button class="filter-pill" id="btn-mode-ruler-quiz" onclick="switchRulerMode('quiz')">🎯 Mode Défi Cible (+2 ⭐)</button>
+            </div>
+          </div>
+
+          <!-- Règle SVG Canvas Papier Millimétré -->
+          <div style="width: 100%; overflow-x: auto; padding: 12px 0;">
+            <div id="millimeterRulerContainer" style="min-width: 680px; position: relative; background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 20px 20px 40px 20px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);">
+              <!-- Le SVG sera injecté et géré dynamiquement par renderMillimeterRuler() -->
+            </div>
+          </div>
+
+          <!-- Panneau d'Information en Direct -->
+          <div id="rulerFeedbackPanel" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 12px 18px; margin-top: 14px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 1.4rem; font-weight: 900; color: #0284c7;" id="rulerCurrentValLabel">3,2</span>
+              <div style="display: flex; flex-direction: column;">
+                <span style="font-size: 0.88rem; font-weight: 800; color: #1e293b;" id="rulerDecompLabel">3 unités + 2 dixièmes (3 + 2/10)</span>
+                <span style="font-size: 0.78rem; color: #64748b;" id="rulerPositionDesc">Positionné 2 traits après 3, avant 3,5.</span>
+              </div>
+            </div>
+            <!-- Boutons préréglages rapides -->
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="rulerPresetsTray">
+              <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; align-self: center;">Exemples :</span>
+              <button class="doc-link-btn" onclick="setRulerValue(3.2)" style="padding: 4px 10px; font-size: 0.8rem; background: #e0f2fe; border-color: #0284c7; color: #0369a1;">3,2</button>
+              <button class="doc-link-btn" onclick="setRulerValue(1.5)" style="padding: 4px 10px; font-size: 0.8rem;">1,5</button>
+              <button class="doc-link-btn" onclick="setRulerValue(2.8)" style="padding: 4px 10px; font-size: 0.8rem;">2,8</button>
+              <button class="doc-link-btn" onclick="setRulerValue(4.1)" style="padding: 4px 10px; font-size: 0.8rem;">4,1</button>
+              <button class="doc-link-btn" onclick="setRulerValue(3.5)" style="padding: 4px 10px; font-size: 0.8rem;">3,5</button>
+            </div>
+          </div>
+
+          <!-- Zone du Défi Interactif (Visible en Mode Défi) -->
+          <div id="rulerChallengeBox" style="display: none; margin-top: 14px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 14px; padding: 14px 18px; text-align: center;">
+            <div style="font-size: 1.1rem; font-weight: 800; color: #92400e;" id="rulerChallengeInstruction">
+              🎯 Mission : Clique exactement sur <span style="font-size: 1.35rem; color: #b45309; text-decoration: underline;" id="rulerTargetNum">3,2</span> sur la droite graduée !
+            </div>
+            <p style="font-size: 0.84rem; color: #78350f; margin: 4px 0 10px 0;">
+              Aide-toi des traits intermédiaires de 0,5 et compte les dixièmes avec précision.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+              <button class="action-btn" onclick="validateRulerTarget()" style="padding: 8px 22px; font-size: 0.92rem;">
+                ✨ Valider ma Position
+              </button>
+              <button class="doc-link-btn" onclick="generateNewRulerChallenge()" style="padding: 8px 16px;">
+                🎲 Autre Cible
+              </button>
+            </div>
+            <div id="rulerChallengeFeedback" style="margin-top: 10px; font-weight: 800; font-size: 0.95rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- MATHS SUBMODULE 2 : LES CONTENANCES (L, dL, cL, mL)     -->
+      <!-- ========================================================= -->
+      <div id="sub-maths-contenances" class="submodule-content">
+        <!-- Bandeau Tuteur Contenances -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #16a34a; margin-bottom: 20px;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title">🧪 Grandeurs & Mesures CM2 : Les Unités de Contenance (Litre, cL, mL)</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink);">Cahier de Mathématiques</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold">
+              <span class="tutor-flash-label" style="color: #ca8a04;">📏 Les Équivalences d'Or</span>
+              <span><strong>1 L = 10 dL = 100 cL = 1 000 mL</strong><br>• Demi-litre = <strong>0,5 L = 50 cL = 500 mL</strong><br>• Quart de litre = <strong>0,25 L = 25 cL = 250 mL</strong></span>
+            </div>
+            <div class="tutor-flash-item tip">
+              <span class="tutor-flash-label" style="color: #059669;">🥤 Les Objets du Quotidien</span>
+              <span>• Cuillère à café = <strong>5 mL</strong><br>• Brique de jus = <strong>20 cL (200 mL)</strong><br>• Canette de soda = <strong>33 cL (330 mL)</strong><br>• Bouteille d'eau = <strong>1 L ou 1,5 L (150 cL)</strong></span>
+            </div>
+            <div class="tutor-flash-item trap">
+              <span class="tutor-flash-label" style="color: #dc2626;">🚫 La Règle du Tableau</span>
+              <span>On place <strong>toujours le chiffre des unités dans la colonne de l'unité de départ</strong> ! Dans <strong>1,5 L</strong>, le 1 va dans L et le 5 dans dL ➔ 150 cL !</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau de Conversion Interactif des Contenances -->
+        <div class="video-doc-card" style="margin-bottom: 22px;">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🔄 Convertisseur Intelligent de Contenances (Tableau CM2)</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #dcfce7; color: #166534; padding: 3px 10px; border-radius: 999px;">hL | daL | L | dL | cL | mL</span>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px;">
+            <label style="font-weight: 700; font-size: 0.9rem; color: #1e293b;">Valeur à convertir :</label>
+            <input type="number" step="0.01" id="capacityInputVal" value="1.5" style="width: 110px; padding: 8px 12px; border: 2px solid var(--ink); border-radius: 10px; font-size: 1.1rem; font-weight: 900; text-align: center;" oninput="updateCapacityTable()">
+            
+            <label style="font-weight: 700; font-size: 0.9rem; color: #1e293b;">Unité de départ :</label>
+            <select id="capacityInputUnit" style="padding: 8px 14px; border: 2px solid var(--ink); border-radius: 10px; font-size: 1rem; font-weight: 800; background: #ffffff;" onchange="updateCapacityTable()">
+              <option value="L" selected>L (Litre)</option>
+              <option value="dL">dL (Décilitre)</option>
+              <option value="cL">cL (Centilitre)</option>
+              <option value="mL">mL (Millilitre)</option>
+              <option value="daL">daL (Décalitre)</option>
+              <option value="hL">hL (Hectolitre)</option>
+            </select>
+          </div>
+
+          <!-- Grille du Tableau de Conversion -->
+          <div style="width: 100%; overflow-x: auto; margin-bottom: 14px;">
+            <table id="capacityConversionTable" style="width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden;">
+              <thead>
+                <tr style="background: #16a34a; color: #ffffff; font-size: 0.92rem; font-weight: 800;">
+                  <th style="padding: 10px; border: 1px solid var(--ink); width: 16%;">hL<br><span style="font-size: 0.72rem; font-weight: 600;">100 L</span></th>
+                  <th style="padding: 10px; border: 1px solid var(--ink); width: 16%;">daL<br><span style="font-size: 0.72rem; font-weight: 600;">10 L</span></th>
+                  <th style="padding: 10px; border: 2px solid #ca8a04; background: #15803d; width: 18%;">L (Litre)<br><span style="font-size: 0.72rem; font-weight: 600; color: #fef08a;">Unité principale</span></th>
+                  <th style="padding: 10px; border: 1px solid var(--ink); width: 16%;">dL<br><span style="font-size: 0.72rem; font-weight: 600;">0,1 L</span></th>
+                  <th style="padding: 10px; border: 1px solid var(--ink); width: 17%;">cL<br><span style="font-size: 0.72rem; font-weight: 600;">0,01 L</span></th>
+                  <th style="padding: 10px; border: 1px solid var(--ink); width: 17%;">mL<br><span style="font-size: 0.72rem; font-weight: 600;">0,001 L</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="capacityTableRow" style="background: #ffffff; font-size: 1.6rem; font-weight: 900; height: 60px;">
+                  <!-- Rempli dynamiquement par updateCapacityTable() -->
+                  <td style="border: 1px solid #cbd5e1;">-</td>
+                  <td style="border: 1px solid #cbd5e1;">-</td>
+                  <td style="border: 2px solid #ca8a04; background: #fefce8; color: #166534;">1</td>
+                  <td style="border: 1px solid #cbd5e1;">5</td>
+                  <td style="border: 1px solid #cbd5e1; color: #64748b;">0</td>
+                  <td style="border: 1px solid #cbd5e1; color: #64748b;">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Équivalences lues en direct -->
+          <div id="capacityEquivalencesCard" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-around; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 12px 16px;">
+            <!-- Rempli dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Grand Quiz des Contenances (10 Défis Notés) -->
+        <div id="quiz-container-contenances" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+
+      <div id="sub-maths-decimaux" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bae6fd; padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0369a1;">
@@ -8197,17 +8423,105 @@
 
       <div class="current-period-callout" style="border-color: #0284c7; background: #f0f9ff;">
         <div class="period-callout-badge" style="background: #0284c7; color: #ffffff;">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
-        <div class="period-callout-text" style="color: #075985;">Focus du moment : Les Gaulois et Celtes (société, druides, oppidums) & Semaine du Goût (Italie).</div>
+        <div class="period-callout-text" style="color: #075985;">Focus du moment : La Gaule Romaine : Alésia & La Cité Antique (Vidéos INA & 3D 🆕), Société gauloise & Semaine du Goût.</div>
         <button class="period-callout-btn" style="border-color: #0369a1; color: #0c4a6e;" onclick="switchSubmodule('histoire', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
       </div>
 
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'gaulois')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚔️ Les Gaulois & les Celtes (Société 🆕)</button>
-        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🌍 Géo : L'Italie & Arcimboldo (Semaine du Goût 🆕)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'gallo_romains')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚔️ La Gaule Romaine : Alésia & La Cité (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'gaulois')" style="border-color:#b45309; color:#92400e; font-weight:700;">🛡️ Les Gaulois & les Celtes</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#0284c7; color:#0369a1; font-weight:700;">🌍 Géo : L'Italie & Arcimboldo</button>
         <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('histoire', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
       </div>
 
-<div id="sub-histoire-gaulois" class="submodule-content active">
+
+      <!-- ========================================================= -->
+      <!-- HISTOIRE SUBMODULE : LA GAULE ROMAINE, ALÉSIA & LA CITÉ  -->
+      <!-- ========================================================= -->
+      <div id="sub-histoire-gallo_romains" class="submodule-content active">
+        <!-- Bandeau Flash Tuteur : La Gaule Romaine -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #b45309; margin-bottom: 20px;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title">🏛️ Histoire CM2 : De la Bataille d'Alésia (-52) à la Cité Gallo-Romaine</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #ffedd5; color: #9a3412; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink);">Programme Officiel CM2</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold">
+              <span class="tutor-flash-label" style="color: #ca8a04;">⚔️ Le Siège d'Alésia (-52 av. J.-C.)</span>
+              <span><strong>Jules César</strong> encercle <strong>Vercingétorix</strong> réfugié sur l'oppidum d'Alésia en construisant une double ligne de fortifications. Après des semaines de siège, Vercingétorix dépose ses armes.</span>
+            </div>
+            <div class="tutor-flash-item tip">
+              <span class="tutor-flash-label" style="color: #059669;">🏛️ La Naissance des Gallo-Romains</span>
+              <span>La Gaule devient une province romaine. Les Gaulois adoptent la langue (le latin), le mode de vie et construisent des villes en pierre avec des routes pavées.</span>
+            </div>
+            <div class="tutor-flash-item trap">
+              <span class="tutor-flash-label" style="color: #dc2626;">🚫 Monuments Clés de la Cité</span>
+              <span>• <strong>Le Forum</strong> (place publique centrale)<br>• <strong>Les Thermes</strong> (bains publics chauffés)<br>• <strong>L'Amphithéâtre / Arènes</strong> (combats de gladiateurs)<br>• <strong>L'Aqueduc</strong> (transport de l'eau potable).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deux Vidéos du Padlet : Alésia INA & Vienne Antique 3D -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; width: 100%; margin-bottom: 22px;">
+          <!-- Vidéo 1 : INA Alésia -->
+          <div class="video-doc-card" style="margin-bottom: 0;">
+            <div class="video-doc-header">
+              <span class="video-doc-title">🎬 Vidéo Padlet : La Bataille d'Alésia en Dessin Animé (INA)</span>
+            </div>
+            <div class="video-preview-box" onclick="window.open('https://www.ina.fr/ina-eclaire-actu/video/cpb8405333105/la-bataille-d-alesia-en-dessin-anime', '_blank')" style="cursor: pointer; position: relative;">
+              <img src="images/gaulois_hero.jpg" alt="La Bataille d'Alésia" class="video-preview-thumb" style="height: 190px; object-fit: cover;">
+              <div class="video-play-overlay">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin: 4px 0 0 0;">
+              Archives INA : Découvre comment Jules César a vaincu Vercingétorix grâce à ses fortifications géantes.
+            </p>
+          </div>
+
+          <!-- Vidéo 2 : 3D Vienne Antique -->
+          <div class="video-doc-card" style="margin-bottom: 0;">
+            <div class="video-doc-header">
+              <span class="video-doc-title">🏛️ Reconstitution 3D : La Ville Gallo-Romaine de Vienne</span>
+            </div>
+            <div class="video-preview-box" onclick="window.open('https://youtu.be/NeuGK05mO7Q', '_blank')" style="cursor: pointer; position: relative;">
+              <img src="https://img.youtube.com/vi/NeuGK05mO7Q/hqdefault.jpg" alt="Vienne Antique 3D" class="video-preview-thumb" style="height: 190px; object-fit: cover;">
+              <div class="video-play-overlay">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin: 4px 0 0 0;">
+              Visite guidée en 3D d'une grande cité gallo-romaine : temples, forum, arènes et voies romaines.
+            </p>
+          </div>
+        </div>
+
+        <!-- Explorateur Interactif de la Cité Gallo-Romaine -->
+        <div class="video-doc-card" style="margin-bottom: 22px;">
+          <div class="video-doc-header">
+            <span class="video-doc-title">🧭 Explorateur Interactif : Les Monuments de la Cité Antique</span>
+            <span style="font-size: 0.82rem; font-weight: 800; background: #ffedd5; color: #9a3412; padding: 3px 10px; border-radius: 999px;">Clique sur un monument</span>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+            <button class="filter-pill active" onclick="showRomanMonument('forum', this)">🏛️ Le Forum</button>
+            <button class="filter-pill" onclick="showRomanMonument('thermes', this)">♨️ Les Thermes</button>
+            <button class="filter-pill" onclick="showRomanMonument('arenes', this)">🏟️ Les Arènes (Amphithéâtre)</button>
+            <button class="filter-pill" onclick="showRomanMonument('theatre', this)">🎭 Le Théâtre Antique</button>
+            <button class="filter-pill" onclick="showRomanMonument('aqueduc', this)">💧 L'Aqueduc</button>
+            <button class="filter-pill" onclick="showRomanMonument('temple', this)">🏺 Le Temple</button>
+          </div>
+
+          <div id="romanMonumentDetails" style="background: #fff7ed; border: 2px solid #fdba74; border-radius: 14px; padding: 16px 20px;">
+            <!-- Rempli dynamiquement par showRomanMonument() -->
+          </div>
+        </div>
+
+        <!-- Grand Quiz Interactif sur la Gaule Romaine -->
+        <div id="quiz-container-gallo-romains" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      </div>
+
+
+      <div id="sub-histoire-gaulois" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #92400e;">
@@ -10121,6 +10435,59 @@
           <a href="https://youtu.be/qBD5TUjFFq4" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
         </div>
 
+        
+        <!-- Video 8 : Alesia INA -->
+        <div class="video-card-item">
+          <h4>⚔️ La Bataille d'Alésia (Dessin Animé INA)</h4>
+          <div class="video-preview-box" onclick="window.open('https://www.ina.fr/ina-eclaire-actu/video/cpb8405333105/la-bataille-d-alesia-en-dessin-anime', '_blank')">
+            <img src="images/gaulois_hero.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>Le siège d'Alésia en 52 av. J.-C. : la double fortification de César et la reddition de Vercingétorix.</p>
+          <a href="https://www.ina.fr/ina-eclaire-actu/video/cpb8405333105/la-bataille-d-alesia-en-dessin-anime" target="_blank" class="yt-btn">▶️ Regarder sur l'INA</a>
+        </div>
+
+        <!-- Video 9 : Vienne Antique 3D -->
+        <div class="video-card-item">
+          <h4>🏛️ La Cité Gallo-Romaine de Vienne en 3D</h4>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/NeuGK05mO7Q', '_blank')">
+            <img src="https://img.youtube.com/vi/NeuGK05mO7Q/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>Reconstitution 3D d'une grande cité romaine : forum, thermes, arènes, temples et aqueducs.</p>
+          <a href="https://youtu.be/NeuGK05mO7Q" target="_blank" class="yt-btn">▶️ Lancer la vidéo 3D</a>
+        </div>
+
+        <!-- Video 10 : René Magritte -->
+        <div class="video-card-item">
+          <h4>🎨 Tu connais René Magritte ? (Petit Bozart)</h4>
+          <div class="video-preview-box" onclick="window.open('https://youtu.be/z8X2fhoOmwU', '_blank')">
+            <img src="https://img.youtube.com/vi/z8X2fhoOmwU/hqdefault.jpg" class="video-preview-thumb">
+            <div class="video-play-overlay" style="width: 52px; height: 52px;">
+              <svg viewBox="0 0 24 24" style="width: 22px; height: 22px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <p>L'histoire de l'art pour les enfants : découvre le peintre surréaliste belge et la célèbre pipe.</p>
+          <a href="https://youtu.be/z8X2fhoOmwU" target="_blank" class="yt-btn">▶️ Lancer la vidéo</a>
+        </div>
+
+        <!-- Document 11 : Le Petit Nicolas -->
+        <div class="video-card-item">
+          <h4>📚 Foire du Livre de Brive : Le Petit Nicolas</h4>
+          <div class="video-preview-box" style="background: #fff;" onclick="window.open('images/petit_nicolas_questions.png', '_blank')">
+            <img src="images/petit_nicolas_questions.png" class="video-preview-thumb" style="object-fit: contain; padding: 6px;">
+            <div class="video-play-overlay" style="width: 52px; height: 52px; background: rgba(14, 165, 233, 0.9);">
+              <span style="font-size: 1.4rem;">🔍</span>
+            </div>
+          </div>
+          <p>Les 13 questions préparées par les CM2 pour la rencontre avec l'auteur de « Le Petit Nicolas, je reviens ! ».</p>
+          <a href="images/petit_nicolas_questions.png" target="_blank" class="yt-btn" style="background: linear-gradient(135deg, #0284c7, #0369a1);">🔍 Voir les questions HD</a>
+        </div>
+
         <!-- Document 7 -->
         <div class="video-card-item">
           <h4>⚛️ Tableau périodique des éléments</h4>
@@ -11969,6 +12336,12 @@
       }
 
       renderDailyBalanceWidget();
+    setTimeout(() => {
+      if (typeof renderMillimeterRuler === 'function') renderMillimeterRuler();
+      if (typeof updateCapacityTable === 'function') updateCapacityTable();
+      if (typeof initValeursSortingAtelier === 'function') initValeursSortingAtelier();
+      if (typeof showRomanMonument === 'function') showRomanMonument('forum');
+    }, 100);
       renderParentActivityStats();
     }
 
@@ -12200,6 +12573,24 @@
       if (target) target.classList.add('active');
 
       if (subj === 'maths') {
+        const activeSub = document.querySelector('#subject-maths .submodule-content.active');
+        if (activeSub && activeSub.id === 'sub-maths-droite_graduee') {
+          setTimeout(renderMillimeterRuler, 50);
+        } else if (activeSub && activeSub.id === 'sub-maths-contenances') {
+          setTimeout(updateCapacityTable, 50);
+        } else if (activeSub && activeSub.id === 'sub-maths-decimaux' && typeof renderGlisseTable === 'function') {
+          renderGlisseTable(currentGlisseValue);
+        }
+      } else if (subj === 'histoire') {
+        const activeSub = document.querySelector('#subject-histoire .submodule-content.active');
+        if (activeSub && activeSub.id === 'sub-histoire-gallo_romains') {
+          setTimeout(() => showRomanMonument('forum'), 50);
+        }
+      } else if (subj === 'francais') {
+        const activeSub = document.querySelector('#subject-francais .submodule-content.active');
+        if (activeSub && activeSub.id === 'sub-francais-conjugaison_valeurs') {
+          setTimeout(initValeursSortingAtelier, 50);
+        }
         if (typeof renderGlisseTable === 'function' && typeof currentGlisseValue !== 'undefined') {
           renderGlisseTable(currentGlisseValue);
         }
@@ -12314,6 +12705,14 @@
         setTimeout(initGeometryStudio, 80);
       } else if (subject === 'maths' && subKey === 'turbo') {
         initTurboTablesView();
+      } else if (subject === 'maths' && subKey === 'droite_graduee') {
+        renderMillimeterRuler();
+      } else if (subject === 'maths' && subKey === 'contenances') {
+        updateCapacityTable();
+      } else if (subject === 'francais' && subKey === 'conjugaison_valeurs') {
+        initValeursSortingAtelier();
+      } else if (subject === 'histoire' && subKey === 'gallo_romains') {
+        showRomanMonument('forum');
       } else if (subject === 'maths' && subKey === 'decimaux') {
         renderGlisseTable(currentGlisseValue);
       } else if (subject === 'maths' && subKey === 'devoir_construction') {
@@ -12355,6 +12754,597 @@
     // =========================================================================
     // MOTEURS INTERACTIFS DÉCIMAUX, GÉOMÉTRIE, SVT & AUTODICTÉE
     // =========================================================================
+
+    
+    // =========================================================================
+    // NOUVEAUX MOTEURS INTERACTIFS (NOVEMBRE 2026) :
+    // DROITE GRADUÉE MILLIMÉTRÉE, CONTENANCES, VALEURS DU PRÉSENT & ALÉSIA
+    // =========================================================================
+
+    // -------------------------------------------------------------------------
+    // 1. DROITE GRADUÉE & PAPIER MILLIMÉTRÉ (Axe de 1 à 5, pas de 0,5 et 0,1)
+    // -------------------------------------------------------------------------
+    let currentRulerValue = 3.2;
+    let rulerChallengeTarget = 3.2;
+    let currentRulerMode = 'explore'; // 'explore' ou 'quiz'
+
+    function renderMillimeterRuler() {
+      const container = document.getElementById('millimeterRulerContainer');
+      if (!container) return;
+
+      const minVal = 1.0;
+      const maxVal = 5.0;
+      const totalUnits = maxVal - minVal; // 4 unités
+      const width = 720;
+      const height = 150;
+      const marginLeft = 35;
+      const marginRight = 35;
+      const usableWidth = width - marginLeft - marginRight; // 650px
+      const pxPerUnit = usableWidth / totalUnits; // 162.5 px par unité (16.25 px par dixième)
+
+      let ticksHtml = "";
+      // Dessiner les graduations : dixièmes (0.1), demi-unités (0.5), entiers (1.0)
+      const totalTenths = Math.round(totalUnits * 10);
+      for (let i = 0; i <= totalTenths; i++) {
+        const val = minVal + i * 0.1;
+        const x = marginLeft + (i * 0.1 / totalUnits) * usableWidth;
+        const isInteger = (i % 10 === 0);
+        const isHalf = (i % 5 === 0 && !isInteger);
+
+        if (isInteger) {
+          // Grand trait entier
+          ticksHtml += `
+            <line x1="${x}" y1="35" x2="${x}" y2="95" stroke="#1e293b" stroke-width="3" />
+            <text x="${x}" y="122" font-family="'Fredoka', sans-serif" font-size="20" font-weight="900" fill="#0f172a" text-anchor="middle">${Math.round(val)}</text>
+          `;
+        } else if (isHalf) {
+          // Trait intermédiaire demi-unité (0,5)
+          ticksHtml += `
+            <line x1="${x}" y1="45" x2="${x}" y2="90" stroke="#d97706" stroke-width="2.5" />
+            <text x="${x}" y="112" font-family="'Fredoka', sans-serif" font-size="12" font-weight="800" fill="#b45309" text-anchor="middle">${val.toFixed(1).replace('.', ',')}</text>
+          `;
+        } else {
+          // Petit trait millimétré (dixième 0,1)
+          ticksHtml += `
+            <line x1="${x}" y1="55" x2="${x}" y2="85" stroke="#64748b" stroke-width="1.2" />
+          `;
+        }
+      }
+
+      // Position du curseur actuel
+      const cursorX = marginLeft + ((currentRulerValue - minVal) / totalUnits) * usableWidth;
+
+      container.innerHTML = `
+        <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; display: block; overflow: visible; cursor: pointer;" onclick="handleRulerSvgClick(event, ${marginLeft}, ${usableWidth}, ${minVal}, ${totalUnits})">
+          <!-- Fond quadrillé papier millimétré -->
+          <defs>
+            <pattern id="millimeterGrid" width="16.25" height="10" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="16.25" y2="0" stroke="#bbf7d0" stroke-width="0.8" />
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#bbf7d0" stroke-width="0.8" />
+            </pattern>
+          </defs>
+          <rect x="${marginLeft}" y="35" width="${usableWidth}" height="55" fill="url(#millimeterGrid)" rx="4" opacity="0.6" />
+
+          <!-- Axe principal horizontal -->
+          <line x1="${marginLeft - 15}" y1="65" x2="${width - marginRight + 15}" y2="65" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" />
+          <!-- Flèche au bout -->
+          <polygon points="${width - marginRight + 15},65 ${width - marginRight + 5},60 ${width - marginRight + 5},70" fill="#0f172a" />
+
+          <!-- Graduations -->
+          ${ticksHtml}
+
+          <!-- Curseur / Flèche rouge interactif -->
+          <g id="rulerCursorGroup" transform="translate(${cursorX}, 0)">
+            <polygon points="0,55 -10,18 10,18" fill="#dc2626" stroke="#991b1b" stroke-width="1.5" />
+            <circle cx="0" cy="18" r="14" fill="#ef4444" stroke="#ffffff" stroke-width="2" />
+            <text x="0" y="22" font-family="'Fredoka', sans-serif" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle">📍</text>
+            <line x1="0" y1="55" x2="0" y2="95" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="3,2" />
+          </g>
+        </svg>
+      `;
+
+      updateRulerLabels();
+    }
+
+    function handleRulerSvgClick(event, marginLeft, usableWidth, minVal, totalUnits) {
+      const svg = event.currentTarget;
+      const rect = svg.getBoundingClientRect();
+      const clickXClient = event.clientX - rect.left;
+      const svgScale = 720 / rect.width;
+      const clickXSvg = clickXClient * svgScale;
+
+      let ratio = (clickXSvg - marginLeft) / usableWidth;
+      ratio = Math.max(0, Math.min(1, ratio));
+      const rawVal = minVal + ratio * totalUnits;
+      // Arrondir au dixième le plus proche (pas de 0,1)
+      const rounded = Math.round(rawVal * 10) / 10;
+      setRulerValue(rounded);
+    }
+
+    function setRulerValue(val) {
+      currentRulerValue = Math.max(1.0, Math.min(5.0, Math.round(val * 10) / 10));
+      renderMillimeterRuler();
+    }
+
+    function updateRulerLabels() {
+      const valLabel = document.getElementById('rulerCurrentValLabel');
+      const decompLabel = document.getElementById('rulerDecompLabel');
+      const descLabel = document.getElementById('rulerPositionDesc');
+      if (!valLabel || !decompLabel || !descLabel) return;
+
+      const formatted = currentRulerValue.toFixed(1).replace('.', ',');
+      valLabel.innerText = formatted;
+
+      const entier = Math.floor(currentRulerValue);
+      const dixieme = Math.round((currentRulerValue - entier) * 10);
+
+      decompLabel.innerText = `${entier} unité${entier > 1 ? 's' : ''} + ${dixieme} dixième${dixieme > 1 ? 's' : ''} (${entier} + ${dixieme}/10)`;
+
+      if (dixieme === 0) {
+        descLabel.innerText = `Exactement sur le grand trait de l'entier ${entier}.`;
+      } else if (dixieme === 5) {
+        descLabel.innerText = `Exactement sur la demi-unité (${formatted}), au milieu parfait entre ${entier} et ${entier + 1}.`;
+      } else if (dixieme < 5) {
+        descLabel.innerText = `Situé ${dixieme} petit${dixieme > 1 ? 's' : ''} trait${dixieme > 1 ? 's' : ''} (mm) après ${entier}, avant la moitié ${entier},5.`;
+      } else {
+        descLabel.innerText = `Situé ${dixieme - 5} petit${dixieme - 5 > 1 ? 's' : ''} trait${dixieme - 5 > 1 ? 's' : ''} (mm) après la moitié ${entier},5, avant ${entier + 1}.`;
+      }
+    }
+
+    function switchRulerMode(mode) {
+      currentRulerMode = mode;
+      const btnExplore = document.getElementById('btn-mode-ruler-explore');
+      const btnQuiz = document.getElementById('btn-mode-ruler-quiz');
+      const challengeBox = document.getElementById('rulerChallengeBox');
+      const presets = document.getElementById('rulerPresetsTray');
+
+      if (mode === 'quiz') {
+        if (btnExplore) btnExplore.classList.remove('active');
+        if (btnQuiz) btnQuiz.classList.add('active');
+        if (challengeBox) challengeBox.style.display = 'block';
+        if (presets) presets.style.display = 'none';
+        generateNewRulerChallenge();
+      } else {
+        if (btnExplore) btnExplore.classList.add('active');
+        if (btnQuiz) btnQuiz.classList.remove('active');
+        if (challengeBox) challengeBox.style.display = 'none';
+        if (presets) presets.style.display = 'flex';
+        setRulerValue(3.2);
+      }
+    }
+
+    function generateNewRulerChallenge() {
+      // Choisir une cible avec des décimaux variés entre 1.1 et 4.9
+      const targets = [3.2, 1.5, 2.8, 4.1, 3.5, 2.3, 1.7, 4.6, 2.5, 3.8, 1.2, 4.5];
+      let newTarget = targets[Math.floor(Math.random() * targets.length)];
+      if (newTarget === rulerChallengeTarget) {
+        newTarget = (newTarget === 3.2) ? 2.7 : 3.2;
+      }
+      rulerChallengeTarget = newTarget;
+
+      const targetEl = document.getElementById('rulerTargetNum');
+      if (targetEl) targetEl.innerText = rulerChallengeTarget.toFixed(1).replace('.', ',');
+
+      const feedback = document.getElementById('rulerChallengeFeedback');
+      if (feedback) feedback.innerHTML = '';
+
+      // Placer le curseur un peu plus loin pour commencer
+      setRulerValue(rulerChallengeTarget > 3 ? 1.5 : 4.5);
+    }
+
+    function validateRulerTarget() {
+      const feedback = document.getElementById('rulerChallengeFeedback');
+      if (!feedback) return;
+
+      const diff = Math.abs(currentRulerValue - rulerChallengeTarget);
+      const formattedCur = currentRulerValue.toFixed(1).replace('.', ',');
+      const formattedTarget = rulerChallengeTarget.toFixed(1).replace('.', ',');
+
+      if (diff < 0.05) {
+        feedback.innerHTML = `
+          <div style="background: #dcfce7; color: #166534; padding: 10px 16px; border-radius: 10px; border: 2px solid #16a34a;">
+            🎉 <strong>BRAVO, CIBLE EXACTE !</strong> Tu as placé la flèche pile sur <strong>${formattedTarget}</strong> ! (+2 ⭐)
+          </div>
+        `;
+        if (typeof addScore === 'function') addScore(2, 'maths', true);
+        if (typeof playSoundEffect === 'function') playSoundEffect('correct');
+        setTimeout(() => {
+          generateNewRulerChallenge();
+        }, 2200);
+      } else {
+        const dixiemesEcart = Math.round(diff * 10);
+        const direction = currentRulerValue < rulerChallengeTarget ? "trop à gauche" : "trop à droite";
+        feedback.innerHTML = `
+          <div style="background: #fee2e2; color: #991b1b; padding: 10px 16px; border-radius: 10px; border: 2px solid #ef4444;">
+            ⚠️ Tu es sur <strong>${formattedCur}</strong> (${direction} de ${dixiemesEcart} petit${dixiemesEcart > 1 ? 's traits' : ' trait'}). Vise <strong>${formattedTarget}</strong> !
+          </div>
+        `;
+        if (typeof playSoundEffect === 'function') playSoundEffect('wrong');
+      }
+    }
+
+
+    // -------------------------------------------------------------------------
+    // 2. LES CONTENANCES : CONVERTISSEUR & QUIZ (L, dL, cL, mL)
+    // -------------------------------------------------------------------------
+    const CAPACITY_FACTORS = {
+      hL: 100,
+      daL: 10,
+      L: 1,
+      dL: 0.1,
+      cL: 0.01,
+      mL: 0.001
+    };
+
+    function updateCapacityTable() {
+      const inputValEl = document.getElementById('capacityInputVal');
+      const inputUnitEl = document.getElementById('capacityInputUnit');
+      const row = document.getElementById('capacityTableRow');
+      const eqCard = document.getElementById('capacityEquivalencesCard');
+      if (!inputValEl || !inputUnitEl || !row || !eqCard) return;
+
+      const val = parseFloat(inputValEl.value) || 0;
+      const unit = inputUnitEl.value || 'L';
+
+      // Convertir la valeur en Litres de référence
+      const liters = val * (CAPACITY_FACTORS[unit] || 1);
+
+      // Calcul des valeurs dans chaque colonne
+      const hlVal = (liters / 100);
+      const dalVal = (liters / 10);
+      const lVal = liters;
+      const dlVal = liters * 10;
+      const clVal = liters * 100;
+      const mlVal = liters * 1000;
+
+      // Affichage dynamique dans les 6 cellules du tableau
+      // Déterminer la case active pour le chiffre des unités
+      const unitsMap = ['hL', 'daL', 'L', 'dL', 'cL', 'mL'];
+      const cells = unitsMap.map(u => {
+        const isCurrentUnit = (u === unit);
+        // Ex: si on a 1.5 L, afficher 1 dans L et 5 dans dL
+        let digitStr = "-";
+        if (liters > 0) {
+          // On peut formater avec les zéros utiles
+          if (u === 'L') digitStr = Math.floor(liters % 10);
+          else if (u === 'daL') digitStr = Math.floor((liters / 10) % 10) || (liters >= 10 ? Math.floor(liters/10) : '-');
+          else if (u === 'hL') digitStr = Math.floor(liters / 100) || '-';
+          else if (u === 'dL') digitStr = Math.floor((liters * 10) % 10);
+          else if (u === 'cL') digitStr = Math.floor((liters * 100) % 10);
+          else if (u === 'mL') digitStr = Math.floor((liters * 1000) % 10);
+        }
+        return `
+          <td style="border: ${isCurrentUnit ? '2.5px solid #ca8a04' : '1px solid #cbd5e1'}; background: ${isCurrentUnit ? '#fefce8' : '#ffffff'}; color: ${isCurrentUnit ? '#15803d' : '#1e293b'}; font-weight: 900;">
+            ${digitStr}
+          </td>
+        `;
+      }).join('');
+
+      row.innerHTML = cells;
+
+      // Badges d'équivalences de lecture immédiate
+      eqCard.innerHTML = `
+        <div style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 8px; padding: 6px 14px; font-weight: 800; font-size: 0.95rem; color: #15803d;">
+          💧 En Litres : <strong>${lVal.toLocaleString('fr-FR', { maximumFractionDigits: 3 })} L</strong>
+        </div>
+        <div style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 8px; padding: 6px 14px; font-weight: 800; font-size: 0.95rem; color: #0284c7;">
+          🥤 En Centilitres : <strong>${clVal.toLocaleString('fr-FR', { maximumFractionDigits: 1 })} cL</strong>
+        </div>
+        <div style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 8px; padding: 6px 14px; font-weight: 800; font-size: 0.95rem; color: #7c3aed;">
+          🥄 En Millilitres : <strong>${mlVal.toLocaleString('fr-FR', { maximumFractionDigits: 0 })} mL</strong>
+        </div>
+        <div style="background: #ffffff; border: 1.5px solid #86efac; border-radius: 8px; padding: 6px 14px; font-weight: 800; font-size: 0.95rem; color: #b45309;">
+          🥛 En Décilitres : <strong>${dlVal.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} dL</strong>
+        </div>
+      `;
+    }
+
+    const allContenancesQuestions = [
+      {
+        question: "Combien y a-t-il de centilitres (cL) dans 1 Litre (1 L) ?",
+        options: ["100 cL", "10 cL", "1 000 cL", "50 cL"],
+        answer: 0,
+        hint: "Pense au préfixe 'centi' comme dans centimètre : 1 L = 100 cL !"
+      },
+      {
+        question: "Une bouteille d'eau classique contient 1,5 L. Combien cela fait-il en cL ?",
+        options: ["150 cL", "15 cL", "1 500 cL", "1500 cL"],
+        answer: 0,
+        hint: "1 L = 100 cL et 0,5 L (demi-litre) = 50 cL. 100 + 50 = 150 cL !"
+      },
+      {
+        question: "Une canette de soda fait 33 cL. Combien de millilitres (mL) contient-elle ?",
+        options: ["330 mL", "33 mL", "3,3 mL", "3 300 mL"],
+        answer: 0,
+        hint: "1 cL = 10 mL. Donc 33 cL = 33 × 10 = 330 mL !"
+      },
+      {
+        question: "Lucie veut remplir une bouteille de 1 L avec des verres de 20 cL. Combien de verres lui faut-il ?",
+        options: ["5 verres", "4 verres", "10 verres", "2 verres"],
+        answer: 0,
+        hint: "1 L = 100 cL. 100 ÷ 20 = 5 verres !"
+      },
+      {
+        question: "Que représente un demi-litre (1/2 L) ?",
+        options: ["50 cL ou 500 mL", "25 cL ou 250 mL", "5 cL ou 50 mL", "100 cL"],
+        answer: 0,
+        hint: "La moitié de 1 000 mL est 500 mL, soit 50 cL ou 0,5 L !"
+      },
+      {
+        question: "Pour préparer un sirop, Tom verse 250 mL d'eau. Quelle fraction de litre cela représente-t-il ?",
+        options: ["Un quart de litre (1/4 L)", "Un demi-litre (1/2 L)", "Trois quarts de litre (3/4 L)", "Un dixième (1/10 L)"],
+        answer: 0,
+        hint: "1 000 ÷ 4 = 250 mL, c'est donc un quart de litre (25 cL) !"
+      },
+      {
+        question: "Compare ces deux capacités : 75 cL et 0,7 L. Quel signe convient ?",
+        options: ["75 cL > 0,7 L", "75 cL < 0,7 L", "75 cL = 0,7 L", "Impossible à comparer"],
+        answer: 0,
+        hint: "Convertis dans la même unité : 0,7 L = 70 cL. Donc 75 cL > 70 cL !"
+      },
+      {
+        question: "Une cuillère à café contient environ 5 mL de sirop. Combien de cuillères font 1 cL ?",
+        options: ["2 cuillères", "1 cuillère", "5 cuillères", "10 cuillères"],
+        answer: 0,
+        hint: "1 cL = 10 mL. 10 mL ÷ 5 mL = 2 cuillères !"
+      },
+      {
+        question: "Un seau contient 1 décalitre (1 daL). Combien de litres d'eau cela fait-il ?",
+        options: ["10 L", "100 L", "1 L", "0,1 L"],
+        answer: 0,
+        hint: "Le préfixe 'déca' signifie 10 fois l'unité : 1 daL = 10 L !"
+      },
+      {
+        question: "Une baignoire contient 1,8 hectolitre (1,8 hL). Combien de litres d'eau cela représente-t-il ?",
+        options: ["180 L", "18 L", "1 800 L", "18 000 L"],
+        answer: 0,
+        hint: "1 hL = 100 L. Donc 1,8 × 100 = 180 Litres !"
+      }
+    ];
+
+
+    // -------------------------------------------------------------------------
+    // 3. ATELIER & QUIZ : LES 4 VALEURS DU PRÉSENT (C3)
+    // -------------------------------------------------------------------------
+    const VALEURS_SENTENCES = [
+      { text: "En ce moment même, Lucie écrit la règle dans son cahier.", correct: "actualite", hint: "Action en cours maintenant." },
+      { text: "Ils dînent vers 19 heures tous les soirs en famille.", correct: "habitude", hint: "'Tous les soirs' indique une répétition régulière." },
+      { text: "La Terre tourne autour du Soleil en 365 jours.", correct: "verite", hint: "Fait scientifique toujours vrai hier, aujourd'hui et demain." },
+      { text: "En 52 avant J.-C., Vercingétorix dépose ses armes devant César.", correct: "historique", hint: "Événement passé raconté au présent pour le rendre vivant." },
+      { text: "Elle se rend à la piscine municipale deux fois par semaine.", correct: "habitude", hint: "'Deux fois par semaine' marque une habitude." },
+      { text: "L'eau pure gèle et se transforme en glace solide à 0°C.", correct: "verite", hint: "Vérité scientifique et loi physique immuable." },
+      { text: "Au XIXe siècle, Gustave Eiffel inaugure sa célèbre tour en fer.", correct: "historique", hint: "Fait historique daté dans le passé." },
+      { text: "Regarde par la fenêtre : la pluie commence à tomber !", correct: "actualite", hint: "L'action se passe sous nos yeux à l'instant où l'on parle." }
+    ];
+
+    function initValeursSortingAtelier() {
+      const zone = document.getElementById('valeurs-sorting-zone');
+      if (!zone) return;
+
+      zone.innerHTML = VALEURS_SENTENCES.map((item, idx) => `
+        <div class="archive-card-item" id="valeur-item-${idx}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; background: #ffffff;">
+          <div style="font-size: 0.95rem; font-weight: 700; color: #1e293b;">
+            « ${item.text} »
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="filter-pill" onclick="checkValeurChoice(${idx}, 'actualite', this)">🟢 Actualité</button>
+            <button class="filter-pill" onclick="checkValeurChoice(${idx}, 'habitude', this)">🟡 Habitude</button>
+            <button class="filter-pill" onclick="checkValeurChoice(${idx}, 'verite', this)">🔵 Vérité Générale</button>
+            <button class="filter-pill" onclick="checkValeurChoice(${idx}, 'historique', this)">🟣 Narration / Historique</button>
+          </div>
+          <div id="valeur-feedback-${idx}" style="font-size: 0.82rem; font-weight: 700;"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkValeurChoice(idx, choice, btn) {
+      const item = VALEURS_SENTENCES[idx];
+      const feedback = document.getElementById(`valeur-feedback-${idx}`);
+      const parent = document.getElementById(`valeur-item-${idx}`);
+      if (!item || !feedback || !parent) return;
+
+      parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (choice === item.correct) {
+        feedback.innerHTML = `<span style="color: #16a34a;">✅ Exact ! ${item.hint} (+2 ⭐)</span>`;
+        if (typeof addScore === 'function') addScore(2, 'francais', true);
+        if (typeof playSoundEffect === 'function') playSoundEffect('correct');
+      } else {
+        feedback.innerHTML = `<span style="color: #dc2626;">❌ Pas tout à fait. Indice : ${item.hint}</span>`;
+        if (typeof playSoundEffect === 'function') playSoundEffect('wrong');
+      }
+    }
+
+    const allValeursPresentQuestions = [
+      {
+        question: "Dans « Ils dînent vers 19 heures tous les soirs », quelle est la valeur du verbe « dînent » ?",
+        options: ["Présent d'habitude", "Présent de vérité générale", "Présent d'actualité", "Présent historique"],
+        answer: 0,
+        hint: "« Tous les soirs » indique une action qui se répète régulièrement : c'est une habitude !"
+      },
+      {
+        question: "Dans « La Terre tourne autour du Soleil », pourquoi utilise-t-on le présent ?",
+        options: ["Pour exprimer une vérité générale / scientifique", "Pour raconter une habitude", "Parce que cela se passe maintenant uniquement", "C'est un présent historique"],
+        answer: 0,
+        hint: "C'est une vérité scientifique qui est toujours vraie : le présent de vérité générale !"
+      },
+      {
+        question: "Dans « Au Moyen Âge, les seigneurs vivent dans des châteaux forts », quelle est la valeur du présent ?",
+        options: ["Présent de narration / historique", "Présent d'actualité", "Présent d'habitude", "Présent de vérité générale"],
+        answer: 0,
+        hint: "L'auteur décrit des événements du passé (Moyen Âge) au présent pour rendre le texte vivant."
+      },
+      {
+        question: "Dans « Silence, le bébé s'endort enfin ! », quelle est la valeur du présent ?",
+        options: ["Présent d'actualité (d'énonciation)", "Présent de vérité générale", "Présent d'habitude", "Présent de narration"],
+        answer: 0,
+        hint: "L'action a lieu au moment précis où la personne s'exprime."
+      },
+      {
+        question: "Dans « Les chats n'ont jamais su nager », de quel présent s'agit-il ?",
+        options: ["Présent de vérité générale", "Présent d'habitude", "Présent d'actualité", "Présent historique"],
+        answer: 0,
+        hint: "C'est une caractéristique constante de la nature des félins, toujours vraie !"
+      },
+      {
+        question: "Dans « Chaque samedi matin, Paul range sa chambre », quelle est la valeur du présent ?",
+        options: ["Présent d'habitude", "Présent d'actualité", "Présent historique", "Présent de vérité générale"],
+        answer: 0,
+        hint: "« Chaque samedi matin » marque une régularité et une habitude !"
+      },
+      {
+        question: "Dans « En 1889, Gustave Eiffel inaugure sa tour », pourquoi emploie-t-on « inaugure » au présent ?",
+        options: ["Pour donner du dynamisme à un récit historique passé", "Parce que Gustave Eiffel est vivant aujourd'hui", "C'est une habitude d'Eiffel", "C'est une loi de la science"],
+        answer: 0,
+        hint: "C'est le présent de narration (ou historique), très utilisé dans les manuels d'histoire !"
+      },
+      {
+        question: "Dans le proverbe « Qui sème le vent récolte la tempête », quelle est la valeur du présent ?",
+        options: ["Présent de vérité générale (maxime / proverbe)", "Présent d'actualité", "Présent d'habitude", "Présent de narration"],
+        answer: 0,
+        hint: "Les proverbes et maximes s'expriment toujours au présent de vérité générale !"
+      },
+      {
+        question: "Dans « Attends-moi, j'arrive dans deux minutes ! », quelle nuance particulière du présent retrouve-t-on ?",
+        options: ["Un futur proche / immédiat", "Un présent historique", "Une vérité générale", "Une habitude ancienne"],
+        answer: 0,
+        hint: "Le verbe au présent exprime une action qui va se produire immédiatement dans un futur proche !"
+      },
+      {
+        question: "Laquelle de ces phrases contient un présent de VÉRITÉ GÉNÉRALE ?",
+        options: [
+          "Deux et deux font quatre.",
+          "Je mange une glace à la vanille.",
+          "Tous les mercredis, je fais du vélo.",
+          "En 1789, le peuple prend la Bastille."
+        ],
+        answer: 0,
+        hint: "« Deux et deux font quatre » est une vérité mathématique absolue !"
+      }
+    ];
+
+
+    // -------------------------------------------------------------------------
+    // 4. EXPLORATEUR DE LA CITÉ GALLO-ROMAINE & ALÉSIA (HISTOIRE)
+    // -------------------------------------------------------------------------
+    const ROMAN_MONUMENTS_DATA = {
+      forum: {
+        title: "🏛️ Le Forum : Cœur politique et commercial",
+        desc: "Grande place publique rectangulaire au croisement du Cardo et du Decumanus. C'est le centre de la cité : on y trouve la basilique judiciaire, la curie (conseil municipal) et de nombreuses boutiques marchandes.",
+        role: "Lieu de rassemblement des citoyens, des discours publics et des transactions économiques."
+      },
+      thermes: {
+        title: "♨️ Les Thermes : Bains publics et hygiène",
+        desc: "Bâtiments majestueux chauffés par le sol (l'hypocauste). On y passe du vestiaire (apodyterium) à la salle tiède (tepidarium), puis chaude (caldarium), avant de plonger dans le bain froid (frigidarium).",
+        role: "Hygiène corporelle, détente, sport et discussions d'affaires entre citoyens."
+      },
+      arenes: {
+        title: "🏟️ Les Arènes / Amphithéâtre : Jeux et combats",
+        desc: "Édifice circulaire ou ovale à gradins pouvant accueillir des milliers de spectateurs. Le sable (arena) absorbe le sang des combats de gladiateurs et des chasses aux bêtes sauvages.",
+        role: "Divertissement du peuple ('Du pain et des jeux' - Panem et circenses)."
+      },
+      theatre: {
+        title: "🎭 Le Théâtre Antique : Tragédies et comédies",
+        desc: "Construit en demi-cercle (hémicycle), souvent adossé à une colline pour profiter du relief naturel. Les acteurs portent des masques pour amplifier leur voix et exprimer les émotions.",
+        role: "Représentations théâtrales en l'honneur des dieux et divertissement culturel."
+      },
+      aqueduc: {
+        title: "💧 L'Aqueduc : Le miracle de l'eau potable",
+        desc: "Ponts à plusieurs rangées d'arches en pierre transportant l'eau des sources lointaines sur des dizaines de kilomètres avec une pente douce et constante (ex: Pont du Gard).",
+        role: "Alimentation en eau courante des fontaines publiques, des thermes et des maisons riches."
+      },
+      temple: {
+        title: "🏺 Le Temple : La demeure des Dieux",
+        desc: "Monument rectangulaire surélevé sur un podium avec des colonnes sculptées et un fronton triangulaire (ex: Maison Carrée à Nîmes).",
+        role: "Culte officiel rendu aux dieux protecteurs de Rome (Jupiter, Junon, Minerve) et à l'Empereur divinisé."
+      }
+    };
+
+    function showRomanMonument(key, btn) {
+      const data = ROMAN_MONUMENTS_DATA[key] || ROMAN_MONUMENTS_DATA['forum'];
+      const container = document.getElementById('romanMonumentDetails');
+      if (!container) return;
+
+      if (btn) {
+        btn.parentElement.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+
+      container.innerHTML = `
+        <h4 style="margin: 0 0 8px 0; font-family: 'Fredoka', sans-serif; font-size: 1.25rem; color: #9a3412;">
+          ${data.title}
+        </h4>
+        <p style="font-size: 0.92rem; color: #1e293b; line-height: 1.5; margin: 0 0 8px 0;">
+          ${data.desc}
+        </p>
+        <div style="background: #ffffff; border-left: 4px solid #ea580c; padding: 8px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 700; color: #c2410c;">
+          ⭐ <strong>Rôle dans la société antique :</strong> ${data.role}
+        </div>
+      `;
+    }
+
+    const allGalloRomainsQuestions = [
+      {
+        question: "En quelle année avant J.-C. a eu lieu la célèbre Bataille d'Alésia ?",
+        options: ["En 52 avant J.-C.", "En 800 après J.-C.", "En 1515", "En 44 avant J.-C."],
+        answer: 0,
+        hint: "C'est au Ier siècle avant notre ère : 52 av. J.-C. !"
+      },
+      {
+        question: "Qui est le jeune chef arverne qui a unifié les tribus gauloises face aux Romains ?",
+        options: ["Vercingétorix", "Astérix", "Clovis", "Charlemagne"],
+        answer: 0,
+        hint: "Vercingétorix a réussi à rassembler les peuples gaulois pour résister à César."
+      },
+      {
+        question: "Comment Jules César a-t-il réussi à vaincre les Gaulois retranchés à Alésia ?",
+        options: [
+          "En construisant une double ligne de fortifications pour les affamer",
+          "En incendiant la forêt tout autour",
+          "En attaquant immédiatement le premier jour",
+          "En négociant un traité de paix"
+        ],
+        answer: 0,
+        hint: "César a fait creuser des fossés géants et dresser des palissades tout autour d'Alésia : un siège impitoyable !"
+      },
+      {
+        question: "Comment appelle-t-on le mélange culturel entre Gaulois et Romains après la conquête ?",
+        options: ["La civilisation gallo-romaine", "La civilisation celtique", "La royauté franque", "La féodalité"],
+        answer: 0,
+        hint: "Les Gaulois deviennent des citoyens de l'Empire romain : les Gallo-Romains !"
+      },
+      {
+        question: "Quel monument romain permettait d'acheminer l'eau potable depuis les montagnes jusqu'à la ville ?",
+        options: ["L'aqueduc", "Le viaduc", "Les thermes", "Le cardo"],
+        answer: 0,
+        hint: "Aqua (l'eau) + ducere (conduire) = l'aqueduc !"
+      },
+      {
+        question: "Dans une cité gallo-romaine, où se déroulaient les combats de gladiateurs ?",
+        options: ["Dans l'amphithéâtre (arènes)", "Dans le temple", "Sur le forum", "Dans les thermes"],
+        answer: 0,
+        hint: "L'amphithéâtre ou les arènes (comme à Nîmes ou Arles) accueillaient les jeux et combats !"
+      },
+      {
+        question: "Qu'est-ce que le système de l'hypocauste dans les thermes romains ?",
+        options: [
+          "Un système de chauffage sous le plancher avec des briques et de l'air chaud",
+          "Une piscine d'eau glacée",
+          "Un réservoir d'eau de pluie",
+          "Une statue sacrée"
+        ],
+        answer: 0,
+        hint: "L'air chaud circulait sous les dalles du sol pour chauffer le caldarium : l'ancêtre du chauffage au sol !"
+      },
+      {
+        question: "Quelle langue adoptent les Gaulois après la conquête romaine ?",
+        options: ["Le latin", "Le grec ancien", "L'anglais", "L'arabe"],
+        answer: 0,
+        hint: "Le latin, langue des Romains, qui donnera plus tard naissance à l'ancien français !"
+      }
+    ];
+
 
     // A. SIMULATEUR GLISSE-NOMBRE MHM
     let currentGlisseValue = 3.45;
@@ -13162,6 +14152,119 @@
     ];
 
     const DICTEE_SERIES_DATA = {
+      7: {
+        number: 7,
+        weekTitle: "Persée et Méduse (Mythologie grecque)",
+        shortBadge: "⚔️ Thème : Persée et Méduse (Mythologie)",
+        themeEmoji: "⚔️",
+        borderColor: "#0284c7",
+        bgColor: "#f0f9ff",
+        titleColor: "#0369a1",
+        badgeBg: "#e0f2fe",
+        badgeColor: "#0284c7",
+        reperes: {
+          titre: "Persée et Méduse (La légende de la Gorgone)",
+          qui: "Persée (fils de Zeus), Méduse (la Gorgone) & la déesse Athéna",
+          lieu: "Grèce antique / L'île lointaine des Gorgones",
+          quand: "Antiquité (- VIIIe siècle av. J.-C.)",
+          domaine: "Mythologie grecque & Récit légendaire"
+        },
+        image: "images/dictee7_persee.png",
+        noms: [
+          "une tête", "la mère", "une créature", "le cheveu / les cheveux", "le serpent",
+          "la pierre", "un dieu / des dieux", "un conseil", "un objet", "une sandale",
+          "la montagne", "le casque", "un bouclier", "le reflet"
+        ],
+        verbes: [
+          "apporter", "épouser", "regarder", "devoir", "donner", "rejoindre",
+          "se coiffer", "habiter", "être", "pouvoir", "risquer", "bondir"
+        ],
+        adjectifs: [
+          "monstrueux / monstrueuse", "vivant", "magique", "ailé", "invisible",
+          "terrible", "pétrifié"
+        ],
+        invariables: [
+          "celui-ci", "dont", "aussitôt", "avec", "puis", "afin de", "dans",
+          "sans", "sur", "soudain"
+        ],
+        tableRows: [
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            colorClass: "col-noms",
+            label: "NOMS",
+            jaune: "une tête, la mère, la pierre",
+            vert: "une créature, le serpent, un objet, la montagne",
+            violet: "les cheveux, un conseil, une sandale, le casque, un bouclier",
+            or: "des dieux, le reflet"
+          },
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            colorClass: "col-verbes",
+            label: "VERBES",
+            jaune: "habiter, être",
+            vert: "apporter, regarder, donner",
+            violet: "épouser, devoir, rejoindre, se coiffer",
+            or: "pouvoir, risquer, bondir"
+          },
+          {
+            levels: ["vert", "violet", "or"],
+            colorClass: "col-adj",
+            label: "ADJECTIFS",
+            jaune: "—",
+            vert: "vivant, terrible",
+            violet: "magique, invisible",
+            or: "monstrueux / monstrueuse, ailé, pétrifié"
+          },
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            colorClass: "col-inv",
+            label: "INVARIABLES",
+            jaune: "avec, dans, sur",
+            vert: "puis, sans",
+            violet: "dont, soudain, celui-ci",
+            or: "aussitôt, afin de"
+          }
+        ],
+        oralBank: [
+          {
+            id: 1,
+            level: "Phrase 1",
+            text: "Persée veut sauver sa mère dont le roi cruel exige le mariage.",
+            hint: "Attention à 'dont' (mot invariable) et à l'accord de 'cruel' avec le roi."
+          },
+          {
+            id: 2,
+            level: "Phrase 2",
+            text: "Les dieux bienveillants lui apportent de précieux conseils et des objets magiques.",
+            hint: "Accorde 'dieux', 'bienveillants', 'précieux' (-x invariable) et 'magiques' (-s au pluriel)."
+          },
+          {
+            id: 3,
+            level: "Phrase 3",
+            text: "Avec le casque invisible et les sandales ailées, le jeune héros rejoint la montagne.",
+            hint: "'sandales ailées' : féminin pluriel (-ées) ! 'rejoint' avec un t final (rejoindre)."
+          },
+          {
+            id: 4,
+            level: "Phrase 4",
+            text: "Méduse est une créature monstrueuse qui se coiffe de serpents vivants.",
+            hint: "'monstrueuse' : féminin de monstrueux. 'serpents vivants' : pluriel avec -s."
+          },
+          {
+            id: 5,
+            level: "Phrase 5",
+            text: "Sans la regarder directement, Persée observe son reflet dans son bouclier afin de ne pas être pétrifié.",
+            hint: "'regarder' à l'infinitif après 'sans'. 'pétrifié' participe passé avec accent aigu (-é)."
+          },
+          {
+            id: 6,
+            level: "Bilan Complet",
+            text: "Aussitôt, le héros bondit soudain sur la créature et tranche sa tête sans risquer sa vie.",
+            hint: "'Aussitôt' avec circonflexe sur le o et deux s. 'bondit' au présent avec un t."
+          }
+        ]
+      },
+
       6: {
         number: 6,
         weekTitle: "La Trahison des images (René Magritte)",
@@ -13488,7 +14591,7 @@
       }
 
       // Recharger le Quiz d'entraînement des mots pour cette série
-      const questions = (num === 6 && typeof allDicteeMotsQuestionsS6 !== 'undefined') ? allDicteeMotsQuestionsS6 : ((num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 : (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions));
+      const questions = (num === 7 && typeof allDicteeMotsQuestionsS7 !== 'undefined') ? allDicteeMotsQuestionsS7 : ((num === 6 && typeof allDicteeMotsQuestionsS6 !== 'undefined') ? allDicteeMotsQuestionsS6 : ((num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 : (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions)));
       if (typeof QuizRunner !== 'undefined') {
         new QuizRunner('quiz-container-dictee-mots', questions, {
           title: `Mots de la Dictée — Série ${num}`,
@@ -14483,6 +15586,70 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
     // =========================================================================
 
     // 1. FRANÇAIS - DICTÉE SÉRIE 6 : MAGRITTE & LA TRAHISON DES IMAGES (8 questions)
+    
+    const allDicteeMotsQuestionsS7 = [
+      {
+        question: "Quel est le féminin correct de l'adjectif « monstrueux » ?",
+        options: ["monstrueuse", "monstrueusse", "monstrueuxse", "monstrueuze"],
+        answer: 0,
+        hint: "Les adjectifs en -eux font généralement leur féminin en -euse (heureux ➔ heureuse, monstrueux ➔ monstrueuse)."
+      },
+      {
+        question: "Comment s'écrit le pluriel du nom « cheveu » ?",
+        options: ["des cheveux", "des cheveus", "des cheveuz", "des cheveu"],
+        answer: 0,
+        hint: "Les noms en -eu prennent un -x au pluriel (un cheveu ➔ des cheveux, un jeu ➔ des jeux)."
+      },
+      {
+        question: "Dans « des dieux bienveillants », quelle est la bonne terminaison du mot « dieux » ?",
+        options: ["-x", "-s", "-z", "-ts"],
+        answer: 0,
+        hint: "Le pluriel de « dieu » est « dieux » avec un x !"
+      },
+      {
+        question: "Comment s'écrit correctement le mot invariable signifiant « immédiatement » ?",
+        options: ["aussitôt", "aussitot", "ossitôt", "aussitôtte"],
+        answer: 0,
+        hint: "« aussitôt » prend deux 's' pour le son [s] entre deux voyelles et un accent circonflexe sur le 'ô' !"
+      },
+      {
+        question: "Dans la phrase « Sans la ________ directement », quelle forme du verbe « regarder » faut-il employer ?",
+        options: ["regarder", "regardé", "regardez", "regardait"],
+        answer: 0,
+        hint: "Après une préposition comme « sans », « pour », « de », « à », le verbe est toujours à l'INFINITIF (-er) !"
+      },
+      {
+        question: "Quelle est l'orthographe correcte de l'adjectif « ailé » accordé avec « des sandales » ?",
+        options: ["des sandales ailées", "des sandales ailés", "des sandales aillées", "des sandales ailée"],
+        answer: 0,
+        hint: "« sandale » est féminin. Au pluriel : féminin pluriel ➔ « ailées » (un seul 'l', -ées)."
+      },
+      {
+        question: "Dans « Persée observe son reflet afin de ne pas être ________ », comment écrire ce participe passé ?",
+        options: ["pétrifié", "pétrifier", "pétrifiée", "pétrifiés"],
+        answer: 0,
+        hint: "Persée est masculin singulier : avec l'auxiliaire être, le participe passé prend un simple -é !"
+      },
+      {
+        question: "Quel mot invariable relie la proposition : « sa mère _____ le roi cruel exige le mariage » ?",
+        options: ["dont", "d'on", "donc", "d'ont"],
+        answer: 0,
+        hint: "« dont » est un pronom relatif invariable (qui remplace 'de laquelle')."
+      },
+      {
+        question: "Comment se conjugue le verbe « bondir » avec le sujet « le héros » au présent ?",
+        options: ["bondit", "bondi", "bondis", "bondisse"],
+        answer: 0,
+        hint: "C'est un verbe du 2e groupe : il bondit (terminaison -it avec il/le héros)."
+      },
+      {
+        question: "Quelle est la bonne orthographe du mot désignant l'armure de protection pour la tête ?",
+        options: ["le casque", "le chasque", "le kask", "le casqe"],
+        answer: 0,
+        hint: "« casque » s'écrit avec un 'c' initial et 'que' à la fin !"
+      }
+    ];
+
     const allDicteeMotsQuestionsS6 = [
       {
         display: "Orthographe de la liste officielle : Comment s'écrit le mot désignant une annonce commerciale ?",
@@ -24041,6 +25208,27 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     selectDicteeSeries(6);
 
     // Initialisation des Nouveaux Modules Padlet (Novembre & Octobre)
+    
+    // Nouveaux Quiz du 13 Novembre 2026 : Valeurs du Présent, Contenances & Gallo-Romains
+    if (typeof allValeursPresentQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-valeurs-present', allValeursPresentQuestions, {
+        title: "Défis : Les 4 Valeurs du Présent",
+        subjectKey: "francais"
+      });
+    }
+    if (typeof allContenancesQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-contenances', allContenancesQuestions, {
+        title: "Défis : Les Contenances (L, dL, cL, mL)",
+        subjectKey: "maths"
+      });
+    }
+    if (typeof allGalloRomainsQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-gallo-romains', allGalloRomainsQuestions, {
+        title: "Défis : La Gaule Romaine & Alésia",
+        subjectKey: "histoire"
+      });
+    }
+    
     new QuizRunner('quiz-container-grammaire-g3', allGrammaireG3Questions, { title: "G3 : Complément du Nom vs Adjectif", subjectKey: "francais" });
     new QuizRunner('quiz-container-conjugaison-c2', allConjugaisonC2Questions, { title: "C2 : Ring des 8 Verbes Clés", subjectKey: "francais" });
     new QuizRunner('quiz-container-autodictee', allAutodicteeQuestions, { title: "Autodictée 1 : Trésors du Patrimoine", subjectKey: "francais" });
