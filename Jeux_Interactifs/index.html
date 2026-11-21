@@ -13650,64 +13650,64 @@
 
     const allContenancesQuestions = [
       {
-        question: "Combien y a-t-il de centilitres (cL) dans 1 Litre (1 L) ?",
+        display: "Combien y a-t-il de centilitres (cL) dans 1 Litre (1 L) ?",
         options: ["100 cL", "10 cL", "1 000 cL", "50 cL"],
-        answer: 0,
-        hint: "Pense au préfixe 'centi' comme dans centimètre : 1 L = 100 cL !"
+        correct: "100 cL",
+        tip: "Pense au préfixe 'centi' comme dans centimètre : 1 L = 100 cL !"
       },
       {
-        question: "Une bouteille d'eau classique contient 1,5 L. Combien cela fait-il en cL ?",
+        display: "Une bouteille d'eau classique contient 1,5 L. Combien cela fait-il en cL ?",
         options: ["150 cL", "15 cL", "1 500 cL", "1500 cL"],
-        answer: 0,
-        hint: "1 L = 100 cL et 0,5 L (demi-litre) = 50 cL. 100 + 50 = 150 cL !"
+        correct: "150 cL",
+        tip: "1 L = 100 cL et 0,5 L (demi-litre) = 50 cL. 100 + 50 = 150 cL !"
       },
       {
-        question: "Une canette de soda fait 33 cL. Combien de millilitres (mL) contient-elle ?",
+        display: "Une canette de soda fait 33 cL. Combien de millilitres (mL) contient-elle ?",
         options: ["330 mL", "33 mL", "3,3 mL", "3 300 mL"],
-        answer: 0,
-        hint: "1 cL = 10 mL. Donc 33 cL = 33 × 10 = 330 mL !"
+        correct: "330 mL",
+        tip: "1 cL = 10 mL. Donc 33 cL = 33 × 10 = 330 mL !"
       },
       {
-        question: "Lucie veut remplir une bouteille de 1 L avec des verres de 20 cL. Combien de verres lui faut-il ?",
+        display: "Lucie veut remplir une bouteille de 1 L avec des verres de 20 cL. Combien de verres lui faut-il ?",
         options: ["5 verres", "4 verres", "10 verres", "2 verres"],
-        answer: 0,
-        hint: "1 L = 100 cL. 100 ÷ 20 = 5 verres !"
+        correct: "5 verres",
+        tip: "1 L = 100 cL. 100 ÷ 20 = 5 verres !"
       },
       {
-        question: "Que représente un demi-litre (1/2 L) ?",
+        display: "Que représente un demi-litre (1/2 L) ?",
         options: ["50 cL ou 500 mL", "25 cL ou 250 mL", "5 cL ou 50 mL", "100 cL"],
-        answer: 0,
-        hint: "La moitié de 1 000 mL est 500 mL, soit 50 cL ou 0,5 L !"
+        correct: "50 cL ou 500 mL",
+        tip: "La moitié de 1 000 mL est 500 mL, soit 50 cL ou 0,5 L !"
       },
       {
-        question: "Pour préparer un sirop, Tom verse 250 mL d'eau. Quelle fraction de litre cela représente-t-il ?",
+        display: "Pour préparer un sirop, Tom verse 250 mL d'eau. Quelle fraction de litre cela représente-t-il ?",
         options: ["Un quart de litre (1/4 L)", "Un demi-litre (1/2 L)", "Trois quarts de litre (3/4 L)", "Un dixième (1/10 L)"],
-        answer: 0,
-        hint: "1 000 ÷ 4 = 250 mL, c'est donc un quart de litre (25 cL) !"
+        correct: "Un quart de litre (1/4 L)",
+        tip: "1 000 ÷ 4 = 250 mL, c'est donc un quart de litre (25 cL) !"
       },
       {
-        question: "Compare ces deux capacités : 75 cL et 0,7 L. Quel signe convient ?",
+        display: "Compare ces deux capacités : 75 cL et 0,7 L. Quel signe convient ?",
         options: ["75 cL > 0,7 L", "75 cL < 0,7 L", "75 cL = 0,7 L", "Impossible à comparer"],
-        answer: 0,
-        hint: "Convertis dans la même unité : 0,7 L = 70 cL. Donc 75 cL > 70 cL !"
+        correct: "75 cL > 0,7 L",
+        tip: "Convertis dans la même unité : 0,7 L = 70 cL. Donc 75 cL > 70 cL !"
       },
       {
-        question: "Une cuillère à café contient environ 5 mL de sirop. Combien de cuillères font 1 cL ?",
+        display: "Une cuillère à café contient environ 5 mL de sirop. Combien de cuillères font 1 cL ?",
         options: ["2 cuillères", "1 cuillère", "5 cuillères", "10 cuillères"],
-        answer: 0,
-        hint: "1 cL = 10 mL. 10 mL ÷ 5 mL = 2 cuillères !"
+        correct: "2 cuillères",
+        tip: "1 cL = 10 mL. 10 mL ÷ 5 mL = 2 cuillères !"
       },
       {
-        question: "Un seau contient 1 décalitre (1 daL). Combien de litres d'eau cela fait-il ?",
+        display: "Un seau contient 1 décalitre (1 daL). Combien de litres d'eau cela fait-il ?",
         options: ["10 L", "100 L", "1 L", "0,1 L"],
-        answer: 0,
-        hint: "Le préfixe 'déca' signifie 10 fois l'unité : 1 daL = 10 L !"
+        correct: "10 L",
+        tip: "Le préfixe 'déca' signifie 10 fois l'unité : 1 daL = 10 L !"
       },
       {
-        question: "Une baignoire contient 1,8 hectolitre (1,8 hL). Combien de litres d'eau cela représente-t-il ?",
+        display: "Une baignoire contient 1,8 hectolitre (1,8 hL). Combien de litres d'eau cela représente-t-il ?",
         options: ["180 L", "18 L", "1 800 L", "18 000 L"],
-        answer: 0,
-        hint: "1 hL = 100 L. Donc 1,8 × 100 = 180 Litres !"
+        correct: "180 L",
+        tip: "1 hL = 100 L. Donc 1,8 × 100 = 180 Litres !"
       }
     ];
 
@@ -13767,69 +13767,69 @@
 
     const allValeursPresentQuestions = [
       {
-        question: "Dans « Ils dînent vers 19 heures tous les soirs », quelle est la valeur du verbe « dînent » ?",
+        display: "Dans « Ils dînent vers 19 heures tous les soirs », quelle est la valeur du verbe « dînent » ?",
         options: ["Présent d'habitude", "Présent de vérité générale", "Présent d'actualité", "Présent historique"],
-        answer: 0,
-        hint: "« Tous les soirs » indique une action qui se répète régulièrement : c'est une habitude !"
+        correct: "Présent d'habitude",
+        tip: "« Tous les soirs » indique une action qui se répète régulièrement : c'est une habitude !"
       },
       {
-        question: "Dans « La Terre tourne autour du Soleil », pourquoi utilise-t-on le présent ?",
+        display: "Dans « La Terre tourne autour du Soleil », pourquoi utilise-t-on le présent ?",
         options: ["Pour exprimer une vérité générale / scientifique", "Pour raconter une habitude", "Parce que cela se passe maintenant uniquement", "C'est un présent historique"],
-        answer: 0,
-        hint: "C'est une vérité scientifique qui est toujours vraie : le présent de vérité générale !"
+        correct: "Pour exprimer une vérité générale / scientifique",
+        tip: "C'est une vérité scientifique qui est toujours vraie : le présent de vérité générale !"
       },
       {
-        question: "Dans « Au Moyen Âge, les seigneurs vivent dans des châteaux forts », quelle est la valeur du présent ?",
+        display: "Dans « Au Moyen Âge, les seigneurs vivent dans des châteaux forts », quelle est la valeur du présent ?",
         options: ["Présent de narration / historique", "Présent d'actualité", "Présent d'habitude", "Présent de vérité générale"],
-        answer: 0,
-        hint: "L'auteur décrit des événements du passé (Moyen Âge) au présent pour rendre le texte vivant."
+        correct: "Présent de narration / historique",
+        tip: "L'auteur décrit des événements du passé (Moyen Âge) au présent pour rendre le texte vivant."
       },
       {
-        question: "Dans « Silence, le bébé s'endort enfin ! », quelle est la valeur du présent ?",
+        display: "Dans « Silence, le bébé s'endort enfin ! », quelle est la valeur du présent ?",
         options: ["Présent d'actualité (d'énonciation)", "Présent de vérité générale", "Présent d'habitude", "Présent de narration"],
-        answer: 0,
-        hint: "L'action a lieu au moment précis où la personne s'exprime."
+        correct: "Présent d'actualité (d'énonciation)",
+        tip: "L'action a lieu au moment précis où la personne s'exprime."
       },
       {
-        question: "Dans « Les chats n'ont jamais su nager », de quel présent s'agit-il ?",
-        options: ["Présent de vérité générale", "Présent d'habitude", "Présent d'actualité", "Présent historique"],
-        answer: 0,
-        hint: "C'est une caractéristique constante de la nature des félins, toujours vraie !"
+        display: "Dans « Les chats n'ont jamais su nager », de quel présent s'agit-il ?",
+        options: ["Présent de vérité générale", "Présent d'actualité", "Présent d'habitude", "Présent historique"],
+        correct: "Présent de vérité générale",
+        tip: "C'est une caractéristique constante et générale de cette espèce animale."
       },
       {
-        question: "Dans « Chaque samedi matin, Paul range sa chambre », quelle est la valeur du présent ?",
+        display: "Dans « Chaque samedi matin, Paul range sa chambre », quelle est la valeur du verbe « range » ?",
         options: ["Présent d'habitude", "Présent d'actualité", "Présent historique", "Présent de vérité générale"],
-        answer: 0,
-        hint: "« Chaque samedi matin » marque une régularité et une habitude !"
+        correct: "Présent d'habitude",
+        tip: "« Chaque samedi matin » marque une régularité et une habitude !"
       },
       {
-        question: "Dans « En 1889, Gustave Eiffel inaugure sa tour », pourquoi emploie-t-on « inaugure » au présent ?",
+        display: "Dans « En 1889, Gustave Eiffel inaugure sa tour », pourquoi emploie-t-on « inaugure » au présent ?",
         options: ["Pour donner du dynamisme à un récit historique passé", "Parce que Gustave Eiffel est vivant aujourd'hui", "C'est une habitude d'Eiffel", "C'est une loi de la science"],
-        answer: 0,
-        hint: "C'est le présent de narration (ou historique), très utilisé dans les manuels d'histoire !"
+        correct: "Pour donner du dynamisme à un récit historique passé",
+        tip: "C'est le présent de narration (ou historique), très utilisé dans les manuels d'histoire !"
       },
       {
-        question: "Dans le proverbe « Qui sème le vent récolte la tempête », quelle est la valeur du présent ?",
+        display: "Dans le proverbe « Qui sème le vent récolte la tempête », quelle est la valeur du présent ?",
         options: ["Présent de vérité générale (maxime / proverbe)", "Présent d'actualité", "Présent d'habitude", "Présent de narration"],
-        answer: 0,
-        hint: "Les proverbes et maximes s'expriment toujours au présent de vérité générale !"
+        correct: "Présent de vérité générale (maxime / proverbe)",
+        tip: "Les proverbes et maximes s'expriment toujours au présent de vérité générale !"
       },
       {
-        question: "Dans « Attends-moi, j'arrive dans deux minutes ! », quelle nuance particulière du présent retrouve-t-on ?",
+        display: "Dans « Attends-moi, j'arrive dans deux minutes ! », quelle nuance particulière du présent retrouve-t-on ?",
         options: ["Un futur proche / immédiat", "Un présent historique", "Une vérité générale", "Une habitude ancienne"],
-        answer: 0,
-        hint: "Le verbe au présent exprime une action qui va se produire immédiatement dans un futur proche !"
+        correct: "Un futur proche / immédiat",
+        tip: "Le verbe au présent exprime une action qui va se produire immédiatement dans un futur proche !"
       },
       {
-        question: "Laquelle de ces phrases contient un présent de VÉRITÉ GÉNÉRALE ?",
+        display: "Laquelle de ces phrases contient un présent de VÉRITÉ GÉNÉRALE ?",
         options: [
           "Deux et deux font quatre.",
           "Je mange une glace à la vanille.",
           "Tous les mercredis, je fais du vélo.",
           "En 1789, le peuple prend la Bastille."
         ],
-        answer: 0,
-        hint: "« Deux et deux font quatre » est une vérité mathématique absolue !"
+        correct: "Deux et deux font quatre.",
+        tip: "« Deux et deux font quatre » est une vérité mathématique absolue !"
       }
     ];
 
@@ -13895,62 +13895,62 @@
 
     const allGalloRomainsQuestions = [
       {
-        question: "En quelle année avant J.-C. a eu lieu la célèbre Bataille d'Alésia ?",
+        display: "En quelle année avant J.-C. a eu lieu la célèbre Bataille d'Alésia ?",
         options: ["En 52 avant J.-C.", "En 800 après J.-C.", "En 1515", "En 44 avant J.-C."],
-        answer: 0,
-        hint: "C'est au Ier siècle avant notre ère : 52 av. J.-C. !"
+        correct: "En 52 avant J.-C.",
+        tip: "C'est au Ier siècle avant notre ère : 52 av. J.-C. !"
       },
       {
-        question: "Qui est le jeune chef arverne qui a unifié les tribus gauloises face aux Romains ?",
+        display: "Qui est le jeune chef arverne qui a unifié les tribus gauloises face aux Romains ?",
         options: ["Vercingétorix", "Astérix", "Clovis", "Charlemagne"],
-        answer: 0,
-        hint: "Vercingétorix a réussi à rassembler les peuples gaulois pour résister à César."
+        correct: "Vercingétorix",
+        tip: "Vercingétorix a réussi à rassembler les peuples gaulois pour résister à César."
       },
       {
-        question: "Comment Jules César a-t-il réussi à vaincre les Gaulois retranchés à Alésia ?",
+        display: "Comment Jules César a-t-il réussi à vaincre les Gaulois retranchés à Alésia ?",
         options: [
           "En construisant une double ligne de fortifications pour les affamer",
           "En incendiant la forêt tout autour",
           "En attaquant immédiatement le premier jour",
           "En négociant un traité de paix"
         ],
-        answer: 0,
-        hint: "César a fait creuser des fossés géants et dresser des palissades tout autour d'Alésia : un siège impitoyable !"
+        correct: "En construisant une double ligne de fortifications pour les affamer",
+        tip: "César a fait creuser des fossés géants et dresser des palissades tout autour d'Alésia : un siège impitoyable !"
       },
       {
-        question: "Comment appelle-t-on le mélange culturel entre Gaulois et Romains après la conquête ?",
+        display: "Comment appelle-t-on le mélange culturel entre Gaulois et Romains après la conquête ?",
         options: ["La civilisation gallo-romaine", "La civilisation celtique", "La royauté franque", "La féodalité"],
-        answer: 0,
-        hint: "Les Gaulois deviennent des citoyens de l'Empire romain : les Gallo-Romains !"
+        correct: "La civilisation gallo-romaine",
+        tip: "Les Gaulois deviennent des citoyens de l'Empire romain : les Gallo-Romains !"
       },
       {
-        question: "Quel monument romain permettait d'acheminer l'eau potable depuis les montagnes jusqu'à la ville ?",
+        display: "Quel monument romain permettait d'acheminer l'eau potable depuis les montagnes jusqu'à la ville ?",
         options: ["L'aqueduc", "Le viaduc", "Les thermes", "Le cardo"],
-        answer: 0,
-        hint: "Aqua (l'eau) + ducere (conduire) = l'aqueduc !"
+        correct: "L'aqueduc",
+        tip: "Aqua (l'eau) + ducere (conduire) = l'aqueduc !"
       },
       {
-        question: "Dans une cité gallo-romaine, où se déroulaient les combats de gladiateurs ?",
+        display: "Dans une cité gallo-romaine, où se déroulaient les combats de gladiateurs ?",
         options: ["Dans l'amphithéâtre (arènes)", "Dans le temple", "Sur le forum", "Dans les thermes"],
-        answer: 0,
-        hint: "L'amphithéâtre ou les arènes (comme à Nîmes ou Arles) accueillaient les jeux et combats !"
+        correct: "Dans l'amphithéâtre (arènes)",
+        tip: "L'amphithéâtre ou les arènes (comme à Nîmes ou Arles) accueillaient les jeux et combats !"
       },
       {
-        question: "Qu'est-ce que le système de l'hypocauste dans les thermes romains ?",
+        display: "Qu'est-ce que le système de l'hypocauste dans les thermes romains ?",
         options: [
           "Un système de chauffage sous le plancher avec des briques et de l'air chaud",
           "Une piscine d'eau glacée",
           "Un réservoir d'eau de pluie",
           "Une statue sacrée"
         ],
-        answer: 0,
-        hint: "L'air chaud circulait sous les dalles du sol pour chauffer le caldarium : l'ancêtre du chauffage au sol !"
+        correct: "Un système de chauffage sous le plancher avec des briques et de l'air chaud",
+        tip: "L'air chaud circulait sous les dalles du sol pour chauffer le caldarium : l'ancêtre du chauffage au sol !"
       },
       {
-        question: "Quelle langue adoptent les Gaulois après la conquête romaine ?",
+        display: "Quelle langue adoptent les Gaulois après la conquête romaine ?",
         options: ["Le latin", "Le grec ancien", "L'anglais", "L'arabe"],
-        answer: 0,
-        hint: "Le latin, langue des Romains, qui donnera plus tard naissance à l'ancien français !"
+        correct: "Le latin",
+        tip: "Le latin, langue des Romains, qui donnera plus tard naissance à l'ancien français !"
       }
     ];
 
@@ -14372,10 +14372,27 @@
       initSeries() {
         this.currentIndex = 0;
         this.correctCount = 0;
-        this.questions = shuffleArray(this.rawQuestions).map(q => ({
-          ...q,
-          options: shuffleArray(q.options)
-        }));
+        this.questions = shuffleArray(this.rawQuestions).map(q => {
+          const display = q.display || q.question || "";
+          let correct = q.correct;
+          if (correct === undefined) {
+            if (typeof q.answer === 'number' && q.options && q.options[q.answer] !== undefined) {
+              correct = q.options[q.answer];
+            } else if (typeof q.answer === 'string') {
+              correct = q.answer;
+            } else if (q.options && q.options.length > 0) {
+              correct = q.options[0];
+            }
+          }
+          const tip = q.tip || q.hint || q.explication || "";
+          return {
+            ...q,
+            display,
+            correct,
+            tip,
+            options: shuffleArray(q.options ? [...q.options] : [])
+          };
+        });
         this.render();
       }
 
