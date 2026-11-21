@@ -8930,30 +8930,325 @@
       <!-- ========================================================= -->
       <!-- HISTOIRE / GÉO SUBMODULE : LE GLOBE & LE PLANISPHÈRE -->
       <!-- ========================================================= -->
+      <!-- ========================================================= -->
+      <!-- HISTOIRE / GÉO SUBMODULE : LE GLOBE & LE PLANISPHÈRE -->
+      <!-- ========================================================= -->
       <div id="sub-histoire-geo_globe" class="submodule-content">
-        <!-- Bandeau Flash Tuteur : Géographie Globe & Planisphère -->
-        <div class="tutor-flash-card" style="border-left: 6px solid #0284c7; background: #f0f9ff;">
+        <!-- Navigation d'accès rapide -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px;">
+          <a href="#section-globe-3d" class="action-btn" style="background: #0284c7; color: #ffffff; text-decoration: none; padding: 8px 16px; font-size: 0.9rem; border-color: #0369a1; font-weight: 700;">
+            🌍 1. Globe 3D Interactif
+          </a>
+          <a href="#section-quizz-visuel" class="action-btn" style="background: #0d9488; color: #ffffff; text-decoration: none; padding: 8px 16px; font-size: 0.9rem; border-color: #0f766e; font-weight: 700;">
+            🗺️ 2. Quizz Visuel : Continents & Océans
+          </a>
+          <a href="#section-lecon-geo" class="action-btn" style="background: #f59e0b; color: #ffffff; text-decoration: none; padding: 8px 16px; font-size: 0.9rem; border-color: #d97706; font-weight: 700;">
+            📖 3. Fiche Mémo & Repères
+          </a>
+          <a href="#section-qcm-geo" class="action-btn" style="background: #7c3aed; color: #ffffff; text-decoration: none; padding: 8px 16px; font-size: 0.9rem; border-color: #6d28d9; font-weight: 700;">
+            ⚡ 4. Défi Élite QCM (8 Questions)
+          </a>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- SECTION 1 : LE GLOBE TERRESTRE 3D INTERACTIF -->
+        <!-- ======================================================= -->
+        <div id="section-globe-3d" style="background: linear-gradient(135deg, #f0fdfa, #e0f2fe); border: 2.5px solid var(--ink); border-radius: 18px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-comic);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #0284c7; color: #ffffff; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase;">
+                🌍 OBSERVATION 3D SANS DÉFORMATION
+              </div>
+              <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: #0369a1; margin-top: 4px;">
+                Le Globe Terrestre Interactif en 3D
+              </h2>
+              <p style="font-size: 0.9rem; color: var(--ink-light); margin-top: 2px;">
+                Fais tourner la Terre avec ta souris ou ton doigt dans toutes les directions ! Clique sur un continent ou un océan pour explorer ses secrets.
+              </p>
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="action-btn" onclick="toggleGlobeAutoRotate()" id="btnGlobeAutoRotate" style="background: #ffffff; color: var(--ink); border-color: var(--ink); padding: 6px 12px; font-size: 0.82rem; font-weight: 700;">
+                🔄 Rotation Auto : OFF
+              </button>
+              <button class="action-btn" onclick="resetGlobeView()" style="background: #0284c7; color: #ffffff; border-color: #0369a1; padding: 6px 12px; font-size: 0.82rem; font-weight: 700;">
+                🧭 Recentrer (France)
+              </button>
+            </div>
+          </div>
+
+          <!-- Conteneur principal 2 colonnes : Globe à gauche / Fiche à droite -->
+          <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: stretch;">
+            
+            <!-- Colonne Gauche : Le Globe 3D et ses manettes -->
+            <div style="flex: 1 1 420px; min-width: 300px; display: flex; flex-direction: column; align-items: center; background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-comic-sm);">
+              
+              <!-- Canvas du Globe -->
+              <div style="position: relative; width: 100%; max-width: 380px; aspect-ratio: 1/1; display: flex; justify-content: center; align-items: center;">
+                <canvas id="geoGlobeCanvas" width="460" height="460" style="width: 100%; height: 100%; display: block; border-radius: 50%; cursor: grab; touch-action: none; background: radial-gradient(circle, #38bdf8 0%, #0284c7 60%, #0f172a 100%); box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 0 10px 25px rgba(2,132,199,0.35);"></canvas>
+                <div id="globeCenterHud" style="position: absolute; bottom: 8px; background: rgba(15, 23, 42, 0.75); color: #ffffff; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; pointer-events: none; backdrop-filter: blur(4px);">
+                  Vue : Europe & Afrique (15°E, 20°N)
+                </div>
+              </div>
+
+              <!-- D-Pad & Manettes de rotation -->
+              <div style="margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                <button class="action-btn" onclick="stepGlobeRotation(0, 15)" title="Incliner vers le Nord" style="padding: 4px 14px; font-size: 0.82rem; background: #f8fafc; color: var(--ink);">▲ Nord</button>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <button class="action-btn" onclick="stepGlobeRotation(-20, 0)" title="Tourner vers l'Ouest" style="padding: 4px 14px; font-size: 0.82rem; background: #f8fafc; color: var(--ink);">◀ Ouest</button>
+                  <span style="font-size: 0.76rem; font-weight: 800; color: var(--ink-light); padding: 0 4px;">GLISSER POUR TOURNER</span>
+                  <button class="action-btn" onclick="stepGlobeRotation(20, 0)" title="Tourner vers l'Est" style="padding: 4px 14px; font-size: 0.82rem; background: #f8fafc; color: var(--ink);">▶ Est</button>
+                </div>
+                <button class="action-btn" onclick="stepGlobeRotation(0, -15)" title="Incliner vers le Sud" style="padding: 4px 14px; font-size: 0.82rem; background: #f8fafc; color: var(--ink);">▼ Sud</button>
+              </div>
+
+              <!-- Boutons de Vues Rapides -->
+              <div style="margin-top: 14px; width: 100%; border-top: 1.5px dashed #cbd5e1; padding-top: 12px;">
+                <div style="font-size: 0.78rem; font-weight: 800; color: #0369a1; margin-bottom: 6px; text-transform: uppercase;">
+                  🎯 Vues Rapides par Continent :
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button class="action-btn" onclick="rotateGlobeTo(15, 20, 'europe')" style="padding: 4px 8px; font-size: 0.78rem; background: #ecfdf5; border-color: #059669; color: #065f46;">🇪🇺 Europe</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(20, 5, 'afrique')" style="padding: 4px 8px; font-size: 0.78rem; background: #fff7ed; border-color: #ea580c; color: #9a3412;">🐘 Afrique</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(90, 35, 'asie')" style="padding: 4px 8px; font-size: 0.78rem; background: #fefce8; border-color: #ca8a04; color: #854d0e;">⛩️ Asie</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(-100, 40, 'amerique_nord')" style="padding: 4px 8px; font-size: 0.78rem; background: #ecfeff; border-color: #0891b2; color: #155e75;">🗽 Amér. Nord</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(-60, -15, 'amerique_sud')" style="padding: 4px 8px; font-size: 0.78rem; background: #f7fee7; border-color: #65a30d; color: #3f6212;">🦙 Amér. Sud</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(135, -25, 'oceanie')" style="padding: 4px 8px; font-size: 0.78rem; background: #fdf2f8; border-color: #db2777; color: #9d174d;">🦘 Océanie</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(0, -85, 'antarctique')" style="padding: 4px 8px; font-size: 0.78rem; background: #f8fafc; border-color: #64748b; color: #334155;">🐧 Pôle Sud</button>
+                  <button class="action-btn" onclick="rotateGlobeTo(0, 85, 'arctique')" style="padding: 4px 8px; font-size: 0.78rem; background: #f0f9ff; border-color: #0284c7; color: #075985;">❄️ Pôle Nord</button>
+                </div>
+              </div>
+
+              <!-- Options de calques -->
+              <div style="margin-top: 10px; display: flex; gap: 12px; font-size: 0.78rem; font-weight: 700; color: var(--ink-light); flex-wrap: wrap;">
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                  <input type="checkbox" id="chkGlobeLines" checked onchange="drawGlobe()"> Lignes (Équateur, Tropiques, Pôles)
+                </label>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                  <input type="checkbox" id="chkGlobeLabels" checked onchange="drawGlobe()"> Étiquettes
+                </label>
+              </div>
+
+            </div>
+
+            <!-- Colonne Droite : Fiche Découverte & Exploration -->
+            <div style="flex: 1 1 360px; min-width: 290px; background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 18px; box-shadow: var(--shadow-comic-sm); display: flex; flex-direction: column;">
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 12px;">
+                <span style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0369a1;">
+                  🔍 Fiche Découverte Interactive
+                </span>
+                <button class="action-btn" onclick="speakCurrentGeoFeature()" title="Écouter la fiche" style="background: #fef08a; color: var(--ink); border-color: #ca8a04; padding: 4px 10px; font-size: 0.8rem; font-weight: 800;">
+                  🎙️ Écouter
+                </button>
+              </div>
+
+              <!-- Sélecteur rapide -->
+              <div style="margin-bottom: 12px;">
+                <label for="geoFeatureSelect" style="font-size: 0.8rem; font-weight: 800; color: var(--ink-light); display: block; margin-bottom: 4px;">
+                  CHOISIR UN CONTINENT OU UN OCÉAN :
+                </label>
+                <select id="geoFeatureSelect" onchange="selectGeoFeature(this.value)" style="width: 100%; padding: 8px 12px; font-size: 0.9rem; font-weight: 700; border: 2px solid var(--ink); border-radius: 8px; background: #f8fafc; color: var(--ink);">
+                  <optgroup label="🌍 Les 7 Continents">
+                    <option value="europe" selected>🏰 Europe (La France s'y trouve)</option>
+                    <option value="afrique">🐘 Afrique (Le Sahara et le Nil)</option>
+                    <option value="asie">⛩️ Asie (Le plus grand et plus peuplé)</option>
+                    <option value="amerique_nord">🗽 Amérique du Nord (Canada, USA, Mexique)</option>
+                    <option value="amerique_sud">🦙 Amérique du Sud (L'Amazone et les Andes)</option>
+                    <option value="oceanie">🦘 Océanie (Australie et milliers d'îles)</option>
+                    <option value="antarctique">🐧 Antarctique (Le continent blanc glaciaire)</option>
+                  </optgroup>
+                  <optgroup label="🌊 Les 5 Océans">
+                    <option value="pacifique">🌊 Océan Pacifique (Le plus vaste)</option>
+                    <option value="atlantique">⛵ Océan Atlantique (Borde la France à l'ouest)</option>
+                    <option value="indien">🌴 Océan Indien (Eaux chaudes au sud de l'Asie)</option>
+                    <option value="arctique">❄️ Océan Arctique (Au pôle Nord)</option>
+                    <option value="austral">🧊 Océan Austral (Entoure l'Antarctique)</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <!-- Carte dynamique de description -->
+              <div id="geoFeatureCardContent" style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+                <!-- Rempli dynamiquement par JS -->
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- SECTION 2 : LE QUIZZ VISUEL SUR LE PLANISPHÈRE -->
+        <!-- ======================================================= -->
+        <div id="section-quizz-visuel" style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 18px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-comic);">
+          
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #0d9488; color: #ffffff; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase;">
+                🎯 JEU VISUEL DE PLACEMENT CM2
+              </div>
+              <h2 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: #0f766e; margin-top: 4px;">
+                Quizz Visuel : Place les Continents et les Océans !
+              </h2>
+              <p style="font-size: 0.9rem; color: var(--ink-light); margin-top: 2px;">
+                Lis la consigne, repère la zone sur le planisphère et clique sur la pastille cible correspondante !
+              </p>
+            </div>
+
+            <!-- Onglets de mode -->
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="action-btn" id="btnModeContinents" onclick="startVisualMapQuiz('continents')" style="background: #0d9488; color: #ffffff; border-color: #0f766e; padding: 6px 12px; font-size: 0.84rem; font-weight: 800;">
+                🌍 Continents (7)
+              </button>
+              <button class="action-btn" id="btnModeOceans" onclick="startVisualMapQuiz('oceans')" style="background: #ffffff; color: #0284c7; border-color: #0284c7; padding: 6px 12px; font-size: 0.84rem; font-weight: 800;">
+                🌊 Océans (5)
+              </button>
+              <button class="action-btn" id="btnModeMixte" onclick="startVisualMapQuiz('mixte')" style="background: #ffffff; color: #7c3aed; border-color: #7c3aed; padding: 6px 12px; font-size: 0.84rem; font-weight: 800;">
+                🌟 Grand Défi (12)
+              </button>
+            </div>
+          </div>
+
+          <!-- Barre de mission & HUD -->
+          <div style="background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 2px solid #0d9488; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span id="mapQuizTargetIcon" style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">📍</span>
+              <div>
+                <div style="font-size: 0.78rem; font-weight: 800; color: #0f766e; text-transform: uppercase;">
+                  MISSION ACTUELLE :
+                </div>
+                <div id="mapQuizPromptText" style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 800; color: #134e4a;">
+                  Clique sur la carte pour placer : <span id="mapQuizTargetName" style="color: #0d9488; text-decoration: underline;">L'AFRIQUE</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <button class="action-btn" onclick="toggleMapQuizHint()" style="background: #fef08a; color: var(--ink); border-color: #ca8a04; padding: 6px 14px; font-size: 0.85rem; font-weight: 800;">
+                💡 Indice
+              </button>
+              <div style="text-align: right;">
+                <div id="mapQuizProgressText" style="font-size: 0.85rem; font-weight: 800; color: #0f766e;">
+                  Question 1 sur 7
+                </div>
+                <div style="font-size: 0.95rem; font-weight: 900; color: #134e4a;" id="mapQuizScoreText">
+                  ⭐ Score : 0 pt
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Encadré d'indice rétractable -->
+          <div id="mapQuizHintBox" style="display: none; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; color: #92400e;">
+            <!-- Rempli dynamiquement -->
+          </div>
+
+          <!-- Message d'alerte / feedback après clic -->
+          <div id="mapQuizFeedbackBox" style="display: none; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 0.92rem; font-weight: 800; text-align: center;"></div>
+
+          <!-- Le Planisphère Interactif SVG -->
+          <div style="width: 100%; border: 2.5px solid var(--ink); border-radius: 14px; overflow: hidden; background: #e0f2fe; box-shadow: var(--shadow-comic-sm); position: relative;">
+            <svg id="geoPlanisphereSvg" viewBox="0 0 800 460" style="width: 100%; height: auto; display: block; user-select: none;">
+              <!-- Fond Océan avec vagues décoratives -->
+              <rect width="800" height="460" fill="#e0f2fe"/>
+              
+              <!-- Grille : Lignes géographiques fondamentales -->
+              <!-- Équateur (0°) -->
+              <line x1="0" y1="230" x2="800" y2="230" stroke="#ea580c" stroke-width="2" stroke-dasharray="6,4"/>
+              <text x="8" y="224" fill="#ea580c" font-size="11" font-weight="800" font-family="'Outfit', sans-serif">ÉQUATEUR (0°)</text>
+              
+              <!-- Tropique du Cancer (23.5° N) -->
+              <line x1="0" y1="168" x2="800" y2="168" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="4,4"/>
+              <text x="8" y="162" fill="#0284c7" font-size="9" font-weight="700" font-family="'Outfit', sans-serif">Tropique du Cancer (23,5° N)</text>
+
+              <!-- Tropique du Capricorne (23.5° S) -->
+              <line x1="0" y1="292" x2="800" y2="292" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="4,4"/>
+              <text x="8" y="286" fill="#0284c7" font-size="9" font-weight="700" font-family="'Outfit', sans-serif">Tropique du Capricorne (23,5° S)</text>
+
+              <!-- Cercle Polaire Arctique (66.5° N) -->
+              <line x1="0" y1="70" x2="800" y2="70" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="8" y="65" fill="#475569" font-size="9" font-weight="700" font-family="'Outfit', sans-serif">Cercle Polaire Arctique (66,5° N)</text>
+
+              <!-- Cercle Polaire Antarctique (66.5° S) -->
+              <line x1="0" y1="390" x2="800" y2="390" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="8" y="385" fill="#475569" font-size="9" font-weight="700" font-family="'Outfit', sans-serif">Cercle Polaire Antarctique (66,5° S)</text>
+
+              <!-- Tracé des Continents (Ligne Claire) -->
+              <!-- Amérique du Nord & Groenland -->
+              <path id="svg-continent-amerique_nord" d="M 80 60 L 140 50 L 180 50 L 220 55 L 270 50 L 260 70 L 230 75 L 240 100 L 210 110 L 230 140 L 220 170 L 190 190 L 175 220 L 160 220 L 160 190 L 130 180 L 115 150 L 90 130 L 70 85 Z M 215 35 L 275 30 L 290 55 L 270 80 L 235 70 Z" fill="#67e8f9" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+              
+              <!-- Amérique du Sud -->
+              <path id="svg-continent-amerique_sud" d="M 185 225 L 225 225 L 260 250 L 295 280 L 275 330 L 245 370 L 225 410 L 210 390 L 215 350 L 200 300 L 180 250 Z" fill="#a3e635" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- Europe -->
+              <path id="svg-continent-europe" d="M 370 170 L 380 140 L 400 125 L 420 110 L 440 90 L 460 90 L 480 100 L 475 125 L 480 160 L 450 170 L 430 180 L 415 185 L 395 190 L 375 190 Z M 380 120 L 400 110 L 395 130 Z M 415 70 L 435 75 L 440 110 L 425 110 Z" fill="#6ee7b7" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- Afrique & Madagascar -->
+              <path id="svg-continent-afrique" d="M 370 200 L 430 195 L 470 215 L 495 250 L 460 300 L 445 350 L 425 380 L 395 340 L 380 290 L 350 260 L 355 225 Z M 480 320 L 490 320 L 485 355 L 475 350 Z" fill="#fed7aa" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- Asie, Japon & Indonésie -->
+              <path id="svg-continent-asie" d="M 480 100 L 530 85 L 600 80 L 700 85 L 740 115 L 700 150 L 680 180 L 640 210 L 600 240 L 580 270 L 565 240 L 540 210 L 500 220 L 475 180 L 480 140 Z M 690 145 L 705 155 L 695 180 Z M 600 280 L 640 285 L 670 295 L 640 310 Z" fill="#fde047" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- Océanie (Australie & Nouvelle-Zélande) -->
+              <path id="svg-continent-oceanie" d="M 630 320 L 710 320 L 730 350 L 715 390 L 670 400 L 635 375 L 625 345 Z M 735 395 L 745 405 L 735 425 Z" fill="#f472b6" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- Antarctique -->
+              <path id="svg-continent-antarctique" d="M 60 440 L 250 430 L 400 435 L 550 430 L 700 440 L 760 455 L 40 455 Z" fill="#ffffff" stroke="#1f1b18" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- Groupe dynamique des cibles cliquables (généré par initVisualMapQuiz) -->
+              <g id="geoMapTargetsGroup"></g>
+            </svg>
+          </div>
+
+          <!-- Écran de victoire festif (masqué au début) -->
+          <div id="mapQuizVictoryBox" style="display: none; margin-top: 16px; background: linear-gradient(135deg, #fefce8, #fef08a); border: 2.5px solid #ca8a04; border-radius: 14px; padding: 20px; text-align: center; box-shadow: var(--shadow-comic);">
+            <div style="font-size: 3rem;">🏆</div>
+            <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: #854d0e; margin: 4px 0;">
+              Félicitations, Géographe Élite !
+            </h3>
+            <p id="mapQuizVictorySummary" style="font-size: 1rem; color: #713f12; margin-bottom: 14px;">
+              Tu as placé tous les repères demandés avec un score parfait !
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+              <button class="action-btn" onclick="restartCurrentMapQuiz()" style="background: #0d9488; color: #ffffff; border-color: #0f766e; padding: 8px 18px; font-weight: 800;">
+                🔄 Rejouer ce mode
+              </button>
+              <button class="action-btn" onclick="startVisualMapQuiz('mixte')" style="background: #7c3aed; color: #ffffff; border-color: #6d28d9; padding: 8px 18px; font-weight: 800;">
+                🌟 Tenter le Grand Défi (12 Repères)
+              </button>
+              <a href="#section-globe-3d" class="action-btn" style="background: #0284c7; color: #ffffff; text-decoration: none; border-color: #0369a1; padding: 8px 18px; font-weight: 800;">
+                🌍 Explorer sur le Globe 3D
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- SECTION 3 : LA LEÇON & REPÈRES CLÉS (LUTIN BAZAR) -->
+        <!-- ======================================================= -->
+        <div id="section-lecon-geo" class="tutor-flash-card" style="border-left: 6px solid #0284c7; background: #f0f9ff; margin-bottom: 20px;">
           <div class="tutor-flash-header">
-            <span class="tutor-flash-title" style="color: #0369a1;">🌍 Géographie CM2 : Le Globe Terrestre et le Planisphère</span>
+            <span class="tutor-flash-title" style="color: #0369a1;">📖 Fiche Mémo Géographie CM2 : Le Globe Terrestre et le Planisphère</span>
             <span style="font-size: 0.8rem; font-weight: 800; color: #0369a1; background: #e0f2fe; padding: 2px 8px; border-radius: 6px;">Lutin Bazar S1 & S2 • Padlet 15-18 Nov</span>
           </div>
           <div class="tutor-flash-grid">
             <div class="tutor-flash-item gold" style="border-color: #0284c7; background: #ffffff;">
               <span class="tutor-flash-label" style="color: #0369a1;">🎯 Globe vs Planisphère</span>
-              <span>Le <strong>globe</strong> est une sphère 3D fidèle sans déformation. Le <strong>planisphère</strong> est une représentation à plat en 2D pour tout voir d'un coup d'œil.</span>
+              <span>Le <strong>globe</strong> est une sphère 3D fidèle sans déformation des distances et surfaces. Le <strong>planisphère</strong> est une représentation à plat en 2D pour tout voir d'un seul coup d'œil.</span>
             </div>
             <div class="tutor-flash-item tip" style="border-color: #059669; background: #ffffff;">
               <span class="tutor-flash-label" style="color: #059669;">🧭 Les Repères Clés</span>
-              <span><strong>L'Équateur</strong> sépare l'Hémisphère Nord et l'Hémisphère Sud. Les 2 pôles : <strong>Pôle Nord</strong> et <strong>Pôle Sud</strong>.</span>
+              <span><strong>L'Équateur</strong> sépare l'Hémisphère Nord et l'Hémisphère Sud. Les 2 pôles : <strong>Pôle Nord (Arctique)</strong> et <strong>Pôle Sud (Antarctique)</strong>. L'axe de la Terre est incliné de 23,5°.</span>
             </div>
             <div class="tutor-flash-item trap" style="border-color: #b45309; background: #ffffff;">
               <span class="tutor-flash-label" style="color: #b45309;">🌊 Continents & Océans</span>
-              <span><strong>6 continents :</strong> Europe, Asie, Afrique, Amérique, Océanie, Antarctique.<br><strong>5 océans :</strong> Pacifique (le plus vaste), Atlantique, Indien, Arctique, Austral.</span>
+              <span><strong>Les Continents :</strong> Europe, Asie, Afrique, Amérique (du Nord et du Sud), Océanie, Antarctique.<br><strong>Les 5 Océans :</strong> Pacifique (le plus vaste), Atlantique, Indien, Arctique, Austral.</span>
             </div>
           </div>
         </div>
 
-        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff; margin-top: 14px;">
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff; margin-bottom: 24px;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
             <span style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0369a1;">
               💡 La Planète Bleue en chiffres clés
@@ -8963,14 +9258,16 @@
             </a>
           </div>
           <p style="font-size: 0.92rem; line-height: 1.6; color: #0c4a6e;">
-            • Les mers et océans recouvrent environ <strong>71 % de la surface terrestre</strong>.<br>
-            • L'eau est liquide sur Terre grâce à sa distance idéale au Soleil (zone habitable).<br>
+            • Les mers et océans recouvrent environ <strong>71 % de la surface terrestre</strong> (d'où le surnom de « Planète Bleue »).<br>
+            • L'eau est liquide sur Terre grâce à sa distance idéale au Soleil (zone habitable du système solaire).<br>
             • La France métropolitaine est située en <strong>Europe</strong>, dans l'<strong>Hémisphère Nord</strong>, bordée par l'Océan Atlantique et la Mer Méditerranée.
           </p>
         </div>
 
-        <!-- Quiz interactif Globe & Planisphère -->
-        <div style="margin-top: 20px;">
+        <!-- ======================================================= -->
+        <!-- SECTION 4 : LE QCM ÉLITE (8 QUESTIONS) -->
+        <!-- ======================================================= -->
+        <div id="section-qcm-geo" style="margin-top: 20px;">
           <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #0369a1; margin-bottom: 10px;">
             ⚡ Défi Élite : 8 Questions de Géographie (Continents, Océans & Repères)
           </h3>
@@ -13141,6 +13438,14 @@
       const sub = document.getElementById(`sub-${subject}-${subKey}`);
       if (sub) {
         sub.classList.add('active');
+      }
+
+      // Initialisation spécifique Géographie (Globe 3D & Quizz Visuel)
+      if (subKey === 'geo_globe') {
+        setTimeout(() => {
+          if (typeof initInteractiveGlobe === 'function') initInteractiveGlobe();
+          if (typeof initVisualMapQuiz === 'function') initVisualMapQuiz();
+        }, 50);
       }
 
       // Si on ouvre l'onglet archives_p1 et qu'aucun volet n'est actif, activer le 1er par défaut
@@ -26565,6 +26870,8 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
         frise20NovCells[i] = FRISE_20NOV_COLORS[i % 4];
       }
       initFrise20Nov();
+    if (typeof initInteractiveGlobe === 'function') initInteractiveGlobe();
+    if (typeof initVisualMapQuiz === 'function') initVisualMapQuiz();
       playSound('badge');
     }
 
@@ -26619,6 +26926,931 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
         subjectKey: "maths"
       });
     }
+    
+    /* ========================================================================== */
+    /* GÉOGRAPHIE CM2 : GLOBE 3D INTERACTIF & QUIZZ VISUEL DU PLANISPHÈRE      */
+    /* ========================================================================== */
+
+    const GEO_DATA = {
+      europe: {
+        id: "europe",
+        type: "continent",
+        name: "Europe",
+        icon: "🏰",
+        color: "#10b981",
+        area: "10,2 millions de km²",
+        pop: "745 millions d'habitants (environ 50 pays)",
+        center: [15, 50],
+        mapPin: [420, 140],
+        hint: "À l'ouest de l'Asie et au nord de l'Afrique. La France, l'Espagne, l'Italie et l'Allemagne s'y trouvent !",
+        records: "Séparée de l'Asie par la chaîne de montagnes de l'Oural. Bordée par l'océan Atlantique à l'ouest, la mer Méditerranée au sud et l'océan Arctique au nord.",
+        memo: "La France métropolitaine est située en Europe de l'Ouest, dans l'Hémisphère Nord !"
+      },
+      afrique: {
+        id: "afrique",
+        type: "continent",
+        name: "Afrique",
+        icon: "🐘",
+        color: "#f97316",
+        area: "30,3 millions de km² (2e plus grand continent)",
+        pop: "1,4 milliard d'habitants (54 pays)",
+        center: [20, 5],
+        mapPin: [425, 250],
+        hint: "Traversée en son milieu par l'Équateur, située au sud de l'Europe, entre l'Atlantique et l'océan Indien.",
+        records: "Abrite le plus grand désert chaud du monde (le Sahara, 9 millions de km²) et le plus long fleuve d'Afrique (le Nil, 6 650 km).",
+        memo: "C'est le berceau de l'humanité ! Traversée par les deux tropiques (Cancer et Capricorne) et par l'Équateur."
+      },
+      asie: {
+        id: "asie",
+        type: "continent",
+        name: "Asie",
+        icon: "⛩️",
+        color: "#f59e0b",
+        area: "44,5 millions de km² (le plus vaste de la Terre)",
+        pop: "4,7 milliards d'habitants (le plus peuplé, 60% de l'humanité)",
+        center: [90, 35],
+        mapPin: [580, 150],
+        hint: "Le plus gigantesque continent de la Terre, s'étendant de l'Oural à l'océan Pacifique (Chine, Inde, Russie, Japon).",
+        records: "Abrite le toit du monde : le mont Everest (8 848 m dans l'Himalaya) et le point terrestre le plus bas (la mer Morte, -430 m).",
+        memo: "Plus grand continent en superficie et en population. Bordée par les océans Arctique, Pacifique et Indien."
+      },
+      amerique_nord: {
+        id: "amerique_nord",
+        type: "continent",
+        name: "Amérique du Nord",
+        icon: "🗽",
+        color: "#06b6d4",
+        area: "24,7 millions de km²",
+        pop: "590 millions d'habitants",
+        center: [-100, 45],
+        mapPin: [200, 145],
+        hint: "Au nord du continent américain : Canada, États-Unis, Mexique et la plus grande île du globe, le Groenland !",
+        records: "Bordée par l'océan Pacifique à l'ouest, l'océan Atlantique à l'est et l'océan Arctique au nord. Traversée par les montagnes Rocheuses.",
+        memo: "Reliée à l'Amérique du Sud par l'isthme d'Amérique centrale."
+      },
+      amerique_sud: {
+        id: "amerique_sud",
+        type: "continent",
+        name: "Amérique du Sud",
+        icon: "🦙",
+        color: "#84cc16",
+        area: "17,8 millions de km²",
+        pop: "430 millions d'habitants",
+        center: [-60, -15],
+        mapPin: [265, 300],
+        hint: "Au sud du continent américain : Brésil, Argentine, Colombie, Pérou. Traversée par la cordillère des Andes.",
+        records: "Abrite le plus puissant fleuve du monde (l'Amazone) et le plus grand poumon vert de la planète (la forêt amazonienne).",
+        memo: "Bordée par l'océan Pacifique à l'ouest et l'océan Atlantique à l'est. Le cap Horn se trouve à sa pointe sud."
+      },
+      oceanie: {
+        id: "oceanie",
+        type: "continent",
+        name: "Océanie",
+        icon: "🦘",
+        color: "#ec4899",
+        area: "8,5 millions de km² (le plus petit continent)",
+        pop: "43 millions d'habitants",
+        center: [135, -25],
+        mapPin: [680, 320],
+        hint: "Le plus petit continent de la Terre, constitué de milliers d'îles dans l'océan Pacifique dont la grande île d'Australie.",
+        records: "Célèbre pour sa faune unique au monde (kangourous, koalas, ornithorynques) et la Grande Barrière de corail.",
+        memo: "Située entièrement dans l'Hémisphère Sud, entourée par l'océan Indien et l'océan Pacifique."
+      },
+      antarctique: {
+        id: "antarctique",
+        type: "continent",
+        name: "Antarctique",
+        icon: "🐧",
+        color: "#94a3b8",
+        area: "14 millions de km²",
+        pop: "0 habitant permanent (environ 1 000 à 4 000 scientifiques)",
+        center: [0, -85],
+        mapPin: [430, 430],
+        hint: "Le continent blanc situé tout au sud de la planète, centré sur le Pôle Sud !",
+        records: "Le continent le plus froid (-89,2 °C record mesuré), le plus venteux et le plus sec de la Terre. Recouvert à 98% par une épaisse calotte de glace.",
+        memo: "Un continent réservé à la paix et à la science par le traité sur l'Antarctique. Les manchots y vivent !"
+      },
+      pacifique: {
+        id: "pacifique",
+        type: "ocean",
+        name: "Océan Pacifique",
+        icon: "🌊",
+        color: "#0284c7",
+        area: "165 millions de km² (le plus vaste de la planète)",
+        center: [-160, 0],
+        mapPin: [100, 240],
+        mapPin2: [730, 240], // Affiché aussi à droite sur le planisphère
+        hint: "Le plus vaste et le plus profond des océans ! Il couvre à lui seul plus d'un tiers de la surface terrestre.",
+        records: "Abrite la fosse des Mariannes, point le plus profond du globe (près de 11 000 mètres sous le niveau de la mer !).",
+        memo: "Il est si immense que tous les continents réunis pourraient y entrer !"
+      },
+      atlantique: {
+        id: "atlantique",
+        type: "ocean",
+        name: "Océan Atlantique",
+        icon: "⛵",
+        color: "#0284c7",
+        area: "106 millions de km² (2e plus grand océan)",
+        center: [-30, 15],
+        mapPin: [330, 210],
+        hint: "Il sépare l'Europe et l'Afrique (à l'est) des Amériques (à l'ouest). Il borde la côte ouest de la France !",
+        records: "Forme un grand 'S' allongé reliant le pôle Nord au pôle Sud. Traversé au milieu par la dorsale médio-atlantique sous-marine.",
+        memo: "C'est l'océan qui borde les plages de l'Atlantique en France métropolitaine !"
+      },
+      indien: {
+        id: "indien",
+        type: "ocean",
+        name: "Océan Indien",
+        icon: "🌴",
+        color: "#0284c7",
+        area: "70 millions de km² (3e plus grand océan)",
+        center: [75, -15],
+        mapPin: [540, 280],
+        hint: "Situé au sud de l'Asie, entre la côte est de l'Afrique et l'Australie. Eaux chaudes tropicales !",
+        records: "Borde des îles célèbres : Madagascar, La Réunion, l'île Maurice, les Seychelles et les Maldives.",
+        memo: "Océan très chaud réputé pour ses récifs coralliens et ses moussons."
+      },
+      arctique: {
+        id: "arctique",
+        type: "ocean",
+        name: "Océan Arctique",
+        icon: "❄️",
+        color: "#0284c7",
+        area: "14 millions de km² (le plus petit et le plus froid)",
+        center: [0, 85],
+        mapPin: [430, 45],
+        hint: "L'océan le plus au nord de la planète, entourant le Pôle Nord et recouvert par la banquise polaire !",
+        records: "Entouré par le nord de l'Amérique, de l'Europe et de l'Asie. Habitat privilégié de l'ours polaire et du morse.",
+        memo: "Attention : l'Arctique au Nord est un océan gelé (banquise), tandis que l'Antarctique au Sud est un vrai continent terrestre recouvert de glace !"
+      },
+      austral: {
+        id: "austral",
+        type: "ocean",
+        name: "Océan Austral",
+        icon: "🧊",
+        color: "#0284c7",
+        area: "20 millions de km²",
+        center: [0, -65],
+        mapPin: [430, 380],
+        hint: "Il entoure entièrement le continent Antarctique au sud du 60e parallèle sud !",
+        records: "Parcouru par les vents redoutables des quarantièmes rugissants et des cinquantièmes hurlants, parsemé de gigantesques icebergs.",
+        memo: "C'est l'océan le plus récent reconnu officiellement en géographie (il ceinture le Pôle Sud)."
+      }
+    };
+
+    // Polygons approximatifs pour le tracé 3D du globe
+    const GLOBE_CONTINENT_POLYS = {
+      europe: [
+        [-9, 36], [-9, 43], [-5, 43], [-1, 46], [-5, 48], [2, 51], [8, 54], [10, 58], 
+        [5, 62], [15, 68], [28, 71], [32, 65], [40, 65], [55, 60], [45, 48], [35, 46], 
+        [28, 41], [23, 38], [28, 36], [20, 37], [16, 40], [12, 44], [16, 38], [10, 36],
+        [3, 42], [-3, 37], [-9, 36]
+      ],
+      afrique: [
+        [-6, 36], [11, 37], [25, 32], [32, 31], [34, 27], [43, 12], [51, 11], [44, 2], 
+        [40, -4], [39, -15], [35, -24], [32, -28], [28, -34], [19, -34], [15, -29], 
+        [12, -17], [9, -1], [9, 4], [4, 6], [-8, 4], [-15, 11], [-17, 15], [-13, 28], 
+        [-10, 30], [-6, 36]
+      ],
+      asie: [
+        [40, 65], [60, 70], [80, 73], [105, 76], [140, 73], [170, 68], [180, 65], [170, 60], 
+        [160, 52], [142, 48], [130, 42], [122, 38], [122, 30], [110, 20], [105, 10], [100, 3], 
+        [96, 17], [88, 22], [80, 10], [74, 20], [68, 25], [60, 25], [50, 28], [44, 15], 
+        [35, 30], [36, 41], [45, 48], [55, 60], [40, 65]
+      ],
+      amerique_nord: [
+        [-168, 65], [-165, 60], [-150, 60], [-135, 54], [-125, 49], [-120, 35], [-110, 30], 
+        [-105, 20], [-90, 16], [-85, 10], [-78, 8], [-80, 22], [-82, 29], [-75, 35], 
+        [-70, 42], [-65, 45], [-55, 50], [-60, 58], [-65, 62], [-80, 65], [-95, 70], 
+        [-120, 70], [-140, 70], [-168, 65]
+      ],
+      amerique_sud: [
+        [-77, 8], [-70, 12], [-60, 8], [-50, 0], [-35, -5], [-35, -12], [-40, -22], 
+        [-48, -28], [-55, -35], [-65, -45], [-68, -55], [-75, -50], [-73, -40], 
+        [-72, -30], [-78, -15], [-81, -5], [-77, 8]
+      ],
+      oceanie: [
+        [114, -22], [113, -32], [115, -35], [130, -32], [138, -35], [145, -39], [150, -37], 
+        [153, -28], [145, -15], [135, -12], [125, -15], [120, -18], [114, -22]
+      ],
+      antarctique: [
+        [-60, -64], [-20, -70], [20, -68], [60, -66], [90, -65], [120, -66], 
+        [150, -68], [180, -72], [-150, -73], [-120, -72], [-90, -70], [-60, -64]
+      ]
+    };
+
+    /* --- ÉTAT DU GLOBE 3D --- */
+    let globeLon = 15;     // Longitude centrale (degrés)
+    let globeLat = 20;     // Latitude centrale (degrés)
+    let globeRadius = 175; // Rayon de la sphère
+    let isGlobeDragging = false;
+    let globeLastMouseX = 0;
+    let globeLastMouseY = 0;
+    let isGlobeAutoRotate = false;
+    let globeAnimTarget = null;
+    let currentSelectedGeoFeatureId = 'europe';
+
+    function initInteractiveGlobe() {
+      const canvas = document.getElementById('geoGlobeCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Événements souris
+      canvas.onmousedown = (e) => {
+        isGlobeDragging = true;
+        globeLastMouseX = e.clientX;
+        globeLastMouseY = e.clientY;
+        canvas.style.cursor = 'grabbing';
+      };
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isGlobeDragging) return;
+        const dx = e.clientX - globeLastMouseX;
+        const dy = e.clientY - globeLastMouseY;
+        globeLastMouseX = e.clientX;
+        globeLastMouseY = e.clientY;
+
+        globeLon -= dx * 0.55;
+        globeLat += dy * 0.45;
+        // Clamp latitude
+        globeLat = Math.max(-85, Math.min(85, globeLat));
+        globeAnimTarget = null;
+        drawGlobe();
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isGlobeDragging) {
+          isGlobeDragging = false;
+          if (canvas) canvas.style.cursor = 'grab';
+        }
+      });
+
+      // Événements tactiles (mobile / tablette)
+      canvas.ontouchstart = (e) => {
+        if (e.touches.length === 1) {
+          isGlobeDragging = true;
+          globeLastMouseX = e.touches[0].clientX;
+          globeLastMouseY = e.touches[0].clientY;
+        }
+      };
+
+      canvas.ontouchmove = (e) => {
+        if (!isGlobeDragging || e.touches.length !== 1) return;
+        e.preventDefault();
+        const dx = e.touches[0].clientX - globeLastMouseX;
+        const dy = e.touches[0].clientY - globeLastMouseY;
+        globeLastMouseX = e.touches[0].clientX;
+        globeLastMouseY = e.touches[0].clientY;
+
+        globeLon -= dx * 0.55;
+        globeLat += dy * 0.45;
+        globeLat = Math.max(-85, Math.min(85, globeLat));
+        globeAnimTarget = null;
+        drawGlobe();
+      };
+
+      canvas.ontouchend = () => {
+        isGlobeDragging = false;
+      };
+
+      // Clic simple pour détecter un continent ou un océan
+      canvas.onclick = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const clickY = (e.clientY - rect.top) * (canvas.height / rect.height);
+        handleGlobeClick(clickX, clickY);
+      };
+
+      // Initialiser la fiche découverte
+      selectGeoFeature('europe');
+      drawGlobe();
+    }
+
+    function projectGlobePoint(lon, lat, lon0, lat0, R, cx, cy) {
+      const l = (lon * Math.PI) / 180;
+      const p = (lat * Math.PI) / 180;
+      const l0 = (lon0 * Math.PI) / 180;
+      const p0 = (lat0 * Math.PI) / 180;
+
+      const cos_c = Math.sin(p0) * Math.sin(p) + Math.cos(p0) * Math.cos(p) * Math.cos(l - l0);
+      const x = cx + R * Math.cos(p) * Math.sin(l - l0);
+      const y = cy - R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l - l0));
+      return { x, y, cos_c, visible: cos_c >= 0 };
+    }
+
+    function drawGlobe() {
+      const canvas = document.getElementById('geoGlobeCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const W = canvas.width;
+      const H = canvas.height;
+      const cx = W / 2;
+      const cy = H / 2;
+      const R = globeRadius;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // 1. Fond Sphère Océan & Shading 3D
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.clip();
+
+      const oceanGrad = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.35, R * 0.1, cx, cy, R);
+      oceanGrad.addColorStop(0, '#38bdf8');
+      oceanGrad.addColorStop(0.55, '#0284c7');
+      oceanGrad.addColorStop(0.9, '#0369a1');
+      oceanGrad.addColorStop(1, '#082f49');
+      ctx.fillStyle = oceanGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      const showLines = document.getElementById('chkGlobeLines') ? document.getElementById('chkGlobeLines').checked : true;
+      const showLabels = document.getElementById('chkGlobeLabels') ? document.getElementById('chkGlobeLabels').checked : true;
+
+      // 2. Méridiens (tous les 30°)
+      if (showLines) {
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 4]);
+
+        for (let m = -180; m < 180; m += 30) {
+          ctx.beginPath();
+          let started = false;
+          for (let lat = -90; lat <= 90; lat += 3) {
+            const pt = projectGlobePoint(m, lat, globeLon, globeLat, R, cx, cy);
+            if (pt.visible) {
+              if (!started) { ctx.moveTo(pt.x, pt.y); started = true; }
+              else ctx.lineTo(pt.x, pt.y);
+            } else {
+              started = false;
+            }
+          }
+          ctx.stroke();
+        }
+
+        // Parallèles : Tropiques et Cercles Polaires
+        const parallels = [
+          { lat: 66.5, color: 'rgba(226, 232, 240, 0.55)', width: 1.2, dash: [4, 4] },
+          { lat: 23.5, color: 'rgba(56, 189, 248, 0.75)', width: 1.5, dash: [5, 4] },
+          { lat: -23.5, color: 'rgba(56, 189, 248, 0.75)', width: 1.5, dash: [5, 4] },
+          { lat: -66.5, color: 'rgba(226, 232, 240, 0.55)', width: 1.2, dash: [4, 4] }
+        ];
+
+        parallels.forEach(p => {
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = p.width;
+          ctx.setLineDash(p.dash);
+          ctx.beginPath();
+          let started = false;
+          for (let lon = -180; lon <= 180; lon += 4) {
+            const pt = projectGlobePoint(lon, p.lat, globeLon, globeLat, R, cx, cy);
+            if (pt.visible) {
+              if (!started) { ctx.moveTo(pt.x, pt.y); started = true; }
+              else ctx.lineTo(pt.x, pt.y);
+            } else {
+              started = false;
+            }
+          }
+          ctx.stroke();
+        });
+
+        // ÉQUATEUR (0°) mis en avant en or vif
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 2.4;
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        let eqStarted = false;
+        for (let lon = -180; lon <= 180; lon += 3) {
+          const pt = projectGlobePoint(lon, 0, globeLon, globeLat, R, cx, cy);
+          if (pt.visible) {
+            if (!eqStarted) { ctx.moveTo(pt.x, pt.y); eqStarted = true; }
+            else ctx.lineTo(pt.x, pt.y);
+          } else {
+            eqStarted = false;
+          }
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // 3. Tracé des Continents
+      for (const [key, coords] of Object.entries(GLOBE_CONTINENT_POLYS)) {
+        const cData = GEO_DATA[key];
+        ctx.fillStyle = cData ? cData.color : '#10b981';
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 1.6;
+
+        ctx.beginPath();
+        let polyStarted = false;
+        for (let i = 0; i < coords.length; i++) {
+          const pt1 = coords[i];
+          const pt2 = coords[(i + 1) % coords.length];
+          // Sous-échantillonnage pour que les bords épousent la courbure
+          const steps = 4;
+          for (let s = 0; s < steps; s++) {
+            const f = s / steps;
+            const curLon = pt1[0] + (pt2[0] - pt1[0]) * f;
+            const curLat = pt1[1] + (pt2[1] - pt1[1]) * f;
+            const proj = projectGlobePoint(curLon, curLat, globeLon, globeLat, R, cx, cy);
+            if (proj.visible) {
+              if (!polyStarted) {
+                ctx.moveTo(proj.x, proj.y);
+                polyStarted = true;
+              } else {
+                ctx.lineTo(proj.x, proj.y);
+              }
+            }
+          }
+        }
+        if (polyStarted) {
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+
+      // 4. Étiquettes des Océans & Continents
+      if (showLabels) {
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Océans
+        ['pacifique', 'atlantique', 'indien', 'arctique', 'austral'].forEach(oId => {
+          const oData = GEO_DATA[oId];
+          if (!oData) return;
+          const proj = projectGlobePoint(oData.center[0], oData.center[1], globeLon, globeLat, R, cx, cy);
+          if (proj.cos_c > 0.2) {
+            ctx.font = 'italic 700 11px Outfit, sans-serif';
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, proj.cos_c * 1.3)})`;
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+            ctx.shadowBlur = 4;
+            ctx.fillText(`${oData.icon} ${oData.name}`, proj.x, proj.y);
+            ctx.shadowBlur = 0;
+          }
+        });
+
+        // Continents
+        ['europe', 'afrique', 'asie', 'amerique_nord', 'amerique_sud', 'oceanie', 'antarctique'].forEach(cId => {
+          const cData = GEO_DATA[cId];
+          if (!cData) return;
+          const proj = projectGlobePoint(cData.center[0], cData.center[1], globeLon, globeLat, R, cx, cy);
+          if (proj.cos_c > 0.15) {
+            ctx.save();
+            ctx.font = '800 12px Fredoka, Outfit, sans-serif';
+            const labelText = `${cData.icon} ${cData.name}`;
+            const metrics = ctx.measureText(labelText);
+            const w = metrics.width + 12;
+            const h = 20;
+
+            // Pastille fond BD
+            ctx.fillStyle = (currentSelectedGeoFeatureId === cId) ? '#fef08a' : 'rgba(255, 255, 255, 0.92)';
+            ctx.strokeStyle = '#1f1b18';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.roundRect(proj.x - w / 2, proj.y - h / 2, w, h, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#1f1b18';
+            ctx.fillText(labelText, proj.x, proj.y);
+            ctx.restore();
+          }
+        });
+      }
+
+      // Ombre intérieure de la sphère
+      const innerShadow = ctx.createRadialGradient(cx, cy, R * 0.82, cx, cy, R);
+      innerShadow.addColorStop(0, 'rgba(0,0,0,0)');
+      innerShadow.addColorStop(1, 'rgba(0,0,0,0.4)');
+      ctx.fillStyle = innerShadow;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+
+      // 5. Anneau d'Atmosphère et Contour BD du Globe
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.strokeStyle = '#1f1b18';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Pôles (axe de rotation visible en haut et en bas)
+      const np = projectGlobePoint(0, 90, globeLon, globeLat, R, cx, cy);
+      if (np.visible) {
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#1f1b18';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(np.x, np.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Mise à jour de l'affichage HUD
+      const hud = document.getElementById('globeCenterHud');
+      if (hud) {
+        const ew = globeLon >= 0 ? `${Math.round(globeLon)}°E` : `${Math.round(Math.abs(globeLon))}°O`;
+        const ns = globeLat >= 0 ? `${Math.round(globeLat)}°N` : `${Math.round(Math.abs(globeLat))}°S`;
+        hud.innerText = `Centre : ${ew}, ${ns}`;
+      }
+    }
+
+    function handleGlobeClick(x, y) {
+      const canvas = document.getElementById('geoGlobeCanvas');
+      if (!canvas) return;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const R = globeRadius;
+
+      let closestFeature = null;
+      let minDistance = 999;
+
+      // Chercher le continent ou l'océan le plus proche du clic
+      for (const [key, item] of Object.entries(GEO_DATA)) {
+        const proj = projectGlobePoint(item.center[0], item.center[1], globeLon, globeLat, R, cx, cy);
+        if (proj.visible) {
+          const d = Math.hypot(proj.x - x, proj.y - y);
+          if (d < minDistance) {
+            minDistance = d;
+            closestFeature = key;
+          }
+        }
+      }
+
+      if (closestFeature && minDistance < 60) {
+        selectGeoFeature(closestFeature);
+        rotateGlobeTo(GEO_DATA[closestFeature].center[0], GEO_DATA[closestFeature].center[1], closestFeature);
+      }
+    }
+
+    function stepGlobeRotation(dLon, dLat) {
+      globeLon += dLon;
+      globeLat += dLat;
+      globeLat = Math.max(-85, Math.min(85, globeLat));
+      globeAnimTarget = null;
+      drawGlobe();
+    }
+
+    function rotateGlobeTo(targetLon, targetLat, featureId) {
+      if (featureId) selectGeoFeature(featureId);
+      globeLon = targetLon;
+      globeLat = targetLat;
+      globeAnimTarget = null;
+      drawGlobe();
+      playSound('badge');
+    }
+
+    function resetGlobeView() {
+      globeLon = 15;
+      globeLat = 20;
+      globeAnimTarget = null;
+      selectGeoFeature('europe');
+      drawGlobe();
+      playSound('correct');
+    }
+
+    function toggleGlobeAutoRotate() {
+      isGlobeAutoRotate = !isGlobeAutoRotate;
+      const btn = document.getElementById('btnGlobeAutoRotate');
+      if (btn) {
+        btn.innerText = isGlobeAutoRotate ? '🔄 Rotation Auto : ON' : '🔄 Rotation Auto : OFF';
+        btn.style.background = isGlobeAutoRotate ? '#ccfbf1' : '#ffffff';
+        btn.style.color = isGlobeAutoRotate ? '#0f766e' : 'var(--ink)';
+      }
+      if (isGlobeAutoRotate) {
+        runGlobeAutoRotateLoop();
+      }
+    }
+
+    function runGlobeAutoRotateLoop() {
+      if (!isGlobeAutoRotate) return;
+      globeLon += 0.35;
+      drawGlobe();
+      requestAnimationFrame(runGlobeAutoRotateLoop);
+    }
+
+    function selectGeoFeature(id) {
+      currentSelectedGeoFeatureId = id;
+      const data = GEO_DATA[id];
+      if (!data) return;
+
+      const selectEl = document.getElementById('geoFeatureSelect');
+      if (selectEl && selectEl.value !== id) {
+        selectEl.value = id;
+      }
+
+      const card = document.getElementById('geoFeatureCardContent');
+      if (!card) return;
+
+      const isContinent = data.type === 'continent';
+      const badgeColor = isContinent ? '#059669' : '#0284c7';
+      const badgeBg = isContinent ? '#ecfdf5' : '#f0f9ff';
+
+      card.innerHTML = `
+        <div style="background: ${badgeBg}; border: 2px solid ${badgeColor}; border-radius: 12px; padding: 12px; box-shadow: var(--shadow-comic-sm);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 2rem;">${data.icon}</span>
+              <div>
+                <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.3rem; color: #1e293b; margin: 0;">${data.name}</h3>
+                <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: ${badgeColor};">
+                  ${isContinent ? '🌍 CONTINENT TERRESTRE' : '🌊 GRAND OCÉAN DU MONDE'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px; font-size: 0.88rem; display: flex; flex-direction: column; gap: 6px; color: #334155;">
+            <div><strong>📏 Superficie :</strong> ${data.area}</div>
+            ${data.pop ? `<div><strong>👥 Population :</strong> ${data.pop}</div>` : ''}
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px; font-size: 0.88rem; line-height: 1.5; color: #1e293b;">
+          <div style="font-weight: 800; color: #0369a1; margin-bottom: 4px;">🏆 Records & Particularités :</div>
+          <p>${data.records}</p>
+        </div>
+
+        <div style="background: #fefce8; border: 1.5px solid #ca8a04; border-radius: 10px; padding: 10px 12px; font-size: 0.85rem; color: #854d0e;">
+          <strong>💡 Repère CM2 :</strong> ${data.memo}
+        </div>
+      `;
+      drawGlobe();
+    }
+
+    function speakCurrentGeoFeature() {
+      const data = GEO_DATA[currentSelectedGeoFeatureId];
+      if (!data) return;
+      if (!window.speechSynthesis) {
+        alert("La synthèse vocale n'est pas supportée par ton navigateur.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const text = `${data.name}, ${data.type === 'continent' ? 'continent' : 'océan'}. Superficie : ${data.area}. ${data.records} ${data.memo}`;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'fr-FR';
+      utterance.rate = 1.0;
+      window.speechSynthesis.speak(utterance);
+      playSound('badge');
+    }
+
+    /* --- ÉTAT DU QUIZZ VISUEL SUR LE PLANISPHÈRE --- */
+    let mapQuizMode = 'continents'; // 'continents', 'oceans', 'mixte'
+    let mapQuizQuestions = [];
+    let mapQuizCurrentIndex = 0;
+    let mapQuizScore = 0;
+    let mapQuizStreak = 0;
+    let mapQuizPlacedIds = new Set();
+
+    function initVisualMapQuiz(mode) {
+      startVisualMapQuiz(mode || mapQuizMode);
+    }
+
+    function startVisualMapQuiz(mode) {
+      mapQuizMode = mode || 'continents';
+      mapQuizPlacedIds.clear();
+      mapQuizScore = 0;
+      mapQuizStreak = 0;
+      mapQuizCurrentIndex = 0;
+
+      // Boutons onglets
+      const btnC = document.getElementById('btnModeContinents');
+      const btnO = document.getElementById('btnModeOceans');
+      const btnM = document.getElementById('btnModeMixte');
+      if (btnC) { btnC.style.background = mode === 'continents' ? '#0d9488' : '#ffffff'; btnC.style.color = mode === 'continents' ? '#ffffff' : '#0d9488'; }
+      if (btnO) { btnO.style.background = mode === 'oceans' ? '#0284c7' : '#ffffff'; btnO.style.color = mode === 'oceans' ? '#ffffff' : '#0284c7'; }
+      if (btnM) { btnM.style.background = mode === 'mixte' ? '#7c3aed' : '#ffffff'; btnM.style.color = mode === 'mixte' ? '#ffffff' : '#7c3aed'; }
+
+      // Préparer la liste des questions
+      if (mapQuizMode === 'continents') {
+        mapQuizQuestions = ['europe', 'afrique', 'asie', 'amerique_nord', 'amerique_sud', 'oceanie', 'antarctique'];
+      } else if (mapQuizMode === 'oceans') {
+        mapQuizQuestions = ['pacifique', 'atlantique', 'indien', 'arctique', 'austral'];
+      } else {
+        mapQuizQuestions = ['europe', 'afrique', 'asie', 'amerique_nord', 'amerique_sud', 'oceanie', 'antarctique', 'pacifique', 'atlantique', 'indien', 'arctique', 'austral'];
+      }
+
+      // Mélanger aléatoirement
+      mapQuizQuestions.sort(() => Math.random() - 0.5);
+
+      // Cacher écran de victoire et alerte
+      const victoryBox = document.getElementById('mapQuizVictoryBox');
+      if (victoryBox) victoryBox.style.display = 'none';
+      const feedbackBox = document.getElementById('mapQuizFeedbackBox');
+      if (feedbackBox) feedbackBox.style.display = 'none';
+      const hintBox = document.getElementById('mapQuizHintBox');
+      if (hintBox) hintBox.style.display = 'none';
+
+      renderMapQuizQuestion();
+      renderMapQuizSvgTargets();
+    }
+
+    function renderMapQuizQuestion() {
+      if (mapQuizCurrentIndex >= mapQuizQuestions.length) {
+        showMapQuizVictory();
+        return;
+      }
+
+      const qId = mapQuizQuestions[mapQuizCurrentIndex];
+      const data = GEO_DATA[qId];
+      if (!data) return;
+
+      const targetIcon = document.getElementById('mapQuizTargetIcon');
+      if (targetIcon) targetIcon.innerText = data.icon;
+
+      const targetName = document.getElementById('mapQuizTargetName');
+      if (targetName) targetName.innerText = data.name.toUpperCase();
+
+      const progressText = document.getElementById('mapQuizProgressText');
+      if (progressText) progressText.innerText = `Question ${mapQuizCurrentIndex + 1} sur ${mapQuizQuestions.length}`;
+
+      const scoreText = document.getElementById('mapQuizScoreText');
+      if (scoreText) scoreText.innerText = `⭐ Score : ${mapQuizScore} pts`;
+
+      const hintBox = document.getElementById('mapQuizHintBox');
+      if (hintBox) {
+        hintBox.style.display = 'none';
+        hintBox.innerHTML = `<strong>💡 Indice :</strong> ${data.hint}`;
+      }
+    }
+
+    function renderMapQuizSvgTargets() {
+      const g = document.getElementById('geoMapTargetsGroup');
+      if (!g) return;
+      g.innerHTML = '';
+
+      // Générer les pastilles actives selon le mode
+      const candidateIds = (mapQuizMode === 'continents') 
+        ? ['europe', 'afrique', 'asie', 'amerique_nord', 'amerique_sud', 'oceanie', 'antarctique']
+        : (mapQuizMode === 'oceans')
+          ? ['pacifique', 'atlantique', 'indien', 'arctique', 'austral']
+          : ['europe', 'afrique', 'asie', 'amerique_nord', 'amerique_sud', 'oceanie', 'antarctique', 'pacifique', 'atlantique', 'indien', 'arctique', 'austral'];
+
+      candidateIds.forEach(id => {
+        const item = GEO_DATA[id];
+        if (!item) return;
+
+        const isPlaced = mapQuizPlacedIds.has(id);
+        const pins = [item.mapPin];
+        if (item.mapPin2) pins.push(item.mapPin2);
+
+        pins.forEach((pin, pIdx) => {
+          const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          group.setAttribute('id', `target-pin-${id}-${pIdx}`);
+          group.setAttribute('cursor', 'pointer');
+          group.onclick = () => handleMapQuizTargetClick(id, group);
+
+          if (isPlaced) {
+            // Badge validé avec nom complet
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            const labelText = `✅ ${item.icon} ${item.name}`;
+            const approxW = labelText.length * 7.5 + 16;
+            rect.setAttribute('x', pin[0] - approxW / 2);
+            rect.setAttribute('y', pin[1] - 12);
+            rect.setAttribute('width', approxW);
+            rect.setAttribute('height', 24);
+            rect.setAttribute('rx', 6);
+            rect.setAttribute('fill', '#ecfdf5');
+            rect.setAttribute('stroke', '#059669');
+            rect.setAttribute('stroke-width', 2);
+
+            const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txt.setAttribute('x', pin[0]);
+            txt.setAttribute('y', pin[1] + 4);
+            txt.setAttribute('fill', '#065f46');
+            txt.setAttribute('font-size', '11');
+            txt.setAttribute('font-weight', '800');
+            txt.setAttribute('text-anchor', 'middle');
+            txt.setAttribute('font-family', "'Outfit', sans-serif");
+            txt.textContent = labelText;
+
+            group.appendChild(rect);
+            group.appendChild(txt);
+          } else {
+            // Pastille cible interactive en attente
+            const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            halo.setAttribute('cx', pin[0]);
+            halo.setAttribute('cy', pin[1]);
+            halo.setAttribute('r', 16);
+            halo.setAttribute('fill', 'rgba(234, 88, 12, 0.25)');
+            halo.setAttribute('stroke', '#ea580c');
+            halo.setAttribute('stroke-width', 1.5);
+            halo.setAttribute('stroke-dasharray', '3,3');
+
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', pin[0]);
+            circle.setAttribute('cy', pin[1]);
+            circle.setAttribute('r', 12);
+            circle.setAttribute('fill', '#ea580c');
+            circle.setAttribute('stroke', '#ffffff');
+            circle.setAttribute('stroke-width', 2);
+
+            const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txt.setAttribute('x', pin[0]);
+            txt.setAttribute('y', pin[1] + 4);
+            txt.setAttribute('fill', '#ffffff');
+            txt.setAttribute('font-size', '11');
+            txt.setAttribute('font-weight', '900');
+            txt.setAttribute('text-anchor', 'middle');
+            txt.setAttribute('font-family', "'Outfit', sans-serif");
+            txt.textContent = '?';
+
+            group.appendChild(halo);
+            group.appendChild(circle);
+            group.appendChild(txt);
+          }
+
+          g.appendChild(group);
+        });
+      });
+    }
+
+    function toggleMapQuizHint() {
+      const hintBox = document.getElementById('mapQuizHintBox');
+      if (!hintBox) return;
+      hintBox.style.display = (hintBox.style.display === 'none') ? 'block' : 'none';
+      playSound('badge');
+    }
+
+    function handleMapQuizTargetClick(clickedId, groupEl) {
+      if (mapQuizCurrentIndex >= mapQuizQuestions.length) return;
+      const expectedId = mapQuizQuestions[mapQuizCurrentIndex];
+      const feedbackBox = document.getElementById('mapQuizFeedbackBox');
+
+      if (clickedId === expectedId) {
+        // SUCCÈS !
+        mapQuizScore += 10;
+        mapQuizStreak += 1;
+        mapQuizPlacedIds.add(clickedId);
+        playSound('correct');
+
+        if (feedbackBox) {
+          feedbackBox.style.display = 'block';
+          feedbackBox.style.background = '#dcfce7';
+          feedbackBox.style.color = '#15803d';
+          feedbackBox.style.border = '2px solid #16a34a';
+          feedbackBox.innerText = `🎉 Bravo ! C'est exactement ${GEO_DATA[expectedId].name} ! (+10 pts)`;
+        }
+
+        renderMapQuizSvgTargets();
+
+        setTimeout(() => {
+          mapQuizCurrentIndex += 1;
+          if (feedbackBox) feedbackBox.style.display = 'none';
+          renderMapQuizQuestion();
+        }, 850);
+
+      } else {
+        // ERREUR
+        mapQuizStreak = 0;
+        playSound('incorrect');
+
+        if (feedbackBox) {
+          feedbackBox.style.display = 'block';
+          feedbackBox.style.background = '#fee2e2';
+          feedbackBox.style.color = '#b91c1c';
+          feedbackBox.style.border = '2px solid #ef4444';
+          feedbackBox.innerText = `❌ Oups ! Ici c'est ${GEO_DATA[clickedId].name}. Regarde l'indice pour trouver ${GEO_DATA[expectedId].name} !`;
+        }
+
+        // Effet de vibration sur la cible cliquée
+        if (groupEl) {
+          groupEl.style.transformOrigin = 'center';
+          groupEl.style.transition = 'transform 0.1s';
+          groupEl.style.transform = 'scale(1.25)';
+          setTimeout(() => { groupEl.style.transform = 'scale(1)'; }, 200);
+        }
+      }
+    }
+
+    function showMapQuizVictory() {
+      const victoryBox = document.getElementById('mapQuizVictoryBox');
+      if (victoryBox) victoryBox.style.display = 'block';
+
+      const summary = document.getElementById('mapQuizVictorySummary');
+      if (summary) {
+        summary.innerHTML = `🌟 Tu as placé avec succès tous les ${mapQuizQuestions.length} repères du monde !<br><strong>Score final : ${mapQuizScore} points !</strong>`;
+      }
+
+      triggerConfetti();
+      playSound('tada');
+      if (typeof gainStars === 'function') {
+        gainStars(3);
+      }
+    }
+
+    function restartCurrentMapQuiz() {
+      startVisualMapQuiz(mapQuizMode);
+    }
+
+
     if (typeof allGeoGlobeQuestions !== 'undefined') {
       new QuizRunner('quiz-container-geo-globe', allGeoGlobeQuestions, {
         title: "Défis : Le Globe & le Planisphère",
