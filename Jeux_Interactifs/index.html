@@ -6760,29 +6760,29 @@
         </div>
       </div>
 
-      <!-- Bandeau d'Annonce Flash : NOUVELLE DICTÉE SÉRIE 6 MAGRITTE -->
-      <div style="background: linear-gradient(135deg, #f5f3ff, #faf5ff); border: 2.5px solid #7c3aed; border-radius: 16px; padding: 14px 18px; margin-bottom: 16px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <!-- Bandeau d'Annonce Flash : NOUVELLE DICTÉE SÉRIE 8 BOTTICELLI -->
+      <div style="background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 2.5px solid #0d9488; border-radius: 16px; padding: 14px 18px; margin-bottom: 16px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">🎨</span>
+          <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">🐚</span>
           <div>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <span style="background: #7c3aed; color: #ffffff; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px;">NOUVEAU • DICTÉE 6 (PADLET)</span>
-              <span style="font-size: 0.78rem; font-weight: 800; color: #6d28d9;">Semaine du 2 Novembre • Histoire de l'Art & Surréalisme</span>
+              <span style="background: #0d9488; color: #ffffff; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px;">NOUVEAU • DICTÉE SÉRIE 8 (PADLET)</span>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #0f766e;">Semaine du 19 Novembre • Renaissance italienne & Histoire des Arts</span>
             </div>
-            <div style="font-family: 'Fredoka', sans-serif; font-weight: 800; color: #4c1d95; font-size: 1.15rem; margin-top: 2px;">
-              « La Trahison des images » (René Magritte) • 36 Mots Clés, Vocale & G3 (Complément du Nom)
+            <div style="font-family: 'Fredoka', sans-serif; font-weight: 800; color: #134e4a; font-size: 1.15rem; margin-top: 2px;">
+              « La Naissance de Vénus » (Sandro Botticelli) • 36 Mots Clés, Dictée Vocale & Règle G / GU
             </div>
           </div>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(7);" style="padding: 8px 16px; font-size: 0.88rem; background: #7c3aed; color: #ffffff; border-color: #5b21b6;">
-            🎨 Grille Série 6 & Dictée Vocale
+          <button class="action-btn" onclick="switchSubmodule('francais', 'dictee_mots'); selectDicteeSeries(8);" style="padding: 8px 16px; font-size: 0.88rem; background: #0d9488; color: #ffffff; border-color: #0f766e; font-weight: 800;">
+            🐚 Grille des 36 Mots Série 8 & Vocale
           </button>
-          <button class="action-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="padding: 8px 16px; font-size: 0.88rem; background: #0284c7; color: #ffffff; border-color: #0369a1;">
-            🧩 Leçon & Défis G3 (Complément du Nom)
+          <button class="action-btn" onclick="switchSubmodule('francais', 'orthographe_g_gu')" style="padding: 8px 16px; font-size: 0.88rem; background: #0284c7; color: #ffffff; border-color: #0369a1; font-weight: 700;">
+            🔤 Devoir G ou GU (Botticelli)
           </button>
-          <button class="action-btn" onclick="switchSubmodule('francais', 'autodictee')" style="padding: 8px 16px; font-size: 0.88rem; background: #d97706; color: #ffffff; border-color: #b45309;">
-            🏛️ Autodictée 1 Patrimoine
+          <button class="action-btn" onclick="switchSubmodule('francais', 'lexique_l1')" style="padding: 8px 16px; font-size: 0.88rem; background: #7c3aed; color: #ffffff; border-color: #6d28d9; font-weight: 700;">
+            📖 Lexique L1 : Sens propre & figuré
           </button>
         </div>
       </div>
@@ -6850,7 +6850,151 @@
         </div>
 
         <!-- Conteneur dynamique de la règle, des repères et de la grille (géré par selectDicteeSeries) -->
-        <div id="dictee-series-dynamic-container"></div>
+        <div id="dictee-series-dynamic-container">
+
+        <div class="rule-box" style="border-left: 5px solid #0d9488; background: #f0fdfa;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed var(--ink-faint); padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0f766e;">
+              📜 Les mots de la dictée (CM2) — Série 8
+            </span>
+            <span id="dictee-week-badge" style="background: #ccfbf1; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #0d9488;">
+              🐚 Thème : La Naissance de Vénus (Botticelli)
+            </span>
+          </div>
+
+          
+          <div class="dictee-reperes-card">
+            <div style="flex: 1; min-width: 260px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.3rem;">🏛️</span>
+                <strong style="font-family: 'Fredoka', sans-serif; font-size: 1.05rem; color: #1e3a8a;">Repères de la leçon : La Naissance de Vénus (vers 1485)</strong>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px; font-size: 0.88rem; color: var(--ink);">
+                <div><strong>• Qui ?</strong> Sandro Botticelli (peintre florentin de la Renaissance, 1445-1510)</div>
+                <div><strong>• Lieu de création ?</strong> Florence (Italie) • Galerie des Offices</div>
+                <div><strong>• Quand ?</strong> Renaissance italienne (vers 1485, XVe siècle)</div>
+                <div><strong>• Domaine ?</strong> Histoire des Arts & Mythologie gréco-romaine</div>
+              </div>
+              <div style="margin-top: 8px; font-size: 0.82rem; background: #eff6ff; border-left: 3px solid #2563eb; padding: 4px 10px; border-radius: 4px;">
+                ⏳ <strong>Repère historique :</strong> <strong style="color:#0d9488;">Renaissance italienne (vers 1485, XVe siècle)</strong> ➔ Galerie des Offices, Florence
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center;">
+              
+            <div style="text-align: center; flex-shrink: 0;">
+              <a href="images/dictee8_mots.jpg" target="_blank" title="Cliquer pour voir la fiche officielle des 36 mots en grand (Padlet)" style="display: inline-block; border: 2.5px solid #0d9488; border-radius: 8px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink);">
+                <img src="images/dictee8_mots.jpg" alt="Fiche Officielle des Mots Série 8" style="width: 82px; height: 108px; object-fit: cover; display: block;">
+              </a>
+              <div style="font-size: 0.72rem; font-weight: 800; color: #0d9488; margin-top: 3px;">📝 Fiche des Mots</div>
+            </div>
+          
+            <div style="text-align: center; flex-shrink: 0;">
+              <a href="images/dictee8_art.jpeg" target="_blank" title="Cliquer pour voir l'œuvre d'art en grand" style="display: inline-block; border: 2.5px solid #4338ca; border-radius: 8px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink);">
+                <img src="images/dictee8_art.jpeg" alt="Tableau Série 8" style="width: 82px; height: 108px; object-fit: cover; display: block;">
+              </a>
+              <div style="font-size: 0.72rem; font-weight: 800; color: #4338ca; margin-top: 3px;">🎨 L'Œuvre d'Art</div>
+            </div>
+          
+            </div>
+          </div>
+        
+
+          <p style="font-size: 0.88rem; color: var(--ink-light); margin-bottom: 10px;">
+            💡 <em>Voici la grille officielle des mots de la dictée (Série 8) classés par groupes de couleurs :</em>
+          </p>
+
+          <div class="dictee-table-wrap">
+            <table class="dictee-table">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Groupes</th>
+                  <th style="width: 27%;">Noms</th>
+                  <th style="width: 18%;">Verbes</th>
+                  <th style="width: 20%;">Adjectifs et<br>participes passés</th>
+                  <th style="width: 20%;">Mots invariables</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+          <tr>
+            <td class="level-col"><span class="lvl-badge jaune">jaune</span> <span class="lvl-badge vert">vert</span> <span class="lvl-badge violet">violet</span> <span class="lvl-badge or">or</span></td>
+            <td>le tableau<br>le rivage<br>le vent<br>la fleur</td>
+            <td>souffler</td>
+            <td>grand<br>long</td>
+            <td>sur<br>vers</td>
+          </tr>
+        
+          <tr>
+            <td class="level-col"><span class="lvl-badge vert">vert</span> <span class="lvl-badge violet">violet</span> <span class="lvl-badge or">or</span></td>
+            <td>la scène<br>le dieu / la déesse<br>la femme<br>la droite<br>le printemps</td>
+            <td>naviguer<br>guetter</td>
+            <td>fleuri<br>habillé</td>
+            <td>à côté<br>autour</td>
+          </tr>
+        
+          <tr>
+            <td class="level-col"><span class="lvl-badge violet">violet</span> <span class="lvl-badge or">or</span></td>
+            <td>la naissance<br>la beauté<br>le coquillage<br>la chevelure<br>l'arrivée</td>
+            <td>représenter<br>distinguer</td>
+            <td>guidé<br>inspiré</td>
+            <td>celui-ci<br>seulement</td>
+          </tr>
+        
+          <tr>
+            <td class="level-col"><span class="lvl-badge or">or</span></td>
+            <td>la gauche<br>l'œuvre</td>
+            <td>recouvrir</td>
+            <td>gigantesque</td>
+            <td>également</td>
+          </tr>
+        
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Cartouche Récapitulatif Visuel des Mots Clés -->
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 14px; box-shadow: var(--shadow-comic-sm);">
+            <div style="font-family: 'Fredoka', sans-serif; font-size: 1rem; font-weight: 700; color: #0f766e; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+              <span>📋 Liste complète des mots à mémoriser (Série 8) :</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+              <div>
+                <strong style="color: #0369a1;">• NOMS (16) :</strong>
+                <span style="color: var(--ink);"><span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">le tableau</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la scène</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la naissance</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">le dieu / la déesse</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la beauté</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">le coquillage</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">le rivage</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">le vent</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la gauche</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la fleur</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la femme</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la chevelure</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">la droite</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">l'œuvre</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">le printemps</span> <span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">l'arrivée</span></span>
+              </div>
+              <div>
+                <strong style="color: #b45309;">• VERBES (6) :</strong>
+                <span style="color: var(--ink);"><span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">représenter</span> <span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">naviguer</span> <span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">distinguer</span> <span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">souffler</span> <span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">guetter</span> <span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">recouvrir</span></span>
+              </div>
+              <div>
+                <strong style="color: #15803d;">• ADJECTIFS (7) :</strong>
+                <span style="color: var(--ink);"><span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">inspiré</span> <span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">gigantesque</span> <span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">guidé</span> <span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">habillé</span> <span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">long</span> <span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">grand</span> <span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">fleuri</span></span>
+              </div>
+              <div>
+                <strong style="color: #6d28d9;">• INVARIABLES (7) :</strong>
+                <span style="color: var(--ink);"><span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">celui-ci</span> <span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">sur</span> <span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">vers</span> <span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">à côté</span> <span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">autour</span> <span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">seulement</span> <span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">également</span></span>
+              </div>
+            </div>
+          </div>
+
+          
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid #0d9488; border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-weight: 800; color: #0f766e; font-size: 0.95rem; margin-bottom: 2px;">
+                🔤 Orthographe associée : La valeur de la lettre G (G ou GU ?)
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin: 0;">
+                Règle d'or de Maîtresse France : On écrit <strong>g</strong> devant <em>a, o, u</em> (<em>le rivage, à gauche, gonflées, grand</em>) et <strong>gu</strong> devant <em>e, i</em> pour garder le son [g] (<em>les vagues, une longue chevelure, ils guident</em>).
+              </p>
+            </div>
+            <button class="action-btn" onclick="switchSubmodule('francais', 'orthographe_g_gu')" style="background: #0d9488; font-size: 0.82rem; padding: 6px 12px;">
+              🎯 S'entraîner sur G / GU ➡️
+            </button>
+          </div>
+        
+        </div>
+      
+        </div>
 
         <!-- Outil Dictée Vocale avec Madame Claire -->
         <div style="background: linear-gradient(135deg, #fdfbf7, #fef3c7); border: 2.5px solid var(--ink); border-radius: 16px; padding: 16px; margin: 14px 0; box-shadow: var(--shadow-comic-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
@@ -6863,8 +7007,8 @@
                 <span style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--ink);">
                   🎙️ Outil « Dictée Orale » avec Madame Claire
                 </span>
-                <span id="dictee-oral-series-tag" style="background: #e0e7ff; color: #3730a3; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 10px; font-weight: 800; font-size: 0.76rem;">
-                  Écoute & Écriture • Série 5
+                <span id="dictee-oral-series-tag" style="background: #ccfbf1; color: #0f766e; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 10px; font-weight: 800; font-size: 0.76rem;">
+                  Écoute & Écriture • Série 8
                 </span>
               </div>
               <p style="font-size: 0.88rem; color: var(--ink-light); margin-top: 4px;" id="dictee-oral-tagline">
@@ -6872,12 +7016,12 @@
               </p>
             </div>
           </div>
-          <button class="action-btn" onclick="openDicteeOraleModal()" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 12px 22px; font-size: 1.02rem; display: inline-flex; align-items: center; gap: 8px;">
-            <span>🎙️ Lancer la Dictée Vocale</span>
+          <button class="action-btn" onclick="openDicteeOraleModal()" style="background: linear-gradient(135deg, #0d9488, #0284c7); padding: 12px 22px; font-size: 1.02rem; display: inline-flex; align-items: center; gap: 8px;">
+            <span>🎙️ Lancer la Dictée Vocale (Série 8)</span>
           </button>
         </div>
 
-        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (<span id="ai-dictee-series-label">Mots de la Série 5</span>)</button>
+        <button class="ai-gen-btn" onclick="generateAiExercisesFor('francais_dictee_mots', this)">✨ Générer de nouvelles phrases d'entraînement avec l'IA (<span id="ai-dictee-series-label">Mots de la Série 8</span>)</button>
         <div id="quiz-container-dictee-mots" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
@@ -14845,38 +14989,50 @@
         oralBank: [
           {
             id: 1,
+            title: "Phrase 1 : Vénus et le rivage",
             level: "Phrase 1",
             text: "Sur une immense coquille, Vénus regarde le rivage sous le souffle du vent.",
+            advice: "N'oublie pas l'accord du verbe 'regarde' (3e pers. du singulier) et 'souffle' avec deux f.",
             hint: "N'oublie pas l'accord du verbe 'regarde' (3e pers. du singulier) et 'souffle' avec deux f."
           },
           {
             id: 2,
+            title: "Phrase 2 : Les souffles de vent",
             level: "Phrase 2",
             text: "À gauche du tableau, deux personnages guident le vent vers la jeune déesse.",
+            advice: "Règle du son [g] : 'gauche' (g devant a) et 'guident' (gu devant i pour garder le son [g]).",
             hint: "Règle du son [g] : 'gauche' (g devant a) et 'guident' (gu devant i pour garder le son [g])."
           },
           {
             id: 3,
+            title: "Phrase 3 : Le coquillage gigantesque",
             level: "Phrase 3",
             text: "La déesse de la beauté arrive sur le rivage, portée par un coquillage gigantesque.",
+            advice: "'portée' s'accorde au féminin singulier avec la déesse. 'gigantesque' prend un g devant i et a.",
             hint: "'portée' s'accorde au féminin singulier avec la déesse. 'gigantesque' prend un g devant i et a."
           },
           {
             id: 4,
+            title: "Phrase 4 : La robe fleurie",
             level: "Phrase 4",
             text: "À droite, une jeune femme habillée d'une robe fleurie apporte un grand manteau pour la recouvrir.",
+            advice: "'habillée' et 'fleurie' au féminin singulier. 'recouvrir' à l'infinitif après 'pour'.",
             hint: "'habillée' et 'fleurie' au féminin singulier. 'recouvrir' à l'infinitif après 'pour'."
           },
           {
             id: 5,
+            title: "Phrase 5 : L'arrivée du printemps",
             level: "Phrase 5",
             text: "Leurs joues gonflées montrent qu'ils soufflent avec vigueur et que le printemps s'installe.",
+            advice: "'joues gonflées' pluriel féminin (-ées). 'vigueur' s'écrit avec un simple g devant u.",
             hint: "'joues gonflées' pluriel féminin (-ées). 'vigueur' s'écrit avec un simple g devant u."
           },
           {
             id: 6,
+            title: "Bilan Complet : Le chef-d'œuvre de Botticelli",
             level: "Bilan Complet",
             text: "Botticelli a représenté une scène où la nature célèbre la beauté et la grâce de Vénus.",
+            advice: "'représenté' participe passé invariable après l'auxiliaire avoir. 'célèbre' s'accorde avec 'la nature'.",
             hint: "'représenté' participe passé invariable après l'auxiliaire avoir. 'célèbre' s'accorde avec 'la nature'."
           }
         ]
@@ -15137,15 +15293,15 @@
       }
     };
 
-    let currentDicteeSeriesNum = 5;
+    let currentDicteeSeriesNum = 8;
     let CURRENT_WEEK_DICTEE_WORDS = {
-      weekTitle: DICTEE_SERIES_DATA[5].weekTitle,
-      noms: DICTEE_SERIES_DATA[5].noms,
-      verbes: DICTEE_SERIES_DATA[5].verbes,
-      adjectifs: DICTEE_SERIES_DATA[5].adjectifs,
-      invariables: DICTEE_SERIES_DATA[5].invariables
+      weekTitle: DICTEE_SERIES_DATA[8].weekTitle,
+      noms: DICTEE_SERIES_DATA[8].noms,
+      verbes: DICTEE_SERIES_DATA[8].verbes,
+      adjectifs: DICTEE_SERIES_DATA[8].adjectifs,
+      invariables: DICTEE_SERIES_DATA[8].invariables
     };
-    let ORAL_DICTEE_BANK = ORAL_DICTEE_BANK_S5;
+    let ORAL_DICTEE_BANK = DICTEE_SERIES_DATA[8].oralBank;
 
     function renderDicteeSeriesUI(num) {
       const container = document.getElementById('dictee-series-dynamic-container');
@@ -15154,6 +15310,33 @@
 
       let reperesHtml = '';
       if (sData.reperes) {
+        // Vignette de la fiche de mots officielle (Padlet)
+        const motsImgSrc = sData.motsImage || (sData.image && sData.image.includes('mots') ? sData.image : null);
+        // Vignette du tableau / de l'œuvre d'art
+        const artImgSrc = sData.artImage || (sData.image && (sData.image.includes('art') || sData.image.includes('persee') || sData.image.includes('vivaldi')) ? sData.image : null);
+
+        let thumbsHtml = '';
+        if (motsImgSrc) {
+          thumbsHtml += `
+            <div style="text-align: center; flex-shrink: 0;">
+              <a href="${motsImgSrc}" target="_blank" title="Cliquer pour voir la fiche officielle des 36 mots en grand (Padlet)" style="display: inline-block; border: 2.5px solid #0d9488; border-radius: 8px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink);">
+                <img src="${motsImgSrc}" alt="Fiche Officielle des Mots Série ${num}" style="width: 82px; height: 108px; object-fit: cover; display: block;">
+              </a>
+              <div style="font-size: 0.72rem; font-weight: 800; color: #0d9488; margin-top: 3px;">📝 Fiche des Mots</div>
+            </div>
+          `;
+        }
+        if (artImgSrc && artImgSrc !== motsImgSrc) {
+          thumbsHtml += `
+            <div style="text-align: center; flex-shrink: 0;">
+              <a href="${artImgSrc}" target="_blank" title="Cliquer pour voir l'œuvre d'art en grand" style="display: inline-block; border: 2.5px solid #4338ca; border-radius: 8px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink);">
+                <img src="${artImgSrc}" alt="Tableau Série ${num}" style="width: 82px; height: 108px; object-fit: cover; display: block;">
+              </a>
+              <div style="font-size: 0.72rem; font-weight: 800; color: #4338ca; margin-top: 3px;">🎨 L'Œuvre d'Art</div>
+            </div>
+          `;
+        }
+
         reperesHtml = `
           <div class="dictee-reperes-card">
             <div style="flex: 1; min-width: 260px;">
@@ -15168,17 +15351,12 @@
                 <div><strong>• Domaine ?</strong> ${sData.reperes.domaine}</div>
               </div>
               <div style="margin-top: 8px; font-size: 0.82rem; background: #eff6ff; border-left: 3px solid #2563eb; padding: 4px 10px; border-radius: 4px;">
-                ⏳ <strong>Frise chronologique :</strong> Préhistoire ➔ Antiquité ➔ Moyen Âge ➔ <strong style="color:#b45309;">Temps modernes (1725)</strong> ➔ Époque contemporaine
+                ⏳ <strong>Repère historique :</strong> ${num === 8 ? '<strong style="color:#0d9488;">Renaissance italienne (vers 1485, XVe siècle)</strong> ➔ Galerie des Offices, Florence' : (num === 7 ? 'Antiquité grecque (- VIIIe siècle av. J.-C.)' : 'Temps Modernes (1725)')}
               </div>
             </div>
-            ${sData.image ? `
-            <div style="text-align: center; flex-shrink: 0;">
-              <a href="${sData.image}" target="_blank" title="Cliquer pour voir la fiche officielle en grand" style="display: inline-block; border: 2px solid var(--ink); border-radius: 8px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink);">
-                <img src="${sData.image}" alt="Fiche Officielle Série ${num}" style="width: 78px; height: 105px; object-fit: cover; display: block;">
-              </a>
-              <div style="font-size: 0.72rem; color: var(--ink-light); margin-top: 3px;">🔍 Voir la fiche</div>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center;">
+              ${thumbsHtml}
             </div>
-            ` : ''}
           </div>
         `;
       }
@@ -15293,6 +15471,31 @@
                 ${tableRowsHtml}
               </tbody>
             </table>
+          </div>
+
+          <!-- Cartouche Récapitulatif Visuel des Mots Clés -->
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 14px; box-shadow: var(--shadow-comic-sm);">
+            <div style="font-family: 'Fredoka', sans-serif; font-size: 1rem; font-weight: 700; color: ${sData.titleColor}; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+              <span>📋 Liste complète des mots à mémoriser (Série ${num}) :</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+              <div>
+                <strong style="color: #0369a1;">• NOMS (${sData.noms.length}) :</strong>
+                <span style="color: var(--ink);">${sData.noms.map(w => `<span style="display:inline-block; background:#f0f9ff; border:1px solid #bae6fd; padding:1px 6px; border-radius:6px; margin:2px;">${w}</span>`).join(' ')}</span>
+              </div>
+              <div>
+                <strong style="color: #b45309;">• VERBES (${sData.verbes.length}) :</strong>
+                <span style="color: var(--ink);">${sData.verbes.map(w => `<span style="display:inline-block; background:#fefce8; border:1px solid #fef08a; padding:1px 6px; border-radius:6px; margin:2px;">${w}</span>`).join(' ')}</span>
+              </div>
+              <div>
+                <strong style="color: #15803d;">• ADJECTIFS (${sData.adjectifs.length}) :</strong>
+                <span style="color: var(--ink);">${sData.adjectifs.map(w => `<span style="display:inline-block; background:#f0fdf4; border:1px solid #bbf7d0; padding:1px 6px; border-radius:6px; margin:2px;">${w}</span>`).join(' ')}</span>
+              </div>
+              <div>
+                <strong style="color: #6d28d9;">• INVARIABLES (${sData.invariables.length}) :</strong>
+                <span style="color: var(--ink);">${sData.invariables.map(w => `<span style="display:inline-block; background:#faf5ff; border:1px solid #e9d5ff; padding:1px 6px; border-radius:6px; margin:2px;">${w}</span>`).join(' ')}</span>
+              </div>
+            </div>
           </div>
 
           ${lessonAdviceHtml}
