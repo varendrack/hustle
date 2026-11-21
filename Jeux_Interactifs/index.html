@@ -6793,12 +6793,14 @@
 
       <div class="current-period-callout">
         <div class="period-callout-badge">🔥 NOUVEAUX APPRENTISSAGES • PÉRIODE 2</div>
-        <div class="period-callout-text">Focus du moment : Dictée 7 Persée et Méduse (🆕), Les 4 Valeurs du Présent (DM 🆕), Grammaire G3 & C2 Ring des 8 verbes.</div>
+        <div class="period-callout-text">Focus du moment : Dictée 8 La Naissance de Vénus (Botticelli 🆕), Orthographe Son [g] (G ou GU 🆕), Dictée 7 en révision, et Proportionnalité.</div>
         <button class="period-callout-btn" onclick="switchSubmodule('francais', 'archives_p1')">📦 Revoir les leçons de Période 1</button>
       </div>
 
       <div class="submodule-bar">
-        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Dictée 7 : Persée & Méduse (🆕, Séries 6, 5 & 4)</button>
+        <button class="submodule-btn active" onclick="switchSubmodule('francais', 'dictee_mots')">📜 Dictée 8 : La Naissance de Vénus (🆕 Botticelli & Archives)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'orthographe_g_gu')" style="border-color:#0d9488; color:#0f766e; font-weight:800;">🔤 Orthographe : G ou GU ? (Botticelli 🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('francais', 'lexique_l1')" style="border-color:#7c3aed; color:#6d28d9; font-weight:800;">📖 Lexique L1 : Polysémie & Sens figuré (🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_valeurs')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C3 : Les 4 Valeurs du Présent (DM 🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'grammaire_g3')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🧩 G3 : Complément du Nom (10 Défis 🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('francais', 'conjugaison_c2')" style="border-color:#d97706; color:#92400e; font-weight:800;">✍️ C2 : Ring des 8 Verbes (🆕)</button>
@@ -6812,21 +6814,37 @@
         <div class="dictee-series-bar">
           <div class="dictee-series-title">
             <span>📚 Série de dictée :</span>
-            <span style="font-size:0.85rem; font-weight:normal; color:var(--ink-light);">(Choisis la leçon à réviser)</span>
+            <span style="font-size:0.85rem; font-weight:normal; color:var(--ink-light);">(Choisis la leçon à travailler)</span>
           </div>
-          <div class="dictee-series-buttons">
-            <button class="dictee-series-btn" id="btn-series-4" onclick="selectDicteeSeries(4)">
-              <span>🦣 Série 4 : L'art pariétal (Préhistoire)</span>
+          <div class="dictee-series-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <!-- Active / En cours : Série 8 Botticelli -->
+            <button class="dictee-series-btn active" id="btn-series-8" onclick="selectDicteeSeries(8)" style="border-color:#0d9488;">
+              <span>🐚 Série 8 : La Naissance de Vénus (Botticelli)</span>
+              <span class="dictee-series-badge-new" style="background:#0d9488; color:#ffffff;">NOUVEAU • EN COURS</span>
+            </button>
+            <!-- Précédente : Série 7 Persée et Méduse -->
+            <button class="dictee-series-btn" id="btn-series-7" onclick="selectDicteeSeries(7)" style="border-color:#0284c7;">
+              <span>⚔️ Série 7 : Persée et Méduse</span>
+              <span style="background:#e0f2fe; color:#0369a1; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:12px;">PRÉCÉDENTE</span>
+            </button>
+            <!-- Bouton tiroir d'archives pour anciennes dictées -->
+            <button class="dictee-series-btn" id="btn-toggle-dictee-archives" onclick="toggleDicteeArchives()" style="background:#f8fafc; border-color:#94a3b8; color:#475569; font-weight:700;">
+              <span>📁 Archives des Dictées (Séries 6, 5, 4) <span id="dictee-archive-arrow">▾</span></span>
+            </button>
+          </div>
+          <!-- Tiroir rétractable d'archives pour séries antérieures -->
+          <div id="dictee-archives-drawer" style="display: none; margin-top: 10px; padding: 10px 14px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 10px; flex-wrap: wrap; gap: 8px;">
+            <button class="dictee-series-btn" id="btn-series-6" onclick="selectDicteeSeries(6)">
+              <span>🎨 Série 6 : La Trahison des images (René Magritte)</span>
+              <span style="background:#f1f5f9; color:#64748b; font-size:0.72rem; font-weight:700; padding:2px 6px; border-radius:10px;">Archive P2</span>
             </button>
             <button class="dictee-series-btn" id="btn-series-5" onclick="selectDicteeSeries(5)">
               <span>🎻 Série 5 : Les Quatre Saisons (Vivaldi)</span>
+              <span style="background:#f1f5f9; color:#64748b; font-size:0.72rem; font-weight:700; padding:2px 6px; border-radius:10px;">Archive P1</span>
             </button>
-            <button class="dictee-series-btn active" id="btn-series-7" onclick="selectDicteeSeries(7)">
-            <span>⚔️ Série 7 : Persée et Méduse (🆕)</span>
-          </button>
-          <button class="dictee-series-btn" id="btn-series-6" onclick="selectDicteeSeries(6)">
-              <span>🎨 Série 6 : La Trahison des images (René Magritte)</span>
-              <span class="dictee-series-badge-new">NOUVEAU</span>
+            <button class="dictee-series-btn" id="btn-series-4" onclick="selectDicteeSeries(4)">
+              <span>🦣 Série 4 : L'art pariétal (Préhistoire)</span>
+              <span style="background:#f1f5f9; color:#64748b; font-size:0.72rem; font-weight:700; padding:2px 6px; border-radius:10px;">Archive P1</span>
             </button>
           </div>
         </div>
@@ -6865,6 +6883,123 @@
 
       <!-- Français Sub 3: Orthographe 4 : « s » ou « ss » -->
 
+
+      <!-- ========================================================= -->
+      <!-- FRANÇAIS SUBMODULE : ORTHOGRAPHE SON [G] (G OU GU ?) -->
+      <!-- ========================================================= -->
+      <div id="sub-francais-orthographe_g_gu" class="submodule-content">
+        <!-- Bandeau Flash Tuteur : Le son [g] -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #0d9488; background: #f0fdfa;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title" style="color: #0f766e;">🔤 Règle d'or de Maîtresse France : La valeur de la lettre G</span>
+            <span style="font-size: 0.8rem; font-weight: 800; color: #0f766e; background: #ccfbf1; padding: 2px 8px; border-radius: 6px;">Padlet 19 Nov 2026</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold" style="border-color: #0d9488; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #0f766e;">🎯 On écrit « G »</span>
+              <span>Devant <strong>A, O, U</strong> et les <strong>consonnes</strong> : <em>le tableau, le rivage, à gauche, gonflées, grand, grâce</em>.</span>
+            </div>
+            <div class="tutor-flash-item tip" style="border-color: #0284c7; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #0369a1;">💡 On écrit « GU »</span>
+              <span>Devant <strong>E, I, Y</strong> pour conserver le son [g] : <em>les vagues, une longue robe, ils guident, la guitare</em>.</span>
+            </div>
+            <div class="tutor-flash-item trap" style="border-color: #dc2626; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #dc2626;">🚫 Le Piège à éviter</span>
+              <span>Sans le « u », la lettre G chante [ʒ] devant E et I (ex: <em>une girafe, une cage</em>) !</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atelier Interactif officiel : Exercice Devoir Botticelli -->
+        <div class="rule-box" style="border-left: 5px solid #0d9488; background: #f0fdfa; margin-top: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #99f6e4; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: #0f766e;">
+              🏛️ Atelier Devoir Maison : « La Naissance de Vénus » (Sandro Botticelli)
+            </span>
+            <span style="background: #ccfbf1; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #0f766e;">
+              Exercice officiel de la classe
+            </span>
+          </div>
+
+          <p style="font-size: 0.95rem; line-height: 1.6; color: #134e4a;">
+            <strong>Consigne de Maîtresse France :</strong><br>
+            <em>« Complète chaque mot avec <strong>g</strong> ou <strong>gu</strong> pour obtenir le son [g]. Clique sur les trous pour choisir ! »</em>
+          </p>
+
+          <div style="background: #ffffff; padding: 16px; border-radius: 12px; border: 1.5px solid var(--ink); font-size: 1.05rem; line-height: 2; color: #1e293b; margin-top: 12px;">
+            Sur une immense coquille, Vénus re<span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>arde le rivage.
+            Les va<span class="son-g-slot" data-expected="gu" onclick="cycleSonG(this)">___</span>es la poussent doucement vers la plage.
+            Une jeune femme l’attend, vêtue d’une lon<span class="son-g-slot" data-expected="gu" onclick="cycleSonG(this)">___</span>e robe fleurie.<br><br>
+            À <span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>auche du tableau, deux personnages <span class="son-g-slot" data-expected="gu" onclick="cycleSonG(this)">___</span>ident le vent vers la déesse.
+            Leurs joues <span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>onflées montrent qu’ils soufflent avec vi<span class="son-g-slot" data-expected="gu" onclick="cycleSonG(this)">___</span>eur.
+            Vénus <span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>arde une posture élé<span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>ante.<br><br>
+            À droite, une femme porte un <span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>rand manteau.
+            Elle semble vouloir protéger la déesse. Dans ce tableau, Botticelli a peint une scène qui évoque la beauté et la <span class="son-g-slot" data-expected="g" onclick="cycleSonG(this)">___</span>râce.
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
+            <button class="action-btn" onclick="checkSonGExercise()" style="background: #0d9488; padding: 8px 18px;">✅ Vérifier mes réponses</button>
+            <button class="action-btn" onclick="resetSonGExercise()" style="background: #64748b; padding: 8px 18px;">🔄 Réinitialiser</button>
+            <div id="son-g-fb" style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-left: 10px;"></div>
+          </div>
+        </div>
+
+        <!-- Quiz interactif de maîtrise du son [g] -->
+        <div style="margin-top: 20px;">
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #0f766e; margin-bottom: 10px;">
+            ⚡ Défi Élite : 8 Questions chrono sur G ou GU
+          </h3>
+          <div id="quiz-container-orthographe-son-g"></div>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- FRANÇAIS SUBMODULE : LEXIQUE L1 (POLYSÉMIE & SENS FIGURÉ) -->
+      <!-- ========================================================= -->
+      <div id="sub-francais-lexique_l1" class="submodule-content">
+        <!-- Bandeau Flash Tuteur : Lexique L1 -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #7c3aed; background: #faf5ff;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title" style="color: #6d28d9;">📖 Leçon L1 : Un mot, plusieurs sens (Sens propre vs Sens figuré)</span>
+            <span style="font-size: 0.8rem; font-weight: 800; color: #6d28d9; background: #ede9fe; padding: 2px 8px; border-radius: 6px;">Padlet 13 Nov 2026</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold" style="border-color: #7c3aed; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #6d28d9;">🎯 La Polysémie</span>
+              <span>La plupart des mots français ont <strong>plusieurs sens</strong> selon le contexte (notés 1., 2., 3. dans le dictionnaire).</span>
+            </div>
+            <div class="tutor-flash-item tip" style="border-color: #059669; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #059669;">🌱 Sens Propre</span>
+              <span>C'est le sens <strong>premier, concret, réel</strong> du mot : <em>L'aigle déploie ses <strong>ailes</strong></em> • <em>Le médecin écoute son <strong>cœur</strong></em>.</span>
+            </div>
+            <div class="tutor-flash-item trap" style="border-color: #d97706; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #b45309;">✨ Sens Figuré</span>
+              <span>C'est un sens <strong>imagé, abstrait ou poétique</strong> : <em>L'avion a brisé une <strong>aile</strong></em> • <em>Elle a un <strong>cœur d'or</strong></em> • <em><strong>Dévorer</strong> un livre</em>.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-box" style="border-left: 5px solid #7c3aed; background: #faf5ff; margin-top: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 700; color: #6d28d9;">
+              💡 L'Astuce Tuteur Élite : Comment reconnaître le sens figuré ?
+            </span>
+          </div>
+          <p style="font-size: 0.92rem; line-height: 1.6; color: #4c1d95;">
+            Pose-toi toujours la question : <strong>« Est-ce réalisable au pied de la lettre dans la vraie vie ? »</strong><br>
+            • Si quelqu'un <em>« tombe dans les pommes »</em>, a-t-il vraiment glissé sur un panier de fruits ? Non ➔ C'est une image (<strong>sens figuré</strong> = s'évanouir).<br>
+            • Si quelqu'un <em>« mange une pomme »</em> ➔ C'est un fruit réel que l'on croque (<strong>sens propre</strong>).
+          </p>
+        </div>
+
+        <!-- Quiz interactif Lexique L1 -->
+        <div style="margin-top: 20px;">
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #6d28d9; margin-bottom: 10px;">
+            ⚡ Défi Élite : 8 Questions de Maîtrise Lexique (Sens Propre vs Figuré)
+          </h3>
+          <div id="quiz-container-lexique-l1"></div>
+        </div>
+      </div>
 
       <!-- ========================================================= -->
       <!-- FRANÇAIS SUBMODULE : LES 4 VALEURS DU PRÉSENT (C3 - NOUVEAU) -->
@@ -7281,8 +7416,9 @@
         <button class="submodule-btn active" onclick="switchSubmodule('maths', 'droite_graduee')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">📏 Droite Graduée & Papier Millimétré (Décimaux 🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'contenances')" style="border-color:#16a34a; color:#166534; font-weight:800;">🧪 Les Contenances : L, dL, cL, mL (🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'decimaux')" style="border-color:#0284c7; color:#0369a1; font-weight:700;">🔢 Décodeur Décimal & Glisse-Nombre (MHM)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'proportionnalite')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚖️ Proportionnalité & Échelles (Canopé 🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('maths', 'devoir_construction')" style="border-color:#b45309; color:#92400e; font-weight:700;">📐 Devoir Noté : 5 Programmes</button>
-        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:700;">✏️ Frise Seyès (2 Nov)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('maths', 'frise_seyes')" style="border-color:#16a34a; color:#166534; font-weight:700;">✏️ Frises Seyès (2 & 20 Nov 🆕)</button>
         <button class="submodule-btn" id="subBtnMathsTurbo" onclick="switchSubmodule('maths', 'turbo')" style="background: linear-gradient(135deg, #fef08a, #fde047); border-color: #ca8a04; color: #713f12; font-weight: 900;">⚡ Turbo Tables CM2</button>
         <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('maths', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
       </div>
@@ -7573,6 +7709,79 @@
         <div id="quiz-container-decimaux" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
+      <!-- ========================================================= -->
+      <!-- MATHS SUBMODULE : PROPORTIONNALITÉ & ÉCHELLES (CANOPÉ / MHM) -->
+      <!-- ========================================================= -->
+      <div id="sub-maths-proportionnalite" class="submodule-content">
+        <!-- Bandeau Flash Tuteur : Proportionnalité -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #b45309; background: #fffbeb;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title" style="color: #92400e;">⚖️ Méthode Clé : La Proportionnalité et les Échelles</span>
+            <span style="font-size: 0.8rem; font-weight: 800; color: #92400e; background: #fef3c7; padding: 2px 8px; border-radius: 6px;">Canopé & MHM 19 Nov 2026</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold" style="border-color: #b45309; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #92400e;">🎯 Définition d'Or</span>
+              <span>Deux grandeurs sont proportionnelles lorsqu'on passe de l'une à l'autre en <strong>multipliant (ou divisant) par un même nombre</strong> (le coefficient).</span>
+            </div>
+            <div class="tutor-flash-item tip" style="border-color: #059669; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #059669;">💡 Les 3 Stratégies</span>
+              <span>1. <strong>Passage à l'unité</strong> (prix d'un seul objet)<br>2. <strong>Multiplication/Division</strong> (x2, x3, ÷2)<br>3. <strong>Addition de colonnes</strong></span>
+            </div>
+            <div class="tutor-flash-item trap" style="border-color: #0284c7; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #0369a1;">📐 Les Échelles (Canopé)</span>
+              <span>Échelle <strong>1/100</strong> : 1 cm sur le plan = 100 cm (soit 1 m) en vrai ! Échelle <strong>1/50</strong> : 1 cm = 50 cm.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculateur interactif d'échelle -->
+        <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb; margin-top: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #fde68a; padding-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: #92400e;">
+              🔍 Simulateur Interactif : Convertisseur d'Échelle (Plans & Cartes)
+            </span>
+            <a href="https://lesfondamentaux.reseau-canope.fr/video/mathematiques/organisation-et-gestion-des-donnees/resolution-de-problemes/proportionnalite-et-echelles" target="_blank" style="text-decoration: none; font-size: 0.8rem; font-weight: 800; color: #b45309; background: #fef3c7; border: 1.5px solid #b45309; padding: 4px 10px; border-radius: 8px;">
+              🎬 Voir la vidéo Canopé
+            </a>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink);">
+            <div>
+              <label style="font-weight: 800; font-size: 0.88rem; color: #92400e; display: block; margin-bottom: 4px;">Choisis l'échelle du plan :</label>
+              <select id="echelleSelect" onchange="runScaleCalculator()" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 2px solid var(--ink); font-weight: 700; font-size: 0.95rem;">
+                <option value="50">1/50 (Maquette / Mobilier : 1 cm = 50 cm = 0,5 m)</option>
+                <option value="100" selected>1/100 (Plan d'architecte maison : 1 cm = 100 cm = 1 m)</option>
+                <option value="200">1/200 (Plan de jardin / cour : 1 cm = 200 cm = 2 m)</option>
+                <option value="1000">1/1 000 (Plan de quartier : 1 cm = 10 m)</option>
+                <option value="100000">1/100 000 (Carte routière IGN : 1 cm = 1 km)</option>
+              </select>
+
+              <label style="font-weight: 800; font-size: 0.88rem; color: #92400e; display: block; margin: 12px 0 4px 0;">Longueur mesurée sur la feuille (en cm) :</label>
+              <input type="number" id="echelleCmInput" value="5" min="0.1" step="0.5" oninput="runScaleCalculator()" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 2px solid var(--ink); font-weight: 700; font-size: 1rem;">
+            </div>
+
+            <div style="background: #fefce8; border: 2px dashed #ca8a04; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; justify-content: center;">
+              <span style="font-size: 0.82rem; font-weight: 800; color: #854d0e; text-transform: uppercase;">Résultat dans la réalité :</span>
+              <div id="echelleResultBox" style="font-size: 1.5rem; font-weight: 900; color: #92400e; margin: 6px 0;">
+                5 mètres (500 cm)
+              </div>
+              <p id="echelleExplanation" style="font-size: 0.85rem; color: #713f12; margin: 0;">
+                Calcul : 5 cm x 100 = 500 cm = 5,00 m.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz interactif Proportionnalité -->
+        <div style="margin-top: 20px;">
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #92400e; margin-bottom: 10px;">
+            ⚡ Défi Élite : 8 Défis de Proportionnalité & Échelles
+          </h3>
+          <div id="quiz-container-proportionnalite"></div>
+        </div>
+      </div>
+
       <!-- Maths Sub : Devoir Noté Géométrie (Les 5 Programmes du Padlet) -->
 
 <div id="sub-maths-devoir_construction" class="submodule-content">
@@ -7623,38 +7832,75 @@
 
 <div id="sub-maths-frise_seyes" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #16a34a; background: #f0fdf4;">
+          <!-- Barre d'onglets pour choisir la Frise du 2 Nov ou du 20 Nov -->
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 8px;">
-            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: #166534;">
-              ✏️ Atelier Cahier : Frise géométrique sur réglure Seyès
-            </span>
-            <span style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
-              Exercice publié le 2 Novembre sur le Padlet
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="action-btn active" id="btn-frise-20nov" onclick="switchFriseModel(20)" style="background: #16a34a; font-size: 0.88rem; padding: 6px 14px;">
+                ✨ Frise du 20 Novembre (Quadricolore 🆕)
+              </button>
+              <button class="action-btn" id="btn-frise-2nov" onclick="switchFriseModel(2)" style="background: #64748b; font-size: 0.88rem; padding: 6px 14px;">
+                📐 Frise du 2 Novembre (Bicolore)
+              </button>
+            </div>
+            <span id="friseDateBadge" style="background: #dcfce7; border: 1.5px solid var(--ink); padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.82rem; color: #14532d;">
+              Nouvelle frise postée le 20 Novembre 2026
             </span>
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
-            <div>
-              <p style="font-size: 0.95rem; line-height: 1.6; color: #14532d;">
-                <strong>Consigne de Maîtresse France :</strong><br>
-                <em>« Reproduis cette frise sur ton cahier en utilisant ton crayon de papier et ta règle. Choisis deux couleurs (crayons de couleur) et colorie chaque figure. »</em>
-              </p>
-              <div style="margin-top: 10px; border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
-                <img src="images/maths_2nov.jpeg" alt="Frise Seyès originale du cahier" style="width: 100%; display: block;">
+          <!-- Volet Frise 20 Novembre (Quadricolore) -->
+          <div id="pane-frise-20nov" style="display: block;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+              <div>
+                <p style="font-size: 0.95rem; line-height: 1.6; color: #14532d;">
+                  <strong>Consigne du 20 Novembre :</strong><br>
+                  <em>« Reproduis cette nouvelle frise géométrique sur réglure Seyès. Alterne tes 4 couleurs (bleu, rouge, vert, jaune) en suivant la symétrie des losanges et triangles ! »</em>
+                </p>
+                <div style="margin-top: 10px; border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                  <img src="images/frise_20nov.jpeg" alt="Frise Seyès originale du 20 Novembre" style="width: 100%; display: block;">
+                </div>
+              </div>
+
+              <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <strong style="color: #166534; font-size: 1rem;">🎨 Atelier Quadricolore Interactif :</strong>
+                  <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 12px 0;">
+                    Clique sur chaque forme pour alterner entre Bleu, Rouge, Vert et Jaune !
+                  </p>
+                  <div id="frise20NovGrid" style="display: flex; gap: 4px; overflow-x: auto; padding: 10px 4px; background: #fafafa; border: 1.5px solid #cbd5e1; border-radius: 8px;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
+                  <button class="action-btn" onclick="resetFrise20Nov()" style="background: #64748b; padding: 6px 14px; font-size: 0.85rem;">🔄 Effacer la frise</button>
+                  <button class="action-btn" onclick="autoColorFrise20Nov()" style="background: #16a34a; padding: 6px 14px; font-size: 0.85rem;">✨ Colorier en alternance auto</button>
+                </div>
               </div>
             </div>
+          </div>
 
-            <!-- Simulateur interactif de frise -->
-            <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+          <!-- Volet Frise 2 Novembre (Bicolore) -->
+          <div id="pane-frise-2nov" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
               <div>
-                <strong style="color: #166534; font-size: 1rem;">🎨 Atelier Numérique Interactif :</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 12px 0;">
-                  Clique sur les cases pour alterner tes deux couleurs (bleu & jaune ou vert & violet) et faire vivre le motif géométrique régulier !
+                <p style="font-size: 0.95rem; line-height: 1.6; color: #14532d;">
+                  <strong>Consigne du 2 Novembre :</strong><br>
+                  <em>« Reproduis cette frise sur ton cahier en utilisant ton crayon de papier et ta règle. Choisis deux couleurs et colorie chaque parallélogramme. »</em>
                 </p>
-                <div id="friseInteractiveGrid" style="display: flex; gap: 4px; overflow-x: auto; padding: 10px 4px; background: #fafafa; border: 1.5px solid #cbd5e1; border-radius: 8px;"></div>
+                <div style="margin-top: 10px; border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow-comic-sm);">
+                  <img src="images/maths_2nov.jpeg" alt="Frise Seyès originale du cahier" style="width: 100%; display: block;">
+                </div>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
-                <button class="action-btn" onclick="resetFriseInteractive()" style="background: #64748b; padding: 6px 14px; font-size: 0.85rem;">🔄 Effacer la frise</button>
-                <button class="action-btn" onclick="autoColorFrise()" style="background: #16a34a; padding: 6px 14px; font-size: 0.85rem;">✨ Colorier en alternance auto</button>
+
+              <div style="background: #ffffff; padding: 14px; border-radius: 12px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <strong style="color: #166534; font-size: 1rem;">🎨 Atelier Numérique Bicolore :</strong>
+                  <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 12px 0;">
+                    Clique sur les cases pour alterner tes deux couleurs (bleu & jaune) !
+                  </p>
+                  <div id="friseInteractiveGrid" style="display: flex; gap: 4px; overflow-x: auto; padding: 10px 4px; background: #fafafa; border: 1.5px solid #cbd5e1; border-radius: 8px;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
+                  <button class="action-btn" onclick="resetFriseInteractive()" style="background: #64748b; padding: 6px 14px; font-size: 0.85rem;">🔄 Effacer</button>
+                  <button class="action-btn" onclick="autoColorFrise()" style="background: #16a34a; padding: 6px 14px; font-size: 0.85rem;">✨ Colorier auto</button>
+                </div>
               </div>
             </div>
           </div>
@@ -8444,8 +8690,9 @@
 
       <div class="submodule-bar">
         <button class="submodule-btn active" onclick="switchSubmodule('histoire', 'gallo_romains')" style="border-color:#b45309; color:#92400e; font-weight:800;">⚔️ La Gaule Romaine : Alésia & La Cité (🆕)</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'geo_globe')" style="border-color:#0284c7; color:#0369a1; font-weight:800;">🌍 Géo : Globe & Planisphère (🆕)</button>
         <button class="submodule-btn" onclick="switchSubmodule('histoire', 'gaulois')" style="border-color:#b45309; color:#92400e; font-weight:700;">🛡️ Les Gaulois & les Celtes</button>
-        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#0284c7; color:#0369a1; font-weight:700;">🌍 Géo : L'Italie & Arcimboldo</button>
+        <button class="submodule-btn" onclick="switchSubmodule('histoire', 'italie')" style="border-color:#16a34a; color:#166534; font-weight:700;">🇮🇹 Géo : L'Italie & Arcimboldo</button>
         <button class="submodule-btn tab-btn-archive-pill" onclick="switchSubmodule('histoire', 'archives_p1')" style="border-color:#64748b; background:#f8fafc; color:#334155; font-weight:800;">📦 Anciennes Leçons (Archives P1)</button>
       </div>
 
@@ -8535,6 +8782,57 @@
         <div id="quiz-container-gallo-romains" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
       </div>
 
+
+      <!-- ========================================================= -->
+      <!-- HISTOIRE / GÉO SUBMODULE : LE GLOBE & LE PLANISPHÈRE -->
+      <!-- ========================================================= -->
+      <div id="sub-histoire-geo_globe" class="submodule-content">
+        <!-- Bandeau Flash Tuteur : Géographie Globe & Planisphère -->
+        <div class="tutor-flash-card" style="border-left: 6px solid #0284c7; background: #f0f9ff;">
+          <div class="tutor-flash-header">
+            <span class="tutor-flash-title" style="color: #0369a1;">🌍 Géographie CM2 : Le Globe Terrestre et le Planisphère</span>
+            <span style="font-size: 0.8rem; font-weight: 800; color: #0369a1; background: #e0f2fe; padding: 2px 8px; border-radius: 6px;">Lutin Bazar S1 & S2 • Padlet 15-18 Nov</span>
+          </div>
+          <div class="tutor-flash-grid">
+            <div class="tutor-flash-item gold" style="border-color: #0284c7; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #0369a1;">🎯 Globe vs Planisphère</span>
+              <span>Le <strong>globe</strong> est une sphère 3D fidèle sans déformation. Le <strong>planisphère</strong> est une représentation à plat en 2D pour tout voir d'un coup d'œil.</span>
+            </div>
+            <div class="tutor-flash-item tip" style="border-color: #059669; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #059669;">🧭 Les Repères Clés</span>
+              <span><strong>L'Équateur</strong> sépare l'Hémisphère Nord et l'Hémisphère Sud. Les 2 pôles : <strong>Pôle Nord</strong> et <strong>Pôle Sud</strong>.</span>
+            </div>
+            <div class="tutor-flash-item trap" style="border-color: #b45309; background: #ffffff;">
+              <span class="tutor-flash-label" style="color: #b45309;">🌊 Continents & Océans</span>
+              <span><strong>6 continents :</strong> Europe, Asie, Afrique, Amérique, Océanie, Antarctique.<br><strong>5 océans :</strong> Pacifique (le plus vaste), Atlantique, Indien, Arctique, Austral.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-box" style="border-left: 5px solid #0284c7; background: #f0f9ff; margin-top: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <span style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0369a1;">
+              💡 La Planète Bleue en chiffres clés
+            </span>
+            <a href="https://youtu.be/kR3aJtKeA2o" target="_blank" style="text-decoration: none; font-size: 0.8rem; font-weight: 800; color: #0369a1; background: #e0f2fe; border: 1.5px solid #0284c7; padding: 4px 10px; border-radius: 8px;">
+              🎬 Vidéo Continents & Océans
+            </a>
+          </div>
+          <p style="font-size: 0.92rem; line-height: 1.6; color: #0c4a6e;">
+            • Les mers et océans recouvrent environ <strong>71 % de la surface terrestre</strong>.<br>
+            • L'eau est liquide sur Terre grâce à sa distance idéale au Soleil (zone habitable).<br>
+            • La France métropolitaine est située en <strong>Europe</strong>, dans l'<strong>Hémisphère Nord</strong>, bordée par l'Océan Atlantique et la Mer Méditerranée.
+          </p>
+        </div>
+
+        <!-- Quiz interactif Globe & Planisphère -->
+        <div style="margin-top: 20px;">
+          <h3 style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; color: #0369a1; margin-bottom: 10px;">
+            ⚡ Défi Élite : 8 Questions de Géographie (Continents, Océans & Repères)
+          </h3>
+          <div id="quiz-container-geo-globe"></div>
+        </div>
+      </div>
 
       <div id="sub-histoire-gaulois" class="submodule-content">
         <div class="rule-box" style="border-left: 5px solid #b45309; background: #fffbeb;">
@@ -14463,6 +14761,110 @@
     ];
 
     const DICTEE_SERIES_DATA = {
+      8: {
+        number: 8,
+        weekTitle: "La Naissance de Vénus (Sandro Botticelli)",
+        shortBadge: "🐚 Thème : La Naissance de Vénus (Botticelli)",
+        themeEmoji: "🐚",
+        borderColor: "#0d9488",
+        bgColor: "#f0fdfa",
+        titleColor: "#0f766e",
+        badgeBg: "#ccfbf1",
+        badgeColor: "#0d9488",
+        reperes: {
+          titre: "La Naissance de Vénus (vers 1485)",
+          qui: "Sandro Botticelli (peintre florentin de la Renaissance, 1445-1510)",
+          lieu: "Florence (Italie) • Galerie des Offices",
+          quand: "Renaissance italienne (vers 1485, XVe siècle)",
+          domaine: "Histoire des Arts & Mythologie gréco-romaine"
+        },
+        image: "images/dictee8_art.jpeg",
+        motsImage: "images/dictee8_mots.jpg",
+        videoUrl: "https://youtu.be/Zscrl6RjBAc",
+        noms: [
+          "le tableau", "la scène", "la naissance", "le dieu / la déesse", "la beauté",
+          "le coquillage", "le rivage", "le vent", "la gauche", "la fleur", "la femme",
+          "la chevelure", "la droite", "l'œuvre", "le printemps", "l'arrivée"
+        ],
+        verbes: [
+          "représenter", "naviguer", "distinguer", "souffler", "guetter", "recouvrir"
+        ],
+        adjectifs: [
+          "inspiré", "gigantesque", "guidé", "habillé", "long", "grand", "fleuri"
+        ],
+        invariables: [
+          "celui-ci", "sur", "vers", "à côté", "autour", "seulement", "également"
+        ],
+        tableRows: [
+          {
+            levels: ["jaune", "vert", "violet", "or"],
+            noms: "le tableau<br>le rivage<br>le vent<br>la fleur",
+            verbes: "souffler",
+            adjectifs: "grand<br>long",
+            invariables: "sur<br>vers"
+          },
+          {
+            levels: ["vert", "violet", "or"],
+            noms: "la scène<br>le dieu / la déesse<br>la femme<br>la droite<br>le printemps",
+            verbes: "naviguer<br>guetter",
+            adjectifs: "fleuri<br>habillé",
+            invariables: "à côté<br>autour"
+          },
+          {
+            levels: ["violet", "or"],
+            noms: "la naissance<br>la beauté<br>le coquillage<br>la chevelure<br>l'arrivée",
+            verbes: "représenter<br>distinguer",
+            adjectifs: "guidé<br>inspiré",
+            invariables: "celui-ci<br>seulement"
+          },
+          {
+            levels: ["or"],
+            noms: "la gauche<br>l'œuvre",
+            verbes: "recouvrir",
+            adjectifs: "gigantesque",
+            invariables: "également"
+          }
+        ],
+        oralBank: [
+          {
+            id: 1,
+            level: "Phrase 1",
+            text: "Sur une immense coquille, Vénus regarde le rivage sous le souffle du vent.",
+            hint: "N'oublie pas l'accord du verbe 'regarde' (3e pers. du singulier) et 'souffle' avec deux f."
+          },
+          {
+            id: 2,
+            level: "Phrase 2",
+            text: "À gauche du tableau, deux personnages guident le vent vers la jeune déesse.",
+            hint: "Règle du son [g] : 'gauche' (g devant a) et 'guident' (gu devant i pour garder le son [g])."
+          },
+          {
+            id: 3,
+            level: "Phrase 3",
+            text: "La déesse de la beauté arrive sur le rivage, portée par un coquillage gigantesque.",
+            hint: "'portée' s'accorde au féminin singulier avec la déesse. 'gigantesque' prend un g devant i et a."
+          },
+          {
+            id: 4,
+            level: "Phrase 4",
+            text: "À droite, une jeune femme habillée d'une robe fleurie apporte un grand manteau pour la recouvrir.",
+            hint: "'habillée' et 'fleurie' au féminin singulier. 'recouvrir' à l'infinitif après 'pour'."
+          },
+          {
+            id: 5,
+            level: "Phrase 5",
+            text: "Leurs joues gonflées montrent qu'ils soufflent avec vigueur et que le printemps s'installe.",
+            hint: "'joues gonflées' pluriel féminin (-ées). 'vigueur' s'écrit avec un simple g devant u."
+          },
+          {
+            id: 6,
+            level: "Bilan Complet",
+            text: "Botticelli a représenté une scène où la nature célèbre la beauté et la grâce de Vénus.",
+            hint: "'représenté' participe passé invariable après l'auxiliaire avoir. 'célèbre' s'accorde avec 'la nature'."
+          }
+        ]
+      },
+
       7: {
         number: 7,
         weekTitle: "Persée et Méduse (Mythologie grecque)",
@@ -14501,39 +14903,31 @@
         tableRows: [
           {
             levels: ["jaune", "vert", "violet", "or"],
-            colorClass: "col-noms",
-            label: "NOMS",
-            jaune: "une tête, la mère, la pierre",
-            vert: "une créature, le serpent, un objet, la montagne",
-            violet: "les cheveux, un conseil, une sandale, le casque, un bouclier",
-            or: "des dieux, le reflet"
-          },
-          {
-            levels: ["jaune", "vert", "violet", "or"],
-            colorClass: "col-verbes",
-            label: "VERBES",
-            jaune: "habiter, être",
-            vert: "apporter, regarder, donner",
-            violet: "épouser, devoir, rejoindre, se coiffer",
-            or: "pouvoir, risquer, bondir"
+            noms: "une tête<br>la mère<br>la pierre",
+            verbes: "habiter<br>être",
+            adjectifs: "<em>—</em>",
+            invariables: "avec / dans<br>sur"
           },
           {
             levels: ["vert", "violet", "or"],
-            colorClass: "col-adj",
-            label: "ADJECTIFS",
-            jaune: "—",
-            vert: "vivant, terrible",
-            violet: "magique, invisible",
-            or: "monstrueux / monstrueuse, ailé, pétrifié"
+            noms: "une créature<br>le serpent<br>un objet<br>la montagne",
+            verbes: "apporter<br>regarder<br>donner",
+            adjectifs: "vivant<br>terrible",
+            invariables: "puis / sans"
           },
           {
-            levels: ["jaune", "vert", "violet", "or"],
-            colorClass: "col-inv",
-            label: "INVARIABLES",
-            jaune: "avec, dans, sur",
-            vert: "puis, sans",
-            violet: "dont, soudain, celui-ci",
-            or: "aussitôt, afin de"
+            levels: ["violet", "or"],
+            noms: "les cheveux<br>un conseil<br>une sandale<br>le casque<br>un bouclier",
+            verbes: "épouser / devoir<br>rejoindre<br>se coiffer",
+            adjectifs: "magique<br>invisible",
+            invariables: "dont<br>soudain<br>celui-ci"
+          },
+          {
+            levels: ["or"],
+            noms: "des dieux<br>le reflet",
+            verbes: "pouvoir<br>risquer<br>bondir",
+            adjectifs: "monstrueux / monstrueuse<br>ailé<br>pétrifié",
+            invariables: "aussitôt<br>afin de"
           }
         ],
         oralBank: [
@@ -14787,7 +15181,36 @@
       });
 
       let lessonAdviceHtml = '';
-      if (num === 5) {
+      if (num === 8) {
+        lessonAdviceHtml = `
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid #0d9488; border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-weight: 800; color: #0f766e; font-size: 0.95rem; margin-bottom: 2px;">
+                🔤 Orthographe associée : La valeur de la lettre G (G ou GU ?)
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin: 0;">
+                Règle d'or de Maîtresse France : On écrit <strong>g</strong> devant <em>a, o, u</em> (<em>le rivage, à gauche, gonflées, grand</em>) et <strong>gu</strong> devant <em>e, i</em> pour garder le son [g] (<em>les vagues, une longue chevelure, ils guident</em>).
+              </p>
+            </div>
+            <button class="action-btn" onclick="switchSubmodule('francais', 'orthographe_g_gu')" style="background: #0d9488; font-size: 0.82rem; padding: 6px 12px;">
+              🎯 S'entraîner sur G / GU ➡️
+            </button>
+          </div>
+        `;
+      } else if (num === 7) {
+        lessonAdviceHtml = `
+          <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid #0284c7; border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-weight: 800; color: #0369a1; font-size: 0.95rem; margin-bottom: 2px;">
+                ⚔️ Thème Mythologie : Persée et Méduse
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-light); margin: 0;">
+                Mots clés de révision : <em>monstrueuse</em> (-euse), <em>des dieux</em> (-x), <em>des sandales ailées</em> (-ées), <em>aussitôt</em> (deux 's', ô circonflexe) et <em>dont</em>.
+              </p>
+            </div>
+          </div>
+        `;
+      } else if (num === 5) {
         lessonAdviceHtml = `
           <div style="margin-top: 14px; background: #ffffff; border: 1.5px solid #2563eb; border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-comic-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
             <div>
@@ -14860,18 +15283,37 @@
       `;
     }
 
+    function toggleDicteeArchives() {
+      const drawer = document.getElementById('dictee-archives-drawer');
+      const arrow = document.getElementById('dictee-archive-arrow');
+      if (!drawer) return;
+      const isHidden = drawer.style.display === 'none' || drawer.style.display === '';
+      drawer.style.display = isHidden ? 'flex' : 'none';
+      if (arrow) arrow.innerText = isHidden ? '▴' : '▾';
+    }
+
     function selectDicteeSeries(num) {
       currentDicteeSeriesNum = num;
       try {
         localStorage.setItem('cm2_dictee_series', num);
       } catch (e) {}
 
+      // Si la série choisie fait partie des archives antérieures, ouvrir le tiroir
+      if (num <= 6) {
+        const drawer = document.getElementById('dictee-archives-drawer');
+        const arrow = document.getElementById('dictee-archive-arrow');
+        if (drawer) {
+          drawer.style.display = 'flex';
+          if (arrow) arrow.innerText = '▴';
+        }
+      }
+
       // Mettre à jour l'état visuel des boutons de série
       document.querySelectorAll('.dictee-series-btn').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.getElementById(`btn-series-${num}`);
       if (activeBtn) activeBtn.classList.add('active');
 
-      const sData = DICTEE_SERIES_DATA[num] || DICTEE_SERIES_DATA[5];
+      const sData = DICTEE_SERIES_DATA[num] || DICTEE_SERIES_DATA[8] || DICTEE_SERIES_DATA[5];
 
       // Mettre à jour les données de la semaine en cours
       CURRENT_WEEK_DICTEE_WORDS = {
@@ -14902,7 +15344,11 @@
       }
 
       // Recharger le Quiz d'entraînement des mots pour cette série
-      const questions = (num === 7 && typeof allDicteeMotsQuestionsS7 !== 'undefined') ? allDicteeMotsQuestionsS7 : ((num === 6 && typeof allDicteeMotsQuestionsS6 !== 'undefined') ? allDicteeMotsQuestionsS6 : ((num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 : (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions)));
+      const questions = (num === 8 && typeof allDicteeMotsQuestionsS8 !== 'undefined') ? allDicteeMotsQuestionsS8 :
+                        ((num === 7 && typeof allDicteeMotsQuestionsS7 !== 'undefined') ? allDicteeMotsQuestionsS7 :
+                        ((num === 6 && typeof allDicteeMotsQuestionsS6 !== 'undefined') ? allDicteeMotsQuestionsS6 :
+                        ((num === 5 && typeof allDicteeMotsQuestionsS5 !== 'undefined') ? allDicteeMotsQuestionsS5 :
+                        (typeof allDicteeMotsQuestionsS4 !== 'undefined' ? allDicteeMotsQuestionsS4 : allDicteeMotsQuestions))));
       if (typeof QuizRunner !== 'undefined') {
         new QuizRunner('quiz-container-dictee-mots', questions, {
           title: `Mots de la Dictée — Série ${num}`,
@@ -15898,66 +16344,117 @@ Renvoie STRICTEMENT un JSON valide au format suivant :
 
     // 1. FRANÇAIS - DICTÉE SÉRIE 6 : MAGRITTE & LA TRAHISON DES IMAGES (8 questions)
     
+    const allDicteeMotsQuestionsS8 = [
+      {
+        display: "Orthographe de la liste officielle : Dans <em>« les va<span class='blank-slot'>...</span>es »</em>, comment s'écrit le son [g] devant le 'e' ?",
+        options: ["vagues", "vages", "vaghes", "vaques"],
+        correct: "vagues",
+        tip: "Règle de Maîtresse France : On écrit 'gu' devant 'e' ou 'i' pour conserver le son [g] !"
+      },
+      {
+        display: "Accord dans le groupe nominal : <em>« La jeune déesse porte une <span class='blank-slot'>...</span> robe fleurie. »</em>",
+        options: ["longue", "long", "longs", "longues"],
+        correct: "longue",
+        tip: "« robe » est féminin singulier : l'adjectif 'long' devient 'longue' (-gue) au féminin !"
+      },
+      {
+        display: "Vocabulaire officiel du tableau : Comment s'écrit le mot désignant la coquille où se tient Vénus ?",
+        options: ["un coquillage", "un coquillaje", "un coquiage", "un coquilage"],
+        correct: "un coquillage",
+        tip: "« un coquillage » prend deux 'l' (-ill-) et se termine par le suffixe masculin -age !"
+      },
+      {
+        display: "Féminin du nom : Quel est le féminin correspondant au mot « dieu » ?",
+        options: ["la déesse", "la diégresse", "la diablesse", "la dieue"],
+        correct: "la déesse",
+        tip: "Le féminin de « dieu » est « la déesse » avec un accent aigu et deux 's' !"
+      },
+      {
+        display: "Accord participe passé : <em>« Les deux personnages sont <span class='blank-slot'>...</span> par le vent. »</em> (guider)",
+        options: ["guidés", "guidé", "guidée", "guider"],
+        correct: "guidés",
+        tip: "Le sujet est « les deux personnages » (masculin pluriel), avec l'auxiliaire être ➔ participe en -és !"
+      },
+      {
+        display: "Mot invariable : Comment s'écrit le mot invariable signifiant « de la même façon / aussi » ?",
+        options: ["également", "égallment", "égualement", "egalement"],
+        correct: "également",
+        tip: "« également » prend un accent aigu 'é' et un seul 'l' !"
+      },
+      {
+        display: "Orthographe lexicale : Comment s'écrit l'adjectif signifiant « d'une taille immense » ?",
+        options: ["gigantesque", "jigantesque", "guigantesque", "gigantex"],
+        correct: "gigantesque",
+        tip: "« gigantesque » s'écrit avec un 'g' initial (qui fait [ʒ] devant 'i') puis un second 'g' devant 'a' (son [g]) !"
+      },
+      {
+        display: "Règle du son [g] : Dans <em>« À <span class='blank-slot'>...</span>auche du tableau »</em>, quelle lettre choisit-on devant 'a' ?",
+        options: ["g", "gu", "j", "ge"],
+        correct: "g",
+        tip: "Devant a, o, u, la simple lettre 'g' donne toujours le son [g] (ex: gauche, gare, gourde) !"
+      }
+    ];
+
     const allDicteeMotsQuestionsS7 = [
       {
-        question: "Quel est le féminin correct de l'adjectif « monstrueux » ?",
+        display: "Quel est le féminin correct de l'adjectif « monstrueux » ?",
         options: ["monstrueuse", "monstrueusse", "monstrueuxse", "monstrueuze"],
-        answer: 0,
-        hint: "Les adjectifs en -eux font généralement leur féminin en -euse (heureux ➔ heureuse, monstrueux ➔ monstrueuse)."
+        correct: "monstrueuse",
+        tip: "Les adjectifs en -eux font généralement leur féminin en -euse (heureux ➔ heureuse, monstrueux ➔ monstrueuse)."
       },
       {
-        question: "Comment s'écrit le pluriel du nom « cheveu » ?",
+        display: "Comment s'écrit le pluriel du nom « cheveu » ?",
         options: ["des cheveux", "des cheveus", "des cheveuz", "des cheveu"],
-        answer: 0,
-        hint: "Les noms en -eu prennent un -x au pluriel (un cheveu ➔ des cheveux, un jeu ➔ des jeux)."
+        correct: "des cheveux",
+        tip: "Les noms en -eu prennent un -x au pluriel (un cheveu ➔ des cheveux, un jeu ➔ des jeux)."
       },
       {
-        question: "Dans « des dieux bienveillants », quelle est la bonne terminaison du mot « dieux » ?",
+        display: "Dans « des dieux bienveillants », quelle est la bonne terminaison du mot « dieux » ?",
         options: ["-x", "-s", "-z", "-ts"],
-        answer: 0,
-        hint: "Le pluriel de « dieu » est « dieux » avec un x !"
+        correct: "-x",
+        tip: "Le pluriel de « dieu » est « dieux » avec un x !"
       },
       {
-        question: "Comment s'écrit correctement le mot invariable signifiant « immédiatement » ?",
+        display: "Comment s'écrit correctement le mot invariable signifiant « immédiatement » ?",
         options: ["aussitôt", "aussitot", "ossitôt", "aussitôtte"],
-        answer: 0,
-        hint: "« aussitôt » prend deux 's' pour le son [s] entre deux voyelles et un accent circonflexe sur le 'ô' !"
+        correct: "aussitôt",
+        tip: "« aussitôt » prend deux 's' pour le son [s] entre deux voyelles et un accent circonflexe sur le 'ô' !"
       },
       {
-        question: "Dans la phrase « Sans la ________ directement », quelle forme du verbe « regarder » faut-il employer ?",
+        display: "Dans la phrase <em>« Sans la <span class='blank-slot'>...</span> directement »</em>, quelle forme du verbe « regarder » employer ?",
         options: ["regarder", "regardé", "regardez", "regardait"],
-        answer: 0,
-        hint: "Après une préposition comme « sans », « pour », « de », « à », le verbe est toujours à l'INFINITIF (-er) !"
+        correct: "regarder",
+        tip: "Après une préposition comme « sans », « pour », « de », « à », le verbe est toujours à l'INFINITIF (-er) !"
       },
       {
-        question: "Quelle est l'orthographe correcte de l'adjectif « ailé » accordé avec « des sandales » ?",
+        display: "Quelle est l'orthographe correcte de l'adjectif « ailé » accordé avec « des sandales » ?",
         options: ["des sandales ailées", "des sandales ailés", "des sandales aillées", "des sandales ailée"],
-        answer: 0,
-        hint: "« sandale » est féminin. Au pluriel : féminin pluriel ➔ « ailées » (un seul 'l', -ées)."
+        correct: "des sandales ailées",
+        tip: "« sandale » est féminin. Au pluriel : féminin pluriel ➔ « ailées » (un seul 'l', -ées)."
       },
       {
-        question: "Dans « Persée observe son reflet afin de ne pas être ________ », comment écrire ce participe passé ?",
+        display: "Dans <em>« Persée observe son reflet afin de ne pas être <span class='blank-slot'>...</span> »</em>, comment écrire ce participe passé ?",
         options: ["pétrifié", "pétrifier", "pétrifiée", "pétrifiés"],
-        answer: 0,
-        hint: "Persée est masculin singulier : avec l'auxiliaire être, le participe passé prend un simple -é !"
+        correct: "pétrifié",
+        tip: "Persée est masculin singulier : avec l'auxiliaire être, le participe passé prend un simple -é !"
       },
       {
-        question: "Quel mot invariable relie la proposition : « sa mère _____ le roi cruel exige le mariage » ?",
+        display: "Quel mot invariable relie la proposition : <em>« sa mère <span class='blank-slot'>...</span> le roi cruel exige le mariage »</em> ?",
         options: ["dont", "d'on", "donc", "d'ont"],
-        answer: 0,
-        hint: "« dont » est un pronom relatif invariable (qui remplace 'de laquelle')."
+        correct: "dont",
+        tip: "« dont » est un pronom relatif invariable (qui remplace 'de laquelle')."
       },
       {
-        question: "Comment se conjugue le verbe « bondir » avec le sujet « le héros » au présent ?",
+        display: "Comment se conjugue le verbe « bondir » avec le sujet « le héros » au présent ?",
         options: ["bondit", "bondi", "bondis", "bondisse"],
-        answer: 0,
-        hint: "C'est un verbe du 2e groupe : il bondit (terminaison -it avec il/le héros)."
+        correct: "bondit",
+        tip: "C'est un verbe du 2e groupe : il bondit (terminaison -it avec il/le héros)."
       },
       {
-        question: "Quelle est la bonne orthographe du mot désignant l'armure de protection pour la tête ?",
+        display: "Quelle est la bonne orthographe du mot désignant l'armure de protection pour la tête ?",
         options: ["le casque", "le chasque", "le kask", "le casqe"],
-        answer: 0,
-        hint: "« casque » s'écrit avec un 'c' initial et 'que' à la fin !"
+        correct: "le casque",
+        tip: "« casque » s'écrit avec un 'c' initial et 'que' à la fin !"
       }
     ];
 
@@ -22526,6 +23023,17 @@ Format JSON attendu :
     // =========================================================================
     const initialPoemsList = [
       {
+        id: "lion_rat",
+        title: "Le Lion et le Rat",
+        author: "Jean de La Fontaine (Fables, 1668)",
+        stanzas: [
+          ["Il faut, autant qu'on peut, obliger tout le monde :", "On a souvent besoin d'un plus petit que soi.", "De cette vérité deux Fables feront foi,", "Tant la chose en preuves abonde."],
+          ["Entre les pattes d'un Lion", "Un Rat sortit de terre assez à l'étourdie.", "Le Roi des animaux, en cette occasion,", "Montra ce qu'il était, et lui donna la vie.", "Ce bienfait ne fut pas perdu."],
+          ["Quelqu'un aurait-il jamais cru", "Qu'un Lion d'un Rat eût affaire ?", "Cependant il advint qu'au sortir des forêts", "Ce Lion fut pris dans des rets,", "Dont ses rugissements ne le purent défaire."],
+          ["Sire Rat accourut, et fit tant par ses dents", "Qu'une maille rongée emporta tout l'ouvrage.", "Patience et longueur de temps", "Font plus que force ni que rage."]
+        ]
+      },
+      {
         id: "corbeau",
         title: "Le Corbeau et le Renard",
         author: "Jean de La Fontaine (1668)",
@@ -25515,8 +26023,390 @@ Renvoie STRICTEMENT un objet JSON valide (sans backticks markdown, sans codebloc
     renderDetectiveMission();
     renderProblemSolver();
     
-    // Initialisation de la Série de Dictée (Série 6 - Magritte & Trahison des images par défaut)
-    selectDicteeSeries(6);
+    // =========================================================
+    // NOUVELLES BANQUES DE QUESTIONS PADLET (NOVEMBRE 2026)
+    // =========================================================
+
+    const allSonGQuestions = [
+      {
+        display: "Règle G ou GU : Dans <em>« Botticelli peint les va<span class='blank-slot'>...</span>es de la mer »</em>, on écrit :",
+        options: ["gu", "g", "ge", "j"],
+        correct: "gu",
+        tip: "Devant la voyelle 'e', il faut impérativement 'gu' pour obtenir le son [g], sinon 'g' ferait le son [ʒ] comme dans cage !"
+      },
+      {
+        display: "Règle G ou GU : Dans <em>« À <span class='blank-slot'>...</span>auche de la déesse »</em>, on écrit :",
+        options: ["g", "gu", "ge", "j"],
+        correct: "g",
+        tip: "Devant la voyelle 'a', la simple lettre 'g' produit le son [g] : pas besoin de 'u' !"
+      },
+      {
+        display: "Règle G ou GU : Dans <em>« Les deux personnages <span class='blank-slot'>...</span>ident le souffle du vent »</em>, on écrit :",
+        options: ["gu", "g", "ge", "j"],
+        correct: "gu",
+        tip: "Devant le 'i', on met 'gu' (guident, guitare). La lettre 'g' seule ferait [ʒ] (comme dans gilet) !"
+      },
+      {
+        display: "Règle G ou GU : Dans <em>« Vénus garde une posture élé<span class='blank-slot'>...</span>ante »</em>, on écrit :",
+        options: ["g", "gu", "ge", "j"],
+        correct: "g",
+        tip: "Devant le 'a', la lettre 'g' chante naturellement [g] !"
+      },
+      {
+        display: "Règle G ou GU : Dans <em>« Ils soufflent de toutes leurs forces avec vi<span class='blank-slot'>...</span>eur »</em>, on écrit :",
+        options: ["gu", "g", "ge", "j"],
+        correct: "gu",
+        tip: "Devant 'e', il faut 'gu' : la vi-gueur !"
+      },
+      {
+        display: "Règle G ou GU : Quel mot est correctement orthographié pour désigner l'instrument de musique ?",
+        options: ["guitare", "gitare", "geitare", "gwitare"],
+        correct: "guitare",
+        tip: "Devant le 'i', il faut 'gu' : la guitare !"
+      },
+      {
+        display: "Piège orthographique : Dans <em>« Après l'effort, le héros ressent une grande fati<span class='blank-slot'>...</span>e »</em>, on écrit :",
+        options: ["fatigue", "fatige", "fatig", "fatique"],
+        correct: "fatigue",
+        tip: "Le nom 'la fatigue' prend 'gue' à la fin pour faire sonner le [g] !"
+      },
+      {
+        display: "Règle G ou GU : Dans <em>« Le vent fait voler les fleurs avec <span class='blank-slot'>...</span>râce »</em>, on écrit :",
+        options: ["g", "gu", "ge", "j"],
+        correct: "g",
+        tip: "Devant une consonne (ici 'r'), la lettre 'g' fait directement le son [g] : grâce, grand, grotte !"
+      }
+    ];
+
+    const allLexiquePolysemieQuestions = [
+      {
+        display: "Sens propre ou figuré ? Dans la phrase <em>« Le pompier combat le mur de <strong>flammes</strong> »</em>, le mot est employé au :",
+        options: ["Sens propre", "Sens figuré"],
+        correct: "Sens propre",
+        tip: "C'est le sens réel, concret et premier : de véritables flammes de feu !"
+      },
+      {
+        display: "Sens propre ou figuré ? Dans la phrase <em>« Cet élève a une <strong>faim de loup</strong> pour apprendre »</em>, le mot est au :",
+        options: ["Sens figuré", "Sens propre"],
+        correct: "Sens figuré",
+        tip: "C'est une image ! L'élève ne dévore pas de la viande comme un loup, il a une grande soif d'apprendre."
+      },
+      {
+        display: "Polysémie : Que signifie l'expression <em>« brûler les étapes »</em> ?",
+        options: ["Aller trop vite sans respecter l'ordre normal", "Mettre le feu à un parcours", "Faire une pause au milieu du chemin", "Marcher très lentement"],
+        correct: "Aller trop vite sans respecter l'ordre normal",
+        tip: "C'est un sens figuré : 'brûler les étapes' signifie précipiter les choses sans faire les étapes nécessaires."
+      },
+      {
+        display: "Sens propre ou figuré ? Dans <em>« La jeune fille a un <strong>cœur d'or</strong> »</em>, quel est le sens ?",
+        options: ["Sens figuré (elle est très généreuse)", "Sens propre (son cœur est en métal précieux)"],
+        correct: "Sens figuré (elle est très généreuse)",
+        tip: "Un être humain ne possède pas un cœur fait d'or métallique : c'est une métaphore pour dire qu'elle est bienveillante !"
+      },
+      {
+        display: "Sens propre ou figuré ? Dans <em>« L'aigle déploie ses <strong>ailes</strong> majestueuses »</em>, quel est le sens ?",
+        options: ["Sens propre", "Sens figuré"],
+        correct: "Sens propre",
+        tip: "L'aile de l'oiseau est son sens anatomique premier et réel."
+      },
+      {
+        display: "Polysémie : Quel mot peut désigner à la fois <em>un meuble de bureau</em>, <em>le bord d'une rivière</em> et <em>un établissement financier</em> ?",
+        options: ["la banque", "la table", "le lit", "le pont"],
+        correct: "la banque",
+        tip: "Le mot 'banque' (ou 'banc') a une riche histoire polysémique : le banc de sable, le banc d'école, la banque d'argent !"
+      },
+      {
+        display: "Sens propre ou figuré ? Dans <em>« Il est tombé dans les <strong>pommes</strong> »</em>, quelle est la signification ?",
+        options: ["Il s'est évanoui (sens figuré)", "Il a glissé sur un panier de fruits (sens propre)", "Il adore manger des tartes aux pommes", "Il a cueilli des fruits dans le verger"],
+        correct: "Il s'est évanoui (sens figuré)",
+        tip: "Tomber dans les pommes est une expression imagée familière qui signifie perdre connaissance !"
+      },
+      {
+        display: "Sens propre ou figuré ? Dans <em>« Mon frère <strong>dévore</strong> un roman policier passionnant »</em>, le verbe est au :",
+        options: ["Sens figuré (lire avec passion et rapidité)", "Sens propre (manger le papier du livre)"],
+        correct: "Sens figuré (lire avec passion et rapidité)",
+        tip: "On dévore un repas au sens propre, mais on dévore un livre au sens figuré !"
+      }
+    ];
+
+    const allProportionnaliteQuestions = [
+      {
+        display: "Situation proportionnelle ? <em>« À 10 ans, Léa mesure 1,35 m. À 20 ans, elle mesurera exactement le double (2,70 m). »</em>",
+        options: ["Faux, ce n'est pas proportionnel", "Vrai, c'est proportionnel"],
+        correct: "Faux, ce n'est pas proportionnel",
+        tip: "La croissance humaine n'est pas proportionnelle à l'âge ! Une adulte ne mesure pas le double de sa taille d'enfant."
+      },
+      {
+        display: "Recette de cuisine : Pour 4 personnes, il faut 200 g de farine. Combien en faut-il pour 8 personnes ?",
+        options: ["400 g", "300 g", "500 g", "250 g"],
+        correct: "400 g",
+        tip: "Il y a 2 fois plus de personnes (8 = 4 x 2), il faut donc 2 fois plus de farine : 200 g x 2 = 400 g !"
+      },
+      {
+        display: "Passage à l'unité : 3 cahiers identiques coûtent 6 €. Combien coûtent 5 cahiers ?",
+        options: ["10 €", "12 €", "8 €", "15 €"],
+        correct: "10 €",
+        tip: "1 cahier coûte 6 € ÷ 3 = 2 €. Donc 5 cahiers coûtent 5 x 2 € = 10 € !"
+      },
+      {
+        display: "Les Échelles (Canopé) : Sur un plan à l'échelle <strong>1/100</strong>, 1 cm sur le papier représente en réalité :",
+        options: ["100 cm (soit 1 mètre)", "10 cm", "10 mètres", "1 kilomètre"],
+        correct: "100 cm (soit 1 mètre)",
+        tip: "Échelle 1/100 signifie que les dimensions réelles sont 100 fois plus grandes : 1 cm sur plan = 100 cm = 1 m en vrai !"
+      },
+      {
+        display: "Calcul d'échelle : Une chambre mesure 4 mètres de long (400 cm). À l'échelle 1/50, quelle sera sa longueur sur le plan ?",
+        options: ["8 cm", "4 cm", "12 cm", "20 cm"],
+        correct: "8 cm",
+        tip: "400 cm ÷ 50 = 8 cm sur le plan !"
+      },
+      {
+        display: "Coefficient de proportionnalité : Dans un tableau, si 2 correspond à 14 et 5 correspond à 35, quel est le coefficient multiplicateur ?",
+        options: ["7", "6", "5", "8"],
+        correct: "7",
+        tip: "2 x 7 = 14 et 5 x 7 = 35 : le coefficient de proportionnalité est 7 !"
+      },
+      {
+        display: "Échelle carte routière : Sur une carte à l'échelle 1/100 000, deux villages sont distants de 3 cm. Quelle est la distance réelle ?",
+        options: ["3 km (300 000 cm)", "30 km", "300 m", "30 m"],
+        correct: "3 km (300 000 cm)",
+        tip: "3 cm x 100 000 = 300 000 cm = 3 000 m = 3 km !"
+      },
+      {
+        display: "Tarif proportionnel : 5 kg de pommes coûtent 15 €. Combien coûteront 7 kg de ces mêmes pommes ?",
+        options: ["21 €", "18 €", "25 €", "20 €"],
+        correct: "21 €",
+        tip: "Le prix au kilo est de 15 ÷ 5 = 3 €/kg. Pour 7 kg : 7 x 3 = 21 € !"
+      }
+    ];
+
+    const allGeoGlobeQuestions = [
+      {
+        display: "Représentation de la Terre : Quelle est la représentation la plus fidèle de la Terre ?",
+        options: ["Le globe terrestre", "Le planisphère", "La carte de France", "Le satellite"],
+        correct: "Le globe terrestre",
+        tip: "Le globe terrestre est une sphère en 3 dimensions, tout comme notre planète : il ne déforme pas les continents !"
+      },
+      {
+        display: "Ligne imaginaire : Comment s'appelle la ligne imaginaire qui sépare la Terre en deux hémisphères (Nord et Sud) ?",
+        options: ["L'Équateur", "Le méridien de Greenwich", "Le tropique du Cancer", "Le pôle Nord"],
+        correct: "L'Équateur",
+        tip: "L'Équateur est le grand cercle imaginaire situé à égale distance des deux pôles !"
+      },
+      {
+        display: "Continents du monde : Combien dénombre-t-on traditionnellement de grands continents sur Terre ?",
+        options: ["6 continents", "4 continents", "8 continents", "12 continents"],
+        correct: "6 continents",
+        tip: "Les 6 continents étudiés en CM2 sont : l'Europe, l'Asie, l'Afrique, l'Amérique, l'Océanie et l'Antarctique !"
+      },
+      {
+        display: "Les Océans : Quel est le plus vaste océan de la planète Terre ?",
+        options: ["L'océan Pacifique", "L'océan Atlantique", "L'océan Indien", "L'océan Arctique"],
+        correct: "L'océan Pacifique",
+        tip: "L'océan Pacifique est le plus grand et le plus profond de tous les océans terrestres !"
+      },
+      {
+        display: "Hémisphères : Dans quel hémisphère la France métropolitaine se situe-t-elle ?",
+        options: ["L'hémisphère Nord", "L'hémisphère Sud", "L'hémisphère Ouest uniquement", "Sur l'Équateur"],
+        correct: "L'hémisphère Nord",
+        tip: "La France est située au nord de l'Équateur, donc dans l'hémisphère Nord (ou boréal) !"
+      },
+      {
+        display: "Géographie : Pourquoi appelle-t-on souvent la Terre « la Planète Bleue » ?",
+        options: ["Car les mers et océans recouvrent environ 71 % de sa surface", "Car l'atmosphère est teintée d'encre bleue", "Car les forêts sont bleues vues du ciel", "Car le ciel est toujours bleu"],
+        correct: "Car les mers et océans recouvrent environ 71 % de sa surface",
+        tip: "Plus de 70 % de la surface terrestre est recouverte d'eau liquide, lui donnant cette couleur bleue depuis l'espace !"
+      },
+      {
+        display: "Pôles géographiques : Quel océan glacial entoure le pôle Nord ?",
+        options: ["L'océan Glacial Arctique", "L'océan Austral", "L'océan Indien", "L'océan Pacifique"],
+        correct: "L'océan Glacial Arctique",
+        tip: "Au pôle Nord se trouve l'océan Arctique (avec la banquise), tandis qu'au pôle Sud se trouve le continent Antarctique !"
+      },
+      {
+        display: "Définition : Qu'est-ce qu'un planisphère ?",
+        options: ["Une carte représentant la totalité de la surface terrestre à plat", "Une maquette en boule de la Terre", "Une boussole marine", "Une photo aérienne d'une seule ville"],
+        correct: "Une carte représentant la totalité de la surface terrestre à plat",
+        tip: "Le planisphère permet d'observer tous les continents et océans en un seul coup d'œil sur une surface plane !"
+      }
+    ];
+
+    // Helpers interactifs pour l'exercice Son [g] Botticelli
+    function cycleSonG(el) {
+      const current = el.innerText.trim();
+      if (current === '___') el.innerText = 'g';
+      else if (current === 'g') el.innerText = 'gu';
+      else el.innerText = '___';
+      el.style.color = '#0f766e';
+      el.style.fontWeight = '900';
+    }
+
+    function checkSonGExercise() {
+      const slots = document.querySelectorAll('.son-g-slot');
+      let correct = 0;
+      slots.forEach(s => {
+        const expected = s.getAttribute('data-expected');
+        const val = s.innerText.trim();
+        if (val === expected) {
+          correct++;
+          s.style.background = '#dcfce7';
+          s.style.color = '#15803d';
+        } else {
+          s.style.background = '#fee2e2';
+          s.style.color = '#b91c1c';
+        }
+      });
+      const fb = document.getElementById('son-g-fb');
+      if (fb) {
+        if (correct === slots.length) {
+          fb.innerHTML = `<span style="color:#15803d;">🎉 Parfait ! 10 / 10 ! Tu maîtrises la règle de G ou GU !</span>`;
+          playSound('correct');
+        } else {
+          fb.innerHTML = `<span style="color:#b91c1c;">Tu as ${correct} / ${slots.length} bonnes réponses. Revois les cases rouges et réessaie !</span>`;
+          playSound('wrong');
+        }
+      }
+    }
+
+    function resetSonGExercise() {
+      const slots = document.querySelectorAll('.son-g-slot');
+      slots.forEach(s => {
+        s.innerText = '___';
+        s.style.background = 'transparent';
+        s.style.color = 'inherit';
+      });
+      const fb = document.getElementById('son-g-fb');
+      if (fb) fb.innerText = '';
+    }
+
+    // Helper Calculateur d'échelle
+    function runScaleCalculator() {
+      const scaleEl = document.getElementById('echelleSelect');
+      const inputEl = document.getElementById('echelleCmInput');
+      const resBox = document.getElementById('echelleResultBox');
+      const explEl = document.getElementById('echelleExplanation');
+      if (!scaleEl || !inputEl || !resBox || !explEl) return;
+
+      const scale = parseFloat(scaleEl.value) || 100;
+      const cm = parseFloat(inputEl.value) || 0;
+      const realCm = cm * scale;
+      const realM = realCm / 100;
+
+      let displayText = '';
+      if (realM >= 1000) {
+        displayText = `${(realM / 1000).toFixed(2)} km (${realM.toFixed(0)} m)`;
+      } else if (realM >= 1) {
+        displayText = `${realM.toFixed(2)} mètres (${realCm.toFixed(0)} cm)`;
+      } else {
+        displayText = `${realCm.toFixed(1)} cm`;
+      }
+      resBox.innerText = displayText;
+      explEl.innerText = `Calcul : ${cm} cm sur plan x ${scale.toLocaleString('fr-FR')} = ${realCm.toLocaleString('fr-FR')} cm réels.`;
+    }
+
+    // Helpers Frise Seyès 20 Novembre (Quadricolore)
+    const FRISE_20NOV_COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#eab308']; // Bleu, Rouge, Vert, Jaune
+    let frise20NovCells = Array(20).fill(null);
+
+    function initFrise20Nov() {
+      const grid = document.getElementById('frise20NovGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const d = document.createElement('div');
+        d.style.minWidth = '24px';
+        d.style.height = '60px';
+        d.style.clipPath = (i % 2 === 0) ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' : 'polygon(0% 0%, 100% 0%, 50% 100%)';
+        d.style.border = '2px solid #0f172a';
+        d.style.cursor = 'pointer';
+        d.style.transition = 'all 0.2s';
+        d.style.background = frise20NovCells[i] || '#ffffff';
+        d.title = `Figure ${i + 1} (Clique pour changer de couleur)`;
+        d.onclick = () => toggleFrise20NovCell(i, d);
+        grid.appendChild(d);
+      }
+    }
+
+    function toggleFrise20NovCell(index, el) {
+      const current = frise20NovCells[index];
+      const curIdx = FRISE_20NOV_COLORS.indexOf(current);
+      let next = null;
+      if (curIdx === -1) next = FRISE_20NOV_COLORS[0];
+      else if (curIdx < FRISE_20NOV_COLORS.length - 1) next = FRISE_20NOV_COLORS[curIdx + 1];
+      else next = null;
+
+      frise20NovCells[index] = next;
+      el.style.background = next || '#ffffff';
+      playSound('correct');
+    }
+
+    function autoColorFrise20Nov() {
+      for (let i = 0; i < 20; i++) {
+        frise20NovCells[i] = FRISE_20NOV_COLORS[i % 4];
+      }
+      initFrise20Nov();
+      playSound('badge');
+    }
+
+    function resetFrise20Nov() {
+      frise20NovCells = Array(20).fill(null);
+      initFrise20Nov();
+    }
+
+    function switchFriseModel(num) {
+      const pane20 = document.getElementById('pane-frise-20nov');
+      const pane2 = document.getElementById('pane-frise-2nov');
+      const btn20 = document.getElementById('btn-frise-20nov');
+      const btn2 = document.getElementById('btn-frise-2nov');
+      const badge = document.getElementById('friseDateBadge');
+
+      if (num === 20) {
+        if (pane20) pane20.style.display = 'block';
+        if (pane2) pane2.style.display = 'none';
+        if (btn20) { btn20.style.background = '#16a34a'; btn20.classList.add('active'); }
+        if (btn2) { btn2.style.background = '#64748b'; btn2.classList.remove('active'); }
+        if (badge) badge.innerText = "Nouvelle frise postée le 20 Novembre 2026";
+        initFrise20Nov();
+      } else {
+        if (pane20) pane20.style.display = 'none';
+        if (pane2) pane2.style.display = 'block';
+        if (btn20) { btn20.style.background = '#64748b'; btn20.classList.remove('active'); }
+        if (btn2) { btn2.style.background = '#16a34a'; btn2.classList.add('active'); }
+        if (badge) badge.innerText = "Frise du 2 Novembre 2026";
+        initFriseInteractive();
+      }
+    }
+
+    // Activer la Série 8 (Semaine en cours - Sandro Botticelli & La Naissance de Vénus par défaut)
+    selectDicteeSeries(8);
+
+    // Initialisation des Nouveaux Quizz du 20 Novembre 2026
+    if (typeof allSonGQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-orthographe-son-g', allSonGQuestions, {
+        title: "Défis : G ou GU ? (Botticelli)",
+        subjectKey: "francais"
+      });
+    }
+    if (typeof allLexiquePolysemieQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-lexique-l1', allLexiquePolysemieQuestions, {
+        title: "Défis : Lexique L1 (Sens propre & figuré)",
+        subjectKey: "francais"
+      });
+    }
+    if (typeof allProportionnaliteQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-proportionnalite', allProportionnaliteQuestions, {
+        title: "Défis : Proportionnalité & Échelles",
+        subjectKey: "maths"
+      });
+    }
+    if (typeof allGeoGlobeQuestions !== 'undefined') {
+      new QuizRunner('quiz-container-geo-globe', allGeoGlobeQuestions, {
+        title: "Défis : Le Globe & le Planisphère",
+        subjectKey: "histoire"
+      });
+    }
+    runScaleCalculator();
+    initFrise20Nov();
 
     // Initialisation des Nouveaux Modules Padlet (Novembre & Octobre)
     

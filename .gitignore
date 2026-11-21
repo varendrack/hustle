@@ -1,3 +1,6 @@
 .DS_Store
 *.tmp
 .wrangler/
+padlet_nov_downloads/
+padlet_wishes_all.json
+recent_padlet_posts.txt
